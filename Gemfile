@@ -3,8 +3,9 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0.rc1'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Use postgres as the database for Active Record
+gem 'pg' #Use postgres as database for ActiveRecord
+gem "devise" #Use devise for authentication
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0.rc1'
@@ -36,10 +37,24 @@ end
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
+gem 'debugger', group: [:development, :test]
+
+#Testing
+gem "rspec-rails", :group => [:development, :test] #Unit test framework
+gem "database_cleaner", :group => :test #For cleaning database during unit tests
+gem "cucumber-rails", :group => :test, :require => false #Behaviour driven development
+gem "factory_girl_rails", :group => [:development, :test] #Factory for DB data
+
+#Development
+gem "better_errors", :group => :development
+gem "binding_of_caller", :group => :development
+gem 'debugger', group: [:development, :test]
+
+
+
