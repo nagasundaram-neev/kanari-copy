@@ -35,5 +35,11 @@ module Kanari
       g.javascripts = false
       g.helper = false
     end
+
+    #Do not access database during asset precompilation
+    config.assets.initialize_on_precompile = false
+
+    #Filter password while logging
+    config.filter_parameters += [:password, :password_confirmation]
   end
 end

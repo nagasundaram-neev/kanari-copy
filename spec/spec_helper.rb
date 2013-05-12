@@ -2,6 +2,7 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require 'email_spec'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -39,6 +40,9 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
+  config.include(EmailSpec::Helpers)
+  config.include(EmailSpec::Matchers)
+
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
   end
@@ -47,10 +51,6 @@ RSpec.configure do |config|
   end
   config.after(:each) do
     DatabaseCleaner.clean
-  end
-
-  config.generators do |g|
-    g.factory_girl false
   end
 
 end

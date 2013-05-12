@@ -4,12 +4,15 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0.rc1'
 
 # Use postgres as the database for Active Record
-gem 'pg' #Use postgres as database for ActiveRecord
-gem "devise" #Use devise for authentication
+gem 'mysql2' #Database adapter for ActiveRecord
+gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
+gem 'devise_invitable', github: 'scambra/devise_invitable', branch: 'rails4' #For sending registration invitations
 gem 'therubyracer'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0.rc1'
+
+gem "bootstrap-sass" #Use twitter bootstrap for easy layouts
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -51,11 +54,12 @@ gem "rspec-rails", :group => [:development, :test] #Unit test framework
 gem "database_cleaner", :group => :test #For cleaning database during unit tests
 gem "cucumber-rails", :group => :test, :require => false #Behaviour driven development
 gem "factory_girl_rails", :group => [:development, :test] #Factory for DB data
+gem "email_spec", :group => :test #Use email_spec for testing emails
+gem "gmail", :group => :test #Use gmail gem for reading emails
 
 #Development
 gem "better_errors", :group => :development
 gem "binding_of_caller", :group => :development
 gem 'debugger', group: [:development, :test]
-
-
+gem 'xray-rails', :group => :development
 
