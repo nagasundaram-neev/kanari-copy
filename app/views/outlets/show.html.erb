@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @outlet.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @outlet.address %>
+</p>
+
+<p>
+  <strong>Geolocation:</strong>
+  <%= @outlet.geolocation %>
+</p>
+
+<p>
+  <strong>Website url:</strong>
+  <%= @outlet.website_url %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @outlet.email %>
+</p>
+
+<p>
+  <strong>Points:</strong>
+  <%= @outlet.points %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @outlet.phone_number %>
+</p>
+
+<p>
+  <strong>Open hours:</strong>
+  <%= @outlet.open_hours %>
+</p>
+
+<p>
+  <strong>Has delivery:</strong>
+  <%= @outlet.has_delivery %>
+</p>
+
+<p>
+  <strong>Serves alcohol:</strong>
+  <%= @outlet.serves_alcohol %>
+</p>
+
+<p>
+  <strong>Has outdoor seating:</strong>
+  <%= @outlet.has_outdoor_seating %>
+</p>
+
+<p>
+  <strong>Customer:</strong>
+  <%= @outlet.customer %>
+</p>
+
+<%= link_to 'Edit', edit_outlet_path(@outlet) %> |
+<%= link_to 'Back', outlets_path %>

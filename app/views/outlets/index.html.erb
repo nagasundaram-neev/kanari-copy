@@ -1,0 +1,49 @@
+<h1>Listing outlets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Geolocation</th>
+      <th>Website url</th>
+      <th>Email</th>
+      <th>Points</th>
+      <th>Phone number</th>
+      <th>Open hours</th>
+      <th>Has delivery</th>
+      <th>Serves alcohol</th>
+      <th>Has outdoor seating</th>
+      <th>Customer</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @outlets.each do |outlet| %>
+      <tr>
+        <td><%= outlet.name %></td>
+        <td><%= outlet.address %></td>
+        <td><%= outlet.geolocation %></td>
+        <td><%= outlet.website_url %></td>
+        <td><%= outlet.email %></td>
+        <td><%= outlet.points %></td>
+        <td><%= outlet.phone_number %></td>
+        <td><%= outlet.open_hours %></td>
+        <td><%= outlet.has_delivery %></td>
+        <td><%= outlet.serves_alcohol %></td>
+        <td><%= outlet.has_outdoor_seating %></td>
+        <td><%= outlet.customer %></td>
+        <td><%= link_to 'Show', outlet %></td>
+        <td><%= link_to 'Edit', edit_outlet_path(outlet) %></td>
+        <td><%= link_to 'Destroy', outlet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Outlet', new_outlet_path %>

@@ -1,0 +1,33 @@
+<%= form_for(@payment_invoice) do |f| %>
+  <% if @payment_invoice.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@payment_invoice.errors.count, "error") %> prohibited this payment_invoice from being saved:</h2>
+
+      <ul>
+      <% @payment_invoice.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :kanari_invoice_id %><br>
+    <%= f.number_field :kanari_invoice_id %>
+  </div>
+  <div class="field">
+    <%= f.label :receipt_date %><br>
+    <%= f.datetime_select :receipt_date %>
+  </div>
+  <div class="field">
+    <%= f.label :amount_paid %><br>
+    <%= f.text_field :amount_paid %>
+  </div>
+  <div class="field">
+    <%= f.label :customer %><br>
+    <%= f.text_field :customer %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

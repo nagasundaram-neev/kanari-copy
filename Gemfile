@@ -56,10 +56,12 @@ gem "cucumber-rails", :group => :test, :require => false #Behaviour driven devel
 gem "factory_girl_rails", :group => [:development, :test] #Factory for DB data
 gem "email_spec", :group => :test #Use email_spec for testing emails
 gem "gmail", :group => :test #Use gmail gem for reading emails
+gem "shoulda-matchers", :group => :test #Collection of Rails testing matchers
 
 #Development
 gem "better_errors", :group => :development
 gem "binding_of_caller", :group => :development
 gem 'debugger', group: [:development, :test]
 gem 'xray-rails', :group => :development
+gem 'rails-erd', :group => :development
 

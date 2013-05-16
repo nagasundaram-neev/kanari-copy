@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @feedback.code %>
+</p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @feedback.score %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @feedback.comment %>
+</p>
+
+<p>
+  <strong>Will recommend:</strong>
+  <%= @feedback.will_recommend %>
+</p>
+
+<p>
+  <strong>Completed:</strong>
+  <%= @feedback.completed %>
+</p>
+
+<p>
+  <strong>Points:</strong>
+  <%= @feedback.points %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @feedback.user %>
+</p>
+
+<p>
+  <strong>Outlet:</strong>
+  <%= @feedback.outlet %>
+</p>
+
+<%= link_to 'Edit', edit_feedback_path(@feedback) %> |
+<%= link_to 'Back', feedbacks_path %>

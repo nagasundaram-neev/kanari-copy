@@ -1,0 +1,31 @@
+<h1>Listing redemptions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Outlet</th>
+      <th>Points</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @redemptions.each do |redemption| %>
+      <tr>
+        <td><%= redemption.user %></td>
+        <td><%= redemption.outlet %></td>
+        <td><%= redemption.points %></td>
+        <td><%= link_to 'Show', redemption %></td>
+        <td><%= link_to 'Edit', edit_redemption_path(redemption) %></td>
+        <td><%= link_to 'Destroy', redemption, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Redemption', new_redemption_path %>
