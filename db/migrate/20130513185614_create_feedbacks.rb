@@ -12,6 +12,8 @@ class CreateFeedbacks < ActiveRecord::Migration
       t.boolean :will_recommend
       t.boolean :completed
       t.integer :points
+      t.integer :rewards_pool_after_feedback
+      t.integer :user_points_after_feedback
       t.references :user, index: true
       t.references :outlet, index: true
 
