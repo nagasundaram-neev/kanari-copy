@@ -1,4 +1,5 @@
 Feature: Client Registration
+  pending
   In order to create a user account in the application
   A client
   Should be able to sign up

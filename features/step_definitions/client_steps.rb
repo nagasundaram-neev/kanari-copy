@@ -15,6 +15,7 @@ Then "he receives an email with a link to the registration process" do
 end
 When "he clicks on the link to the registration process" do
   open_last_email
+  pending
   click_email_link_matching(/invitation_token/)
 end
 
