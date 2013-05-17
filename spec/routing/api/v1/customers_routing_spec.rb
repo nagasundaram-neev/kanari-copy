@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe CustomersController do
+describe Api::V1::CustomersController, pending: true do
   describe "routing" do
 
     it "routes to #index" do

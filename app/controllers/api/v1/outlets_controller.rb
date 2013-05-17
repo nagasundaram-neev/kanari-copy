@@ -1,4 +1,4 @@
-class OutletsController < ApplicationController
+class Api::V1::OutletsController < ApplicationController
   before_action :set_outlet, only: [:show, :edit, :update, :destroy]
 
   # GET /outlets

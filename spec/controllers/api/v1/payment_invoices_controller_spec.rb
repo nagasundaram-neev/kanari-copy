@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PaymentInvoicesController, pending: true do
+describe Api::V1::PaymentInvoicesController, pending: true do
 
   # This should return the minimal set of attributes required to create a valid
   # PaymentInvoice. As you add validations to PaymentInvoice, be sure to

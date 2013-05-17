@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe OutletsController, pending: true do
+describe Api::V1::OutletsController, pending: true do
 
   # This should return the minimal set of attributes required to create a valid
   # Outlet. As you add validations to Outlet, be sure to

@@ -6,6 +6,7 @@ gem 'rails-api' #Rails on API mode
 
 # Use postgres as the database for Active Record
 gem 'mysql2' #Database adapter for ActiveRecord
+gem 'warden', github: 'emilsoman/warden', branch: 'no-session'
 gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
 gem 'devise_invitable', github: 'scambra/devise_invitable', branch: 'rails4' #For sending registration invitations
 gem 'therubyracer'
@@ -44,6 +45,8 @@ gem "factory_girl_rails", :group => [:development, :test] #Factory for DB data
 gem "email_spec", :group => :test #Use email_spec for testing emails
 gem "gmail", :group => :test #Use gmail gem for reading emails
 gem "shoulda-matchers", :group => :test #Collection of Rails testing matchers
+gem 'cucumber-api-steps', :require => false, :group => :test #Cucumber steps for API
+gem 'json_spec', group: :test # JSON matchers for tests
 
 #Development
 gem 'debugger', group: [:development, :test]

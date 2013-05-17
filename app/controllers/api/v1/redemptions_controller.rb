@@ -1,4 +1,4 @@
-class RedemptionsController < ApplicationController
+class Api::V1::RedemptionsController < ApplicationController
   before_action :set_redemption, only: [:show, :edit, :update, :destroy]
 
   # GET /redemptions

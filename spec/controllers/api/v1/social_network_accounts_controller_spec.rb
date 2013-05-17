@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SocialNetworkAccountsController, pending: true do
+describe Api::V1::SocialNetworkAccountsController, pending: true do
 
   # This should return the minimal set of attributes required to create a valid
   # SocialNetworkAccount. As you add validations to SocialNetworkAccount, be sure to

@@ -1,4 +1,4 @@
-class SocialNetworkAccountsController < ApplicationController
+class Api::V1::SocialNetworkAccountsController < ApplicationController
   before_action :set_social_network_account, only: [:show, :edit, :update, :destroy]
 
   # GET /social_network_accounts

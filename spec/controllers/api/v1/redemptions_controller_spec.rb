@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe RedemptionsController, pending: true do
+describe Api::V1::RedemptionsController, pending: true do
 
   # This should return the minimal set of attributes required to create a valid
   # Redemption. As you add validations to Redemption, be sure to

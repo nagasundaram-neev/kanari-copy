@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CustomersController, pending: true do
+describe Api::V1::CustomersController, pending: true do
 
   # This should return the minimal set of attributes required to create a valid
   # Customer. As you add validations to Customer, be sure to
