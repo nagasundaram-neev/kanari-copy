@@ -16,22 +16,12 @@ module Api
             auth_token: resource.reset_authentication_token,
             user_role: resource.role
           }
-          return
-          invalid_login_attempt
-        rescue
-          invalid_login_attempt
         end
 
         def destroy
           sign_out(resource_name)
         end
 
-        protected
-
-          def invalid_login_attempt
-            warden.custom_failure!
-            render :json=> { errors: ["Invalid login credentials"] }, :status=>401
-          end
       end
     end
   end
