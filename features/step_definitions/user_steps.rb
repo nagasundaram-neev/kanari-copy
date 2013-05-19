@@ -21,3 +21,6 @@ Given /^No user is present with email "([^"]*)"$/ do |email|
   User.where(email: email).delete_all
 end
 
+And "$token should belong to the new inactive user that was created" do |token|
+  JsonSpec.remember(token).should == User.invitation_not_accepted.last.invitation_token.to_json
+end

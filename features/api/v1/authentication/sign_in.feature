@@ -33,7 +33,7 @@ Feature: Sign In
       And the JSON response should be:
       """
       {
-        "errors": ["Invalid login credentials."]
+        "errors": ["Invalid login credentials"]
       }
       """
 
@@ -45,6 +45,6 @@ Feature: Sign In
       And the JSON response should be:
       """
       {
-        "errors" : ["Invalid login credentials."]
+        "errors" : ["Invalid login credentials"]
       }
       """

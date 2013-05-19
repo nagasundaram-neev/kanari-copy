@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
   include ActionController::MimeResponds
+  include ActionController::StrongParameters
 
   before_filter :skip_trackable
 
