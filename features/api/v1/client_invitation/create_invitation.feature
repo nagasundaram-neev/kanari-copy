@@ -20,3 +20,21 @@ Feature: Create invitation
       Given I keep the JSON response at "invitation_token" as "TOKEN"
       Then %{TOKEN} should belong to the new inactive user that was created
 
+    Scenario: Invalid authentication token
+      Given "Adam" is a user with email id "user@gmail.com" and password "password123"
+        And his authentication token is "auth_token_123"
+      And I send a POST request to "/api/users/invitation" with the following:
+      """
+      {
+        "user" : {
+          "email" : "newuser@gmail.com"
+        },
+        "auth_token" : "auth_token_1234"
+      }
+      """
+      Then the response status should be "401"
+      And the JSON response should not have "invitation_token"
+      Then the JSON response should be:
+      """
+      {"errors": ["Invalid login credentials"]}
+      """
