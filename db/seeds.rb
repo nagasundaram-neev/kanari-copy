@@ -5,3 +5,4 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+default_kanari_admin = User.create(email: 'admin@kanari.co', password: 'admin123', password_confirmation: 'admin123', role: 'kanari_admin')
