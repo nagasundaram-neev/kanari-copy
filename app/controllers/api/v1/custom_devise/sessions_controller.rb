@@ -19,6 +19,8 @@ module Api
         end
 
         def destroy
+          authenticate_user!(force: true)
+          current_user.reset_authentication_token!
           sign_out(resource_name)
         end
 
