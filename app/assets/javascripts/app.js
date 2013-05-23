@@ -15,8 +15,6 @@
     // });
     // $locationProvider.jqmCompatMode(false);
 // });
-
-
 var module = angular.module("app", []).config(function($routeProvider,$locationProvider){
     // bring back /# urls by turning OFF html5 paths
     // JQueryMobileAngularAdapter turns in ON by default
@@ -24,9 +22,8 @@ var module = angular.module("app", []).config(function($routeProvider,$locationP
     $locationProvider.html5Mode(false);
     $locationProvider.hashPrefix("");
     // routes
-    console.log("in router");
     $routeProvider
         .when('/home',{templateUrl:'#home'}) // this is the default JQueryMobile view in index.html
         .when('/register',{templateUrl:'register.html'}) // this is a familiar AngularJS route using a partial ...
-        .when('/login',{templateUrl:'/login.html'}) // ... and so is this
+        .when('/login',{templateUrl:'login.html'}) // ... and so is this
 });
