@@ -13,7 +13,7 @@ module Api
           resource.reset_authentication_token!
           resource.save!
           render json: {
-            auth_token: resource.reset_authentication_token,
+            auth_token: resource.authentication_token,
             user_role: resource.role
           }
         end

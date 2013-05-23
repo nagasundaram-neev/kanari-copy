@@ -29,3 +29,11 @@ end
 And "$token should belong to the new inactive user that was created" do |token|
   JsonSpec.remember(token).should == User.invitation_not_accepted.last.invitation_token.to_json
 end
+
+And /^"([^"]*)" should receive an email with password reset link$/ do |email|
+  step "\"#{email}\" should receive an email with subject /Reset password instructions/"
+  open_last_email
+  @user.reload
+  reset_password_token = @user.reset_password_token
+  step "I should see \"reset_password_token=#{reset_password_token}\" in the email body"
+end
