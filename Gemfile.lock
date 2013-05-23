@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/emilsoman/warden.git
-  revision: 5bb1e3b0cda7341e9f2a61bfedecfaa1262faa5e
+  revision: 82c46b25d83716cd440389424a6760748490f94e
   branch: no-session
   specs:
     warden (1.2.1)
