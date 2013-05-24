@@ -37,3 +37,19 @@ And /^"([^"]*)" should receive an email with password reset link$/ do |email|
   reset_password_token = @user.reset_password_token
   step "I should see \"reset_password_token=#{reset_password_token}\" in the email body"
 end
+
+And /his reset_password_token is "([^"]*)"/ do |reset_password_token|
+  @user.reset_password_token = reset_password_token
+  @user.reset_password_sent_at = Time.now.utc
+  @user.save!
+end
+
+And /^his reset_password_token is more than "([^"]*)" hours old$/ do |time_in_hours|
+  @user.reset_password_sent_at = Time.now - (time_in_hours.to_i.hours + 1.second)
+  @user.save!
+end
+
+And /^his password should be "([^"]*)"$/ do |password|
+  @user.reload
+  @user.valid_password?(password).should be_true
+end
