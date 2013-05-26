@@ -1,18 +1,13 @@
-<div data-role="page" data-theme="b" id="login">
+<div data-role="page" data-theme="b" id="login" ng-controller="Login">
 			<div data-role="content">
 				<div class="outerDiv">
-					<div class="row">
-						<p class="error" data-bind="text: errorMessage">
-							Incorrect Username and Password
-						</p>
-					</div>
 					<p class="alreadyUser">Already a user? Log in to Kanari</p>
 					<div data-role="fieldcontain" class="loginDiv">
 						<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
-							<input data-theme="a" data-inline="true" type="email" name="txtUsername" data-bind="value: username" placeholder="Eamil address"/>
+							<input data-theme="a" data-inline="true" type="email" name="txtUsername" ng-model="email" placeholder="Eamil address"/>
 						</div>
 						<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
-							<input data-theme="a" data-inline="true" type="password" name="txtPassword" data-bind="value: password" class="passwordTxt" placeholder="Password"/>
+							<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="password" class="passwordTxt" placeholder="Password"/>
 						</div>
 						<div data-role="fieldcontain" class="rememberMe">
 						 	<fieldset data-role="controlgroup">
@@ -20,12 +15,12 @@
 								<label for="checkbox-1">Remember Me</label>
 						    </fieldset>
 						</div>
-						<input type="button" class="loginBtn" data-bind="click:checkLogin" data-inline="true" value="Login" />
+						<input type="button" class="loginBtn" ng-click="chkLogin()" data-inline="true" value="Login" />
 					</div>
 					<p class="forgotPass">
-						<a href="#">Forgot your password?</a>
+						<a href="#" ng-click="logout()">Forgot your password?</a>
 					</p>
 				</div>
-				<div class="logo_btm"><img src="../images/login_bird.png" alt="login_bird" /></div>
+				<div class="logo_btm"></div>
 			</div>
 		</div>

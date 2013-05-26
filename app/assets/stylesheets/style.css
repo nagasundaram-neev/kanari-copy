@@ -22,7 +22,7 @@ img, object {
 	padding: 0;
 }
 .signIn {
-	display: none;
+	/*display: none;*/
 	position: absolute;
 	bottom: 0;
 	width: 89%;
