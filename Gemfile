@@ -9,6 +9,7 @@ gem 'mysql2' #Database adapter for ActiveRecord
 gem 'warden', github: 'emilsoman/warden', branch: 'no-session'
 gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
 gem 'devise_invitable', github: 'scambra/devise_invitable', branch: 'rails4' #For sending registration invitations
+gem 'cancan' #For authorization
 gem 'therubyracer'
 
 # Use SCSS for stylesheets

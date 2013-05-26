@@ -27,6 +27,7 @@ class Api::V1::PaymentInvoicesController < ApplicationController
   # POST /payment_invoices
   # POST /payment_invoices.json
   def create
+    authorize! :create, PaymentInvoice
     @payment_invoice = PaymentInvoice.new(payment_invoice_params)
 
     if @payment_invoice.save

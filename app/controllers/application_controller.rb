@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::API
   include ActionController::MimeResponds
   include ActionController::StrongParameters
+  include CanCan::ControllerAdditions
 
   before_filter :skip_trackable
 
@@ -8,6 +9,11 @@ class ApplicationController < ActionController::API
   #to track user log in
   def skip_trackable
     request.env['devise.skip_trackable'] = true
+  end
+
+  #Handle authorization exception from CanCan
+  rescue_from CanCan::AccessDenied do |exception|
+    render json: {errors: ["Insufficient privileges"]}, status: :forbidden
   end
 
 end
