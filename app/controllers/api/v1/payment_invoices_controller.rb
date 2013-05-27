@@ -1,5 +1,8 @@
 class Api::V1::PaymentInvoicesController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_payment_invoice, only: [:show, :edit, :update, :destroy]
+
+  respond_to :json
 
   # GET /payment_invoices
   # GET /payment_invoices.json
@@ -24,16 +27,13 @@ class Api::V1::PaymentInvoicesController < ApplicationController
   # POST /payment_invoices
   # POST /payment_invoices.json
   def create
+    authorize! :create, PaymentInvoice
     @payment_invoice = PaymentInvoice.new(payment_invoice_params)
 
-    respond_to do |format|
-      if @payment_invoice.save
-        format.html { redirect_to @payment_invoice, notice: 'Payment invoice was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @payment_invoice }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @payment_invoice.errors, status: :unprocessable_entity }
-      end
+    if @payment_invoice.save
+      render json: nil, status: :created
+    else
+      render json: { errors: @payment_invoice.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
