@@ -32,6 +32,9 @@ class Ability
     when 'kanari_admin'
       #Kanari admin's permissions
       can :manage, :all
+    when 'customer_admin'
+      #Customer admin's permissions
+      can :read, PaymentInvoice
     else
       #Default permissions
     end

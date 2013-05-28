@@ -1,13 +1,21 @@
 class Api::V1::PaymentInvoicesController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_payment_invoice, only: [:show, :edit, :update, :destroy]
+  before_action :set_customer
 
   respond_to :json
 
   # GET /payment_invoices
   # GET /payment_invoices.json
   def index
-    @payment_invoices = PaymentInvoice.all
+    authorize! :read, PaymentInvoice
+    @payment_invoices = @customer.payment_invoices
+    if !params[:start_date].nil? && !params[:end_date].nil?
+      start_date = DateTime.parse(params[:start_date])
+      end_date = DateTime.parse(params[:end_date])
+      @payment_invoices = @payment_invoices.where(receipt_date: start_date..end_date)
+    end
+    render json: @payment_invoices
   end
 
   # GET /payment_invoices/1
@@ -65,6 +73,13 @@ class Api::V1::PaymentInvoicesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_payment_invoice
       @payment_invoice = PaymentInvoice.find(params[:id])
+    end
+
+    def set_customer
+      @customer = Customer.where(id: params[:customer_id], customer_admin: current_user).first
+      if @customer.nil?
+        render json: {errors: ["Invalid customer ID"]}, status: :bad_request
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
