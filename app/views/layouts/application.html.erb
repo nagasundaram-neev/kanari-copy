@@ -1,81 +1,56 @@
-<!DOCTYPE html>
-<html ng:app="app">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no"  />
-    <title>Kanari</title>
-    <meta name="description" content="Kanari">
-   
-    <%= javascript_include_tag "jquery-mobile-angular-adapter-standalone-1.2.0.js" %>
-    <%= javascript_include_tag "app" %>
-    <%= javascript_include_tag "controllers.js" %>
-    <%= stylesheet_link_tag "jquery.mobile-1.3.0.css", :media => "all" %>
-    <%= stylesheet_link_tag "style.css", :media => "all" %>
-  </head>
-  <body>
-    <!-- <header>
-      <nav>
-      </nav>
-    </header>
-    <div id="main" role="main"> -->
-      <div id="splash" data-role="page" ng-controller="Login">
-				<div data-role="content">
-				<div class="logo">
-					<%= image_tag 'logo.png' %>
-				</div>
-				<div class="signIn">
-					<div class="userClick">
-						<%= image_tag 'signuo_line_icon.png' %>
-						<div class="socialBtn">
-							<span>Sign In:</span>
-							<%= image_tag 'icon_fb.png' %>
-							<%= image_tag 'icon_twitter.png' %>
-							<a ng-click="login()">
-								<%= image_tag 'icon_email.png' %>	
-							</a>
-						</div>
-						<div class="clr"></div>
-						<div style="width:100%;overflow: hidden;margin: 0 auto;">
-							<div class="newUSer">
-								<a href="index.html" data-iconpos="top" data-role="button" data-icon="delete" data-iconpos="notext">New</a>
-							</div>
-							<div class="regUSer">
-								<a href="index.html" data-iconpos="top"  data-role="button" data-icon="delete" data-iconpos="notext">Unregistered</a>
-							</div>
-						</div>
+<!doctype html>
+<html lang="en" ng-app="kanari">
+	<head>
+		<meta charset="utf-8">
+		<title>Kanari</title>
+		<%= stylesheet_link_tag "app.css", :media => "all" %>
+		<%= stylesheet_link_tag "bootstrap.css", :media => "all" %>
+		<%= stylesheet_link_tag "bootstrap-responsive.css", :media => "all" %>
+		<%= javascript_include_tag "jquery.js" %>
+		<%= javascript_include_tag "jquery.validate.js" %>
+		<%= javascript_include_tag "angular.js" %>
+		<%= javascript_include_tag "app" %>
+		<%= javascript_include_tag "controllers.js" %>
+		<%= javascript_include_tag "angular-resource.js" %>
+		<%= javascript_include_tag "bootstrap.js" %>
+		<!-- <script src="lib/angular/angular.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/controllers.js"></script>
+		<script src="js/filters.js"></script>
+		<script src="js/services.js"></script>
+		<script src="lib/angular/angular-resource.js"></script> -->
+	</head>
+	<body>
+		<div class="content" ng-controller="commonCtrl">
+			<div class="header">
+				<div class="span12">
+					<%= image_tag 'logo.jpg' %>
+					<div class="welcome">
+						Hello <a href="#/test" >Abdul Malik</a>
+						<a ng-click="logout()" class="logOut"><%= image_tag 'icon_logout.png' %> Logout</a>
 					</div>
+					
 				</div>
-				<div ></div>
 			</div>
+			<div class="navBarCls">
+			<ul class="span12 nav nav-tabs">
+						<li>
+							<a href="#"><%= image_tag 'icon_outlet_in.png' %> Account</a>
+						</li>
+						<li>
+							<a href="#"><%= image_tag 'icon_dasboard_in.png' %> Dashboard</a>
+						</li>
+						<li class="active">
+							<a href="#"><%= image_tag 'logo_account_in.png' %> Outletes</a>
+						</li>
+					</ul>
 			</div>
-			
-			<!-- <div data-role="page" data-theme="b" id="login" ng-controller="Login">
-			<div data-role="content">
-				<div class="outerDiv">
-					<p class="alreadyUser">Already a user? Log in to Kanari</p>
-					<div data-role="fieldcontain" class="loginDiv">
-						<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
-							<input data-theme="a" data-inline="true" type="email" name="txtUsername" ng-model="email" placeholder="Eamil address"/>
-						</div>
-						<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
-							<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="password" class="passwordTxt" placeholder="Password"/>
-						</div>
-						<div data-role="fieldcontain" class="rememberMe">
-						 	<fieldset data-role="controlgroup">
-								<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
-								<label for="checkbox-1">Remember Me</label>
-						    </fieldset>
-						</div>
-						<input type="button" class="loginBtn" ng-click="chkLogin()" data-inline="true" value="Login" />
-					</div>
-					<p class="forgotPass">
-						<a href="#" ng-click="logout()">Forgot your password?</a>
-					</p>
+			<div class="ngView" style=" overflow: hidden;" ng-view></div>
+			<div class="footer">
+				<div class="span12">
+					Copyright@2013 Kanari. All Rights Reserved
 				</div>
-				<div class="logo_btm"><%= image_tag 'login_bird.png' %></div>
 			</div>
-		</div> -->
-
-    <!-- </div> --> <!--! end of #main -->
-  </body>
+		</div>
+	</body>
 </html>

@@ -1,15 +1,17 @@
+'use strict';
 
-var module = angular.module("app", []).config(function($routeProvider,$locationProvider){
-    // bring back /# urls by turning OFF html5 paths
-    // JQueryMobileAngularAdapter turns in ON by default
-    // https://github.com/tigbro/jquery-mobile-angular-adapter/issues/163#issuecomment-16928255
-    $locationProvider.html5Mode(false);
-    $locationProvider.hashPrefix("");
-    // routes
-   //console.log("in router");
-    $routeProvider
-        .when('/home',{templateUrl:"<%= asset_path 'home.html' %>"}) // this is the default JQueryMobile view in index.html
-        .when('/register',{templateUrl:'register.html'}) // this is a familiar AngularJS route using a partial ...
-        .when('/login',{templateUrl:"<%= asset_path 'login.html' %>"}) // ... and so is this
-        .when('/regsuccess',{templateUrl: "<%= asset_path 'regsuccess.html' %>" })
-});
+/* App Module */
+
+var module = angular.module('kanari', []).
+  config(['$routeProvider','$locationProvider', function($routeProvider,$locationProvider) {
+  	
+  $routeProvider.
+      when('/login', {templateUrl: "<%= asset_path 'login.html' %>"}).
+      when('/forgot_pass', {templateUrl: "<%= asset_path 'forgot_password.html' %>"}).
+       when('/api/users/password/edit', {templateUrl: "<%= asset_path 'reset_password.html' %>"}).
+     when('/home', {templateUrl: "<%= asset_path 'home.html' %>"}).
+     when('/createInvitation', {templateUrl: "<%= asset_path 'add_Restaurant.html' %>"}).
+       when('/logout', {templateUrl: "<%= asset_path 'logOut.html' %>"}).
+      otherwise({redirectTo: '/login'});
+      $locationProvider.hashPrefix = "";
+}]);
