@@ -120,9 +120,7 @@ var Base64 = {
 				string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
 				i += 3;
 			}
-
 		}
-
 		return string;
 	}
 }
@@ -161,22 +159,6 @@ module.controller('Login', function($scope, $http, $location) {
 		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
 	});
 
-	// $scope.logout = function(){
-	//
-	// console.log("in logout");
-	//
-	// $http({method:'delete',url:'/api/users/sign_out'}).
-	// success(function(data,status){
-	// console.log("User Role "+data.user_role+" status "+status);
-	// $location.url("/home");
-	// }).error(function(data,status){
-	// console.log("data "+data+" status "+status);
-	// });
-	//
-	// $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(auth_token);
-	//
-	// };
-	//$http.defaults.headers.common['X-StatusOnLoginFail'] = '418';
 });
 
 module.controller('homeCtrl', function($scope, $http, $location) {
