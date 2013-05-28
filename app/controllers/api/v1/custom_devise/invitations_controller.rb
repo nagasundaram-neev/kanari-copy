@@ -25,8 +25,10 @@ module Api
         # params : invitation_token, password, password_confirmation
         def update
           self.resource = resource_class.accept_invitation!(update_resource_params)
-          auth_token = resource.reset_authentication_token
-          resource.save
+          if resource.errors.empty?
+            auth_token = resource.reset_authentication_token
+            resource.save
+          end
           if resource.errors.empty?
             sign_in(resource_name, resource)
             render json: {auth_token: auth_token}, status: 200 #Invitation accepted
@@ -58,7 +60,7 @@ module Api
         end
 
         def update_resource_params
-          devise_parameter_sanitizer.for(:accept_invitation)
+          params.fetch(:user).permit([:password, :password_confirmation, :invitation_token, :name])
         end
       end
 

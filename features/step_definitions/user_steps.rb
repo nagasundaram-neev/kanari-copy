@@ -59,3 +59,8 @@ And /^he is the admin for customer "([^"]*)"$/ do |customer_name|
   customer.customer_admin_id = @user.id
   customer.save!
 end
+
+Given /^"([^"]*)" received an invitation with token "([^"]*)"$/ do |email, invitation_token|
+  @user = User.new(email: email, invitation_token: invitation_token, invitation_sent_at: Time.now.utc)
+  @user.save!(validate: false)
+end
