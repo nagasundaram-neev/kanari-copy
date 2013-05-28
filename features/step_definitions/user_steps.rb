@@ -53,3 +53,9 @@ And /^his password should be "([^"]*)"$/ do |password|
   @user.reload
   @user.valid_password?(password).should be_true
 end
+
+And /^he is the admin for customer "([^"]*)"$/ do |customer_name|
+  customer = Customer.where(name: customer_name).first
+  customer.customer_admin_id = @user.id
+  customer.save!
+end

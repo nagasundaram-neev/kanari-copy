@@ -10,6 +10,9 @@ gem 'warden', github: 'emilsoman/warden', branch: 'no-session'
 gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
 gem 'devise_invitable', github: 'scambra/devise_invitable', branch: 'rails4' #For sending registration invitations
 gem 'cancan' #For authorization
+gem 'active_model_serializers'
+
+# Javascript server side engine for asset pipeline
 gem 'therubyracer'
 
 # Use SCSS for stylesheets
