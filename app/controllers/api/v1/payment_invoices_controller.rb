@@ -1,6 +1,6 @@
 class Api::V1::PaymentInvoicesController < ApplicationController
   before_filter :authenticate_user!
-  before_action :set_payment_invoice, only: [:show, :edit, :update, :destroy]
+  before_action :set_payment_invoice, only: [:show, :update, :destroy]
   before_action :set_customer
 
   respond_to :json

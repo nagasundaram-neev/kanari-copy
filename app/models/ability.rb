@@ -35,6 +35,7 @@ class Ability
     when 'customer_admin'
       #Customer admin's permissions
       can :read, PaymentInvoice
+      can :manage, Customer
     else
       #Default permissions
     end
