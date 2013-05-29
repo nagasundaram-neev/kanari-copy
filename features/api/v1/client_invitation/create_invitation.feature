@@ -35,6 +35,7 @@ Feature: Create invitation
       """
       Then the response status should be "201"
       And the JSON response should have "invitation_token"
+      And the new user should have role "customer_admin"
       Given I keep the JSON response at "invitation_token" as "TOKEN"
       Then %{TOKEN} should belong to the new inactive user that was created
 
