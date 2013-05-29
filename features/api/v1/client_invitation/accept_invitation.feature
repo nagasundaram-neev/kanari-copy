@@ -11,7 +11,8 @@ Feature: Accept invitation
         "user" : {
           "password" : "testpassword",
           "password_confirmation": "testpassword",
-          "name": "John Doe",
+          "first_name": "John",
+          "last_name": "Doe",
           "invitation_token": "invitation_token_123"
         }
       }
@@ -26,7 +27,8 @@ Feature: Accept invitation
         "user" : {
           "password" : "testpassword",
           "password_confirmation": "testpassword",
-          "name": "John Doe",
+          "first_name": "John",
+          "last_name": "Doe",
           "invitation_token": "invalid_auth_token"
         }
       }
@@ -45,7 +47,8 @@ Feature: Accept invitation
         "user" : {
           "password" : "testpassword",
           "password_confirmation": "testpassword123",
-          "name": "John Doe",
+          "first_name": "John",
+          "last_name": "Doe",
           "invitation_token": "invitation_token_123"
         }
       }
