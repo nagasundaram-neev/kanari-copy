@@ -9,4 +9,23 @@ class User < ActiveRecord::Base
   has_many :managed_outlets, class_name: 'Outlet', foreign_key: 'manager_id'
   has_one :outlets_staff, foreign_key: 'staff_id' # For restaurant staff only
   has_one :employed_outlet, source: 'outlet', through: :outlets_staff, foreign_key: 'staff_id' # For restaurant staff only
+
+  def customer
+    case role
+    when 'customer_admin'
+      return Customer.where(customer_admin_id: id).first
+    when 'manager'
+      outlet = managed_outlets.first
+      if !outlet.nil?
+        return outlet.customer
+      end
+    when 'staff'
+      outlet = employed_outlet
+      if !outlet.nil?
+        return outlet.customer
+      end
+    else
+      return nil
+    end
+  end
 end

@@ -2,9 +2,7 @@
 
 FactoryGirl.define do
   factory :customer do
-    name "MyString"
-    phone_number "MyString"
-    registered_address "MyText"
-    mailing_address "MyText"
+    name "Customer1"
+    phone_number "+33221133"
   end
 end
