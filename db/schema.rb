@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130529070043) do
+ActiveRecord::Schema.define(version: 20130529103838) do
 
   create_table "cuisine_types", force: true do |t|
     t.string   "name"
@@ -167,7 +167,6 @@ ActiveRecord::Schema.define(version: 20130529070043) do
     t.string   "authentication_token"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
     t.string   "invitation_token",       limit: 60
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
@@ -178,6 +177,8 @@ ActiveRecord::Schema.define(version: 20130529070043) do
     t.integer  "points_available"
     t.integer  "points_redeemed"
     t.string   "phone_number"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
