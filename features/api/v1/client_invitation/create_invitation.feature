@@ -19,6 +19,7 @@ Feature: Create invitation
       And the JSON response should have "invitation_token"
       Given I keep the JSON response at "invitation_token" as "TOKEN"
       Then %{TOKEN} should belong to the new inactive user that was created
+      And "newuser@gmail.com" should receive no email
 
     Scenario: Successfully create an invitation by sending auth_token in the HTTP auth header
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"

@@ -9,8 +9,8 @@ module Api
 
         # POST /resource/invitation
         def create
-          self.resource = resource_class.invite!(invite_params, current_inviter) do
-            skip_invitation = true
+          self.resource = resource_class.invite!(invite_params, current_inviter) do |u|
+            u.skip_invitation = true
           end
           resource.invitation_sent_at = Time.now.utc
           resource.save
