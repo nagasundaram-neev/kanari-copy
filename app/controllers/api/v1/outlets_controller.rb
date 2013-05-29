@@ -1,5 +1,8 @@
 class Api::V1::OutletsController < ApplicationController
-  before_action :set_outlet, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :set_outlet, only: [:show, :update, :destroy]
+
+  respond_to :json
 
   # GET /outlets
   # GET /outlets.json
@@ -12,28 +15,16 @@ class Api::V1::OutletsController < ApplicationController
   def show
   end
 
-  # GET /outlets/new
-  def new
-    @outlet = Outlet.new
-  end
-
-  # GET /outlets/1/edit
-  def edit
-  end
-
   # POST /outlets
-  # POST /outlets.json
   def create
     @outlet = Outlet.new(outlet_params)
+    authorize! :create, @outlet
 
-    respond_to do |format|
-      if @outlet.save
-        format.html { redirect_to @outlet, notice: 'Outlet was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @outlet }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @outlet.errors, status: :unprocessable_entity }
-      end
+    @outlet.customer = current_user.customer
+    if @outlet.save
+      render json: @outlet, status: :created
+    else
+      render json: @outlet.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -69,6 +60,6 @@ class Api::V1::OutletsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def outlet_params
-      params.require(:outlet).permit(:name, :address, :geolocation, :website_url, :email, :points, :phone_number, :open_hours, :has_delivery, :serves_alcohol, :has_outdoor_seating, :customer_id)
+      params.require(:outlet).permit(:name, :address, :latitude, :longitude, :website_url, :email, :phone_number, :open_hours, :has_delivery, :serves_alcohol, :has_outdoor_seating)
     end
 end

@@ -90,7 +90,6 @@ Feature: Create customer account
 
       Examples:
       |role           |
-      |kanari_admin   |
       |customer_admin |
 
     Scenario Outline: User's role is <role>
@@ -124,6 +123,7 @@ Feature: Create customer account
 
       Examples:
       |role           |
+      |kanari_admin   |
       |manager        |
       |staff          |
       |user           |

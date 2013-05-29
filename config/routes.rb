@@ -4,9 +4,9 @@ Kanari::Application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
       resources :redemptions
+      resources :outlets
 
       resources :customers do
-        resources :outlets
         resources :payment_invoices
       end
       resources :feedbacks

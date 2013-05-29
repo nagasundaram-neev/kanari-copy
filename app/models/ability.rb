@@ -31,11 +31,13 @@ class Ability
     case user.role
     when 'kanari_admin'
       #Kanari admin's permissions
-      can :manage, :all
+      can :create, PaymentInvoice
     when 'customer_admin'
       #Customer admin's permissions
       can :read, PaymentInvoice
       can :manage, Customer
+      can :manage, Outlet, customer: user.customer
+      can :create, Outlet
     else
       #Default permissions
     end

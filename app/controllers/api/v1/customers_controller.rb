@@ -25,7 +25,7 @@ class Api::V1::CustomersController < ApplicationController
     if @customer.save
       render json: nil, status: :created
     else
-      render json: @customer.errors, status: :unprocessable_entity
+      render json: @customer.errors.full_messages, status: :unprocessable_entity
     end
   end
 
