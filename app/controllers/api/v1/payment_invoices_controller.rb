@@ -1,7 +1,6 @@
 class Api::V1::PaymentInvoicesController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_payment_invoice, only: [:show, :update, :destroy]
-  before_action :set_customer
 
   respond_to :json
 
@@ -9,6 +8,9 @@ class Api::V1::PaymentInvoicesController < ApplicationController
   # GET /payment_invoices.json
   def index
     authorize! :read, PaymentInvoice
+    if !set_customer
+      return #Already rendered errors json
+    end
     @payment_invoices = @customer.payment_invoices
     if !params[:start_date].nil? && !params[:end_date].nil?
       start_date = DateTime.parse(params[:start_date])
@@ -36,8 +38,11 @@ class Api::V1::PaymentInvoicesController < ApplicationController
   # POST /payment_invoices.json
   def create
     authorize! :create, PaymentInvoice
+    if !validate_customer
+      return #Already rendered errors json
+    end
     @payment_invoice = PaymentInvoice.new(payment_invoice_params)
-
+    @payment_invoice.customer = @customer
     if @payment_invoice.save
       render json: nil, status: :created
     else
@@ -76,14 +81,26 @@ class Api::V1::PaymentInvoicesController < ApplicationController
     end
 
     def set_customer
-      @customer = Customer.where(id: params[:customer_id], customer_admin: current_user).first
+      @customer = current_user.customer
       if @customer.nil?
-        render json: {errors: ["Invalid customer ID"]}, status: :bad_request
+        render json: {errors: ["No customer account found"]}, status: :unprocessable_entity
+        return false
+      else
+        return true
+      end
+    end
+
+    def validate_customer
+      begin
+        @customer = Customer.find(params[:customer_id])
+      rescue
+        render json: {errors: ["Invalid customer ID"]}, status: :unprocessable_entity
+        return false
       end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def payment_invoice_params
-      params.require(:payment_invoice).permit(:kanari_invoice_id, :receipt_date, :amount_paid, :customer_id)
+      params.require(:payment_invoice).permit(:kanari_invoice_id, :receipt_date, :amount_paid)
     end
 end

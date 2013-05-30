@@ -5,9 +5,10 @@ Kanari::Application.routes.draw do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
       resources :redemptions
       resources :outlets
+      resources :payment_invoices, only: [:index]
 
       resources :customers do
-        resources :payment_invoices
+        resources :payment_invoices, only: [:create]
       end
       resources :feedbacks
       resources :social_network_accounts
