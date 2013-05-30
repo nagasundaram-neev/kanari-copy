@@ -23,10 +23,10 @@
 	<body>
 		<div class="content" ng-controller="commonCtrl">
 			<div class="header">
-				<div class="span12">
-					<%= image_tag 'logo.jpg' %>
+				<div class="span12">	
+					<a href="#/home"><%= image_tag 'logo.jpg' %></a>
 					<div class="welcome">
-						Hello <a href="#/test" >Abdul Malik</a>
+						Hello <a href="#/home" >Abdul Malik</a>
 						<a ng-click="logout()" class="logOut"><%= image_tag 'icon_logout.png' %> Logout</a>
 					</div>
 					
@@ -41,7 +41,7 @@
 							<a href="#"><%= image_tag 'icon_dasboard_in.png' %> Dashboard</a>
 						</li>
 						<li class="active">
-							<a href="#"><%= image_tag 'logo_account_in.png' %> Outletes</a>
+							<a href="#/create_outlet"><%= image_tag 'logo_account_in.png' %> Outletes</a>
 						</li>
 					</ul>
 			</div>
