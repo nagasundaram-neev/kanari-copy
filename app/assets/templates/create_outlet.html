@@ -37,16 +37,16 @@
 			<div class="ui-input-data">
 			<lable>Opening Hours</lable>
 			from <select ng-model="fromTime">
-				  <option value="time1">10.00pm</option>
-				  <option value="time2">10.00pm</option>
-				  <option value="time3">10.00pm</option>
-				  <option value="time4">10.00pm</option>
+				  <option value="10.00pm">10.00pm</option>
+				  <option value="11.00pm">10.00pm</option>
+				  <option value="12.00pm">10.00pm</option>
+				  <option value="1.00pm">10.00pm</option>
 				</select>
 		    to <select ng-model="toTime">
-				  <option value="time1">10.00pm</option>
-				  <option value="time2">10.00pm</option>
-				  <option value="time3">10.00pm</option>
-				  <option value="time4">10.00pm</option>
+				   <option value="10.00pm">10.00pm</option>
+				  <option value="11.00pm">10.00pm</option>
+				  <option value="12.00pm">10.00pm</option>
+				  <option value="1.00pm">10.00pm</option>
 				</select>
 			</div>
 			<div class="ui-input-data">
@@ -66,7 +66,9 @@
 			</div>
 			<input type="button" class="loginBtn" ng-click="create_outlet()" data-inline="true" value="Save" />
 		</div>
-		<p ng-show="error">Please fillup the fields</p>
-		<p ng-hide="error"></p>
+		<p ng-show="error" class="errorMsg">Please fillup the form.</p>
+		<p ng-hide="error" ></p>
+		<p ng-show="success" class="successMsg">Outlet is created by Id {{outletID}}</p>
+		<p ng-hide="success" ></p>
 	</div>
 </div>
