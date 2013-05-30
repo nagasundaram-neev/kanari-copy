@@ -83,6 +83,7 @@ body {
 	color: #5A4166;
 	padding: 2px 12px;
 	background: none repeat scroll 0 0 #E4E3E1;
+	 cursor: pointer !important;
 }
 .navBarCls .nav-tabs {
 	border: none;
@@ -145,6 +146,7 @@ a.addRestaurant {
 	padding: 5px 20px;
 	float: left;
 }
+a.addRestaurant img{vertical-align: text-bottom;}
 a.createPayment {
 	float: left;
 	 margin: 5px 10px;
@@ -158,3 +160,4 @@ a.addRestaurant:hover {
 #createOutlet .ui-input-data{padding: 5px 0;}
 #createOutlet lable{ float: left;width: 130px;}
 #createOutlet select{  width: 80px;}
+.successMsg{color: green}

@@ -144,6 +144,13 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 		deleteCookie('authToken');
 		$location.url("/login");
 	}
+	$scope.goTOOulet = function() {
+		if (getCookie('userRole') == "kanari_admin") {
+			$location.url("/home");
+		} else if (getCookie('userRole') == "customer_admin") {
+			$location.url("/create_outlet");
+		}
+	}
 });
 
 module.controller('Login', function($scope, $http, $location) {
@@ -170,7 +177,11 @@ module.controller('Login', function($scope, $http, $location) {
 			setCookie('userRole', data.user_role, 1);
 			setCookie('authToken', data.auth_token, 1);
 			$scope.erromsg = false;
-			$location.url("/home");
+			if (getCookie('userRole') == "kanari_admin") {
+				$location.url("/home");
+			} else if (getCookie('userRole') == "customer_admin") {
+				$location.url("/create_outlet");
+			}
 
 		}).error(function(data, status) {
 			console.log("data " + data + " status " + status);
@@ -276,7 +287,7 @@ module.controller('createInvitation', function($scope, $http, $location) {
 			}).success(function(data, status) {
 				console.log("data in success " + data + " status " + status);
 				//$location.url("/accept_invitation"+data.invitation_token);
-				$scope.invitation_token = "http://localhost:8080/#/accept_invitation/" + data.invitation_token;
+				$scope.invitation_token = "http://localhost:8080/#/accept_invitation?invi_token=" + data.invitation_token;
 				$scope.statement = true;
 				$scope.erromsg = false;
 			}).error(function(data, status) {
@@ -355,7 +366,10 @@ module.controller('createOutletCtrl', function($scope, $http, $location) {
 	if (getCookie('authToken')) {
 		$('.welcome').show();
 		$('.navBarCls').show();
+		$scope.error = false;
+		$scope.success = false;
 		$scope.create_outlet = function() {
+			console.log($scope.fromTime);
 			var param = {
 				"outlet" : {
 					"name" : $scope.restaurant_name,
@@ -365,10 +379,10 @@ module.controller('createOutletCtrl', function($scope, $http, $location) {
 					"website_url" : "http://batmansdonuts.com",
 					"email" : $scope.email_address,
 					"phone_number" : $scope.contact_number,
-					"open_hours" : "10:00-23:00",
-					"has_delivery" : true,
-					"serves_alcohol" : true,
-					"has_outdoor_seating" : true
+					"open_hours" : $scope.fromTime + "-" + $scope.toTime,
+					"has_delivery" : $scope.Delivery,
+					"serves_alcohol" : $scope.serves_alcohol,
+					"has_outdoor_seating" : $scope.outdoor_Seating
 				}
 			}
 
@@ -377,13 +391,52 @@ module.controller('createOutletCtrl', function($scope, $http, $location) {
 				url : '/api/outlets',
 				data : param,
 			}).success(function(data, status) {
+				console.log(data.outlet.id);
 				console.log("data in success " + data + " status " + status);
+				$scope.error = false;
+				$scope.outletID = data.outlet.id;
+				$scope.success = true;
 			}).error(function(data, status) {
 				console.log("data in error" + data + " status " + status);
+				$scope.error = true;
+				$scope.success = false;
 			});
 		}
 	} else {
 		$location.url("/login");
+	}
+});
+
+module.controller('acceptInvitationCtrl', function($scope,$routeParams, $http, $location) {
+	alert('in');
+	$scope.acceptInvitation = function() {
+	console.log($routeParams.invi_token);
+		var param = {
+			"user" : {
+				"password" :$scope.password,
+				"password_confirmation" : $scope.password_confirmation,
+				"first_name" : $scope.first_name,
+				"last_name" : $scope.last_name,
+				"invitation_token" : $routeParams.invi_token
+			}
+		}
+
+		$http({
+			method : 'put',
+			url : '/api/users/invitation',
+			data : param,
+		}).success(function(data, status) {
+			console.log("data in success " + data + " status " + status);
+			$scope.error = false;
+			$scope.auth_token = data.auth_token;
+			$scope.success = true;
+		}).error(function(data, status) {
+			console.log("data in error" + data + " status " + status);
+			$scope.errorMsg = data.errors;
+			$scope.error = true;
+			$scope.success = false;
+		});
+
 	}
 });
 
