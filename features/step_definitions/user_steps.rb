@@ -68,3 +68,21 @@ Given /^"([^"]*)" received an invitation with token "([^"]*)"$/ do |email, invit
   @user = User.new(email: email, invitation_token: invitation_token, invitation_sent_at: Time.now.utc)
   @user.save!(validate: false)
 end
+
+And /^a new user with email "([^"]*)" should be created$/ do |email|
+  @user = User.last
+  @user.email.should == email
+end
+
+And /^the user's full name should be "([^"]*)"$/ do |full_name|
+  actual_full_name = @user.first_name + " " + @user.last_name
+  actual_full_name.should == full_name
+end
+
+And /^the user's phone number should be "([^"]*)"$/ do |phone_number|
+  @user.phone_number.should == phone_number
+end
+
+And /^a new user should not be created with email "([^"]*)"$/ do |email|
+  User.where(email: email).first.should == nil
+end

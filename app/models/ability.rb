@@ -38,6 +38,7 @@ class Ability
       can :manage, Customer
       can :manage, Outlet, customer: user.customer
       can :create, Outlet
+      can :create, User, role: 'manager'
     else
       #Default permissions
     end
