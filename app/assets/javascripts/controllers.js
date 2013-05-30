@@ -160,23 +160,22 @@ module.controller('Login', function($scope, $http, $location) {
 
 		$('.welcome').hide();
 		$('.navBarCls').hide();
-		
+
 		var param = "{email:'" + $scope.email + "','" + $scope.password + "'}";
-			$http({
-				method : 'post',
-				url : '/api/users/sign_in',
-			}).success(function(data, status) {
-				console.log("User Role " + data.user_role + " status " + status);
-				setCookie('userRole', data.user_role, 1);
-				setCookie('authToken', data.auth_token, 1);
-				$scope.erromsg = false;
-				$location.url("/home");
-				
-			}).error(function(data, status) {
-				console.log("data " + data + " status " + status);
-				$scope.erromsg = true;
-			});
-		
+		$http({
+			method : 'post',
+			url : '/api/users/sign_in',
+		}).success(function(data, status) {
+			console.log("User Role " + data.user_role + " status " + status);
+			setCookie('userRole', data.user_role, 1);
+			setCookie('authToken', data.auth_token, 1);
+			$scope.erromsg = false;
+			$location.url("/home");
+
+		}).error(function(data, status) {
+			console.log("data " + data + " status " + status);
+			$scope.erromsg = true;
+		});
 
 	};
 
@@ -190,7 +189,11 @@ module.controller('forgotPassCtrl', function($scope, $http, $location) {
 	$scope.erromsg = false;
 	$scope.SendLink = function() {
 		var userEmail = $scope.email;
-		var param = {"user" : {"email" : userEmail}};
+		var param = {
+			"user" : {
+				"email" : userEmail
+			}
+		};
 		//alert(param);
 		$http({
 			method : 'post',
@@ -200,8 +203,8 @@ module.controller('forgotPassCtrl', function($scope, $http, $location) {
 			console.log("data in success " + userEmail + " status " + status);
 			$scope.error = data.error;
 			$scope.statement = true;
-			if(!userEmail)
-			$scope.erromsg = true;
+			if (!userEmail)
+				$scope.erromsg = true;
 		}).error(function(data, status) {
 			console.log("data in error" + data + " status " + status);
 			$scope.erromsg = true;
@@ -210,7 +213,7 @@ module.controller('forgotPassCtrl', function($scope, $http, $location) {
 });
 
 module.controller('resetPassCtrl', function($scope, $routeParams, $http, $location) {
-$scope.erromsg = false;
+	$scope.erromsg = false;
 	$scope.resetPass = function() {
 		//alert($routeParams.reset_password_token);
 		var userPass = $scope.password;
@@ -241,43 +244,147 @@ $scope.erromsg = false;
 });
 
 module.controller('homeCtrl', function($scope, $http, $location) {
-	$('.welcome').show();
-	$('.navBarCls').show();
-	console.log(getCookie('userRole'));
-	$scope.userRole = getCookie('userRole');
-
+	if (getCookie('authToken')) {
+		$('.welcome').show();
+		$('.navBarCls').show();
+		console.log(getCookie('userRole'));
+		$scope.userRole = getCookie('userRole');
+	} else {
+		$location.url("/login");
+	}
 });
 module.controller('createInvitation', function($scope, $http, $location) {
-	$('.welcome').show();
-	$('.navBarCls').show();
-	$scope.statement = false;
-	$scope.erromsg = false;
-	$scope.create_invitation = function() {
-		console.log("In Create Invitation" + auth_token);
-		var userEmail = $scope.userEmail;
-		var param = {
-			"user" : {
-				"email" : userEmail
-			},
-			"auth_token" : getCookie('authToken')
-		}
+	if (getCookie('authToken')) {
+		$('.welcome').show();
+		$('.navBarCls').show();
+		$scope.statement = false;
+		$scope.erromsg = false;
+		$scope.create_invitation = function() {
+			console.log("In Create Invitation" + auth_token);
+			var userEmail = $scope.userEmail;
+			var param = {
+				"user" : {
+					"email" : userEmail
+				},
+				"auth_token" : getCookie('authToken')
+			}
 
+			$http({
+				method : 'post',
+				url : '/api/users/invitation',
+				data : param,
+			}).success(function(data, status) {
+				console.log("data in success " + data + " status " + status);
+				//$location.url("/accept_invitation"+data.invitation_token);
+				$scope.invitation_token = "http://localhost:8080/#/accept_invitation/" + data.invitation_token;
+				$scope.statement = true;
+				$scope.erromsg = false;
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+				$scope.erromsg = true;
+			});
+
+		};
+	} else {
+		$location.url("/login");
+	}
+});
+
+module.controller('paymentInvoiceCtrl', function($scope, $http, $location) {
+	if (getCookie('authToken')) {
+		$('.welcome').show();
+		$('.navBarCls').show();
+
+		$scope.payment_invoice = function() {
+			console.log("in Payment Invoice" + this.url);
+			var invoiceId = $scope.kanari_invoice_id;
+			var receiptDate = $scope.receipt_date;
+			var amount = $scope.amount_paid;
+			var param = {
+				"payment_invoice" : {
+					"kanari_invoice_id" : invoiceId,
+					"receipt_date" : receiptDate,
+					"amount_paid" : amount
+				}
+			}
+
+			$http({
+				method : 'post',
+				url : '/api/customers/100/payment_invoices',
+				data : param,
+			}).success(function(data, status) {
+				console.log("data in success " + data + " status " + status);
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+			});
+
+			console.log("auth_token" + getCookie('authToken'));
+			$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
+
+		};
+	} else {
+		$location.url("/login");
+	}
+
+});
+
+module.controller('listPaymentInvoiceCtrl', function($scope, $http, $location) {
+	if (getCookie('authToken')) {
+		$('.welcome').show();
+		$('.navBarCls').show();
+
+		var param = {
+			"start_date" : "22-01-2013",
+			"end_date" : "24-01-2013"
+		}
 		$http({
-			method : 'post',
-			url : '/api/users/invitation',
+			method : 'get',
+			url : '/api/customers/100/payment_invoices',
 			data : param,
 		}).success(function(data, status) {
 			console.log("data in success " + data + " status " + status);
-			//$location.url("/accept_invitation"+data.invitation_token);
-			$scope.invitation_token = "http://localhost:8080/#/accept_invitation/" + data.invitation_token;
-			$scope.statement = true;
-			$scope.erromsg = false;
 		}).error(function(data, status) {
 			console.log("data in error" + data + " status " + status);
-			$scope.erromsg = true;
 		});
+	} else {
+		$location.url("/login");
+	}
+});
 
-	};
+module.controller('createOutletCtrl', function($scope, $http, $location) {
+	if (getCookie('authToken')) {
+		$('.welcome').show();
+		$('.navBarCls').show();
+		$scope.create_outlet = function() {
+			var param = {
+				"outlet" : {
+					"name" : $scope.restaurant_name,
+					"address" : $scope.restaurant_location,
+					"latitude" : "50.50",
+					"longitude" : "60.60",
+					"website_url" : "http://batmansdonuts.com",
+					"email" : $scope.email_address,
+					"phone_number" : $scope.contact_number,
+					"open_hours" : "10:00-23:00",
+					"has_delivery" : true,
+					"serves_alcohol" : true,
+					"has_outdoor_seating" : true
+				}
+			}
+
+			$http({
+				method : 'post',
+				url : '/api/outlets',
+				data : param,
+			}).success(function(data, status) {
+				console.log("data in success " + data + " status " + status);
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+			});
+		}
+	} else {
+		$location.url("/login");
+	}
 });
 
 function setCookie(name, value, days) {
