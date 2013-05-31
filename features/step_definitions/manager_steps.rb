@@ -11,3 +11,7 @@ And /^the following managers have been created$/ do |managers|
     manager.save!
   end
 end
+
+And /^"([^"]*)" should have "([^"]*)" as the manager$/ do |outlet_name, manager_email|
+  Outlet.where(name: outlet_name).first.manager_id.should == User.where(email: manager_email).first.id
+end

@@ -2,6 +2,10 @@ Given /^".*" is a user with email id "([^"]*)" and password "([^"]*)"$/ do |emai
   @user = User.create(email: email, password: password, password_confirmation: password)
 end
 
+Given /^".*" is a user with email id "([^"]*)" and password "([^"]*)" and user id "([^"]*)"$/ do |email, password, user_id|
+  @user = User.create(id: user_id, email: email, password: password, password_confirmation: password)
+end
+
 And /^his authentication token is "([^"]*)"$/ do |auth_token|
   @user.authentication_token = auth_token
   @user.save!

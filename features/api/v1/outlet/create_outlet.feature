@@ -9,6 +9,8 @@ Feature: Create Outlet
         And his authentication token is "auth_token_123"
       Given a customer named "China Pearl" exists with id "100"
       And he is the admin for customer "China Pearl"
+      Given "Bob" is a user with email id "bob@gmail.com" and password "password123" and user id "10"
+        And his role is "manager"
       When I authenticate as the user "auth_token_123" with the password "random string"
       And I send a POST request to "/api/outlets" with the following:
       """
@@ -24,7 +26,8 @@ Feature: Create Outlet
           "open_hours": "10:00-23:00",
           "has_delivery": true,
           "serves_alcohol" : true,
-          "has_outdoor_seating" : true
+          "has_outdoor_seating" : true,
+          "manager_id" : 10
         }
       }
       """
@@ -38,6 +41,7 @@ Feature: Create Outlet
       {"outlet" : {"id" : 1}}
       """
       And the outlet "Batman's Donuts" should be created under customer with id "100"
+      And "Batman's Donuts" should have "bob@gmail.com" as the manager
 
     Scenario Outline: User's role is <role>
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"
