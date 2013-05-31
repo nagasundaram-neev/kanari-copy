@@ -449,11 +449,18 @@ module.controller('acceptInvitationCtrl', function($scope, $routeParams, $http, 
 	}
 });
 
+
 module.controller('createManagerCtrl', function($scope, $routeParams, $route, $http, $location) {
 	if (getCookie('authToken')) {
 		$('.welcome').show();
 		$('.navBarCls').show();
 		
+		  // $scope.items = [
+        // {name: 'item1', content: 'content1'},
+        // {name: 'item2', content: 'content2'},
+        // {name: 'item3', content: 'content3'}
+    // ];
+    
 		$http({
 			method : 'get',
 			url : '/api/managers',
@@ -465,7 +472,9 @@ module.controller('createManagerCtrl', function($scope, $routeParams, $route, $h
 			
 		});
 		
-		
+	$scope.add_new_manager = function() {
+		$('.add_manager').show();
+		}	
 	$scope.create_manager = function() {
 		var param = {
 			"user" : {
