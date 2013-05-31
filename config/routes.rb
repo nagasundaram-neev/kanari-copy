@@ -6,7 +6,7 @@ Kanari::Application.routes.draw do
       resources :redemptions
       resources :outlets
       resources :payment_invoices, only: [:index]
-      resources :managers, only: [:create]
+      resources :managers, only: [:create, :index]
 
       resources :customers do
         resources :payment_invoices, only: [:create]

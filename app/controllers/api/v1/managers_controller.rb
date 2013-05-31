@@ -1,6 +1,8 @@
 class Api::V1::ManagersController < ApplicationController
   before_action :authenticate_user!
 
+  respond_to :json
+
   #POST /managers
   def create
     user = User.new(create_manager_params)
@@ -11,6 +13,14 @@ class Api::V1::ManagersController < ApplicationController
     else
       render json: {errors: user.errors.full_messages}, status: :unprocessable_entity
     end
+  end
+
+  #GET /managers
+  def index
+    authorize! :read, User
+    #TODO: Query to be optimized
+    managers = current_user.customer.outlets.collect(&:manager).uniq
+    render json: managers, each_serializer: ManagerSerializer
   end
 
   private

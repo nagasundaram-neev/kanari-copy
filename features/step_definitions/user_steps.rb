@@ -86,3 +86,17 @@ end
 And /^a new user should not be created with email "([^"]*)"$/ do |email|
   User.where(email: email).first.should == nil
 end
+
+Given /^Password reset instuctions were sent to "([^"]*)"$/ do |email|
+  @user = User.create(email: email, password: 'password123', password_confirmation: 'password123')
+  User.send_reset_password_instructions(email: email)
+end
+
+When "he clicks on the password reset link" do
+  open_last_email
+  visit_in_email(/reset_password_token/)
+end
+
+And /^the customer with id "([^"]*)" has an outlet named "([^"]*)"$/  do |customer_id, outlet_name|
+  outlet = Outlet.create!(name: outlet_name, customer_id: customer_id)
+end
