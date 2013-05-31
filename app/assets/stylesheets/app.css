@@ -95,6 +95,7 @@ body {
 }
 .rememberMe label {
 	float: left;
+	margin-left: 5px;
 }
 .errorMsg {
 	color: red
@@ -161,3 +162,10 @@ a.addRestaurant:hover {
 #createOutlet lable{ float: left;width: 130px;}
 #createOutlet select{  width: 80px;}
 .successMsg{color: green}
+.leftPanel{float: left;width:25%;}
+.rightPanel{float:left;width:74%;/*margin-left:30px*/}
+.leftPanel ul{margin: 0;}
+.leftPanel ul li{list-style: none; padding: 10px 5px;}
+.leftPanel ul li a{color: #5A4166;font-size: 14px;font-weight: bold;}
+.leftPanel ul li a:hover{text-decoration:none;}
+.leftPanel ul li a span{ font-size: 12px;font-weight: normal;margin-left: 28px;padding: 0;}

@@ -1,7 +1,10 @@
 <div data-role="page" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
+	 
 	<div class="innerDiv" data-role="content">
-		<h1>Create Restaurant Outlet</h1>
-		<div data-role="fieldcontain" class="loginDiv">
+		<!-- <div class="leftPanel" ng-include src ="'<%= asset_path 'sidepanel.html' %>'" ></div> -->
+		
+		<div data-role="fieldcontain" class="rightPanel loginDiv">
+			<h1>Create Restaurant Outlet</h1>
 			<div class="ui-input-data">
 				<lable>Restaurant Name</lable>
 				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="restaurant_name" class="passwordTxt" />
@@ -66,6 +69,7 @@
 			</div>
 			<input type="button" class="loginBtn" ng-click="create_outlet()" data-inline="true" value="Save" />
 		</div>
+		<div class="clr"></div>
 		<p ng-show="error" class="errorMsg">Please fillup the form.</p>
 		<p ng-hide="error" ></p>
 		<p ng-show="success" class="successMsg">Outlet is created by Id {{outletID}}</p>

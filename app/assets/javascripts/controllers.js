@@ -198,6 +198,7 @@ module.controller('Login', function($scope, $http, $location) {
 
 module.controller('forgotPassCtrl', function($scope, $http, $location) {
 	$scope.erromsg = false;
+	$scope.success = false;
 	$scope.SendLink = function() {
 		var userEmail = $scope.email;
 		var param = {
@@ -213,12 +214,17 @@ module.controller('forgotPassCtrl', function($scope, $http, $location) {
 		}).success(function(data, status) {
 			console.log("data in success " + userEmail + " status " + status);
 			$scope.error = data.error;
-			$scope.statement = true;
-			if (!userEmail)
+			if (!userEmail) {
 				$scope.erromsg = true;
+				$scope.success = false;
+			} else {
+				$scope.success = true;
+				$scope.erromsg = false;
+			}
 		}).error(function(data, status) {
 			console.log("data in error" + data + " status " + status);
 			$scope.erromsg = true;
+			$scope.success = false;
 		});
 	};
 });
@@ -407,13 +413,13 @@ module.controller('createOutletCtrl', function($scope, $http, $location) {
 	}
 });
 
-module.controller('acceptInvitationCtrl', function($scope,$routeParams, $http, $location) {
+module.controller('acceptInvitationCtrl', function($scope, $routeParams, $http, $location) {
 	alert('in');
 	$scope.acceptInvitation = function() {
-	console.log($routeParams.invi_token);
+		console.log($routeParams.invi_token);
 		var param = {
 			"user" : {
-				"password" :$scope.password,
+				"password" : $scope.password,
 				"password_confirmation" : $scope.password_confirmation,
 				"first_name" : $scope.first_name,
 				"last_name" : $scope.last_name,
@@ -430,6 +436,7 @@ module.controller('acceptInvitationCtrl', function($scope,$routeParams, $http, $
 			$scope.error = false;
 			$scope.auth_token = data.auth_token;
 			$scope.success = true;
+			$location.url("/login");
 		}).error(function(data, status) {
 			console.log("data in error" + data + " status " + status);
 			$scope.errorMsg = data.errors;
