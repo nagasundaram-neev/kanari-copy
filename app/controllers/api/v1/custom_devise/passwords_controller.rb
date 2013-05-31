@@ -12,6 +12,10 @@ module Api
           self.resource = resource_class.send_reset_password_instructions(resource_params)
         end
 
+        def edit
+          redirect_to "/#/api/users/password/edit?reset_password_token=#{params[:reset_password_token]}"
+        end
+
 
         # PUT /users/password
         def update
