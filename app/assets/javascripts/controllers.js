@@ -414,7 +414,6 @@ module.controller('createOutletCtrl', function($scope, $http, $location) {
 });
 
 module.controller('acceptInvitationCtrl', function($scope, $routeParams, $http, $location) {
-	alert('in');
 	$scope.acceptInvitation = function() {
 		console.log($routeParams.invi_token);
 		var param = {
