@@ -1,27 +1,27 @@
-<ul class="">
-	<li>
-		<a href="#">
+<ul class="" ng-controller="sidePanelCtrl">
+	<li class="active create_outlet">
+		<a ng-click="getActive('create_outlet')">
 			<%= image_tag 'icon_profile.png' %>
 			Profile<br/>
 			<span>Name, Description and contact info</span>
 		</a>
 	</li>
-	<li>
-		<a href="#">
+	<li class="create_location">
+		<a ng-click="getActive('create_location')">
 			<%= image_tag 'icon_location.png' %>
 			Location<br/>
 			<span>Specifi the exact location of your outlet</span>
 		</a>
 	</li>
-	<li>
-		<a href="#">
+	<li class="create_manager">
+		<a ng-click="getActive('create_manager')">
 			<%= image_tag 'icon_permissions.png' %>
 			Permission<br/>
 			<span>Set user permissions for your staff</span>
 		</a>
 	</li>
-	<li>
-		<a href="#">
+	<li class="create_report">
+		<a ng-click="getActive('create_report')">
 			<%= image_tag 'icon_reports.png' %>
 			Reports	<br/>		
 			<span>Who gets the reports and hoe often</span>

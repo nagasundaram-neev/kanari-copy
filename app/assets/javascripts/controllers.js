@@ -151,6 +151,9 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 			$location.url("/create_outlet");
 		}
 	}
+	$scope.getActive = function(section) {
+		$location.url("/"+section);
+	}
 });
 
 module.controller('Login', function($scope, $http, $location) {
@@ -446,6 +449,62 @@ module.controller('acceptInvitationCtrl', function($scope, $routeParams, $http, 
 	}
 });
 
+module.controller('createManagerCtrl', function($scope, $routeParams, $route, $http, $location) {
+	if (getCookie('authToken')) {
+		$('.welcome').show();
+		$('.navBarCls').show();
+		
+		$http({
+			method : 'get',
+			url : '/api/managers',
+		}).success(function(data, status) {
+			console.log("data in success " + data + " status " + status);
+			//console.log(data);
+		}).error(function(data, status) {
+			console.log("data in error" + data + " status " + status);
+			
+		});
+		
+		
+	$scope.create_manager = function() {
+		var param = {
+			"user" : {
+				"email" : $scope.email_address,
+				"first_name" : $scope.first_name,
+				"last_name" : $scope.last_name,
+				"phone_number" : $scope.contact_number,
+				"password" : $scope.password,
+				"password_confirmation" : $scope.confirmpassword
+			}
+		}
+
+		$http({
+			method : 'post',
+			url : '/api/managers',
+			data : param,
+		}).success(function(data, status) {
+			console.log("data in success " + data + " status " + status);
+			$scope.error = false;
+			$scope.manager_id = data.manager.id;
+			$scope.success = true;
+		}).error(function(data, status) {
+			console.log("data in error" + data + " status " + status);
+			$scope.errorMsg = data.errors;
+			$scope.error = true;
+			$scope.success = false;
+		});
+	}
+	}
+	else{
+		$location.url("/login");
+	}
+});
+module.controller('sidePanelCtrl', function($scope, $routeParams, $route, $http, $location) {
+	var classNm = $location.path();
+	var newValue = classNm.replace('/', '');
+	$('.ng-scope li').removeClass('active');
+		$('.'+newValue).addClass('active');
+});
 function setCookie(name, value, days) {
 	//alert(value);
 	if (days) {
