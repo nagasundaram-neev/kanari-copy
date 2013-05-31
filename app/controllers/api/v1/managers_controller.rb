@@ -19,7 +19,7 @@ class Api::V1::ManagersController < ApplicationController
   def index
     authorize! :read, User
     #TODO: Query to be optimized
-    managers = current_user.customer.outlets.collect(&:manager).uniq
+    managers = current_user.customer.outlets.collect(&:manager).uniq rescue []
     render json: managers, each_serializer: ManagerSerializer
   end
 

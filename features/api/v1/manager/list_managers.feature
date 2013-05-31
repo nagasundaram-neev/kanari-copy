@@ -79,3 +79,35 @@ Feature: List Managers
       |manager        |
       |staff          |
       |user           |
+
+    Scenario: User has not created a customer account yet
+      Given "Adam" is a user with email id "user@gmail.com" and password "password123"
+        And his authentication token is "auth_token_123"
+        And his role is "customer_admin"
+      When I authenticate as the user "auth_token_123" with the password "random string"
+      And I send a GET request to "/api/managers"
+      Then the response status should be "200"
+      And the JSON response should be:
+      """
+      {
+        "managers" : []
+      }
+      """
+
+    Scenario: User has not created outlet profiles
+      Given "Adam" is a user with email id "user@gmail.com" and password "password123"
+        And his authentication token is "auth_token_123"
+        And his role is "customer_admin"
+      Given a customer named "China Pearl" exists with id "100"
+      And a customer named "Mast Kalandar" exists with id "101"
+      Given he is the admin for customer "China Pearl"
+      When I authenticate as the user "auth_token_123" with the password "random string"
+      And I send a GET request to "/api/managers"
+      Then the response status should be "200"
+      And the JSON response should be:
+      """
+      {
+        "managers" : []
+      }
+      """
+
