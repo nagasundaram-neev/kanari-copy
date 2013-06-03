@@ -6,3 +6,23 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 default_kanari_admin = User.create(email: 'admin@kanari.co', password: 'admin123', password_confirmation: 'admin123', role: 'kanari_admin')
+
+CuisineType.create([
+  { name: "International" },
+  { name: "Chinese" },
+  { name: "Japanese" },
+  { name: "Italian" },
+  { name: "Lebanese" },
+  { name: "Indian" },
+  { name: "Steakhouse" }
+])
+
+OutletType.create([
+  { name: "Cafe" },
+  { name: "Fine Dining" },
+  { name: "Casual Dining" },
+  { name: "Fast-Casual" },
+  { name: "Lebanese" },
+  { name: "Indian" },
+  { name: "Steakhouse" }
+])
