@@ -29,6 +29,30 @@ Feature: Update Outlet
       And the outlet "China Pearl - Bengaluru" should be present under customer with id "100"
       And the outlet should be disabled
 
+    Scenario: Outlet doesn't exist
+      Given "Adam" is a user with email id "user@gmail.com" and password "password123"
+        And his role is "customer_admin"
+        And his authentication token is "auth_token_123"
+      Given a customer named "China Pearl" exists with id "100"
+        And the customer with id "100" has an outlet named "China Pearl - Bangalore"
+        And the outlet's id is "20"
+      And he is the admin for customer "China Pearl"
+      When I authenticate as the user "auth_token_123" with the password "random string"
+      And I send a PUT request to "/api/outlets/21" with the following:
+      """
+      {
+        "outlet" : {
+          "name" : "China Pearl - Bengaluru",
+          "disabled" : true
+        }
+      }
+      """
+      Then the response status should be "422"
+      And the JSON response should be:
+      """
+      { "errors" : ["Couldn't find Outlet with id=21"] }
+      """
+
     Scenario: Outlet belongs to a different customer account
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"
         And his role is "customer_admin"
