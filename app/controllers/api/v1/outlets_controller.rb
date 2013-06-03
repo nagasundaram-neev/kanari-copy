@@ -29,16 +29,12 @@ class Api::V1::OutletsController < ApplicationController
   end
 
   # PATCH/PUT /outlets/1
-  # PATCH/PUT /outlets/1.json
   def update
-    respond_to do |format|
-      if @outlet.update(outlet_params)
-        format.html { redirect_to @outlet, notice: 'Outlet was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @outlet.errors, status: :unprocessable_entity }
-      end
+    authorize! :update, @outlet
+    if @outlet.update(outlet_params)
+      render json: nil, status: 200
+    else
+      render json: @outlet.errors, status: :unprocessable_entity
     end
   end
 
@@ -60,6 +56,6 @@ class Api::V1::OutletsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def outlet_params
-      params.require(:outlet).permit(:name, :address, :latitude, :longitude, :website_url, :email, :phone_number, :open_hours, :has_delivery, :serves_alcohol, :has_outdoor_seating, :manager_id)
+      params.require(:outlet).permit(:name, :address, :latitude, :longitude, :website_url, :email, :phone_number, :open_hours, :has_delivery, :serves_alcohol, :has_outdoor_seating, :manager_id, :disabled)
     end
 end

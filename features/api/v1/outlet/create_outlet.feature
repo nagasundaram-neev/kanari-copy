@@ -40,7 +40,7 @@ Feature: Create Outlet
       """
       {"outlet" : {"id" : 1}}
       """
-      And the outlet "Batman's Donuts" should be created under customer with id "100"
+      And the outlet "Batman's Donuts" should be present under customer with id "100"
       And "Batman's Donuts" should have "bob@gmail.com" as the manager
 
     Scenario Outline: User's role is <role>

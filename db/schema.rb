@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130529111339) do
+ActiveRecord::Schema.define(version: 20130531143855) do
 
   create_table "cuisine_types", force: true do |t|
     t.string   "name"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 20130529111339) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "manager_id"
+    t.boolean  "disabled",            default: false
   end
 
   add_index "outlets", ["customer_id"], name: "index_outlets_on_customer_id", using: :btree
