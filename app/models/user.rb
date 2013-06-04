@@ -28,4 +28,22 @@ class User < ActiveRecord::Base
       return nil
     end
   end
+
+  def outlets
+    case role
+    when 'kanari_admin'
+      Outlet.all
+    when 'customer_admin'
+      customer.outlets
+    when 'manager'
+      managed_outlets
+    when 'staff'
+      Array(employed_outlet)
+    when 'user'
+      return []
+    else
+      return []
+    end
+  end
+
 end

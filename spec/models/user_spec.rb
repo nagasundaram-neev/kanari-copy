@@ -46,4 +46,64 @@ describe User do
       end
     end
   end
+
+  describe "#outlets" do
+    let(:user) { FactoryGirl.create(:user, role: role)}
+    context "when role is kanari_admin" do
+      let(:role) { 'kanari_admin' }
+      it "should return all the outlets in the database" do
+        customer = FactoryGirl.create(:customer)
+        another_customer = FactoryGirl.create(:customer)
+        outlet_1 = FactoryGirl.create(:outlet, customer: customer)
+        outlet_2 = FactoryGirl.create(:outlet, customer: customer)
+        outlet_3 = FactoryGirl.create(:outlet, customer: another_customer)
+        user.outlets.should =~ [outlet_1, outlet_2, outlet_3]
+      end
+    end
+    context "when role is customer_admin" do
+      let(:role) { 'customer_admin' }
+      it "should return all the outlets belonging to the customer" do
+        customer = FactoryGirl.create(:customer, customer_admin: user)
+        another_customer = FactoryGirl.create(:customer)
+        outlet_1 = FactoryGirl.create(:outlet, customer: customer)
+        outlet_2 = FactoryGirl.create(:outlet, customer: customer)
+        outlet_3 = FactoryGirl.create(:outlet, customer: another_customer)
+        user.outlets.should =~ [outlet_1, outlet_2]
+      end
+    end
+    context "when role is manager" do
+      let(:role) { 'manager' }
+      it "should return all the outlets managed by the user" do
+        customer = FactoryGirl.create(:customer)
+        another_customer = FactoryGirl.create(:customer)
+        outlet_1 = FactoryGirl.create(:outlet, customer: customer, manager: user)
+        outlet_2 = FactoryGirl.create(:outlet, customer: customer, manager: user)
+        outlet_3 = FactoryGirl.create(:outlet, customer: another_customer)
+        user.outlets.should =~ [outlet_1, outlet_2]
+      end
+    end
+    context "when role is staff" do
+      let(:role) { 'staff' }
+      it "should return the outlet where the user is employed" do
+        customer = FactoryGirl.create(:customer)
+        another_customer = FactoryGirl.create(:customer)
+        outlet_1 = FactoryGirl.create(:outlet, customer: customer, staffs: [user])
+        outlet_2 = FactoryGirl.create(:outlet, customer: customer)
+        outlet_3 = FactoryGirl.create(:outlet, customer: another_customer)
+        user.outlets.should =~ [outlet_1]
+      end
+    end
+    context "when role is user" do
+      let(:role) { 'user' }
+      it "should return an empty array" do
+        user.outlets.should == []
+      end
+    end
+    context "when role is invalid" do
+      let(:role) { 'random' }
+      it "should return an empty array" do
+        user.outlets.should == []
+      end
+    end
+  end
 end
