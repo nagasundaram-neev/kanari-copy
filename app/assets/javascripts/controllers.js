@@ -152,7 +152,7 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 		}
 	}
 	$scope.getActive = function(section) {
-		$location.url("/"+section);
+		$location.url("/" + section);
 	}
 });
 
@@ -274,6 +274,7 @@ module.controller('homeCtrl', function($scope, $http, $location) {
 	}
 });
 module.controller('createInvitation', function($scope, $http, $location) {
+
 	if (getCookie('authToken')) {
 		$('.welcome').show();
 		$('.navBarCls').show();
@@ -296,7 +297,16 @@ module.controller('createInvitation', function($scope, $http, $location) {
 			}).success(function(data, status) {
 				console.log("data in success " + data + " status " + status);
 				//$location.url("/accept_invitation"+data.invitation_token);
-				$scope.invitation_token = "http://localhost:8080/#/accept_invitation?invi_token=" + data.invitation_token;
+				baseurl = ""
+				if (!window.location.origin){
+					baseurl = window.location.protocol + "//" + window.location.host;
+				}
+				else {
+					console.log("under else");
+					baseurl = window.location.origin
+				}
+				$scope.invitation_token = baseurl+"/accept_invitation?invi_token=" + data.invitation_token;
+				//$scope.invitation_token = $location.host()+":"+$location.port()+"/#/accept_invitation?invi_token=" + data.invitation_token;
 				$scope.statement = true;
 				$scope.erromsg = false;
 			}).error(function(data, status) {
@@ -449,18 +459,17 @@ module.controller('acceptInvitationCtrl', function($scope, $routeParams, $http, 
 	}
 });
 
-
 module.controller('createManagerCtrl', function($scope, $routeParams, $route, $http, $location) {
 	if (getCookie('authToken')) {
 		$('.welcome').show();
 		$('.navBarCls').show();
-		
-		  // $scope.items = [
-        // {name: 'item1', content: 'content1'},
-        // {name: 'item2', content: 'content2'},
-        // {name: 'item3', content: 'content3'}
-    // ];
-    
+
+		// $scope.items = [
+		// {name: 'item1', content: 'content1'},
+		// {name: 'item2', content: 'content2'},
+		// {name: 'item3', content: 'content3'}
+		// ];
+
 		$http({
 			method : 'get',
 			url : '/api/managers',
@@ -469,42 +478,41 @@ module.controller('createManagerCtrl', function($scope, $routeParams, $route, $h
 			//console.log(data);
 		}).error(function(data, status) {
 			console.log("data in error" + data + " status " + status);
-			
-		});
-		
-	$scope.add_new_manager = function() {
-		$('.add_manager').show();
-		}	
-	$scope.create_manager = function() {
-		var param = {
-			"user" : {
-				"email" : $scope.email_address,
-				"first_name" : $scope.first_name,
-				"last_name" : $scope.last_name,
-				"phone_number" : $scope.contact_number,
-				"password" : $scope.password,
-				"password_confirmation" : $scope.confirmpassword
-			}
-		}
 
-		$http({
-			method : 'post',
-			url : '/api/managers',
-			data : param,
-		}).success(function(data, status) {
-			console.log("data in success " + data + " status " + status);
-			$scope.error = false;
-			$scope.manager_id = data.manager.id;
-			$scope.success = true;
-		}).error(function(data, status) {
-			console.log("data in error" + data + " status " + status);
-			$scope.errorMsg = data.errors;
-			$scope.error = true;
-			$scope.success = false;
 		});
-	}
-	}
-	else{
+
+		$scope.add_new_manager = function() {
+			$('.add_manager').show();
+		}
+		$scope.create_manager = function() {
+			var param = {
+				"user" : {
+					"email" : $scope.email_address,
+					"first_name" : $scope.first_name,
+					"last_name" : $scope.last_name,
+					"phone_number" : $scope.contact_number,
+					"password" : $scope.password,
+					"password_confirmation" : $scope.confirmpassword
+				}
+			}
+
+			$http({
+				method : 'post',
+				url : '/api/managers',
+				data : param,
+			}).success(function(data, status) {
+				console.log("data in success " + data + " status " + status);
+				$scope.error = false;
+				$scope.manager_id = data.manager.id;
+				$scope.success = true;
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+				$scope.errorMsg = data.errors;
+				$scope.error = true;
+				$scope.success = false;
+			});
+		}
+	} else {
 		$location.url("/login");
 	}
 });
@@ -512,7 +520,7 @@ module.controller('sidePanelCtrl', function($scope, $routeParams, $route, $http,
 	var classNm = $location.path();
 	var newValue = classNm.replace('/', '');
 	$('.ng-scope li').removeClass('active');
-		$('.'+newValue).addClass('active');
+	$('.' + newValue).addClass('active');
 });
 function setCookie(name, value, days) {
 	//alert(value);
