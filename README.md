@@ -33,6 +33,9 @@ After you have installed Ruby and bundler ruby gem, see the "Getting Started" se
     #Update the database to the latest schema
     rake db:migrate
 
+    #Setup default data
+    rake db:seed
+
     #Runs the application by starting the processes in `Procfile`
     foreman start
 
