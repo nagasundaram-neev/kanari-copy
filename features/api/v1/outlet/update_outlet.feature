@@ -29,6 +29,31 @@ Feature: Update Outlet
       And the outlet "China Pearl - Bengaluru" should be present under customer with id "100"
       And the outlet should be disabled
 
+    Scenario: Update manager
+      Given the following users exist
+        |first_name |email                          | password    | authentication_token  | role            |id |
+        |Adam       |admin@subway.com               | password123 | adam_auth_token       | customer_admin  |1  |
+        |Bill       |bill@subway.com                | password123 | bill_auth_token       | manager         |2  |
+        |Noushad    |noushad@subway.com             | password123 | noushad_auth_token    | manager         |3  |
+      Given a customer named "Subway" exists with id "100" with admin "admin@subway.com"
+        And the customer with id "100" has an outlet named "Subway - Bangalore" with manager "bill@subway.com"
+        And the outlet's id is "20"
+      Then "Subway - Bangalore" should have "bill@subway.com" as the manager
+      When I authenticate as the user "adam_auth_token" with the password "random string"
+      And I send a PUT request to "/api/outlets/20" with the following:
+      """
+      {
+        "outlet" : {
+          "manager_id" : 3
+        }
+      }
+      """
+      And the JSON response should be:
+      """
+      null
+      """
+      And "Subway - Bangalore" should have "noushad@subway.com" as the manager
+
     Scenario: Outlet doesn't exist
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"
         And his role is "customer_admin"
