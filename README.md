@@ -65,7 +65,8 @@ You don't need to run `foreman start` if you decide to go down this route.
 ## Problem ?
 
 Check the logs first. `tail -f log/development.log` should print the logs as they are generated.
-Inspect the request and response using the browser console ( Chrome console / Firebug )
+Inspect the request and response using the browser console ( Chrome console / Firebug ).
+Talk to a duck.
 
 # Production
 
