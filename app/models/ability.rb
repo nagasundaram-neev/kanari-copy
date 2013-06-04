@@ -32,6 +32,7 @@ class Ability
     when 'kanari_admin'
       #Kanari admin's permissions
       can :create, PaymentInvoice
+      can :read, Outlet
     when 'customer_admin'
       #Customer admin's permissions
       can :read, PaymentInvoice
@@ -40,6 +41,10 @@ class Ability
       can :create, Outlet
       can :create, User, role: 'manager'
       can :read, User, role: 'manager'
+    when 'manager'
+      can :read, Outlet, manager_id: user.id
+    when 'staff'
+      can :read, Outlet, id: (user.employed_outlet.id rescue nil)
     else
       #Default permissions
     end

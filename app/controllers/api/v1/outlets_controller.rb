@@ -7,7 +7,9 @@ class Api::V1::OutletsController < ApplicationController
   # GET /outlets
   # GET /outlets.json
   def index
-    @outlets = Outlet.all
+    authorize! :read, Outlet
+    outlets = current_user.outlets
+    render json: outlets
   end
 
   # GET /outlets/1
