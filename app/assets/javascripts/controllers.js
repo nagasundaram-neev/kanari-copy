@@ -305,7 +305,7 @@ module.controller('createInvitation', function($scope, $http, $location) {
 					console.log("under else");
 					baseurl = window.location.origin
 				}
-				$scope.invitation_token = baseurl+"/accept_invitation?invi_token=" + data.invitation_token;
+				$scope.invitation_token = baseurl+"/#/accept_invitation?invi_token=" + data.invitation_token;
 				//$scope.invitation_token = $location.host()+":"+$location.port()+"/#/accept_invitation?invi_token=" + data.invitation_token;
 				$scope.statement = true;
 				$scope.erromsg = false;
