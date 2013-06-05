@@ -106,4 +106,49 @@ describe User do
       end
     end
   end
+
+  describe "#registration_complete?" do
+    let(:user) { FactoryGirl.create(:user, role: role)}
+    context "when role is kanari_admin" do
+      let(:role) { 'kanari_admin' }
+      it "should true" do
+        user.registration_complete?.should be_true
+      end
+    end
+    context "when role is customer_admin" do
+      let(:role) { 'customer_admin' }
+      context "when a customer account is present" do
+      end
+      context "when a customer account is not present" do
+        it "should true" do
+          customer = FactoryGirl.create(:customer, customer_admin: user)
+          user.registration_complete?.should be_true
+        end
+      end
+    end
+    context "when role is manager" do
+      let(:role) { 'manager' }
+      it "should true" do
+        user.registration_complete?.should be_true
+      end
+    end
+    context "when role is staff" do
+      let(:role) { 'staff' }
+      it "should true" do
+        user.registration_complete?.should be_true
+      end
+    end
+    context "when role is user" do
+      let(:role) { 'user' }
+      it "should true" do
+        user.registration_complete?.should be_true
+      end
+    end
+    context "when role is invalid" do
+      let(:role) { 'random' }
+      it "should true" do
+        user.registration_complete?.should be_true
+      end
+    end
+  end
 end

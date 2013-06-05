@@ -46,4 +46,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  def registration_complete?
+    if role == 'customer_admin'
+      !customer.nil?
+    else
+      return true
+    end
+  end
+
 end
