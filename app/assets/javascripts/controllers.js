@@ -230,6 +230,9 @@ module.controller('forgotPassCtrl', function($scope, $http, $location) {
 			$scope.success = false;
 		});
 	};
+	$scope.BackLink = function(){
+		$location.url("/login");
+	}
 });
 
 module.controller('resetPassCtrl', function($scope, $routeParams, $http, $location) {
