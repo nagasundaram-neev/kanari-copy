@@ -12,10 +12,10 @@ module Api
           self.resource = resource_class.invite!(invite_params, current_inviter) do |u|
             u.skip_invitation = true
           end
-          resource.invitation_sent_at = Time.now.utc
-          resource.role = 'customer_admin'
-          resource.save
           if resource.errors.empty?
+            resource.invitation_sent_at = Time.now.utc
+            resource.role = 'customer_admin'
+            resource.save
             render json: {invitation_token: resource.invitation_token}, status: 201 #Invitation created
           else
             render json: {errors: resource.errors.full_messages}, status: 422 #Unprocessable entity
