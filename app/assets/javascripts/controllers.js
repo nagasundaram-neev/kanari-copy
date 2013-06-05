@@ -298,14 +298,13 @@ module.controller('createInvitation', function($scope, $http, $location) {
 				console.log("data in success " + data + " status " + status);
 				//$location.url("/accept_invitation"+data.invitation_token);
 				baseurl = ""
-				if (!window.location.origin){
+				if (!window.location.origin) {
 					baseurl = window.location.protocol + "//" + window.location.host;
-				}
-				else {
+				} else {
 					console.log("under else");
 					baseurl = window.location.origin
 				}
-				$scope.invitation_token = baseurl+"/#/accept_invitation?invi_token=" + data.invitation_token;
+				$scope.invitation_token = baseurl + "/#/accept_invitation?invi_token=" + data.invitation_token;
 				//$scope.invitation_token = $location.host()+":"+$location.port()+"/#/accept_invitation?invi_token=" + data.invitation_token;
 				$scope.statement = true;
 				$scope.erromsg = false;
@@ -448,7 +447,8 @@ module.controller('acceptInvitationCtrl', function($scope, $routeParams, $http, 
 			$scope.error = false;
 			$scope.auth_token = data.auth_token;
 			$scope.success = true;
-			$location.url("/login");
+			setCookie('authToken', data.auth_token, 1);
+			$location.url("/acceptInvitationStep2");
 		}).error(function(data, status) {
 			console.log("data in error" + data + " status " + status);
 			$scope.errorMsg = data.errors;
@@ -458,7 +458,55 @@ module.controller('acceptInvitationCtrl', function($scope, $routeParams, $http, 
 
 	}
 });
+module.controller('acceptInvitation2Ctrl', function($scope, $routeParams, $http, $location) {
+	if (getCookie('authToken')) {
+		$scope.auth_token = getCookie('authToken');
+		console.log($scope.auth_token);
+		$scope.acceptInvitation2 = function() {
+			console.log($routeParams.invi_token);
+			var param = {
+				"customer" : {
+					"name" : $scope.name,
+					"phone_number" : $scope.phone_number,
+					"registered_address_line_1" : $scope.registered_address_line_1,
+					"registered_address_line_2" : $scope.registered_address_line_2,
+					"registered_address_city" : $scope.registered_address_city,
+					"registered_address_country" : $scope.registered_address_country,
+					"mailing_address_line_1" : $scope.mailing_address_line_1,
+					"mailing_address_line_2" : $scope.mailing_address_line_2,
+					"mailing_address_city" : $scope.mailing_address_city,
+					"mailing_address_country" : $scope.mailing_address_country,
+					"email" : $scope.email
+				},
+				"auth_token" : $scope.auth_token
 
+			}
+
+			$http({
+				method : 'post',
+				url : '/api/customers',
+				data : param,
+			}).success(function(data, status) {
+				console.log(data)
+				console.log("data in success " + data + " status " + status);
+				$scope.error = false;
+				$scope.success = true;
+				$location.url("/create_outlet");
+				//$location.url("/login");
+			}).error(function(data, status) {
+				console.log(data)
+				console.log("data in error" + data + " status " + status);
+				$scope.errorMsg = data.errors;
+				$scope.error = true;
+				$scope.success = false;
+			});
+
+		}
+	}
+	else{
+		$location.url("/login");
+	}
+});
 module.controller('createManagerCtrl', function($scope, $routeParams, $route, $http, $location) {
 	if (getCookie('authToken')) {
 		$('.welcome').show();
