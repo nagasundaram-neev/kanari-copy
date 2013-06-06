@@ -45,12 +45,92 @@ Feature: List Outlets
       And the JSON response should be:
       """
       {
-        "outlets" : [
-          {"id": 1, "name" : "Subway - Bangalore", "disabled" : false},
-          {"id": 2, "name" : "Subway - Pune", "disabled" : false},
-          {"id": 3, "name" : "NBC - Cochin", "disabled" : false},
-          {"id": 4, "name" : "NBC - Bangalore", "disabled" : false}
-        ]
+         "outlets": [
+           {
+            "id" : 1,
+            "name": "Subway - Bangalore",
+            "address": null,
+            "disabled": false,
+            "email": null,
+            "has_delivery": null,
+            "has_outdoor_seating": null,
+            "latitude": null,
+            "longitude": null,
+            "manager": {
+              "email": "manager@subway.com",
+              "first_name": "George",
+              "last_name": null,
+              "phone_number": null
+            },
+            "open_hours": null,
+            "phone_number": null,
+            "serves_alcohol": null,
+            "website_url": null
+          },
+          {
+            "id" : 2,
+            "name": "Subway - Pune",
+            "address": null,
+            "disabled": false,
+            "email": null,
+            "has_delivery": null,
+            "has_outdoor_seating": null,
+            "latitude": null,
+            "longitude": null,
+            "manager": {
+              "email": "manager@subway.com",
+              "first_name": "George",
+              "last_name": null,
+              "phone_number": null
+            },
+            "open_hours": null,
+            "phone_number": null,
+            "serves_alcohol": null,
+            "website_url": null
+          },
+          {
+            "id" : 3,
+            "name": "NBC - Cochin",
+            "address": null,
+            "disabled": false,
+            "email": null,
+            "has_delivery": null,
+            "has_outdoor_seating": null,
+            "latitude": null,
+            "longitude": null,
+            "manager": {
+              "email": "manager.cochin@nbc.com",
+              "first_name": "Alex",
+              "last_name": null,
+              "phone_number": null
+            },
+            "open_hours": null,
+            "phone_number": null,
+            "serves_alcohol": null,
+            "website_url": null
+          },
+          {
+            "id" : 4,
+            "name": "NBC - Bangalore",
+            "address": null,
+            "disabled": false,
+            "email": null,
+            "has_delivery": null,
+            "has_outdoor_seating": null,
+            "latitude": null,
+            "longitude": null,
+            "manager": {
+              "email": "manager.bangalore@nbc.com",
+              "first_name": "Paul",
+              "last_name": null,
+              "phone_number": null
+            },
+            "open_hours": null,
+            "phone_number": null,
+            "serves_alcohol": null,
+            "website_url": null
+           }
+         ]
       }
       """
     Scenario: User's role is customer_admin
@@ -94,24 +174,104 @@ Feature: List Outlets
       Then the response status should be "200"
       And the JSON response should be:
       """
-      {
-        "outlets" : [
-          {"id": 1, "name" : "Subway - Bangalore", "disabled" : false},
-          {"id": 2, "name" : "Subway - Pune", "disabled" : false}
-        ]
-      }
+       {
+         "outlets": [
+           {
+            "id" : 1,
+            "address": null,
+            "disabled": false,
+            "email": null,
+            "has_delivery": null,
+            "has_outdoor_seating": null,
+            "latitude": null,
+            "longitude": null,
+            "manager": {
+              "email": "manager@subway.com",
+              "first_name": "George",
+              "last_name": null,
+              "phone_number": null
+            },
+            "name": "Subway - Bangalore",
+            "open_hours": null,
+            "phone_number": null,
+            "serves_alcohol": null,
+            "website_url": null
+          },
+          {
+            "id" : 2,
+            "address": null,
+            "disabled": false,
+            "email": null,
+            "has_delivery": null,
+            "has_outdoor_seating": null,
+            "latitude": null,
+            "longitude": null,
+            "manager": {
+              "email": "manager@subway.com",
+              "first_name": "George",
+              "last_name": null,
+              "phone_number": null
+            },
+            "name": "Subway - Pune",
+            "open_hours": null,
+            "phone_number": null,
+            "serves_alcohol": null,
+            "website_url": null
+           }
+         ]
+       }
       """
       When I authenticate as the user "noushad_auth_token" with the password "random string"
       And I send a GET request to "/api/outlets"
       Then the response status should be "200"
       And the JSON response should be:
       """
-      {
-        "outlets" : [
-          {"id": 1, "name" : "NBC - Cochin", "disabled" : false},
-          {"id": 2, "name" : "NBC - Bangalore", "disabled" : false}
-        ]
-      }
+       {
+         "outlets": [
+           {
+            "id" : 1,
+            "address": null,
+            "disabled": false,
+            "email": null,
+            "has_delivery": null,
+            "has_outdoor_seating": null,
+            "latitude": null,
+            "longitude": null,
+            "manager": {
+              "email": "manager.cochin@nbc.com",
+              "first_name": "Alex",
+              "last_name": null,
+              "phone_number": null
+            },
+            "name": "NBC - Cochin",
+            "open_hours": null,
+            "phone_number": null,
+            "serves_alcohol": null,
+            "website_url": null
+          },
+          {
+            "id" : 2,
+            "address": null,
+            "disabled": false,
+            "email": null,
+            "has_delivery": null,
+            "has_outdoor_seating": null,
+            "latitude": null,
+            "longitude": null,
+            "manager": {
+              "email": "manager.bangalore@nbc.com",
+              "first_name": "Paul",
+              "last_name": null,
+              "phone_number": null
+            },
+            "name": "NBC - Bangalore",
+            "open_hours": null,
+            "phone_number": null,
+            "serves_alcohol": null,
+            "website_url": null
+           }
+         ]
+       }
       """
 
     Scenario: User's role is manager
@@ -155,34 +315,114 @@ Feature: List Outlets
       Then the response status should be "200"
       And the JSON response should be:
       """
-      {
-        "outlets" : [
-          {"id": 1, "name" : "Subway - Bangalore", "disabled" : false},
-          {"id": 2, "name" : "Subway - Pune", "disabled" : false}
-        ]
-      }
+       {
+         "outlets": [
+           {
+            "id" : 1,
+            "address": null,
+            "disabled": false,
+            "email": null,
+            "has_delivery": null,
+            "has_outdoor_seating": null,
+            "latitude": null,
+            "longitude": null,
+            "manager": {
+              "email": "manager@subway.com",
+              "first_name": "George",
+              "last_name": null,
+              "phone_number": null
+            },
+            "name": "Subway - Bangalore",
+            "open_hours": null,
+            "phone_number": null,
+            "serves_alcohol": null,
+            "website_url": null
+          },
+          {
+            "id" : 2,
+            "address": null,
+            "disabled": false,
+            "email": null,
+            "has_delivery": null,
+            "has_outdoor_seating": null,
+            "latitude": null,
+            "longitude": null,
+            "manager": {
+              "email": "manager@subway.com",
+              "first_name": "George",
+              "last_name": null,
+              "phone_number": null
+            },
+            "name": "Subway - Pune",
+            "open_hours": null,
+            "phone_number": null,
+            "serves_alcohol": null,
+            "website_url": null
+           }
+         ]
+       }
       """
       When I authenticate as the user "alex_auth_token" with the password "random string"
       And I send a GET request to "/api/outlets"
       Then the response status should be "200"
       And the JSON response should be:
       """
-      {
-        "outlets" : [
-          {"id": 1, "name" : "NBC - Cochin", "disabled" : false}
-        ]
-      }
+       {
+         "outlets": [
+           {
+            "id" : 1,
+            "address": null,
+            "disabled": false,
+            "email": null,
+            "has_delivery": null,
+            "has_outdoor_seating": null,
+            "latitude": null,
+            "longitude": null,
+            "manager": {
+              "email": "manager.cochin@nbc.com",
+              "first_name": "Alex",
+              "last_name": null,
+              "phone_number": null
+            },
+            "name": "NBC - Cochin",
+            "open_hours": null,
+            "phone_number": null,
+            "serves_alcohol": null,
+            "website_url": null
+           }
+         ]
+       }
       """
       When I authenticate as the user "paul_auth_token" with the password "random string"
       And I send a GET request to "/api/outlets"
       Then the response status should be "200"
       And the JSON response should be:
       """
-      {
-        "outlets" : [
-          {"id": 2, "name" : "NBC - Bangalore", "disabled" : false}
-        ]
-      }
+       {
+         "outlets": [
+           {
+            "id" : 2,
+            "address": null,
+            "disabled": false,
+            "email": null,
+            "has_delivery": null,
+            "has_outdoor_seating": null,
+            "latitude": null,
+            "longitude": null,
+            "manager": {
+              "email": "manager.bangalore@nbc.com",
+              "first_name": "Paul",
+              "last_name": null,
+              "phone_number": null
+            },
+            "name": "NBC - Bangalore",
+            "open_hours": null,
+            "phone_number": null,
+            "serves_alcohol": null,
+            "website_url": null
+           }
+         ]
+       }
       """
 
     Scenario Outline: User's role is staff
@@ -200,7 +440,7 @@ Feature: List Outlets
         |Goofy      |staff.pune.2@subway.com        | password123 | goofy_auth_token      | staff           |
         |Cyclops    |staff.bangalore.1@nbc.com      | password123 | cyclops_auth_token    | staff           |
         |Hulk       |staff.bangalore.2@nbc.com      | password123 | hulk_auth_token       | staff           |
-        |IronMan    |staff.cochin.1@nbc.com         | password123 | ironman_auth_token    | staff           |
+        |IronMan    |staff.cochin.1@nbc.com         | password123 | ironMan_auth_token    | staff           |
         |Wolverine  |staff.cochin.2@nbc.com         | password123 | wolverine_auth_token  | staff           |
         |Mike       |simpleuser@gmail.com           | password123 | user_auth_token       | user            |
       Given a customer named "Subway" exists with id "100" with admin "admin@subway.com"
@@ -226,22 +466,41 @@ Feature: List Outlets
       Then the response status should be "200"
       And the JSON response should be:
       """
-      {
-        "outlets" : [
-          {"id": 1, "name" : "<outlet_name>", "disabled" : false}
-        ]
-      }
+       {
+         "outlets": [
+           {
+            "address": null,
+            "disabled": false,
+            "name": "<outlet_name>",
+            "email": null,
+            "has_delivery": null,
+            "has_outdoor_seating": null,
+            "latitude": null,
+            "longitude": null,
+            "manager": {
+              "email": "<manager_email>",
+              "first_name": "<manager_name>",
+              "last_name": null,
+              "phone_number": null
+            },
+            "open_hours": null,
+            "phone_number": null,
+            "serves_alcohol": null,
+            "website_url": null
+           }
+         ]
+       }
       """
       Examples:
-        |staff_token_prefix |outlet_name        |
-        |donald             |Subway - Bangalore |
-        |mickey             |Subway - Bangalore |
-        |pluto              |Subway - Pune      |
-        |goofy              |Subway - Pune      |
-        |cyclops            |NBC - Bangalore    |
-        |hulk               |NBC - Bangalore    |
-        |ironMan            |NBC - Cochin       |
-        |wolverine          |NBC - Cochin       |
+        |staff_token_prefix |outlet_name        |manager_email              | manager_name  |
+        |donald             |Subway - Bangalore |manager@subway.com         | George        |
+        |mickey             |Subway - Bangalore |manager@subway.com         | George        |
+        |pluto              |Subway - Pune      |manager@subway.com         | George        |
+        |goofy              |Subway - Pune      |manager@subway.com         | George        |
+        |cyclops            |NBC - Bangalore    |manager.bangalore@nbc.com  | Paul          |
+        |hulk               |NBC - Bangalore    |manager.bangalore@nbc.com  | Paul          |
+        |ironMan            |NBC - Cochin       |manager.cochin@nbc.com     | Alex          |
+        |wolverine          |NBC - Cochin       |manager.cochin@nbc.com     | Alex          |
 
     Scenario: User's role is "user"
       Given the following users exist

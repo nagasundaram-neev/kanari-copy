@@ -24,9 +24,25 @@ Feature: Show Outlet
       """
       {
         "outlet" : {
-          "id": 10,
-          "name" : "Subway - Bangalore",
-          "disabled" : false
+        "name": "Subway - Bangalore",
+        "address": null,
+        "disabled": false,
+        "email": null,
+        "has_delivery": null,
+        "has_outdoor_seating": null,
+        "latitude": null,
+        "longitude": null,
+        "manager": {
+          "email": "manager@subway.com",
+          "first_name": "George",
+          "last_name": null,
+          "phone_number": null
+        },
+        "open_hours": null,
+        "phone_number": null,
+        "serves_alcohol": null,
+        "website_url": null
+
         }
       }
       """
@@ -52,9 +68,25 @@ Feature: Show Outlet
       """
       {
         "outlet" : {
-          "id": 10,
-          "name" : "Subway - Bangalore",
-          "disabled" : false
+        "name": "Subway - Bangalore",
+        "address": null,
+        "disabled": false,
+        "email": null,
+        "has_delivery": null,
+        "has_outdoor_seating": null,
+        "latitude": null,
+        "longitude": null,
+        "manager": {
+          "email": "manager@subway.com",
+          "first_name": "George",
+          "last_name": null,
+          "phone_number": null
+        },
+        "open_hours": null,
+        "phone_number": null,
+        "serves_alcohol": null,
+        "website_url": null
+
         }
       }
       """
@@ -80,9 +112,25 @@ Feature: Show Outlet
       """
       {
         "outlet" : {
-          "id": 10,
-          "name" : "Subway - Bangalore",
-          "disabled" : false
+        "name": "Subway - Bangalore",
+        "address": null,
+        "disabled": false,
+        "email": null,
+        "has_delivery": null,
+        "has_outdoor_seating": null,
+        "latitude": null,
+        "longitude": null,
+        "manager": {
+          "email": "manager@subway.com",
+          "first_name": "George",
+          "last_name": null,
+          "phone_number": null
+        },
+        "open_hours": null,
+        "phone_number": null,
+        "serves_alcohol": null,
+        "website_url": null
+
         }
       }
       """
@@ -108,9 +156,25 @@ Feature: Show Outlet
       """
       {
         "outlet" : {
-          "id": 10,
-          "name" : "<outlet_name>",
-          "disabled" : false
+        "name": "Subway - Bangalore",
+        "address": null,
+        "disabled": false,
+        "email": null,
+        "has_delivery": null,
+        "has_outdoor_seating": null,
+        "latitude": null,
+        "longitude": null,
+        "manager": {
+          "email": "manager@subway.com",
+          "first_name": "George",
+          "last_name": null,
+          "phone_number": null
+        },
+        "open_hours": null,
+        "phone_number": null,
+        "serves_alcohol": null,
+        "website_url": null
+
         }
       }
       """
