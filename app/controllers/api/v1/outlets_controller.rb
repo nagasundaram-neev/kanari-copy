@@ -13,8 +13,10 @@ class Api::V1::OutletsController < ApplicationController
   end
 
   # GET /outlets/1
-  # GET /outlets/1.json
   def show
+    outlet = Outlet.find(params[:id])
+    authorize! :read, outlet
+    render json: outlet
   end
 
   # POST /outlets

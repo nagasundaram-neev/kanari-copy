@@ -9,6 +9,12 @@ And /^the customer with id "([^"]*)" has an outlet named "([^"]*)" with manager 
   @outlet.disabled.should be_false
 end
 
+And /^the customer with id "([^"]*)" has an outlet named "([^"]*)" with id "([^"]*)" with manager "([^"]*)"$/  do |customer_id, outlet_name, outlet_id, manager_email|
+  manager = User.where(email: manager_email).first
+  @outlet = Outlet.create!(id: outlet_id, name: outlet_name, customer_id: customer_id, manager: manager)
+  @outlet.disabled.should be_false
+end
+
 And /^the outlet's id is "([^"]*)"$/ do |id|
   @outlet.id = id
   @outlet.save
