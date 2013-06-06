@@ -419,6 +419,7 @@ module.controller('listPaymentInvoiceCtrl', function($scope, $http, $location) {
 module.controller('createOutletCtrl', function($scope, $http, $location) {
 	if (getCookie('authToken')) {
 		$('.welcome').show();
+		$scope.auth_token = getCookie('authToken');
 		console.log(getCookie("authToken"));
 		$('.navBarCls').show();
 		$scope.error = false;
@@ -438,7 +439,8 @@ module.controller('createOutletCtrl', function($scope, $http, $location) {
 					"has_delivery" : $scope.Delivery,
 					"serves_alcohol" : $scope.serves_alcohol,
 					"has_outdoor_seating" : $scope.outdoor_Seating
-				}
+				},
+				"auth_token" : $scope.auth_token
 			}
 
 			$http({
