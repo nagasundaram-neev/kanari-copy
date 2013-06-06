@@ -34,12 +34,13 @@ Feature: Create Outlet
       Then the response status should be "201"
       And the JSON response should have "outlet"
       And the JSON response at "outlet" should be a Hash
-      And the JSON at "outlet" should have 2 entries
+      And the JSON at "outlet" should have 3 entries
       And the JSON at "outlet/id" should be a fixnum
       And the JSON at "outlet/name" should be a string
+      And the JSON at "outlet/disabled" should be a boolean
       And the JSON response should be:
       """
-      {"outlet" : {"id" : 1, "name" : "Batman's Donuts"}}
+      {"outlet" : {"id" : 1, "name" : "Batman's Donuts", "disabled": false}}
       """
       And the outlet "Batman's Donuts" should be present under customer with id "100"
       And "Batman's Donuts" should have "bob@gmail.com" as the manager

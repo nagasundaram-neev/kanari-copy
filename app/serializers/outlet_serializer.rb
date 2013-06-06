@@ -1,3 +1,3 @@
 class OutletSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :disabled
 end

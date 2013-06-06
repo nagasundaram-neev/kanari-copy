@@ -46,10 +46,10 @@ Feature: List Outlets
       """
       {
         "outlets" : [
-          {"id": 1, "name" : "Subway - Bangalore"},
-          {"id": 2, "name" : "Subway - Pune"},
-          {"id": 3, "name" : "NBC - Cochin"},
-          {"id": 4, "name" : "NBC - Bangalore"}
+          {"id": 1, "name" : "Subway - Bangalore", "disabled" : false},
+          {"id": 2, "name" : "Subway - Pune", "disabled" : false},
+          {"id": 3, "name" : "NBC - Cochin", "disabled" : false},
+          {"id": 4, "name" : "NBC - Bangalore", "disabled" : false}
         ]
       }
       """
@@ -96,8 +96,8 @@ Feature: List Outlets
       """
       {
         "outlets" : [
-          {"id": 1, "name" : "Subway - Bangalore"},
-          {"id": 2, "name" : "Subway - Pune"}
+          {"id": 1, "name" : "Subway - Bangalore", "disabled" : false},
+          {"id": 2, "name" : "Subway - Pune", "disabled" : false}
         ]
       }
       """
@@ -108,8 +108,8 @@ Feature: List Outlets
       """
       {
         "outlets" : [
-          {"id": 1, "name" : "NBC - Cochin"},
-          {"id": 2, "name" : "NBC - Bangalore"}
+          {"id": 1, "name" : "NBC - Cochin", "disabled" : false},
+          {"id": 2, "name" : "NBC - Bangalore", "disabled" : false}
         ]
       }
       """
@@ -157,8 +157,8 @@ Feature: List Outlets
       """
       {
         "outlets" : [
-          {"id": 1, "name" : "Subway - Bangalore"},
-          {"id": 2, "name" : "Subway - Pune"}
+          {"id": 1, "name" : "Subway - Bangalore", "disabled" : false},
+          {"id": 2, "name" : "Subway - Pune", "disabled" : false}
         ]
       }
       """
@@ -169,7 +169,7 @@ Feature: List Outlets
       """
       {
         "outlets" : [
-          {"id": 1, "name" : "NBC - Cochin"}
+          {"id": 1, "name" : "NBC - Cochin", "disabled" : false}
         ]
       }
       """
@@ -180,7 +180,7 @@ Feature: List Outlets
       """
       {
         "outlets" : [
-          {"id": 2, "name" : "NBC - Bangalore"}
+          {"id": 2, "name" : "NBC - Bangalore", "disabled" : false}
         ]
       }
       """
@@ -228,7 +228,7 @@ Feature: List Outlets
       """
       {
         "outlets" : [
-          {"id": 1, "name" : "<outlet_name>"}
+          {"id": 1, "name" : "<outlet_name>", "disabled" : false}
         ]
       }
       """
