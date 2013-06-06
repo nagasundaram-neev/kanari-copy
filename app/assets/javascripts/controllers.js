@@ -197,8 +197,11 @@ module.controller('Login', function($scope, $http, $location) {
 			$scope.erromsg = false;
 			if (getCookie('userRole') == "kanari_admin") {
 				$location.url("/createInvitation");
-			} else if (getCookie('userRole') == "customer_admin") {
+			} else if (getCookie('userRole') == "customer_admin" && data.registration_complete) {
 				$location.url("/outlets");
+			}
+			else if(getCookie('userRole') == "customer_admin" && !data.registration_complete) {
+				$location.url("/acceptInvitationStep2");
 			}
 
 		}).error(function(data, status) {
@@ -311,7 +314,7 @@ module.controller('homeCtrl', function($scope, $http, $location) {
 	} else {
 		$location.url("/login");
 	}
-	$scope.disableOutlet = function($event,id) {
+	$scope.disableOutlet = function($event, id) {
 		console.log(id)
 		$scope.auth_token = getCookie('authToken');
 		checkbox = $event.target;
@@ -328,7 +331,7 @@ module.controller('homeCtrl', function($scope, $http, $location) {
 			data : params,
 		}).success(function(data, status) {
 			console.log("data in success " + data + " status " + status);
-			
+
 			$scope.error = data.auth_token;
 			$scope.statement = true;
 			$scope.erromsg = false;
@@ -345,6 +348,7 @@ module.controller('createInvitation', function($scope, $http, $location) {
 		$('.navBarCls').show();
 		$scope.statement = false;
 		$scope.erromsg = false;
+		$scope.errortext = ""
 		$scope.create_invitation = function() {
 			console.log("In Create Invitation" + auth_token);
 			var userEmail = $scope.userEmail;
@@ -375,6 +379,7 @@ module.controller('createInvitation', function($scope, $http, $location) {
 				$scope.erromsg = false;
 			}).error(function(data, status) {
 				console.log("data in error" + data + " status " + status);
+				$scope.errortext = data.errors[0]
 				$scope.erromsg = true;
 			});
 
@@ -445,15 +450,40 @@ module.controller('listPaymentInvoiceCtrl', function($scope, $http, $location) {
 	}
 });
 
-module.controller('createOutletCtrl', function($scope, $http, $location) {
+module.controller('createOutletCtrl', function($scope, $routeParams, $http, $location) {
 	if (getCookie('authToken')) {
 		$('.welcome').show();
 		$scope.auth_token = getCookie('authToken');
-		console.log(getCookie("authToken"));
+		//console.log(getCookie("authToken"));
 		$('.navBarCls').show();
 		$scope.error = false;
 		$scope.success = false;
+		/* Adding for updating the outlet*/
+		if ($routeParams.outletId) {
+			console.log($scope.auth_token);
+			console.log($routeParams.outletId);
+			var param = {
+				"auth_token" : $scope.auth_token
+			}
+			$http({
+				method : 'get',
+				url : '/api/outlets/' + $routeParams.outletId,
+				params : param,
+			}).success(function(data, status) {
+				console.log(data);
+				console.log("data in success " + data + " status " + status);
+				$scope.error = false;
+				$scope.outletID = data.outlet.id;
+				$scope.success = true;
 
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+				$scope.error = true;
+				$scope.success = false;
+			});
+		}
+
+		/* Adding for creating the outlet*/
 		$scope.create_outlet = function() {
 			console.log($scope.fromTime);
 			var param = {

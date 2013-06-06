@@ -1,78 +1,129 @@
 <div data-role="page" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
-	 
+	<style>
+		input[type="image"], input[type="checkbox"], input[type="radio"] {
+			margin: 3px 5px 3px 0;
+		}
+		.main_content span.vertical_center {
+			display: inline !important;
+			vertical-align: middle !important;
+		}
+	</style>
 	<div class="create_outlet innerDiv" data-role="content">
 		<div class="leftPanel" ng-include src ="'<%= asset_path 'sidepanel.html' %>'" ></div>
-		
+
 		<div data-role="fieldcontain" class="rightPanel loginDiv">
 			<h1>Create Restaurant Outlet</h1>
 			<div class="ui-input-data">
-				<lable>Restaurant Name</lable>
-				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="restaurant_name" class="passwordTxt" />
+				<lable>
+					Restaurant Name
+				</lable>
+				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="restaurant_name" class="passwordTxt" required />
 			</div>
 			<div class="ui-input-data">
-				<lable>Restaurant Location</lable>
-				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="restaurant_location" class="passwordTxt" />
+				<lable>
+					Restaurant Location
+				</lable>
+				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="restaurant_location" class="passwordTxt" required />
 			</div>
 			<div class="ui-input-data">
-				<lable>Contact Number</lable>
-				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="contact_number" class="passwordTxt" />
+				<lable>
+					Contact Number
+				</lable>
+				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="contact_number" class="passwordTxt" required />
 			</div>
 			<div class="ui-input-data">
-				<lable>Email Address</lable>
-				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="email_address" class="passwordTxt" />
+				<lable>
+					Email Address
+				</lable>
+				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="email_address" class="passwordTxt" required />
 			</div>
 			<div class="ui-input-data">
-			<lable>Outlet Type</lable>
-			<input type="checkbox" name="outlet" value="fast_casuale">Fast Casuale
-			<input type="checkbox" name="outlet" value="Casual">Casual 
-			<input type="checkbox" name="outlet" value="Cafe">Cafe
-			<input type="checkbox" name="outlet" value="fine_dining">Fine Dining
+				<lable>
+					Outlet Type
+				</lable>
+				<input type="checkbox" name="outlet" value="fast_casuale">
+				Fast Casuale
+				<input type="checkbox" name="outlet" value="Casual">
+				Casual
+				<input type="checkbox" name="outlet" value="Cafe">
+				Cafe
+				<input type="checkbox" name="outlet" value="fine_dining">
+				Fine Dining
 			</div>
 			<div class="ui-input-data">
-			<lable>Cuisine Type</lable>
-			<input type="checkbox" name="cuisine" value="fast_casuale">Chinese
-			<input type="checkbox" name="cuisine" value="Casual">Japanese 
-			<input type="checkbox" name="cuisine" value="Cafe">Lebanese
-			<input type="checkbox" name="cuisine" value="Casual">Italian 
-			<input type="checkbox" name="cuisine" value="Cafe">Pizzeria
-			<input type="checkbox" name="cuisine" value="fine_dining">American
+				<lable>
+					Cuisine Type
+				</lable>
+				<input type="checkbox" name="cuisine" value="Chinese">
+				Chinese
+				<input type="checkbox" name="cuisine" value="North Indian">
+				North Indian
+				<input type="checkbox" name="cuisine" value="Lebanese">
+				Lebanese
+				<input type="checkbox" name="cuisine" value="Italian">
+				Italian
+				<input type="checkbox" name="cuisine" value="Pizzeria">
+				Pizzeria
+				<input type="checkbox" name="cuisine" value="American">
+				American
 			</div>
 			<div class="ui-input-data">
-			<lable>Opening Hours</lable>
-			from <select ng-model="fromTime">
-				  <option value="10.00pm">10.00pm</option>
-				  <option value="11.00pm">10.00pm</option>
-				  <option value="12.00pm">10.00pm</option>
-				  <option value="1.00pm">10.00pm</option>
+				<lable>
+					Opening Hours
+				</lable>
+				<span class="vertical_center">from</span>
+				<select ng-model="fromTime">
+					<option value="10.00am">10.00am</option>
+					<option value="11.00am">11.00am</option>
+					<option value="12.00pm">12.00pm</option>
+					<option value="1.00pm">01.00pm</option>
 				</select>
-		    to <select ng-model="toTime">
-				   <option value="10.00pm">10.00pm</option>
-				  <option value="11.00pm">10.00pm</option>
-				  <option value="12.00pm">10.00pm</option>
-				  <option value="1.00pm">10.00pm</option>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<span class="vertical_center"> to</span>
+				<select ng-model="toTime">
+					<option value="10.00pm">10.00pm</option>
+					<option value="11.00pm">11.00pm</option>
+					<option value="12.00am">12.00am</option>
+					<option value="1.00am">01.00am</option>
 				</select>
 			</div>
 			<div class="ui-input-data">
-			<lable>Delivery</lable>
-			<input type="radio" ng-model="Delivery" value="true">Yes
-			<input type="radio" ng-model="Delivery" value="false">No
+				<lable>
+					Delivery
+				</lable>
+				<input type="radio" ng-model="Delivery" value="true">
+				Yes
+				<input type="radio" ng-model="Delivery" value="false">
+				No
 			</div>
 			<div class="ui-input-data">
-			<lable>Serves Alcohol</lable>
-			<input type="radio" ng-model="serves_alcohol" value="true">Yes
-			<input type="radio" ng-model="serves_alcohol" value="false">No
+				<lable>
+					Serves Alcohol
+				</lable>
+				<input type="radio" ng-model="serves_alcohol" value="true">
+				Yes
+				<input type="radio" ng-model="serves_alcohol" value="false">
+				No
 			</div>
 			<div class="ui-input-data">
-			<lable>Outdoor Seating</lable>
-			<input type="radio" ng-model="outdoor_Seating" value="true">Yes
-			<input type="radio" ng-model="outdoor_Seating" value="false">No
+				<lable>
+					Outdoor Seating
+				</lable>
+				<input type="radio" ng-model="outdoor_Seating" value="true">
+				Yes
+				<input type="radio" ng-model="outdoor_Seating" value="false">
+				No
 			</div>
 			<input type="button" class="loginBtn" ng-click="create_outlet()" data-inline="true" value="Save" />
 		</div>
 		<div class="clr"></div>
-		<p ng-show="error" class="errorMsg">Please fillup the form.</p>
+		<p ng-show="error" class="errorMsg">
+			Please fillup the form.
+		</p>
 		<p ng-hide="error" ></p>
-		<p ng-show="success" class="successMsg">Outlet is created by Id {{outletID}}</p>
+		<p ng-show="success" class="successMsg">
+			Outlet is created by Id {{outletID}}
+		</p>
 		<p ng-hide="success" ></p>
 	</div>
 </div>
