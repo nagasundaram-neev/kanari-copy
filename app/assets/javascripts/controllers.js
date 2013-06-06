@@ -142,13 +142,14 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 
 		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(auth_token);
 		deleteCookie('authToken');
+		deleteCookie('userRole');
 		$location.url("/login");
 	}
 	$scope.goTOOulet = function() {
 		if (getCookie('userRole') == "kanari_admin") {
 			$location.url("/home");
 		} else if (getCookie('userRole') == "customer_admin") {
-			$location.url("/create_outlet");
+			$location.url("/outlets");
 		}
 	}
 	$scope.getActive = function(section) {
@@ -159,13 +160,21 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 module.controller('Login', function($scope, $http, $location) {
 	$('.welcome').hide();
 	$('.navBarCls').hide();
-
+	$scope.remember = false;
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
 	$scope.erromsg = false;
 	$scope.login = function() {
 		$location.url("/login");
 	}
+	$scope.getLogin = function() {
+		console.log("under get login")
+		if (getCookie('userRole') == "kanari_admin") {
+			$location.url("/createInvitation");
+		} else if (getCookie('userRole') == "customer_admin") {
+			$location.url("/outlets");
+		}
 
+	};
 	$scope.chkLogin = function() {
 
 		$('.welcome').hide();
@@ -177,13 +186,19 @@ module.controller('Login', function($scope, $http, $location) {
 			url : '/api/users/sign_in',
 		}).success(function(data, status) {
 			console.log("User Role " + data.user_role + " status " + status);
-			setCookie('userRole', data.user_role, 1);
-			setCookie('authToken', data.auth_token, 1);
+			if ($scope.remember) {
+				setCookie('userRole', data.user_role, 7);
+				setCookie('authToken', data.auth_token, 7);
+			} else {
+				setCookie('userRole', data.user_role, 0.29);
+				setCookie('authToken', data.auth_token, 0.29);
+			}
+
 			$scope.erromsg = false;
 			if (getCookie('userRole') == "kanari_admin") {
 				$location.url("/createInvitation");
 			} else if (getCookie('userRole') == "customer_admin") {
-				$location.url("/create_outlet");
+				$location.url("/outlets");
 			}
 
 		}).error(function(data, status) {
@@ -196,7 +211,7 @@ module.controller('Login', function($scope, $http, $location) {
 	$scope.$watch('email + password', function() {
 		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
 	});
-
+	$scope.getLogin();
 });
 
 module.controller('forgotPassCtrl', function($scope, $http, $location) {
@@ -230,6 +245,9 @@ module.controller('forgotPassCtrl', function($scope, $http, $location) {
 			$scope.success = false;
 		});
 	};
+	$scope.BackLink = function() {
+		$location.url("/login");
+	}
 });
 
 module.controller('resetPassCtrl', function($scope, $routeParams, $http, $location) {
@@ -267,8 +285,26 @@ module.controller('homeCtrl', function($scope, $http, $location) {
 	if (getCookie('authToken')) {
 		$('.welcome').show();
 		$('.navBarCls').show();
-		console.log(getCookie('userRole'));
+		getCookie('userRole');
+		$scope.auth_token = getCookie('authToken');
+		console.log("auth token = "+$scope.auth_token)
 		$scope.userRole = getCookie('userRole');
+		var param = {
+			"auth_token" : $scope.auth_token
+		};
+		$http({
+			method : 'get',
+			url : '/api/outlets',
+			params : param,
+		}).success(function(data, status) {
+			console.log("data in success " + data + " status " + status);
+			$scope.error = data.auth_token;
+			$scope.statement = true;
+			$scope.erromsg = false;
+		}).error(function(data, status) {
+			console.log("data in error" + data + " status " + status);
+			$scope.erromsg = true;
+		});
 	} else {
 		$location.url("/login");
 	}
@@ -383,6 +419,7 @@ module.controller('listPaymentInvoiceCtrl', function($scope, $http, $location) {
 module.controller('createOutletCtrl', function($scope, $http, $location) {
 	if (getCookie('authToken')) {
 		$('.welcome').show();
+		console.log(getCookie("authToken"));
 		$('.navBarCls').show();
 		$scope.error = false;
 		$scope.success = false;
@@ -491,7 +528,7 @@ module.controller('acceptInvitation2Ctrl', function($scope, $routeParams, $http,
 				console.log("data in success " + data + " status " + status);
 				$scope.error = false;
 				$scope.success = true;
-				$location.url("/create_outlet");
+				$location.url("/outlets");
 				//$location.url("/login");
 			}).error(function(data, status) {
 				console.log(data)
@@ -502,8 +539,7 @@ module.controller('acceptInvitation2Ctrl', function($scope, $routeParams, $http,
 			});
 
 		}
-	}
-	else{
+	} else {
 		$location.url("/login");
 	}
 });
