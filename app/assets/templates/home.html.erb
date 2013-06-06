@@ -10,7 +10,7 @@
 					<th> Disable </th>
 				</tr>
 				<tr ng-repeat="outlet in outlets">
-					<td ><a href="#/update_outlets">{{outlet.name}}</a></td>
+					<td ><a href="#/create_outlet?outletId={{outlet.id}}">{{outlet.name}}</a></td>
 					<td>
 							
 					<input type="checkbox" ng-show="outlet.disabled" checked ng-click="disableOutlet($event,outlet.id)" />
