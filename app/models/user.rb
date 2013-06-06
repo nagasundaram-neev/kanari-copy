@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
     when 'kanari_admin'
       Outlet.all
     when 'customer_admin'
-      customer.outlets
+      customer.nil? ? [] : customer.outlets
     when 'manager'
       managed_outlets
     when 'staff'

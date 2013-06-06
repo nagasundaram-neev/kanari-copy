@@ -70,6 +70,11 @@ describe User do
         outlet_3 = FactoryGirl.create(:outlet, customer: another_customer)
         user.outlets.should =~ [outlet_1, outlet_2]
       end
+      context "when there is no customer account created" do
+        it "should return an empty array" do
+          user.outlets.should == []
+        end
+      end
     end
     context "when role is manager" do
       let(:role) { 'manager' }
