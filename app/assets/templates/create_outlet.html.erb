@@ -107,27 +107,27 @@
 					<lable>
 						Delivery
 					</lable>
-					<input type="radio" ng-model="Delivery" value="true">
+					<input type="radio" name="delivery" ng-model="Delivery" value="true">
 					Yes
-					<input type="radio" ng-model="Delivery" value="false">
+					<input type="radio"  name="delivery" ng-model="Delivery" value="false">
 					No
 				</div>
 				<div class="ui-input-data">
 					<lable>
 						Serves Alcohol
 					</lable>
-					<input type="radio" ng-model="serves_alcohol" value="true">
+					<input type="radio"  name="serves_alcohol"  ng-model="serves_alcohol" value="true">
 					Yes
-					<input type="radio" ng-model="serves_alcohol" value="false">
+					<input type="radio" ng-model="serves_alcohol" name="serves_alcohol" value="false">
 					No
 				</div>
 				<div class="ui-input-data">
 					<lable>
 						Outdoor Seating
 					</lable>
-					<input type="radio" ng-model="outdoor_Seating" value="true">
+					<input type="radio"  ng-model="outdoor_Seating" name="outdoor_Seating" value="true">
 					Yes
-					<input type="radio" ng-model="outdoor_Seating" value="false">
+					<input type="radio"  ng-model="outdoor_Seating" name="outdoor_Seating" value="false">
 					No
 				</div>
 				<input type="button" class="loginBtn" ng-click="create_outlet()" data-inline="true" value="Save" />

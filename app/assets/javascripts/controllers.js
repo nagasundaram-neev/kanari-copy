@@ -455,7 +455,7 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 		$scope.locationShow = false;
 		$scope.permissionShow = false;
 		$scope.ReportShow = false;
-		
+		$scope.updateMode = false;
 		$('.welcome').show();
 		$scope.auth_token = getCookie('authToken');
 		//console.log(getCookie("authToken"));
@@ -463,7 +463,7 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 		$scope.error = false;
 		$scope.success = false;
 		$scope.outletTypes = [];
-		$scope.cuisineTypes =[];
+		$scope.cuisineTypes = [];
 		/* Adding for updating the outlet*/
 		if ($routeParams.outletId) {
 			console.log($scope.auth_token);
@@ -481,6 +481,18 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 				$scope.error = false;
 				$scope.outletID = data.outlet.id;
 				$scope.success = true;
+				/* Populating preconfigured data useful for update query*/
+				$scope.restaurant_name = data.outlet.name;
+				$scope.restaurant_location = data.outlet.address;
+				$scope.email_address = data.outlet.email;
+				$scope.contact_number = data.outlet.phone_number;
+				$scope.fromTime = data.outlet.open_hours.split("-")[0]
+				$scope.toTime = data.outlet.open_hours.split("-")[1]
+				$scope.Delivery = data.outlet.has_delivery.toString();
+				$scope.serves_alcohol = data.outlet.serves_alcohol.toString();
+				;
+				$scope.outdoor_Seating = data.outlet.has_outdoor_seating.toString();
+				$scope.updateMode = true
 
 			}).error(function(data, status) {
 				console.log("data in error" + data + " status " + status);
@@ -511,7 +523,7 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 			});
 		};
 		$scope.getOutletTypes();
-		$scope.getCuisineTypes = function(){
+		$scope.getCuisineTypes = function() {
 			var param = {
 				"auth_token" : $scope.auth_token
 			}
@@ -536,6 +548,13 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 		$scope.getCuisineTypes();
 		/* Adding for creating the outlet*/
 		$scope.create_outlet = function() {
+			var url = "/api/outlets"
+			var method = "post"
+			if ($scope.updateMode) {
+				url = "/api/outlets/" + $scope.outletID;
+				method = "PUT";
+			}
+
 			console.log($scope.fromTime);
 			var param = {
 				"outlet" : {
@@ -555,15 +574,17 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 			}
 
 			$http({
-				method : 'post',
-				url : '/api/outlets',
+				method : method,
+				url : url,
 				data : param,
 			}).success(function(data, status) {
-				console.log(data.outlet.id);
-
 				console.log("data in success " + data + " status " + status);
 				$scope.error = false;
-				$scope.outletID = data.outlet.id;
+				if (data.outlet) {
+					console.log(data.outlet.id);
+					$scope.outletID = data.outlet.id;
+				}
+
 				$scope.success = true;
 			}).error(function(data, status) {
 				console.log("data in error" + data + " status " + status);
