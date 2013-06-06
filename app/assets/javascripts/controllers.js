@@ -345,6 +345,7 @@ module.controller('createInvitation', function($scope, $http, $location) {
 		$('.navBarCls').show();
 		$scope.statement = false;
 		$scope.erromsg = false;
+		$scope.errortext = ""
 		$scope.create_invitation = function() {
 			console.log("In Create Invitation" + auth_token);
 			var userEmail = $scope.userEmail;
@@ -375,6 +376,7 @@ module.controller('createInvitation', function($scope, $http, $location) {
 				$scope.erromsg = false;
 			}).error(function(data, status) {
 				console.log("data in error" + data + " status " + status);
+				$scope.errortext = data.errors[0]
 				$scope.erromsg = true;
 			});
 
