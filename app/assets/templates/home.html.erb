@@ -3,17 +3,39 @@
 		<div class="span4 divLeft">
 			<h1>Welcome </h1>
 			<span>You currently do not have any outlets in your account. Please add an outlet to start using Kanari.</span>
+			You have {{outlets.length}} Outlets.
+			<table style="display: block">
+				<tr >
+					<th style="width:80%;text-align: left"> Name Of Restaurant </th>
+					<th> Disable </th>
+				</tr>
+				<tr ng-repeat="outlet in outlets">
+					<td ><a href="#/update_outlets">{{outlet.name}}</a></td>
+					<td>
+					<input type="checkbox" ng-click="disableOutlet($event,outlet.id)" />
+					</td>
+				</tr>
+			</table>
+	
 			<a href="#/create_outlet" title="addRestaurant" class="addRestaurant"><%= image_tag "icon_new_restaurant_outlet.png" %>New Restaurant Outlet</a>
 			<a href="#/payment_invoice" title="PaymentInvoice" class="createPayment">Create Payment Invoice</a>
 		</div>
-		
+
 		<div class="divRight">
 			<span>Take the tour</span>
 			<ul>
-				<li>How Kanari Works?</li>
-				<li>How to Register?</li>
-				<li>Search Restaurants?</li>
-				<li>Available Deals?</li>
+				<li>
+					How Kanari Works?
+				</li>
+				<li>
+					How to Register?
+				</li>
+				<li>
+					Search Restaurants?
+				</li>
+				<li>
+					Available Deals?
+				</li>
 			</ul>
 		</div>
 		<div class="clr"></div>
