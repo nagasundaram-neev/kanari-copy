@@ -285,10 +285,11 @@ module.controller('homeCtrl', function($scope, $http, $location) {
 	if (getCookie('authToken')) {
 		$('.welcome').show();
 		$('.navBarCls').show();
-		getCookie('userRole');
 		$scope.auth_token = getCookie('authToken');
-		console.log("auth token = "+$scope.auth_token)
+		console.log("auth token = " + $scope.auth_token)
 		$scope.userRole = getCookie('userRole');
+		$scope.outlets = []
+
 		var param = {
 			"auth_token" : $scope.auth_token
 		};
@@ -298,6 +299,8 @@ module.controller('homeCtrl', function($scope, $http, $location) {
 			params : param,
 		}).success(function(data, status) {
 			console.log("data in success " + data + " status " + status);
+			$scope.outlets = data.outlets;
+			console.log($scope.outlets)
 			$scope.error = data.auth_token;
 			$scope.statement = true;
 			$scope.erromsg = false;
@@ -308,6 +311,32 @@ module.controller('homeCtrl', function($scope, $http, $location) {
 	} else {
 		$location.url("/login");
 	}
+	$scope.disableOutlet = function($event,id) {
+		console.log(id)
+		$scope.auth_token = getCookie('authToken');
+		checkbox = $event.target;
+		console.log(checkbox.checked)
+		var params = {
+			"outlet" : {
+				"disabled" : checkbox.checked
+			},
+			"auth_token" : $scope.auth_token
+		}
+		$http({
+			method : 'PUT',
+			url : '/api/outlets/' + id,
+			data : params,
+		}).success(function(data, status) {
+			console.log("data in success " + data + " status " + status);
+			
+			$scope.error = data.auth_token;
+			$scope.statement = true;
+			$scope.erromsg = false;
+		}).error(function(data, status) {
+			console.log("data in error" + data + " status " + status);
+			$scope.erromsg = true;
+		});
+	};
 });
 module.controller('createInvitation', function($scope, $http, $location) {
 
@@ -419,10 +448,12 @@ module.controller('listPaymentInvoiceCtrl', function($scope, $http, $location) {
 module.controller('createOutletCtrl', function($scope, $http, $location) {
 	if (getCookie('authToken')) {
 		$('.welcome').show();
+		$scope.auth_token = getCookie('authToken');
 		console.log(getCookie("authToken"));
 		$('.navBarCls').show();
 		$scope.error = false;
 		$scope.success = false;
+
 		$scope.create_outlet = function() {
 			console.log($scope.fromTime);
 			var param = {
@@ -438,7 +469,8 @@ module.controller('createOutletCtrl', function($scope, $http, $location) {
 					"has_delivery" : $scope.Delivery,
 					"serves_alcohol" : $scope.serves_alcohol,
 					"has_outdoor_seating" : $scope.outdoor_Seating
-				}
+				},
+				"auth_token" : $scope.auth_token
 			}
 
 			$http({
@@ -447,6 +479,7 @@ module.controller('createOutletCtrl', function($scope, $http, $location) {
 				data : param,
 			}).success(function(data, status) {
 				console.log(data.outlet.id);
+
 				console.log("data in success " + data + " status " + status);
 				$scope.error = false;
 				$scope.outletID = data.outlet.id;
