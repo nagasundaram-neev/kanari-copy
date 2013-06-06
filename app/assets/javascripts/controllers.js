@@ -199,8 +199,7 @@ module.controller('Login', function($scope, $http, $location) {
 				$location.url("/createInvitation");
 			} else if (getCookie('userRole') == "customer_admin" && data.registration_complete) {
 				$location.url("/outlets");
-			}
-			else if(getCookie('userRole') == "customer_admin" && !data.registration_complete) {
+			} else if (getCookie('userRole') == "customer_admin" && !data.registration_complete) {
 				$location.url("/acceptInvitationStep2");
 			}
 
@@ -452,12 +451,19 @@ module.controller('listPaymentInvoiceCtrl', function($scope, $http, $location) {
 
 module.controller('createOutletCtrl', function($scope, $routeParams, $http, $location) {
 	if (getCookie('authToken')) {
+		$scope.profileShow = true;
+		$scope.locationShow = false;
+		$scope.permissionShow = false;
+		$scope.ReportShow = false;
+		
 		$('.welcome').show();
 		$scope.auth_token = getCookie('authToken');
 		//console.log(getCookie("authToken"));
 		$('.navBarCls').show();
 		$scope.error = false;
 		$scope.success = false;
+		$scope.outletTypes = [];
+		$scope.cuisineTypes =[];
 		/* Adding for updating the outlet*/
 		if ($routeParams.outletId) {
 			console.log($scope.auth_token);
@@ -482,7 +488,52 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 				$scope.success = false;
 			});
 		}
+		$scope.getOutletTypes = function() {
+			var param = {
+				"auth_token" : $scope.auth_token
+			}
+			$http({
+				method : 'get',
+				url : '/api/outlet_types',
+				params : param,
+			}).success(function(data, status) {
+				console.log(data);
+				//console.log("data in success " + data + " status " + status);
+				$scope.error = false;
+				$scope.outletTypes = data.outlet_types;
+				console.log($scope.outletTypes)
+				$scope.success = true;
 
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+				$scope.error = true;
+				$scope.success = false;
+			});
+		};
+		$scope.getOutletTypes();
+		$scope.getCuisineTypes = function(){
+			var param = {
+				"auth_token" : $scope.auth_token
+			}
+			$http({
+				method : 'get',
+				url : '/api/cuisine_types',
+				params : param,
+			}).success(function(data, status) {
+				console.log(data);
+				//console.log("data in success " + data + " status " + status);
+				$scope.error = false;
+				$scope.cuisineTypes = data.cuisine_types;
+				console.log($scope.OutletTypes)
+				$scope.success = true;
+
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+				$scope.error = true;
+				$scope.success = false;
+			});
+		};
+		$scope.getCuisineTypes();
 		/* Adding for creating the outlet*/
 		$scope.create_outlet = function() {
 			console.log($scope.fromTime);
@@ -519,6 +570,29 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 				$scope.error = true;
 				$scope.success = false;
 			});
+		};
+		$scope.changeTab = function(currentTab) {
+			if (currentTab == "profileShow") {
+				$scope.profileShow = true;
+				$scope.locationShow = false;
+				$scope.permissionShow = false;
+				$scope.ReportShow = false;
+			} else if (currentTab == "locationShow") {
+				$scope.profileShow = false;
+				$scope.locationShow = true;
+				$scope.permissionShow = false;
+				$scope.ReportShow = false;
+			} else if (currentTab == "permissionShow") {
+				$scope.profileShow = false;
+				$scope.locationShow = false;
+				$scope.permissionShow = true;
+				$scope.ReportShow = false;
+			} else if (currentTab == "ReportShow") {
+				$scope.profileShow = false;
+				$scope.locationShow = false;
+				$scope.permissionShow = false;
+				$scope.ReportShow = true;
+			}
 		}
 	} else {
 		$location.url("/login");
