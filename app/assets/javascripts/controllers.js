@@ -163,9 +163,11 @@ module.controller('Login', function($scope, $http, $location) {
 	$scope.remember = false;
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
 	$scope.erromsg = false;
+	
 	$scope.login = function() {
 		$location.url("/login");
 	}
+	
 	$scope.getLogin = function() {
 		console.log("under get login")
 		if (getCookie('userRole') == "kanari_admin") {
@@ -173,8 +175,8 @@ module.controller('Login', function($scope, $http, $location) {
 		} else if (getCookie('userRole') == "customer_admin") {
 			$location.url("/outlets");
 		}
-
 	};
+	
 	$scope.chkLogin = function() {
 
 		$('.welcome').hide();
@@ -314,7 +316,7 @@ module.controller('homeCtrl', function($scope, $http, $location) {
 		$location.url("/login");
 	}
 	$scope.disableOutlet = function($event, id) {
-		console.log(id)
+		console.log(id);
 		$scope.auth_token = getCookie('authToken');
 		checkbox = $event.target;
 		console.log(checkbox.checked)
@@ -464,6 +466,7 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 		$scope.success = false;
 		$scope.outletTypes = [];
 		$scope.cuisineTypes = [];
+		console.log($routeParams.outletId);
 		/* Adding for updating the outlet*/
 		if ($routeParams.outletId) {
 			console.log($scope.auth_token);
@@ -486,11 +489,10 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 				$scope.restaurant_location = data.outlet.address;
 				$scope.email_address = data.outlet.email;
 				$scope.contact_number = data.outlet.phone_number;
-				$scope.fromTime = data.outlet.open_hours.split("-")[0]
+				$scope.fromTime = data.outlet.open_hours.split("-")[0];
 				$scope.toTime = data.outlet.open_hours.split("-")[1]
 				$scope.Delivery = data.outlet.has_delivery.toString();
 				$scope.serves_alcohol = data.outlet.serves_alcohol.toString();
-				;
 				$scope.outdoor_Seating = data.outlet.has_outdoor_seating.toString();
 				$scope.updateMode = true
 
@@ -513,7 +515,7 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 				//console.log("data in success " + data + " status " + status);
 				$scope.error = false;
 				$scope.outletTypes = data.outlet_types;
-				console.log($scope.outletTypes)
+				//console.log($scope.outletTypes)
 				$scope.success = true;
 
 			}).error(function(data, status) {
@@ -536,7 +538,7 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 				//console.log("data in success " + data + " status " + status);
 				$scope.error = false;
 				$scope.cuisineTypes = data.cuisine_types;
-				console.log($scope.OutletTypes)
+				//console.log($scope.OutletTypes)
 				$scope.success = true;
 
 			}).error(function(data, status) {
@@ -550,10 +552,10 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 		$scope.create_outlet = function() {
 			var url = "/api/outlets"
 			var method = "post"
-			if ($scope.updateMode) {
-				url = "/api/outlets/" + $scope.outletID;
-				method = "PUT";
-			}
+			// if ($scope.updateMode) {
+				// url = "/api/outlets/" + $scope.outletID;
+				// method = "PUT";
+			// }
 
 			console.log($scope.fromTime);
 			var param = {
