@@ -2,9 +2,9 @@
 	<div class="innerDiv" data-role="content">
 		<div class="span4 divLeft">
 			<h1>Welcome </h1>
-			<span>You currently do not have any outlets in your account. Please add an outlet to start using Kanari.</span>
-			You have {{outlets.length}} Outlets.
-			<table style="display: block">
+			<span ng-show="!outlets.length">You currently do not have any outlets in your account. Please add an outlet to start using Kanari.</span>
+			
+			<table ng-show="outlets.length" style="display: block">
 				<tr >
 					<th style="width:80%;text-align: left"> Name Of Restaurant </th>
 					<th> Disable </th>
