@@ -22,7 +22,8 @@ Kanari::Application.routes.draw do
     devise_for :users, path: '/api/users',controllers: {
       sessions: 'api/v1/custom_devise/sessions',
       invitations: 'api/v1/custom_devise/invitations',
-      passwords: 'api/v1/custom_devise/passwords'
+      passwords: 'api/v1/custom_devise/passwords',
+      registrations: 'api/v1/custom_devise/registrations'
     }
   end
 
