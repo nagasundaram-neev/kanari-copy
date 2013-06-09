@@ -18,11 +18,14 @@ Kanari::Application.routes.draw do
     end
   end
 
-  devise_for :users, path: '/api/users',controllers: {
-    sessions: 'api/v1/custom_devise/sessions',
-    invitations: 'api/v1/custom_devise/invitations',
-    passwords: 'api/v1/custom_devise/passwords'
-  }
+  scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
+    devise_for :users, path: '/api/users',controllers: {
+      sessions: 'api/v1/custom_devise/sessions',
+      invitations: 'api/v1/custom_devise/invitations',
+      passwords: 'api/v1/custom_devise/passwords'
+    }
+  end
+
 
   root :to => "home#index"
 end
