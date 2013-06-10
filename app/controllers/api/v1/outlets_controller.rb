@@ -22,6 +22,8 @@ class Api::V1::OutletsController < ApplicationController
   # POST /outlets
   def create
     @outlet = Outlet.new(outlet_params)
+    @outlet.outlet_types = OutletType.find(params[:outlet][:outlet_type_ids]) rescue []
+    @outlet.cuisine_types = CuisineType.find(params[:outlet][:cuisine_type_ids]) rescue []
     authorize! :create, @outlet
 
     @outlet.customer = current_user.customer
@@ -35,6 +37,8 @@ class Api::V1::OutletsController < ApplicationController
   # PATCH/PUT /outlets/1
   def update
     authorize! :update, @outlet
+    @outlet.outlet_types = OutletType.find(params[:outlet][:outlet_type_ids]) rescue []
+    @outlet.cuisine_types = CuisineType.find(params[:outlet][:cuisine_type_ids]) rescue []
     if @outlet.update(outlet_params)
       render json: nil, status: 200
     else

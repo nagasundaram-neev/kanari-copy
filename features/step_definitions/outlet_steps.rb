@@ -20,6 +20,14 @@ And /^the outlet's id is "([^"]*)"$/ do |id|
   @outlet.save
 end
 
+And /^the outlet's cuisine types should be "([^"]*)"$/ do |cuisine_types|
+  @outlet.cuisine_types.collect(&:name).should =~ cuisine_types.split(',')
+end
+
+And /^the outlet's outlet types should be "([^"]*)"$/ do |outlet_types|
+  @outlet.outlet_types.collect(&:name).should =~ outlet_types.split(',')
+end
+
 And /^the outlet "([^"]*)" should be present under customer with id "([^"]*)"$/ do |outlet_name, customer_id|
   @existing_outlet = Outlet.where(name: outlet_name).first
   Customer.find(customer_id).outlets.should == [@existing_outlet]

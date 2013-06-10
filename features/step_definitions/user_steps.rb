@@ -7,12 +7,7 @@ Given "the following users exist" do |user_data|
   user_hashes = user_data.hashes
   user_hashes.each do |user_hash|
     user_hash["password_confirmation"] = user_hash["password"]
-    begin
     User.create!(user_hash)
-    rescue
-      require 'debugger'; debugger 
-      puts "okay"
-    end
   end
   User.count.should == user_hashes.size
 end

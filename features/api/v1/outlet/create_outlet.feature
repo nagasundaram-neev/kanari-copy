@@ -11,6 +11,16 @@ Feature: Create Outlet
       And he is the admin for customer "China Pearl"
       Given "Bob" is a user with email id "bob@gmail.com" and password "password123" and user id "10"
         And his role is "manager"
+      Given the following cuisine types exist
+        |id   |name     |
+        |1    |Indian   |
+        |2    |Chinese  |
+        |3    |Japanese |
+      And the following outlet types exist
+        |id   |name     |
+        |1    |Casual   |
+        |2    |Date     |
+        |3    |Sports   |
       When I authenticate as the user "auth_token_123" with the password "random string"
       And I send a POST request to "/api/outlets" with the following:
       """
@@ -27,7 +37,9 @@ Feature: Create Outlet
           "has_delivery": true,
           "serves_alcohol" : true,
           "has_outdoor_seating" : true,
-          "manager_id" : 10
+          "manager_id" : 10,
+          "cuisine_type_ids" : [1,2],
+          "outlet_type_ids" : [1,3]
         }
       }
       """
@@ -57,7 +69,27 @@ Feature: Create Outlet
           "open_hours": "10:00-23:00",
           "phone_number": "+123456",
           "serves_alcohol": true,
-          "website_url": "http://batmansdonuts.com"
+          "website_url": "http://batmansdonuts.com",
+          "cuisine_types" : [
+            {
+              "id" : 1,
+              "name" : "Indian"
+            },
+            {
+              "id" : 2,
+              "name" : "Chinese"
+            }
+          ],
+          "outlet_types" : [
+            {
+              "id" : 1,
+              "name" : "Casual"
+            },
+            {
+              "id" : 3,
+              "name" : "Sports"
+            }
+          ]
         }
       }
       """

@@ -3,4 +3,6 @@ class OutletSerializer < ActiveModel::Serializer
   :has_outdoor_seating
 
   has_one :manager, serializer: ManagerSerializer
+  has_many :cuisine_types
+  has_many :outlet_types
 end

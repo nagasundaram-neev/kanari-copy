@@ -65,7 +65,9 @@ Feature: List Outlets
             "open_hours": null,
             "phone_number": null,
             "serves_alcohol": null,
-            "website_url": null
+            "website_url": null,
+            "cuisine_types": [],
+            "outlet_types": []
           },
           {
             "id" : 2,
@@ -86,7 +88,9 @@ Feature: List Outlets
             "open_hours": null,
             "phone_number": null,
             "serves_alcohol": null,
-            "website_url": null
+            "website_url": null,
+            "cuisine_types": [],
+            "outlet_types": []
           },
           {
             "id" : 3,
@@ -107,7 +111,9 @@ Feature: List Outlets
             "open_hours": null,
             "phone_number": null,
             "serves_alcohol": null,
-            "website_url": null
+            "website_url": null,
+            "cuisine_types": [],
+            "outlet_types": []
           },
           {
             "id" : 4,
@@ -128,7 +134,9 @@ Feature: List Outlets
             "open_hours": null,
             "phone_number": null,
             "serves_alcohol": null,
-            "website_url": null
+            "website_url": null,
+            "cuisine_types": [],
+            "outlet_types": []
            }
          ]
       }
@@ -195,7 +203,9 @@ Feature: List Outlets
             "open_hours": null,
             "phone_number": null,
             "serves_alcohol": null,
-            "website_url": null
+            "website_url": null,
+            "cuisine_types": [],
+            "outlet_types": []
           },
           {
             "id" : 2,
@@ -216,7 +226,9 @@ Feature: List Outlets
             "open_hours": null,
             "phone_number": null,
             "serves_alcohol": null,
-            "website_url": null
+            "website_url": null,
+            "cuisine_types": [],
+            "outlet_types": []
            }
          ]
        }
@@ -247,7 +259,9 @@ Feature: List Outlets
             "open_hours": null,
             "phone_number": null,
             "serves_alcohol": null,
-            "website_url": null
+            "website_url": null,
+            "cuisine_types": [],
+            "outlet_types": []
           },
           {
             "id" : 2,
@@ -268,7 +282,9 @@ Feature: List Outlets
             "open_hours": null,
             "phone_number": null,
             "serves_alcohol": null,
-            "website_url": null
+            "website_url": null,
+            "cuisine_types": [],
+            "outlet_types": []
            }
          ]
        }
@@ -336,7 +352,9 @@ Feature: List Outlets
             "open_hours": null,
             "phone_number": null,
             "serves_alcohol": null,
-            "website_url": null
+            "website_url": null,
+            "cuisine_types": [],
+            "outlet_types": []
           },
           {
             "id" : 2,
@@ -357,7 +375,9 @@ Feature: List Outlets
             "open_hours": null,
             "phone_number": null,
             "serves_alcohol": null,
-            "website_url": null
+            "website_url": null,
+            "cuisine_types": [],
+            "outlet_types": []
            }
          ]
        }
@@ -388,7 +408,9 @@ Feature: List Outlets
             "open_hours": null,
             "phone_number": null,
             "serves_alcohol": null,
-            "website_url": null
+            "website_url": null,
+            "cuisine_types": [],
+            "outlet_types": []
            }
          ]
        }
@@ -419,7 +441,9 @@ Feature: List Outlets
             "open_hours": null,
             "phone_number": null,
             "serves_alcohol": null,
-            "website_url": null
+            "website_url": null,
+            "cuisine_types": [],
+            "outlet_types": []
            }
          ]
        }
@@ -486,7 +510,9 @@ Feature: List Outlets
             "open_hours": null,
             "phone_number": null,
             "serves_alcohol": null,
-            "website_url": null
+            "website_url": null,
+            "cuisine_types": [],
+            "outlet_types": []
            }
          ]
        }
