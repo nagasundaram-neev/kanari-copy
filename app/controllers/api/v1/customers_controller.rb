@@ -7,7 +7,9 @@ class Api::V1::CustomersController < ApplicationController
   # GET /customers
   # GET /customers.json
   def index
-    @customers = Customer.all
+    customers = Customer.all
+    authorize! :read_all, Customer
+    render json: customers
   end
 
   # GET /customers/1
