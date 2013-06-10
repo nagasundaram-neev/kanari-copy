@@ -34,6 +34,7 @@ class Ability
       can :create, PaymentInvoice
       can :read, Outlet
       can :read_all, Customer
+      can :read, Customer
     when 'customer_admin'
       #Customer admin's permissions
       can :read, PaymentInvoice
