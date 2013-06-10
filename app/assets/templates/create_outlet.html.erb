@@ -8,7 +8,7 @@
 			vertical-align: middle !important;
 		}
 	</style>
-	<div class="create_outlet innerDiv" data-role="content" >
+	<div class="create_outlet innerDiv" data-role="content">
 		<div class="leftPanel" >
 			<ul class="">
 				<li data-ng-class="{active:profileShow,create_outlet:true }">
@@ -38,13 +38,14 @@
 			</ul>
 		</div>
 		<div ng-show="profileShow">
-			<div data-role="fieldcontain" class="rightPanel loginDiv">
+			<div data-role="fieldcontain" class="rightPanel loginDiv" name="create_outlet_form" novalidate>
 				<h1>Create Restaurant Outlet</h1>
 				<div class="ui-input-data">
 					<lable>
 						Restaurant Name
 					</lable>
 					<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="restaurant_name" class="passwordTxt" required />
+					<span ng-show="create_outlet_form.restaurant_name.$error.required">Please Enter Restaurant Name</span>
 				</div>
 				<div class="ui-input-data">
 					<lable>
@@ -62,7 +63,7 @@
 					<lable>
 						Email Address
 					</lable>
-					<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="email_address" class="passwordTxt" required />
+					<input data-theme="a" data-inline="true" type="email" name="txtPassword" ng-model="email_address" class="passwordTxt" required />
 				</div>
 				<div class="ui-input-data">
 					<lable>
@@ -129,17 +130,17 @@
 					<input type="radio"  ng-model="outdoor_Seating" name="outdoor_Seating" value="false">
 					No
 				</div>
-				<input type="button" class="loginBtn" ng-click="create_outlet()" data-inline="true" value="Save" />
+				<input type="button" class="loginBtn" ng-click="create_outlet()" ng-disabled="create_outlet_form.$invalid" data-inline="true" value="Save" />
 			</div>
 			<div class="clr"></div>
 			<p ng-show="error" class="errorMsg">
 				Please fillup the form.
 			</p>
 			<p ng-hide="error" ></p>
-			<p ng-show="success" class="successMsg">
-				Outlet is created by Id {{outletID}}
+			<p ng-show="successMsg" class="successMsg">
+				Outlet is created Successfully
 			</p>
-			<p ng-hide="success" ></p>
+			<p ng-hide="success"></p>
 		</div>
 		<div id ="location" ng-show="locationShow">
 			This is location based div only
