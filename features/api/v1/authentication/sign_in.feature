@@ -4,7 +4,7 @@ Feature: Sign In
       Given I send and accept JSON
 
     Scenario: Successful sign in using email and password
-      Given "Adam" is a user with email id "user@gmail.com" and password "password123"
+      Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"
         And his role is "kanari_admin"
         And his authentication token is "auth_token_123"
       When I authenticate as the user "user@gmail.com" with the password "password123"
@@ -14,9 +14,11 @@ Feature: Sign In
         And the auth_token should be different from "auth_token_123"
       And the JSON response at "user_role" should be "kanari_admin"
       And the JSON response at "registration_complete" should be true
+      And the JSON response at "first_name" should be "Adam"
+      And the JSON response at "last_name" should be "Smith"
 
     Scenario: Successful sign in using authentication token
-      Given "Adam" is a user with email id "user@gmail.com" and password "password123"
+      Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"
         And his role is "kanari_admin"
         And his authentication token is "auth_token_123"
       When I authenticate as the user "auth_token_123" with the password "X"
@@ -25,6 +27,8 @@ Feature: Sign In
       And the JSON response should have "auth_token"
         And the auth_token should be different from "auth_token_123"
       And the JSON response at "user_role" should be "kanari_admin"
+      And the JSON response at "first_name" should be "Adam"
+      And the JSON response at "last_name" should be "Smith"
 
     Scenario: customer_admin who has not created a customer account
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"

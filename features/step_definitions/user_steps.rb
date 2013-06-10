@@ -1,5 +1,6 @@
-Given /^".*" is a user with email id "([^"]*)" and password "([^"]*)"$/ do |email, password|
-  @user = User.create(email: email, password: password, password_confirmation: password)
+Given /^"([^"]*)" is a user with email id "([^"]*)" and password "([^"]*)"$/ do |full_name, email, password|
+  first_name, last_name = full_name.split
+  @user = User.create(email: email, password: password, password_confirmation: password, first_name: first_name.to_s, last_name: last_name.to_s)
 end
 
 Given "the following users exist" do |user_data|
