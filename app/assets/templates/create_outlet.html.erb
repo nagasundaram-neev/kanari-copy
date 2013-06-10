@@ -9,6 +9,7 @@
 		}
 	</style>
 	<div class="create_outlet innerDiv" data-role="content">
+		<div ></div>
 		<div class="leftPanel" >
 			<ul class="">
 				<li data-ng-class="{active:profileShow,create_outlet:true }">
@@ -70,7 +71,7 @@
 						Outlet Type
 					</lable>
 					<span ng-repeat="outletType in outletTypes" style="display: inline; font-size: 13px; padding: 0;">
-						<input  type="checkbox" name="outlet" value="{{outletType.id}}">
+						<input  type="checkbox" value="{{outletType.id}}">
 						{{outletType.name}}
 						</input> </span>
 				</div>
@@ -79,7 +80,7 @@
 						Cuisine Type
 					</lable>
 					<span ng-repeat="cuisineType in cuisineTypes" style="display: inline; font-size: 13px; padding: 0;">
-						<input  type="checkbox" name="cuisine" value="{{cuisineType.id}}">
+						<input  type="checkbox" value="{{cuisineType.id}}" ng-checked="{{checkedCuisineTypes.checked}}" name="cousine{{cuisineType.id}}">
 						{{cuisineType.name}}
 						</input> </span>
 				</div>

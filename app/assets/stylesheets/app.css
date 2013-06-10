@@ -134,6 +134,7 @@ body {
 .main_content h1 {
 	color: #5A4166;
 	font-weight: normal;
+	padding: 0 0 15px;
 }
 .main_content span {
 	color: #5A4166;
