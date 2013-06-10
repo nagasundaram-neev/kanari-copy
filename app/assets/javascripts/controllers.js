@@ -193,9 +193,12 @@ module.controller('Login', function($scope, $http, $location) {
 			if ($scope.remember) {
 				setCookie('userRole', data.user_role, 7);
 				setCookie('authToken', data.auth_token, 7);
+				setCookie('userName', data.first_name+' '+data.last_name, 7);
+				//setCookie('firstName', data.first_name, 7);
 			} else {
 				setCookie('userRole', data.user_role, 0.29);
 				setCookie('authToken', data.auth_token, 0.29);
+				setCookie('userName', data.first_name+' '+data.last_name, 0.29);
 			}
 
 			$scope.erromsg = false;
