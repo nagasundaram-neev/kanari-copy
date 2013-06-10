@@ -130,7 +130,7 @@ var auth_token = "";
 
 module.controller('commonCtrl', function($scope, $http, $location) {
 	//$scope.userName = "";
-	$scope.userName = getCookie('userRole');
+	$scope.userName = getCookie('userName');
 	$scope.logout = function() {
 		$http({
 			method : 'delete',
