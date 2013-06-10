@@ -581,6 +581,7 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 		};
 		/* Adding for creating the outlet*/
 		$scope.create_outlet = function() {
+			
 			if ($scope.validateForm()) {
 				var url = "/api/outlets"
 				var method = "post"
@@ -602,7 +603,8 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 						"open_hours" : $scope.fromTime + "-" + $scope.toTime,
 						"has_delivery" : $scope.Delivery,
 						"serves_alcohol" : $scope.serves_alcohol,
-						"has_outdoor_seating" : $scope.outdoor_Seating
+						"has_outdoor_seating" : $scope.outdoor_Seating,
+						//"cuisine_type_ids" : $scope.
 					},
 					"auth_token" : $scope.auth_token
 				}
@@ -620,7 +622,6 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 						$scope.updateMode = true
 					}
 					$scope.successMsg = true;
-					//$location.url("/outlets");
 					$scope.profileShow = false;
 					$scope.locationShow = true;
 				}).error(function(data, status) {
