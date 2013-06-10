@@ -14,6 +14,8 @@ module Api
           resource.save!
           render json: {
             auth_token: resource.authentication_token,
+            first_name: resource.first_name,
+            last_name: resource.last_name,
             user_role: resource.role,
             registration_complete: resource.registration_complete?
           }

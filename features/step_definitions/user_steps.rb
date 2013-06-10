@@ -1,17 +1,13 @@
-Given /^".*" is a user with email id "([^"]*)" and password "([^"]*)"$/ do |email, password|
-  @user = User.create(email: email, password: password, password_confirmation: password)
+Given /^"([^"]*)" is a user with email id "([^"]*)" and password "([^"]*)"$/ do |full_name, email, password|
+  first_name, last_name = full_name.split
+  @user = User.create(email: email, password: password, password_confirmation: password, first_name: first_name.to_s, last_name: last_name.to_s)
 end
 
 Given "the following users exist" do |user_data|
   user_hashes = user_data.hashes
   user_hashes.each do |user_hash|
     user_hash["password_confirmation"] = user_hash["password"]
-    begin
     User.create!(user_hash)
-    rescue
-      require 'debugger'; debugger 
-      puts "okay"
-    end
   end
   User.count.should == user_hashes.size
 end

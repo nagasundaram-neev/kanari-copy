@@ -54,6 +54,45 @@ Feature: Update Outlet
       """
       And "Subway - Bangalore" should have "noushad@subway.com" as the manager
 
+    Scenario: Update cuisine type and outlet type
+      Given "Adam" is a user with email id "user@gmail.com" and password "password123"
+        And his role is "customer_admin"
+        And his authentication token is "auth_token_123"
+      Given a customer named "China Pearl" exists with id "100"
+        And the customer with id "100" has an outlet named "China Pearl - Bangalore"
+        And the outlet's id is "20"
+      And he is the admin for customer "China Pearl"
+      Given the following cuisine types exist
+        |id   |name     |
+        |1    |Indian   |
+        |2    |Chinese  |
+        |3    |Japanese |
+      And the following outlet types exist
+        |id   |name     |
+        |1    |Casual   |
+        |2    |Date     |
+        |3    |Sports   |
+      When I authenticate as the user "auth_token_123" with the password "random string"
+      And I send a PUT request to "/api/outlets/20" with the following:
+      """
+      {
+        "outlet" : {
+          "name" : "China Pearl - Bengaluru",
+          "disabled" : true,
+          "cuisine_type_ids" : [1,2],
+          "outlet_type_ids" : [1,3]
+        }
+      }
+      """
+      Then the response status should be "200"
+      And the JSON response should be:
+      """
+      null
+      """
+      And the outlet "China Pearl - Bengaluru" should be present under customer with id "100"
+      And the outlet's cuisine types should be "Indian,Chinese"
+      And the outlet's outlet types should be "Casual,Sports"
+
     Scenario: Outlet doesn't exist
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"
         And his role is "customer_admin"

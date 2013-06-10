@@ -20,6 +20,10 @@
 					
 					<p class="errorMsg" ng-show="error">{{errorMsg}}</p>
 					<p ng-hide="error"></p>
+					<p class="errorMsg" ng-show="passwordError">Password Didn't match</p>
+					<p ng-hide="passwordError"></p>
+					<p class="errorMsg" ng-show="errorClient">Please Fill the Form</p>
+					<p ng-hide="errorClient"></p>
 					<p class="successMsg" ng-show="success">Your Authenticatin Token is {{auth_token}}</p>
 					<p ng-hide="success"></p>
 				</div>

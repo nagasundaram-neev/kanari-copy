@@ -41,7 +41,9 @@ Feature: Show Outlet
         "open_hours": null,
         "phone_number": null,
         "serves_alcohol": null,
-        "website_url": null
+        "website_url": null,
+        "cuisine_types": [],
+        "outlet_types": []
 
         }
       }
@@ -85,7 +87,9 @@ Feature: Show Outlet
         "open_hours": null,
         "phone_number": null,
         "serves_alcohol": null,
-        "website_url": null
+        "website_url": null,
+        "cuisine_types": [],
+        "outlet_types": []
 
         }
       }
@@ -129,7 +133,9 @@ Feature: Show Outlet
         "open_hours": null,
         "phone_number": null,
         "serves_alcohol": null,
-        "website_url": null
+        "website_url": null,
+        "cuisine_types": [],
+        "outlet_types": []
 
         }
       }
@@ -173,7 +179,9 @@ Feature: Show Outlet
         "open_hours": null,
         "phone_number": null,
         "serves_alcohol": null,
-        "website_url": null
+        "website_url": null,
+        "cuisine_types": [],
+        "outlet_types": []
 
         }
       }

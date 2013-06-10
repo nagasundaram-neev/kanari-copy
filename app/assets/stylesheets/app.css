@@ -83,7 +83,7 @@ body {
 	color: #5A4166;
 	padding: 2px 12px;
 	background: none repeat scroll 0 0 #E4E3E1;
-	 cursor: pointer !important;
+	cursor: pointer !important;
 }
 .navBarCls .nav-tabs {
 	border: none;
@@ -98,7 +98,10 @@ body {
 	margin-left: 5px;
 }
 .errorMsg {
-	color: red
+	color: red;
+	text-align:center;
+	font-size: 18px;
+	
 }
 /***Home Page**/
 .innerDiv {
@@ -135,7 +138,7 @@ body {
 .main_content span {
 	color: #5A4166;
 	font-size: 15px;
-	padding: 25px 0 30px;
+	padding: 25px 0 35px;
 	display: block;
 }
 a.addRestaurant {
@@ -147,10 +150,12 @@ a.addRestaurant {
 	padding: 5px 20px;
 	float: left;
 }
-a.addRestaurant img{vertical-align: text-bottom;}
+a.addRestaurant img {
+	vertical-align: text-bottom;
+}
 a.createPayment {
 	float: left;
-	 margin: 5px 10px;
+	margin: 5px 10px;
 }
 a.addRestaurant:hover {
 	color: #94711F;
@@ -158,26 +163,101 @@ a.addRestaurant:hover {
 }
 
 /***createOutlet****/
-#createOutlet .ui-input-data{padding: 5px 0;}
-.rightPanel lable{ float: left;width: 130px;}
-#createOutlet select{  width: 80px;}
-.create_outlet{padding: 30px 0;}
-.successMsg{color: green}
-.leftPanel{float: left;width:25%;}
-.rightPanel{float:left;width:70%; margin-left: 5%;}
-.leftPanel ul{margin: 0;}
-.leftPanel ul li{list-style: none; padding: 10px 5px;background-image:url('bg_left_tab.jpg');background-position: 100% 100%;border-bottom:1px solid #CCCCCC;border-right:1px solid #CCCCCC}
-.leftPanel ul li.active{background:none;border-right:none;}
-.leftPanel ul li a{color: #5A4166;font-size: 14px;font-weight: bold;cursor: pointer;}
-.leftPanel ul li a:hover{text-decoration:none;}
-.leftPanel ul li a span{ font-size: 12px;font-weight: normal;margin-left: 28px;padding: 0;}
-.innerDiv h3{padding-bottom:20px;font-weight: normal;} 
-.manager_list{width: 30%}
-.add_manager{width:30%;display: none; margin-left: 20px;
-    padding-left: 20px;}
-.manager_list ul{padding: 0;margin: 0 0 20px;border: 1px solid #CCCCCC;border-radius: 5px 5px 5px 5px;}
-.manager_list ul li{ list-style: none outside none;border-bottom: 1px solid #CCCCCC; padding: 10px;}
-.manager_list ul li a{color: #5A4166;font-size: 14px;cursor: pointer;}
-.manager_list ul li a:hover{text-decoration:none;}
-.btn_cls{background: none repeat scroll 0 0 #F5BA44;border-radius: 7px 7px 7px 7px;padding: 5px 10px;}
-.manager_list span{display: inline;padding: 5px;}
+#createOutlet .ui-input-data {
+	padding: 5px 0;
+}
+.rightPanel lable {
+	float: left;
+	width: 130px;
+}
+#createOutlet select {
+	width: 80px;
+}
+.create_outlet {
+	padding: 30px 0;
+}
+.successMsg {
+	color: green;
+	text-align: center;
+	font-size: 18px;
+}
+.leftPanel {
+	float: left;
+	width: 25%;
+}
+.rightPanel {
+	float: left;
+	width: 70%;
+	margin-left: 5%;
+}
+.leftPanel ul {
+	margin: 0;
+}
+.leftPanel ul li {
+	list-style: none;
+	padding: 10px 5px;
+	background-image: url('bg_left_tab.jpg');
+	background-position: 100% 100%;
+	border-bottom: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC
+}
+.leftPanel ul li.active {
+	background: none;
+	border-right: none;
+}
+.leftPanel ul li a {
+	color: #5A4166;
+	font-size: 14px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.leftPanel ul li a:hover {
+	text-decoration: none;
+}
+.leftPanel ul li a span {
+	font-size: 12px;
+	font-weight: normal;
+	margin-left: 28px;
+	padding: 0;
+}
+.innerDiv h3 {
+	padding-bottom: 20px;
+	font-weight: normal;
+}
+.manager_list {
+	width: 30%
+}
+.add_manager {
+	width: 30%;
+	display: none;
+	margin-left: 20px;
+	padding-left: 20px;
+}
+.manager_list ul {
+	padding: 0;
+	margin: 0 0 20px;
+	border: 1px solid #CCCCCC;
+	border-radius: 5px 5px 5px 5px;
+}
+.manager_list ul li {
+	list-style: none outside none;
+	border-bottom: 1px solid #CCCCCC;
+	padding: 10px;
+}
+.manager_list ul li a {
+	color: #5A4166;
+	font-size: 14px;
+	cursor: pointer;
+}
+.manager_list ul li a:hover {
+	text-decoration: none;
+}
+.btn_cls {
+	background: none repeat scroll 0 0 #F5BA44;
+	border-radius: 7px 7px 7px 7px;
+	padding: 5px 10px;
+}
+.manager_list span {
+	display: inline;
+	padding: 5px;
+}
