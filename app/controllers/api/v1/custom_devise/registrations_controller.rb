@@ -37,10 +37,14 @@ module Api
         def update
           self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
           prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
-
+          resource.reset_authentication_token
           if resource.update_with_password(account_update_params)
             sign_in resource_name, resource, :bypass => true
-            render json: 200
+            render json: {
+              auth_token: resource.authentication_token,
+              user_role: resource.role,
+              registration_complete: resource.registration_complete?
+            }, status: :ok
           else
             clean_up_passwords resource
             render json: {errors: resource.errors.full_messages}, status: :unprocessable_entity
