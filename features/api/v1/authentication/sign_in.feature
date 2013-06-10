@@ -16,6 +16,19 @@ Feature: Sign In
       And the JSON response at "registration_complete" should be true
       And the JSON response at "first_name" should be "Adam"
       And the JSON response at "last_name" should be "Smith"
+      And the JSON response at "sign_in_count" should be 1
+
+    Scenario: Sign in count on second login
+      Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"
+        And his role is "kanari_admin"
+        And his authentication token is "auth_token_123"
+      When I authenticate as the user "user@gmail.com" with the password "password123"
+      And I send a POST request to "/api/users/sign_in"
+      And I send a POST request to "/api/users/sign_in"
+      Then the response status should be "200"
+      And the JSON response should have "auth_token"
+        And the auth_token should be different from "auth_token_123"
+      And the JSON response at "sign_in_count" should be 2
 
     Scenario: Successful sign in using authentication token
       Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"

@@ -15,22 +15,52 @@ Feature: List customer accounts
       Then the response status should be "200"
       And the JSON response should be:
       """
-      {
-        "customers" : [
-          {
-            "id": 100,
-            "name": "Subway"
+       {
+         "customers": [
+           {
+            "customer_admin": null,
+            "email": null,
+            "mailing_address_city": null,
+            "mailing_address_country": null,
+            "mailing_address_line_1": null,
+            "mailing_address_line_2": null,
+            "name": "Subway",
+            "phone_number": null,
+            "registered_address_city": null,
+            "registered_address_country": null,
+            "registered_address_line_1": null,
+            "registered_address_line_2": null
           },
           {
-            "id": 101,
-            "name": "McD"
+            "customer_admin": null,
+            "email": null,
+            "mailing_address_city": null,
+            "mailing_address_country": null,
+            "mailing_address_line_1": null,
+            "mailing_address_line_2": null,
+            "name": "McD",
+            "phone_number": null,
+            "registered_address_city": null,
+            "registered_address_country": null,
+            "registered_address_line_1": null,
+            "registered_address_line_2": null
           },
           {
-            "id": 102,
-            "name": "KFC"
-          }
-        ]
-      }
+            "customer_admin": null,
+            "email": null,
+            "mailing_address_city": null,
+            "mailing_address_country": null,
+            "mailing_address_line_1": null,
+            "mailing_address_line_2": null,
+            "name": "KFC",
+            "phone_number": null,
+            "registered_address_city": null,
+            "registered_address_country": null,
+            "registered_address_line_1": null,
+            "registered_address_line_2": null
+           }
+         ]
+       }
       """
 
     Scenario: User not authenticated
