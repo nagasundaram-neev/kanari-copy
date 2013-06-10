@@ -7,3 +7,7 @@ Given /^a customer named "([^"]*)" exists with id "([^"]*)" with admin "([^"]*)"
   Customer.create!(name: customer_name, id: id, customer_admin: customer_admin)
 end
 
+Then(/^the "(.*?)" of customer with id "(.*?)" should be "(.*?)"$/) do |attribute, id, value|
+  customer = Customer.find(id)
+  customer.send(attribute).should == value
+end

@@ -3,6 +3,8 @@ module Api
     module CustomDevise
       class SessionsController < Devise::SessionsController
         prepend_before_filter :require_no_authentication, :only => [:create ]
+        skip_before_filter :skip_trackable, :only => [:create]
+
         include Devise::Controllers::Helpers
 
         respond_to :json
@@ -17,6 +19,7 @@ module Api
             first_name: resource.first_name,
             last_name: resource.last_name,
             user_role: resource.role,
+            sign_in_count: resource.sign_in_count,
             registration_complete: resource.registration_complete?
           }
         end

@@ -33,10 +33,14 @@ class Ability
       #Kanari admin's permissions
       can :create, PaymentInvoice
       can :read, Outlet
+      can :read_all, Customer
+      can :read, Customer
     when 'customer_admin'
       #Customer admin's permissions
       can :read, PaymentInvoice
-      can :manage, Customer
+      can :create, Customer
+      can :update, Customer, customer_admin_id: user.id
+      can :read, Customer, customer_admin_id: user.id
       can :manage, Outlet, customer: user.customer
       can :create, Outlet
       can :create, User, role: 'manager'

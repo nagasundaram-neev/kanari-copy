@@ -1,18 +1,23 @@
 class Api::V1::CustomersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_customer, only: [:show, :update, :destroy]
+  before_action :set_customer, only: [:update, :destroy]
 
   respond_to :json
 
   # GET /customers
   # GET /customers.json
   def index
-    @customers = Customer.all
+    customers = Customer.all
+    authorize! :read_all, Customer
+    render json: customers
   end
 
   # GET /customers/1
   # GET /customers/1.json
   def show
+    customer = Customer.find(params[:id])
+    authorize! :read, customer
+    render json: customer
   end
 
   # POST /customers
@@ -32,14 +37,11 @@ class Api::V1::CustomersController < ApplicationController
   # PATCH/PUT /customers/1
   # PATCH/PUT /customers/1.json
   def update
-    respond_to do |format|
-      if @customer.update(customer_params)
-        format.html { redirect_to @customer, notice: 'Customer was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @customer.errors, status: :unprocessable_entity }
-      end
+    authorize! :update, @customer
+    if @customer.update(customer_params)
+      render json: nil, status: 200
+    else
+      render json: @customer.errors, status: :unprocessable_entity
     end
   end
 
