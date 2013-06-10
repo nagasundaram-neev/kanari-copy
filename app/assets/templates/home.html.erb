@@ -6,8 +6,8 @@
 			
 			<table ng-show="outlets.length" style="display: block">
 				<tr >
-					<th style="width:80%;text-align: left"> Name Of Restaurant </th>
-					<th> Disable </th>
+					<th style="width:80%;text-align: left;font-size: 14px;"> Name Of Restaurant </th>
+					<th style="font-size: 14px;"> Disable </th>
 				</tr>
 				<tr ng-repeat="outlet in outlets">
 					<td ><a href="#/create_outlet?outletId={{outlet.id}}">{{outlet.name}}</a></td>
@@ -20,7 +20,6 @@
 			</table>
 	
 			<a href="#/create_outlet" title="addRestaurant" class="addRestaurant"><%= image_tag "icon_new_restaurant_outlet.png" %>New Restaurant Outlet</a>
-			<a href="#/payment_invoice" title="PaymentInvoice" class="createPayment">Create Payment Invoice</a>
 		</div>
 
 		<div class="divRight">

@@ -130,7 +130,12 @@ var auth_token = "";
 
 module.controller('commonCtrl', function($scope, $http, $location) {
 	//$scope.userName = "";
-	$scope.userName = getCookie('userName');
+	if (getCookie('userRole') == "kanari_admin") {
+		$scope.userName = getCookie('userRole');
+	} else if (getCookie('userRole') == "customer_admin") {
+		$scope.userName = getCookie('userName');
+	}
+	//$scope.userName = getCookie('userName');
 	$scope.logout = function() {
 		$http({
 			method : 'delete',
@@ -193,12 +198,12 @@ module.controller('Login', function($scope, $http, $location) {
 			if ($scope.remember) {
 				setCookie('userRole', data.user_role, 7);
 				setCookie('authToken', data.auth_token, 7);
-				setCookie('userName', data.first_name+' '+data.last_name, 7);
+				setCookie('userName', data.first_name + ' ' + data.last_name, 7);
 				//setCookie('firstName', data.first_name, 7);
 			} else {
 				setCookie('userRole', data.user_role, 0.29);
 				setCookie('authToken', data.auth_token, 0.29);
-				setCookie('userName', data.first_name+' '+data.last_name, 0.29);
+				setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
 			}
 
 			$scope.erromsg = false;
@@ -309,7 +314,7 @@ module.controller('homeCtrl', function($scope, $http, $location) {
 		}).success(function(data, status) {
 			console.log("data in success " + data + " status " + status);
 			$scope.outlets = data.outlets;
-			console.log($scope.outlets)
+			//console.log($scope.outlets)
 			$scope.error = data.auth_token;
 			$scope.statement = true;
 			$scope.erromsg = false;
@@ -401,7 +406,7 @@ module.controller('paymentInvoiceCtrl', function($scope, $http, $location) {
 		$('.navBarCls').show();
 
 		$scope.payment_invoice = function() {
-			console.log("in Payment Invoice" + this.url);
+			//console.log("in Payment Invoice" + this.url);
 			var invoiceId = $scope.kanari_invoice_id;
 			var receiptDate = $scope.receipt_date;
 			var amount = $scope.amount_paid;
@@ -415,7 +420,7 @@ module.controller('paymentInvoiceCtrl', function($scope, $http, $location) {
 
 			$http({
 				method : 'post',
-				url : '/api/customers/100/payment_invoices',
+				url : '/api/customers/' + invoiceId + '/payment_invoices',
 				data : param,
 			}).success(function(data, status) {
 				console.log("data in success " + data + " status " + status);
@@ -468,49 +473,11 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 		//console.log(getCookie("authToken"));
 		$('.navBarCls').show();
 		$scope.error = false;
-		$scope.success = true;
+		$scope.successMsg = false;
 		$scope.outletTypes = [];
 		$scope.cuisineTypes = [];
+		$scope.checkedCuisineTypes =[]
 		console.log($routeParams.outletId);
-		/* Adding for updating the outlet*/
-		if ($routeParams.outletId) {
-			console.log($scope.auth_token);
-			console.log($routeParams.outletId);
-			var param = {
-				"auth_token" : $scope.auth_token
-			}
-			$http({
-				method : 'get',
-				url : '/api/outlets/' + $routeParams.outletId,
-				params : param,
-			}).success(function(data, status) {
-				console.log(data);
-				console.log("data in success " + data + " status " + status);
-				$scope.error = false;
-				$scope.outletID = data.outlet.id;
-				$scope.success = true;
-				/* Populating preconfigured data useful for update query*/
-				$scope.restaurant_name = data.outlet.name;
-				$scope.restaurant_location = data.outlet.address;
-				$scope.email_address = data.outlet.email;
-				$scope.contact_number = data.outlet.phone_number;
-				$scope.fromTime = data.outlet.open_hours.split("-")[0];
-				$scope.toTime = data.outlet.open_hours.split("-")[1]
-				$scope.Delivery = data.outlet.has_delivery.toString();
-				$scope.serves_alcohol = data.outlet.serves_alcohol.toString();
-				$scope.outdoor_Seating = data.outlet.has_outdoor_seating.toString();
-				$scope.updateMode = true;
-				$scope.successMsg = true;
-				//$location.url("/outlets");
-				$scope.profileShow = false;
-				$scope.locationShow = true;
-
-			}).error(function(data, status) {
-				console.log("data in error" + data + " status " + status);
-				$scope.error = true;
-				$scope.success = false;
-			});
-		}
 		$scope.getOutletTypes = function() {
 			var param = {
 				"auth_token" : $scope.auth_token
@@ -520,7 +487,7 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 				url : '/api/outlet_types',
 				params : param,
 			}).success(function(data, status) {
-				console.log(data);
+				//console.log(data);
 				//console.log("data in success " + data + " status " + status);
 				$scope.error = false;
 				$scope.outletTypes = data.outlet_types;
@@ -543,7 +510,7 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 				url : '/api/cuisine_types',
 				params : param,
 			}).success(function(data, status) {
-				console.log(data);
+				//console.log(data);
 				//console.log("data in success " + data + " status " + status);
 				$scope.error = false;
 				$scope.cuisineTypes = data.cuisine_types;
@@ -557,32 +524,71 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 			});
 		};
 		$scope.getCuisineTypes();
+		/* Adding for updating the outlet*/
+
+		if ($routeParams.outletId) {
+			console.log($scope.auth_token);
+			console.log($routeParams.outletId);
+			var param = {
+				"auth_token" : $scope.auth_token
+			}
+			$http({
+				method : 'get',
+				url : '/api/outlets/' + $routeParams.outletId,
+				params : param,
+			}).success(function(data, status) {
+				//console.log(data);
+				console.log("data in success " + data + " status " + status);
+				$scope.error = false;
+				$scope.outletID = data.outlet.id;
+				$scope.success = true;
+				/* Populating preconfigured data useful for update query*/
+				$scope.restaurant_name = data.outlet.name;
+				$scope.restaurant_location = data.outlet.address;
+				$scope.email_address = data.outlet.email;
+				$scope.contact_number = data.outlet.phone_number;
+				$scope.fromTime = data.outlet.open_hours.split("-")[0];
+				$scope.toTime = data.outlet.open_hours.split("-")[1]
+				$scope.Delivery = data.outlet.has_delivery.toString();
+				$scope.serves_alcohol = data.outlet.serves_alcohol.toString();
+				$scope.outdoor_Seating = data.outlet.has_outdoor_seating.toString();
+				$scope.updateMode = true;
+				$scope.checkedCuisineTypes = data.outlet.cuisine_types; 
+				for (i=0; i<$scope.checkedCuisineTypes;i++){
+					$scope.checkedCuisineTypes[i]["checked"] = true;
+					console.log($scope.checkedCuisineTypes[i])
+				} 
+				
+				console.log($scope.checkedCuisineTypes)
+				
+				console.log($scope.cusineTypes)
+				//$scope.successMsg = true;
+				//$location.url("/outlets");
+
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+				$scope.error = true;
+				$scope.success = false;
+			});
+		}
+
 		/* Validating the form */
 		$scope.validateForm = function() {
-			if ($scope.restaurant_name && $scope.restaurant_location && $scope.email_address && $scope.contact_number && $scope.Delivery && $scope.serves_alcohol && $scope.outdoor_Seating && $scope.timeValidate()) {
+			if ($scope.restaurant_name || $scope.restaurant_location || $scope.email_address || $scope.contact_number || $scope.Delivery || $scope.serves_alcohol || $scope.outdoor_Seating) {
 				return true;
 			} else {
 				return false;
 			}
 		};
 
-		$scope.timeValidate = function() {
-			if ($scope.fromTime || $scope.toTime) {
-				if ($scope.fromTime < $scope.toTime) {
-					console.log("in if");
-					return true;
-				} else {
-					console.log("in else");
-					return false;
-				}
-			} else {
-				return false;
-			}
-		};
 		/* Adding for creating the outlet*/
 		$scope.create_outlet = function() {
-			
+			$scope.checked_cuisine = [1, 2, 3, 4];
 			if ($scope.validateForm()) {
+
+				//$scope.checked_cuisine = $scope.cuisineType.checked;
+				console.log($scope.checked_cuisine);
+				//console.log($scope.cuisineType);
 				var url = "/api/outlets"
 				var method = "post"
 				if ($scope.updateMode) {
@@ -604,7 +610,7 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 						"has_delivery" : $scope.Delivery,
 						"serves_alcohol" : $scope.serves_alcohol,
 						"has_outdoor_seating" : $scope.outdoor_Seating,
-						//"cuisine_type_ids" : $scope.
+						"cuisine_type_ids" : $scope.checked_cuisine
 					},
 					"auth_token" : $scope.auth_token
 				}
@@ -614,7 +620,7 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 					url : url,
 					data : param,
 				}).success(function(data, status) {
-					console.log("data in success " + data + " status " + status);
+					console.log("data in success hi " + data + " status " + status);
 					$scope.error = false;
 					if (data.outlet) {
 						console.log(data.outlet.id);
@@ -642,6 +648,7 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 					$scope.profileShow = true;
 					$scope.locationShow = false;
 					$scope.permissionShow = false;
+					$scope.successMsg = false;
 					$scope.ReportShow = false;
 				} else if (currentTab == "locationShow") {
 					$scope.profileShow = false;
