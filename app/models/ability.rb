@@ -45,10 +45,13 @@ class Ability
       can :create, Outlet
       can :create, User, role: 'manager'
       can :read, User, role: 'manager'
+      can :generate_code, Outlet, customer: user.customer
     when 'manager'
       can :read, Outlet, manager_id: user.id
+      can :generate_code, Outlet, manager_id: user.id
     when 'staff'
       can :read, Outlet, id: (user.employed_outlet.id rescue nil)
+      can :generate_code, Outlet, id: (user.employed_outlet.id rescue nil)
     else
       #Default permissions
     end
