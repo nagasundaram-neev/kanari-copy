@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20130611092629) do
     t.integer  "generated_by"
   end
 
-  add_index "feedbacks", ["code"], name: "index_feedbacks_on_code", unique: true, using: :btree
+  add_index "feedbacks", ["code"], name: "index_feedbacks_on_code", using: :btree
   add_index "feedbacks", ["outlet_id"], name: "index_feedbacks_on_outlet_id", using: :btree
   add_index "feedbacks", ["user_id"], name: "index_feedbacks_on_user_id", using: :btree
 
