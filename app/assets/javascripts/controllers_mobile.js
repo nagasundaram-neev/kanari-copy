@@ -128,19 +128,13 @@ var Base64 = {
 var baseUrl = "localhost:8080";
 var auth_token = "";
 
-module.controller('Login', function($scope, $http, $location) {
+module.controller('loginController', function($scope, $http, $location) {
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
-
-	$scope.login = function() {
-		$location.url("/login");
-	}
+	$scope.remember = false;
+	$scope.erromsg = false;
 
 	$scope.chkLogin = function() {
-		//console.log("email:: "+$scope.email+" password:: "+$scope.password);
-		//var param = "{email:\"bhagyashri@neev.com\",password:\"bhagya127\",loginType:\"Dishgram\"}";
 		var param = "{email:'" + $scope.email + "','" + $scope.password + "'}";
-		//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
-		//console.log(param);
 
 		$http({
 			method : 'post',
@@ -148,9 +142,19 @@ module.controller('Login', function($scope, $http, $location) {
 		}).success(function(data, status) {
 			auth_token = data.user_role;
 			console.log("User Role " + data.user_role + " status " + status);
+			if ($scope.remember) {
+				setCookie('userRole', data.user_role, 7);
+				setCookie('authToken', data.auth_token, 7);
+				setCookie('userName', data.first_name + ' ' + data.last_name, 7);
+			} else {
+				setCookie('userRole', data.user_role, 0.29);
+				setCookie('authToken', data.auth_token, 0.29);
+				setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
+			}
 			$location.url("/home");
 		}).error(function(data, status) {
 			console.log("data " + data + " status " + status);
+			$scope.erromsg = true;
 		});
 
 	};
@@ -161,27 +165,70 @@ module.controller('Login', function($scope, $http, $location) {
 
 });
 
-module.controller('homeCtrl', function($scope, $http, $location) {
+module.controller('homeController', function($scope, $http, $location) {
+	if (getCookie('authToken')) {
+		$scope.userName = getCookie('userName');
+		$scope.role = getCookie('userRole');
+		
+		$scope.logout = function() {
+			console.log("in Logout");
 
-	console.log(auth_token);
-	$scope.userRole = auth_token;
+			$http({
+				method : 'delete',
+				url : '/api/users/sign_out'
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				deleteCookie('authToken');
+				deleteCookie('userRole');
+				deleteCookie('userName');
+				$location.url("/login");
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status);
+			});
 
-	$scope.logout = function() {
-		console.log("in Logout");
-
-		$http({
-			method : 'delete',
-			url : '/api/users/sign_out'
-		}).success(function(data, status) {
-			console.log("User Role " + data + " status " + status);
-			$location.url("/login");
-		}).error(function(data, status) {
-			console.log("data " + data + " status " + status);
-		});
-
-		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(auth_token);
-
-	};
+			$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
+			
+			
+		};
+	} else {
+		$location.url('/login');
+	}
 
 });
+
+module.controller('commonCtrl', function($scope, $http, $location) {
+	if(getCookie('authToken')){
+		$location.url('/home');
+	}else{
+		
+	}
+});
+
+function setCookie(name, value, days) {
+	//alert(value);
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+		var expires = "; expires=" + date.toGMTString();
+	} else
+		var expires = "";
+	document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function getCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for (var i = 0; i < ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0) == ' ')
+		c = c.substring(1, c.length);
+		if (c.indexOf(nameEQ) == 0)
+			return c.substring(nameEQ.length, c.length);
+	}
+	return null;
+}
+
+function deleteCookie(name) {
+	setCookie(name, "", -1);
+}
 
