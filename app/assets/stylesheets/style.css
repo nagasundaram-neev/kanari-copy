@@ -9,6 +9,24 @@ img, object {
 	max-height: 90%;
 	max-width: 90%;
 }
+.logo_btm img {
+	max-height: 90%;
+	max-width: 75%;
+	float: left;
+}
+#login .ui-btn-corner-all {
+	border-radius: 0px;
+}
+
+.border {
+	border: 1px solid #664765;
+}
+
+.homeImg img {
+	max-height: 90%;
+	max-width: 75%;
+}
+
 .ui-body-b, .ui-overlay-b, .ui-body-c, .ui-overlay-c {
 	background: #FEbf3B !important;
 	height: 500px;
@@ -24,13 +42,13 @@ img, object {
 .signIn {
 	/*display: none;*/
 	position: absolute;
-	bottom: 0;
+	/*bottom: 0;*/
 	width: 89%;
 	margin: 0 6%;
 }
 .userClick {
 	width: 100%;
-	margin: 0 auto;
+	margin: 30% auto;
 	overflow: hidden;
 	text-align: center;
 }
@@ -44,7 +62,7 @@ img, object {
 }
 .socialBtn {
 	color: #664765 !important;
-	margin: 10px 10% 40px;
+	margin: 10% 20% 0;
 	overflow: hidden;
 }
 .socialBtn span {
@@ -107,7 +125,7 @@ img, object {
 	text-shadow: none;
 }
 .loginDiv {
-	border: 1px solid #D9A432 !important;
+	/*border: 1px solid #D9A432 !important;*/
 	border-radius: 10px;
 	padding: 2% 0 !important;
 }
@@ -123,6 +141,21 @@ img, object {
 .outerDiv .alreadyUser {
 	color: #664765;
 }
+.chkbox{
+	
+}
+.forgotPass{
+	float: right;
+    text-align: right;
+    width: 50%;
+}
+.rememberMe .ui-field-contain .ui-controlgroup, .ui-field-contain fieldset.ui-controlgroup{
+	 float: left;
+    width: 50%;
+}
+/*.rememberMe .ui-checkbox .ui-btn-icon-left .ui-icon, .ui-radio .ui-btn-icon-left .ui-icon{
+	left: 2px;
+}*/
 .outerDiv .ui-btn-up-b, .outerDiv .ui-btn-hover-b {
 	background: #6E4D6C;
 	border: 0;
@@ -134,10 +167,10 @@ img, object {
 	box-shadow: none;
 }
 .loginDiv .ui-corner-all, .loginDiv .ui-btn-corner-all {
-	border-radius: 5px
+	border-radius: 0px
 }
 .rememberMe {
-	margin: 0 !important;
+	margin: 0 11%;
 	border: none;
 }
 .rememberMe .ui-btn-up-b, .rememberMe .ui-btn-hover-b {
@@ -152,6 +185,7 @@ img, object {
 }
 .rememberMe .ui-btn-text {
 	text-shadow: none;
+	color: #664765;
 }
 .outerDiv .ui-btn-left, .ui-btn-right, .ui-btn-inline, input {
 	width: 94%;
@@ -169,8 +203,37 @@ img, object {
 .btn {
 	text-align: center;
 }
+.code {
+	color: #664765;
+	text-shadow: none;
+	font-size: 28px;
+}
 .loginBtn {
 	width: 100% !important;
+}
+.username {
+	background: none repeat scroll 0 0 #664765;
+    color: #FFFFFF;
+    padding: 0.6em;
+    text-shadow: none;
+}
+.username a {
+	text-decoration: none;
+	text-transform: uppercase;
+}
+.username .ui-link{
+	color:#FFFFFF !important;
+	display:block;
+	margin: 12px 0 0;
+	width: 168px;
+}
+.role{
+	display:block;
+	width: 168px;
+}
+.or {
+	color: #664765;
+	font-size: 28px;
 }
 .rightBtn {
 }

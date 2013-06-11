@@ -1,0 +1,21 @@
+<div data-role="page" data-theme="b" id="home" ng-controller="homeController">
+	<style>
+.logout{
+background-image: url(<%= asset_path 'sprite_mobile.png' %>	);
+	background-position: -234px -557px;
+	height: 69px;
+	width: 63px;
+	float:right;
+	cursor:pointer;
+	}
+	</style>
+	<div data-role="content">
+		<div class="username">
+			<div class="logout" ng-click="logout()"></div>
+			<a href="#/home">{{userName}}</a>
+			<span class="role">{{role}}</span>
+			<div class="clr"></div>
+		</div>
+		<div class="outerDiv"></div>
+	</div>
+</div>
