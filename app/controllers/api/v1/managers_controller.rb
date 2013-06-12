@@ -9,6 +9,7 @@ class Api::V1::ManagersController < ApplicationController
     user.role = "manager"
     authorize! :create, user
     if user.save
+      user.employed_customer = current_user.customer
       render json: { manager: { id: user.id } }, status: :created
     else
       render json: {errors: user.errors.full_messages}, status: :unprocessable_entity
