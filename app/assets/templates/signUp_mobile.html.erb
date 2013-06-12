@@ -1,0 +1,37 @@
+<div data-role="page" data-theme="b" id="signUp" ng-controller="signUpController">
+	<div data-role="content">
+		<div class="username">
+			<div class="signUp">
+				Kanari Sign Up
+			</div>
+		</div>
+		<div class="outDiv">
+			<div>
+				Please enter the details below
+			</div>
+			<div data-role="fieldcontain" class="signUpDiv">
+				<div class="ui-input-text ui-body-a">
+					<input data-theme="a" data-inline="true" type="text" name="txtUsername" ng-model="firstName" placeholder="First Name"/>
+				</div>
+				<div class="ui-input-text ui-body-a">
+					<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="lastName" class="passwordTxt" placeholder="Last Name"/>
+				</div>
+				<div class="ui-input-text ui-body-a">
+					<input data-theme="a" data-inline="true" type="email" name="txtPassword" ng-model="email" class="passwordTxt" placeholder="Email"/>
+				</div>
+				<div class="ui-input-text ui-body-a">
+					<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="password" class="passwordTxt" placeholder="Password"/>
+				</div>
+				<div class="ui-input-text ui-body-a">
+					<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="confPassword" class="passwordTxt" placeholder="Confirm Password"/>
+				</div>
+				<input type="button" class="signBtn" ng-click="signUp()" data-inline="true" value="Sign Up" />
+				<input type="button" class="cancelBtn" ng-click="cancel()" data-inline="true" value="Cancel" />
+				<p class="errorMsg" ng-show="erromsg">
+					Invalid Username Password
+				</p>
+				<p ng-hide="erromsg"></p>
+			</div>
+		</div>
+	</div>
+</div>
