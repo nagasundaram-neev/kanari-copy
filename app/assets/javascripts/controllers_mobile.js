@@ -259,7 +259,7 @@ module.controller('signUpController', function($scope, $http, $location) {
 module.controller('signedUpController', function($scope, $http, $location) {
 	
 	$scope.proceedAccount = function(){
-		
+		$location.url("/login");
 	}
 	
 });
