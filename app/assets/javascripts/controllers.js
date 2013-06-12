@@ -451,7 +451,7 @@ module.controller('listPaymentInvoiceCtrl', function($scope, $http, $location) {
 		$scope.list_payment_invoice = function() {
 			var startDate = $scope.start_date;
 			var endDate = $scope.end_date;
-			var param = "start_date="+startDate+"&end_date="+endDate;
+			var param = "start_date=" + startDate + "&end_date=" + endDate;
 
 			$http({
 				method : 'get',
@@ -618,6 +618,7 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 						"website_url" : "http://batmansdonuts.com",
 						"email" : $scope.email_address,
 						"phone_number" : $scope.contact_number,
+						"manager_id" : $scope.manager_Id,
 						"open_hours" : $scope.fromTime + "-" + $scope.toTime,
 						"has_delivery" : $scope.Delivery,
 						"serves_alcohol" : $scope.serves_alcohol,
@@ -680,6 +681,57 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 				}
 			}
 		}
+		/**Location***/
+		MYMAP = {
+			map : null,
+			bounds : null
+		};
+		$("#map").css({
+			height : 500,
+			width : 600
+		});
+		var myLatLng = new google.maps.LatLng(17.74033553, 83.25067267);
+		//MYMAP.init('#map', myLatLng, 11);
+
+		//MYMAP.init = function(selector, latLng, zoom) {
+		var myOptions = {
+			zoom : 11,
+			center : myLatLng,
+			mapTypeId : google.maps.MapTypeId.ROADMAP
+		}
+		this.map = new google.maps.Map($('#map')[0], myOptions);
+		this.bounds = new google.maps.LatLngBounds();
+		google.maps.event.addListener(this.map, 'click', function(event) {
+			//alert(event.latLng);
+			//var point = new google.maps.LatLng(parseFloat(lat),parseFloat(lng));
+
+			// extend the bounds to include the new point
+			//MYMAP.bounds.extend(event.latLng);
+
+			var marker = new google.maps.Marker({
+				position : event.latLng,
+				map : MYMAP.map
+			});
+			alert(marker);
+			var geocoder = new google.maps.Geocoder();
+			geocoder.geocode({
+				"latLng" : event.latLng
+			}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					console.log(results[0].formatted_address);
+					var infoWindow = new google.maps.InfoWindow();
+					var html = '<strong>Kanari</strong.><br />' + results[0].formatted_address;
+					google.maps.event.addListener(marker, 'click', function() {
+						infoWindow.setContent(html);
+						infoWindow.open(MYMAP.map, marker);
+					});
+					//MYMAP.map.fitBounds(MYMAP.bounds);
+				}
+			});
+
+		});
+		//}
+
 	} else {
 		$location.url("/login");
 	}
@@ -788,12 +840,18 @@ module.controller('createManagerCtrl', function($scope, $routeParams, $route, $h
 		// {name: 'item3', content: 'content3'}
 		// ];
 
+		var param = {
+			"auth_token" : getCookie('authToken')
+		}
+
 		$http({
 			method : 'get',
 			url : '/api/managers',
+			params : param,
 		}).success(function(data, status) {
-			console.log("data in success " + data + " status " + status);
-			//console.log(data);
+			console.log("data manager list " + data + " status " + status);
+			console.log(data.managers);
+			$scope.items = data.managers;
 		}).error(function(data, status) {
 			console.log("data in error" + data + " status " + status);
 
@@ -811,7 +869,8 @@ module.controller('createManagerCtrl', function($scope, $routeParams, $route, $h
 					"phone_number" : $scope.contact_number,
 					"password" : $scope.password,
 					"password_confirmation" : $scope.confirmpassword
-				}
+				},
+				"auth_token" : getCookie('authToken')
 			}
 
 			$http({
@@ -834,6 +893,45 @@ module.controller('createManagerCtrl', function($scope, $routeParams, $route, $h
 		$location.url("/login");
 	}
 });
+
+module.controller('takeTourCtrl', function($scope, $routeParams, $http, $location) {
+	if (getCookie('authToken')) {
+		$('.welcome').show();
+		$('.navBarCls').show();
+		$scope.kanariWorks = true;
+		$scope.register = false;
+		$scope.srchRestaurant = false;
+		$scope.deals = false;
+	}
+});
+
+module.controller('rightSideCtrl', function($scope, $routeParams, $http, $location) {
+	$scope.changeTab = function(currentTab) {
+		$location.url("/take_tour");
+		if (currentTab == "kanariWorks") {
+			$scope.kanariWorks = true;
+			$scope.register = false;
+			$scope.srchRestaurant = false;
+			$scope.deals = false;
+		} else if (currentTab == "register") {
+			$scope.kanariWorks = false;
+			$scope.register = true;
+			$scope.srchRestaurant = false;
+			$scope.deals = false;
+		} else if (currentTab == "srchRestaurant") {
+			$scope.kanariWorks = false;
+			$scope.register = false;
+			$scope.srchRestaurant = true;
+			$scope.deals = false;
+		} else if (currentTab == "deals") {
+			$scope.kanariWorks = false;
+			$scope.register = false;
+			$scope.srchRestaurant = false;
+			$scope.deals = true;
+		}
+	}
+});
+
 module.controller('sidePanelCtrl', function($scope, $routeParams, $route, $http, $location) {
 	var classNm = $location.path();
 	var newValue = classNm.replace('/', '');

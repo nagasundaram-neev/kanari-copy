@@ -6,6 +6,8 @@
 		<%= stylesheet_link_tag "app.css", :media => "all" %>
 		<%= stylesheet_link_tag "bootstrap.css", :media => "all" %>
 		<%= stylesheet_link_tag "bootstrap-responsive.css", :media => "all" %>
+		<!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
+		<%= javascript_include_tag "maps.js" %>
 		<%= javascript_include_tag "jquery.js" %>
 		<%= javascript_include_tag "jquery.validate.js" %>
 		<%= javascript_include_tag "angular.js" %>
@@ -37,10 +39,10 @@
 						<li>
 							<a href="#"><%= image_tag 'icon_outlet_in.png' %> Account</a>
 						</li>
-						<li>
+						<!-- <li>
 							<a href="#"><%= image_tag 'icon_dasboard_in.png' %> Dashboard</a>
 						</li>
-						<li class="active">
+						 --><li class="active">
 							<a href="#"><%= image_tag 'logo_account_in.png' %> Outlets</a>
 						</li>
 					</ul>
