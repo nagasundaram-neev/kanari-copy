@@ -12,7 +12,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>	);
 	<div data-role="content">
 		<div class="username">
 			<div class="logout" ng-click="logout()"></div>
-			<a href="#/home">{{userName}}</a>
+			<a ng-click="homeClk()">{{userName}}</a>
 			<span class="role">{{role}}</span>
 			<div class="clr"></div>
 		</div>

@@ -134,7 +134,7 @@ module.controller('loginController', function($scope, $http, $location) {
 	$scope.erromsg = false;
 
 	$scope.chkLogin = function() {
-		var param = "{email:'" + $scope.email + "','" + $scope.password + "'}";
+		var param = "{email:'" + $scope.email + "','password:'" + $scope.password + "'}";
 
 		$http({
 			method : 'post',
@@ -159,9 +159,14 @@ module.controller('loginController', function($scope, $http, $location) {
 
 	};
 
+	
 	$scope.$watch('email + password', function() {
 		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
 	});
+	
+	// $scope.$watch('email + password', function() {
+		// $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
+	// });
 
 });
 
@@ -169,7 +174,13 @@ module.controller('homeController', function($scope, $http, $location) {
 	if (getCookie('authToken')) {
 		$scope.userName = getCookie('userName');
 		$scope.role = getCookie('userRole');
-		
+		//document.body.style.background = #FFFFFF;
+		$('body').css('background', '#FFF');
+
+		$scope.homeClk = function() {
+			$location.url("/home");
+		};
+
 		$scope.logout = function() {
 			console.log("in Logout");
 
@@ -187,8 +198,7 @@ module.controller('homeController', function($scope, $http, $location) {
 			});
 
 			$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
-			
-			
+
 		};
 	} else {
 		$location.url('/login');
@@ -197,11 +207,50 @@ module.controller('homeController', function($scope, $http, $location) {
 });
 
 module.controller('commonCtrl', function($scope, $http, $location) {
-	if(getCookie('authToken')){
+	if (getCookie('authToken')) {
 		$location.url('/home');
-	}else{
-		
+	} else {
+		// $location.url('/index');
 	}
+
+	$scope.emailCLick = function() {
+		$location.url("/login");
+	};
+	$scope.signUpCLick = function() {
+		$location.url("/signUp");
+	};
+});
+
+module.controller('signUpController', function($scope, $http, $location) {
+
+	$scope.signUp = function() {
+		var param = {
+			"user" : {
+				"first_name" : $scope.firstName,
+				"last_name" : $scope.lastName,
+				"email" : $scope.email,
+				"password" : $scope.password,
+				"password_confirmation" : $scope.confPassword
+			}
+		}
+
+		$http({
+			method : 'post',
+			url : '/api/users',
+			data : param
+		}).success(function(data, status) {
+			console.log("User Role " + data + " status " + status);
+			
+		}).error(function(data, status) {
+			console.log("data " + data + " status " + status);
+		});
+
+	};
+	
+	$scope.cancel = function(){
+		$location.url("/index");
+	};
+
 });
 
 function setCookie(name, value, days) {
