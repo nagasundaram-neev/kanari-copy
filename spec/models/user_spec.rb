@@ -5,6 +5,7 @@ describe User do
   it { should have_many(:managed_outlets) }
   it { should have_one(:outlets_staff) }
   it { should have_one(:employed_outlet).through(:outlets_staff) }
+  it { should have_one(:employed_customer).through(:customers_user) }
 
   shared_examples "a user who has a customer account" do
     it "should return the customer" do
@@ -26,9 +27,13 @@ describe User do
         #customer.save
         it_should_behave_like "a user who has a customer account"
       end
-      describe "when the user is a manager" do
+      describe "when the user is a manager who is assigned an outlet" do
         let(:user) { FactoryGirl.create(:user, role: 'manager') }
         let!(:outlet) { FactoryGirl.create(:outlet, customer: customer, manager: user)  }
+        it_should_behave_like "a user who has a customer account"
+      end
+      describe "when the user is a manager who is not assigned an outlet" do
+        let(:user) { FactoryGirl.create(:user, role: 'manager', employed_customer: customer) }
         it_should_behave_like "a user who has a customer account"
       end
       describe "when the user is a staff" do

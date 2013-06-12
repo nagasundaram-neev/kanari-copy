@@ -29,6 +29,13 @@ Feature: Update account
       And the JSON response at "auth_token" should be a string
       And the JSON response at "user_role" should be "user"
       And the JSON response at "registration_complete" should be true
+      And a user should be created with the following
+        |first_name|Kobe|
+        |last_name|Bryant|
+        |email|kobe@gmail.com|
+        |gender|Male|
+        |date_of_birth|1987-05-06|
+        |location|SF|
 
     Scenario: User not authenticated
       Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"

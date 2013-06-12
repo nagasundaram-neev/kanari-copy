@@ -72,6 +72,10 @@ And /^his password should be "([^"]*)"$/ do |password|
   @user.valid_password?(password).should be_true
 end
 
+And /^he should be under customer id "([^"]*)"$/ do |customer_id|
+  @user.customer.should == Customer.find(customer_id)
+end
+
 And /^he is the admin for customer "([^"]*)"$/ do |customer_name|
   customer = Customer.where(name: customer_name).first
   customer.customer_admin_id = @user.id
@@ -110,3 +114,8 @@ When "he clicks on the password reset link" do
   open_last_email
   visit_in_email(/reset_password_token/)
 end
+
+Then(/^a user should be created with the following$/) do |table|
+  User.where(table.rows_hash).present?.should be_true
+end
+
