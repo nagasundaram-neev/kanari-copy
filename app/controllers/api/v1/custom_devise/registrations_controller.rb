@@ -57,6 +57,14 @@ module Api
           Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
           render json: nil, status: 200
         end
+        private
+          def sign_up_params
+            params.fetch(:user).permit([:password, :password_confirmation, :email, :first_name, :last_name])
+          end
+
+          def account_update_params
+            params.fetch(:user).permit([:password, :password_confirmation, :email, :first_name, :last_name, :current_password, :date_of_birth, :gender, :location])
+          end
       end
     end
   end
