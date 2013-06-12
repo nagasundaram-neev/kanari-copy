@@ -1,11 +1,16 @@
 class Api::V1::KanariCodesController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:show]
 
   respond_to :json
 
   # GET /kanari_codes/:code
   def show
-    Feedback.where(code: params[:code])
+    feedback = Feedback.where(code: params[:id]).first
+    if feedback.nil?
+      render json: {errors: ["Invalid code"]}, status: :unprocessable_entity
+    else
+      render json: {feedback_id: feedback.id}, status: :ok
+    end
   end
 
   def create
