@@ -110,3 +110,8 @@ When "he clicks on the password reset link" do
   open_last_email
   visit_in_email(/reset_password_token/)
 end
+
+Then(/^a user should be created with the following$/) do |table|
+  User.where(table.rows_hash).present?.should be_true
+end
+

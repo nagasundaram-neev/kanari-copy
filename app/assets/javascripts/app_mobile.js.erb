@@ -9,8 +9,12 @@ var module = angular.module("kanariMobile", []).config(function($routeProvider,$
    //console.log("in router");
     $routeProvider
         .when('/home',{templateUrl:"<%= asset_path 'home_mobile.html' %>"}) // this is the default JQueryMobile view in index.html
+        .when('/index',{templateUrl: "<%= asset_path 'landing_page.html' %>" })
         .when('/register',{templateUrl:'register.html'}) // this is a familiar AngularJS route using a partial ...
         .when('/login',{templateUrl:"<%= asset_path 'login_mobile.html' %>"}) // ... and so is this
         .when('/regsuccess',{templateUrl: "<%= asset_path 'regsuccess.html' %>" })
-        .otherwise({redirectTo: '/login'});
+        .when('/signUp',{templateUrl: "<%= asset_path 'signUp_mobile.html' %>" })
+        .when('/signedUp',{templateUrl: "<%= asset_path 'signedUp_mobile.html' %>" })
+        .when('/settings',{templateUrl: "<%= asset_path 'settings_mobile.html' %>" })
+        .otherwise({redirectTo: '/index'});
 });

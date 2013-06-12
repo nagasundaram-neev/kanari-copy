@@ -21,6 +21,10 @@ Feature: Sign Up
       And the JSON response at "auth_token" should be a string
       And the JSON response at "user_role" should be "user"
       And the JSON response at "registration_complete" should be true
+      And a user should be created with the following
+        |first_name|Kobe|
+        |last_name|Bryant|
+        |email|kobe@gmail.com|
 
     Scenario: Passwords do not match
       When I send a POST request to "/api/users" with the following:
