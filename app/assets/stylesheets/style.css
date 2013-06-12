@@ -269,6 +269,10 @@ img, object {
 	margin: 0.5em;
 }
 
+.errorMsg{
+	color:#FF0000;
+}
+
 .loginDiv .ui-input-text.ui-focus, .ui-input-search.ui-focus {
 	box-shadow: none;
 }

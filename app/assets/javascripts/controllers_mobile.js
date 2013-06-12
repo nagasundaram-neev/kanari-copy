@@ -243,8 +243,8 @@ module.controller('signUpController', function($scope, $http, $location) {
 			console.log("User Role " + data + " status " + status);
 			$location.url("/signedUp");
 		}).error(function(data, status) {
-			console.log("data in error " + data + " status " + status);
-			//$scope.errorMsg = data.error;
+			console.log("data in error " + data.errors + " status " + status);
+			$scope.error = data.errors;
 			$scope.errorMsg = true;
 		});
 
@@ -258,6 +258,9 @@ module.controller('signUpController', function($scope, $http, $location) {
 
 module.controller('signedUpController', function($scope, $http, $location) {
 	
+	$scope.proceedAccount = function(){
+		
+	}
 	
 });
 
