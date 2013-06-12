@@ -122,6 +122,47 @@ img, object {
 #signUp .ui-content{
 	padding:0 !important;
 }
+#signedUp .ui-content{
+	padding:0 !important;
+}
+.mainDiv{
+	color: #664765;
+	margin: 5% 0 0 3%;
+	width: 93%;
+	text-shadow: none;
+}
+.thanks{
+	color: #664765;
+}
+
+.secondDiv{
+	color:#656565;
+}
+.trustUs{
+	margin: 4%;	
+}
+
+.proceedBtn .ui-btn-up-b, .ui-btn-hover-b{
+	background-image: -webkit-gradient(linear,left top,left bottom,from( #FACC4A ),to( #F9C040 ));
+	background-image: -webkit-linear-gradient( #FACC4A,#F9C040 );
+	background-image: -moz-linear-gradient( #FACC4A,#F9C040 );
+	background-image: -ms-linear-gradient( #FACC4A,#F9C040 );
+	background-image: -o-linear-gradient( #FACC4A,#F9C040 );
+	background-image: linear-gradient( #FACC4A,#F9C040 );
+}
+
+.proceedBtn .ui-btn-corner-all{
+	 border-radius: 0.4em 0.4em 0.4em 0.4em;
+}
+
+.proceedBtn .ui-focus, .ui-btn:focus{
+	box-shadow:none;
+}
+.signedUpBrdr{
+	border:1px solid #CACACA;
+	margin: 4% 0;
+}
+
 .signUp{
 	text-align:center;
 	font-size:20px;
@@ -157,8 +198,8 @@ img, object {
 	border-radius: 6px 6px 6px 6px;
 }
 
-.signUpDiv .ui-btn-left, .ui-btn-right, .ui-btn-inline, input{
-	 width: 40% !important;
+#signUp .ui-btn-left, .ui-btn-right, .ui-btn-inline, input{
+	 width: 40%;
 }
 .signUpDiv .ui-btn-up-b, .ui-btn-hover-b{
 	background-image: -webkit-gradient(linear,left top,left bottom,from( #FACC4A ),to( #F9C040 ));
@@ -173,8 +214,9 @@ img, object {
 	box-shadow:none;
 }
 .signUpDiv .ui-btn-inner, .ui-btn-text{
-	color: #7A5E17;
+	color: #FFFFFF;
     text-shadow: none;	
+    font-weight:normal;
 }
 /***Login  Page***/
 .outerDiv {
@@ -222,6 +264,11 @@ img, object {
 .loginDiv div.ui-input-text {
 	margin: 0.5em;
 }
+
+.signUpDiv div.ui-input-text {
+	margin: 0.5em;
+}
+
 .loginDiv .ui-input-text.ui-focus, .ui-input-search.ui-focus {
 	box-shadow: none;
 }
@@ -246,7 +293,7 @@ img, object {
 	text-shadow: none;
 	color: #664765;
 }
-.outerDiv .ui-btn-left, .ui-btn-right, .ui-btn-inline, input {
+#login .ui-btn-left, .ui-btn-right, .ui-btn-inline, input {
 	width: 94%;
 }
 .ui-input-text input {

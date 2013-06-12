@@ -192,7 +192,7 @@ module.controller('homeController', function($scope, $http, $location) {
 				deleteCookie('authToken');
 				deleteCookie('userRole');
 				deleteCookie('userName');
-				$location.url("/login");
+				$location.url("/index");
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status);
 			});
@@ -205,6 +205,7 @@ module.controller('homeController', function($scope, $http, $location) {
 	}
 
 });
+
 
 module.controller('commonCtrl', function($scope, $http, $location) {
 	if (getCookie('authToken')) {
@@ -233,16 +234,18 @@ module.controller('signUpController', function($scope, $http, $location) {
 				"password_confirmation" : $scope.confPassword
 			}
 		}
-
+		
 		$http({
 			method : 'post',
 			url : '/api/users',
 			data : param
 		}).success(function(data, status) {
 			console.log("User Role " + data + " status " + status);
-			
+			$location.url("/signedUp");
 		}).error(function(data, status) {
-			console.log("data " + data + " status " + status);
+			console.log("data in error " + data + " status " + status);
+			//$scope.errorMsg = data.error;
+			$scope.errorMsg = true;
 		});
 
 	};
@@ -251,6 +254,11 @@ module.controller('signUpController', function($scope, $http, $location) {
 		$location.url("/index");
 	};
 
+});
+
+module.controller('signedUpController', function($scope, $http, $location) {
+	
+	
 });
 
 function setCookie(name, value, days) {

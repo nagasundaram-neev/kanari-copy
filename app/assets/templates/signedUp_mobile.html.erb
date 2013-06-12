@@ -1,0 +1,32 @@
+<div data-role="page" data-theme="b" id="signedUp" ng-controller="signedUpController">
+	<div data-role="content">
+		<div class="username">
+			<div class="signUp">
+				You're signed up!
+			</div>
+		</div>
+		<div class="mainDiv">
+			<span class="thanks">Thanks for signing up to Kanari!</span>
+			<div class="signedUpBrdr"></div>
+			<div class="secondDiv">
+				<div>
+					You are now ready to start earning points in return for leaving valuable feedback to restaurants.
+				</div>
+				<div class="trustUs">
+					Trust us, they will really appreciate it.
+				</div>
+			</div>
+			<div>
+				But First!
+			</div>
+			<div class="signedUpBrdr"></div>
+			<div class="secondDiv">
+				A confirmation email has been sent to your email address, please click the link to confirm your account...
+			</div>
+			<div class="proceedBtn">
+				<input type="button" class="signBtn" ng-click="proceedAccount()" data-inline="true" value="Proceed to My Account"/>
+			</div>
+		</div>
+		<p class="errorMsg" ng-show="errorMsg"></p>
+		<p ng-hide="errorMsg"></p>
+	</div>

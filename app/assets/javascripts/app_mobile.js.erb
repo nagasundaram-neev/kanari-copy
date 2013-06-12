@@ -14,5 +14,6 @@ var module = angular.module("kanariMobile", []).config(function($routeProvider,$
         .when('/login',{templateUrl:"<%= asset_path 'login_mobile.html' %>"}) // ... and so is this
         .when('/regsuccess',{templateUrl: "<%= asset_path 'regsuccess.html' %>" })
         .when('/signUp',{templateUrl: "<%= asset_path 'signUp_mobile.html' %>" })
+        .when('/signedUp',{templateUrl: "<%= asset_path 'signedUp_mobile.html' %>" })
         .otherwise({redirectTo: '/index'});
 });
