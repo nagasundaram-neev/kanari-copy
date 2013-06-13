@@ -1,10 +1,60 @@
 <div data-role="page" data-theme="b" id="settings" ng-controller="settingsController">
+	<style>
+.logout{
+background-image: url(<%= asset_path 'sprite_mobile.png' %>
+	);
+	background-position: -473px -557px;
+	height: 69px;
+	width: 63px;
+	float:right;
+	cursor:pointer;
+	}
+	.home {
+		background-image: url("/assets/sprite_mobile.png");
+		background-position: -361px -557px;
+		cursor: pointer;
+		float: left;
+		height: 69px;
+		width: 56px;
+	}
+	</style>
 	<div data-role="content">
 		<div class="username">
+			<div class="logout" ng-click="logout()"></div>
+			<div class="home" ng-click="home()"></div>
 			<div class="signUp">
 				SETTINGS!
 			</div>
+			<div class="clr"></div>
 		</div>
-		
+		<div data-role="fieldcontain" class="settingDiv" align="center">
+			<div class="ui-input-text ui-body-a">
+				<input data-theme="a" data-inline="true" type="text" name="txtUsername" ng-model="firstName" placeholder="First Name"/>
+			</div>
+			<div class="ui-input-text ui-body-a">
+				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="lastName" class="passwordTxt" placeholder="Last Name"/>
+			</div>
+			<div class="ui-input-text ui-body-a">
+				<input data-theme="a" data-inline="true" type="email" name="txtPassword" ng-model="email" class="passwordTxt" placeholder="Email" readonly/>
+			</div>
+			<div class="ui-input-text ui-body-a">
+				<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="password" class="passwordTxt" placeholder="Change Password"/>
+			</div>
+			<div class="ui-input-text ui-body-a">
+				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="password" class="passwordTxt" placeholder="Location"/>
+			</div>
+			<div data-role="fieldcontain" class="genderBtn">
+				<label for="toggleswitch1"> Gender </label>
+				<select name="toggleswitch1" id="toggleswitch1" data-theme="a" ng-model="gender" data-role="slider"
+				data-mini="true">
+					<option value="Male"> Male </option>
+					<option value="Female"> Female </option>
+				</select>
+			</div>
+			<input type="button" class="signBtn" ng-click="saveProfile()" data-inline="true" value="Save"/>
+			<p class="errorMsg" ng-show="errorMsg">
+				{{error}}
+			</p>
+		</div>
 	</div>
 </div>
