@@ -41,13 +41,13 @@
 			</div>
 			<div class="navBarCls">
 			<ul class="span12 nav nav-tabs">
-						<li>
+						<li id="account">
 							<a href="#/view_account"><%= image_tag 'icon_outlet_in.png' %> Account</a>
 						</li>
-						<!-- <li>
-							<a href="#"><%= image_tag 'icon_dasboard_in.png' %> Dashboard</a>
+						<li id="dasboard" class="diffLinks">
+							<a href="#/createInvitation" class="active"><%= image_tag 'icon_dasboard_in.png' %> Dashboard</a>
 						</li>
-						 --><li class="active">
+						<li class="active" id="outlet" class="diffLinks">
 							<a href="#/outlets"><%= image_tag 'logo_account_in.png' %> Outlets</a>
 						</li>
 					</ul>

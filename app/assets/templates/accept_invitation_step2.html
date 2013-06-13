@@ -2,13 +2,13 @@
 	<div class="innerDiv" data-role="content">
 		<h1>Create Profile</h1><br/>
 		<div class="outerDiv">
-			<form class="cmxform" id="commentForm" >
+			<form  name="acceptInv2" ng-submit="acceptInvitation2(acceptInv2)" ng-app>
 				<div data-role="fieldcontain" class="loginDiv">
 					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
-						<input data-theme="a" data-inline="true" type="text" name="name" ng-model="name" placeholder="Bussiness name"/>
+						<input data-theme="a" data-inline="true" type="text" name="name" ng-model="name" placeholder="Bussiness name" required/>
 					</div>
 					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
-						<input data-theme="a" data-inline="true" type="text" name="phone_number" ng-model="phone_number" placeholder="Phone Number"/>
+						<input data-theme="a" data-inline="true" type="text" name="phone_number" ng-model="phone_number" placeholder="Phone Number" required/>
 					</div>
 					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
 						<input data-theme="a" data-inline="true" type="text" name="registered_address_line_1" ng-model="registered_address_line_1" value="" placeholder="Registered Address Line 1" required/>
@@ -37,8 +37,10 @@
 					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
 						<input data-theme="a" data-inline="true" type="text" name="email" ng-model="email" value="" placeholder="Email" required/>
 					</div>
-					<input type="button" class="loginBtn" ng-click="acceptInvitation2()" data-inline="true" value="Save" />
-					
+					<!-- <input type="button" class="loginBtn" ng-click="acceptInvitation2()" data-inline="true" value="Save" /> -->
+					<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
+						Save
+					</button>
 					<p class="errorMsg" ng-show="error">{{errorMsg}}</p>
 					<p ng-hide="error"></p>
 					<p class="successMsg" ng-show="success">Your Authenticatin Token is {{auth_token}}</p>
