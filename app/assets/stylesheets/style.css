@@ -355,8 +355,12 @@ img, object {
 
 .errorMsg{
 	color:#FF0000;
+	text-shadow:none;
 }
-
+.succMsg{
+	color:#0F9D58;
+	text-shadow:none;
+}
 .loginDiv .ui-input-text.ui-focus, .ui-input-search.ui-focus {
 	box-shadow: none;
 }
