@@ -142,6 +142,45 @@ img, object {
 	margin: 4%;	
 }
 
+.genderBtn{
+	background:#f5f5f5;
+	padding:0.2em;
+	border:1px solid #BFBFBF;
+	width: 78%;
+}
+
+.genderBtn .ui-corner-all, .genderBtn .ui-btn-corner-all{
+	border-radius: 0 !important;
+}
+
+.genderBtn .ui-btn-up-a, .ui-btn-hover-a {
+	background: linear-gradient(#E5E6E8, #E5E6E8) repeat scroll 0 0 #E5E6E8;
+}
+
+/*.genderBtn .ui-slider-switch .ui-btn.ui-slider-handle{
+	margin: -3px 0 0 -10px;	
+}
+
+.genderBtn .ui-slider-track .ui-btn.ui-slider-handle, .ui-slider-switch .ui-btn.ui-slider-handle{
+	height: 35px;
+	width: 42px;
+}*/
+
+.genderBtn .ui-btn-down-b, .genderBtn .ui-btn-active{
+	background: linear-gradient(#593F5A, #593F5A) repeat scroll 0 0 #593F5A;
+}
+
+.genderBtn .ui-field-contain, .ui-mobile fieldset.ui-field-contain{
+	margin:none !important;	
+}
+.genderBtn .ui-field-contain label.ui-slider , .ui-field-contain label.ui-slider{
+	float:left;
+	 width: 8%;
+	color: #664765;
+	text-shadow:none;
+	font-size: 20px;
+}
+
 .proceedBtn .ui-btn-up-b, .ui-btn-hover-b{
 	background-image: -webkit-gradient(linear,left top,left bottom,from( #FACC4A ),to( #F9C040 ));
 	background-image: -webkit-linear-gradient( #FACC4A,#F9C040 );
@@ -178,23 +217,45 @@ img, object {
 	padding:0.2em;
 }
 
+.settingDiv {
+	padding:0.2em;
+}
+
 #signUp .ui-field-contain .ui-input-search, .ui-field-contain div.ui-input-text{
 	background: none repeat scroll 0 0 #F5F5F5;
 }
 .signUpDiv .ui-input-text.ui-focus, .ui-input-search.ui-focus{
 	box-shadow:none;
 }
+
+.settingDiv .ui-input-text.ui-focus, .ui-input-search.ui-focus{
+	box-shadow:none;
+}
 .signUpDiv input::-moz-placeholder, textarea::-moz-placeholder{
 	color: #BFBFBF;
     text-shadow: none;
 }
+.settingDiv input::-moz-placeholder, textarea::-moz-placeholder{
+	color: #664765;
+	font-weight:bold;
+    text-shadow: none;
+}
+
 .signUpDiv .ui-body-a, .ui-overlay-a{
+	text-shadow:none;
+	color:#664765;
+	border: 1px solid #BFBFBF;
+}
+.settingDiv .ui-body-a, .ui-overlay-a{
 	text-shadow:none;
 	color:#664765;
 	border: 1px solid #BFBFBF;
 }
 
 .signUpDiv .ui-corner-all, .signUpDiv .ui-btn-corner-all {
+	border-radius: 6px 6px 6px 6px;
+}
+.settingDiv .ui-corner-all, .settingDiv .ui-btn-corner-all {
 	border-radius: 6px 6px 6px 6px;
 }
 
@@ -210,10 +271,29 @@ img, object {
 	background-image: linear-gradient( #FACC4A,#F9C040 );
 }
 
+.settingDiv .ui-btn-up-b, .ui-btn-hover-b{
+	background-image: -webkit-gradient(linear,left top,left bottom,from( #FACC4A ),to( #F9C040 ));
+	background-image: -webkit-linear-gradient( #FACC4A,#F9C040 );
+	background-image: -moz-linear-gradient( #FACC4A,#F9C040 );
+	background-image: -ms-linear-gradient( #FACC4A,#F9C040 );
+	background-image: -o-linear-gradient( #FACC4A,#F9C040 );
+	background-image: linear-gradient( #FACC4A,#F9C040 );
+}
+
 .signUpDiv .ui-focus, .ui-btn:focus{
 	box-shadow:none;
 }
+
+.settingDiv .ui-focus, .ui-btn:focus{
+	box-shadow:none;
+}
+
 .signUpDiv .ui-btn-inner, .ui-btn-text{
+	color: #FFFFFF;
+    text-shadow: none;	
+    font-weight:normal;
+}
+.settingDiv .ui-btn-inner, .ui-btn-text{
 	color: #FFFFFF;
     text-shadow: none;	
     font-weight:normal;
@@ -266,6 +346,10 @@ img, object {
 }
 
 .signUpDiv div.ui-input-text {
+	margin: 0.5em;
+}
+
+.settingDiv div.ui-input-text {
 	margin: 0.5em;
 }
 

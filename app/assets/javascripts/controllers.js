@@ -151,6 +151,7 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 		deleteCookie('authToken');
 		deleteCookie('userRole');
 		$location.url("/login");
+
 	}
 	$scope.goTOOulet = function() {
 		if (getCookie('userRole') == "kanari_admin") {
@@ -183,49 +184,58 @@ module.controller('Login', function($scope, $http, $location) {
 			$location.url("/outlets");
 		}
 	};
+	$scope.rememberMe = function(val, stat) {
+		if (val) {
+			setCookie('rememberme', 'yes', 0.29);
+		} else {
+			setCookie('rememberme', 'no', 0.29);
+		}
 
-	$scope.chkLogin = function() {
+	}
+	$scope.chkLogin = function(login) {
+		//console.log($scope.login.$valid);
+		if ($scope.login.$valid) {
+			$('.welcome').hide();
+			$('.navBarCls').hide();
 
-		$('.welcome').hide();
-		$('.navBarCls').hide();
+			var param = "{email:'" + $scope.email + "','" + $scope.password + "'}";
+			$http({
+				method : 'post',
+				url : '/api/users/sign_in',
+			}).success(function(data, status) {
+				console.log("User Role " + data.user_role + " status " + status);
+				if ($scope.remember) {
+					setCookie('userRole', data.user_role, 7);
+					setCookie('authToken', data.auth_token, 7);
+					setCookie('userName', data.first_name + ' ' + data.last_name, 7);
+					//setCookie('firstName', data.first_name, 7);
+				} else {
+					setCookie('userRole', data.user_role, 0.29);
+					setCookie('authToken', data.auth_token, 0.29);
+					setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
+				}
 
-		var param = "{email:'" + $scope.email + "','" + $scope.password + "'}";
-		$http({
-			method : 'post',
-			url : '/api/users/sign_in',
-		}).success(function(data, status) {
-			console.log("User Role " + data.user_role + " status " + status);
-			if ($scope.remember) {
-				setCookie('userRole', data.user_role, 7);
-				setCookie('authToken', data.auth_token, 7);
-				setCookie('userName', data.first_name + ' ' + data.last_name, 7);
-				//setCookie('firstName', data.first_name, 7);
-			} else {
-				setCookie('userRole', data.user_role, 0.29);
-				setCookie('authToken', data.auth_token, 0.29);
-				setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
-			}
+				$scope.erromsg = false;
+				if (getCookie('userRole') == "kanari_admin") {
+					$location.url("/createInvitation");
+				} else if (getCookie('userRole') == "customer_admin" && data.registration_complete) {
+					$location.url("/outlets");
+				} else if (getCookie('userRole') == "customer_admin" && !data.registration_complete) {
+					$location.url("/acceptInvitationStep2");
+				}
 
-			$scope.erromsg = false;
-			if (getCookie('userRole') == "kanari_admin") {
-				$location.url("/createInvitation");
-			} else if (getCookie('userRole') == "customer_admin" && data.registration_complete) {
-				$location.url("/outlets");
-			} else if (getCookie('userRole') == "customer_admin" && !data.registration_complete) {
-				$location.url("/acceptInvitationStep2");
-			}
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status);
+				$scope.erromsg = true;
+			});
 
-		}).error(function(data, status) {
-			console.log("data " + data + " status " + status);
-			$scope.erromsg = true;
+		};
+
+		$scope.$watch('email + password', function() {
+			$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
 		});
-
-	};
-
-	$scope.$watch('email + password', function() {
-		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
-	});
-	$scope.getLogin();
+		$scope.getLogin();
+	}
 });
 
 module.controller('forgotPassCtrl', function($scope, $http, $location) {
@@ -390,8 +400,10 @@ module.controller('createInvitation', function($scope, $http, $location) {
 				$scope.erromsg = false;
 			}).error(function(data, status) {
 				console.log("data in error" + data + " status " + status);
-				$scope.errortext = "Invitation url for this email is already been created";
-				$scope.erromsg = true;
+				if (userEmail) {
+					$scope.errortext = "Invitation url for this email is already been created";
+					$scope.erromsg = true;
+				}
 			});
 
 		};
@@ -586,7 +598,7 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 
 		/* Validating the form */
 		$scope.validateForm = function() {
-			if ($scope.restaurant_name || $scope.restaurant_location || $scope.email_address || $scope.contact_number || $scope.Delivery || $scope.serves_alcohol || $scope.outdoor_Seating) {
+			if ($scope.restaurant_name && $scope.restaurant_location && $scope.email_address && $scope.contact_number && $scope.Delivery && $scope.serves_alcohol && $scope.outdoor_Seating) {
 				return true;
 			} else {
 				return false;
@@ -594,9 +606,9 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 		};
 
 		/* Adding for creating the outlet*/
-		$scope.create_outlet = function() {
+		$scope.create_outlet = function(createOutlet) {
 			$scope.checked_cuisine = [1, 2, 3, 4];
-			if ($scope.validateForm()) {
+			if ($scope.createOutlet.$valid) {
 
 				//$scope.checked_cuisine = $scope.cuisineType.checked;
 				console.log($scope.checked_cuisine);
@@ -788,10 +800,9 @@ module.controller('createManagerCtrl', function($scope, $routeParams, $route, $h
 		// {name: 'item2', content: 'content2'},
 		// {name: 'item3', content: 'content3'}
 		// ];
-		
-	//	listManager();
+
+		//	listManager();
 		$scope.listManager = function() {
-			alert('in');
 			var param = {
 				"auth_token" : getCookie('authToken')
 			}
@@ -809,45 +820,48 @@ module.controller('createManagerCtrl', function($scope, $routeParams, $route, $h
 
 			});
 		};
-$scope.listManager();
+		$scope.listManager();
 
 		$scope.add_new_manager = function() {
 			$('.add_manager').show();
 		}
-		$scope.create_manager = function() {
-			console.log("in create manager call first")
-			var param = {
-				"user" : {
-					"email" : $scope.email_address,
-					"first_name" : $scope.first_name,
-					"last_name" : $scope.last_name,
-					"phone_number" : $scope.add_contact_number,
-					"password" : $scope.password,
-					"password_confirmation" : $scope.confirmpassword
-				},
-				"auth_token" : getCookie('authToken')
-			}
+		$scope.create_manager = function(createManager) {
+			if ($scope.createManager.$valid) {
+				console.log("in create manager call first")
+				var param = {
+					"user" : {
+						"email" : $scope.email_address,
+						"first_name" : $scope.first_name,
+						"last_name" : $scope.last_name,
+						"phone_number" : $scope.add_contact_number,
+						"password" : $scope.password,
+						"password_confirmation" : $scope.confirmpassword
+					},
+					"auth_token" : getCookie('authToken')
+				}
 
-			$http({
-				method : 'post',
-				url : '/api/managers',
-				data : param,
-			}).success(function(data, status) {
-				console.log("data in success " + data + " status " + status);
-				$scope.error = false;
-				$scope.manager_id = data.manager.id;
-				$scope.success = true;
-				$scope.listManager();
-			}).error(function(data, status) {
-				console.log("data in error" + data + " status " + status);
-				$scope.errorMsg = data.errors;
-				$scope.error = true;
-				$scope.success = false;
-			});
+				$http({
+					method : 'post',
+					url : '/api/managers',
+					data : param,
+				}).success(function(data, status) {
+					console.log("data in success " + data + " status " + status);
+					$scope.error = false;
+					$scope.manager_id = data.manager.id;
+					$scope.success = true;
+					$scope.listManager();
+				}).error(function(data, status) {
+					console.log("data in error" + data + " status " + status);
+					$scope.errorMsg = data.errors;
+					$scope.error = true;
+					$scope.success = false;
+				});
+			}
 		}
 	} else {
 		$location.url("/login");
 	}
+
 });
 
 module.controller('locationCtrl', function($scope, $routeParams, $route, $http, $location) {
@@ -905,7 +919,6 @@ module.controller('sidePanelCtrl', function($scope, $routeParams, $route, $http,
 	$('.' + newValue).addClass('active');
 });
 function setCookie(name, value, days) {
-	//alert(value);
 	if (days) {
 		var date = new Date();
 		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
