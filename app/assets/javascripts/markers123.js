@@ -1,24 +1,28 @@
-var MYMAP;
-$(document).ready(function() {
-	MYMAP = {
-	map : null,
-	bounds : null
-};
-	$("#map").css({
+$mymaps = jQuery.noConflict();
+$mymaps(document).ready(function() {
+	alert("here");
+	
+	$mymaps("#map").css({
 		height : 500,
 		width : 600
 	});
 	var myLatLng = new google.maps.LatLng(17.74033553, 83.25067267);
-	MYMAPinit('#map', myLatLng, 11);
+	MYMAP.init('#map', myLatLng, 11);
 
+});
+
+var MYMAP = {
+	map : null,
+	bounds : null
+}
 	
-function MYMAPinit(selector, latLng, zoom) {
+MYMAP.init = function(selector, latLng, zoom) {
 	var myOptions = {
 		zoom : zoom,
 		center : latLng,
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	}
-	this.map = new google.maps.Map($(selector)[0], myOptions);
+	this.map = new google.maps.Map($mymaps(selector)[0], myOptions);
 	this.bounds = new google.maps.LatLngBounds();
 	google.maps.event.addListener(this.map, 'click', function(event) {
 		alert(event.country);
@@ -49,5 +53,3 @@ function MYMAPinit(selector, latLng, zoom) {
 
 	});
 }
-
-});

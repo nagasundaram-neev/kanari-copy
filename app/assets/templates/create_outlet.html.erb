@@ -1,3 +1,4 @@
+
 <div data-role="page" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
 	<style>
 		input[type="image"], input[type="checkbox"], input[type="radio"] {
@@ -201,7 +202,7 @@
 						<lable>
 							Phone
 						</lable>
-						<input data-theme="a" data-inline="true" type="text" name="txtPhone" ng-model="contact_number" class="passwordTxt" placeholder="Enter phone no"/>
+						<input data-theme="a" data-inline="true" type="text" name="txtPhone" ng-model="add_contact_number" class="passwordTxt" placeholder="Enter phone no"/>
 					</div>
 
 					<input type="button" class="loginBtn" ng-click="create_manager()" data-inline="true" value="Add" />
@@ -211,7 +212,7 @@
 					</p>
 					<p ng-hide="error" ></p>
 					<p ng-show="success" class="successMsg">
-						Manager is created by Id {{manager_id}}
+						Manager added successfully.
 					</p>
 					<p ng-hide="success" ></p>
 				</div>

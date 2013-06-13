@@ -681,57 +681,6 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 				}
 			}
 		}
-		/**Location***/
-		MYMAP = {
-			map : null,
-			bounds : null
-		};
-		$("#map").css({
-			height : 500,
-			width : 600
-		});
-		var myLatLng = new google.maps.LatLng(17.74033553, 83.25067267);
-		//MYMAP.init('#map', myLatLng, 11);
-
-		//MYMAP.init = function(selector, latLng, zoom) {
-		var myOptions = {
-			zoom : 11,
-			center : myLatLng,
-			mapTypeId : google.maps.MapTypeId.ROADMAP
-		}
-		this.map = new google.maps.Map($('#map')[0], myOptions);
-		this.bounds = new google.maps.LatLngBounds();
-		google.maps.event.addListener(this.map, 'click', function(event) {
-			//alert(event.latLng);
-			//var point = new google.maps.LatLng(parseFloat(lat),parseFloat(lng));
-
-			// extend the bounds to include the new point
-			//MYMAP.bounds.extend(event.latLng);
-
-			var marker = new google.maps.Marker({
-				position : event.latLng,
-				map : MYMAP.map
-			});
-			alert(marker);
-			var geocoder = new google.maps.Geocoder();
-			geocoder.geocode({
-				"latLng" : event.latLng
-			}, function(results, status) {
-				if (status == google.maps.GeocoderStatus.OK) {
-					console.log(results[0].formatted_address);
-					var infoWindow = new google.maps.InfoWindow();
-					var html = '<strong>Kanari</strong.><br />' + results[0].formatted_address;
-					google.maps.event.addListener(marker, 'click', function() {
-						infoWindow.setContent(html);
-						infoWindow.open(MYMAP.map, marker);
-					});
-					//MYMAP.map.fitBounds(MYMAP.bounds);
-				}
-			});
-
-		});
-		//}
-
 	} else {
 		$location.url("/login");
 	}
@@ -833,40 +782,46 @@ module.controller('createManagerCtrl', function($scope, $routeParams, $route, $h
 	if (getCookie('authToken')) {
 		$('.welcome').show();
 		$('.navBarCls').show();
-
+		$scope.success = false;
 		// $scope.items = [
 		// {name: 'item1', content: 'content1'},
 		// {name: 'item2', content: 'content2'},
 		// {name: 'item3', content: 'content3'}
 		// ];
+		
+	//	listManager();
+		$scope.listManager = function() {
+			alert('in');
+			var param = {
+				"auth_token" : getCookie('authToken')
+			}
 
-		var param = {
-			"auth_token" : getCookie('authToken')
-		}
+			$http({
+				method : 'get',
+				url : '/api/managers',
+				params : param,
+			}).success(function(data, status) {
+				console.log("data manager list " + data + " status " + status);
+				console.log(data.managers);
+				$scope.items = data.managers;
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
 
-		$http({
-			method : 'get',
-			url : '/api/managers',
-			params : param,
-		}).success(function(data, status) {
-			console.log("data manager list " + data + " status " + status);
-			console.log(data.managers);
-			$scope.items = data.managers;
-		}).error(function(data, status) {
-			console.log("data in error" + data + " status " + status);
-
-		});
+			});
+		};
+$scope.listManager();
 
 		$scope.add_new_manager = function() {
 			$('.add_manager').show();
 		}
 		$scope.create_manager = function() {
+			console.log("in create manager call first")
 			var param = {
 				"user" : {
 					"email" : $scope.email_address,
 					"first_name" : $scope.first_name,
 					"last_name" : $scope.last_name,
-					"phone_number" : $scope.contact_number,
+					"phone_number" : $scope.add_contact_number,
 					"password" : $scope.password,
 					"password_confirmation" : $scope.confirmpassword
 				},
@@ -882,6 +837,7 @@ module.controller('createManagerCtrl', function($scope, $routeParams, $route, $h
 				$scope.error = false;
 				$scope.manager_id = data.manager.id;
 				$scope.success = true;
+				$scope.listManager();
 			}).error(function(data, status) {
 				console.log("data in error" + data + " status " + status);
 				$scope.errorMsg = data.errors;
@@ -889,6 +845,16 @@ module.controller('createManagerCtrl', function($scope, $routeParams, $route, $h
 				$scope.success = false;
 			});
 		}
+	} else {
+		$location.url("/login");
+	}
+});
+
+module.controller('locationCtrl', function($scope, $routeParams, $route, $http, $location) {
+	if (getCookie('authToken')) {
+		/**Location***/
+
+		/** END Location**/
 	} else {
 		$location.url("/login");
 	}
