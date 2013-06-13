@@ -324,7 +324,6 @@ module.controller('homeCtrl', function($scope, $http, $location) {
 		}).success(function(data, status) {
 			console.log("data in success " + data + " status " + status);
 			$scope.outlets = data.outlets;
-			//console.log($scope.outlets)
 			$scope.error = data.auth_token;
 			$scope.statement = true;
 			$scope.erromsg = false;
@@ -360,6 +359,10 @@ module.controller('homeCtrl', function($scope, $http, $location) {
 			console.log("data in error" + data + " status " + status);
 			$scope.erromsg = true;
 		});
+	};
+	$scope.changeTab = function(currentTab) {
+		//setCookie('selectedTab', currentTab, 7);
+		$location.url("/take_tour");
 	};
 });
 module.controller('createInvitation', function($scope, $http, $location) {
@@ -500,6 +503,7 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 		$scope.successMsg = false;
 		$scope.outletTypes = [];
 		$scope.cuisineTypes = [];
+		$scope.managerList = [];
 		$scope.checkedCuisineTypes = []
 		console.log($routeParams.outletId);
 		$scope.getOutletTypes = function() {
@@ -548,6 +552,34 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 			});
 		};
 		$scope.getCuisineTypes();
+		
+		$scope.getManagerList = function() {
+			var param = {
+				"auth_token" : $scope.auth_token
+			}
+			$http({
+				method : 'get',
+				url : '/api/managers',
+				params : param,
+			}).success(function(data, status) {
+				//console.log(data);
+				//console.log("data in success " + data + " status " + status);
+				$scope.error = false;
+				$scope.managerList = data.managers;
+				//console.log($scope.OutletTypes)
+				$scope.success = true;
+
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+				$scope.error = true;
+				$scope.success = false;
+			});
+		};
+		$scope.getManagerList();
+		
+		 $scope.selectAction = function(value) {
+   	 		managerId = $scope.myOption;
+ 		 }
 		/* Adding for updating the outlet*/
 
 		if ($routeParams.outletId) {
@@ -630,7 +662,7 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 						"website_url" : "http://batmansdonuts.com",
 						"email" : $scope.email_address,
 						"phone_number" : $scope.contact_number,
-						"manager_id" : $scope.manager_Id,
+						"manager_id" : managerId,
 						"open_hours" : $scope.fromTime + "-" + $scope.toTime,
 						"has_delivery" : $scope.Delivery,
 						"serves_alcohol" : $scope.serves_alcohol,
@@ -876,39 +908,61 @@ module.controller('locationCtrl', function($scope, $routeParams, $route, $http, 
 
 module.controller('takeTourCtrl', function($scope, $routeParams, $http, $location) {
 	if (getCookie('authToken')) {
+
 		$('.welcome').show();
 		$('.navBarCls').show();
 		$scope.kanariWorks = true;
 		$scope.register = false;
 		$scope.srchRestaurant = false;
 		$scope.deals = false;
+
+		$scope.changeTab = function(currentTab) {
+			//alert('in');
+			$location.url("/take_tour");
+			if (currentTab == "kanariWorks") {
+				$scope.kanariWorks = true;
+				$scope.register = false;
+				$scope.srchRestaurant = false;
+				$scope.deals = false;
+			} else if (currentTab == "register") {
+				$scope.kanariWorks = false;
+				$scope.register = true;
+				$scope.srchRestaurant = false;
+				$scope.deals = false;
+			} else if (currentTab == "srchRestaurant") {
+				$scope.kanariWorks = false;
+				$scope.register = false;
+				$scope.srchRestaurant = true;
+				$scope.deals = false;
+			} else if (currentTab == "deals") {
+				$scope.kanariWorks = false;
+				$scope.register = false;
+				$scope.srchRestaurant = false;
+				$scope.deals = true;
+			}
+		}
 	}
 });
 
 module.controller('rightSideCtrl', function($scope, $routeParams, $http, $location) {
-	$scope.changeTab = function(currentTab) {
-		$location.url("/take_tour");
-		if (currentTab == "kanariWorks") {
-			$scope.kanariWorks = true;
-			$scope.register = false;
-			$scope.srchRestaurant = false;
-			$scope.deals = false;
-		} else if (currentTab == "register") {
-			$scope.kanariWorks = false;
-			$scope.register = true;
-			$scope.srchRestaurant = false;
-			$scope.deals = false;
-		} else if (currentTab == "srchRestaurant") {
-			$scope.kanariWorks = false;
-			$scope.register = false;
-			$scope.srchRestaurant = true;
-			$scope.deals = false;
-		} else if (currentTab == "deals") {
-			$scope.kanariWorks = false;
-			$scope.register = false;
-			$scope.srchRestaurant = false;
-			$scope.deals = true;
-		}
+});
+
+module.controller('viewaccountCtrl', function($scope, $http, $location) {
+	if (getCookie('authToken')) {
+		var param = {
+			"auth_token" : $scope.auth_token
+		};
+		$http({
+			method : 'get',
+			url : '/api/customers/100',
+			params : param,
+		}).success(function(data, status) {
+			console.log("data in success " + data + " status " + status);
+			$
+		}).error(function(data, status) {
+			console.log("data in error" + data + " status " + status);
+			
+		});
 	}
 });
 

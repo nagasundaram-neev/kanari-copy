@@ -17,6 +17,7 @@ Feature: Sign In
       And the JSON response at "first_name" should be "Adam"
       And the JSON response at "last_name" should be "Smith"
       And the JSON response at "sign_in_count" should be 1
+      And the JSON response at "customer_id" should be null
 
     Scenario: Sign in count on second login
       Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"
@@ -54,6 +55,7 @@ Feature: Sign In
         And the auth_token should be different from "auth_token_123"
       And the JSON response at "user_role" should be "customer_admin"
       And the JSON response at "registration_complete" should be false
+      And the JSON response at "customer_id" should be null
 
     Scenario: customer_admin who has created a customer account
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"
@@ -67,6 +69,7 @@ Feature: Sign In
         And the auth_token should be different from "auth_token_123"
       And the JSON response at "user_role" should be "customer_admin"
       And the JSON response at "registration_complete" should be true
+      And the JSON response at "customer_id" should be 100
 
     Scenario: Invalid email
       Given No user is present with email "user@gmail.com"
