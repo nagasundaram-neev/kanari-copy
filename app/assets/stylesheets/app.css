@@ -99,9 +99,18 @@ body {
 }
 .errorMsg {
 	color: red;
-	text-align:center;
-	font-size: 18px;
-	
+	text-align: left;
+	font-size: 14px;
+}
+.submitBtn {
+	background: none repeat scroll 0 0 #5A4156 !important;
+	padding: 5px !important;
+	text-shadow: none !important;
+}
+.main_content span {
+	/*color: red !important;*/
+	/*display: inline !important;*/
+	/*font-size: 14px !important;*/
 }
 /***Home Page**/
 .innerDiv {
@@ -117,7 +126,7 @@ body {
 	border-radius: 10px 10px 10px 10px;
 	float: right;
 	height: 300px;
-	padding: 10px;
+	padding: 10px 25px;
 }
 .divRight span {
 	font-weight: bold;
@@ -125,7 +134,7 @@ body {
 	border-bottom: 1px dotted #5A4166;
 }
 .divRight ul {
-	margin: 5px 0 0 15px;
+	margin: 5px 0 0 10px;
 }
 .divRight ul li {
 	border-bottom: 1px dotted #5A4166;
@@ -261,4 +270,18 @@ a.addRestaurant:hover {
 .manager_list span {
 	display: inline;
 	padding: 5px;
+}
+.takeTourSpan span {
+	display: block;
+	font-size: 18px;
+}
+ul.taketour li a {
+	color: #5A4166;
+	cursor: pointer;
+}
+ul.taketour li.active a {
+	font-weight: bold;
+}
+ul.taketour li a:hover {
+	text-decoration: none;
 }

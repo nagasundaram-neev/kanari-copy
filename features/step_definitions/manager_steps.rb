@@ -15,3 +15,11 @@ end
 And /^"([^"]*)" should have "([^"]*)" as the manager$/ do |outlet_name, manager_email|
   Outlet.where(name: outlet_name).first.manager_id.should == User.where(email: manager_email).first.id
 end
+
+Given(/^an unassigned manager exists with the following attributes for customer (\d+)$/) do |customer_id, table|
+  user = User.new(table.rows_hash)
+  user.role = 'manager'
+  user.employed_customer = Customer.find(customer_id)
+  user.save
+end
+

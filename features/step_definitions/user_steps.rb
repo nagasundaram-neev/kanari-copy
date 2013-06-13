@@ -72,6 +72,10 @@ And /^his password should be "([^"]*)"$/ do |password|
   @user.valid_password?(password).should be_true
 end
 
+And /^he should be under customer id "([^"]*)"$/ do |customer_id|
+  @user.customer.should == Customer.find(customer_id)
+end
+
 And /^he is the admin for customer "([^"]*)"$/ do |customer_name|
   customer = Customer.where(name: customer_name).first
   customer.customer_admin_id = @user.id
@@ -115,3 +119,6 @@ Then(/^a user should be created with the following$/) do |table|
   User.where(table.rows_hash).present?.should be_true
 end
 
+Given "the following user exists" do |table|
+  User.create!(table.rows_hash)
+end

@@ -1,6 +1,16 @@
 require 'api_constraints'
 
 Kanari::Application.routes.draw do
+
+  scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
+    devise_for :users, path: '/api/users',controllers: {
+      sessions: 'api/v1/custom_devise/sessions',
+      invitations: 'api/v1/custom_devise/invitations',
+      passwords: 'api/v1/custom_devise/passwords',
+      registrations: 'api/v1/custom_devise/registrations'
+    }
+  end
+
   namespace :api, defaults: {format: 'json'} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
       resources :redemptions
@@ -16,18 +26,9 @@ Kanari::Application.routes.draw do
       end
       resources :feedbacks
       resources :social_network_accounts
+      resources :users, :only => [:index]
     end
   end
-
-  scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
-    devise_for :users, path: '/api/users',controllers: {
-      sessions: 'api/v1/custom_devise/sessions',
-      invitations: 'api/v1/custom_devise/invitations',
-      passwords: 'api/v1/custom_devise/passwords',
-      registrations: 'api/v1/custom_devise/registrations'
-    }
-  end
-
 
   root :to => "home#index"
 end

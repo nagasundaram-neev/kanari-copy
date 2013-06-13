@@ -7,6 +7,7 @@ Feature: Create Manager
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"
         And his role is "customer_admin"
         And his authentication token is "auth_token_123"
+      Given a customer named "Subway" exists with id "100" with admin "user@gmail.com"
       When I authenticate as the user "auth_token_123" with the password "random string"
       And I send a POST request to "/api/managers" with the following:
       """
@@ -30,6 +31,7 @@ Feature: Create Manager
       And the user's full name should be "John Doe"
       And the user's phone number should be "+9132222"
       And his password should be "password123"
+      And he should be under customer id "100"
 
     Scenario: User not authenticated
       And I send a POST request to "/api/managers" with the following:
