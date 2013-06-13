@@ -1,4 +1,3 @@
-
 <div data-role="page" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
 	<style>
 		input[type="image"], input[type="checkbox"], input[type="radio"] {
@@ -43,103 +42,108 @@
 			<div data-role="fieldcontain" class="rightPanel loginDiv">
 				<h1>Create Restaurant Outlet</h1>
 				<form  name="createOutlet" ng-submit="create_outlet(createOutlet)" ng-app>
-				<div class="ui-input-data">
-					<lable>
-						Restaurant Name
-					</lable>
-					<input data-theme="a" data-inline="true" type="text" name="restaurant_name" ng-model="restaurant_name" class="passwordTxt" required />
-					
-				</div>
-				<div class="ui-input-data">
-					<lable>
-						Restaurant Location
-					</lable>
-					<input data-theme="a" data-inline="true" type="text" name="restaurant_location" ng-model="restaurant_location" class="passwordTxt" required />
-				</div>
-				<div class="ui-input-data">
-					<lable>
-						Contact Number
-					</lable>
-					<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="contact_number" class="passwordTxt" required />
-				</div>
-				<div class="ui-input-data">
-					<lable>
-						Email Address
-					</lable>
-					<input data-theme="a" data-inline="true" type="email" name="txtPassword" ng-model="email_address" class="passwordTxt" required />
-				</div>
-				<div class="ui-input-data">
-					<lable>
-						Manager Id
-					</lable>
-					<input data-theme="a" data-inline="true" type="text" name="txtmanagerId" ng-model="manager_Id" class="passwordTxt" required />
-				</div>
-				<div class="ui-input-data">
-					<lable>
-						Outlet Type
-					</lable>
-					<span ng-repeat="outletType in outletTypes" style="display: inline; font-size: 13px; padding: 0;">
-						<input  type="checkbox" value="{{outletType.id}}">
-						{{outletType.name}}
-						</input> </span>
-				</div>
-				<div class="ui-input-data">
-					<lable>
-						Cuisine Type
-					</lable>
-					<span ng-repeat="cuisineType in cuisineTypes" style="display: inline; font-size: 13px; padding: 0;">
-						<input  type="checkbox" value="{{cuisineType.id}}" ng-checked="{{checkedCuisineTypes.checked}}" name="cousine{{cuisineType.id}}">
-						{{cuisineType.name}}
-						</input> </span>
-				</div>
-				<div class="ui-input-data">
-					<lable>
-						Opening Hours
-					</lable>
-					<span class="vertical_center">from</span>
-					<select ng-model="fromTime">
-						<option value="10.00am">10.00am</option>
-						<option value="11.00am">11.00am</option>
-						<option value="12.00pm">12.00pm</option>
-						<option value="1.00pm">01.00pm</option>
-					</select>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<span class="vertical_center"> to</span>
-					<select ng-model="toTime">
-						<option value="10.00pm">10.00pm</option>
-						<option value="11.00pm">11.00pm</option>
-						<option value="12.00am">12.00am</option>
-						<option value="1.00am">01.00am</option>
-					</select>
-				</div>
-				<div class="ui-input-data">
-					<lable>
-						Delivery
-					</lable>
-					<input type="radio" name="delivery" ng-model="Delivery" value="true">
-					Yes
-					<input type="radio"  name="delivery" ng-model="Delivery" value="false">
-					No
-				</div>
-				<div class="ui-input-data">
-					<lable>
-						Serves Alcohol
-					</lable>
-					<input type="radio"  name="serves_alcohol"  ng-model="serves_alcohol" value="true">
-					Yes
-					<input type="radio" ng-model="serves_alcohol" name="serves_alcohol" value="false">
-					No
-				</div>
-				<div class="ui-input-data">
-					<lable>
-						Outdoor Seating
-					</lable>
-					<input type="radio"  ng-model="outdoor_Seating" name="outdoor_Seating" value="true">
-					Yes
-					<input type="radio"  ng-model="outdoor_Seating" name="outdoor_Seating" value="false">
-					No
-				</div>
-				<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
+					<div class="ui-input-data">
+						<lable>
+							Restaurant Name
+						</lable>
+						<input data-theme="a" data-inline="true" type="text" name="restaurant_name" ng-model="restaurant_name" class="passwordTxt" required />
+
+					</div>
+					<div class="ui-input-data">
+						<lable>
+							Restaurant Location
+						</lable>
+						<input data-theme="a" data-inline="true" type="text" name="restaurant_location" ng-model="restaurant_location" class="passwordTxt" required />
+					</div>
+					<div class="ui-input-data">
+						<lable>
+							Contact Number
+						</lable>
+						<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="contact_number" class="passwordTxt" required />
+					</div>
+					<div class="ui-input-data">
+						<lable>
+							Email Address
+						</lable>
+						<input data-theme="a" data-inline="true" type="email" name="txtPassword" ng-model="email_address" class="passwordTxt" required />
+					</div>
+					<div class="ui-input-data">
+						<lable>
+							Manager Id
+						</lable>
+						<select
+						ng-change="selectAction()"
+						ng-model="myOption"
+						ng-options="value.id as value.first_name for value in managerList">
+							<option>--</option>
+						</select>
+					</div>
+					<div class="ui-input-data">
+						<lable>
+							Outlet Type
+						</lable>
+						<span ng-repeat="outletType in outletTypes" style="display: inline; font-size: 13px; padding: 0;">
+							<input  type="checkbox" value="{{outletType.id}}">
+							{{outletType.name}}
+							</input> </span>
+					</div>
+					<div class="ui-input-data">
+						<lable>
+							Cuisine Type
+						</lable>
+						<span ng-repeat="cuisineType in cuisineTypes" style="display: inline; font-size: 13px; padding: 0;">
+							<input  type="checkbox" value="{{cuisineType.id}}" ng-checked="{{checkedCuisineTypes.checked}}" name="cousine{{cuisineType.id}}">
+							{{cuisineType.name}}
+							</input> </span>
+					</div>
+					<div class="ui-input-data">
+						<lable>
+							Opening Hours
+						</lable>
+						<span class="vertical_center">from</span>
+						<select ng-model="fromTime">
+							<option value="10.00am">10.00am</option>
+							<option value="11.00am">11.00am</option>
+							<option value="12.00pm">12.00pm</option>
+							<option value="1.00pm">01.00pm</option>
+						</select>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span class="vertical_center"> to</span>
+						<select ng-model="toTime">
+							<option value="10.00pm">10.00pm</option>
+							<option value="11.00pm">11.00pm</option>
+							<option value="12.00am">12.00am</option>
+							<option value="1.00am">01.00am</option>
+						</select>
+					</div>
+					<div class="ui-input-data">
+						<lable>
+							Delivery
+						</lable>
+						<input type="radio" name="delivery" ng-model="Delivery" value="true">
+						Yes
+						<input type="radio"  name="delivery" ng-model="Delivery" value="false">
+						No
+					</div>
+					<div class="ui-input-data">
+						<lable>
+							Serves Alcohol
+						</lable>
+						<input type="radio"  name="serves_alcohol"  ng-model="serves_alcohol" value="true">
+						Yes
+						<input type="radio" ng-model="serves_alcohol" name="serves_alcohol" value="false">
+						No
+					</div>
+					<div class="ui-input-data">
+						<lable>
+							Outdoor Seating
+						</lable>
+						<input type="radio"  ng-model="outdoor_Seating" name="outdoor_Seating" value="true">
+						Yes
+						<input type="radio"  ng-model="outdoor_Seating" name="outdoor_Seating" value="false">
+						No
+					</div>
+					<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
 						Save
 					</button>
 				</form>
@@ -159,20 +163,20 @@
 			<div id="map"></div>
 		</div>
 		<div id ="permission" ng-show="permissionShow" ng-controller="createManagerCtrl">
-			<div data-role="fieldcontain" class="manager_list rightPanel">
-					<h3>Select a manager for this outlet</h3>
-					<ul >
-						<li ng-repeat="item in items" >
-							<a ng-click="open(item)"> {{item.first_name}} </a>
-						</li>
-					</ul>
-					<input type="button" class="btn_cls" ng-click="save_manager()" data-inline="true" value="Save" />
-					<span>OR</span>
-					<input type="button" class="btn_cls" ng-click="add_new_manager()" data-inline="true" value="Add a new manager" />
-				</div>
-				<div data-role="fieldcontain" class="add_manager rightPanel">
-					<h3>Add a new manager</h3>
-					<form  name="createManager" ng-submit="create_manager(createManager)" ng-app>
+			<!-- <div data-role="fieldcontain" class="manager_list rightPanel">
+				<h3>Select a manager for this outlet</h3>
+				<ul >
+					<li ng-repeat="item in items" >
+						<a ng-click="open(item)"> {{item.first_name}} </a>
+					</li>
+				</ul>
+				<input type="button" class="btn_cls" ng-click="save_manager()" data-inline="true" value="Save" />
+				<span>OR</span>
+				<input type="button" class="btn_cls" ng-click="add_new_manager()" data-inline="true" value="Add a new manager" />
+			</div> -->
+			<div data-role="fieldcontain" class="add_manager rightPanel">
+				<h3>Add a new manager</h3>
+				<form  name="createManager" ng-submit="create_manager(createManager)" ng-app>
 					<div class="ui-input-data">
 						<lable>
 							First Name
@@ -210,7 +214,9 @@
 						<input data-theme="a" data-inline="true" type="text" name="txtPhone" ng-model="add_contact_number" class="passwordTxt" placeholder="Enter phone no" required/>
 					</div>
 
-					<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true">Add Manager</button>
+					<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true">
+						Add Manager
+					</button>
 					<p ng-show="error" class="errorMsg">
 						{{errorMsg}}
 					</p>
@@ -219,11 +225,10 @@
 						Manager added successfully.
 					</p>
 					<p ng-hide="success" ></p>
-					</form>
-				</div>
-				<div class="clr"></div>
+				</form>
+			</div>
+			<div class="clr"></div>
 
-			
 		</div>
 		<div id ="reports" ng-show="ReportShow">
 			This is reports based div only

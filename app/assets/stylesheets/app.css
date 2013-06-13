@@ -239,7 +239,7 @@ a.addRestaurant:hover {
 }
 .add_manager {
 	width: 30%;
-	display: none;
+	/*display: none;*/
 	margin-left: 20px;
 	padding-left: 20px;
 }

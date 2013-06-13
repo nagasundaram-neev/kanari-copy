@@ -6,11 +6,13 @@
 
 			<table ng-show="outlets.length" style="display: block">
 				<tr >
-					<th style="width:80%;text-align: left;font-size: 14px;"> Name Of Restaurant </th>
+					<th style="width:45%;text-align: left;font-size: 14px;"> Name Of Restaurant </th>
+					<th style="width:40%;text-align: left;font-size: 14px;"> Name Of Manager </th>
 					<th style="font-size: 14px;"> Disable </th>
 				</tr>
 				<tr ng-repeat="outlet in outlets">
 					<td ><a href="#/create_outlet?outletId={{outlet.id}}">{{outlet.name}}</a></td>
+					<td >{{outlet.manager.first_name}}</td>
 					<td>
 					<input type="checkbox" ng-show="outlet.disabled" checked ng-click="disableOutlet($event,outlet.id)" />
 					<input type="checkbox" ng-hide="outlet.disabled" ng-click="disableOutlet($event,outlet.id)" />

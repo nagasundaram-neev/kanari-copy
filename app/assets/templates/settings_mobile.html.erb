@@ -38,10 +38,16 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				<input data-theme="a" data-inline="true" type="email" name="txtPassword" ng-model="email" class="passwordTxt" placeholder="Email" readonly/>
 			</div>
 			<div class="ui-input-text ui-body-a">
-				<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="password" class="passwordTxt" placeholder="Change Password"/>
+				<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="currentPassword" class="passwordTxt" placeholder="Current Password"/>
 			</div>
 			<div class="ui-input-text ui-body-a">
-				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="password" class="passwordTxt" placeholder="Location"/>
+				<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="newPassword" class="passwordTxt" placeholder="New Password"/>
+			</div>
+			<div class="ui-input-text ui-body-a">
+				<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="confirmPassword" class="passwordTxt" placeholder="Confirm Password"/>
+			</div>
+			<div class="ui-input-text ui-body-a">
+				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="location" class="passwordTxt" placeholder="Location"/>
 			</div>
 			<div data-role="fieldcontain" class="genderBtn">
 				<label for="toggleswitch1"> Gender </label>
@@ -51,9 +57,15 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 					<option value="Female"> Female </option>
 				</select>
 			</div>
+			<div class="ui-input-text ui-body-a">
+				<input data-theme="a" data-inline="true" type="date" name="txtPassword" ng-model="dateOfBirth" class="passwordTxt" placeholder="Date of Birth"/>
+			</div>
 			<input type="button" class="signBtn" ng-click="saveProfile()" data-inline="true" value="Save"/>
 			<p class="errorMsg" ng-show="errorMsg">
 				{{error}}
+			</p>
+			<p class="succMsg" ng-show="succMsg">
+				Profile updated successfully!!!
 			</p>
 		</div>
 	</div>

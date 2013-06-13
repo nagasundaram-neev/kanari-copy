@@ -10,7 +10,7 @@
 			</p>
 			<div data-role="fieldcontain" class="loginDiv">
 				<div class="ui-input-text ui-body-a">
-					<input data-theme="a" data-inline="true" type="email" name="txtUsername" ng-model="email" placeholder="Eamil address"/>
+					<input data-theme="a" data-inline="true" type="email" name="txtUsername" ng-model="email" placeholder="Email address"/>
 				</div>
 				<div class="ui-input-text ui-body-a">
 					<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="password" class="passwordTxt" placeholder="Password"/>
@@ -21,7 +21,7 @@
 						<label for="checkbox-1">Remember Me</label>
 					</fieldset>
 					<p class="forgotPass">
-						<a href="#">Forgot your password?</a>
+						<a ng-click="forgotPassword()">Forgot your password?</a>
 					</p>
 				</div>
 				<input type="button" class="loginBtn" ng-click="chkLogin()" data-inline="true" value="Login" />

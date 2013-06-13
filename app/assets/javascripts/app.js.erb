@@ -18,6 +18,7 @@ var module = angular.module('kanari', []).
      when('/list_payment_invoice',{templateUrl:"<%= asset_path 'list_payment_invoice.html'%>"}).
      when('/payment_invoice',{templateUrl:"<%= asset_path 'payment_invoice.html'%>"}).
       when('/take_tour',{templateUrl:"<%= asset_path 'takeTour.html'%>"}).
+       when('/view_account',{templateUrl:"<%= asset_path 'viewAccount.html'%>"}).
      when('/logout', {templateUrl: "<%= asset_path 'logOut.html' %>"}).
       otherwise({redirectTo: '/login'});
       $locationProvider.hashPrefix = "";
