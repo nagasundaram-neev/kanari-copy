@@ -7,9 +7,13 @@ class Api::V1::CustomersController < ApplicationController
   # GET /customers
   # GET /customers.json
   def index
-    customers = Customer.all
-    authorize! :read_all, Customer
-    render json: customers
+    if current_user.role == 'customer_admin'
+      render json: current_user.customer and return
+    else
+      customers = Customer.all
+      authorize! :read_all, Customer
+      render json: customers and return
+    end
   end
 
   # GET /customers/1
