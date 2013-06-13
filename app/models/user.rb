@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_many :managed_outlets, class_name: 'Outlet', foreign_key: 'manager_id'
   has_one :outlets_staff, foreign_key: 'staff_id' # For restaurant staff only
   has_one :employed_outlet, source: 'outlet', through: :outlets_staff, foreign_key: 'staff_id' # For restaurant staff only
+  has_one :customers_user
+  has_one :employed_customer, source: 'customer', through: :customers_user # For all users except mobile users
 
   def customer
     case role
@@ -18,6 +20,8 @@ class User < ActiveRecord::Base
       outlet = managed_outlets.first
       if !outlet.nil?
         return outlet.customer
+      else
+        employed_customer
       end
     when 'staff'
       outlet = employed_outlet

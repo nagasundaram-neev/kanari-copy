@@ -1,3 +1,4 @@
+
 <div data-role="page" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
 	<style>
 		input[type="image"], input[type="checkbox"], input[type="radio"] {
@@ -65,6 +66,12 @@
 						Email Address
 					</lable>
 					<input data-theme="a" data-inline="true" type="email" name="txtPassword" ng-model="email_address" class="passwordTxt" required />
+				</div>
+				<div class="ui-input-data">
+					<lable>
+						Manager Id
+					</lable>
+					<input data-theme="a" data-inline="true" type="text" name="txtmanagerId" ng-model="manager_Id" class="passwordTxt" required />
 				</div>
 				<div class="ui-input-data">
 					<lable>
@@ -145,9 +152,73 @@
 		</div>
 		<div id ="location" ng-show="locationShow">
 			This is location based div only
+			<div id="map"></div>
 		</div>
-		<div id ="permission" ng-show="permissionShow">
-			This is permissions based div only
+		<div id ="permission" ng-show="permissionShow" ng-controller="createManagerCtrl">
+			<div data-role="fieldcontain" class="manager_list rightPanel">
+					<h3>Select a manager for this outlet</h3>
+					<ul >
+						<li ng-repeat="item in items" >
+							<a ng-click="open(item)"> {{item.first_name}} </a>
+						</li>
+					</ul>
+					<input type="button" class="btn_cls" ng-click="save_manager()" data-inline="true" value="Save" />
+					<span>OR</span>
+					<input type="button" class="btn_cls" ng-click="add_new_manager()" data-inline="true" value="Add a new manager" />
+				</div>
+				<div data-role="fieldcontain" class="add_manager rightPanel">
+					<h3>Add a new manager</h3>
+					<div class="ui-input-data">
+						<lable>
+							First Name
+						</lable>
+						<input data-theme="a" data-inline="true" type="text" name="txtFirstName" ng-model="first_name" class="passwordTxt" placeholder="Enter first name"/>
+					</div>
+					<div class="ui-input-data">
+						<lable>
+							Last Name
+						</lable>
+						<input data-theme="a" data-inline="true" type="text" name="txtLastName" ng-model="last_name" class="passwordTxt" placeholder="Enter last name"/>
+					</div>
+					<div class="ui-input-data">
+						<lable>
+							Email Address
+						</lable>
+						<input data-theme="a" data-inline="true" type="text" name="txtEmail" ng-model="email_address" class="passwordTxt" placeholder="Enter email address"/>
+					</div>
+					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
+						<lable>
+							Password
+						</lable>
+						<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="password" class="passwordTxt" placeholder="Enter password"/>
+					</div>
+					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
+						<lable>
+							Confirm Password
+						</lable>
+						<input data-theme="a" data-inline="true" type="password" name="txtResetPassword" ng-model="confirmpassword" class="passwordTxt" placeholder="Enter confirm password"/>
+					</div>
+					<div class="ui-input-data">
+						<lable>
+							Phone
+						</lable>
+						<input data-theme="a" data-inline="true" type="text" name="txtPhone" ng-model="add_contact_number" class="passwordTxt" placeholder="Enter phone no"/>
+					</div>
+
+					<input type="button" class="loginBtn" ng-click="create_manager()" data-inline="true" value="Add" />
+
+					<p ng-show="error" class="errorMsg">
+						{{errorMsg}}
+					</p>
+					<p ng-hide="error" ></p>
+					<p ng-show="success" class="successMsg">
+						Manager added successfully.
+					</p>
+					<p ng-hide="success" ></p>
+				</div>
+				<div class="clr"></div>
+
+			
 		</div>
 		<div id ="reports" ng-show="ReportShow">
 			This is reports based div only
@@ -155,3 +226,4 @@
 
 	</div>
 </div>
+

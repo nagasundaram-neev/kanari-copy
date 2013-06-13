@@ -117,7 +117,7 @@ body {
 	border-radius: 10px 10px 10px 10px;
 	float: right;
 	height: 300px;
-	padding: 10px;
+	padding: 10px 25px;
 }
 .divRight span {
 	font-weight: bold;
@@ -125,7 +125,7 @@ body {
 	border-bottom: 1px dotted #5A4166;
 }
 .divRight ul {
-	margin: 5px 0 0 15px;
+	margin: 5px 0 0 10px;
 }
 .divRight ul li {
 	border-bottom: 1px dotted #5A4166;
@@ -262,3 +262,7 @@ a.addRestaurant:hover {
 	display: inline;
 	padding: 5px;
 }
+.takeTourSpan span{display:block;font-size:18px;}
+ul.taketour li a{ color: #5A4166;cursor: pointer;}
+ul.taketour li.active a{font-weight:bold;}
+ul.taketour li a:hover{ text-decoration: none;}

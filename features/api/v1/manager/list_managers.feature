@@ -15,6 +15,14 @@ Feature: List Managers
         And the customer with id "101" has an outlet named "Mast Kalandar - Bangalore"
         And the customer with id "101" has an outlet named "Mast Kalandar - Pune"
       Given he is the admin for customer "China Pearl"
+      And an unassigned manager exists with the following attributes for customer 100
+        |id|50|
+        |first_name|Unassigned|
+        |last_name|Manager|
+        |email|unassigned@manager.com|
+        |phone_number|1111|
+        |password|password123|
+        |password_confirmation|password123|
       And the following managers have been created
         |outlet_name                |   manager_id    |   first_name  | last_name   | email       | phone_number  |
         |China Pearl - Bangalore    |   10            |   John        | Smith       | john@cp.com | 1234          |
@@ -29,8 +37,9 @@ Feature: List Managers
       """
       {
         "managers" : [
-          {"id" : 1, "first_name" : "John", "last_name"  : "Smith", "email" : "john@cp.com", "phone_number" : "1234"},
-          {"id" : 2, "first_name" : "William", "last_name"  : "Penn", "email" : "penn@cp.com", "phone_number" : "2345"}
+          {"id" : 10, "first_name" : "John", "last_name"  : "Smith", "email" : "john@cp.com", "phone_number" : "1234"},
+          {"id" : 20, "first_name" : "William", "last_name"  : "Penn", "email" : "penn@cp.com", "phone_number" : "2345"},
+          {"id" : 50, "first_name" : "Unassigned", "last_name"  : "Manager", "email" : "unassigned@manager.com", "phone_number" : "1111"}
         ]
       }
       """
