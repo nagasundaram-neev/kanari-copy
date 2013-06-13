@@ -451,7 +451,7 @@ module.controller('listPaymentInvoiceCtrl', function($scope, $http, $location) {
 		$scope.list_payment_invoice = function() {
 			var startDate = $scope.start_date;
 			var endDate = $scope.end_date;
-			var param = "start_date="+startDate+"&end_date="+endDate;
+			var param = "start_date=" + startDate + "&end_date=" + endDate;
 
 			$http({
 				method : 'get',
@@ -618,6 +618,7 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 						"website_url" : "http://batmansdonuts.com",
 						"email" : $scope.email_address,
 						"phone_number" : $scope.contact_number,
+						"manager_id" : $scope.manager_Id,
 						"open_hours" : $scope.fromTime + "-" + $scope.toTime,
 						"has_delivery" : $scope.Delivery,
 						"serves_alcohol" : $scope.serves_alcohol,
@@ -781,37 +782,50 @@ module.controller('createManagerCtrl', function($scope, $routeParams, $route, $h
 	if (getCookie('authToken')) {
 		$('.welcome').show();
 		$('.navBarCls').show();
-
+		$scope.success = false;
 		// $scope.items = [
 		// {name: 'item1', content: 'content1'},
 		// {name: 'item2', content: 'content2'},
 		// {name: 'item3', content: 'content3'}
 		// ];
+		
+	//	listManager();
+		$scope.listManager = function() {
+			alert('in');
+			var param = {
+				"auth_token" : getCookie('authToken')
+			}
 
-		$http({
-			method : 'get',
-			url : '/api/managers',
-		}).success(function(data, status) {
-			console.log("data in success " + data + " status " + status);
-			//console.log(data);
-		}).error(function(data, status) {
-			console.log("data in error" + data + " status " + status);
+			$http({
+				method : 'get',
+				url : '/api/managers',
+				params : param,
+			}).success(function(data, status) {
+				console.log("data manager list " + data + " status " + status);
+				console.log(data.managers);
+				$scope.items = data.managers;
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
 
-		});
+			});
+		};
+$scope.listManager();
 
 		$scope.add_new_manager = function() {
 			$('.add_manager').show();
 		}
 		$scope.create_manager = function() {
+			console.log("in create manager call first")
 			var param = {
 				"user" : {
 					"email" : $scope.email_address,
 					"first_name" : $scope.first_name,
 					"last_name" : $scope.last_name,
-					"phone_number" : $scope.contact_number,
+					"phone_number" : $scope.add_contact_number,
 					"password" : $scope.password,
 					"password_confirmation" : $scope.confirmpassword
-				}
+				},
+				"auth_token" : getCookie('authToken')
 			}
 
 			$http({
@@ -823,6 +837,7 @@ module.controller('createManagerCtrl', function($scope, $routeParams, $route, $h
 				$scope.error = false;
 				$scope.manager_id = data.manager.id;
 				$scope.success = true;
+				$scope.listManager();
 			}).error(function(data, status) {
 				console.log("data in error" + data + " status " + status);
 				$scope.errorMsg = data.errors;
@@ -834,6 +849,55 @@ module.controller('createManagerCtrl', function($scope, $routeParams, $route, $h
 		$location.url("/login");
 	}
 });
+
+module.controller('locationCtrl', function($scope, $routeParams, $route, $http, $location) {
+	if (getCookie('authToken')) {
+		/**Location***/
+
+		/** END Location**/
+	} else {
+		$location.url("/login");
+	}
+});
+
+module.controller('takeTourCtrl', function($scope, $routeParams, $http, $location) {
+	if (getCookie('authToken')) {
+		$('.welcome').show();
+		$('.navBarCls').show();
+		$scope.kanariWorks = true;
+		$scope.register = false;
+		$scope.srchRestaurant = false;
+		$scope.deals = false;
+	}
+});
+
+module.controller('rightSideCtrl', function($scope, $routeParams, $http, $location) {
+	$scope.changeTab = function(currentTab) {
+		$location.url("/take_tour");
+		if (currentTab == "kanariWorks") {
+			$scope.kanariWorks = true;
+			$scope.register = false;
+			$scope.srchRestaurant = false;
+			$scope.deals = false;
+		} else if (currentTab == "register") {
+			$scope.kanariWorks = false;
+			$scope.register = true;
+			$scope.srchRestaurant = false;
+			$scope.deals = false;
+		} else if (currentTab == "srchRestaurant") {
+			$scope.kanariWorks = false;
+			$scope.register = false;
+			$scope.srchRestaurant = true;
+			$scope.deals = false;
+		} else if (currentTab == "deals") {
+			$scope.kanariWorks = false;
+			$scope.register = false;
+			$scope.srchRestaurant = false;
+			$scope.deals = true;
+		}
+	}
+});
+
 module.controller('sidePanelCtrl', function($scope, $routeParams, $route, $http, $location) {
 	var classNm = $location.path();
 	var newValue = classNm.replace('/', '');

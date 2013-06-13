@@ -19,26 +19,10 @@
 			</table>
 
 			<a href="#/create_outlet" title="addRestaurant" class="addRestaurant"><%= image_tag "icon_new_restaurant_outlet.png" %>New Restaurant Outlet</a>
-			<a href="#/list_payment_invoice" title="addRestaurant" class="addRestaurant"><%= image_tag "icon_new_restaurant_outlet.png" %>List Payment Invoices</a>
+			<a style="margin-left: 10px;" href="#/list_payment_invoice" title="addRestaurant" class="addRestaurant"><%= image_tag "icon_new_restaurant_outlet.png" %>List Payment Invoices</a>
 		</div>
 
-		<div class="divRight">
-			<span>Take the tour</span>
-			<ul>
-				<li>
-					How Kanari Works?
-				</li>
-				<li>
-					How to Register?
-				</li>
-				<li>
-					Search Restaurants?
-				</li>
-				<li>
-					Available Deals?
-				</li>
-			</ul>
-		</div>
+		<div class="divRight" ng-include src ="'<%= asset_path 'rightSidePanel.html' %>'" ></div>
 		<div class="clr"></div>
 	</div>
 </div>

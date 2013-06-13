@@ -56,4 +56,4 @@ gem 'json_spec', group: :test # JSON matchers for tests
 gem 'debugger', group: [:development, :test]
 gem 'foreman', :group => :development
 gem 'rails-erd', :group => :development
-
+gem "mysql2"
