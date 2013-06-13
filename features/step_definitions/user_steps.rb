@@ -119,3 +119,6 @@ Then(/^a user should be created with the following$/) do |table|
   User.where(table.rows_hash).present?.should be_true
 end
 
+Given "the following user exists" do |table|
+  User.create!(table.rows_hash)
+end
