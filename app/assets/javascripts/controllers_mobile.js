@@ -159,13 +159,12 @@ module.controller('loginController', function($scope, $http, $location) {
 
 	};
 
-	
 	$scope.$watch('email + password', function() {
 		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
 	});
-	
+
 	// $scope.$watch('email + password', function() {
-		// $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
+	// $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
 	// });
 
 });
@@ -181,23 +180,8 @@ module.controller('homeController', function($scope, $http, $location) {
 			$location.url("/home");
 		};
 
-		$scope.logout = function() {
-			console.log("in Logout");
-
-			$http({
-				method : 'delete',
-				url : '/api/users/sign_out'
-			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
-				deleteCookie('authToken');
-				deleteCookie('userRole');
-				deleteCookie('userName');
-				$location.url("/index");
-			}).error(function(data, status) {
-				console.log("data " + data + " status " + status);
-			});
-
-			$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
+		$scope.setting = function() {
+			$location.url("/settings");
 
 		};
 	} else {
@@ -205,7 +189,6 @@ module.controller('homeController', function($scope, $http, $location) {
 	}
 
 });
-
 
 module.controller('commonCtrl', function($scope, $http, $location) {
 	if (getCookie('authToken')) {
@@ -234,7 +217,7 @@ module.controller('signUpController', function($scope, $http, $location) {
 				"password_confirmation" : $scope.confPassword
 			}
 		}
-		
+
 		$http({
 			method : 'post',
 			url : '/api/users',
@@ -249,19 +232,75 @@ module.controller('signUpController', function($scope, $http, $location) {
 		});
 
 	};
-	
-	$scope.cancel = function(){
+
+	$scope.cancel = function() {
 		$location.url("/index");
 	};
 
 });
 
 module.controller('signedUpController', function($scope, $http, $location) {
-	
-	$scope.proceedAccount = function(){
+
+	$scope.proceedAccount = function() {
 		$location.url("/login");
 	}
-	
+});
+
+module.controller('settingsController', function($scope, $http, $location) {
+
+	$scope.logout = function() {
+		console.log("in Logout");
+
+		$http({
+			method : 'delete',
+			url : '/api/users/sign_out'
+		}).success(function(data, status) {
+			console.log("User Role " + data + " status " + status);
+			deleteCookie('authToken');
+			deleteCookie('userRole');
+			deleteCookie('userName');
+			$location.url("/index");
+		}).error(function(data, status) {
+			console.log("data " + data + " status " + status);
+		});
+
+		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
+
+	};
+
+	$scope.getProfile = function() {
+
+		$http({
+			method : 'get',
+			url : '/api/users/sign_out'
+		}).success(function(data, status) {
+			console.log("User Role " + data + " status " + status);
+			$scope.firstName = data.users.first_name;
+			$scope.lastName = data.users.last_name;
+			$scope.email = data.users.email;
+			$scope.password = data.users.password;
+		}).error(function(data, status) {
+			console.log("data " + data + " status " + status);
+		});
+
+		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
+
+	};
+
+	$scope.savePrfle = function() {
+		
+		
+		$http({
+			method : 'get',
+			url : '/api/users/sign_out'
+		}).success(function(data, status) {
+			console.log("User Role " + data + " status " + status);
+		}).error(function(data, status) {
+			console.log("data " + data + " status " + status);
+		});
+
+	};
+
 });
 
 function setCookie(name, value, days) {

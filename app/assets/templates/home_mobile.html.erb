@@ -1,6 +1,6 @@
 <div data-role="page" data-theme="b" id="home" ng-controller="homeController">
 	<style>
-.logout{
+.setting{
 background-image: url(<%= asset_path 'sprite_mobile.png' %>	);
 	background-position: -234px -557px;
 	height: 69px;
@@ -11,7 +11,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>	);
 	</style>
 	<div data-role="content">
 		<div class="username">
-			<div class="logout" ng-click="logout()"></div>
+			<div class="setting" ng-click="setting()"></div>
 			<a ng-click="homeClk()">{{userName}}</a>
 			<span class="role">{{role}}</span>
 			<div class="clr"></div>
