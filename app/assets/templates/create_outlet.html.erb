@@ -1,4 +1,3 @@
-	<!-- <%= javascript_include_tag "markers123.js" %> -->
 <div data-role="page" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
 	<style>
 		input[type="image"], input[type="checkbox"], input[type="radio"] {
@@ -8,6 +7,12 @@
 			display: inline !important;
 			vertical-align: middle !important;
 		}
+#map_canvas{
+			    width:100%;
+			    height: 250px; 
+			    border: 1px solid #333335;
+			    margin-bottom:20px;
+			}
 	</style>
 	<div class="create_outlet innerDiv" data-role="content">
 		<div ></div>
@@ -160,20 +165,23 @@
 			<p ng-hide="success"></p>
 		</div>
 		<div id ="location" ng-show="locationShow">
-			This is location based div only
-			<div id="map"></div>
+			<div ng-app="kanari">
+				<div ng-controller="MapCtrl">
+					<map id="map_canvas"></map>
+				</div>
+			</div>
 		</div>
-		<div id ="permission" ng-show="permissionShow" ng-controller="createManagerCtrl">
+		<div id ="permission" ng-show="permissionShow">
 			<!-- <div data-role="fieldcontain" class="manager_list rightPanel">
-				<h3>Select a manager for this outlet</h3>
-				<ul >
-					<li ng-repeat="item in items" >
-						<a ng-click="open(item)"> {{item.first_name}} </a>
-					</li>
-				</ul>
-				<input type="button" class="btn_cls" ng-click="save_manager()" data-inline="true" value="Save" />
-				<span>OR</span>
-				<input type="button" class="btn_cls" ng-click="add_new_manager()" data-inline="true" value="Add a new manager" />
+			<h3>Select a manager for this outlet</h3>
+			<ul >
+			<li ng-repeat="item in items" >
+			<a ng-click="open(item)"> {{item.first_name}} </a>
+			</li>
+			</ul>
+			<input type="button" class="btn_cls" ng-click="save_manager()" data-inline="true" value="Save" />
+			<span>OR</span>
+			<input type="button" class="btn_cls" ng-click="add_new_manager()" data-inline="true" value="Add a new manager" />
 			</div> -->
 			<div data-role="fieldcontain" class="add_manager rightPanel">
 				<h3>Add a new manager</h3>
@@ -222,7 +230,7 @@
 						{{errorMsg}}
 					</p>
 					<p ng-hide="error" ></p>
-					<p ng-show="success" class="successMsg">
+					<p ng-show="success1" class="successMsg">
 						Manager added successfully.
 					</p>
 					<p ng-hide="success" ></p>
