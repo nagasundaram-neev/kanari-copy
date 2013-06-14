@@ -37,7 +37,7 @@ src: url('Roboto-Regular.ttf');
 
 body {
 	font-family:"kanariFont",sans-serif;
-	color: #664765 !important;
+	/*color: #664765 !important;*/
 	background: #FEbf3B !important;
 }
 img, object {
