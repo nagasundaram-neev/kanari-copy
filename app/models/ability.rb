@@ -52,6 +52,8 @@ class Ability
     when 'staff'
       can :read, Outlet, id: (user.employed_outlet.id rescue nil)
       can :generate_code, Outlet, id: (user.employed_outlet.id rescue nil)
+    when 'user'
+      can :create, Feedback
     else
       #Default permissions
     end
