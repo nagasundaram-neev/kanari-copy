@@ -193,12 +193,10 @@ module.controller('Login', function($scope, $http, $location) {
 
 	}
 	$scope.chkLogin = function(login) {
-		//console.log($scope.login.$valid);
 		if ($scope.login.$valid) {
 			$('.welcome').hide();
 			$('.navBarCls').hide();
 			var param = "{email:'" + $scope.email + "','" + $scope.password + "'}";
-			alert(param);
 			$http({
 				method : 'post',
 				url : '/api/users/sign_in',
@@ -232,11 +230,11 @@ module.controller('Login', function($scope, $http, $location) {
 
 		};
 
-		$scope.$watch('email + password', function() {
-			$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
-		});
 		$scope.getLogin();
-	}
+	};
+	$scope.$watch('email + password', function() {
+		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
+	});
 });
 
 module.controller('forgotPassCtrl', function($scope, $http, $location) {
@@ -381,10 +379,10 @@ module.controller('createInvitation', function($scope, $http, $location) {
 		$('#outlet').hide();
 		$('#dasboard').show();
 		$('.navBarCls ul li').removeClass('active');
-	$('#outlet').hide();
-	$('#account').hide();
-	$('#dasboard').addClass('active');
-	
+		$('#outlet').hide();
+		$('#account').hide();
+		$('#dasboard').addClass('active');
+
 		$scope.statement = false;
 		$scope.erromsg = false;
 		$scope.errortext = ""
@@ -434,6 +432,10 @@ module.controller('paymentInvoiceCtrl', function($scope, $http, $location) {
 	if (getCookie('authToken')) {
 		$('.welcome').show();
 		$('.navBarCls').show();
+		$('.navBarCls ul li').removeClass('active');
+		$('#outlet').hide();
+		$('#account').hide();
+		$('#dasboard').addClass('active');
 		$scope.paymentInvoiceSuccess = false;
 		$scope.paymentInvoiceFail = false;
 		$scope.payment_invoice = function() {
@@ -1035,7 +1037,7 @@ module.controller('sidePanelCtrl', function($scope, $routeParams, $route, $http,
 	var newValue = classNm.replace('/', '');
 	$('.ng-scope li').removeClass('active');
 	$('.' + newValue).addClass('active');
-	
+
 });
 function setCookie(name, value, days) {
 	if (days) {
