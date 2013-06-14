@@ -27,13 +27,13 @@
 				<lable>
 					Password
 				</lable>
-				<input data-theme="a" data-inline="true" type="password" name="password" ng-model="password" class="passwordTxt" required />
+				<input data-theme="a" data-inline="true" type="password" name="password" ng-model="password" class="passwordTxt" required/>
 			</div>
 			<div class="ui-input-data">
 				<lable>
 					Phone
 				</lable>
-				<input data-theme="a" data-inline="true" type="text" name="phoneno" ng-model="phoneno" class="passwordTxt" required />
+				<input data-theme="a" data-inline="true" type="text" name="phoneno" ng-model="phoneno" class="passwordTxt" />
 			</div>
 			<div class="section">
 				Business Details
@@ -42,7 +42,7 @@
 				<lable>
 					Company Name
 				</lable>
-				<input data-theme="a" data-inline="true" type="text" name="compnyNm" ng-model="compnyNm" class="passwordTxt" required />
+				<input data-theme="a" data-inline="true" type="text" name="compnyNm" ng-model="compnyNm" class="passwordTxt" />
 			</div>
 			<div class="ui-input-data">
 				<lable>
@@ -84,6 +84,9 @@
 			</div>
 			<p ng-show="success" class="successMsg">
 						Account updated sucessfully.
+					</p>
+					<p ng-show="error" class="errorMsg">
+						{{errormsg}}
 					</p>
 		</form>
 	</div>
