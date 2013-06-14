@@ -20,3 +20,7 @@ And /^the feedback with id "([^"]*)" should have the following attributes$/ do |
   feedback.comment.should == attr["comment"]
   feedback.will_recommend.to_s.should == attr["will_recommend"]
 end
+
+Then(/^the feedback with id "(.*?)" should belong to user with id "(.*?)"$/) do |feedback_id, user_id|
+  Feedback.find(feedback_id).user_id.should == user_id.to_i
+end

@@ -1,6 +1,5 @@
 class Api::V1::FeedbacksController < ApplicationController
   before_action :set_feedback, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
 
   respond_to :json
 
@@ -43,25 +42,35 @@ class Api::V1::FeedbacksController < ApplicationController
   # PATCH/PUT /feedbacks/1
   # PATCH/PUT /feedbacks/1.json
   def update
-    authorize! :create, Feedback
-    Feedback.transaction do
-      points = @feedback.points
-      outlet = @feedback.outlet
-      outlet.with_lock do
-        outlet.rewards_pool = outlet.rewards_pool + points
-        @feedback.rewards_pool_after_feedback = outlet.rewards_pool
-        outlet.save
-      end
-      current_user.with_lock do
-        current_user.points_available += points
-        @feedback.user_points_after_feedback += current_user.points_available
-        current_user.save
-      end
-      @feedback.user = current_user
+    current_user = warden.authenticate(scope: :user)
+    if current_user.nil?
       if @feedback.update(feedback_params)
         render json: {points: @feedback.points}, status: :ok
       else
         render json: {errors: @feedback.errors.full_messages}, status: :unprocessable_entity
+      end
+    else
+      Feedback.transaction do
+        authorize! :create, Feedback
+        points = @feedback.points
+        outlet = @feedback.outlet
+        outlet.with_lock do
+          outlet.rewards_pool = outlet.rewards_pool + points
+          @feedback.rewards_pool_after_feedback = outlet.rewards_pool
+          outlet.save
+        end
+        current_user.with_lock do
+          current_user.points_available += points
+          @feedback.user_points_after_feedback += current_user.points_available
+          current_user.save
+        end
+        @feedback.user = current_user
+        @feedback.code = nil
+        if @feedback.update(feedback_params)
+          render json: {points: @feedback.points}, status: :ok
+        else
+          render json: {errors: @feedback.errors.full_messages}, status: :unprocessable_entity
+        end
       end
     end
   end

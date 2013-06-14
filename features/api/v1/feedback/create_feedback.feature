@@ -58,10 +58,6 @@ Feature: Create Feedback
         |code     |12345  |
         |points   |120    |
         |outlet_id|20      |
-      Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"
-        And his role is "user"
-        And his authentication token is "auth_token_1234"
-        And he has "100" points
       When I send a PUT request to "/api/feedbacks/10" with the following:
       """
       {
@@ -77,13 +73,21 @@ Feature: Create Feedback
         }
       }
       """
-      Then the response status should be "401"
+      Then the response status should be "200"
       And the JSON response should be:
       """
-      {"errors" : ["Invalid login credentials"]}
+      {"points" : 120}
       """
       And the outlet's rewards pool should have "1000" points
-      And the user should have "100" points
+      And the feedback with id "10" should have the following attributes
+      |food_quality|-1|
+      |speed_of_service|1|
+      |friendliness_of_service|0|
+      |ambience|-1|
+      |cleanliness|0|
+      |value_for_money|1|
+      |comment|Affordable place for a casual dinner|
+      |will_recommend|false|
 
     Scenario Outline: User's role is not 'user'
       Given a customer named "Subway" exists with id "100"
