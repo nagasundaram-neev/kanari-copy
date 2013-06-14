@@ -137,7 +137,6 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 		$scope.userName = getCookie('userRole');
 	} else if (getCookie('userRole') == "customer_admin") {
 		$scope.userName = getCookie('userName');
-		alert($scope.userName);
 	}
 
 	$scope.logout = function() {
@@ -255,7 +254,6 @@ function getRefresh($scope) {
 		$scope.userName = getCookie('userRole');
 	} else if (getCookie('userRole') == "customer_admin") {
 		$scope.userName = getCookie('userName');
-		alert($scope.userName);
 	}
 }
 
@@ -1031,6 +1029,11 @@ module.controller('viewaccountCtrl', function($scope, $http, $location) {
 					"customer" : {
 						"name" : $scope.first_name,
 						"email" : $scope.email,
+						"data.customer.registered_address_line_1" : $scope.add1,
+						"data.customer.registered_address_line_2" : $scope.add2,
+						"data.customer.mailing_address_city" : $scope.city,
+						"data.customer.mailing_address_country" : $scope.country,
+						"data.customer.phone_number" : $scope.contactNo
 					},
 					"auth_token" : getCookie('authToken')
 				}
@@ -1053,6 +1056,7 @@ module.controller('viewaccountCtrl', function($scope, $http, $location) {
 						"first_name" : $scope.first_name,
 						"last_name" : $scope.last_name,
 						"email" : $scope.email,
+						"phone_number" : $scope.phoneno,
 						//	"password": $scope.first_name,
 						//"password_confirmation": $scope.first_name,
 						//"date_of_birth": "06-05-1987",
