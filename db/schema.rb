@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130612125058) do
+ActiveRecord::Schema.define(version: 20130614080934) do
 
   create_table "cuisine_types", force: true do |t|
     t.string   "name"
@@ -56,8 +56,8 @@ ActiveRecord::Schema.define(version: 20130612125058) do
     t.boolean  "will_recommend"
     t.boolean  "completed"
     t.integer  "points"
-    t.integer  "rewards_pool_after_feedback"
-    t.integer  "user_points_after_feedback"
+    t.integer  "rewards_pool_after_feedback", default: 0
+    t.integer  "user_points_after_feedback",  default: 0
     t.integer  "user_id"
     t.integer  "outlet_id"
     t.datetime "created_at"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 20130612125058) do
     t.float    "longitude"
     t.string   "website_url"
     t.string   "email"
-    t.integer  "rewards_pool"
+    t.integer  "rewards_pool",        default: 0
     t.integer  "points_redeemed"
     t.string   "phone_number"
     t.string   "open_hours"
@@ -186,7 +186,7 @@ ActiveRecord::Schema.define(version: 20130612125058) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.string   "role"
-    t.integer  "points_available"
+    t.integer  "points_available",                  default: 0
     t.integer  "points_redeemed"
     t.string   "phone_number"
     t.string   "first_name"

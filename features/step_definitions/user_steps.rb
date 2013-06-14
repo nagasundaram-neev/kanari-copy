@@ -26,6 +26,11 @@ And /^his role is "([^"]*)"$/ do |role|
   @user.save!
 end
 
+And /^he has "([^"]*)" points$/ do |points|
+  @user.points_available = points
+  @user.save!
+end
+
 And /^the auth_token should be different from "([^"]*)"$/ do |auth_token|
   @user.reload
   @user.authentication_token.should_not == auth_token
@@ -121,4 +126,8 @@ end
 
 Given "the following user exists" do |table|
   User.create!(table.rows_hash)
+end
+
+And /^the user should have "([^"]*)" points$/ do |points|
+  @user.reload.points_available.should == points.to_i
 end

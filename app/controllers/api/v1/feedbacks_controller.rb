@@ -1,6 +1,8 @@
 class Api::V1::FeedbacksController < ApplicationController
   before_action :set_feedback, only: [:show, :edit, :update, :destroy]
 
+  respond_to :json
+
   # GET /feedbacks
   # GET /feedbacks.json
   def index
@@ -40,13 +42,35 @@ class Api::V1::FeedbacksController < ApplicationController
   # PATCH/PUT /feedbacks/1
   # PATCH/PUT /feedbacks/1.json
   def update
-    respond_to do |format|
+    current_user = warden.authenticate(scope: :user)
+    if current_user.nil?
       if @feedback.update(feedback_params)
-        format.html { redirect_to @feedback, notice: 'Feedback was successfully updated.' }
-        format.json { head :no_content }
+        render json: {points: @feedback.points}, status: :ok
       else
-        format.html { render action: 'edit' }
-        format.json { render json: @feedback.errors, status: :unprocessable_entity }
+        render json: {errors: @feedback.errors.full_messages}, status: :unprocessable_entity
+      end
+    else
+      Feedback.transaction do
+        authorize! :create, Feedback
+        points = @feedback.points
+        outlet = @feedback.outlet
+        outlet.with_lock do
+          outlet.rewards_pool = outlet.rewards_pool + points
+          @feedback.rewards_pool_after_feedback = outlet.rewards_pool
+          outlet.save
+        end
+        current_user.with_lock do
+          current_user.points_available += points
+          @feedback.user_points_after_feedback += current_user.points_available
+          current_user.save
+        end
+        @feedback.user = current_user
+        @feedback.code = nil
+        if @feedback.update(feedback_params)
+          render json: {points: @feedback.points}, status: :ok
+        else
+          render json: {errors: @feedback.errors.full_messages}, status: :unprocessable_entity
+        end
       end
     end
   end
@@ -69,6 +93,6 @@ class Api::V1::FeedbacksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def feedback_params
-      params.require(:feedback).permit(:code, :score, :comment, :will_recommend, :completed, :points, :user_id, :outlet_id)
+      params.require(:feedback).permit(:food_quality, :speed_of_service, :friendliness_of_service, :ambience, :cleanliness, :value_for_money, :comment, :will_recommend)
     end
 end
