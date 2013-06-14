@@ -310,9 +310,19 @@ module.controller('signUpController', function($scope, $http, $location) {
 				console.log("User Role " + data + " status " + status);
 				$location.url("/signedUp");
 			}).error(function(data, status) {
-				console.log("data in error " + data.errors + " status " + status);
-				$scope.error = data.errors[0];
-				$scope.errorMsg = true;
+				console.log("data in error " + $scope.email + " status " + status);
+				if (data.errors[0] == "Email can't be blank") {
+					console.log("data.errors[0] "+data.errors[0]);
+					$scope.error = "Please enter a valid email";
+					$scope.errorMsg = true;
+				}else if(data.errors[0] == "Email has already been taken"){
+					$scope.error = "This email belongs to an existing account";
+					$scope.errorMsg = true;
+				}else {
+					$scope.error = data.errors[0];
+					$scope.errorMsg = true;
+				}
+
 			});
 		}
 	};
