@@ -158,6 +158,9 @@ module.controller('loginController', function($scope, $http, $location) {
 		});
 
 	};
+	$scope.forgotPassword = function() {
+		$location.url('/forgotPassword');
+	};
 
 	$scope.$watch('email + password', function() {
 		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
@@ -166,6 +169,74 @@ module.controller('loginController', function($scope, $http, $location) {
 	// $scope.$watch('email + password', function() {
 	// $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
 	// });
+
+});
+
+module.controller('forgotPasswordController', function($scope, $http, $location) {
+
+	$scope.success = false;
+
+	$scope.sendLink = function() {
+		var userEmail = $scope.email;
+		var param = {
+			"user" : {
+				"email" : userEmail
+			}
+		};
+
+		$http({
+			method : 'post',
+			url : '/api/users/password',
+			data : param
+		}).success(function(data, status) {
+			console.log("data in success " + data + " status " + status);
+			$scope.error = data.error;
+			if (!userEmail) {
+				$scope.erromsg = true;
+				$scope.success = false;
+			} else {
+				$scope.success = true;
+				$scope.erromsg = false;
+			}
+		}).error(function(data, status) {
+			console.log("data in error" + data + " status " + status);
+			$scope.erromsg = true;
+			$scope.success = false;
+		});
+
+	};
+});
+
+module.controller('resetPassController', function($scope, $http, $location, $routeParams) {
+
+	$scope.erromsg = false;
+	$scope.resetPass = function() {
+		//alert($routeParams.reset_password_token);
+		var userPass = $scope.password;
+		var userConfirmPass = $scope.confirmpassword;
+		var resetPassToken = $routeParams.reset_password_token;
+		var param = {
+			"user" : {
+				"password" : userPass,
+				"password_confirmation" : userConfirmPass,
+				"reset_password_token" : resetPassToken
+			}
+		};
+		//alert(param);
+		$http({
+			method : 'put',
+			url : '/api/users/password',
+			data : param,
+		}).success(function(data, status) {
+			console.log("data in success " + data + " status " + status);
+			$scope.error = data.auth_token;
+			$scope.statement = true;
+			$scope.erromsg = false;
+		}).error(function(data, status) {
+			console.log("data in error" + data + " status " + status);
+			$scope.erromsg = true;
+		});
+	};
 
 });
 
@@ -247,13 +318,88 @@ module.controller('signedUpController', function($scope, $http, $location) {
 });
 
 module.controller('settingsController', function($scope, $http, $location) {
+	$scope.succMsg = false;
+	$scope.errorMsg = false;
+
+	$scope.home = function() {
+		$location.url("/home");
+	};
+
+	$scope.getProfile = function() {
+
+		var param = {
+			"user_auth_token" : getCookie('authToken')
+		}
+
+		$http({
+			method : 'get',
+			url : '/api/users',
+			params : param
+		}).success(function(data, status) {
+			console.log("User Role " + data + " status " + status);
+			$scope.firstName = data.user.first_name;
+			$scope.lastName = data.user.last_name;
+			$scope.email = data.user.email;
+			$scope.password = data.user.password;
+			$scope.dateOfBirth = data.user.date_of_birth;
+			$scope.gender = data.user.gender;
+			$scope.location = data.user.location;
+		}).error(function(data, status) {
+			console.log("data " + data + " status " + status);
+		});
+
+		//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
+	};
+
+	$scope.getProfile();
+
+	$scope.saveProfile = function() {
+
+		var param = {
+			"user" : {
+				"first_name" : $scope.firstName,
+				"last_name" : $scope.lastName,
+				"email" : $scope.email,
+				"password" : $scope.newPassword,
+				"password_confirmation" : $scope.confirmPassword,
+				"date_of_birth" : $scope.dateOfBirth,
+				"gender" : $scope.gender,
+				"location" : $scope.location,
+				"current_password" : $scope.currentPassword
+			},
+			"auth_token" : getCookie('authToken')
+		}
+
+		$http({
+			method : 'put',
+			url : '/api/users',
+			data : param
+		}).success(function(data, status) {
+			console.log("User Role " + data + " status " + status);
+			setCookie('authToken', data.auth_token, 0.29);
+			$scope.errorMsg = false;
+			$scope.succMsg = true;
+		}).error(function(data, status) {
+			console.log("data " + data + " status " + status);
+			$scope.error = data.errors[0];
+			$scope.errorMsg = true;
+			$scope.succMsg = false;
+		});
+
+		//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('') + ':X');
+	};
 
 	$scope.logout = function() {
 		console.log("in Logout");
 
+		var param = {
+			"user_auth_token" : getCookie('authToken')
+		}
+
 		$http({
 			method : 'delete',
-			url : '/api/users/sign_out'
+			url : '/api/users/sign_out',
+			data : param
 		}).success(function(data, status) {
 			console.log("User Role " + data + " status " + status);
 			deleteCookie('authToken');
@@ -264,40 +410,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 			console.log("data " + data + " status " + status);
 		});
 
-		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
-
-	};
-
-	$scope.getProfile = function() {
-
-		$http({
-			method : 'get',
-			url : '/api/users/sign_out'
-		}).success(function(data, status) {
-			console.log("User Role " + data + " status " + status);
-			$scope.firstName = data.users.first_name;
-			$scope.lastName = data.users.last_name;
-			$scope.email = data.users.email;
-			$scope.password = data.users.password;
-		}).error(function(data, status) {
-			console.log("data " + data + " status " + status);
-		});
-
-		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
-
-	};
-
-	$scope.savePrfle = function() {
-		
-		
-		$http({
-			method : 'get',
-			url : '/api/users/sign_out'
-		}).success(function(data, status) {
-			console.log("User Role " + data + " status " + status);
-		}).error(function(data, status) {
-			console.log("data " + data + " status " + status);
-		});
+		//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
 
 	};
 

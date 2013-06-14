@@ -1,0 +1,93 @@
+<div data-role="page" class="main_content span12" data-theme="b" id="viewaccount" ng-controller="viewaccountCtrl">
+	<div class="viewAccPage">
+		<form  name="viewAcc" ng-submit="view_account(viewAcc)" ng-app>
+			<div class="section">
+				Main Contact Person
+			</div>
+			<div class="ui-input-data">
+				<lable>
+					First Name
+				</lable>
+				<input data-theme="a" data-inline="true" type="text" name="first_name" ng-model="first_name" class="passwordTxt" required />
+
+			</div>
+			<div class="ui-input-data">
+				<lable>
+					Last Name
+				</lable>
+				<input data-theme="a" data-inline="true" type="text" name="last_name" ng-model="last_name" class="passwordTxt" required />
+			</div>
+			<div class="ui-input-data">
+				<lable>
+					Email
+				</lable>
+				<input data-theme="a" data-inline="true" type="email" name="email" ng-model="email" class="passwordTxt" required />
+			</div>
+			<div class="ui-input-data">
+				<lable>
+					Password
+				</lable>
+				<input data-theme="a" data-inline="true" type="password" name="password" ng-model="password" class="passwordTxt" required/>
+			</div>
+			<div class="ui-input-data">
+				<lable>
+					Phone
+				</lable>
+				<input data-theme="a" data-inline="true" type="text" name="phoneno" ng-model="phoneno" class="passwordTxt" />
+			</div>
+			<div class="section">
+				Business Details
+			</div>
+			<div class="ui-input-data">
+				<lable>
+					Company Name
+				</lable>
+				<input data-theme="a" data-inline="true" type="text" name="compnyNm" ng-model="compnyNm" class="passwordTxt" />
+			</div>
+			<div class="ui-input-data">
+				<lable>
+					Contact Number
+				</lable>
+				<input data-theme="a" data-inline="true" type="text" name="contactNo" ng-model="contactNo" class="passwordTxt" required />
+			</div>
+			<div class="ui-input-data">
+				<lable>
+					Address1
+				</lable>
+				<input data-theme="a" data-inline="true" type="text" name="add1" ng-model="add1" class="passwordTxt" required />
+			</div>
+			<div class="ui-input-data">
+				<lable>
+					Addresss2
+				</lable>
+				<input data-theme="a" data-inline="true" type="text" name="add2" ng-model="add2" class="passwordTxt" required />
+			</div>
+			<div class="ui-input-data">
+				<lable>
+					City
+				</lable>
+				<input data-theme="a" data-inline="true" type="text" name="city" ng-model="city" class="passwordTxt" required />
+			</div>
+			<div class="ui-input-data">
+				<lable>
+					Country
+				</lable>
+				<input data-theme="a" data-inline="true" type="text" name="country" ng-model="country" class="passwordTxt" required />
+			</div>
+			<div class="ui-input-data">
+			<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
+				Save
+			</button>
+			<button type="submit" class="submitBtn btn btn-primary btn-large"  >
+				Cancel
+			</button>
+			</div>
+			<p ng-show="success" class="successMsg">
+						Account updated sucessfully.
+					</p>
+					<p ng-show="error" class="errorMsg">
+						{{errormsg}}
+					</p>
+		</form>
+	</div>
+</div>
