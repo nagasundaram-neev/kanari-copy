@@ -530,7 +530,7 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 		$scope.permissionShow = false;
 		$scope.ReportShow = false;
 		$scope.updateMode = false;
-		$scope.success = false;
+		$scope.success1 = false;
 		$('.welcome').show();
 		$('#dasboard').hide();
 		var managerId;
@@ -688,7 +688,43 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 					method = "PUT";
 				}
 				if (!managerId) {
-					managerId = null;
+					var param = {
+					"outlet" : {
+						"name" : $scope.restaurant_name,
+						"address" : $scope.restaurant_location,
+						"latitude" : "50.50",
+						"longitude" : "60.60",
+						"website_url" : "http://batmansdonuts.com",
+						"email" : $scope.email_address,
+						"phone_number" : $scope.contact_number,
+						"open_hours" : $scope.fromTime + "-" + $scope.toTime,
+						"has_delivery" : $scope.Delivery,
+						"serves_alcohol" : $scope.serves_alcohol,
+						"has_outdoor_seating" : $scope.outdoor_Seating,
+						"cuisine_type_ids" : $scope.checked_cuisine
+					},
+					"auth_token" : $scope.auth_token
+				}
+				}
+				else{
+					var param = {
+					"outlet" : {
+						"name" : $scope.restaurant_name,
+						"address" : $scope.restaurant_location,
+						"latitude" : "50.50",
+						"longitude" : "60.60",
+						"website_url" : "http://batmansdonuts.com",
+						"email" : $scope.email_address,
+						"phone_number" : $scope.contact_number,
+						"manager_id" : managerId,
+						"open_hours" : $scope.fromTime + "-" + $scope.toTime,
+						"has_delivery" : $scope.Delivery,
+						"serves_alcohol" : $scope.serves_alcohol,
+						"has_outdoor_seating" : $scope.outdoor_Seating,
+						"cuisine_type_ids" : $scope.checked_cuisine
+					},
+					"auth_token" : $scope.auth_token
+				}
 				}
 				var param = {
 					"outlet" : {
@@ -759,13 +795,13 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 					console.log("data in success " + data + " status " + status);
 					$scope.error = false;
 					$scope.manager_id = data.manager.id;
-					$scope.success = true;
+					$scope.success1 = true;
 					$scope.getManagerList();
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
 					$scope.errorMsg = data.errors;
 					$scope.error = true;
-					$scope.success = false;
+					$scope.success1 = false;
 				});
 			}
 		}
