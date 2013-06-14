@@ -132,8 +132,14 @@ module.controller('loginController', function($scope, $http, $location) {
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
 	$scope.remember = false;
 	$scope.erromsg = false;
-
+	$scope.email = ""
 	$scope.chkLogin = function() {
+		if ($scope.email == "" && $scope.password == "" && !$scope.email && !$scope.password) {
+			console.log("email is blank");
+			$scope.error = " Please enter Email and Password";
+			$scope.erromsg = true;
+			return false;
+		}
 		var param = "{email:'" + $scope.email + "','password:'" + $scope.password + "'}";
 
 		$http({
@@ -153,8 +159,11 @@ module.controller('loginController', function($scope, $http, $location) {
 			}
 			$location.url("/home");
 		}).error(function(data, status) {
-			console.log("data " + data + " status " + status);
+			console.log($scope.password)
+			console.log("data " + $scope.email + " status " + status);
+			$scope.error = "Invalid Email or Password";
 			$scope.erromsg = true;
+
 		});
 
 	};
@@ -278,30 +287,34 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 
 module.controller('signUpController', function($scope, $http, $location) {
 
+	$scope.confPassword = "";
 	$scope.signUp = function() {
-		var param = {
-			"user" : {
-				"first_name" : $scope.firstName,
-				"last_name" : $scope.lastName,
-				"email" : $scope.email,
-				"password" : $scope.password,
-				"password_confirmation" : $scope.confPassword
-			}
-		}
-
-		$http({
-			method : 'post',
-			url : '/api/users',
-			data : param
-		}).success(function(data, status) {
-			console.log("User Role " + data + " status " + status);
-			$location.url("/signedUp");
-		}).error(function(data, status) {
-			console.log("data in error " + data.errors + " status " + status);
-			$scope.error = data.errors;
+		if (!$scope.firstName && !$scope.lastName && $scope.confPassword == "") {
+			$scope.error = "First Name and Last Name is required. Please enter it to continue";
 			$scope.errorMsg = true;
-		});
-
+		} else {
+			var param = {
+				"user" : {
+					"first_name" : $scope.firstName,
+					"last_name" : $scope.lastName,
+					"email" : $scope.email,
+					"password" : $scope.password,
+					"password_confirmation" : $scope.confPassword
+				}
+			}
+			$http({
+				method : 'post',
+				url : '/api/users',
+				data : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				$location.url("/signedUp");
+			}).error(function(data, status) {
+				console.log("data in error " + data.errors + " status " + status);
+				$scope.error = data.errors[0];
+				$scope.errorMsg = true;
+			});
+		}
 	};
 
 	$scope.cancel = function() {

@@ -1,7 +1,42 @@
 /* Give the header a height and a background image */
 
 /* Give basic styles to the body and the navigation */
+
+@font-face {
+	font-family: kanariFont;
+src: url('Roboto-Regular.ttf');
+}
+
+.ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button{
+	font-family:"kanariFont",sans-serif;
+}
+.ui-body-b, .ui-body-b input, .ui-body-b select, .ui-body-b textarea, .ui-body-b button{
+	font-family:"kanariFont",sans-serif;
+}
+
+
+.dob{
+	float:left;
+}
+
+.dobDiv div.ui-input-text input.ui-input-text, .dobDiv div.ui-input-text textarea.ui-input-text, .dobDiv .ui-input-search input.ui-input-text{
+	background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    display: block;
+    float: left;
+    margin: 0;
+    outline: 0 none !important;
+    padding: 0.4em 0;
+    width: 29% !important;
+}
+
+.dobDiv input::-moz-placeholder, .dobDiv textarea::-moz-placeholder{
+	background:#664765;
+}
+
+
 body {
+	font-family:"kanariFont",sans-serif;
 	color: #664765 !important;
 	background: #FEbf3B !important;
 }
@@ -358,6 +393,10 @@ img, object {
 	text-shadow:none;
 }
 .succMsg{
+	color:#0F9D58;
+	text-shadow:none;
+}
+.sucsessMsg{
 	color:#0F9D58;
 	text-shadow:none;
 }

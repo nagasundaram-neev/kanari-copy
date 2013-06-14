@@ -25,10 +25,7 @@
 					</p>
 				</div>
 				<input type="button" class="loginBtn" ng-click="chkLogin()" data-inline="true" value="Login" />
-				<p class="errorMsg" ng-show="erromsg">
-					Invalid Username Password
-				</p>
-				<p ng-hide="erromsg"></p>
+				<p class="errorMsg" ng-show="erromsg">{{error}}</p>
 			</div>
 			<div class="border"></div>
 			<div class="clr"></div>
