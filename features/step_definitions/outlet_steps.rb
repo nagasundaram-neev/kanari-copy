@@ -15,6 +15,16 @@ And /^the customer with id "([^"]*)" has an outlet named "([^"]*)" with id "([^"
   @outlet.disabled.should be_false
 end
 
+And /^the outlet has "([^"]*)" points in its rewards pool$/ do |points|
+  @outlet.rewards_pool = points
+  @outlet.save!
+end
+
+And /^the customer with id "([^"]*)" has an outlet named "([^"]*)" with id "([^"]*)"$/  do |customer_id, outlet_name, outlet_id|
+  @outlet = Outlet.create!(id: outlet_id, name: outlet_name, customer_id: customer_id)
+  @outlet.disabled.should be_false
+end
+
 And /^the outlet's id is "([^"]*)"$/ do |id|
   @outlet.id = id
   @outlet.save
@@ -43,4 +53,8 @@ Given /^outlet "(.*?)" has staffs$/ do |outlet_name, table|
   outlet = Outlet.where(name: outlet_name).first
   outlet.staffs = User.where(email: staff_emails)
   outlet.save!
+end
+
+And /^the outlet's rewards pool should have "([^"]*)" points$/ do |points|
+  @outlet.reload.rewards_pool.should == points.to_i
 end
