@@ -168,7 +168,8 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 	}
 });
 
-module.controller('Login', function($scope, $http, $location) {
+module.controller('Login', function($rootScope,$scope, $http, $location) {
+	$rootScope.header = "Login | Kanari";
 	$('.welcome').hide();
 	$('.navBarCls').hide();
 	$scope.remember = false;
@@ -257,7 +258,8 @@ function getRefresh($scope) {
 	}
 }
 
-module.controller('forgotPassCtrl', function($scope, $http, $location) {
+module.controller('forgotPassCtrl', function($rootScope,$scope, $http, $location) {
+	$rootScope.header = "Forgot Password | Kanari";
 	$scope.erromsg = false;
 	$scope.success = false;
 	$scope.SendLink = function(forgotPass) {
@@ -295,7 +297,8 @@ module.controller('forgotPassCtrl', function($scope, $http, $location) {
 	}
 });
 
-module.controller('resetPassCtrl', function($scope, $routeParams, $http, $location) {
+module.controller('resetPassCtrl', function($rootScope,$scope, $routeParams, $http, $location) {
+	$rootScope.header = "Reset Password | Kanari";
 	$scope.erromsg = false;
 	$scope.resetPass = function(resetPass) {
 		if ($scope.forgotPass.$valid) {
@@ -327,8 +330,9 @@ module.controller('resetPassCtrl', function($scope, $routeParams, $http, $locati
 	};
 });
 
-module.controller('homeCtrl', function($scope, $http, $location) {
+module.controller('homeCtrl', function($rootScope,$scope, $http, $location) {
 	if (getCookie('authToken')) {
+		$rootScope.header = "Create Invitation | Kanari";
 		//getRefresh($scope);
 		$('.welcome').show();
 		$('.navBarCls').show();
@@ -392,9 +396,10 @@ module.controller('homeCtrl', function($scope, $http, $location) {
 		$location.url("/take_tour");
 	};
 });
-module.controller('createInvitation', function($scope, $http, $location) {
+module.controller('createInvitation', function($rootScope,$scope, $http, $location) {
 
 	if (getCookie('authToken')) {
+		$rootScope.header = "Create Invitation | Kanari";
 		$('.welcome').show();
 		$('.navBarCls').show();
 		$('#outlet').hide();
@@ -868,6 +873,20 @@ module.controller('acceptInvitationCtrl', function($scope, $routeParams, $http, 
 			return false;
 		}
 	};
+	// var param = {
+			// "inv_token" : $routeParams.invi_token
+		// }
+
+		$http({
+			method : 'get',
+			url : '/api/invitations/:' + $routeParams.invi_token,
+		}).success(function(data, status) {
+			console.log("data in success " + data + " status " + status);
+			
+		}).error(function(data, status) {
+			console.log("data in error" + data + " status " + status);
+
+		});
 	$scope.acceptInvitation = function(acceptInv) {
 		console.log($routeParams.invi_token);
 		if ($scope.acceptInv.$valid) {
