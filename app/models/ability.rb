@@ -35,12 +35,14 @@ class Ability
       can :read, Outlet
       can :read_all, Customer
       can :read, Customer
+      can :read_pending_redemptions, Outlet
     when 'customer_admin'
       #Customer admin's permissions
       can :read, PaymentInvoice
       can :create, Customer
       can :update, Customer, customer_admin_id: user.id
       can :read, Customer, customer_admin_id: user.id
+      can :read_pending_redemptions, Outlet
       can :manage, Outlet, customer: user.customer
       can :create, Outlet
       can :create, User, role: 'manager'
@@ -48,12 +50,15 @@ class Ability
       can :generate_code, Outlet, customer: user.customer
     when 'manager'
       can :read, Outlet, manager_id: user.id
+      can :read_pending_redemptions, Outlet
       can :generate_code, Outlet, manager_id: user.id
     when 'staff'
       can :read, Outlet, id: (user.employed_outlet.id rescue nil)
+      can :read_pending_redemptions, Outlet
       can :generate_code, Outlet, id: (user.employed_outlet.id rescue nil)
     when 'user'
       can :create, Feedback
+      can :read, Outlet, disabled: false
     else
       #Default permissions
     end
