@@ -32,7 +32,7 @@
 		<div class="content" ng-controller="commonCtrl">
 			<div class="header">
 				<div class="span12">
-					<a href="#/home"><%= image_tag 'logo.jpg' %></a>
+					<a class="homeLogo" href="#/home"><%= image_tag 'logo.jpg' %><span>Kanari</span></a>
 					<div class="welcome">
 						Hello <a href="#/home" id="userName">{{userName}}</a>
 						<a ng-click="logout()" class="logOut"><%= image_tag 'icon_logout.png' %> Logout</a>
