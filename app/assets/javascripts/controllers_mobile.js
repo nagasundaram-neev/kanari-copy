@@ -360,11 +360,17 @@ module.controller('settingsController', function($scope, $http, $location) {
 			params : param
 		}).success(function(data, status) {
 			console.log("User Role " + data + " status " + status);
+			var date = new Date();
+			date = data.user.date_of_birth.split("-");
+			console.log("date "+date);
+			console.log(date[0]+" "+date[1]+" "+date[2]);
 			$scope.firstName = data.user.first_name;
 			$scope.lastName = data.user.last_name;
 			$scope.email = data.user.email;
 			$scope.password = data.user.password;
-			$scope.dateOfBirth = data.user.date_of_birth;
+			$scope.date = date[2];
+			$scope.month = date[1];
+			$scope.year = date[0];
 			$scope.gender = data.user.gender;
 			$scope.location = data.user.location;
 		}).error(function(data, status) {
@@ -378,14 +384,23 @@ module.controller('settingsController', function($scope, $http, $location) {
 
 	$scope.saveProfile = function() {
 
-		var param = {
+		//console.log("length year"+$scope.year.length);
+		var date = $scope.date+"/"+$scope.month+"/"+$scope.year;
+		if (!$scope.date && !$scope.month && !$scope.year) {
+			$scope.error = "Enter the date of birth";
+			$scope.errorMsg = true;
+		} else if(!isDate(date)) {
+			$scope.error = "Enter valid Date of birth";
+			$scope.errorMsg = true;
+		}else{
+			var param = {
 			"user" : {
 				"first_name" : $scope.firstName,
 				"last_name" : $scope.lastName,
 				"email" : $scope.email,
 				"password" : $scope.newPassword,
 				"password_confirmation" : $scope.confirmPassword,
-				"date_of_birth" : $scope.dateOfBirth,
+				"date_of_birth" : $scope.date+"-"+$scope.month+"-"+$scope.year,
 				"gender" : $scope.gender,
 				"location" : $scope.location,
 				"current_password" : $scope.currentPassword
@@ -409,6 +424,10 @@ module.controller('settingsController', function($scope, $http, $location) {
 			$scope.succMsg = false;
 		});
 
+		}
+			
+
+		
 		//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('') + ':X');
 	};
 
@@ -465,5 +484,44 @@ function getCookie(name) {
 
 function deleteCookie(name) {
 	setCookie(name, "", -1);
+}
+
+function isDate(txtDate, separator) {
+	var aoDate, // needed for creating array and object
+	ms, // date in milliseconds
+	month, day, year;
+	// (integer) month, day and year
+	// if separator is not defined then set '/'
+	if (separator == undefined) {
+		separator = '/';
+	}
+	// split input date to month, day and year
+	aoDate = txtDate.split(separator);
+	// array length should be exactly 3 (no more no less)
+	if (aoDate.length !== 3) {
+		return false;
+	}
+	// define month, day and year from array (expected format is m/d/yyyy)
+	// subtraction will cast variables to integer implicitly
+	month = aoDate[1] - 1;
+	// because months in JS start from 0
+	day = aoDate[0] - 0;
+	year = aoDate[2] - 0;
+	// test year range
+	if (year < 1000 || year > 3000) {
+		return false;
+	}
+	// convert input date to milliseconds
+	ms = (new Date(year, month, day)).getTime();
+	// initialize Date() object from milliseconds (reuse aoDate variable)
+	aoDate = new Date();
+	aoDate.setTime(ms);
+	// compare input date and parts from Date() object
+	// if difference exists then input date is not valid
+	if (aoDate.getFullYear() !== year || aoDate.getMonth() !== month || aoDate.getDate() !== day) {
+		return false;
+	}
+	// date is OK, return true
+	return true;
 }
 
