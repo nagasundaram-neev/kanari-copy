@@ -8,10 +8,10 @@
 			vertical-align: middle !important;
 		}
 #map_canvas{
-			    width:100%;
-			    height: 250px; 
+			    /*width:100%;*/
+			    height: 435px; 
 			    border: 1px solid #333335;
-			    margin-bottom:20px;
+			    margin: 0 20px;
 			}
 	</style>
 	<div class="create_outlet innerDiv" data-role="content">
@@ -45,7 +45,7 @@
 			</ul>
 		</div>
 		<div ng-show="profileShow">
-			<div data-role="fieldcontain" class="rightPanel loginDiv">
+			<div data-role="fieldcontain" class="rightPanel">
 				<h1>Create Restaurant Outlet</h1>
 				<form  name="createOutlet" ng-submit="create_outlet(createOutlet)" ng-app>
 					<div class="ui-input-data">
@@ -164,13 +164,7 @@
 			</p>
 			<p ng-hide="success"></p>
 		</div>
-		<div id ="location" ng-show="locationShow">
-			<div ng-app="kanari">
-				<div ng-controller="MapCtrl">
-					<map id="map_canvas"></map>
-				</div>
-			</div>
-		</div>
+		
 		<div id ="permission" ng-show="permissionShow">
 			<!-- <div data-role="fieldcontain" class="manager_list rightPanel">
 			<h3>Select a manager for this outlet</h3>
@@ -242,7 +236,13 @@
 		<div id ="reports" ng-show="ReportShow">
 			This is reports based div only
 		</div>
-
+<div id ="location" >
+			<div ng-app="kanari">
+				<div ng-controller="MapCtrl">
+					<map id="map_canvas"></map>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
