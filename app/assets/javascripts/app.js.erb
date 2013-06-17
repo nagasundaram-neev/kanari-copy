@@ -39,35 +39,63 @@ module.directive('map', function() {
             };
            // alert(attrs.id);
             var map = new google.maps.Map(document.getElementById(attrs.id), myOptions);
-            
-            google.maps.event.addListener(map, 'click', function(e) {
+            var markersArray = [];
+
+            google.maps.event.addListener(map, 'click', function(event) {
                 scope.$apply(function() {
                     addMarker({
-                    lat: e.latLng.lat(),
-                    lng: e.latLng.lng()
+                    lat: event.latLng.lat(),
+                    lng: event.latLng.lng()
                   }); 
                     
-                    console.log(e);
+                    console.log(event);
                 });
+                
+               
+		
+                 var geocoder = new google.maps.Geocoder();
+		geocoder.geocode({
+			"latLng" : event.latLng
+		}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				console.log(results[0].formatted_address);
+				var infoWindow = new google.maps.InfoWindow();
+				var html = results[0].formatted_address;
+				
+				 var marker = new google.maps.Marker({
+			position : event.latLng,
+			map : map,
+			title:html
+		});
+		 markersArray.push(marker);
+
+			}
+		});
     
             }); // end click listener
             
             var addMarker= function(pos){
-            	alert('in');
-               var myLatlng = new google.maps.LatLng(pos.lat,pos.lng);
-               var marker = new google.maps.Marker({
-                    position: myLatlng, 
-                    map: map,
-                    title:"Hello World!"
-                });
+            	clearOverlays()
+            	var myLatlng = new google.maps.LatLng(pos.lat,pos.lng);
             } //end addMarker
             
+           function clearOverlays() {
+  if (markersArray) {
+    for (i in markersArray) {
+      markersArray[i].setMap(null);
+    }
+  }
+}
+
         }
     };
 });
 
 function MapCtrl($scope) {
         
-    $scope.mapPin = 'No pin set yet';       
+    $scope.mapPin = 'No pin set yet';  
+    angular.forEach($scope.myMarkers, function(marker) {
+    marker.setMap(null);
+});     
           
 }

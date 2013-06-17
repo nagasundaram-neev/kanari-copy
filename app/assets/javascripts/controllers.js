@@ -809,22 +809,26 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 		$scope.changeTab = function(currentTab) {
 			if ($scope.updateMode) {
 				if (currentTab == "profileShow") {
+					$('#location').css({'opacity':'0'});
 					$scope.profileShow = true;
 					$scope.locationShow = false;
 					$scope.permissionShow = false;
 					$scope.successMsg = false;
 					$scope.ReportShow = false;
 				} else if (currentTab == "locationShow") {
+					$('#location').css({'opacity':'1'});
 					$scope.profileShow = false;
 					$scope.locationShow = true;
 					$scope.permissionShow = false;
 					$scope.ReportShow = false;
 				} else if (currentTab == "permissionShow") {
+					$('#location').css({'opacity':'0'});
 					$scope.profileShow = false;
 					$scope.locationShow = false;
 					$scope.permissionShow = true;
 					$scope.ReportShow = false;
 				} else if (currentTab == "ReportShow") {
+					$('#location').css({'opacity':'0'});
 					$scope.profileShow = false;
 					$scope.locationShow = false;
 					$scope.permissionShow = false;
