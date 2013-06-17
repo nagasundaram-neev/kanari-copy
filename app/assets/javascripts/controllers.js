@@ -689,42 +689,41 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 				}
 				if (!managerId) {
 					var param = {
-					"outlet" : {
-						"name" : $scope.restaurant_name,
-						"address" : $scope.restaurant_location,
-						"latitude" : "50.50",
-						"longitude" : "60.60",
-						"website_url" : "http://batmansdonuts.com",
-						"email" : $scope.email_address,
-						"phone_number" : $scope.contact_number,
-						"open_hours" : $scope.fromTime + "-" + $scope.toTime,
-						"has_delivery" : $scope.Delivery,
-						"serves_alcohol" : $scope.serves_alcohol,
-						"has_outdoor_seating" : $scope.outdoor_Seating,
-						"cuisine_type_ids" : $scope.checked_cuisine
-					},
-					"auth_token" : $scope.auth_token
-				}
-				}
-				else{
+						"outlet" : {
+							"name" : $scope.restaurant_name,
+							"address" : $scope.restaurant_location,
+							"latitude" : "50.50",
+							"longitude" : "60.60",
+							"website_url" : "http://batmansdonuts.com",
+							"email" : $scope.email_address,
+							"phone_number" : $scope.contact_number,
+							"open_hours" : $scope.fromTime + "-" + $scope.toTime,
+							"has_delivery" : $scope.Delivery,
+							"serves_alcohol" : $scope.serves_alcohol,
+							"has_outdoor_seating" : $scope.outdoor_Seating,
+							"cuisine_type_ids" : $scope.checked_cuisine
+						},
+						"auth_token" : $scope.auth_token
+					}
+				} else {
 					var param = {
-					"outlet" : {
-						"name" : $scope.restaurant_name,
-						"address" : $scope.restaurant_location,
-						"latitude" : "50.50",
-						"longitude" : "60.60",
-						"website_url" : "http://batmansdonuts.com",
-						"email" : $scope.email_address,
-						"phone_number" : $scope.contact_number,
-						"manager_id" : managerId,
-						"open_hours" : $scope.fromTime + "-" + $scope.toTime,
-						"has_delivery" : $scope.Delivery,
-						"serves_alcohol" : $scope.serves_alcohol,
-						"has_outdoor_seating" : $scope.outdoor_Seating,
-						"cuisine_type_ids" : $scope.checked_cuisine
-					},
-					"auth_token" : $scope.auth_token
-				}
+						"outlet" : {
+							"name" : $scope.restaurant_name,
+							"address" : $scope.restaurant_location,
+							"latitude" : "50.50",
+							"longitude" : "60.60",
+							"website_url" : "http://batmansdonuts.com",
+							"email" : $scope.email_address,
+							"phone_number" : $scope.contact_number,
+							"manager_id" : managerId,
+							"open_hours" : $scope.fromTime + "-" + $scope.toTime,
+							"has_delivery" : $scope.Delivery,
+							"serves_alcohol" : $scope.serves_alcohol,
+							"has_outdoor_seating" : $scope.outdoor_Seating,
+							"cuisine_type_ids" : $scope.checked_cuisine
+						},
+						"auth_token" : $scope.auth_token
+					}
 				}
 				var param = {
 					"outlet" : {
@@ -809,26 +808,34 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 		$scope.changeTab = function(currentTab) {
 			if ($scope.updateMode) {
 				if (currentTab == "profileShow") {
-					$('#location').css({'opacity':'0'});
+					$('#location').css({
+						'opacity' : '0'
+					});
 					$scope.profileShow = true;
 					$scope.locationShow = false;
 					$scope.permissionShow = false;
 					$scope.successMsg = false;
 					$scope.ReportShow = false;
 				} else if (currentTab == "locationShow") {
-					$('#location').css({'opacity':'1'});
+					$('#location').css({
+						'opacity' : '1'
+					});
 					$scope.profileShow = false;
 					$scope.locationShow = true;
 					$scope.permissionShow = false;
 					$scope.ReportShow = false;
 				} else if (currentTab == "permissionShow") {
-					$('#location').css({'opacity':'0'});
+					$('#location').css({
+						'opacity' : '0'
+					});
 					$scope.profileShow = false;
 					$scope.locationShow = false;
 					$scope.permissionShow = true;
 					$scope.ReportShow = false;
 				} else if (currentTab == "ReportShow") {
-					$('#location').css({'opacity':'0'});
+					$('#location').css({
+						'opacity' : '0'
+					});
 					$scope.profileShow = false;
 					$scope.locationShow = false;
 					$scope.permissionShow = false;
@@ -887,6 +894,7 @@ module.controller('acceptInvitationCtrl', function($scope, $routeParams, $http, 
 });
 module.controller('acceptInvitation2Ctrl', function($scope, $routeParams, $http, $location) {
 	if (getCookie('authToken')) {
+		$('.welcome').show();
 		$scope.auth_token = getCookie('authToken');
 		console.log($scope.auth_token);
 		$scope.acceptInvitation2 = function(acceptInv2) {
@@ -1133,9 +1141,54 @@ module.controller('viewaccountCtrl', function($scope, $http, $location) {
 				$scope.success = false;
 			}
 		}
+		$scope.gotoChangePassword = function() {
+			$location.url("/change_password");
+		}
 	}
 });
+module.controller('changePassCtrl', function($scope, $routeParams, $route, $http, $location) {
+	if (getCookie('authToken')) {
+		$('.welcome').show();
+		$('.navBarCls').show();
+		$('.navBarCls ul li').removeClass('active');
+		$('#dasboard').hide();
+		$('#account').addClass('active');
+		$scope.success = false;
+		$scope.error = false;
 
+		$scope.changePassword = function(changePass) {
+			if ($scope.changePass.$valid) {
+				var param2 = {
+					"user" : {
+						"password" : $scope.password,
+						"password_confirmation" : $scope.password_confirmation,
+						"current_password" : $scope.old_password
+					},
+					"auth_token" : getCookie('authToken')
+				}
+				$http({
+					method : 'put',
+					url : '/api/users/',
+					data : param2,
+				}).success(function(data, status) {
+					console.log("data in success " + data + " status " + status);
+
+					$scope.success = true;
+					$scope.error = false;
+
+				}).error(function(data, status) {
+					console.log("data in errorrr" + data + " status " + status);
+					$scope.success = false;
+					$scope.error = true;
+					$scope.errormsg = data.errors;
+				});
+
+			} else {
+				$scope.success = false;
+			}
+		}
+	}
+});
 module.controller('sidePanelCtrl', function($scope, $routeParams, $route, $http, $location) {
 	var classNm = $location.path();
 	var newValue = classNm.replace('/', '');

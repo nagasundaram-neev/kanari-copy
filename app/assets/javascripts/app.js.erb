@@ -20,6 +20,7 @@ var module = angular.module('kanari', []).
       when('/take_tour',{templateUrl:"<%= asset_path 'takeTour.html'%>"}).
        when('/view_account',{templateUrl:"<%= asset_path 'viewAccount.html'%>"}).
      when('/logout', {templateUrl: "<%= asset_path 'logOut.html' %>"}).
+      when('/change_password', {templateUrl: "<%= asset_path 'changePassword.html' %>"}).
       otherwise({redirectTo: '/login'});
       $locationProvider.hashPrefix = "";
 }]);
@@ -99,3 +100,27 @@ function MapCtrl($scope) {
 });     
           
 }
+
+
+module.directive('passwordValidate', function() {
+    return {
+        require: 'ngModel',
+        link: function(scope, elm, attrs, ctrl) {
+            ctrl.$parsers.unshift(function(viewValue) {
+
+                scope.pwdValidLength = (viewValue && viewValue.length >= 8 ? 'valid' : undefined);
+                scope.pwdHasLetter = (viewValue && /[A-z]/.test(viewValue)) ? 'valid' : undefined;
+                scope.pwdHasNumber = (viewValue && /\d/.test(viewValue)) ? 'valid' : undefined;
+
+                if(scope.pwdValidLength && scope.pwdHasLetter && scope.pwdHasNumber) {
+                    ctrl.$setValidity('pwd', true);
+                    return viewValue;
+                } else {
+                    ctrl.$setValidity('pwd', false);                    
+                    return undefined;
+                }
+
+            });
+        }
+    };
+});
