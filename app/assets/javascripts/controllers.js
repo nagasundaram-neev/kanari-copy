@@ -529,6 +529,7 @@ module.controller('listPaymentInvoiceCtrl', function($scope, $http, $location) {
 module.controller('createOutletCtrl', function($scope, $routeParams, $http, $location) {
 	if (getCookie('authToken')) {
 		$scope.profileShow = true;
+		$scope.managerField= false;
 		$scope.locationShow = false;
 		$scope.permissionShow = false;
 		$scope.ReportShow = false;
@@ -606,6 +607,14 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 				$scope.error = false;
 				$scope.managerList = data.managers;
 				var managerlist = data.managers;
+				if(managerlist != ""){
+					alert(managerlist);
+					$scope.managerField= true;
+				}
+				else
+				{
+					$scope.managerField= false;
+				}
 				$scope.success = true;
 
 			}).error(function(data, status) {
