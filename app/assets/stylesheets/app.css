@@ -14,6 +14,7 @@ html, body {
 body {
 	margin: 0 !important;
 	padding: 0 !important;
+	background: none repeat scroll 0 0 #E4E3E1 !important;
 }
 .clr {
 	margin: 0;
@@ -34,6 +35,15 @@ body {
 	text-decoration: none;
 	color: #5A4166;
 	font-weight: bold;
+}
+.homeLogo img {
+	float: left
+}
+.homeLogo span {
+	color: #5A4156;
+	float: left;
+	font-size: 53px;
+	margin: 35px 5px 0;
 }
 .welcome a:hover {
 	text-decoration: none;
@@ -66,7 +76,8 @@ body {
 	padding: 0 150px
 }
 .content .span12 {
-	margin: 0 7%;
+	float: none;
+	margin: 0 auto;
 	width: 1115px;
 }
 .navBarCls {
@@ -120,6 +131,12 @@ body {
 	padding: 5px !important;
 	text-shadow: none !important;
 	display: inline-block !important;
+}
+.btn {
+	background: none repeat scroll 0 0 #F5BA44 !important;
+	color: #5A4156 !important;
+	padding: 5px !important;
+	text-shadow: none !important;
 }
 .loginDiv {
 	text-align: center
@@ -325,12 +342,13 @@ ul.taketour li a:hover {
 /***Change Password**/
 .
 .changePass {
-	
+
 }
 
 /**View Account Details**/
 .viewAccPage {
-	margin: 20px 50px;;
+	margin: 20px 50px;
+	padding: 10px 0;
 }
 .section {
 	border-bottom: 1px solid #CCCCCC;
@@ -350,14 +368,16 @@ ul.taketour li a:hover {
 }
 .changePassword {
 	background: none repeat scroll 0 0 #F5BA44 !important;
-    color: #5A4156 !important;
-    display: inline-block !important;
-    padding: 5px !important;
-    text-shadow: none !important;
-     border-radius: 5px 5px 5px 5px;
-     margin-left:5px;
+	color: #5A4156 !important;
+	display: inline-block !important;
+	padding: 5px !important;
+	text-shadow: none !important;
+	border-radius: 5px 5px 5px 5px;
+	margin-left: 5px;
 }
-a.changePassword:hover{text-decoration:none;}
+a.changePassword:hover {
+	text-decoration: none;
+}
 #location {
 	opacity: 0
 }

@@ -260,33 +260,35 @@ function getRefresh($scope) {
 module.controller('forgotPassCtrl', function($scope, $http, $location) {
 	$scope.erromsg = false;
 	$scope.success = false;
-	$scope.SendLink = function() {
-		var userEmail = $scope.email;
-		var param = {
-			"user" : {
-				"email" : userEmail
-			}
-		};
-		//alert(param);
-		$http({
-			method : 'post',
-			url : '/api/users/password',
-			data : param,
-		}).success(function(data, status) {
-			console.log("data in success " + userEmail + " status " + status);
-			$scope.error = data.error;
-			if (!userEmail) {
+	$scope.SendLink = function(forgotPass) {
+		if ($scope.forgotPass.$valid) {
+			var userEmail = $scope.email;
+			var param = {
+				"user" : {
+					"email" : userEmail
+				}
+			};
+			//alert(param);
+			$http({
+				method : 'post',
+				url : '/api/users/password',
+				data : param,
+			}).success(function(data, status) {
+				console.log("data in success " + userEmail + " status " + status);
+				$scope.error = data.error;
+				if (!userEmail) {
+					$scope.erromsg = true;
+					$scope.success = false;
+				} else {
+					$scope.success = true;
+					$scope.erromsg = false;
+				}
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
 				$scope.erromsg = true;
 				$scope.success = false;
-			} else {
-				$scope.success = true;
-				$scope.erromsg = false;
-			}
-		}).error(function(data, status) {
-			console.log("data in error" + data + " status " + status);
-			$scope.erromsg = true;
-			$scope.success = false;
-		});
+			});
+		}
 	};
 	$scope.BackLink = function() {
 		$location.url("/login");
@@ -295,32 +297,33 @@ module.controller('forgotPassCtrl', function($scope, $http, $location) {
 
 module.controller('resetPassCtrl', function($scope, $routeParams, $http, $location) {
 	$scope.erromsg = false;
-	$scope.resetPass = function() {
-		//alert($routeParams.reset_password_token);
-		var userPass = $scope.password;
-		var userConfirmPass = $scope.confirmpassword;
-		var resetPassToken = $routeParams.reset_password_token;
-		var param = {
-			"user" : {
-				"password" : userPass,
-				"password_confirmation" : userConfirmPass,
-				"reset_password_token" : resetPassToken
-			}
-		};
-		//alert(param);
-		$http({
-			method : 'put',
-			url : '/api/users/password',
-			data : param,
-		}).success(function(data, status) {
-			console.log("data in success " + data + " status " + status);
-			$scope.error = data.auth_token;
-			$scope.statement = true;
-			$scope.erromsg = false;
-		}).error(function(data, status) {
-			console.log("data in error" + data + " status " + status);
-			$scope.erromsg = true;
-		});
+	$scope.resetPass = function(resetPass) {
+		if ($scope.forgotPass.$valid) {
+			var userPass = $scope.password;
+			var userConfirmPass = $scope.confirmpassword;
+			var resetPassToken = $routeParams.reset_password_token;
+			var param = {
+				"user" : {
+					"password" : userPass,
+					"password_confirmation" : userConfirmPass,
+					"reset_password_token" : resetPassToken
+				}
+			};
+			//alert(param);
+			$http({
+				method : 'put',
+				url : '/api/users/password',
+				data : param,
+			}).success(function(data, status) {
+				console.log("data in success " + data + " status " + status);
+				$scope.error = data.auth_token;
+				$scope.statement = true;
+				$scope.erromsg = false;
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+				$scope.erromsg = true;
+			});
+		}
 	};
 });
 
