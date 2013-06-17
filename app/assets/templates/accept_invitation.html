@@ -1,22 +1,44 @@
 <div data-role="page" data-theme="b" id="acceptInvitation" ng-controller="acceptInvitationCtrl" class="main_content span12">
-	<div class="innerDiv" data-role="content">
+	<div class="loginDiv innerDiv" data-role="content">
 		<h1>Accept Invitation</h1>
 		<br/>
-		<div class="outerDiv">
+		<div class="acceptInv outerDiv">
 			<form  name="acceptInv" ng-submit="acceptInvitation(acceptInv)" ng-app>
-				<div data-role="fieldcontain" class="loginDiv">
+				<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 42%;">
 					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
-						<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="password" class="passwordTxt" placeholder="Password" required/>
-					</div>
-					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
-						<input data-theme="a" data-inline="true" type="password" name="txtcpassword" ng-model="password_confirmation" class="passwordTxt" placeholder="Confirmation Password" required/>
-					</div>
-					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
+						<lable>
+							First Name
+						</lable>
 						<input data-theme="a" data-inline="true" type="text" name="txtfirstname" ng-model="first_name" value="" placeholder="First Name" required/>
 					</div>
 					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
+						<lable>
+							Last Name
+						</lable>
 						<input data-theme="a" data-inline="true" type="text" name="txtlastname" ng-model="last_name" value="" placeholder="Last Name" required/>
+						<div class="clr"></div>
 					</div>
+					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
+						<lable>
+							Phone Number
+						</lable>
+						<input data-theme="a" data-inline="true" type="text" name="txtphnNo" ng-model="phone_no" value="" placeholder="Phone Number" required/>
+						<div class="clr"></div>
+					</div>
+					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
+						<lable>
+							Password
+						</lable>
+						<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="password" class="passwordTxt" placeholder="Password" required/>
+					</div>
+					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
+						<lable>
+							Confirm Password
+						</lable>
+						<input data-theme="a" data-inline="true" type="password" name="txtcpassword" ng-model="password_confirmation" class="passwordTxt" placeholder="Confirmation Password" required/>
+					</div>
+					
+					
 					<!-- <input type="button" class="loginBtn" ng-click="acceptInvitation()" data-inline="true" value="Save" /> -->
 					<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
 						Save
