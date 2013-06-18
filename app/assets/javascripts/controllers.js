@@ -302,8 +302,8 @@ module.controller('forgotPassCtrl', function($rootScope, $scope, $http, $locatio
 module.controller('resetPassCtrl', function($rootScope, $scope, $routeParams, $http, $location) {
 	$rootScope.header = "Reset Password | Kanari";
 	$scope.erromsg = false;
-	$scope.resetPass = function(resetPass) {
-		if ($scope.forgotPass.$valid) {
+	$scope.reset_Pass = function(resetPass) {
+		if ($scope.resetPass.$valid) {
 			var userPass = $scope.password;
 			var userConfirmPass = $scope.confirmpassword;
 			var resetPassToken = $routeParams.reset_password_token;
@@ -445,7 +445,7 @@ module.controller('createInvitation', function($rootScope, $scope, $http, $locat
 			}).error(function(data, status) {
 				console.log("data in error" + data + " status " + status);
 				if (userEmail) {
-					$scope.errortext = "Invitation url for this email is already been created";
+					$scope.errortext = "An invitation url for this email is already created.";
 					$scope.erromsg = true;
 				}
 			});
@@ -679,12 +679,18 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				$scope.Delivery = data.outlet.has_delivery.toString();
 				$scope.serves_alcohol = data.outlet.serves_alcohol.toString();
 				$scope.outdoor_Seating = data.outlet.has_outdoor_seating.toString();
+				setCookie('latitude', data.outlet.latitude, 0.29);
+				setCookie('logitude', data.outlet.longitude, 0.29);
 				$scope.updateMode = true;
 				$scope.checkedCuisineTypes = data.outlet.cuisine_types;
 				for ( i = 0; i < $scope.checkedCuisineTypes; i++) {
 					$scope.checkedCuisineTypes[i]["checked"] = true;
 					console.log($scope.checkedCuisineTypes[i])
 				}
+
+				$scope.$broadcast('clickMessageFromParent', {
+					data : "SOME msg to the child"
+				})
 
 				console.log($scope.checkedCuisineTypes)
 
@@ -727,8 +733,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 						"outlet" : {
 							"name" : $scope.restaurant_name,
 							"address" : $scope.restaurant_location,
-							"latitude" : "50.50",
-							"longitude" : "60.60",
 							"website_url" : "http://batmansdonuts.com",
 							"email" : $scope.email_address,
 							"phone_number" : $scope.contact_number,
@@ -745,8 +749,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 						"outlet" : {
 							"name" : $scope.restaurant_name,
 							"address" : $scope.restaurant_location,
-							"latitude" : "50.50",
-							"longitude" : "60.60",
 							"website_url" : "http://batmansdonuts.com",
 							"email" : $scope.email_address,
 							"phone_number" : $scope.contact_number,
@@ -764,8 +766,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					"outlet" : {
 						"name" : $scope.restaurant_name,
 						"address" : $scope.restaurant_location,
-						"latitude" : "50.50",
-						"longitude" : "60.60",
 						"website_url" : "http://batmansdonuts.com",
 						"email" : $scope.email_address,
 						"phone_number" : $scope.contact_number,
@@ -789,11 +789,13 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					if (data.outlet) {
 						console.log(data.outlet.id);
 						$scope.outletID = data.outlet.id;
-						$scope.updateMode = true
+						$scope.updateMode = true;
+						$('#location').css({'opacity' : '1'});
 					}
 					$scope.successMsg = true;
 					$scope.profileShow = false;
 					$scope.locationShow = true;
+					$('#location').css({'opacity' : '1'});
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
 					$scope.error = true;
@@ -897,9 +899,10 @@ module.controller('acceptInvitationCtrl', function($rootScope, $scope, $routePar
 	$rootScope.header = "Accept Invitation | Kanari";
 	$http({
 		method : 'get',
-		url : '/api/invitations/:' + $routeParams.invi_token,
+		url : '/api/users/invitation/' + $routeParams.invi_token,
 	}).success(function(data, status) {
 		console.log("data in success " + data + " status " + status);
+		$scope.emailId = data.email;
 
 	}).error(function(data, status) {
 		console.log("data in error" + data + " status " + status);
@@ -914,6 +917,7 @@ module.controller('acceptInvitationCtrl', function($rootScope, $scope, $routePar
 					"password_confirmation" : $scope.password_confirmation,
 					"first_name" : $scope.first_name,
 					"last_name" : $scope.last_name,
+					"phone_number":$scope.phone_no,
 					"invitation_token" : $routeParams.invi_token
 				}
 			}
@@ -1118,7 +1122,7 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 			$scope.last_name = data.customer.customer_admin.last_name;
 			$scope.email = data.customer.customer_admin.email;
 			$scope.phoneno = data.customer.customer_admin.phone_number;
-			//$scope.compnyNm = data.customer.customer_admin.first_name;
+			$scope.compnyNm = data.customer.name;
 			$scope.contactNo = data.customer.phone_number;
 			$scope.add1 = data.customer.registered_address_line_1;
 			$scope.add2 = data.customer.registered_address_line_2;
@@ -1133,7 +1137,7 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 			if ($scope.viewAcc.$valid) {
 				var param = {
 					"customer" : {
-						"name" : $scope.first_name,
+						"name" : $scope.compnyNm,
 						"email" : $scope.email,
 						"data.customer.registered_address_line_1" : $scope.add1,
 						"data.customer.registered_address_line_2" : $scope.add2,

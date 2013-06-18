@@ -14,42 +14,45 @@
 			</button>
 			</div>
 			</form> -->
-<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 41%;">
-			<form ng-app="form-example" class="row form-horizontal" name="login" ng-submit="create_invitation()" novalidate>
-				<div class="control-group">
-					<div class="controls">
-						<lable >
-							Email Address
-						</lable>
-						<input type="email" id="inputEmail" placeholder="Email" ng-model="userEmail" required>
-						<div class="input-help">
-							<h4>Invalid Email</h4>
+			<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 41%;">
+				<form ng-app="form-example" class="row form-horizontal" name="login" ng-submit="create_invitation()" novalidate>
+					<div class="control-group">
+						<div class="controls">
+							<lable >
+								Email Address
+							</lable>
+							<input type="email" id="inputEmail" placeholder="Email" ng-model="userEmail" required>
+							<div class="input-help">
+								<h4>Invalid Email</h4>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div style="margin: 10px 0 0 145px;" class="control-group">
-					<div class="controls">
-						<button type="submit" class="btn">
-							Create Invitation
-						</button>
-						<button class="btn" disabled>
-							Create Invitation
-						</button>
-					</div><br/>
-					<a href="#/payment_invoice" title="PaymentInvoice" class="createPayment">Create Payment Invoice</a>
-			<br/>
-				</div>
-			</form>
-			
-		</div>
-		<div class="errorMsg" ng-show="erromsg">
-			{{errortext}}
-		</div>
-		<p ng-hide="erromsg"></p>
-		<p ng-show="statement">
-			Invitation Url Is: <a href="{{invitation_token}}" target="_blank"}<u>{{invitation_token}}</u></a>
-		</p>
-		<p ng-hide="statement"></p>
+					<div style="margin: 10px 0 0 145px;" class="control-group">
+						<div class="controls">
+							<button type="submit" class="btn">
+								Create Invitation
+							</button>
+							<button class="btn" disabled>
+								Create Invitation
+							</button>
+						</div>
+						<br/>
+						<a href="#/payment_invoice" title="PaymentInvoice" class="createPayment">Create Payment Invoice</a>
+						<br/>
+						<p class="errorMsg" ng-show="erromsg">
+							{{errortext}}
+						</p>
+						<p ng-hide="erromsg"></p>
+
+					</div>
+
+				</form>
+
+			</div>
+			<p ng-show="statement">
+				Invitation Url Is: <a href="{{invitation_token}}" target="_blank"}<u>{{invitation_token}}</u></a>
+			</p>
+			<p ng-hide="statement"></p>
 		</div>
 	</div>
 </div>
