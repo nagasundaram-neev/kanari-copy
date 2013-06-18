@@ -1,5 +1,6 @@
 <div data-role="page" class="main_content span12" data-theme="b" id="viewaccount" ng-controller="viewaccountCtrl">
 	<div class="viewAccPage">
+		<h1> Settings</h1>
 		<form  name="viewAcc" ng-submit="view_account(viewAcc)" ng-app>
 			<div class="section">
 				Main Contact Person
@@ -28,6 +29,9 @@
 					Password
 				</lable>
 				<input data-theme="a" data-inline="true" type="password" name="password" ng-model="password" class="passwordTxt" required/>
+				<a href="" class="changePassword"  ng-click="gotoChangePassword()">
+				Change Password
+			</a>
 			</div>
 			<div class="ui-input-data">
 				<lable>
@@ -89,5 +93,7 @@
 						{{errormsg}}
 					</p>
 		</form>
+		
 	</div>
+	
 </div>

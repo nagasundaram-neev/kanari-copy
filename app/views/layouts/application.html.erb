@@ -2,24 +2,25 @@
 <html lang="en" ng-app="kanari">
 	<head>
 		<meta charset="utf-8">
-		<title>Kanari</title>
+		<title ng-bind="header"></title>
 		<%= stylesheet_link_tag "app.css", :media => "all" %>
 		<%= stylesheet_link_tag "bootstrap.css", :media => "all" %>
 		<%= stylesheet_link_tag "bootstrap-responsive.css", :media => "all" %>
+		<%= favicon_link_tag 'favicon.ico' %>
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 		<!-- <%= javascript_include_tag "maps.js" %> -->
-		
+
 		<%= javascript_include_tag "jquery.js" %>
-		
+
 		<%= javascript_include_tag "jquery.validate.js" %>
-		
+
 		<%= javascript_include_tag "angular.js" %>
 		<%= javascript_include_tag "app" %>
-		
+
 		<%= javascript_include_tag "controllers.js" %>
 		<%= javascript_include_tag "angular-resource.js" %>
 		<%= javascript_include_tag "bootstrap.js" %>
-		
+		<!-- <%= javascript_include_tag "markers123.js" %> -->
 		<!-- <script src="lib/angular/angular.js"></script>
 		<script src="js/app.js"></script>
 		<script src="js/controllers.js"></script>
@@ -30,33 +31,33 @@
 	<body>
 		<div class="content" ng-controller="commonCtrl">
 			<div class="header">
-				<div class="span12">	
-					<a href="#/home"><%= image_tag 'logo.jpg' %></a>
+				<div class="span12">
+					<a class="" href="#/home"><%= image_tag 'Kanari-Logo-Horizontal-300x77.png' %></a>
 					<div class="welcome">
 						Hello <a href="#/home" id="userName">{{userName}}</a>
 						<a ng-click="logout()" class="logOut"><%= image_tag 'icon_logout.png' %> Logout</a>
 					</div>
-					
+
 				</div>
 			</div>
 			<div class="navBarCls">
-			<ul class="span12 nav nav-tabs">
-						<li id="account">
-							<a href="#/view_account"><%= image_tag 'icon_outlet_in.png' %> Account</a>
-						</li>
-						<li id="dasboard" class="diffLinks">
-							<a href="#/createInvitation" class="active"><%= image_tag 'icon_dasboard_in.png' %> Dashboard</a>
-						</li>
-						<li class="active" id="outlet" class="diffLinks">
-							<a href="#/outlets"><%= image_tag 'logo_account_in.png' %> Outlets</a>
-						</li>
-					</ul>
+				<ul class="span12 nav nav-tabs">
+					<li id="account">
+						<a href="#/view_account"><%= image_tag 'icon_outlet_in.png' %> Account</a>
+					</li>
+					<li id="dasboard" class="diffLinks">
+						<a href="#/createInvitation" class="active"><%= image_tag 'icon_dasboard_in.png' %> Dashboard</a>
+					</li>
+					<li class="active" id="outlet" class="diffLinks">
+						<a href="#/outlets"><%= image_tag 'logo_account_in.png' %> Outlets</a>
+					</li>
+				</ul>
 			</div>
-			<div class="ngView" style=" overflow: hidden;" ng-view></div>
-			<div class="footer">
-				<div class="span12">
-					Copyright@2013 Kanari. All Rights Reserved
-				</div>
+			<div class="ngView" style=" overflow: hidden;position: relative;" ng-view></div>
+		</div>
+		<div class="footer">
+			<div class="span12">
+				Copyright © 2013 Kanari. All Rights Reserved.
 			</div>
 		</div>
 	</body>

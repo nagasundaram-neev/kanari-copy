@@ -1,51 +1,24 @@
-<div id="splash" data-role="page" ng-controller="commonCtrl">
-	<style>
-.logIn {
-background-image: url(<%= asset_path 'sprite_mobile.png' %>
-	);
-	background-position: -3px -291px;
-	cursor: pointer;
-	height: 147px;
-	width: 148px;
-	float: left;
-	}
-.signUp{
-	background-image: url(<%= asset_path 'sprite_mobile.png' %>
-	);
-	background-position: -149px -291px;
-	cursor: pointer;
-	height: 147px;
-	width: 148px;
-	float: left;
-	}
-.feedBack{
-	background-image: url(<%= asset_path 'sprite_mobile.png' %>
-	);
-	background-position: -296px -291px;
-	cursor: pointer;
-	height: 147px;
-	width: 148px;
-	float: left;
-}
-	</style>
+<div id="landPage" data-role="page" ng-controller="commonCtrl">
 	<div data-role="content">
 		<div class="logo">
 			<%= image_tag 'logo.png' %>
 		</div>
 		<div class="signIn">
 			<div class="userClick">
-
 				<span class="code">Have a code?</span>
 				<div class="socialBtn" align="center">
-					<div class="logIn" ng-click="emailCLick()">
-
+					<!-- <div class="logIn" ng-click="emailCLick()" align="center">
+					LOGIN
+					</div> -->
+					<a class="roundBtn" ng-click="emailCLick()"><%= image_tag 'round_login.png' %></a>
+					<a class="roundBtn" ng-click="signUpCLick()"><%= image_tag 'round_signup.png' %></a>
+					<a class="roundBtn"><%= image_tag 'round_leavefeedback.png' %></a>
+					<!-- <div class="logIn" ng-click="signUpCLick()">
+					SIGNUP
 					</div>
-					<div class="signUp" ng-click="signUpCLick()">
-						
-					</div>
-					<div class="feedBack" >
-					
-					</div>
+					<div class="logIn" >
+					LEAVE FEEDBACK
+					</div> -->
 				</div>
 			</div>
 		</div>

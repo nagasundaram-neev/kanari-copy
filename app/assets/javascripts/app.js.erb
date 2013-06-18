@@ -6,7 +6,7 @@ var module = angular.module('kanari', []).
   config(['$routeProvider','$locationProvider', function($routeProvider,$locationProvider) {
   	
   $routeProvider.
-     when('/login', {templateUrl: "<%= asset_path 'login.html' %>"}).
+     when('/login', {title: "Product",templateUrl: "<%= asset_path 'login.html' %>"}).
      when('/forgot_pass', {templateUrl: "<%= asset_path 'forgot_password.html' %>"}).
      when('/api/users/password/edit', {templateUrl: "<%= asset_path 'reset_password.html' %>"}).
      when('/outlets', {templateUrl: "<%= asset_path 'home.html' %>"}).
@@ -20,6 +20,108 @@ var module = angular.module('kanari', []).
       when('/take_tour',{templateUrl:"<%= asset_path 'takeTour.html'%>"}).
        when('/view_account',{templateUrl:"<%= asset_path 'viewAccount.html'%>"}).
      when('/logout', {templateUrl: "<%= asset_path 'logOut.html' %>"}).
+      when('/change_password', {templateUrl: "<%= asset_path 'changePassword.html' %>"}).
       otherwise({redirectTo: '/login'});
       $locationProvider.hashPrefix = "";
 }]);
+
+
+module.directive('map', function() {
+    return {
+        restrict: 'E',
+        replace: true,
+        template: '<div></div>',
+        link: function(scope, element, attrs) {
+            console.log(element);
+            
+            var myOptions = {
+                zoom: 6,
+                center: new google.maps.LatLng(46.87916, -3.32910),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+           // alert(attrs.id);
+            var map = new google.maps.Map(document.getElementById(attrs.id), myOptions);
+            var markersArray = [];
+
+            google.maps.event.addListener(map, 'click', function(event) {
+                scope.$apply(function() {
+                    addMarker({
+                    lat: event.latLng.lat(),
+                    lng: event.latLng.lng()
+                  }); 
+                    
+                    console.log(event);
+                });
+                
+               
+		
+                 var geocoder = new google.maps.Geocoder();
+		geocoder.geocode({
+			"latLng" : event.latLng
+		}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				console.log(results[0].formatted_address);
+				var infoWindow = new google.maps.InfoWindow();
+				var html = results[0].formatted_address;
+				
+				 var marker = new google.maps.Marker({
+			position : event.latLng,
+			map : map,
+			title:html
+		});
+		 markersArray.push(marker);
+
+			}
+		});
+    
+            }); // end click listener
+            
+            var addMarker= function(pos){
+            	clearOverlays()
+            	var myLatlng = new google.maps.LatLng(pos.lat,pos.lng);
+            } //end addMarker
+            
+           function clearOverlays() {
+  if (markersArray) {
+    for (i in markersArray) {
+      markersArray[i].setMap(null);
+    }
+  }
+}
+
+        }
+    };
+});
+
+function MapCtrl($scope) {
+        
+    $scope.mapPin = 'No pin set yet';  
+    angular.forEach($scope.myMarkers, function(marker) {
+    marker.setMap(null);
+});     
+          
+}
+
+
+module.directive('passwordValidate', function() {
+    return {
+        require: 'ngModel',
+        link: function(scope, elm, attrs, ctrl) {
+            ctrl.$parsers.unshift(function(viewValue) {
+
+                scope.pwdValidLength = (viewValue && viewValue.length >= 8 ? 'valid' : undefined);
+                scope.pwdHasLetter = (viewValue && /[A-z]/.test(viewValue)) ? 'valid' : undefined;
+                scope.pwdHasNumber = (viewValue && /\d/.test(viewValue)) ? 'valid' : undefined;
+
+                if(scope.pwdValidLength && scope.pwdHasLetter && scope.pwdHasNumber) {
+                    ctrl.$setValidity('pwd', true);
+                    return viewValue;
+                } else {
+                    ctrl.$setValidity('pwd', false);                    
+                    return undefined;
+                }
+
+            });
+        }
+    };
+});

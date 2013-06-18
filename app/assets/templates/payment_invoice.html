@@ -1,29 +1,64 @@
 <div data-role="page" class="main_content span12" data-theme="b" id="login" ng-controller="paymentInvoiceCtrl">
 	<div class="innerDiv" data-role="content">
 		<h1>Payment Invoices</h1>
-		<form  name="form" ng-app>
+		<!-- <form  name="form" ng-app>
 			<div data-role="fieldcontain" class="loginDiv">
 				<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
-					<input type="text" name="kanari_invoice_id" ng-model="kanari_invoice_id" required />
+					<input type="text" placeholder="Invoice Id" name="kanari_invoice_id" ng-model="kanari_invoice_id" required />
 					<span class="help-inline" ng-show="submitted && form.kanari_invoice_id.$error.required">Required</span>
-					<!-- <span class="help-inline" ng-show="submitted && form.kanari_invoice_id.$error.email">Invalid email</span> -->
-				</div>
+					</div>
 				<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
-					<input type="text" name="receipt_date" ng-model="receipt_date" required />
+					<input type="text" placeholder="Receipt Date" name="receipt_date" ng-model="receipt_date" required />
 					<span class="help-inline" ng-show="submitted && form.receipt_date.$error.required">Required</span>
-					<!-- <span class="help-inline" ng-show="submitted && form.receipt_date.$error.email">Invalid email</span> -->
-				</div>
+					</div>
 				<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
-					<input type="number" name="amount_paid" ng-model="amount_paid" min="0" max="10000000"  required />
+					<input type="number" placeholder="Amount Paid" name="amount_paid" ng-model="amount_paid" min="0" max="10000000"  required />
 					<span class="help-inline" ng-show="submitted && form.amount_paid.$error.required">Required</span>
 					<span class="help-inline" ng-show="submitted && form.amount_paid.$error.number">Invalid amount</span>
 				</div>
-				<!-- <input type="button" class="loginBtn" ng-click="payment_invoice()" data-inline="true" value="Create Payment Invoice" /> -->
 				<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="payment_invoice()">
 						Create Payment Invoice
 					</button>
 			</div>
-		</form>
+		</form> -->
+		
+		<form ng-app="form-example" class="row form-horizontal" name="login" ng-submit="payment_invoice()" novalidate>
+					<div class="control-group">
+						<div class="controls">
+							<input type="text" placeholder="Invoice Id" name="kanari_invoice_id" ng-model="kanari_invoice_id" required />
+							<div class="input-help">
+								<h4>Invalid Invoice Id</h4>
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<input type="number" placeholder="Receipt Date" name="receipt_date" ng-model="receipt_date" required />
+							<div class="input-help">
+								<h4>Invalid Date</h4>
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<input type="number" placeholder="Amount Paid" name="amount_paid" ng-model="amount_paid" min="0" max="10000000"  required />
+							<div class="input-help">
+								<h4>Invalid Amount.</h4>
+							</div>
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<div class="controls">
+							<button type="submit" class="btn">
+								Create Payment Invoice
+							</button>
+							<button class="btn" disabled>
+								Create Payment Invoice
+							</button>
+						</div>
+					</div>
+				</form>
 		<p ng-show="paymentInvoiceSuccess">
 			Payment Invoice Generated
 		</p>

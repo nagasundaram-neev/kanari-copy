@@ -9,7 +9,7 @@ Kanari::Application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
-  config.action_mailer.default_url_options = { :host => 'localhost:8080' }
+  config.action_mailer.default_url_options = { :host => '123.238.128.62:8080' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address:                 "127.0.0.1",

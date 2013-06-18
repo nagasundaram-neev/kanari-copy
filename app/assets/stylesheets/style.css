@@ -1,9 +1,54 @@
 /* Give the header a height and a background image */
 
 /* Give basic styles to the body and the navigation */
-body {
-	color: #664765 !important;
+
+@font-face {
+	font-family: kanariFont;
+src: url('Roboto-Regular.ttf');
+}
+
+.ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button{
+	font-family:"kanariFont",sans-serif;
+}
+.ui-body-b, .ui-body-b input, .ui-body-b select, .ui-body-b textarea, .ui-body-b button{
+	font-family:"kanariFont",sans-serif;
+}
+
+#splash ,#login,#landPage{
 	background: #FEbf3B !important;
+}
+
+#signUp, #settings, #home{
+	background: #FFFFFF !important;
+}
+
+
+.dob{
+	float:left;
+}
+
+.dobDiv div.ui-input-text input.ui-input-text, .dobDiv div.ui-input-text textarea.ui-input-text, .dobDiv .ui-input-search input.ui-input-text{
+	background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    display: block;
+    float: left;
+    margin: 0;
+    outline: 0 none !important;
+    padding: 0.4em 0;
+    width: 29% !important;
+}
+
+.dobDiv input::-moz-placeholder, .dobDiv textarea::-moz-placeholder{
+	background:#664765;
+}
+
+.roundBtn img{
+	height: 94px;
+}
+
+body {
+	font-family:"kanariFont",sans-serif;
+	/*color: #664765 !important;*/
 }
 img, object {
 	max-height: 90%;
@@ -27,7 +72,7 @@ img, object {
 	max-width: 75%;
 }
 
-.ui-body-b, .ui-overlay-b, .ui-body-c, .ui-overlay-c {
+#landPage .ui-body-b, .ui-overlay-b, .ui-body-c, .ui-overlay-c {
 	background: #FEbf3B !important;
 	height: 500px;
 }
@@ -141,12 +186,37 @@ img, object {
 .trustUs{
 	margin: 4%;	
 }
+.dateLabel{
+	float:left;
+	font-size: 20px;
+    margin: 1%;
+}
+.date {
+	float:left;
+	width:61%;
+}
+.dateInner{
+	float: left;
+    width: 30% !important;
+    background:#664765 !important;
+    border-radius:none !important;
+    border-right: 2px solid #ffffff !important;
+}
 
+.dateInner .ui-corner-all{
+	border-radius:0 !important;
+}
+#settings .dateDiv .dateInner{	color:#F5C03F ;}
+
+.settingDiv {
+	color:#664765;
+}
 .genderBtn{
-	background:#f5f5f5;
-	padding:0.2em;
-	border:1px solid #BFBFBF;
-	width: 78%;
+	background: none repeat scroll 0 0 #F5F5F5;
+    border: 1px solid #BFBFBF;
+	padding-bottom: 0.2em;
+    padding-top: 0.5em;
+    /*width: 88%;*/
 }
 
 .genderBtn .ui-corner-all, .genderBtn .ui-btn-corner-all{
@@ -175,7 +245,7 @@ img, object {
 }
 .genderBtn .ui-field-contain label.ui-slider , .ui-field-contain label.ui-slider{
 	float:left;
-	 width: 8%;
+	width: 33%;
 	color: #664765;
 	text-shadow:none;
 	font-size: 20px;
@@ -218,7 +288,7 @@ img, object {
 }
 
 .settingDiv {
-	padding:0.2em;
+	padding-top: 1.2em;
 }
 
 #signUp .ui-field-contain .ui-input-search, .ui-field-contain div.ui-input-text{
@@ -241,6 +311,12 @@ img, object {
     text-shadow: none;
 }
 
+.dateDiv input::-moz-placeholder, textarea::-moz-placeholder{
+	color: #F5C03F;
+	font-weight:bold;
+    text-shadow: none;
+}
+
 .signUpDiv .ui-body-a, .ui-overlay-a{
 	text-shadow:none;
 	color:#664765;
@@ -257,6 +333,9 @@ img, object {
 }
 .settingDiv .ui-corner-all, .settingDiv .ui-btn-corner-all {
 	border-radius: 6px 6px 6px 6px;
+}
+.dateDiv .ui-corner-all, .dateDiv .ui-btn-corner-all {
+	border-radius: 0 !important;
 }
 
 #signUp .ui-btn-left, .ui-btn-right, .ui-btn-inline, input{
@@ -326,9 +405,6 @@ img, object {
 	
 }
 .forgotPass{
-	float: right;
-    text-align: right;
-    width: 50%;
 }
 .rememberMe .ui-field-contain .ui-controlgroup, .ui-field-contain fieldset.ui-controlgroup{
 	 float: left;
@@ -350,7 +426,7 @@ img, object {
 }
 
 .settingDiv div.ui-input-text {
-	margin: 0.5em;
+	/*margin: 0.5em;*/
 }
 
 .errorMsg{
@@ -361,6 +437,10 @@ img, object {
 	color:#0F9D58;
 	text-shadow:none;
 }
+.sucsessMsg{
+	color:#0F9D58;
+	text-shadow:none;
+}
 .loginDiv .ui-input-text.ui-focus, .ui-input-search.ui-focus {
 	box-shadow: none;
 }
@@ -368,8 +448,7 @@ img, object {
 	border-radius: 0px
 }
 .rememberMe {
-	margin: 0 11%;
-	border: none;
+	border: none;	
 }
 .rememberMe .ui-btn-up-b, .rememberMe .ui-btn-hover-b {
 	background: transparent;
