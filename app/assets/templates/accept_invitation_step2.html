@@ -1,6 +1,7 @@
 <div data-role="page" data-theme="b" id="acceptInvitationStep2" ng-controller="acceptInvitation2Ctrl" class="main_content span12">
 	<div class="loginDiv innerDiv" data-role="content">
-		<h1>Create Profile</h1><br/>
+		<h1>Create Profile</h1>
+		<br/>
 		<div class="acceptInv outerDiv">
 			<form  name="acceptInv2" ng-submit="acceptInvitation2(acceptInv2)" ng-app>
 				<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 42%;">
@@ -71,16 +72,22 @@
 						<input data-theme="a" data-inline="true" type="text" name="email" ng-model="email" value="" placeholder="Email" required/>
 					</div>
 					<div class="clr"></div>
-					<!-- <input type="button" class="loginBtn" ng-click="acceptInvitation2()" data-inline="true" value="Save" /> -->
-					<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
-						Save
-					</button>
-					<p class="errorMsg" ng-show="error">{{errorMsg}}</p>
-					<p ng-hide="error"></p>
-					<p class="successMsg" ng-show="success">Your Authenticatin Token is {{auth_token}}</p>
-					<p ng-hide="success"></p>
+					<div style="margin: 10px 0 0 145px;">
+						<!-- <input type="button" class="loginBtn" ng-click="acceptInvitation2()" data-inline="true" value="Save" /> -->
+						<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
+							Save
+						</button>
+						<p class="errorMsg" ng-show="error">
+							{{errorMsg}}
+						</p>
+						<p ng-hide="error"></p>
+						<p class="successMsg" ng-show="success">
+							Your Authenticatin Token is {{auth_token}}
+						</p>
+						<p ng-hide="success"></p>
+					</div>
 				</div>
-			</form>			
+			</form>
 		</div>
 	</div>
 </div>

@@ -27,8 +27,8 @@
 					<div class="control-group">
 						<div class="controls">
 							<lable >
-							Invoice Id
-						</lable>
+								Invoice Id
+							</lable>
 							<input type="text" placeholder="Invoice Id" name="kanari_invoice_id" ng-model="kanari_invoice_id" required />
 							<div class="input-help">
 								<h4>Invalid Invoice Id</h4>
@@ -38,8 +38,8 @@
 					<div class="control-group">
 						<div class="controls">
 							<lable >
-							Reciept Date
-						</lable>
+								Reciept Date
+							</lable>
 							<input type="number" placeholder="Receipt Date" name="receipt_date" ng-model="receipt_date" required />
 							<div class="input-help">
 								<h4>Invalid Date</h4>
@@ -49,8 +49,8 @@
 					<div class="control-group">
 						<div class="controls">
 							<lable >
-							Invalid Amount
-						</lable>
+								Invalid Amount
+							</lable>
 							<input type="number" placeholder="Amount Paid" name="amount_paid" ng-model="amount_paid" min="0" max="10000000"  required />
 							<div class="input-help">
 								<h4>Invalid Amount.</h4>
@@ -67,16 +67,17 @@
 								Create Payment Invoice
 							</button>
 						</div>
+						<p ng-show="paymentInvoiceSuccess">
+							Payment Invoice Generated
+						</p>
+						<p ng-hide="paymentInvoiceSuccess"></p>
+						<p class="errorMsg" ng-show="paymentInvoiceFail">
+							Please fill the details
+						</p>
+						<p ng-hide="paymentInvoiceFail"></p>
 					</div>
 				</form>
-				<p ng-show="paymentInvoiceSuccess">
-					Payment Invoice Generated
-				</p>
-				<p ng-hide="paymentInvoiceSuccess"></p>
-				<p class="errorMsg" ng-show="paymentInvoiceFail">
-					Please fill the details
-				</p>
-				<p ng-hide="paymentInvoiceFail"></p>
+
 			</div>
 		</div>
 	</div>

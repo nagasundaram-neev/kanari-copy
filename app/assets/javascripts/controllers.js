@@ -302,8 +302,8 @@ module.controller('forgotPassCtrl', function($rootScope, $scope, $http, $locatio
 module.controller('resetPassCtrl', function($rootScope, $scope, $routeParams, $http, $location) {
 	$rootScope.header = "Reset Password | Kanari";
 	$scope.erromsg = false;
-	$scope.resetPass = function(resetPass) {
-		if ($scope.forgotPass.$valid) {
+	$scope.reset_Pass = function(resetPass) {
+		if ($scope.resetPass.$valid) {
 			var userPass = $scope.password;
 			var userConfirmPass = $scope.confirmpassword;
 			var resetPassToken = $routeParams.reset_password_token;
@@ -445,7 +445,7 @@ module.controller('createInvitation', function($rootScope, $scope, $http, $locat
 			}).error(function(data, status) {
 				console.log("data in error" + data + " status " + status);
 				if (userEmail) {
-					$scope.errortext = "Invitation url for this email is already been created";
+					$scope.errortext = "An invitation url for this email is already created.";
 					$scope.erromsg = true;
 				}
 			});
@@ -901,9 +901,10 @@ module.controller('acceptInvitationCtrl', function($rootScope, $scope, $routePar
 	$rootScope.header = "Accept Invitation | Kanari";
 	$http({
 		method : 'get',
-		url : '/api/invitations/:' + $routeParams.invi_token,
+		url : '/api/users/invitation/' + $routeParams.invi_token,
 	}).success(function(data, status) {
 		console.log("data in success " + data + " status " + status);
+		$scope.emailId = data.email;
 
 	}).error(function(data, status) {
 		console.log("data in error" + data + " status " + status);
@@ -918,6 +919,7 @@ module.controller('acceptInvitationCtrl', function($rootScope, $scope, $routePar
 					"password_confirmation" : $scope.password_confirmation,
 					"first_name" : $scope.first_name,
 					"last_name" : $scope.last_name,
+					"phone_number":$scope.phone_no,
 					"invitation_token" : $routeParams.invi_token
 				}
 			}
@@ -1122,7 +1124,7 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 			$scope.last_name = data.customer.customer_admin.last_name;
 			$scope.email = data.customer.customer_admin.email;
 			$scope.phoneno = data.customer.customer_admin.phone_number;
-			//$scope.compnyNm = data.customer.customer_admin.first_name;
+			$scope.compnyNm = data.customer.name;
 			$scope.contactNo = data.customer.phone_number;
 			$scope.add1 = data.customer.registered_address_line_1;
 			$scope.add2 = data.customer.registered_address_line_2;
@@ -1137,7 +1139,7 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 			if ($scope.viewAcc.$valid) {
 				var param = {
 					"customer" : {
-						"name" : $scope.first_name,
+						"name" : $scope.compnyNm,
 						"email" : $scope.email,
 						"data.customer.registered_address_line_1" : $scope.add1,
 						"data.customer.registered_address_line_2" : $scope.add2,
