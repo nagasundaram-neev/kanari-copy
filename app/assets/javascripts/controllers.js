@@ -350,7 +350,7 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 		$scope.outlets = []
 
 		var param = {
-			"auth_token" : $scope.auth_token
+			"auth_token" : getCookie('authToken')
 		};
 		$http({
 			method : 'get',
