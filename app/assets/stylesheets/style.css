@@ -71,12 +71,32 @@ src: url('Roboto-Regular.ttf');
 .descript{
 	font-size: 0.9em;
 }
+.actDate{
+	color: #FFFFFF;
+    float: left;
+    margin: 0 0 0 2%;
+}
+.bottomDiv{
+	background-color: #593F5A;
+    margin: 15% 0 0;
+}
+.recentAct{
+	color: #ECBD3A;
+    float: left;
+    margin: 0 0 0 2%;
+}
 .whatLike{
 	margin: 9% 0;
 }
+.recentActDiv{
+	float: left;
+    padding: 3% 0;
+    width: 75%;
+}
 .backColr{
 	background-color: #E5E6E8;
-	 float: left;
+	padding: 5% 0;
+	float: left;
     width: 32%;
     border-right: 3px solid #FFFFFF;
 }
@@ -320,6 +340,7 @@ img, object {
 
 .signUp{
 	text-align:center;
+	margin: 5%;
 	font-size:20px;
 }
 
