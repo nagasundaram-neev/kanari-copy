@@ -335,7 +335,7 @@ module.controller('resetPassCtrl', function($rootScope, $scope, $routeParams, $h
 
 module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 	if (getCookie('authToken')) {
-		$rootScope.header = "Create Invitation | Kanari";
+		$rootScope.header = "Outlets | Kanari";
 		//getRefresh($scope);
 		$('.welcome').show();
 		$('.navBarCls').show();
