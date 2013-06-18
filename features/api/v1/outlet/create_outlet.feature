@@ -89,7 +89,9 @@ Feature: Create Outlet
               "id" : 3,
               "name" : "Sports"
             }
-          ]
+          ],
+          "redeemable_points": 0,
+          "points_pending_redemption": 0
         }
       }
       """

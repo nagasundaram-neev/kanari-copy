@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe User do
   it { should have_many(:feedbacks) }
+  it { should have_many(:redemptions) }
   it { should have_many(:managed_outlets) }
   it { should have_one(:outlets_staff) }
   it { should have_one(:employed_outlet).through(:outlets_staff) }
@@ -106,7 +107,12 @@ describe User do
     context "when role is user" do
       let(:role) { 'user' }
       it "should return an empty array" do
-        user.outlets.should == []
+        customer = FactoryGirl.create(:customer)
+        another_customer = FactoryGirl.create(:customer)
+        outlet_1 = FactoryGirl.create(:outlet, customer: customer, disabled: true)
+        outlet_2 = FactoryGirl.create(:outlet, customer: customer)
+        outlet_3 = FactoryGirl.create(:outlet, customer: another_customer)
+        user.outlets.should =~ [outlet_2, outlet_3]
       end
     end
     context "when role is invalid" do
