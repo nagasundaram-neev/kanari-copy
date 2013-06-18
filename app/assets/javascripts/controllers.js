@@ -321,12 +321,13 @@ module.controller('resetPassCtrl', function($rootScope, $scope, $routeParams, $h
 				data : param,
 			}).success(function(data, status) {
 				console.log("data in success " + data + " status " + status);
-				$scope.error = data.auth_token;
-				$scope.statement = true;
+				$scope.success = true;
 				$scope.erromsg = false;
 			}).error(function(data, status) {
 				console.log("data in error" + data + " status " + status);
+				$scope.errormessage = data.errors;
 				$scope.erromsg = true;
+				$scope.success = false;
 			});
 		}
 	};
