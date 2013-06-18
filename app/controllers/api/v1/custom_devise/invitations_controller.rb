@@ -61,7 +61,7 @@ module Api
         end
 
         def update_resource_params
-          params.fetch(:user).permit([:password, :password_confirmation, :invitation_token, :first_name, :last_name])
+          params.fetch(:user).permit([:password, :password_confirmation, :invitation_token, :first_name, :last_name, :phone_number])
         end
       end
 
