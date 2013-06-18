@@ -232,6 +232,8 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 
 				} else if (getCookie('userRole') == "customer_admin" && !data.registration_complete) {
 					$location.url("/acceptInvitationStep2");
+				} else if (getCookie('userRole') == "staff" && data.registration_complete) {
+					$location.url("/create_kanari_code");
 				}
 
 			}).error(function(data, status) {
@@ -679,12 +681,18 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				$scope.Delivery = data.outlet.has_delivery.toString();
 				$scope.serves_alcohol = data.outlet.serves_alcohol.toString();
 				$scope.outdoor_Seating = data.outlet.has_outdoor_seating.toString();
+				setCookie('latitude', data.outlet.latitude, 0.29);
+				setCookie('logitude', data.outlet.longitude, 0.29);
 				$scope.updateMode = true;
 				$scope.checkedCuisineTypes = data.outlet.cuisine_types;
 				for ( i = 0; i < $scope.checkedCuisineTypes; i++) {
 					$scope.checkedCuisineTypes[i]["checked"] = true;
 					console.log($scope.checkedCuisineTypes[i])
 				}
+
+				$scope.$broadcast('clickMessageFromParent', {
+					data : "SOME msg to the child"
+				})
 
 				console.log($scope.checkedCuisineTypes)
 
@@ -727,8 +735,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 						"outlet" : {
 							"name" : $scope.restaurant_name,
 							"address" : $scope.restaurant_location,
-							"latitude" : "50.50",
-							"longitude" : "60.60",
 							"website_url" : "http://batmansdonuts.com",
 							"email" : $scope.email_address,
 							"phone_number" : $scope.contact_number,
@@ -745,8 +751,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 						"outlet" : {
 							"name" : $scope.restaurant_name,
 							"address" : $scope.restaurant_location,
-							"latitude" : "50.50",
-							"longitude" : "60.60",
 							"website_url" : "http://batmansdonuts.com",
 							"email" : $scope.email_address,
 							"phone_number" : $scope.contact_number,
@@ -764,8 +768,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					"outlet" : {
 						"name" : $scope.restaurant_name,
 						"address" : $scope.restaurant_location,
-						"latitude" : "50.50",
-						"longitude" : "60.60",
 						"website_url" : "http://batmansdonuts.com",
 						"email" : $scope.email_address,
 						"phone_number" : $scope.contact_number,
@@ -789,11 +791,13 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					if (data.outlet) {
 						console.log(data.outlet.id);
 						$scope.outletID = data.outlet.id;
-						$scope.updateMode = true
+						$scope.updateMode = true;
+						$('#location').css({'opacity' : '1'});
 					}
 					$scope.successMsg = true;
 					$scope.profileShow = false;
 					$scope.locationShow = true;
+					$('#location').css({'opacity' : '1'});
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
 					$scope.error = true;
@@ -1247,6 +1251,47 @@ module.controller('sidePanelCtrl', function($scope, $routeParams, $route, $http,
 	var newValue = classNm.replace('/', '');
 	$('.ng-scope li').removeClass('active');
 	$('.' + newValue).addClass('active');
+
+});
+
+module.controller('createKanariCodeCtrl', function($scope, $routeParams, $route, $http, $location) {
+	if (getCookie('authToken')) {
+		$('.welcome').show();
+		$('.navBarCls').show();
+		$('.navBarCls ul li').removeClass('active');
+		$('#dasboard').hide();
+		$('#account').addClass('active');
+		$scope.success = false;
+		$scope.error = false;
+	} else {
+		$location.url("/login");
+	}
+	$scope.createKanariCode = function() {
+		var param = 
+				{
+					"bill_amount" : $scope.bill_amount
+				}
+			
+
+		$http({
+			method : 'post',
+			url : '/api/kanari_codes',
+			data : param
+		}).success(function(data, status) {
+			console.log("data in success " + data + " status " + status);
+			//$scope.success = true;
+			//$scope.error = false;
+
+		}).error(function(data, status) {
+			console.log("data in errorrr" + data + " status " + status);
+			//$scope.success = false;
+			//$scope.error = true;
+			//$scope.errormsg = data.errors;
+		});
+
+		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
+
+	};
 
 });
 
