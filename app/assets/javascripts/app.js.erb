@@ -134,7 +134,7 @@ module.directive('map', function($http) {
 			$http({
 			method : "post",
 			url : '/api/outlets/',
-			data : param,
+			data : params,
 			}).success(function(data, status) {
 
 			}).error(function(data, status) {
