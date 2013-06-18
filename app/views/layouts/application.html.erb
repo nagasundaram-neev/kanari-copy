@@ -2,7 +2,7 @@
 <html lang="en" ng-app="kanari">
 	<head>
 		<meta charset="utf-8">
-		<title>Kanari</title>
+		<title ng-bind="header"></title>
 		<%= stylesheet_link_tag "app.css", :media => "all" %>
 		<%= stylesheet_link_tag "bootstrap.css", :media => "all" %>
 		<%= stylesheet_link_tag "bootstrap-responsive.css", :media => "all" %>
@@ -32,7 +32,7 @@
 		<div class="content" ng-controller="commonCtrl">
 			<div class="header">
 				<div class="span12">
-					<a href="#/home"><%= image_tag 'logo.jpg' %></a>
+					<a class="" href="#/home"><%= image_tag 'Kanari-Logo-Horizontal-300x77.png' %></a>
 					<div class="welcome">
 						Hello <a href="#/home" id="userName">{{userName}}</a>
 						<a ng-click="logout()" class="logOut"><%= image_tag 'icon_logout.png' %> Logout</a>

@@ -13,12 +13,17 @@ Feature: Accept invitation
           "password_confirmation": "testpassword",
           "first_name": "John",
           "last_name": "Doe",
+          "phone_number": "+9123455",
           "invitation_token": "invitation_token_123"
         }
       }
       """
       Then the response status should be "200"
       And the JSON response should have "auth_token"
+      And a user should be created with the following
+        |first_name|John|
+        |last_name|Doe|
+        |phone_number|+9123455|
 
     Scenario: Invalid invitation_token
       Given I send a PUT request to "/api/users/invitation" with the following:

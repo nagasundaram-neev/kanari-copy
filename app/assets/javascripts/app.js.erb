@@ -6,7 +6,7 @@ var module = angular.module('kanari', []).
   config(['$routeProvider','$locationProvider', function($routeProvider,$locationProvider) {
   	
   $routeProvider.
-     when('/login', {templateUrl: "<%= asset_path 'login.html' %>"}).
+     when('/login', {title: "Product",templateUrl: "<%= asset_path 'login.html' %>"}).
      when('/forgot_pass', {templateUrl: "<%= asset_path 'forgot_password.html' %>"}).
      when('/api/users/password/edit', {templateUrl: "<%= asset_path 'reset_password.html' %>"}).
      when('/outlets', {templateUrl: "<%= asset_path 'home.html' %>"}).
@@ -25,6 +25,7 @@ var module = angular.module('kanari', []).
       otherwise({redirectTo: '/login'});
       $locationProvider.hashPrefix = "";
 }]);
+
 
 module.directive('map', function() {
     return {

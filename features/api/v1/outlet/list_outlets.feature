@@ -67,7 +67,9 @@ Feature: List Outlets
             "serves_alcohol": null,
             "website_url": null,
             "cuisine_types": [],
-            "outlet_types": []
+            "outlet_types": [],
+            "redeemable_points": 0,
+            "points_pending_redemption": 0
           },
           {
             "id" : 2,
@@ -90,7 +92,9 @@ Feature: List Outlets
             "serves_alcohol": null,
             "website_url": null,
             "cuisine_types": [],
-            "outlet_types": []
+            "outlet_types": [],
+            "redeemable_points": 0,
+            "points_pending_redemption": 0
           },
           {
             "id" : 3,
@@ -113,7 +117,9 @@ Feature: List Outlets
             "serves_alcohol": null,
             "website_url": null,
             "cuisine_types": [],
-            "outlet_types": []
+            "outlet_types": [],
+            "redeemable_points": 0,
+            "points_pending_redemption": 0
           },
           {
             "id" : 4,
@@ -136,7 +142,9 @@ Feature: List Outlets
             "serves_alcohol": null,
             "website_url": null,
             "cuisine_types": [],
-            "outlet_types": []
+            "outlet_types": [],
+            "redeemable_points": 0,
+            "points_pending_redemption": 0
            }
          ]
       }
@@ -205,7 +213,9 @@ Feature: List Outlets
             "serves_alcohol": null,
             "website_url": null,
             "cuisine_types": [],
-            "outlet_types": []
+            "outlet_types": [],
+            "redeemable_points": 0,
+            "points_pending_redemption": 0
           },
           {
             "id" : 2,
@@ -228,7 +238,9 @@ Feature: List Outlets
             "serves_alcohol": null,
             "website_url": null,
             "cuisine_types": [],
-            "outlet_types": []
+            "outlet_types": [],
+            "redeemable_points": 0,
+            "points_pending_redemption": 0
            }
          ]
        }
@@ -261,7 +273,9 @@ Feature: List Outlets
             "serves_alcohol": null,
             "website_url": null,
             "cuisine_types": [],
-            "outlet_types": []
+            "outlet_types": [],
+            "redeemable_points": 0,
+            "points_pending_redemption": 0
           },
           {
             "id" : 2,
@@ -284,7 +298,9 @@ Feature: List Outlets
             "serves_alcohol": null,
             "website_url": null,
             "cuisine_types": [],
-            "outlet_types": []
+            "outlet_types": [],
+            "redeemable_points": 0,
+            "points_pending_redemption": 0
            }
          ]
        }
@@ -354,7 +370,9 @@ Feature: List Outlets
             "serves_alcohol": null,
             "website_url": null,
             "cuisine_types": [],
-            "outlet_types": []
+            "outlet_types": [],
+            "redeemable_points": 0,
+            "points_pending_redemption": 0
           },
           {
             "id" : 2,
@@ -377,7 +395,9 @@ Feature: List Outlets
             "serves_alcohol": null,
             "website_url": null,
             "cuisine_types": [],
-            "outlet_types": []
+            "outlet_types": [],
+            "redeemable_points": 0,
+            "points_pending_redemption": 0
            }
          ]
        }
@@ -410,7 +430,9 @@ Feature: List Outlets
             "serves_alcohol": null,
             "website_url": null,
             "cuisine_types": [],
-            "outlet_types": []
+            "outlet_types": [],
+            "redeemable_points": 0,
+            "points_pending_redemption": 0
            }
          ]
        }
@@ -443,7 +465,9 @@ Feature: List Outlets
             "serves_alcohol": null,
             "website_url": null,
             "cuisine_types": [],
-            "outlet_types": []
+            "outlet_types": [],
+            "redeemable_points": 0,
+            "points_pending_redemption": 0
            }
          ]
        }
@@ -512,7 +536,9 @@ Feature: List Outlets
             "serves_alcohol": null,
             "website_url": null,
             "cuisine_types": [],
-            "outlet_types": []
+            "outlet_types": [],
+            "redeemable_points": 0,
+            "points_pending_redemption": 0
            }
          ]
        }
@@ -566,11 +592,108 @@ Feature: List Outlets
           |staff.bangalore.2@nbc.com   |
       When I authenticate as the user "user_auth_token" with the password "random string"
       And I send a GET request to "/api/outlets"
-      Then the response status should be "403"
+      Then the response status should be "200"
       And the JSON response should be:
       """
       {
-        "errors" : ["Insufficient privileges"]
+         "outlets": [
+           {
+            "id" : 1,
+            "name": "Subway - Bangalore",
+            "address": null,
+            "disabled": false,
+            "email": null,
+            "has_delivery": null,
+            "has_outdoor_seating": null,
+            "latitude": null,
+            "longitude": null,
+            "manager": {
+              "email": "manager@subway.com",
+              "first_name": "George",
+              "last_name": null,
+              "phone_number": null
+            },
+            "open_hours": null,
+            "phone_number": null,
+            "serves_alcohol": null,
+            "website_url": null,
+            "cuisine_types": [],
+            "outlet_types": [],
+            "redeemable_points": 0
+          },
+          {
+            "id" : 2,
+            "name": "Subway - Pune",
+            "address": null,
+            "disabled": false,
+            "email": null,
+            "has_delivery": null,
+            "has_outdoor_seating": null,
+            "latitude": null,
+            "longitude": null,
+            "manager": {
+              "email": "manager@subway.com",
+              "first_name": "George",
+              "last_name": null,
+              "phone_number": null
+            },
+            "open_hours": null,
+            "phone_number": null,
+            "serves_alcohol": null,
+            "website_url": null,
+            "cuisine_types": [],
+            "outlet_types": [],
+            "redeemable_points": 0
+          },
+          {
+            "id" : 3,
+            "name": "NBC - Cochin",
+            "address": null,
+            "disabled": false,
+            "email": null,
+            "has_delivery": null,
+            "has_outdoor_seating": null,
+            "latitude": null,
+            "longitude": null,
+            "manager": {
+              "email": "manager.cochin@nbc.com",
+              "first_name": "Alex",
+              "last_name": null,
+              "phone_number": null
+            },
+            "open_hours": null,
+            "phone_number": null,
+            "serves_alcohol": null,
+            "website_url": null,
+            "cuisine_types": [],
+            "outlet_types": [],
+            "redeemable_points": 0
+          },
+          {
+            "id" : 4,
+            "name": "NBC - Bangalore",
+            "address": null,
+            "disabled": false,
+            "email": null,
+            "has_delivery": null,
+            "has_outdoor_seating": null,
+            "latitude": null,
+            "longitude": null,
+            "manager": {
+              "email": "manager.bangalore@nbc.com",
+              "first_name": "Paul",
+              "last_name": null,
+              "phone_number": null
+            },
+            "open_hours": null,
+            "phone_number": null,
+            "serves_alcohol": null,
+            "website_url": null,
+            "cuisine_types": [],
+            "outlet_types": [],
+            "redeemable_points": 0
+           }
+         ]
       }
       """
 
