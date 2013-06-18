@@ -231,6 +231,8 @@ module.controller('Login', function($scope, $http, $location) {
 
 				} else if (getCookie('userRole') == "customer_admin" && !data.registration_complete) {
 					$location.url("/acceptInvitationStep2");
+				} else if (getCookie('userRole') == "staff" && data.registration_complete) {
+					$location.url("/create_kanari_code");
 				}
 
 			}).error(function(data, status) {
@@ -1194,6 +1196,47 @@ module.controller('sidePanelCtrl', function($scope, $routeParams, $route, $http,
 	var newValue = classNm.replace('/', '');
 	$('.ng-scope li').removeClass('active');
 	$('.' + newValue).addClass('active');
+
+});
+
+module.controller('createKanariCodeCtrl', function($scope, $routeParams, $route, $http, $location) {
+	if (getCookie('authToken')) {
+		$('.welcome').show();
+		$('.navBarCls').show();
+		$('.navBarCls ul li').removeClass('active');
+		$('#dasboard').hide();
+		$('#account').addClass('active');
+		$scope.success = false;
+		$scope.error = false;
+	} else {
+		$location.url("/login");
+	}
+	$scope.createKanariCode = function() {
+		var param = 
+				{
+					"bill_amount" : $scope.bill_amount
+				}
+			
+
+		$http({
+			method : 'post',
+			url : '/api/kanari_codes',
+			data : param
+		}).success(function(data, status) {
+			console.log("data in success " + data + " status " + status);
+			//$scope.success = true;
+			//$scope.error = false;
+
+		}).error(function(data, status) {
+			console.log("data in errorrr" + data + " status " + status);
+			//$scope.success = false;
+			//$scope.error = true;
+			//$scope.errormsg = data.errors;
+		});
+
+		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
+
+	};
 
 });
 
