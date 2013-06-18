@@ -122,7 +122,7 @@ body {
 }
 .errorMsg {
 	color: red;
-	text-align: left;
+	text-align: center;
 	font-size: 14px;
 }
 .submitBtn {

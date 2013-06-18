@@ -168,7 +168,8 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 	}
 });
 
-module.controller('Login', function($scope, $http, $location) {
+module.controller('Login', function($rootScope,$scope, $http, $location) {
+	$rootScope.header = "Login | Kanari";
 	$('.welcome').hide();
 	$('.navBarCls').hide();
 	$scope.remember = false;
@@ -257,7 +258,8 @@ function getRefresh($scope) {
 	}
 }
 
-module.controller('forgotPassCtrl', function($scope, $http, $location) {
+module.controller('forgotPassCtrl', function($rootScope,$scope, $http, $location) {
+	$rootScope.header = "Forgot Password | Kanari";
 	$scope.erromsg = false;
 	$scope.success = false;
 	$scope.SendLink = function(forgotPass) {
@@ -295,7 +297,8 @@ module.controller('forgotPassCtrl', function($scope, $http, $location) {
 	}
 });
 
-module.controller('resetPassCtrl', function($scope, $routeParams, $http, $location) {
+module.controller('resetPassCtrl', function($rootScope,$scope, $routeParams, $http, $location) {
+	$rootScope.header = "Reset Password | Kanari";
 	$scope.erromsg = false;
 	$scope.resetPass = function(resetPass) {
 		if ($scope.forgotPass.$valid) {
@@ -327,8 +330,9 @@ module.controller('resetPassCtrl', function($scope, $routeParams, $http, $locati
 	};
 });
 
-module.controller('homeCtrl', function($scope, $http, $location) {
+module.controller('homeCtrl', function($rootScope,$scope, $http, $location) {
 	if (getCookie('authToken')) {
+		$rootScope.header = "Create Invitation | Kanari";
 		//getRefresh($scope);
 		$('.welcome').show();
 		$('.navBarCls').show();
@@ -392,9 +396,10 @@ module.controller('homeCtrl', function($scope, $http, $location) {
 		$location.url("/take_tour");
 	};
 });
-module.controller('createInvitation', function($scope, $http, $location) {
+module.controller('createInvitation', function($rootScope,$scope, $http, $location) {
 
 	if (getCookie('authToken')) {
+		$rootScope.header = "Create Invitation | Kanari";
 		$('.welcome').show();
 		$('.navBarCls').show();
 		$('#outlet').hide();
@@ -449,8 +454,9 @@ module.controller('createInvitation', function($scope, $http, $location) {
 	}
 });
 
-module.controller('paymentInvoiceCtrl', function($scope, $http, $location) {
+module.controller('paymentInvoiceCtrl', function($rootScope,$scope, $http, $location) {
 	if (getCookie('authToken')) {
+		$rootScope.header = "Payment Invoice | Kanari";
 		$('.welcome').show();
 		$('.navBarCls').show();
 		$('.navBarCls ul li').removeClass('active');
@@ -496,10 +502,15 @@ module.controller('paymentInvoiceCtrl', function($scope, $http, $location) {
 
 });
 
-module.controller('listPaymentInvoiceCtrl', function($scope, $http, $location) {
+module.controller('listPaymentInvoiceCtrl', function($rootScope,$scope, $http, $location) {
 	if (getCookie('authToken')) {
+		$rootScope.header = "Payment Invoice List | Kanari";
 		$('.welcome').show();
 		$('.navBarCls').show();
+		$('.navBarCls ul li').removeClass('active');
+		$('#outlet').hide();
+		$('#account').hide();
+		$('#dasboard').addClass('active');
 		$scope.InvoiceList = [];
 		$scope.list_payment_invoice = function() {
 			var startDate = $scope.start_date;
@@ -526,8 +537,9 @@ module.controller('listPaymentInvoiceCtrl', function($scope, $http, $location) {
 	}
 });
 
-module.controller('createOutletCtrl', function($scope, $routeParams, $http, $location) {
+module.controller('createOutletCtrl', function($rootScope,$scope, $routeParams, $http, $location) {
 	if (getCookie('authToken')) {
+		$rootScope.header = "Create Outlet | Kanari";
 		$scope.profileShow = true;
 		$scope.managerField= false;
 		$scope.locationShow = false;
@@ -860,7 +872,7 @@ module.controller('createOutletCtrl', function($scope, $routeParams, $http, $loc
 	}
 });
 
-module.controller('acceptInvitationCtrl', function($scope, $routeParams, $http, $location) {
+module.controller('acceptInvitationCtrl', function($rootScope,$scope, $routeParams, $http, $location) {
 	$scope.validateForm = function() {
 		if ($scope.password || $scope.password_confirmation || $scope.first_name || $scope.last_name) {
 			return true;
@@ -868,6 +880,20 @@ module.controller('acceptInvitationCtrl', function($scope, $routeParams, $http, 
 			return false;
 		}
 	};
+	// var param = {
+			// "inv_token" : $routeParams.invi_token
+		// }
+$rootScope.header = "Accept Invitation | Kanari";
+		$http({
+			method : 'get',
+			url : '/api/invitations/:' + $routeParams.invi_token,
+		}).success(function(data, status) {
+			console.log("data in success " + data + " status " + status);
+			
+		}).error(function(data, status) {
+			console.log("data in error" + data + " status " + status);
+
+		});
 	$scope.acceptInvitation = function(acceptInv) {
 		console.log($routeParams.invi_token);
 		if ($scope.acceptInv.$valid) {
@@ -904,8 +930,9 @@ module.controller('acceptInvitationCtrl', function($scope, $routeParams, $http, 
 		}
 	}
 });
-module.controller('acceptInvitation2Ctrl', function($scope, $routeParams, $http, $location) {
+module.controller('acceptInvitation2Ctrl', function($rootScope,$scope, $routeParams, $http, $location) {
 	if (getCookie('authToken')) {
+		$rootScope.header = "Accept Invitation | Kanari";
 		$('.welcome').show();
 		$scope.auth_token = getCookie('authToken');
 		console.log($scope.auth_token);
@@ -955,8 +982,9 @@ module.controller('acceptInvitation2Ctrl', function($scope, $routeParams, $http,
 		$location.url("/login");
 	}
 });
-module.controller('createManagerCtrl', function($scope, $routeParams, $route, $http, $location) {
+module.controller('createManagerCtrl', function($rootScope,$scope, $routeParams, $route, $http, $location) {
 	if (getCookie('authToken')) {
+		$rootScope.header = "Create Manager | Kanari";
 		$('.welcome').show();
 		$('.navBarCls').show();
 		$scope.success = false;
@@ -1010,9 +1038,9 @@ module.controller('locationCtrl', function($scope, $routeParams, $route, $http, 
 	}
 });
 
-module.controller('takeTourCtrl', function($scope, $routeParams, $http, $location) {
+module.controller('takeTourCtrl', function($rootScope,$scope, $routeParams, $http, $location) {
 	if (getCookie('authToken')) {
-
+		$rootScope.header = "Take Tour | Kanari";
 		$('.welcome').show();
 		$('.navBarCls').show();
 		$scope.kanariWorks = true;
@@ -1054,8 +1082,9 @@ module.controller('rightSideCtrl', function($scope, $routeParams, $http, $locati
 	$('#outlet').addClass('active');
 });
 
-module.controller('viewaccountCtrl', function($scope, $http, $location) {
+module.controller('viewaccountCtrl', function($rootScope,$scope, $http, $location) {
 	if (getCookie('authToken')) {
+		$rootScope.header = "Settings | Kanari";
 		$('.welcome').show();
 		$('.navBarCls').show();
 		$('.navBarCls ul li').removeClass('active');
@@ -1158,8 +1187,9 @@ module.controller('viewaccountCtrl', function($scope, $http, $location) {
 		}
 	}
 });
-module.controller('changePassCtrl', function($scope, $routeParams, $route, $http, $location) {
+module.controller('changePassCtrl', function($rootScope,$scope, $routeParams, $route, $http, $location) {
 	if (getCookie('authToken')) {
+		$rootScope.header = "Change Password | Kanari";
 		$('.welcome').show();
 		$('.navBarCls').show();
 		$('.navBarCls ul li').removeClass('active');
