@@ -655,6 +655,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		/* Adding for updating the outlet*/
 
 		if ($routeParams.outletId) {
+			$rootScope.header = "Update Outlet | Kanari";
 			console.log($scope.auth_token);
 			console.log($routeParams.outletId);
 			var param = {
@@ -727,6 +728,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				var method = "post"
 				if ($scope.updateMode) {
 					url = "/api/outlets/" + $scope.outletID;
+					
 					method = "PUT";
 				}
 				if (!managerId) {
