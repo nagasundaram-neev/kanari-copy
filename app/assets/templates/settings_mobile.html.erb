@@ -1,21 +1,22 @@
 <div data-role="page" data-theme="b" id="settings" ng-controller="settingsController">
 	<style>
-.logout{
+.logout {
+background-image: url(<%= asset_path 'sprite_mobile.png' %>
+);
+background-position: -899px -475px;
+cursor: pointer;
+float: right;
+height: 54px;
+width: 48px;
+}
+.home {
 background-image: url(<%= asset_path 'sprite_mobile.png' %>
 	);
-	background-position: -473px -557px;
-	height: 69px;
-	width: 63px;
-	float:right;
-	cursor:pointer;
-	}
-	.home {
-		background-image: url("/assets/sprite_mobile.png");
-		background-position: -361px -557px;
-		cursor: pointer;
-		float: left;
-		height: 69px;
-		width: 56px;
+	background-position: -309px -471px;
+	cursor: pointer;
+	float: left;
+	height: 56px;
+	width: 45px;
 	}
 	</style>
 	<script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.core.min.js"></script>
