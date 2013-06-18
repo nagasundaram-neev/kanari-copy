@@ -64,7 +64,7 @@
 				<lable>
 					Addresss2
 				</lable>
-				<input data-theme="a" data-inline="true" type="text" name="add2" ng-model="add2" class="passwordTxt" required />
+				<input data-theme="a" data-inline="true" type="text" name="add2" ng-model="add2" class="passwordTxt"  />
 			</div>
 			<div class="ui-input-data">
 				<lable>
@@ -79,19 +79,22 @@
 				<input data-theme="a" data-inline="true" type="text" name="country" ng-model="country" class="passwordTxt" required />
 			</div>
 			<div class="ui-input-data">
+				<div style="margin: 10px 0 0 141px;" class="control-group">
 			<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
 				Save
 			</button>
 			<button type="submit" class="submitBtn btn btn-primary btn-large"  >
 				Cancel
 			</button>
-			</div>
 			<p ng-show="success" class="successMsg">
 						Account updated sucessfully.
 					</p>
 					<p ng-show="error" class="errorMsg">
 						{{errormsg}}
 					</p>
+					</div>
+			</div>
+			
 		</form>
 		
 	</div>
