@@ -1,18 +1,19 @@
 <div data-role="page" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
 	<style>
 		input[type="image"], input[type="checkbox"], input[type="radio"] {
-			margin: 3px 5px 3px 0;
+			margin: 0;
 		}
 		.main_content span.vertical_center {
 			display: inline !important;
 			vertical-align: middle !important;
+			margin-right: 0px;
 		}
-#map_canvas{
-			    /*width:100%;*/
-			    height: 435px; 
-			    border: 1px solid #333335;
-			    margin: 0 20px;
-			}
+		#map_canvas {
+			/*width:100%;*/
+			height: 435px;
+			border: 1px solid #333335;
+			margin: 0 20px;
+		}
 	</style>
 	<div class="create_outlet innerDiv" data-role="content">
 		<div ></div>
@@ -85,7 +86,7 @@
 						</select>
 					</div>
 					<div class="ui-input-data">
-						<lable>
+						<lable style="margin: 0;">
 							Outlet Type
 						</lable>
 						<span ng-repeat="outletType in outletTypes" style="display: inline; font-size: 13px; padding: 0;">
@@ -94,7 +95,7 @@
 							</input> </span>
 					</div>
 					<div class="ui-input-data">
-						<lable>
+						<lable style="margin: 0;">
 							Cuisine Type
 						</lable>
 						<span ng-repeat="cuisineType in cuisineTypes" style="display: inline; font-size: 13px; padding: 0;">
@@ -103,7 +104,7 @@
 							</input> </span>
 					</div>
 					<div class="ui-input-data">
-						<lable>
+						<lable >
 							Opening Hours
 						</lable>
 						<span class="vertical_center">from</span>
@@ -123,48 +124,51 @@
 						</select>
 					</div>
 					<div class="ui-input-data">
-						<lable>
+						<lable style="margin: 0;">
 							Delivery
 						</lable>
 						<input type="radio" name="delivery" ng-model="Delivery" value="true">
-						Yes
+						Yes &nbsp;&nbsp;&nbsp;
 						<input type="radio"  name="delivery" ng-model="Delivery" value="false">
 						No
 					</div>
 					<div class="ui-input-data">
-						<lable>
+						<lable style="margin: 0;">
 							Serves Alcohol
 						</lable>
 						<input type="radio"  name="serves_alcohol"  ng-model="serves_alcohol" value="true">
-						Yes
+						Yes &nbsp;&nbsp;&nbsp;
 						<input type="radio" ng-model="serves_alcohol" name="serves_alcohol" value="false">
 						No
 					</div>
 					<div class="ui-input-data">
-						<lable>
+						<lable style="margin: 0;">
 							Outdoor Seating
 						</lable>
 						<input type="radio"  ng-model="outdoor_Seating" name="outdoor_Seating" value="true">
-						Yes
+						Yes &nbsp;&nbsp;&nbsp;
 						<input type="radio"  ng-model="outdoor_Seating" name="outdoor_Seating" value="false">
 						No
 					</div>
-					<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
-						Save
-					</button>
+					<div style="margin: 10px 0 0 130px;">
+						<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
+							Save
+						</button>
+						<p ng-show="error" class="errorMsg">
+							Please fillup the form.
+						</p>
+						<p ng-hide="error" ></p>
+						<p ng-show="successMsg" class="successMsg">
+							Outlet is created Successfully
+						</p>
+						<p ng-hide="success"></p>
+					</div>
 				</form>
 			</div>
 			<div class="clr"></div>
-			<p ng-show="error" class="errorMsg">
-				Please fillup the form.
-			</p>
-			<p ng-hide="error" ></p>
-			<p ng-show="successMsg" class="successMsg">
-				Outlet is created Successfully
-			</p>
-			<p ng-hide="success"></p>
+
 		</div>
-		
+
 		<div id ="permission" ng-show="permissionShow">
 			<!-- <div data-role="fieldcontain" class="manager_list rightPanel">
 			<h3>Select a manager for this outlet</h3>
@@ -178,7 +182,7 @@
 			<input type="button" class="btn_cls" ng-click="add_new_manager()" data-inline="true" value="Add a new manager" />
 			</div> -->
 			<div data-role="fieldcontain" class="add_manager rightPanel">
-				<h3>Add a new manager</h3>
+				<h1>Add a new manager</h1>
 				<form  name="createManager" ng-submit="create_manager(createManager)" ng-app>
 					<div class="ui-input-data">
 						<lable>
@@ -216,18 +220,19 @@
 						</lable>
 						<input data-theme="a" data-inline="true" type="text" name="txtPhone" ng-model="add_contact_number" class="passwordTxt" placeholder="Enter phone no" required/>
 					</div>
-
-					<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true">
-						Add Manager
-					</button>
-					<p ng-show="error" class="errorMsg">
-						{{errorMsg}}
-					</p>
-					<p ng-hide="error" ></p>
-					<p ng-show="success1" class="successMsg">
-						Manager added successfully.
-					</p>
-					<p ng-hide="success" ></p>
+					<div style="margin: 10px 0 0 131px;">
+						<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true">
+							Add Manager
+						</button>
+						<p ng-show="error" class="errorMsg">
+							{{errorMsg}}
+						</p>
+						<p ng-hide="error" ></p>
+						<p ng-show="success1" class="successMsg">
+							Manager added successfully.
+						</p>
+						<p ng-hide="success" ></p>
+					</div>
 				</form>
 			</div>
 			<div class="clr"></div>
@@ -236,7 +241,7 @@
 		<div id ="reports" ng-show="ReportShow">
 			This is reports based div only
 		</div>
-<div id ="location" >
+		<div id ="location" >
 			<div ng-app="kanari">
 				<div ng-controller="MapCtrl">
 					<map id="map_canvas"></map>
