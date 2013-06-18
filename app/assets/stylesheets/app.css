@@ -195,6 +195,7 @@ body {
 	font-size: 15px;
 	padding: 25px 0 35px;
 	display: block;
+	margin-right: 8px;
 }
 a.addRestaurant {
 	background: none repeat scroll 0 0 #F5BA44;
@@ -225,6 +226,7 @@ a.addRestaurant:hover {
 .rightPanel lable {
 	float: left;
 	width: 130px;
+	margin-top: 4px;
 }
 #createOutlet select {
 	width: 80px;
@@ -234,7 +236,8 @@ a.addRestaurant:hover {
 }
 .successMsg {
 	color: green;
-	text-align: center;
+	margin-top: 10px;
+    text-align: left;
 	font-size: 18px;
 }
 .leftPanel {
@@ -275,6 +278,7 @@ a.addRestaurant:hover {
 	font-weight: normal;
 	margin-left: 28px;
 	padding: 0;
+	
 }
 .innerDiv h3 {
 	padding-bottom: 20px;
@@ -284,7 +288,7 @@ a.addRestaurant:hover {
 	width: 30%
 }
 .add_manager {
-	width: 30%;
+	width: 35%;
 	/*display: none;*/
 	margin-left: 20px;
 	padding-left: 20px;
@@ -338,6 +342,7 @@ ul.taketour li a:hover {
 .acceptInv lable {
 	float: left;
 	width: 145px;
+	margin-top: 4px;
 }
 .acceptInv input {
 	float: left;
@@ -366,7 +371,8 @@ ul.taketour li a:hover {
 }
 .viewAccPage lable {
 	width: 140px;
-	float: left
+	float: left;
+	 margin-top: 4px;
 }
 .viewAccPage input {
 	float: left

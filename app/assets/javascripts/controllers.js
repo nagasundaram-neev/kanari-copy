@@ -138,7 +138,8 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 	} else if (getCookie('userRole') == "customer_admin") {
 		$scope.userName = getCookie('userName');
 	}
-
+	
+	
 	$scope.logout = function() {
 		$http({
 			method : 'delete',
@@ -321,12 +322,13 @@ module.controller('resetPassCtrl', function($rootScope, $scope, $routeParams, $h
 				data : param,
 			}).success(function(data, status) {
 				console.log("data in success " + data + " status " + status);
-				$scope.error = data.auth_token;
-				$scope.statement = true;
+				$scope.success = true;
 				$scope.erromsg = false;
 			}).error(function(data, status) {
 				console.log("data in error" + data + " status " + status);
+				$scope.errormessage = data.errors;
 				$scope.erromsg = true;
+				$scope.success = false;
 			});
 		}
 	};
@@ -334,7 +336,7 @@ module.controller('resetPassCtrl', function($rootScope, $scope, $routeParams, $h
 
 module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 	if (getCookie('authToken')) {
-		$rootScope.header = "Create Invitation | Kanari";
+		$rootScope.header = "Outlets | Kanari";
 		//getRefresh($scope);
 		$('.welcome').show();
 		$('.navBarCls').show();
@@ -348,7 +350,7 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 		$scope.outlets = []
 
 		var param = {
-			"auth_token" : $scope.auth_token
+			"auth_token" : getCookie('authToken')
 		};
 		$http({
 			method : 'get',
@@ -553,6 +555,7 @@ module.controller('listPaymentInvoiceCtrl', function($rootScope, $scope, $http, 
 
 module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams, $http, $location) {
 	if (getCookie('authToken')) {
+		
 		$rootScope.header = "Create Outlet | Kanari";
 		$scope.profileShow = true;
 		$scope.managerField = false;
@@ -573,8 +576,11 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.cuisineTypes = [];
 		$scope.managerList = [];
 		$scope.checkedCuisineTypes = []
-		console.log($routeParams.outletId);
+	//	console.log($routeParams.outletId);
+		
+		
 		$scope.getOutletTypes = function() {
+			
 			var param = {
 				"auth_token" : $scope.auth_token
 			}
@@ -611,6 +617,9 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				$scope.error = false;
 				$scope.cuisineTypes = data.cuisine_types;
 				//console.log($scope.OutletTypes)
+				$scope.$broadcast('clickMessageFromParent', {
+					data : "SOME msg to the child"
+				})
 				$scope.success = true;
 
 			}).error(function(data, status) {
@@ -654,6 +663,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		/* Adding for updating the outlet*/
 
 		if ($routeParams.outletId) {
+			$rootScope.header = "Update Outlet | Kanari";
 			console.log($scope.auth_token);
 			console.log($routeParams.outletId);
 			var param = {
@@ -726,6 +736,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				var method = "post"
 				if ($scope.updateMode) {
 					url = "/api/outlets/" + $scope.outletID;
+					
 					method = "PUT";
 				}
 				if (!managerId) {
