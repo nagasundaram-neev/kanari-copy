@@ -45,7 +45,41 @@ src: url('Roboto-Regular.ttf');
 .roundBtn img{
 	height: 94px;
 }
-
+.menDiv{
+	width:100%;	
+	margin: 7% 0 0;
+}
+.imgDiv{
+	
+}
+.feedbackTxt{
+	color: #FFFFFF;
+    display: block;
+    margin: 0 auto;
+    width: 82px;
+}
+.yellowBack{
+	float:left;
+	padding: 5% 0;
+	width:48%;
+	background-color:#F8BE40;
+	border-right:2px solid #FFFFFF;
+}
+.count{
+	font-size: 2em;
+}
+.descript{
+	font-size: 0.9em;
+}
+.whatLike{
+	margin: 9% 0;
+}
+.backColr{
+	background-color: #E5E6E8;
+	 float: left;
+    width: 32%;
+    border-right: 3px solid #FFFFFF;
+}
 body {
 	font-family:"kanariFont",sans-serif;
 	/*color: #664765 !important;*/
@@ -91,6 +125,18 @@ img, object {
 	width: 89%;
 	margin: 0 6%;
 }
+
+.number{
+	color:#593F5A;
+	font-size:10em;
+	margin-bottom: -21px;
+}
+
+.points{
+	font-size: 1.6em;
+    letter-spacing: 0.4em;
+}
+
 .userClick {
 	width: 100%;
 	margin: 30% auto;
@@ -383,6 +429,7 @@ img, object {
 	width: 93%;
 	text-align: center;
 	text-shadow: none;
+	color:#593F5A;
 }
 .loginDiv {
 	/*border: 1px solid #D9A432 !important;*/

@@ -1,12 +1,30 @@
 <div data-role="page" data-theme="b" id="home" ng-controller="homeController">
 	<style>
 .setting{
-background-image: url(<%= asset_path 'sprite_mobile.png' %>	);
+background-image: url(<%= asset_path 'sprite_mobile.png' %>
+	);
 	background-position: -234px -557px;
 	height: 69px;
 	width: 63px;
 	float:right;
 	cursor:pointer;
+	}
+
+	.feedback {
+		background-image: url("/assets/sprite_mobile.png");
+		background-position: -158px -440px;
+		cursor: pointer;
+		height: 109px;
+		margin-left: 8%;
+		width: 126px;
+	}
+	.redeems {
+		background-image: url("/assets/sprite_mobile.png");
+		background-position: -158px -440px;
+		cursor: pointer;
+		height: 109px;
+		margin-left: 8%;
+		width: 126px;
 	}
 	</style>
 	<div data-role="content">
@@ -16,6 +34,55 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>	);
 			<span class="role">{{role}}</span>
 			<div class="clr"></div>
 		</div>
-		<div class="outerDiv"></div>
+		<div class="outerDiv">
+			<div>
+				<div class="number">
+					255
+				</div>
+				<span class="points">POINTS</span>
+				<div class="clr"></div>
+			</div>
+			<div class="menDiv">
+				<div class="backColr">
+					<div class="count">
+						10
+					</div>
+					<div class="descript">
+						Tips left
+					</div>
+				</div>
+				<div class="backColr">
+					<div class="count">
+						2400
+					</div>
+					<div class="descript">
+						AED Saved
+					</div>
+				</div>
+				<div class="backColr">
+					<div class="count">
+						60
+					</div>
+					<div class="descript">
+						Redeems
+					</div>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="whatLike">
+				What would you like to do?
+			</div>
+			<div class="imgDiv">
+				<div class="yellowBack">
+					<div class="feedback"></div>
+					<span class="feedbackTxt">LEAVE FEEDBACK</span>
+				</div>
+				<div class="yellowBack">
+					<div class="redeems"></div>
+					<span class="feedbackTxt">REDEEM POINTS</span>
+				</div>
+			</div>
+			<div class="clr"></div>
+		</div>
 	</div>
 </div>
