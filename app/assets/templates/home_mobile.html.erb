@@ -1,30 +1,42 @@
 <div data-role="page" data-theme="b" id="home" ng-controller="homeController">
 	<style>
-.setting{
+.setting {
+background-image: url(<%= asset_path 'sprite_mobile.png' %>
+);
+background-position: -197px -477px;
+cursor: pointer;
+float: right;
+height: 57px;
+width: 56px;
+}
+
+.feedback {
+background-image: url(<%= asset_path 'sprite_mobile.png' %>
+);
+background-position: -135px -373px;
+cursor: pointer;
+height: 101px;
+margin-left: 8%;
+width: 102px;
+}
+.redeems {
+background-image: url(<%= asset_path 'sprite_mobile.png' %>
+);
+background-position: -237px -371px;
+cursor: pointer;
+height: 101px;
+margin-left: 8%;
+width: 118px;
+}
+.calender{
 background-image: url(<%= asset_path 'sprite_mobile.png' %>
 	);
-	background-position: -234px -557px;
-	height: 69px;
-	width: 63px;
-	float:right;
-	cursor:pointer;
-	}
-
-	.feedback {
-		background-image: url("/assets/sprite_mobile.png");
-		background-position: -158px -440px;
-		cursor: pointer;
-		height: 109px;
-		margin-left: 8%;
-		width: 126px;
-	}
-	.redeems {
-		background-image: url("/assets/sprite_mobile.png");
-		background-position: -158px -440px;
-		cursor: pointer;
-		height: 109px;
-		margin-left: 8%;
-		width: 126px;
+	background-position: -257px -478px;
+	cursor: pointer;
+	float: right;
+	height: 48px;
+	margin-left: 8%;
+	width: 50px;
 	}
 	</style>
 	<div data-role="content">
@@ -81,8 +93,21 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 					<div class="redeems"></div>
 					<span class="feedbackTxt">REDEEM POINTS</span>
 				</div>
+				<div class="clr"></div>
 			</div>
-			<div class="clr"></div>
+			<div class="bottomDiv">
+				<div class="recentActDiv">
+					<div class="recentAct">
+						RECENT ACTIVITY
+					</div>
+					<div class="actDate">
+						05.03.2013
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="calender"></div>
+				<div class="clr"></div>
+			</div>
 		</div>
 	</div>
 </div>
