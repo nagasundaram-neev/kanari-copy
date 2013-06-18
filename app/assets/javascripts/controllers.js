@@ -526,8 +526,7 @@ module.controller('listPaymentInvoiceCtrl', function($rootScope, $scope, $http, 
 				"end_date" : endDate,
 				"auth_token" : getCookie('authToken')
 			}
-				
-				
+
 			$http({
 				method : 'get',
 				url : '/api/payment_invoices',
@@ -538,8 +537,7 @@ module.controller('listPaymentInvoiceCtrl', function($rootScope, $scope, $http, 
 				var value = $scope.InvoiceList.val;
 				if (!value) {
 					$scope.paymentInvoiceSuccess = true;
-				}
-				else{
+				} else {
 					$scope.paymentInvoiceSuccess = false;
 				}
 			}).error(function(data, status) {
@@ -1269,31 +1267,30 @@ module.controller('createKanariCodeCtrl', function($scope, $routeParams, $route,
 	} else {
 		$location.url("/login");
 	}
-	$scope.createKanariCode = function() {
-		var param = 
-				{
-					"bill_amount" : $scope.bill_amount
-				}
-			
+	$scope.create_kanariCode = function(createKanariCode) {
+		if ($scope.createKanariCode.$valid) {
+			var param = {
+				"bill_amount" : $scope.bill_amount
+			}
 
-		$http({
-			method : 'post',
-			url : '/api/kanari_codes',
-			data : param
-		}).success(function(data, status) {
-			console.log("data in success " + data + " status " + status);
-			//$scope.success = true;
-			//$scope.error = false;
+			$http({
+				method : 'POST',
+				url : '/api/kanari_codes',
+				data : param,
+			}).success(function(data, status) {
+				console.log("data in success " + data + " status " + status);
+				//$scope.success = true;
+				//$scope.error = false;
 
-		}).error(function(data, status) {
-			console.log("data in errorrr" + data + " status " + status);
-			//$scope.success = false;
-			//$scope.error = true;
-			//$scope.errormsg = data.errors;
-		});
+			}).error(function(data, status) {
+				console.log("data in errorrr" + data + " status " + status);
+				//$scope.success = false;
+				//$scope.error = true;
+				//$scope.errormsg = data.errors;
+			});
 
-		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
-
+			//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
+		}
 	};
 
 });
