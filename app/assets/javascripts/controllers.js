@@ -460,7 +460,7 @@ module.controller('createInvitation', function($rootScope, $scope, $http, $locat
 
 module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $location) {
 	if (getCookie('authToken')) {
-		$rootScope.header = "Payment Invoice | Kanari";
+		$rootScope.header = "Create Payment Invoice | Kanari";
 		$('.welcome').show();
 		$('.navBarCls').show();
 		$('.navBarCls ul li').removeClass('active');
