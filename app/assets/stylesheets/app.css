@@ -28,7 +28,7 @@ body {
 .welcome {
 	float: right;
 	display: none;
-	margin-top: 50px;
+	margin-top: 55px;
 	font-size: 12px;
 }
 .welcome a {
@@ -129,6 +129,7 @@ body {
 	background: none repeat scroll 0 0 #F5BA44 !important;
 	color: #5A4156 !important;
 	padding: 5px !important;
+	font-size: 13px !important;
 	text-shadow: none !important;
 	display: inline-block !important;
 }
@@ -136,6 +137,7 @@ body {
 	background: none repeat scroll 0 0 #F5BA44 !important;
 	color: #5A4156 !important;
 	padding: 5px !important;
+	font-size: 13px;
 	text-shadow: none !important;
 }
 .loginDiv {
@@ -328,7 +330,9 @@ ul.taketour li.active a {
 ul.taketour li a:hover {
 	text-decoration: none;
 }
-
+/**Create Invitation**/
+#createInvitation .input-help, #paymentInvoice .input-help{left: 340px;}
+	
 /**accept Invitation**/
 .acceptInv lable {
 	float: left;
