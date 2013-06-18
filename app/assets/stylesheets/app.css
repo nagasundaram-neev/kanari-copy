@@ -371,7 +371,8 @@ ul.taketour li a:hover {
 }
 .viewAccPage lable {
 	width: 140px;
-	float: left
+	float: left;
+	 margin-top: 4px;
 }
 .viewAccPage input {
 	float: left
