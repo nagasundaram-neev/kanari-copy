@@ -43,29 +43,30 @@
 						</lable>
 						<input data-theme="a" data-inline="true" type="password" name="txtcpassword" ng-model="password_confirmation" class="passwordTxt" placeholder="Confirmation Password" required/>
 					</div>
-					
-					
-					<!-- <input type="button" class="loginBtn" ng-click="acceptInvitation()" data-inline="true" value="Save" /> -->
-					<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
-						Save
-					</button>
 
-					<p class="errorMsg" ng-show="error">
-						{{errorMsg}}
-					</p>
-					<p ng-hide="error"></p>
-					<p class="errorMsg" ng-show="passwordError">
-						Password Didn't match
-					</p>
-					<p ng-hide="passwordError"></p>
-					<p class="errorMsg" ng-show="errorClient">
-						Please Fill the Form
-					</p>
-					<p ng-hide="errorClient"></p>
-					<p class="successMsg" ng-show="success">
-						Your Authenticatin Token is {{auth_token}}
-					</p>
-					<p ng-hide="success"></p>
+					<div style="margin: 10px 0 0 145px;">
+						<!-- <input type="button" class="loginBtn" ng-click="acceptInvitation()" data-inline="true" value="Save" /> -->
+						<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
+							Save
+						</button>
+
+						<p class="errorMsg" ng-show="error">
+							{{errorMsg}}
+						</p>
+						<p ng-hide="error"></p>
+						<p class="errorMsg" ng-show="passwordError">
+							Password Didn't match
+						</p>
+						<p ng-hide="passwordError"></p>
+						<p class="errorMsg" ng-show="errorClient">
+							Please Fill the Form
+						</p>
+						<p ng-hide="errorClient"></p>
+						<p class="successMsg" ng-show="success">
+							Your Authenticatin Token is {{auth_token}}
+						</p>
+						<p ng-hide="success"></p>
+					</div>
 				</div>
 			</form>
 		</div>
