@@ -138,7 +138,8 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 	} else if (getCookie('userRole') == "customer_admin") {
 		$scope.userName = getCookie('userName');
 	}
-
+	
+	
 	$scope.logout = function() {
 		$http({
 			method : 'delete',
@@ -554,6 +555,7 @@ module.controller('listPaymentInvoiceCtrl', function($rootScope, $scope, $http, 
 
 module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams, $http, $location) {
 	if (getCookie('authToken')) {
+		
 		$rootScope.header = "Create Outlet | Kanari";
 		$scope.profileShow = true;
 		$scope.managerField = false;
@@ -574,8 +576,11 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.cuisineTypes = [];
 		$scope.managerList = [];
 		$scope.checkedCuisineTypes = []
-		console.log($routeParams.outletId);
+	//	console.log($routeParams.outletId);
+		
+		
 		$scope.getOutletTypes = function() {
+			
 			var param = {
 				"auth_token" : $scope.auth_token
 			}
@@ -612,6 +617,9 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				$scope.error = false;
 				$scope.cuisineTypes = data.cuisine_types;
 				//console.log($scope.OutletTypes)
+				$scope.$broadcast('clickMessageFromParent', {
+					data : "SOME msg to the child"
+				})
 				$scope.success = true;
 
 			}).error(function(data, status) {
