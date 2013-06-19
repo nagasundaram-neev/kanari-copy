@@ -580,7 +580,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		//	console.log($routeParams.outletId);
 
 		$scope.getOutletTypes = function() {
-console.log('$scope.outletTypes'+$scope.outletTypes);
+
 			var param = {
 				"auth_token" : $scope.auth_token
 			}
@@ -591,6 +591,7 @@ console.log('$scope.outletTypes'+$scope.outletTypes);
 			}).success(function(data, status) {
 				$scope.error = false;
 				$scope.outletTypes = data.outlet_types;
+				console.log('$scope.outletTypes'+$scope.outletTypes);
 				$scope.success = true;
 
 			}).error(function(data, status) {
