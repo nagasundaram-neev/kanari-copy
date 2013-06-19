@@ -238,8 +238,9 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 				}
 
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status);
+				console.log("data error" + data + " status " + status);
 				$scope.erromsg = true;
+				$scope.error = data.errors;
 			});
 
 		};
