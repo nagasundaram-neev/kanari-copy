@@ -1,39 +1,25 @@
 class Api::V1::RedemptionsController < ApplicationController
-  before_action :set_redemption, only: [:show, :edit, :update, :destroy]
 
-  # GET /redemptions
-  # GET /redemptions.json
-  def index
-    @redemptions = Redemption.all
-  end
+  before_action :authenticate_user!
 
-  # GET /redemptions/1
-  # GET /redemptions/1.json
-  def show
-  end
+  respond_to :json
 
-  # GET /redemptions/new
-  def new
-    @redemption = Redemption.new
-  end
 
-  # GET /redemptions/1/edit
-  def edit
-  end
-
-  # POST /redemptions
-  # POST /redemptions.json
   def create
-    @redemption = Redemption.new(redemption_params)
+    authorize! :request, Redemption
+    redemption = Redemption.new(redemption_params)
+    redemption.user_id = current_user.id
 
-    respond_to do |format|
-      if @redemption.save
-        format.html { redirect_to @redemption, notice: 'Redemption was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @redemption }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @redemption.errors, status: :unprocessable_entity }
-      end
+    if !redemption.points_available?
+      render json: {errors: ["Points not available"]}, status: :unprocessable_entity and return
+    end
+
+    if redemption.save
+      current_user.points_available -= redemption.points
+      current_user.save
+      render json: nil, status: :created
+    else
+      render json: {errors: redemption.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
@@ -62,13 +48,9 @@ class Api::V1::RedemptionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_redemption
-      @redemption = Redemption.find(params[:id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def redemption_params
-      params.require(:redemption).permit(:user_id, :outlet_id, :points)
+      params.require(:redemption).permit(:outlet_id, :points)
     end
 end
