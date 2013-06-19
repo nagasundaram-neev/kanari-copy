@@ -66,7 +66,7 @@
 						<lable>
 							Contact Number
 						</lable>
-						<input data-theme="a" data-inline="true" placeholder="Contact Number" type="text" name="txtPassword" ng-model="contact_number" class="passwordTxt" required />
+						<input data-theme="a" data-inline="true" placeholder="Contact Number" type="text" min="0" number-mask="" max="99" name="txtPassword" ng-model="contact_number" class="passwordTxt" required />
 					</div>
 					<div class="ui-input-data">
 						<lable>
@@ -218,8 +218,8 @@
 						<lable>
 							Phone
 						</lable>
-						<input style="float: left;" data-theme="a" data-inline="true" type="number" name="add_contact_number"  ng-model="add_contact_number" class="passwordTxt" placeholder="Enter phone no" required/>
-						<span class="help-inline" ng-show="submitted && createManager.add_contact_number.$error.number">Invalid Phone Number</span>
+						<input style="float: left;" data-theme="a" data-inline="true" type="text" min="0" number-mask="" max="99" name="add_contact_number"  ng-model="add_contact_number" class="passwordTxt" placeholder="Enter phone no" required/>
+						
 					</div>
 					<div class="clr"></div>
 					<div style="margin: 10px 0 0 131px;">

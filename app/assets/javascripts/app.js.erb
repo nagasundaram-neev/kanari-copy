@@ -210,4 +210,13 @@ module.directive('passwordValidate', function() {
 	};
 }); 
 
+module.directive('numberMask', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            $(element).numeric();
+        }
+    }
+});
+
 
