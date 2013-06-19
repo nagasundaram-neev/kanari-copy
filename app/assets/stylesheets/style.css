@@ -18,7 +18,7 @@ src: url('Roboto-Regular.ttf');
 	background: #FEbf3B !important;
 }
 
-#signUp, #settings, #home{
+#signUp, #settings, #home, #feedback{
 	background: #FFFFFF !important;
 }
 
@@ -43,7 +43,7 @@ src: url('Roboto-Regular.ttf');
 }
 
 .roundBtn img{
-	height: 94px;
+	width: 30%;
 }
 .menDiv{
 	width:100%;	
@@ -91,7 +91,7 @@ src: url('Roboto-Regular.ttf');
 .recentActDiv{
 	float: left;
     padding: 3% 0;
-    width: 75%;
+  	width: 74%;
 }
 .backColr{
 	background-color: #E5E6E8;
@@ -100,6 +100,29 @@ src: url('Roboto-Regular.ttf');
     width: 32%;
     border-right: 3px solid #FFFFFF;
 }
+.clear{
+	color:#FEBF3B;
+	font-size: 2em;
+}
+
+.clearBackColr{
+	background-color: #664765;
+    border-right: 3px solid #FFFFFF;
+    border-top: 3px solid #FFFFFF;
+    float: left;
+    padding: 9% 0;
+    width: 30%;
+}
+
+.nextBackColr{
+	background-color: #FEBF3B;
+    border-right: 3px solid #FFFFFF;
+    border-top: 3px solid #FFFFFF;
+    float: left;
+   	padding: 12% 0;
+    width: 30%;
+}
+
 body {
 	font-family:"kanariFont",sans-serif;
 	/*color: #664765 !important;*/
@@ -117,13 +140,41 @@ img, object {
 	border-radius: 0px;
 }
 
+#feedback .backColr{
+	background-color: #E5E6E8;
+    border-right: 3px solid #FFFFFF;
+    float: left;
+    padding: 8% 0;
+    width: 18%;
+    height: 43px;
+}
+
+#feedback .menDiv {
+    margin: 7% 0 0 4%;
+    width: 100%;
+}
+
+#feedback .keypad .menDiv{
+	margin: 8% 0 0 10%;
+    width: 90%;
+}
+
 .border {
 	border: 1px solid #664765;
 }
 
+.secondRow{
+	width:90%;
+	margin: 0 0 0 10%;
+}
 .homeImg img {
 	max-height: 90%;
 	max-width: 75%;
+}
+.next{
+	float: left;
+    font-size: 1em;
+    padding: 2% 0 0 8%;
 }
 
 #landPage .ui-body-b, .ui-overlay-b, .ui-body-c, .ui-overlay-c {
@@ -140,10 +191,10 @@ img, object {
 }
 .signIn {
 	/*display: none;*/
-	position: absolute;
+	/*position: absolute;*/
 	/*bottom: 0;*/
-	width: 89%;
-	margin: 0 6%;
+	/*width: 89%;*/
+	/*margin: 0 6%;*/
 }
 
 .number{
@@ -157,9 +208,15 @@ img, object {
     letter-spacing: 0.4em;
 }
 
+.forgotpass{
+	text-decoration: none;
+	/*font-size: 0.9em;*/
+	color:#66475E;
+	float: right;
+}
+
 .userClick {
 	width: 100%;
-	margin: 30% auto;
 	overflow: hidden;
 	text-align: center;
 }
@@ -167,7 +224,7 @@ img, object {
 	text-align: center; /*position: relative;height: 377px;*/
 }
 .logo {
-	margin: 5% 0;
+	padding:6% 0;
 	position: relative;
 	text-align: center;
 }
@@ -184,7 +241,7 @@ img, object {
 	text-align: right;
 }
 .socialBtn img {
-	float: left;
+	/*float: left;*/
 }
 .userClick .ui-btn {
 	border-radius: 0;
@@ -254,12 +311,13 @@ img, object {
 }
 .dateLabel{
 	float:left;
-	font-size: 20px;
+	font-size: 18px;
     margin: 1%;
 }
 .date {
 	float:left;
-	width:61%;
+	width:49%;
+	margin-left: 13%;
 }
 .dateInner{
 	float: left;
@@ -311,10 +369,10 @@ img, object {
 }
 .genderBtn .ui-field-contain label.ui-slider , .ui-field-contain label.ui-slider{
 	float:left;
-	width: 33%;
+	width: 24%;
 	color: #664765;
 	text-shadow:none;
-	font-size: 20px;
+	font-size: 18px;
 }
 
 .proceedBtn .ui-btn-up-b, .ui-btn-hover-b{
@@ -452,6 +510,22 @@ img, object {
 	text-shadow: none;
 	color:#593F5A;
 }
+.keypad{
+	margin: 5% 0 0 3%;
+	width: 93%;
+	text-align: center;
+	text-shadow: none;
+	color:#593F5A;
+}
+
+#feedback .keypad .backColr{
+	background-color: #E5E6E8;
+    border-right: 3px solid #FFFFFF;
+    border-top: 3px solid #FFFFFF;
+    float: left;
+    padding: 8% 0;
+    width: 30%;
+}
 .loginDiv {
 	/*border: 1px solid #D9A432 !important;*/
 	border-radius: 10px;
@@ -472,11 +546,23 @@ img, object {
 .chkbox{
 	
 }
+#login .ui-content{
+	padding:0;
+}
 .forgotPass{
 }
+.rememberMe .ui-checkbox .ui-btn-icon-left .ui-btn-inner, .ui-radio .ui-btn-icon-left .ui-btn-inner{
+	padding-right: 0;
+    padding-top: 0;
+}
+
+.rememberMe  .ui-controlgroup .ui-checkbox label, .ui-controlgroup .ui-radio label{
+	font-size: 0.9em;
+}
 .rememberMe .ui-field-contain .ui-controlgroup, .ui-field-contain fieldset.ui-controlgroup{
-	 float: left;
-    width: 50%;
+	 /*float: left;*/
+	 display: inline;
+    /*width: 50%;*/
 }
 /*.rememberMe .ui-checkbox .ui-btn-icon-left .ui-icon, .ui-radio .ui-btn-icon-left .ui-icon{
 	left: 2px;
