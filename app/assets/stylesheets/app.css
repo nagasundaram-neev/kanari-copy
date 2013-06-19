@@ -80,6 +80,7 @@ body {
 	float: none;
 	margin: 0 auto;
 	width: 1115px;
+	overflow: hidden;
 }
 .navBarCls {
 	background: none repeat scroll 0 0 #664766;
