@@ -144,10 +144,12 @@ body {
 	text-shadow: none !important;
 }
 .loginDiv {
-	text-align: center
+	text-align: center;
+	margin: 0 auto;
+	width: 40%;
 }
 .innerLoginDiv {
-	width: 21%;
+	width: 100% !important;
 	margin: 0 auto;
 	text-align: left
 }
@@ -163,6 +165,7 @@ body {
 .innerDiv {
 	padding: 30px;
 	min-height: 300px;
+	
 }
 .divLeft {
 	float: left !important;
@@ -338,7 +341,7 @@ ul.taketour li a:hover {
 	text-decoration: none;
 }
 /**Create Invitation**/
-#createInvitation .input-help, #paymentInvoice .input-help{left: 340px;}
+#createInvitation .input-help, #paymentInvoice .input-help{left: 240px;}
 	
 /**accept Invitation**/
 .acceptInv lable {
@@ -401,7 +404,7 @@ a.changePassword:hover {
 	z-index: 100;
 	top: -6px;
 	left: 160px;
-	width: 200px;
+	width: 180px;
 	padding: 10px;
 	background: #fefefe;
 	font-size: .875em;
@@ -455,7 +458,6 @@ input:focus {
 /* Show red border when stuff has been typed in, but its invalid */
 .ng-dirty.ng-invalid {
 	border-color: #ec3f41;
-	float: left;
 }
 .help-inline{display: inline-block;
     float: left;padding: 5px !important;}
