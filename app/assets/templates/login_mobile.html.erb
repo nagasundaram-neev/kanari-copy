@@ -17,12 +17,10 @@
 				</div>
 				<div data-role="fieldcontain" class="rememberMe">
 					<fieldset data-role="controlgroup" class="chkbox">
-						<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" ng-model="remember" />
+						<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" ng-model="remember" data-inline="true" />
 						<label for="checkbox-1">Remember Me</label>
 					</fieldset>
-					<p class="forgotPass">
-						<a ng-click="forgotPassword()">Forgot your password?</a>
-					</p>
+						<a data-role="none" class="forgotpass" ng-click="forgotPassword()">Forgot your password?</a>
 					<div class="clr"></div>
 				</div>
 				<input type="button" class="loginBtn" ng-click="chkLogin()" data-inline="true" value="Login" />

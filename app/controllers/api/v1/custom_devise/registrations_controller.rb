@@ -59,11 +59,11 @@ module Api
         end
         private
           def sign_up_params
-            params.fetch(:user).permit([:password, :password_confirmation, :email, :first_name, :last_name])
+            params.fetch(:user).permit([:password, :password_confirmation, :email, :first_name, :last_name, :phone_number])
           end
 
           def account_update_params
-            params.fetch(:user).permit([:password, :password_confirmation, :email, :first_name, :last_name, :current_password, :date_of_birth, :gender, :location])
+            params.fetch(:user).permit([:password, :password_confirmation, :email, :first_name, :last_name, :current_password, :date_of_birth, :gender, :location, :phone_number])
           end
       end
     end

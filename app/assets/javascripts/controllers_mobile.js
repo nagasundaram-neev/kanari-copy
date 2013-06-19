@@ -259,10 +259,13 @@ module.controller('homeController', function($scope, $http, $location) {
 		$scope.homeClk = function() {
 			$location.url("/home");
 		};
+		
+		$scope.feedback = function(){
+			$location.url("/feedback");			
+		};
 
 		$scope.setting = function() {
 			$location.url("/settings");
-
 		};
 	} else {
 		$location.url('/login');
@@ -425,9 +428,6 @@ module.controller('settingsController', function($scope, $http, $location) {
 		});
 
 		}
-			
-
-		
 		//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('') + ':X');
 	};
 
@@ -451,12 +451,18 @@ module.controller('settingsController', function($scope, $http, $location) {
 		}).error(function(data, status) {
 			console.log("data " + data + " status " + status);
 		});
-
 		//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
-
 	};
-
 });
+
+module.controller('feedbackController', function($scope, $http, $location) {
+	
+	$scope.home = function(){
+		$location.url("/home");
+	};
+	
+});
+
 
 function setCookie(name, value, days) {
 	//alert(value);
