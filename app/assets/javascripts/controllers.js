@@ -960,7 +960,9 @@ module.controller('acceptInvitationCtrl', function($rootScope, $scope, $routePar
 module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routeParams, $http, $location) {
 	if (getCookie('authToken')) {
 		$rootScope.header = "Accept Invitation | Kanari";
+		if(getCookie('userRole') == "customer_admin"){
 		$('.welcome').show();
+		}
 		$scope.auth_token = getCookie('authToken');
 		console.log($scope.auth_token);
 		$scope.acceptInvitation2 = function(acceptInv2) {
