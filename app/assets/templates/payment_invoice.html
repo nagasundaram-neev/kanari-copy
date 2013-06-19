@@ -51,10 +51,8 @@
 							<lable >
 								Invalid Amount
 							</lable>
-							<input type="number" placeholder="Amount Paid" name="amount_paid" ng-model="amount_paid" min="0" max="10000000"  required />
-							<div class="input-help">
-								<h4>Invalid Amount.</h4>
-							</div>
+							<input type="text" min="0" number-mask="" max="99" placeholder="Amount Paid" name="amount_paid" ng-model="amount_paid"   required />
+							
 						</div>
 					</div>
 

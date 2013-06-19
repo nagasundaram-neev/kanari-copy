@@ -28,13 +28,19 @@ body {
 .welcome {
 	float: right;
 	display: none;
-	margin-top: 55px;
+	margin-top: 50px;
 	font-size: 12px;
 }
 .welcome a {
 	text-decoration: none;
 	color: #5A4166;
 	font-weight: bold;
+	cursor: pointer;
+	margin-right: 10px;
+}
+.welcome a.userName {
+	font-size: 14px;
+	text-transform: capitalize;
 }
 .homeLogo img {
 	float: left
@@ -79,6 +85,7 @@ body {
 	float: none;
 	margin: 0 auto;
 	width: 1115px;
+	overflow: hidden;
 }
 .navBarCls {
 	background: none repeat scroll 0 0 #664766;
@@ -123,29 +130,35 @@ body {
 .errorMsg {
 	color: red;
 	margin-top: 10px;
-    text-align: left;
+	text-align: left;
 	font-size: 14px;
 }
 .submitBtn {
 	background: none repeat scroll 0 0 #F5BA44 !important;
 	color: #5A4156 !important;
-	padding: 5px !important;
+	padding: 5px 10px !important;
 	font-size: 13px !important;
 	text-shadow: none !important;
 	display: inline-block !important;
 }
+
 .btn {
 	background: none repeat scroll 0 0 #F5BA44 !important;
 	color: #5A4156 !important;
-	padding: 5px !important;
+	padding: 5px 10px !important;
 	font-size: 13px;
 	text-shadow: none !important;
 }
+.cancelBtn {
+	background: none repeat scroll 0 0 #DCDBD9 !important;
+}
 .loginDiv {
-	text-align: center
+	text-align: center;
+	margin: 0 auto;
+	width: 41%;
 }
 .innerLoginDiv {
-	width: 21%;
+	width: 100% !important;
 	margin: 0 auto;
 	text-align: left
 }
@@ -164,7 +177,7 @@ body {
 }
 .divLeft {
 	float: left !important;
-	width: 50% !important;
+	width: 75% !important;
 }
 .divRight {
 	border: 1px solid #CCCCCC;
@@ -199,13 +212,12 @@ body {
 }
 a.addRestaurant {
 	background: none repeat scroll 0 0 #F5BA44;
-	padding: 10px;
 	border-radius: 5px 5px 5px 5px;
-	color: #94711F;
+	color: #664765;
 	font-size: 18px;
-	margin-top: 20px;
-	padding: 5px 10px;
-	float: left;
+	margin: 20px 5px;
+	padding: 2px 10px;
+	float: right;
 }
 a.addRestaurant img {
 	vertical-align: text-bottom;
@@ -219,6 +231,61 @@ a.addRestaurant:hover {
 	text-decoration: none;
 }
 
+.outlet_lenght {
+	border-bottom: 1px solid #CCCCCC;
+	padding: 5px 0 !important;
+}
+.outlets_list {
+	margin: 5px 0
+}
+.sr_outlet {
+	border: 1px solid #CCCCCC;
+	border-radius: 5px;
+	margin-bottom: 15px;
+	overflow: hidden;
+}
+.outlet_name, .manager_name, .action {
+	float: left;
+	height: 40px;
+	padding: 10px;
+}
+.outlet_name {
+	width: 170px;
+}
+.manager_name {
+	width: 110px;
+}
+.outlet_name a {
+	color: #5A4166;
+	font-size: 14px;
+	text-transform: uppercase;
+}
+.outlet_text{padding:0px !important;}
+.outlet_id {
+	background: none repeat scroll 0 0 #5A4166;
+	border-radius: 33px 33px 33px 33px;
+	font-size: 12px !important;
+	color: #FFFFFF !important;
+	display: inline !important;
+	margin-right: 0 !important;
+	padding: 1px 5px !important;
+	width: 16px;
+}
+.outlet_name a:hover {
+	text-decoration: none;
+}
+.outlet_name span.address {
+	margin-left: 23px;
+	padding: 0;
+	font-size: 12px;
+}
+.action .checkbox_lable{
+	display:inline-block;
+	padding:0 !important;
+}
+.border_right {
+	border-right: 1px solid #CCCCCC;
+}
 /***createOutlet****/
 #createOutlet .ui-input-data {
 	padding: 5px 0;
@@ -237,7 +304,7 @@ a.addRestaurant:hover {
 .successMsg {
 	color: green;
 	margin-top: 10px;
-    text-align: left;
+	text-align: left;
 	font-size: 18px;
 }
 .leftPanel {
@@ -278,7 +345,6 @@ a.addRestaurant:hover {
 	font-weight: normal;
 	margin-left: 28px;
 	padding: 0;
-	
 }
 .innerDiv h3 {
 	padding-bottom: 20px;
@@ -288,7 +354,7 @@ a.addRestaurant:hover {
 	width: 30%
 }
 .add_manager {
-	width: 35%;
+	width: 47%;
 	/*display: none;*/
 	margin-left: 20px;
 	padding-left: 20px;
@@ -336,8 +402,10 @@ ul.taketour li a:hover {
 	text-decoration: none;
 }
 /**Create Invitation**/
-#createInvitation .input-help, #paymentInvoice .input-help{left: 340px;}
-	
+#createInvitation .input-help, #paymentInvoice .input-help {
+	left: 240px;
+}
+
 /**accept Invitation**/
 .acceptInv lable {
 	float: left;
@@ -360,6 +428,7 @@ ul.taketour li a:hover {
 	margin: 20px 50px;
 	padding: 10px 0;
 }
+#viewaccount .passwordTxt{width: 250px;}
 .section {
 	border-bottom: 1px solid #CCCCCC;
 	margin-bottom: 10px;
@@ -372,7 +441,7 @@ ul.taketour li a:hover {
 .viewAccPage lable {
 	width: 140px;
 	float: left;
-	 margin-top: 4px;
+	margin-top: 4px;
 }
 .viewAccPage input {
 	float: left
@@ -399,7 +468,7 @@ a.changePassword:hover {
 	z-index: 100;
 	top: -6px;
 	left: 160px;
-	width: 200px;
+	width: 180px;
 	padding: 10px;
 	background: #fefefe;
 	font-size: .875em;
@@ -454,7 +523,11 @@ input:focus {
 .ng-dirty.ng-invalid {
 	border-color: #ec3f41;
 }
-
+.help-inline {
+	display: inline-block;
+	float: left;
+	padding: 5px !important;
+}
 /* Show the help box once it has focus */
 .immediate-help:focus + .input-help {
 	display: block;

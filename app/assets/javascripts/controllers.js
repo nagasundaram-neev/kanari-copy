@@ -159,7 +159,7 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 	}
 	$scope.goTOOulet = function() {
 		if (getCookie('userRole') == "kanari_admin") {
-			$location.url("/home");
+			$location.url("/createInvitation");
 		} else if (getCookie('userRole') == "customer_admin") {
 			$location.url("/outlets");
 		}
@@ -238,8 +238,9 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 				}
 
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status);
+				console.log("data error" + data + " status " + status);
 				$scope.erromsg = true;
+				$scope.error = data.errors[0];
 			});
 
 		};
@@ -326,7 +327,7 @@ module.controller('resetPassCtrl', function($rootScope, $scope, $routeParams, $h
 				$scope.erromsg = false;
 			}).error(function(data, status) {
 				console.log("data in error" + data + " status " + status);
-				$scope.errormessage = data.errors;
+				$scope.errormessage = data.errors[0];
 				$scope.erromsg = true;
 				$scope.success = false;
 			});
@@ -357,8 +358,9 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 			url : '/api/outlets',
 			params : param,
 		}).success(function(data, status) {
-			console.log("data in success " + data + " status " + status);
+			console.log("data in success " + data.lenght + " status " + status);
 			$scope.outlets = data.outlets;
+			//console.log($scope.outlets.lenght);
 			$scope.error = data.auth_token;
 			$scope.statement = true;
 			$scope.erromsg = false;
@@ -373,7 +375,7 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 		console.log(id);
 		$scope.auth_token = getCookie('authToken');
 		checkbox = $event.target;
-		console.log(checkbox.checked)
+		console.log(checkbox.checked);
 		var params = {
 			"outlet" : {
 				"disabled" : checkbox.checked
@@ -460,7 +462,7 @@ module.controller('createInvitation', function($rootScope, $scope, $http, $locat
 
 module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $location) {
 	if (getCookie('authToken')) {
-		$rootScope.header = "Payment Invoice | Kanari";
+		$rootScope.header = "Create Payment Invoice | Kanari";
 		$('.welcome').show();
 		$('.navBarCls').show();
 		$('.navBarCls ul li').removeClass('active');
@@ -846,7 +848,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.getManagerList();
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
-					$scope.errorMsg = data.errors;
+					$scope.errorMsg = data.errors[0];
 					$scope.error = true;
 					$scope.success1 = false;
 				});
@@ -946,7 +948,7 @@ module.controller('acceptInvitationCtrl', function($rootScope, $scope, $routePar
 				$location.url("/acceptInvitationStep2");
 			}).error(function(data, status) {
 				console.log("data in error" + data + " status " + status);
-				$scope.errorMsg = data.errors;
+				$scope.errorMsg = data.errors[0];
 				$scope.error = true;
 				$scope.success = false;
 			});
@@ -959,7 +961,9 @@ module.controller('acceptInvitationCtrl', function($rootScope, $scope, $routePar
 module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routeParams, $http, $location) {
 	if (getCookie('authToken')) {
 		$rootScope.header = "Accept Invitation | Kanari";
+		if(getCookie('userRole') == "customer_admin"){
 		$('.welcome').show();
+		}
 		$scope.auth_token = getCookie('authToken');
 		console.log($scope.auth_token);
 		$scope.acceptInvitation2 = function(acceptInv2) {
@@ -997,7 +1001,7 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 				}).error(function(data, status) {
 					console.log(data)
 					console.log("data in error" + data + " status " + status);
-					$scope.errorMsg = data.errors;
+					$scope.errorMsg = data.errors[0];
 					$scope.error = true;
 					$scope.success = false;
 				});
@@ -1042,7 +1046,7 @@ module.controller('createManagerCtrl', function($rootScope, $scope, $routeParams
 					$scope.listManager();
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
-					$scope.errorMsg = data.errors;
+					$scope.errorMsg = data.errors[0];
 					$scope.error = true;
 					$scope.success = false;
 				});
@@ -1171,7 +1175,6 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 					console.log("data in error" + data + " status " + status);
 					//$scope.success = false;
 				});
-
 				var param2 = {
 					"user" : {
 						"first_name" : $scope.first_name,
@@ -1201,7 +1204,7 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 					console.log("data in errorrr" + data + " status " + status);
 					$scope.success = false;
 					$scope.error = true;
-					$scope.errormsg = data.errors;
+					$scope.errormsg = data.errors[0];
 				});
 
 			} else {
@@ -1210,6 +1213,9 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 		}
 		$scope.gotoChangePassword = function() {
 			$location.url("/change_password");
+		}
+		$scope.goback = function() {
+			$location.url("/outlets");
 		}
 	}
 });
@@ -1248,7 +1254,7 @@ module.controller('changePassCtrl', function($rootScope, $scope, $routeParams, $
 					console.log("data in errorrr" + data + " status " + status);
 					$scope.success = false;
 					$scope.error = true;
-					$scope.errormsg = data.errors;
+					$scope.errormsg = data.errors[0];
 				});
 
 			} else {
@@ -1296,7 +1302,7 @@ module.controller('createKanariCodeCtrl', function($scope, $routeParams, $route,
 				console.log("data in errorrr" + data + " status " + status);
 				//$scope.success = false;
 				//$scope.error = true;
-				//$scope.errormsg = data.errors;
+				//$scope.errormsg = data.errors[0];
 			});
 
 			//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');

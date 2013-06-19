@@ -134,7 +134,7 @@ module.directive('map', function($http) {
 			$http({
 			method : "post",
 			url : '/api/outlets/',
-			data : param,
+			data : params,
 			}).success(function(data, status) {
 
 			}).error(function(data, status) {
@@ -209,5 +209,14 @@ module.directive('passwordValidate', function() {
 		}
 	};
 }); 
+
+module.directive('numberMask', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            $(element).numeric();
+        }
+    }
+});
 
 

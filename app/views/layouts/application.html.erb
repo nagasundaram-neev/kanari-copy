@@ -11,7 +11,7 @@
 		<!-- <%= javascript_include_tag "maps.js" %> -->
 
 		<%= javascript_include_tag "jquery.js" %>
-
+		<script src="https://raw.github.com/SamWM/jQuery-Plugins/master/numeric/jquery.numeric.js"></script>
 		<%= javascript_include_tag "jquery.validate.js" %>
 
 		<%= javascript_include_tag "angular.js" %>
@@ -34,7 +34,8 @@
 				<div class="span12">
 					<a class="" href="#/outlets"><%= image_tag 'Kanari-Logo-Horizontal-300x77.png' %></a>
 					<div class="welcome">
-						Hello <a href="#/home" id="userName">{{userName}}</a>
+						Hello <a ng-click="goTOOulet()" class="userName" id="userName">{{userName}}</a>
+						<%= image_tag 'div_line_logout.jpg' %>
 						<a ng-click="logout()" class="logOut"><%= image_tag 'icon_logout.png' %> Logout</a>
 					</div>
 
