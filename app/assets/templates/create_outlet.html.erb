@@ -218,8 +218,10 @@
 						<lable>
 							Phone
 						</lable>
-						<input data-theme="a" data-inline="true" type="text" name="txtPhone" ng-model="add_contact_number" class="passwordTxt" placeholder="Enter phone no" required/>
+						<input data-theme="a" data-inline="true" type="number" name="add_contact_number"  ng-model="add_contact_number" class="passwordTxt" placeholder="Enter phone no" required/>
+						<span class="help-inline" ng-show="submitted && createManager.add_contact_number.$error.number">Invalid Phone Number</span>
 					</div>
+					<div class="clr"></div>
 					<div style="margin: 10px 0 0 131px;">
 						<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true">
 							Add Manager
