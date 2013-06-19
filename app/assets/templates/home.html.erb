@@ -1,27 +1,60 @@
 <div data-role="page" class="main_content span12" data-theme="b" id="login" ng-controller="homeCtrl">
 	<div class="innerDiv" data-role="content">
 		<div class="span4 divLeft">
-			<h1>Welcome </h1>
-			<span ng-show="!outlets.length">You currently do not have any outlets in your account. Please add an outlet to start using Kanari.</span>
-
-			<table ng-show="outlets.length" style="display: block">
-				<tr >
-					<th style="width:45%;text-align: left;font-size: 14px;"> Name Of Restaurant </th>
-					<th style="width:40%;text-align: left;font-size: 14px;"> Name Of Manager </th>
-					<th style="font-size: 14px;"> Disable </th>
-				</tr>
-				<tr ng-repeat="outlet in outlets">
-					<td ><a href="#/create_outlet?outletId={{outlet.id}}">{{outlet.name}}</a></td>
-					<td >{{outlet.manager.first_name}}</td>
-					<td>
-					<input type="checkbox" ng-show="outlet.disabled" checked ng-click="disableOutlet($event,outlet.id)" />
-					<input type="checkbox" ng-hide="outlet.disabled" ng-click="disableOutlet($event,outlet.id)" />
-					</td>
-				</tr>
-			</table>
-
+			<h1>Outlets </h1>
+			<span class="outlet_text" ng-show="!outlets.length">You currently do not have any outlets in your account. Please add an outlet to start using Kanari.</span>
+			<span class="outlet_text" ng-show="outlets.length">Below are the outlets you are managing through Kanari. You can updatetheir details, view and download the latest reports and access  the advanced analytics to learn more about what about
+				what your customer are saying about your business.</span>
+			<a ng-show="outlets.length" href="#/list_payment_invoice" title="Payment Invoice Link" class="addRestaurant"><%= image_tag "icon_new_restaurant_outlet.png" %>List Payment Invoices</a>
 			<a href="#/create_outlet" title="addRestaurant" class="addRestaurant"><%= image_tag "icon_new_restaurant_outlet.png" %>New Restaurant Outlet</a>
-			<a style="margin-left: 20px;" href="#/list_payment_invoice" title="Payment Invoice Link" class="addRestaurant"><%= image_tag "icon_new_restaurant_outlet.png" %>List Payment Invoices</a>
+
+			<div class="clr"></div>
+			<div ng-show="outlets.length">
+				<span class="outlet_lenght"> Viewing {{outlets.length}} outlets</span>
+				<div class="outlets_list">
+					<div class="sr_outlet" ng-repeat="outlet in outlets">
+						<div class="outlet_name border_right">
+							<span class="outlet_id">{{outlet.id}}</span>
+							<a href="#/create_outlet?outletId={{outlet.id}}">{{outlet.name}}</a>
+							<br/>
+							<span class="address">{{outlet.address}}</span>
+						</div>
+						<div class="manager_name border_right">
+							<b>Managed by</b>
+							<br/>
+							{{outlet.manager.first_name}}
+						</div>
+						<div class="action">
+							<b>Disable?</b>
+							<br/>
+							<input type="checkbox" ng-show="outlet.disabled" checked ng-click="disableOutlet($event,outlet.id)" />
+							
+							<input type="checkbox" ng-hide="outlet.disabled" ng-click="disableOutlet($event,outlet.id)" />
+							<!-- <span class="checkbox_lable" ng-hide="outlet.disabled">Disable</span>
+							<span class="checkbox_lable" ng-show="outlet.disabled">Enable</span> -->
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- <table ng-show="outlets.length" style="display: block">
+
+			<tr >
+			<th style="width:45%;text-align: left;font-size: 14px;"> Name Of Restaurant </th>
+			<th style="width:40%;text-align: left;font-size: 14px;"> Name Of Manager </th>
+			<th style="font-size: 14px;"> Disable </th>
+			</tr>
+			<tr ng-repeat="outlet in outlets">
+
+			<td ><a href="#/create_outlet?outletId={{outlet.id}}">{{outlet.name}}</a></td>
+			<td >{{outlet.manager.first_name}}</td>
+			<td>
+			<input type="checkbox" ng-show="outlet.disabled" checked ng-click="disableOutlet($event,outlet.id)" />
+			<input type="checkbox" ng-hide="outlet.disabled" ng-click="disableOutlet($event,outlet.id)" />
+			</td>
+			</tr>
+			</table> -->
+
 		</div>
 
 		<div class="divRight" ng-include src ="'<%= asset_path 'rightSidePanel.html' %>'" ></div>
