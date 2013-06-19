@@ -159,7 +159,7 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 	}
 	$scope.goTOOulet = function() {
 		if (getCookie('userRole') == "kanari_admin") {
-			$location.url("/home");
+			$location.url("/createInvitation");
 		} else if (getCookie('userRole') == "customer_admin") {
 			$location.url("/outlets");
 		}
