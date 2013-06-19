@@ -589,11 +589,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				url : '/api/outlet_types',
 				params : param,
 			}).success(function(data, status) {
-				//console.log(data);
-				//console.log("data in success " + data + " status " + status);
 				$scope.error = false;
 				$scope.outletTypes = data.outlet_types;
-				//console.log($scope.outletTypes)
 				$scope.success = true;
 
 			}).error(function(data, status) {
