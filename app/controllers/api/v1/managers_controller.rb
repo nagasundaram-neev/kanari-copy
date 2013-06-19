@@ -10,6 +10,7 @@ class Api::V1::ManagersController < ApplicationController
     authorize! :create, user
     if user.save
       user.employed_customer = current_user.customer
+      user.managed_outlets << Outlet.find(params[:user][:outlet_id]) unless params[:user][:outlet_id].nil?
       render json: { manager: { id: user.id } }, status: :created
     else
       render json: {errors: user.errors.full_messages}, status: :unprocessable_entity
