@@ -37,7 +37,7 @@
 				<lable>
 					Phone
 				</lable>
-				<input data-theme="a" data-inline="true" type="text" name="phoneno" ng-model="phoneno" class="passwordTxt" />
+				<input data-theme="a" data-inline="true" type="text" name="phoneno" ng-model="phoneno" class="passwordTxt" required/>
 			</div>
 			<div class="section">
 				Business Details
@@ -46,7 +46,7 @@
 				<lable>
 					Company Name
 				</lable>
-				<input data-theme="a" data-inline="true" type="text" name="compnyNm" ng-model="compnyNm" class="passwordTxt" />
+				<input data-theme="a" data-inline="true" type="text" name="compnyNm" ng-model="compnyNm" class="passwordTxt" required/>
 			</div>
 			<div class="ui-input-data">
 				<lable>
@@ -83,7 +83,7 @@
 			<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
 				Save
 			</button>
-			<button type="submit" class="submitBtn btn btn-primary btn-large"  >
+			<button  ng-click="goback()" class="submitBtn btn btn-primary btn-large"  >
 				Cancel
 			</button>
 			<p ng-show="success" class="successMsg">
