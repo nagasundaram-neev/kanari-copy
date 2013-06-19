@@ -9,14 +9,14 @@
 				<lable>
 					First Name
 				</lable>
-				<input data-theme="a" data-inline="true" type="text" name="first_name" ng-model="first_name" class="passwordTxt" required />
+				<input data-theme="a" data-inline="true" placeholder="First Name" type="text" name="first_name" ng-model="first_name" class="passwordTxt" required />
 
 			</div>
 			<div class="ui-input-data">
 				<lable>
 					Last Name
 				</lable>
-				<input data-theme="a" data-inline="true" type="text" name="last_name" ng-model="last_name" class="passwordTxt" required />
+				<input data-theme="a" data-inline="true" placeholder="Last Name" type="text" name="last_name" ng-model="last_name" class="passwordTxt" required />
 			</div>
 			<div class="ui-input-data">
 				<lable>
@@ -29,7 +29,7 @@
 				<lable>
 					Password
 				</lable>
-				<input data-theme="a" data-inline="true" type="password" name="password" ng-model="password" class="passwordTxt" required/>
+				<input style="width: 130px;" data-theme="a" placeholder="Password" data-inline="true" type="password" name="password" ng-model="password" class="passwordTxt" required/>
 				<a href="" class="changePassword"  ng-click="gotoChangePassword()">
 				Change Password
 			</a>
@@ -38,7 +38,8 @@
 				<lable>
 					Phone
 				</lable>
-				<input data-theme="a" data-inline="true" type="text" name="phoneno" ng-model="phoneno" class="passwordTxt" required/>
+				<input style="width: 130px;" data-theme="a" data-inline="true" placeholder="Phone Number" type="text" min="0" number-mask="" max="99" name="phoneno" ng-model="phoneno" class="passwordTxt" required/>
+				<span class="help-inline" ng-show="submitted && viewAcc.phoneno.$error.number">Invalid Phone Number</span>
 			</div>
 			<div class="section">
 				Business Details
@@ -47,37 +48,38 @@
 				<lable>
 					Company Name
 				</lable>
-				<input data-theme="a" data-inline="true" type="text" name="compnyNm" ng-model="compnyNm" class="passwordTxt" required/>
+				<input data-theme="a" data-inline="true" type="text" placeholder="Company Name" name="compnyNm" ng-model="compnyNm" class="passwordTxt" required/>
 			</div>
 			<div class="ui-input-data">
 				<lable>
 					Contact Number
 				</lable>
-				<input data-theme="a" data-inline="true" type="text" name="contactNo" ng-model="contactNo" class="passwordTxt" required />
+				<input data-theme="a" style="width: 130px;" data-inline="true" ttype="text" min="0" max="99" number-mask="" name="contactNo" placeholder="Contact Number" ng-model="contactNo" class="passwordTxt" required />
+				<span class="help-inline" ng-show="submitted && viewAcc.contactNo.$error.number">Invalid Phone Number</span>
 			</div>
 			<div class="ui-input-data">
 				<lable>
 					Address1
 				</lable>
-				<input data-theme="a" data-inline="true" type="text" name="add1" ng-model="add1" class="passwordTxt" required />
+				<input data-theme="a" data-inline="true" type="text" name="add1" ng-model="add1" placeholder="Address1" class="passwordTxt" required />
 			</div>
 			<div class="ui-input-data">
 				<lable>
 					Addresss2
 				</lable>
-				<input data-theme="a" data-inline="true" type="text" name="add2" ng-model="add2" class="passwordTxt"  />
+				<input data-theme="a" data-inline="true" type="text" name="add2" placeholder="Address2" ng-model="add2" class="passwordTxt"  />
 			</div>
 			<div class="ui-input-data">
 				<lable>
 					City
 				</lable>
-				<input data-theme="a" data-inline="true" type="text" name="city" ng-model="city" class="passwordTxt" required />
+				<input data-theme="a" data-inline="true" type="text" name="city" placeholder="City" ng-model="city" class="passwordTxt" required />
 			</div>
 			<div class="ui-input-data">
 				<lable>
 					Country
 				</lable>
-				<input data-theme="a" data-inline="true" type="text" name="country" ng-model="country" class="passwordTxt" required />
+				<input data-theme="a" data-inline="true" type="text" name="country" placeholder="Country" ng-model="country" class="passwordTxt" required />
 			</div>
 			<div class="ui-input-data">
 				<div style="margin: 10px 0 0 141px;" class="control-group">

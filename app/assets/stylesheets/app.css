@@ -428,6 +428,7 @@ ul.taketour li a:hover {
 	margin: 20px 50px;
 	padding: 10px 0;
 }
+#viewaccount .passwordTxt{width: 250px;}
 .section {
 	border-bottom: 1px solid #CCCCCC;
 	margin-bottom: 10px;
