@@ -20,6 +20,7 @@ Feature: Update account
           "date_of_birth": "06-05-1987",
           "gender": "Male",
           "location": "SF",
+          "phone_number": "+91234",
           "current_password": "password123"
         }
       }
@@ -36,6 +37,7 @@ Feature: Update account
         |gender|Male|
         |date_of_birth|1987-05-06|
         |location|SF|
+        |phone_number|+91234|
 
     Scenario: User not authenticated
       Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"
