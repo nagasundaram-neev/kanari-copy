@@ -862,7 +862,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				console.log("in create manager call first")
 				var param = {
 					"user" : {
-						"email" : $scope.email_address,
+						"email" : $scope.email_address_manager,
 						"first_name" : $scope.first_name,
 						"last_name" : $scope.last_name,
 						"phone_number" : $scope.add_contact_number,
