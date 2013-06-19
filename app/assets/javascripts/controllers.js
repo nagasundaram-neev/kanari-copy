@@ -138,8 +138,7 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 	} else if (getCookie('userRole') == "customer_admin") {
 		$scope.userName = getCookie('userName');
 	}
-	
-	
+
 	$scope.logout = function() {
 		$http({
 			method : 'delete',
@@ -557,7 +556,7 @@ module.controller('listPaymentInvoiceCtrl', function($rootScope, $scope, $http, 
 
 module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams, $http, $location) {
 	if (getCookie('authToken')) {
-		
+
 		$rootScope.header = "Create Outlet | Kanari";
 		$scope.profileShow = true;
 		$scope.managerField = false;
@@ -578,11 +577,10 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.cuisineTypes = [];
 		$scope.managerList = [];
 		$scope.checkedCuisineTypes = []
-	//	console.log($routeParams.outletId);
-		
-		
+		//	console.log($routeParams.outletId);
+
 		$scope.getOutletTypes = function() {
-			
+console.log('$scope.outletTypes'+$scope.outletTypes);
 			var param = {
 				"auth_token" : $scope.auth_token
 			}
@@ -591,11 +589,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				url : '/api/outlet_types',
 				params : param,
 			}).success(function(data, status) {
-				//console.log(data);
-				//console.log("data in success " + data + " status " + status);
 				$scope.error = false;
 				$scope.outletTypes = data.outlet_types;
-				//console.log($scope.outletTypes)
 				$scope.success = true;
 
 			}).error(function(data, status) {
@@ -661,62 +656,96 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 
 		$scope.selectAction = function(value) {
 			managerId = $scope.myOption;
+			var deleteUser = confirm('Are you sure you want to change manager?');
+
+			if (deleteUser) {
+				//alert('Going to delete the user');
+
+				var param = {
+					"outlet" : {
+						"manager_id" : managerId
+					},
+					"auth_token" : $scope.auth_token
+				}
+
+				$http({
+					method : "put",
+					url : "/api/outlets/" + $scope.outletID,
+					data : param,
+				}).success(function(data, status) {
+					console.log("data in success hi " + data + " status " + status);
+					$scope.successmgr = true;
+					$scope.getOutlet();
+				}).error(function(data, status) {
+					console.log("data in error" + data + " status " + status);
+					$scope.successmgr = false;
+				});
+			}
+
 		}
 		/* Adding for updating the outlet*/
 
-		if ($routeParams.outletId) {
-			$rootScope.header = "Update Outlet | Kanari";
-			console.log($scope.auth_token);
-			console.log($routeParams.outletId);
-			var param = {
-				"auth_token" : $scope.auth_token
-			}
-			$http({
-				method : 'get',
-				url : '/api/outlets/' + $routeParams.outletId,
-				params : param,
-			}).success(function(data, status) {
-
-				console.log("data in success " + data + " status " + status);
-				$scope.error = false;
-				$scope.outletID = data.outlet.id;
-				$scope.success = true;
-				/* Populating preconfigured data useful for update query*/
-				$scope.restaurant_name = data.outlet.name;
-				$scope.restaurant_location = data.outlet.address;
-				$scope.email_address = data.outlet.email;
-				$scope.contact_number = data.outlet.phone_number;
-				$scope.fromTime = data.outlet.open_hours.split("-")[0];
-				$scope.toTime = data.outlet.open_hours.split("-")[1]
-				$scope.Delivery = data.outlet.has_delivery.toString();
-				$scope.serves_alcohol = data.outlet.serves_alcohol.toString();
-				$scope.outdoor_Seating = data.outlet.has_outdoor_seating.toString();
-				setCookie('latitude', data.outlet.latitude, 0.29);
-				setCookie('logitude', data.outlet.longitude, 0.29);
-				$scope.updateMode = true;
-				$scope.checkedCuisineTypes = data.outlet.cuisine_types;
-				for ( i = 0; i < $scope.checkedCuisineTypes; i++) {
-					$scope.checkedCuisineTypes[i]["checked"] = true;
-					console.log($scope.checkedCuisineTypes[i])
+		$scope.getOutlet = function() {
+			if ($routeParams.outletId) {
+				$rootScope.header = "Update Outlet | Kanari";
+				console.log($scope.auth_token);
+				console.log($routeParams.outletId);
+				var param = {
+					"auth_token" : $scope.auth_token
 				}
+				$http({
+					method : 'get',
+					url : '/api/outlets/' + $routeParams.outletId,
+					params : param,
+				}).success(function(data, status) {
 
-				$scope.$broadcast('clickMessageFromParent', {
-					data : "SOME msg to the child"
-				})
+					console.log("data in success " + data + " status " + status);
+					$scope.error = false;
+					$scope.outletID = data.outlet.id;
+					$scope.success = true;
+					/* Populating preconfigured data useful for update query*/
+					$scope.restaurant_name = data.outlet.name;
+					$scope.restaurant_location = data.outlet.address;
+					$scope.email_address = data.outlet.email;
+					$scope.contact_number = data.outlet.phone_number;
+					$scope.fromTime = data.outlet.open_hours.split("-")[0];
+					$scope.toTime = data.outlet.open_hours.split("-")[1]
+					$scope.Delivery = data.outlet.has_delivery.toString();
+					$scope.serves_alcohol = data.outlet.serves_alcohol.toString();
+					$scope.outdoor_Seating = data.outlet.has_outdoor_seating.toString();
+					setCookie('latitude', data.outlet.latitude, 0.29);
+					setCookie('logitude', data.outlet.longitude, 0.29);
+					if (data.outlet.manager) {
+						$scope.manager = data.outlet.manager.first_name;
+						$scope.manager_show = true;
+					} else {
+						$scope.manager_show = false;
+					}
+					$scope.updateMode = true;
+					$scope.checkedCuisineTypes = data.outlet.cuisine_types;
+					for ( i = 0; i < $scope.checkedCuisineTypes; i++) {
+						$scope.checkedCuisineTypes[i]["checked"] = true;
+						console.log($scope.checkedCuisineTypes[i])
+					}
 
-				console.log($scope.checkedCuisineTypes)
+					$scope.$broadcast('clickMessageFromParent', {
+						data : "SOME msg to the child"
+					})
 
-				console.log($scope.cusineTypes)
-				//$scope.successMsg = true;
-				//$location.url("/outlets");
+					console.log($scope.checkedCuisineTypes)
 
-			}).error(function(data, status) {
-				console.log("data in error" + data + " status " + status);
-				$scope.error = true;
-				$scope.success = false;
-			});
+					console.log($scope.cusineTypes)
+					//$scope.successMsg = true;
+					//$location.url("/outlets");
+
+				}).error(function(data, status) {
+					console.log("data in error" + data + " status " + status);
+					$scope.error = true;
+					$scope.success = false;
+				});
+			}
 		}
-
+		$scope.getOutlet();
 		/* Validating the form */
 		$scope.validateForm = function() {
 			if ($scope.restaurant_name && $scope.restaurant_location && $scope.email_address && $scope.contact_number && $scope.Delivery && $scope.serves_alcohol && $scope.outdoor_Seating) {
@@ -738,7 +767,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				var method = "post"
 				if ($scope.updateMode) {
 					url = "/api/outlets/" + $scope.outletID;
-					
+
 					method = "PUT";
 				}
 				if (!managerId) {
@@ -803,12 +832,16 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 						console.log(data.outlet.id);
 						$scope.outletID = data.outlet.id;
 						$scope.updateMode = true;
-						$('#location').css({'opacity' : '1'});
+						$('#location').css({
+							'opacity' : '1'
+						});
 					}
 					$scope.successMsg = true;
 					$scope.profileShow = false;
 					$scope.locationShow = true;
-					$('#location').css({'opacity' : '1'});
+					$('#location').css({
+						'opacity' : '1'
+					});
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
 					$scope.error = true;
@@ -820,7 +853,9 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			}
 
 		};
-
+		$scope.add_new_manager = function() {
+			$('.add_manager').show();
+		}
 		$scope.create_manager = function(createManager) {
 			if ($scope.createManager.$valid) {
 				console.log("in create manager call first")
@@ -930,7 +965,7 @@ module.controller('acceptInvitationCtrl', function($rootScope, $scope, $routePar
 					"password_confirmation" : $scope.password_confirmation,
 					"first_name" : $scope.first_name,
 					"last_name" : $scope.last_name,
-					"phone_number":$scope.phone_no,
+					"phone_number" : $scope.phone_no,
 					"invitation_token" : $routeParams.invi_token
 				}
 			}
@@ -961,8 +996,8 @@ module.controller('acceptInvitationCtrl', function($rootScope, $scope, $routePar
 module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routeParams, $http, $location) {
 	if (getCookie('authToken')) {
 		$rootScope.header = "Accept Invitation | Kanari";
-		if(getCookie('userRole') == "customer_admin"){
-		$('.welcome').show();
+		if (getCookie('userRole') == "customer_admin") {
+			$('.welcome').show();
 		}
 		$scope.auth_token = getCookie('authToken');
 		console.log($scope.auth_token);
@@ -1011,51 +1046,6 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 	} else {
 		$location.url("/login");
 	}
-});
-module.controller('createManagerCtrl', function($rootScope, $scope, $routeParams, $route, $http, $location) {
-	if (getCookie('authToken')) {
-		$rootScope.header = "Create Manager | Kanari";
-		$('.welcome').show();
-		$('.navBarCls').show();
-		$scope.success = false;
-
-		$scope.create_manager = function(createManager) {
-			if ($scope.createManager.$valid) {
-				console.log("in create manager call first")
-				var param = {
-					"user" : {
-						"email" : $scope.email_address,
-						"first_name" : $scope.first_name,
-						"last_name" : $scope.last_name,
-						"phone_number" : $scope.add_contact_number,
-						"password" : $scope.password,
-						"password_confirmation" : $scope.confirmpassword
-					},
-					"auth_token" : getCookie('authToken')
-				}
-
-				$http({
-					method : 'post',
-					url : '/api/managers',
-					data : param,
-				}).success(function(data, status) {
-					console.log("data in success " + data + " status " + status);
-					$scope.error = false;
-					$scope.manager_id = data.manager.id;
-					$scope.success = true;
-					$scope.listManager();
-				}).error(function(data, status) {
-					console.log("data in error" + data + " status " + status);
-					$scope.errorMsg = data.errors[0];
-					$scope.error = true;
-					$scope.success = false;
-				});
-			}
-		}
-	} else {
-		$location.url("/login");
-	}
-
 });
 
 module.controller('locationCtrl', function($scope, $routeParams, $route, $http, $location) {
