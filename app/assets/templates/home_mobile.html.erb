@@ -10,8 +10,8 @@ height: 57px;
 width: 56px;
 }
 
-.feedback {
-background-image: url(<%= asset_path 'sprite_mobile.png' %>
+/*.feedback {
+background-image: url(
 );
 background-position: -135px -373px;
 cursor: pointer;
@@ -20,14 +20,14 @@ margin-left: 8%;
 width: 102px;
 }
 .redeems {
-background-image: url(<%= asset_path 'sprite_mobile.png' %>
+background-image: url(
 );
 background-position: -237px -371px;
 cursor: pointer;
 height: 101px;
 margin-left: 8%;
 width: 118px;
-}
+}*/
 .calender{
 background-image: url(<%= asset_path 'sprite_mobile.png' %>
 	);
@@ -85,12 +85,12 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				What would you like to do?
 			</div>
 			<div class="imgDiv">
-				<div class="yellowBack">
-					<div class="feedback"></div>
+				<div class="yellowBack" ng-click="feedback()">
+					<div class="feedback"><%= image_tag 'feed1.png' %></div>
 					<span class="feedbackTxt">LEAVE FEEDBACK</span>
 				</div>
 				<div class="yellowBack">
-					<div class="redeems"></div>
+					<div class="redeems"><%= image_tag 'feed2.png' %></div>
 					<span class="feedbackTxt">REDEEM POINTS</span>
 				</div>
 				<div class="clr"></div>

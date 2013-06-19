@@ -1,0 +1,156 @@
+<div data-role="page" data-theme="b" id="feedback" ng-controller="feedbackController">
+	<style>
+.home {
+background-image: url(<%= asset_path 'sprite_mobile.png' %>
+);
+background-position: -309px -471px;
+cursor: pointer;
+float: left;
+height: 56px;
+width: 45px;
+}
+.nextArrow{
+background-image: url(<%= asset_path 'sprite_mobile.png' %>
+	);
+	background-position: -464px -608px;
+	cursor: pointer;
+	float: right;
+	height: 23px;
+	width: 21px;
+	}
+	</style>
+	<div data-role="content">
+		<div class="username">
+			<div class="home" ng-click="home()"></div>
+			<div class="signUp">
+				LEAVE FEEDBACK
+			</div>
+			<div class="clr"></div>
+		</div>
+		<div class="outerDiv">
+			<div>
+				Enter your code to proceed
+			</div>
+			<div class="menDiv">
+				<div class="backColr">
+					<div class="count">
+						3
+					</div>
+				</div>
+				<div class="backColr">
+					<div class="count">
+						4
+					</div>
+				</div>
+				<div class="backColr">
+					<div class="count">
+						5
+					</div>
+				</div>
+				<div class="backColr">
+					<div class="count">
+
+					</div>
+				</div>
+				<div class="backColr">
+					<div class="count">
+
+					</div>
+				</div>
+				<div class="clr"></div>
+			</div>
+		</div>
+		<div class="keypad">
+			<div class="menDiv">
+				<div class="backColr">
+					<div class="count">
+						1
+					</div>
+				</div>
+				<div class="backColr">
+					<div class="count">
+						2
+					</div>
+				</div>
+				<div class="backColr">
+					<div class="count">
+						3
+					</div>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="secondRow">
+				<div class="backColr">
+					<div class="count">
+						4
+					</div>
+				</div>
+				<div class="backColr">
+					<div class="count">
+						5
+					</div>
+				</div>
+				<div class="backColr">
+					<div class="count">
+						6
+					</div>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="secondRow">
+				<div class="backColr">
+					<div class="count">
+						7
+					</div>
+				</div>
+				<div class="backColr">
+					<div class="count">
+						8
+					</div>
+				</div>
+				<div class="backColr">
+					<div class="count">
+						9
+					</div>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="secondRow">
+				<div class="backColr">
+					<div class="count">
+						7
+					</div>
+				</div>
+				<div class="backColr">
+					<div class="count">
+						8
+					</div>
+				</div>
+				<div class="backColr">
+					<div class="count">
+						9
+					</div>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="secondRow">
+				<div class="clearBackColr">
+					<div class="clear">
+						C
+					</div>
+				</div>
+				<div class="backColr">
+					<div class="count">
+						0
+					</div>
+				</div>
+				<div class="nextBackColr">
+					<div class="next">
+						NEXT
+					</div>
+					<div class="nextArrow"></div>
+				</div>
+				<div class="clr"></div>
+			</div>
+		</div>
+	</div>
