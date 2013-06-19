@@ -22,7 +22,8 @@
 				<lable>
 					Email
 				</lable>
-				<input data-theme="a" data-inline="true" type="email" name="email" ng-model="email" class="passwordTxt" required />
+				<label style="margin-bottom: 10px;">{{email}}</label>
+				<!-- <input data-theme="a" data-inline="true" type="email" name="email" ng-model="email" class="passwordTxt" required /> -->
 			</div>
 			<div class="ui-input-data">
 				<lable>
@@ -83,7 +84,7 @@
 			<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
 				Save
 			</button>
-			<button  ng-click="goback()" class="submitBtn btn btn-primary btn-large"  >
+			<button  ng-click="goback()" class="cancelBtn submitBtn btn btn-primary btn-large"  >
 				Cancel
 			</button>
 			<p ng-show="success" class="successMsg">

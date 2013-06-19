@@ -358,8 +358,9 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 			url : '/api/outlets',
 			params : param,
 		}).success(function(data, status) {
-			console.log("data in success " + data + " status " + status);
+			console.log("data in success " + data.lenght + " status " + status);
 			$scope.outlets = data.outlets;
+			//console.log($scope.outlets.lenght);
 			$scope.error = data.auth_token;
 			$scope.statement = true;
 			$scope.erromsg = false;
@@ -374,7 +375,7 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 		console.log(id);
 		$scope.auth_token = getCookie('authToken');
 		checkbox = $event.target;
-		console.log(checkbox.checked)
+		console.log(checkbox.checked);
 		var params = {
 			"outlet" : {
 				"disabled" : checkbox.checked
