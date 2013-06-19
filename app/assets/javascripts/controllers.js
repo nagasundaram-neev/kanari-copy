@@ -1172,7 +1172,6 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 					console.log("data in error" + data + " status " + status);
 					//$scope.success = false;
 				});
-
 				var param2 = {
 					"user" : {
 						"first_name" : $scope.first_name,
@@ -1211,6 +1210,9 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 		}
 		$scope.gotoChangePassword = function() {
 			$location.url("/change_password");
+		}
+		$scope.goback = function() {
+			$location.url("/outlets");
 		}
 	}
 });
