@@ -1227,6 +1227,10 @@ module.controller('changePassCtrl', function($rootScope, $scope, $routeParams, $
 		$scope.success = false;
 		$scope.error = false;
 
+		$scope.BackLink = function(){
+			$location.url("/view_account");
+		};
+			
 		$scope.changePassword = function(changePass) {
 			if ($scope.changePass.$valid) {
 				var param2 = {

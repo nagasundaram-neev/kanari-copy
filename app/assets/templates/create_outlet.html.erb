@@ -1,28 +1,28 @@
 <div data-role="page" style="height: 570px;" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
 	<style>
 		input[type="image"], input[type="checkbox"], input[type="radio"] {
-			margin: 0;
+		margin: 0;
 		}
 		.main_content span.vertical_center {
-			display: inline !important;
-			vertical-align: middle !important;
-			margin-right: 0px;
-			padding: 0 0 8px 0;
+		display: inline !important;
+		vertical-align: middle !important;
+		margin-right: 0px;
+		padding: 0 0 8px 0;
 		}
 		#map_canvas {
-			/*width:100%;*/
-			height: 450px;
-			border: 1px solid #333335;
-			margin: 0 20px;
+		/*width:100%;*/
+		height: 450px;
+		border: 1px solid #333335;
+		margin: 0 20px;
 	</style>
 	<div class="header_title">
-			<span class="manager_outlet">Manage Outlet</span>
-			<span class="arrow-right blank_span">&nbsp;</span>
-			<span class="create_rest" ng-show="action"><%= image_tag 'icon_new_restaurant_outlet.png' %>Create Restaurant Outlet</span>
-			<span class="create_rest" ng-hide="action"><%= image_tag 'icon_new_restaurant_outlet.png' %>Update Restaurant Outlet</span>
-		</div>
+		<span class="manager_outlet">Manage Outlet</span>
+		<span class="arrow-right blank_span">&nbsp;</span>
+		<span class="create_rest" ng-show="action"><%= image_tag 'icon_new_restaurant_outlet.png' %>Create Restaurant Outlet</span>
+		<span class="create_rest" ng-hide="action"><%= image_tag 'icon_new_restaurant_outlet.png' %>Update Restaurant Outlet</span>
+	</div>
 	<div class="create_outlet innerDiv" data-role="content">
-		
+
 		<div class="clr"></div>
 		<div class="leftPanel" >
 			<ul class="">
@@ -56,105 +56,128 @@
 			<div data-role="fieldcontain" class="rightPanel">
 				<h1 ng-show="action">Create Restaurant Outlet</h1>
 				<h1 ng-hide="action">Update Restaurant Outlet</h1>
-				<form  name="createOutlet" ng-submit="create_outlet(createOutlet)" ng-app>
-					<div class="ui-input-data">
-						<lable>
-							Restaurant Name
-						</lable>
-						<input data-theme="a" data-inline="true" placeholder="Restaurant Name" type="text" name="restaurant_name" ng-model="restaurant_name" class="passwordTxt" required />
+				<form name="createOutlet" ng-app="form-example" ng-submit="create_outlet(createOutlet)" class="row form-horizontal" novalidate>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Restaurant Name
+							</lable>
 
+							<input data-theme="a" data-inline="true" placeholder="Restaurant Name" type="text" name="restaurant_name" ng-model="restaurant_name" class="passwordTxt" required />
+						</div>
 					</div>
-					<div class="ui-input-data">
-						<lable>
-							Restaurant Location
-						</lable>
-						<input data-theme="a" data-inline="true" placeholder="Restaurant Location" type="text" name="restaurant_location" ng-model="restaurant_location" class="passwordTxt" required />
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Restaurant Location
+							</lable>
+							<input data-theme="a" data-inline="true" placeholder="Restaurant Location" type="text" name="restaurant_location" ng-model="restaurant_location" class="passwordTxt" required />
+						</div>
 					</div>
-					<div class="ui-input-data">
-						<lable>
-							Contact Number
-						</lable>
-						<input data-theme="a" data-inline="true" placeholder="Contact Number" type="text" min="0" number-mask="" max="99" name="txtPassword" ng-model="contact_number" class="passwordTxt" required />
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Contact Number
+							</lable>
+							<input data-theme="a" data-inline="true" placeholder="Contact Number" type="text" min="0" number-mask="" maxlength="11" name="txtPassword" ng-model="contact_number" class="passwordTxt" required />
+						</div>
 					</div>
-					<div class="ui-input-data">
-						<lable>
-							Email Address
-						</lable>
-						<input data-theme="a" data-inline="true" placeholder="Email Address" type="email" name="txtPassword" ng-model="email_address" class="passwordTxt" required />
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Email Address
+							</lable>
+							<input data-theme="a" data-inline="true" placeholder="Email Address" type="email" name="txtPassword" ng-model="email_address" class="passwordTxt" required />
+						</div>
 					</div>
 
-					<div class="ui-input-data">
-						<lable style="margin: 0;">
-							Outlet Type
-						</lable>
-						<span ng-repeat="outletType in outletTypes" style="display: inline; font-size: 13px; padding: 0;" >
-							<input  type="checkbox" ng-model="outletType.checked" name="group-one" value="{{outletType.id}}" >
-							{{outletType.name}}
-							</input>
-							<!-- <span ng-show="outletType.checked" ></span> 
-							<span ng-hide="outletType.checked" >error</span>  -->
-							 </span>
+					<div class="control-group">
+						<div class="controls">
+							<lable style="margin: 0;">
+								Outlet Type
+							</lable>
+							<span ng-repeat="outletType in outletTypes" style="display: inline; font-size: 13px; padding: 0;" >
+								<input  type="checkbox" ng-model="outletType.checked" name="group-one" value="{{outletType.id}}" >
+								{{outletType.name}}
+								</input> <!-- <span ng-show="outletType.checked" ></span>
+								<span ng-hide="outletType.checked" >error</span>  --> </span>
+						</div>
 					</div>
-					<div class="ui-input-data">
-						<lable style="margin: 0;">
-							Cuisine Type
-						</lable>
-						<span ng-repeat="cuisineType in cuisineTypes" style="display: inline; font-size: 13px; padding: 0;">
-							<input  type="checkbox" value="{{cuisineType.id}}" ng-checked="{{checkedCuisineTypes.checked}}" name="cousine{{cuisineType.id}}">
-							{{cuisineType.name}}
-							</input> </span>
+					<div class="control-group">
+						<div class="controls">
+							<lable style="margin: 0;">
+								Cuisine Type
+							</lable>
+							<span ng-repeat="cuisineType in cuisineTypes" style="display: inline; font-size: 13px; padding: 0;">
+								<input  type="checkbox" value="{{cuisineType.id}}" ng-checked="{{checkedCuisineTypes.checked}}" name="cousine{{cuisineType.id}}">
+								{{cuisineType.name}}
+								</input> </span>
+						</div>
 					</div>
-					<div class="ui-input-data">
-						<lable >
-							Opening Hours
-						</lable>
-						<span class="vertical_center">from</span>
-						<select ng-model="fromTime">
-							<option value="10.00am">10.00am</option>
-							<option value="11.00am">11.00am</option>
-							<option value="12.00pm">12.00pm</option>
-							<option value="1.00pm">01.00pm</option>
-						</select>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<span class="vertical_center left_margin"> to</span>
-						<select ng-model="toTime">
-							<option value="10.00pm">10.00pm</option>
-							<option value="11.00pm">11.00pm</option>
-							<option value="12.00am">12.00am</option>
-							<option value="1.00am">01.00am</option>
-						</select>
+					<div class="control-group">
+						<div class="controls">
+							<lable >
+								Opening Hours
+							</lable>
+							<span class="vertical_center">from</span>
+							<select ng-model="fromTime">
+								<option value="10.00am">10.00am</option>
+								<option value="11.00am">11.00am</option>
+								<option value="12.00pm">12.00pm</option>
+								<option value="1.00pm">01.00pm</option>
+							</select>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<span class="vertical_center left_margin"> to</span>
+							<select ng-model="toTime">
+								<option value="10.00pm">10.00pm</option>
+								<option value="11.00pm">11.00pm</option>
+								<option value="12.00am">12.00am</option>
+								<option value="1.00am">01.00am</option>
+							</select>
+						</div>
 					</div>
-					<div class="ui-input-data">
-						<lable style="margin: 0;">
-							Delivery
-						</lable>
-						<input type="radio" name="delivery" ng-model="Delivery" value="true">
-						Yes &nbsp;&nbsp;&nbsp;
-						<input type="radio"  name="delivery" ng-model="Delivery" value="false">
-						No
+					<div class="control-group">
+						<div class="controls">
+							<lable style="margin: 0;">
+								Delivery
+							</lable>
+							<input type="radio" name="delivery" ng-model="Delivery" value="true">
+							Yes &nbsp;&nbsp;&nbsp;
+							<input type="radio"  name="delivery" ng-model="Delivery" value="false">
+							No
+						</div>
 					</div>
-					<div class="ui-input-data">
-						<lable style="margin: 0;">
-							Serves Alcohol
-						</lable>
-						<input type="radio"  name="serves_alcohol"  ng-model="serves_alcohol" value="true">
-						Yes &nbsp;&nbsp;&nbsp;
-						<input type="radio" ng-model="serves_alcohol" name="serves_alcohol" value="false">
-						No
+					<div class="control-group">
+						<div class="controls">
+							<lable style="margin: 0;">
+								Serves Alcohol
+							</lable>
+							<input type="radio"  name="serves_alcohol"  ng-model="serves_alcohol" value="true">
+							Yes &nbsp;&nbsp;&nbsp;
+							<input type="radio" ng-model="serves_alcohol" name="serves_alcohol" value="false">
+							No
+						</div>
 					</div>
-					<div class="ui-input-data">
-						<lable style="margin: 0;">
-							Outdoor Seating
-						</lable>
-						<input type="radio"  ng-model="outdoor_Seating" name="outdoor_Seating" value="true">
-						Yes &nbsp;&nbsp;&nbsp;
-						<input type="radio"  ng-model="outdoor_Seating" name="outdoor_Seating" value="false">
-						No
+					<div class="control-group">
+						<div class="controls">
+							<lable style="margin: 0;">
+								Outdoor Seating
+							</lable>
+							<input type="radio"  ng-model="outdoor_Seating" name="outdoor_Seating" value="true">
+							Yes &nbsp;&nbsp;&nbsp;
+							<input type="radio"  ng-model="outdoor_Seating" name="outdoor_Seating" value="false">
+							No
+						</div>
 					</div>
-					<div style="margin: 10px 0 0 130px;">
-						<button ng-disabled="value.length==0" type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
-							Save
-						</button>
+					<div style="margin: 10px 0 0 130px;" class="control-group">
+						<div class="controls">
+							<button ng-disabled="value.length==0" type="submit" class="btn">
+								Save
+							</button>
+							<button disabled class="btn">
+								Save
+							</button>
+						</div>
 						<p ng-show="error" class="errorMsg">
 							Please fillup the form.
 						</p>
