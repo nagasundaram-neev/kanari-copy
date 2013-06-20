@@ -1150,11 +1150,11 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 					"customer" : {
 						"name" : $scope.compnyNm,
 						"email" : $scope.email,
-						"data.customer.registered_address_line_1" : $scope.add1,
-						"data.customer.registered_address_line_2" : $scope.add2,
-						"data.customer.mailing_address_city" : $scope.city,
-						"data.customer.mailing_address_country" : $scope.country,
-						"data.customer.phone_number" : $scope.contactNo
+						"registered_address_line_1" : $scope.add1,
+						"registered_address_line_2" : $scope.add2,
+						"mailing_address_city" : $scope.city,
+						"mailing_address_country" : $scope.country,
+						"phone_number" : $scope.contactNo
 					},
 					"auth_token" : getCookie('authToken')
 				}
