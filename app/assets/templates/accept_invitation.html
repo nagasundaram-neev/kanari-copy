@@ -1,9 +1,9 @@
 <div data-role="page" data-theme="b" id="acceptInvitation" ng-controller="acceptInvitationCtrl" class="main_content span12">
 	<div class="loginDiv innerDiv" data-role="content">
 		<h1>Accept Invitation</h1>
-		<br/>
+		<span class="mandatoryFld"><span class="star">*</span> Indicate mandatory fields</span>
 		<div class="acceptInv outerDiv">
-			<form ng-app="form-example"  name="acceptInv" class="row form-horizontal" ng-submit="acceptInvitation(acceptInv)" ng-app>
+			<form ng-app="form-example" name="acceptInv" class="row form-horizontal" ng-submit="acceptInvitation(acceptInv)" novalidate>
 				<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 42%;">
 					<div class="control-group">
 						<div class="controls">
@@ -19,6 +19,7 @@
 								First Name
 							</lable>
 							<input data-theme="a" data-inline="true" type="text" name="txtfirstname" ng-model="first_name" value="" placeholder="First Name" required/>
+							<span class="star">*</span>
 						</div>
 					</div>
 					<div class="control-group">
@@ -27,6 +28,7 @@
 								Last Name
 							</lable>
 							<input data-theme="a" data-inline="true" type="text" name="txtlastname" ng-model="last_name" value="" placeholder="Last Name" required/>
+							<span class="star">*</span>
 							<div class="clr"></div>
 						</div>
 					</div>
@@ -36,7 +38,7 @@
 								Phone Number
 							</lable>
 							<input data-theme="a" data-inline="true" type="text" min="0" number-mask="" maxlength="11" name="phone_no" ng-model="phone_no"  placeholder="Phone Number" required/>
-							
+							<span class="star">*</span>
 							<div class="clr"></div>
 						</div>
 					</div>
@@ -45,7 +47,22 @@
 							<lable>
 								Password
 							</lable>
-							<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="password" class="passwordTxt" placeholder="Password" required/>
+							<input data-theme="a" data-inline="true" password-validate required type="password" name="txtPassword" ng-model="password" class="passwordTxt" placeholder="Password" />
+							<div class="input-help">
+								<h4>Password must meet the following requirements:</h4>
+								<ul>
+									<li ng-class="pwdHasLetter">
+										At least <strong>one letter</strong>
+									</li>
+									<li ng-class="pwdHasNumber">
+										At least <strong>one number</strong>
+									</li>
+									<li ng-class="pwdValidLength">
+										At least <strong>8 characters long</strong>
+									</li>
+								</ul>
+							</div>
+							<span class="star">*</span>
 						</div>
 					</div>
 					<div class="control-group">
@@ -53,15 +70,35 @@
 							<lable>
 								Confirm Password
 							</lable>
-							<input data-theme="a" data-inline="true" type="password" name="txtcpassword" ng-model="password_confirmation" class="passwordTxt" placeholder="Confirmation Password" required/>
+							<input data-theme="a" data-inline="true" type="password" password-validate required name="txtcpassword" ng-model="password_confirmation" class="passwordTxt" placeholder="Confirmation Password" />
+							<div class="input-help">
+								<h4>Password must meet the following requirements:</h4>
+								<ul>
+									<li ng-class="pwdHasLetter">
+										At least <strong>one letter</strong>
+									</li>
+									<li ng-class="pwdHasNumber">
+										At least <strong>one number</strong>
+									</li>
+									<li ng-class="pwdValidLength">
+										At least <strong>8 characters long</strong>
+									</li>
+								</ul>
+							</div>
+							<span class="star">*</span>
 						</div>
 					</div>
 
-					<div style="margin: 10px 0 0 145px;">
+					<div style="margin: 10px 0 0 145px;"  class="control-group">
 						<!-- <input type="button" class="loginBtn" ng-click="acceptInvitation()" data-inline="true" value="Save" /> -->
-						<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
-							Save
-						</button>
+						<div class="controls">
+							<button type="submit" class="btn"  >
+								Save
+							</button>
+							<button class="btn" disabled >
+								Save
+							</button>
+						</div>
 
 						<p class="errorMsg" ng-show="error">
 							{{errorMsg}}
@@ -76,7 +113,7 @@
 						</p>
 						<p ng-hide="errorClient"></p>
 						<!-- <p class="successMsg" ng-show="success">
-							Your Authenticatin Token is {{auth_token}}
+						Your Authenticatin Token is {{auth_token}}
 						</p>
 						<p ng-hide="success"></p> -->
 					</div>
