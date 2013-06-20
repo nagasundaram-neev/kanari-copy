@@ -1,0 +1,102 @@
+<div data-role="page" data-theme="b" id="feedback_step2" ng-controller="feedback_step2Controller">
+	<style>
+.home {
+background-image: url(<%= asset_path 'sprite_mobile.png' %>
+);
+background-position: -309px -471px;
+cursor: pointer;
+float: left;
+height: 56px;
+width: 45px;
+}
+.nextArrow{
+background-image: url(<%= asset_path 'sprite_mobile.png' %>
+	);
+	background-position: -464px -608px;
+	cursor: pointer;
+	float: right;
+	height: 23px;
+	width: 21px;
+	}
+	.food {
+		background-image: url(<%= asset_path 'sprite_mobile.png' %>
+	);
+		background-position: -489px -654px;
+		cursor: pointer;
+		height: 86px;
+		width: 106px;
+	}
+	.friendliness{
+		background-image: url(<%= asset_path 'sprite_mobile.png' %>
+	);
+		background-position: -489px -654px;
+		cursor: pointer;
+		height: 86px;
+		width: 106px;
+	}
+	</style>
+	<div data-role="content">
+		<div class="username">
+			<div class="home" ng-click="home()"></div>
+			<div class="signUp">
+				LEAVE FEEDBACK
+			</div>
+			<div class="clr"></div>
+		</div>
+		<div class="outerDiv">
+			<div>
+				What do you think the restaurant did not do particular well?
+			</div>
+		</div>
+		<div class="keypad">
+			<div class="menDiv">
+				<div class="backColr">
+					<div class="food"></div>
+					<span class="feedbackStep2Txt">FOOD</span>
+				</div>
+				<div class="backColr">
+					<div class="friendliness"></div>
+					<span class="feedbackStep2Txt">FRIENDLINESS</span>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="menDiv">
+				<div class="backColr">
+					<div class="count"></div>
+				</div>
+				<div class="backColr">
+					<div class="count"></div>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="menDiv">
+				<div class="backColr">
+					<div class="count"></div>
+				</div>
+				<div class="backColr">
+					<div class="count"></div>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<!-- <div class="secondRow">
+			<div class="clearBackColr">
+			<div class="clear">
+			C
+			</div>
+			</div>
+			<div class="backColr">
+			<div class="count">
+			0
+			</div>
+			</div>
+			<div class="nextBackColr">
+			<div class="next">
+			NEXT
+			</div>
+			<div class="nextArrow"></div>
+			</div>
+			<div class="clr"></div>
+			</div> -->
+		</div>
+
+	</div>

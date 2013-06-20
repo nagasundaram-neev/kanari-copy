@@ -1,6 +1,6 @@
 <div data-role="page" data-theme="b" id="login" ng-controller="loginController">
 	<div data-role="content">
-		<div class="homeImg" align="center">
+		<div class="homeImg" align="center" ng-click="home()">
 			<%= image_tag 'icon_home.png' %>
 		</div>
 		<div class="clr"></div>
@@ -17,7 +17,7 @@
 				</div>
 				<div data-role="fieldcontain" class="rememberMe">
 					<fieldset data-role="controlgroup" class="chkbox">
-						<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" ng-model="remember" data-inline="true" />
+						<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" ng-model="remember" data-mini="true" data-icon="check" />
 						<label for="checkbox-1">Remember Me</label>
 					</fieldset>
 						<a data-role="none" class="forgotpass" ng-click="forgotPassword()">Forgot your password?</a>

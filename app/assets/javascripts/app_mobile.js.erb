@@ -18,6 +18,7 @@ var module = angular.module("kanariMobile", []).config(function($routeProvider,$
         .when('/settings',{templateUrl: "<%= asset_path 'settings_mobile.html' %>" })
         .when('/forgotPassword',{templateUrl: "<%= asset_path 'forgotPassword_mobile.html' %>" })
         .when('/feedback',{templateUrl: "<%= asset_path 'feedback.html' %>" })
+        .when('/feedback_step2',{templateUrl: "<%= asset_path 'feedback_step2.html' %>" })
         .when('/api/users/password/edit', {templateUrl: "<%= asset_path 'reset_password_mobile.html' %>"})
         .otherwise({redirectTo: '/index'});
 });

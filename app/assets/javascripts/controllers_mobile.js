@@ -170,6 +170,10 @@ module.controller('loginController', function($scope, $http, $location) {
 	$scope.forgotPassword = function() {
 		$location.url('/forgotPassword');
 	};
+	
+	$scope.home = function(){
+		$location.url("/index");
+	};
 
 	$scope.$watch('email + password', function() {
 		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
@@ -184,6 +188,10 @@ module.controller('loginController', function($scope, $http, $location) {
 module.controller('forgotPasswordController', function($scope, $http, $location) {
 
 	$scope.success = false;
+	
+	$scope.cancel = function(){
+		$location.url("/login");
+	};
 
 	$scope.sendLink = function() {
 		var userEmail = $scope.email;
@@ -461,7 +469,17 @@ module.controller('feedbackController', function($scope, $http, $location) {
 		$location.url("/home");
 	};
 	
+	$scope.next = function(){
+		$location.url("/feedback_step2");
+	};
+	
 });
+
+module.controller('feedback_step2Controller', function($scope, $http, $location) {
+	
+});
+
+
 
 
 function setCookie(name, value, days) {
