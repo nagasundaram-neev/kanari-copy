@@ -1,4 +1,4 @@
-<div data-role="page" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
+<div data-role="page" style="height: 520px;" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
 	<style>
 		input[type="image"], input[type="checkbox"], input[type="radio"] {
 			margin: 0;
@@ -74,17 +74,7 @@
 						</lable>
 						<input data-theme="a" data-inline="true" placeholder="Email Address" type="email" name="txtPassword" ng-model="email_address" class="passwordTxt" required />
 					</div>
-					<div class="ui-input-data" ng-show="managerField">
-						<lable>
-							Manager Id
-						</lable>
-						<select
-						ng-change="selectAction()"
-						ng-model="myOption"
-						ng-options="value.id as value.first_name for value in managerList">
-							<option>--</option>
-						</select>
-					</div>
+
 					<div class="ui-input-data">
 						<lable style="margin: 0;">
 							Outlet Type
@@ -170,17 +160,31 @@
 		</div>
 
 		<div id ="permission" ng-show="permissionShow">
-			<!-- <div data-role="fieldcontain" class="manager_list rightPanel">
-			<h3>Select a manager for this outlet</h3>
-			<ul >
-			<li ng-repeat="item in items" >
-			<a ng-click="open(item)"> {{item.first_name}} </a>
-			</li>
-			</ul>
-			<input type="button" class="btn_cls" ng-click="save_manager()" data-inline="true" value="Save" />
-			<span>OR</span>
-			<input type="button" class="btn_cls" ng-click="add_new_manager()" data-inline="true" value="Add a new manager" />
-			</div> -->
+			<div data-role="fieldcontain" class="manager_list rightPanel">
+				<h3 ng-show="manager_show">Selected manager is : {{manager}}</h3>
+				<div ng-show="manager_show" class="change_manager">
+					Change Manager?
+				</div>
+				<div ng-hide="manager_show" class="change_manager">
+					Select Manager
+				</div>
+				<div class="select_option">
+					<lable>
+						Select Manager
+					</lable>
+					<select ng-change="selectAction()" ng-model="myOption" ng-options="value.id as value.first_name for value in managerList"></select>
+					<br />
+					<span class="or">OR</span>
+					<br />
+					<br />
+					<input type="button" class="btn_cls" ng-click="add_new_manager()" data-inline="true" value="Add a new manager" />
+					<br/>
+					<p ng-show="successmgr" class="successMsg">
+						Manager updated successfully.
+					</p>
+					<p ng-hide="successmgr" ></p>
+				</div>
+			</div>
 			<div data-role="fieldcontain" class="add_manager rightPanel">
 				<h1>Add a new manager</h1>
 				<form  name="createManager" ng-submit="create_manager(createManager)" ng-app>
@@ -219,7 +223,7 @@
 							Phone
 						</lable>
 						<input style="float: left;" data-theme="a" data-inline="true" type="text" min="0" number-mask="" max="99" name="add_contact_number"  ng-model="add_contact_number" class="passwordTxt" placeholder="Enter phone no" required/>
-						
+
 					</div>
 					<div class="clr"></div>
 					<div style="margin: 10px 0 0 131px;">
@@ -244,7 +248,8 @@
 			This is reports based div only
 		</div>
 		<div id ="location" >
-			<div ng-app="kanari">
+			<div ng-app="kanari" class="location_map">
+				<span class="location_select"> Please select your location </span>
 				<div ng-controller="MapCtrl">
 					<map id="map_canvas"></map>
 				</div>

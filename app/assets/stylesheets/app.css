@@ -260,7 +260,9 @@ a.addRestaurant:hover {
 	font-size: 14px;
 	text-transform: uppercase;
 }
-.outlet_text{padding:0px !important;}
+.outlet_text {
+	padding: 0px !important;
+}
 .outlet_id {
 	background: none repeat scroll 0 0 #5A4166;
 	border-radius: 33px 33px 33px 33px;
@@ -279,9 +281,9 @@ a.addRestaurant:hover {
 	padding: 0;
 	font-size: 12px;
 }
-.action .checkbox_lable{
-	display:inline-block;
-	padding:0 !important;
+.action .checkbox_lable {
+	display: inline-block;
+	padding: 0 !important;
 }
 .border_right {
 	border-right: 1px solid #CCCCCC;
@@ -351,13 +353,14 @@ a.addRestaurant:hover {
 	font-weight: normal;
 }
 .manager_list {
-	width: 30%
+	width: 25%
 }
 .add_manager {
-	width: 47%;
-	/*display: none;*/
+	width: 35%;
+	display: none;
 	margin-left: 20px;
 	padding-left: 20px;
+	border-left: 2px solid #CCCCCC;
 }
 .manager_list ul {
 	padding: 0;
@@ -365,6 +368,9 @@ a.addRestaurant:hover {
 	border: 1px solid #CCCCCC;
 	border-radius: 5px 5px 5px 5px;
 }
+#location .location_select{padding: 10px 20px;}
+#location .location_map{float: left;
+    width: 75%;}
 .manager_list ul li {
 	list-style: none outside none;
 	border-bottom: 1px solid #CCCCCC;
@@ -401,6 +407,20 @@ ul.taketour li.active a {
 ul.taketour li a:hover {
 	text-decoration: none;
 }
+.change_manager {
+	border-bottom: 1px solid #CCCCCC;
+	font-size: 16px;
+	padding-bottom: 5px;
+}
+.select_option {
+	padding: 15px 0;
+}
+.select_option select {
+	width: 130px !important;
+}
+.select_option lable {
+	width: 100px;
+}
 /**Create Invitation**/
 #createInvitation .input-help, #paymentInvoice .input-help {
 	left: 240px;
@@ -428,7 +448,9 @@ ul.taketour li a:hover {
 	margin: 20px 50px;
 	padding: 10px 0;
 }
-#viewaccount .passwordTxt{width: 250px;}
+#viewaccount .passwordTxt {
+	width: 250px;
+}
 .section {
 	border-bottom: 1px solid #CCCCCC;
 	margin-bottom: 10px;

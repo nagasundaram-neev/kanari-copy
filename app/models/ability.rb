@@ -59,6 +59,7 @@ class Ability
     when 'user'
       can :create, Feedback
       can :read, Outlet, disabled: false
+      can :request, Redemption
     else
       #Default permissions
     end
