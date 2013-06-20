@@ -79,10 +79,13 @@
 						<lable style="margin: 0;">
 							Outlet Type
 						</lable>
-						<span ng-repeat="outletType in outletTypes" style="display: inline; font-size: 13px; padding: 0;">
-							<input  type="checkbox" value="{{outletType.id}}">
+						<span ng-repeat="outletType in outletTypes" style="display: inline; font-size: 13px; padding: 0;" >
+							<input  type="checkbox" ng-model="outletType.checked" name="group-one" value="{{outletType.id}}" >
 							{{outletType.name}}
-							</input> </span>
+							</input>
+							<!-- <span ng-show="outletType.checked" ></span> 
+							<span ng-hide="outletType.checked" >error</span>  -->
+							 </span>
 					</div>
 					<div class="ui-input-data">
 						<lable style="margin: 0;">
@@ -141,7 +144,7 @@
 						No
 					</div>
 					<div style="margin: 10px 0 0 130px;">
-						<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
+						<button ng-disabled="value.length==0" type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
 							Save
 						</button>
 						<p ng-show="error" class="errorMsg">

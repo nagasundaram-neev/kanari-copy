@@ -8,17 +8,20 @@ src: url('Roboto-Regular.ttf');
 }
 
 .ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button{
-	font-family:"kanariFont",sans-serif;
+	font-family:"kanariFont",sans-serif !important;
 }
 .ui-body-b, .ui-body-b input, .ui-body-b select, .ui-body-b textarea, .ui-body-b button{
+	font-family:"kanariFont",sans-serif !important;
+}
+.ui-btn-up-b, .ui-btn-hover-b, .ui-btn-down-b{
 	font-family:"kanariFont",sans-serif;
 }
 
-#splash ,#login,#landPage{
+#splash ,#login,#landPage,#forgotpass{
 	background: #FEbf3B !important;
 }
 
-#signUp, #settings, #home, #feedback{
+#signUp, #settings, #home, #feedback, #feedback_step2{
 	background: #FFFFFF !important;
 }
 
@@ -53,6 +56,12 @@ src: url('Roboto-Regular.ttf');
 	
 }
 .feedbackTxt{
+	color: #FFFFFF;
+    display: block;
+    margin: 0 auto;
+    width: 82px;
+}
+.feedbackStep2Txt{
 	color: #FFFFFF;
     display: block;
     margin: 0 auto;
@@ -159,6 +168,26 @@ img, object {
     width: 90%;
 }
 
+#feedback_step2 .backColr{
+	background-color: #E5E6E8;
+    border-right: 3px solid #FFFFFF;
+    border-top: 3px solid #FFFFFF;
+    float: left;
+    height: 80px;
+    padding: 8% 0;
+    width: 48%;
+}
+
+#feedback_step2 .menDiv {
+    margin: 0 0 0 4%;
+    width: 100%;
+}
+
+/*#feedback_step2 .keypad .menDiv{
+	margin: 8% 0 0 10%;
+    width: 90%;
+}*/
+
 .border {
 	border: 1px solid #664765;
 }
@@ -210,13 +239,14 @@ img, object {
 
 .forgotpass{
 	text-decoration: none;
-	/*font-size: 0.9em;*/
+	font-size: 0.9em;
 	color:#66475E;
 	float: right;
 }
 
 .userClick {
 	width: 100%;
+	margin: 10% 0;
 	overflow: hidden;
 	text-align: center;
 }
@@ -552,7 +582,6 @@ img, object {
 .forgotPass{
 }
 .rememberMe .ui-checkbox .ui-btn-icon-left .ui-btn-inner, .ui-radio .ui-btn-icon-left .ui-btn-inner{
-	padding-right: 0;
     padding-top: 0;
 }
 
@@ -616,10 +645,15 @@ img, object {
 }
 .rememberMe .ui-btn-text {
 	text-shadow: none;
+	font-size: 0.9em;
 	color: #664765;
 }
-#login .ui-btn-left, .ui-btn-right, .ui-btn-inline, input {
+#login .ui-btn-left, #login .ui-btn-right, #login .ui-btn-inline, input {
 	width: 94%;
+}
+
+#forgotpass .ui-btn-left, #forgotpass .ui-btn-right, #forgotpass .ui-btn-inline, input {
+	width: 40%;
 }
 .ui-input-text input {
 	box-shadow: none;
