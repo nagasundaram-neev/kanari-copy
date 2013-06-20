@@ -422,8 +422,8 @@ ul.taketour li a:hover {
 	width: 100px;
 }
 /**Create Invitation**/
-#createInvitation .input-help, #paymentInvoice .input-help {
-	left: 240px;
+#login .input-help{
+	left: 160px;
 }
 
 /**accept Invitation**/
@@ -489,7 +489,7 @@ a.changePassword:hover {
 	position: absolute;
 	z-index: 100;
 	top: -6px;
-	left: 160px;
+	left: 240px;
 	width: 180px;
 	padding: 10px;
 	background: #fefefe;
