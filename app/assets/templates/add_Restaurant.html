@@ -14,6 +14,7 @@
 			</button>
 			</div>
 			</form> -->
+			<span class="mandatoryFld"><span class="star">*</span> Indicate mandatory fields</span>
 			<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 41%;">
 				<form ng-app="form-example" class="row form-horizontal" name="invitation" ng-submit="create_invitation()" novalidate>
 					<div class="control-group">
@@ -22,6 +23,7 @@
 								Email Address
 							</lable>
 							<input type="email" id="inputEmail" placeholder="Email" ng-model="userEmail" required>
+							<span class="star">*</span>
 							<div class="input-help">
 								<h4>Invalid Email</h4>
 							</div>

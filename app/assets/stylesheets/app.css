@@ -11,10 +11,19 @@ html, body {
 	height: 100%;
 	margin: 0 auto 0em;
 }
+.star{
+	color: #FF0000 !important;
+    display: inline !important;
+    padding: 3px !important;
+}
 body {
 	margin: 0 !important;
 	padding: 0 !important;
 	background: none repeat scroll 0 0 #E4E3E1 !important;
+}
+.main_content .mandatoryFld{
+	padding:0;
+	font-size:13px;	
 }
 .left_margin{
 	margin-left: -17px;

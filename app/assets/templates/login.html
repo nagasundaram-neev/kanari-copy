@@ -1,5 +1,5 @@
 <div data-role="page" data-theme="b" id="login" ng-controller="Login" class="main_content span12">
-	<div class="loginDiv innerDiv" data-role="content" style="width: 17%;">
+	<div class="loginDiv innerDiv" data-role="content" style="width: 23%;">
 		<div class="outerDiv">
 			<h1>Sign In</h1>
 			<div class="innerLoginDiv">
@@ -23,15 +23,15 @@
 						Login
 					</button>
 				</form> -->
-			
+				<span class="mandatoryFld"><span class="star">*</span> Indicate mandatory fields</span>
 				<form ng-app="form-example" class="row form-horizontal" name="login" ng-submit="chkLogin(login)" novalidate>
 					<div class="control-group">
 						<div class="controls">
 							<input type="email" id="inputEmail" placeholder="Email" ng-model="email" required>
-							
 							<div class="input-help">
 								<h4>Invalid Email</h4>
 							</div>
+							<span class="star">*</span>
 						</div>
 					</div>
 					<div class="control-group">
@@ -51,6 +51,7 @@
 									</li>
 								</ul>
 							</div>
+							<span class="star">*</span>
 						</div>
 					</div>
 					<div class="control-group">
