@@ -170,4 +170,34 @@ describe User do
       end
     end
   end
+
+  describe "#full_name" do
+    context "when first_name and last_name are nil" do
+      it "should return empty string" do
+        user = FactoryGirl.create(:user, email: 'test@test.com', first_name: nil, last_name: nil)
+        user.full_name.should == ""
+      end
+    end
+
+    context "when first_name is nil" do
+      it "should return last name" do
+        user = FactoryGirl.create(:user, email: 'test@test.com', first_name: nil, last_name: 'Parker')
+        user.full_name.should == "Parker"
+      end
+    end
+
+    context "when last_name is nil" do
+      it "should return first name" do
+        user = FactoryGirl.create(:user, email: 'test@test.com', first_name: 'Peter', last_name: nil)
+        user.full_name.should == "Peter"
+      end
+    end
+
+    context "when first_name and last_name are present" do
+      it "should return full name" do
+        user = FactoryGirl.create(:user, email: 'test@test.com', first_name: 'Peter', last_name: 'Parker')
+        user.full_name.should == "Peter Parker"
+      end
+    end
+  end
 end
