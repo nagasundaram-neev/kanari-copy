@@ -14,7 +14,7 @@
 				<div class="outlets_list">
 					<div class="sr_outlet" ng-repeat="outlet in outlets">
 						<div class="outlet_name border_right">
-							<span class="outlet_id">{{outlet.id}}</span>
+							<span class="outlet_id">{{$index+1}}</span>
 							<a href="#/create_outlet?outletId={{outlet.id}}">{{outlet.name}}</a>
 							<br/>
 							<span class="address">{{outlet.address}}</span>
