@@ -569,7 +569,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$('#dasboard').hide();
 		var managerId;
 		$scope.auth_token = getCookie('authToken');
-		//console.log(getCookie("authToken"));
 		$('.navBarCls').show();
 		$scope.error = false;
 		$scope.successMsg = false;
@@ -1032,7 +1031,7 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 					console.log("data in success " + data + " status " + status);
 					$scope.error = false;
 					$scope.success = true;
-					$location.url("/outlets");
+					//$location.url("/login");
 					//$location.url("/login");
 				}).error(function(data, status) {
 					console.log(data)
