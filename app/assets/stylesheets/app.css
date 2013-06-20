@@ -13,7 +13,7 @@ html, body {
 	margin: 0 auto 0em;
 }
 .star{
-	color: #FF0000 !important;
+	color: #C64957 !important;
     display: inline !important;
     padding: 3px !important;
 }
@@ -143,7 +143,7 @@ body {
 	margin-left: 5px;
 }
 .errorMsg {
-	color: red;
+	color: #C64957;
 	margin-top: 10px;
 	text-align: left;
 	font-size: 14px;
@@ -505,6 +505,9 @@ ul.taketour li a:hover {
 }
 #viewaccount .passwordTxt {
 	width: 250px;
+}
+#viewaccount .control-group{
+	margin-left: 247px;
 }
 .section {
 	border-bottom: 1px solid #CCCCCC;
