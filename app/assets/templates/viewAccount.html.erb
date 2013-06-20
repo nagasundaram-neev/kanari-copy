@@ -9,92 +9,134 @@
 	</div>
 	<div class="viewAccPage">
 
-		<form  name="viewAcc" ng-submit="view_account(viewAcc)" ng-app>
+		<form name="viewAcc" ng-app="form-example" class="row form-horizontal" ng-submit="view_account(viewAcc)" novalidate>
 			<div class="section">
 				Main Contact Person
 			</div>
-			<div class="ui-input-data">
-				<lable>
-					First Name
-				</lable>
-				<input data-theme="a" data-inline="true" placeholder="First Name" type="text" name="first_name" ng-model="first_name" class="passwordTxt" required />
-
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						First Name
+					</lable>
+					<input data-theme="a" data-inline="true" placeholder="First Name" type="text" name="first_name" ng-model="first_name" class="passwordTxt" required />
+				</div>
 			</div>
-			<div class="ui-input-data">
-				<lable>
-					Last Name
-				</lable>
-				<input data-theme="a" data-inline="true" placeholder="Last Name" type="text" name="last_name" ng-model="last_name" class="passwordTxt" required />
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Last Name
+					</lable>
+					<input data-theme="a" data-inline="true" placeholder="Last Name" type="text" name="last_name" ng-model="last_name" class="passwordTxt" required />
+				</div>
 			</div>
-			<div class="ui-input-data">
-				<lable>
-					Email
-				</lable>
-				<label style="margin-bottom: 10px;">{{email}}</label>
-				<!-- <input data-theme="a" data-inline="true" type="email" name="email" ng-model="email" class="passwordTxt" required /> -->
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Email
+					</lable>
+					<label style="margin-bottom: 10px;">{{email}}</label>
+					<!-- <input data-theme="a" data-inline="true" type="email" name="email" ng-model="email" class="passwordTxt" required /> -->
+				</div>
 			</div>
-			<div class="ui-input-data">
-				<lable>
-					Password
-				</lable>
-				<input style="width: 130px;" data-theme="a" placeholder="Password" data-inline="true" type="password" name="password" ng-model="password" class="passwordTxt" required/>
-				<a href="" class="changePassword"  ng-click="gotoChangePassword()"> Change Password </a>
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Password
+					</lable>
+					<input style="width: 130px;" data-theme="a" placeholder="Password" data-inline="true" type="password" name="password" ng-model="password" class="passwordTxt" password-validate required/>
+					<div class="input-help">
+						<h4>Password must meet the following requirements:</h4>
+						<ul>
+							<li ng-class="pwdHasLetter">
+								At least <strong>one letter</strong>
+							</li>
+							<li ng-class="pwdHasNumber">
+								At least <strong>one number</strong>
+							</li>
+							<li ng-class="pwdValidLength">
+								At least <strong>8 characters long</strong>
+							</li>
+						</ul>
+					</div>
+					<a href="" class="changePassword"  ng-click="gotoChangePassword()"> Change Password </a>
+				</div>
 			</div>
-			<div class="ui-input-data">
-				<lable>
-					Phone
-				</lable>
-				<input style="width: 130px;" data-theme="a" data-inline="true" placeholder="Phone Number" type="text" min="0" number-mask="" max="99" name="phoneno" ng-model="phoneno" class="passwordTxt" required/>
-				<span class="help-inline" ng-show="submitted && viewAcc.phoneno.$error.number">Invalid Phone Number</span>
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Phone
+					</lable>
+					<input style="width: 130px;" data-theme="a" data-inline="true" placeholder="Phone Number" type="text" min="0" number-mask="" max="99" maxlength="11" name="phoneno" ng-model="phoneno" class="passwordTxt" required/>
+					<span class="help-inline" ng-show="submitted && viewAcc.phoneno.$error.number">Invalid Phone Number</span>
+				</div>
 			</div>
 			<div class="section">
 				Business Details
 			</div>
-			<div class="ui-input-data">
-				<lable>
-					Company Name
-				</lable>
-				<input data-theme="a" data-inline="true" type="text" placeholder="Company Name" name="compnyNm" ng-model="compnyNm" class="passwordTxt" required/>
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Company Name
+					</lable>
+					<input data-theme="a" data-inline="true" type="text" placeholder="Company Name" name="compnyNm" ng-model="compnyNm" class="passwordTxt" required/>
+				</div>
 			</div>
-			<div class="ui-input-data">
-				<lable>
-					Contact Number
-				</lable>
-				<input data-theme="a" style="width: 130px;" data-inline="true" ttype="text" min="0" max="99" number-mask="" name="contactNo" placeholder="Contact Number" ng-model="contactNo" class="passwordTxt" required />
-				<span class="help-inline" ng-show="submitted && viewAcc.contactNo.$error.number">Invalid Phone Number</span>
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Contact Number
+					</lable>
+					<input data-theme="a" style="width: 130px;" data-inline="true" type="text" min="0" maxlength="11" name="contactNo" placeholder="Contact Number" ng-model="contactNo" required />
+					<span class="help-inline" ng-show="submitted && viewAcc.contactNo.$error.number">Invalid Phone Number</span>
+				</div>
 			</div>
-			<div class="ui-input-data">
-				<lable>
-					Address1
-				</lable>
-				<input data-theme="a" data-inline="true" type="text" name="add1" ng-model="add1" placeholder="Address1" class="passwordTxt" required />
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Address1
+					</lable>
+					<input data-theme="a" data-inline="true" type="text" name="add1" ng-model="add1" placeholder="Address1" class="passwordTxt" required />
+				</div>
 			</div>
-			<div class="ui-input-data">
-				<lable>
-					Addresss2
-				</lable>
-				<input data-theme="a" data-inline="true" type="text" name="add2" placeholder="Address2" ng-model="add2" class="passwordTxt"  />
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Addresss2
+					</lable>
+					<input data-theme="a" data-inline="true" type="text" name="add2" placeholder="Address2" ng-model="add2" class="passwordTxt"  />
+				</div>
 			</div>
-			<div class="ui-input-data">
-				<lable>
-					City
-				</lable>
-				<input data-theme="a" data-inline="true" type="text" name="city" placeholder="City" ng-model="city" class="passwordTxt" required />
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						City
+					</lable>
+					<input data-theme="a" data-inline="true" type="text" name="city" placeholder="City" ng-model="city" class="passwordTxt" required />
+				</div>
 			</div>
-			<div class="ui-input-data">
-				<lable>
-					Country
-				</lable>
-				<input data-theme="a" data-inline="true" type="text" name="country" placeholder="Country" ng-model="country" class="passwordTxt" required />
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Country
+					</lable>
+					<input data-theme="a" data-inline="true" type="text" name="country" placeholder="Country" ng-model="country" class="passwordTxt" required />
+				</div>
 			</div>
 			<div class="ui-input-data">
 				<div style="margin: 10px 0 0 141px;" class="control-group">
-					<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
-						Save
-					</button>
-					<button  ng-click="goback()" class="cancelBtn submitBtn btn btn-primary btn-large"  >
+					<div class="controls">
+						<button type="submit" class="btn">
+							Save
+						</button>
+						<button class="btn" disabled>
+							Save
+						</button>
+						<button  ng-click="goback()" class="cancelBtn submitBtn btn btn-primary btn-large"  >
 						Cancel
 					</button>
+						<div class="clr"></div>
+					</div>
+					
 					<p ng-show="success" class="successMsg">
 						Account updated successfully.
 					</p>
