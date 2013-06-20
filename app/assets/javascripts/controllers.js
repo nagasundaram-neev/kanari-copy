@@ -713,8 +713,12 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					if( data.outlet.has_delivery){
 					$scope.Delivery = data.outlet.has_delivery.toString();
 					}
+					if( data.outlet.serves_alcohol){
 					$scope.serves_alcohol = data.outlet.serves_alcohol.toString();
+					}
+					if( data.outlet.has_outdoor_seating){
 					$scope.outdoor_Seating = data.outlet.has_outdoor_seating.toString();
+					}
 					setCookie('latitude', data.outlet.latitude, 0.29);
 					setCookie('logitude', data.outlet.longitude, 0.29);
 					if (data.outlet.manager) {
