@@ -710,7 +710,9 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.contact_number = data.outlet.phone_number;
 					$scope.fromTime = data.outlet.open_hours.split("-")[0];
 					$scope.toTime = data.outlet.open_hours.split("-")[1]
+					if( data.outlet.has_delivery){
 					$scope.Delivery = data.outlet.has_delivery.toString();
+					}
 					$scope.serves_alcohol = data.outlet.serves_alcohol.toString();
 					$scope.outdoor_Seating = data.outlet.has_outdoor_seating.toString();
 					setCookie('latitude', data.outlet.latitude, 0.29);
