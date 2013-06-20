@@ -569,7 +569,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$('#dasboard').hide();
 		var managerId;
 		$scope.auth_token = getCookie('authToken');
-		//console.log(getCookie("authToken"));
 		$('.navBarCls').show();
 		$scope.error = false;
 		$scope.successMsg = false;
@@ -580,7 +579,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		//	console.log($routeParams.outletId);
 
 		$scope.getOutletTypes = function() {
-console.log('$scope.outletTypes'+$scope.outletTypes);
+
 			var param = {
 				"auth_token" : $scope.auth_token
 			}
@@ -591,6 +590,7 @@ console.log('$scope.outletTypes'+$scope.outletTypes);
 			}).success(function(data, status) {
 				$scope.error = false;
 				$scope.outletTypes = data.outlet_types;
+				console.log('$scope.outletTypes'+$scope.outletTypes);
 				$scope.success = true;
 
 			}).error(function(data, status) {
@@ -861,7 +861,7 @@ console.log('$scope.outletTypes'+$scope.outletTypes);
 				console.log("in create manager call first")
 				var param = {
 					"user" : {
-						"email" : $scope.email_address,
+						"email" : $scope.email_address_manager,
 						"first_name" : $scope.first_name,
 						"last_name" : $scope.last_name,
 						"phone_number" : $scope.add_contact_number,
@@ -1031,7 +1031,7 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 					console.log("data in success " + data + " status " + status);
 					$scope.error = false;
 					$scope.success = true;
-					$location.url("/outlets");
+					//$location.url("/login");
 					//$location.url("/login");
 				}).error(function(data, status) {
 					console.log(data)
