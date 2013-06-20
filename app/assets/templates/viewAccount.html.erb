@@ -1,6 +1,14 @@
 <div data-role="page" class="main_content span12" data-theme="b" id="viewaccount" ng-controller="viewaccountCtrl">
+	<div class="header_title">
+		<span class="manager_outlet">Manage Outlet</span>
+		<span class="arrow-right blank_span">&nbsp;</span>
+		<span style="padding: 10px 20px;">Account Details </span>
+		<span class="blank_span"><%= image_tag 'div_line_yellow.jpg' %></span>
+		<span style="padding: 10px 20px;">Payment History </span>
+		<span class="blank_span"><%= image_tag 'div_line_yellow.jpg' %></span>
+	</div>
 	<div class="viewAccPage">
-		<h1> Settings</h1>
+
 		<form  name="viewAcc" ng-submit="view_account(viewAcc)" ng-app>
 			<div class="section">
 				Main Contact Person
@@ -30,9 +38,7 @@
 					Password
 				</lable>
 				<input style="width: 130px;" data-theme="a" placeholder="Password" data-inline="true" type="password" name="password" ng-model="password" class="passwordTxt" required/>
-				<a href="" class="changePassword"  ng-click="gotoChangePassword()">
-				Change Password
-			</a>
+				<a href="" class="changePassword"  ng-click="gotoChangePassword()"> Change Password </a>
 			</div>
 			<div class="ui-input-data">
 				<lable>
@@ -83,23 +89,23 @@
 			</div>
 			<div class="ui-input-data">
 				<div style="margin: 10px 0 0 141px;" class="control-group">
-			<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
-				Save
-			</button>
-			<button  ng-click="goback()" class="cancelBtn submitBtn btn btn-primary btn-large"  >
-				Cancel
-			</button>
-			<p ng-show="success" class="successMsg">
+					<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true" >
+						Save
+					</button>
+					<button  ng-click="goback()" class="cancelBtn submitBtn btn btn-primary btn-large"  >
+						Cancel
+					</button>
+					<p ng-show="success" class="successMsg">
 						Account updated successfully.
 					</p>
 					<p ng-show="error" class="errorMsg">
 						{{errormsg}}
 					</p>
-					</div>
+				</div>
 			</div>
-			
+
 		</form>
-		
+
 	</div>
-	
+
 </div>

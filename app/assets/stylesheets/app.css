@@ -4,6 +4,7 @@
 }
 html, body {
 	height: 100%;
+	
 }
 .content {
 	min-height: 100%;
@@ -20,12 +21,14 @@ body {
 	margin: 0 !important;
 	padding: 0 !important;
 	background: none repeat scroll 0 0 #E4E3E1 !important;
+	font-family: 'Open Sans',sans-serif !important;
 }
+
 .main_content .mandatoryFld{
 	padding:0;
 	font-size:13px;	
 }
-.left_margin{
+.left_margin {
 	margin-left: -17px;
 }
 .clr {
@@ -301,6 +304,40 @@ a.addRestaurant:hover {
 	border-right: 1px solid #CCCCCC;
 }
 /***createOutlet****/
+.header_title {
+	background: none repeat scroll 0 0 #F5BA44;
+	overflow: hidden;
+	height: 38px;
+}
+
+.header_title span {
+	 padding: 10px;
+	float: left;
+	margin: 0;
+	font-size:18px;
+}
+.header_title span.manager_outlet {
+	background: none repeat scroll 0 0 #664766;
+	color: #FFFFFF;
+}
+.header_title span.blank_span {
+	
+	padding: 0;
+}
+.arrow-right {
+	width: 0; 
+	height: 0; 
+	border-top: 19px solid transparent;
+	border-bottom: 19px solid transparent;
+	
+	border-left: 19px solid #664766;
+}
+.header_title span.create_rest {
+	padding: 6px;
+}
+.header_title span.create_rest img {
+	vertical-align: text-bottom;
+}
 #createOutlet .ui-input-data {
 	padding: 5px 0;
 }
@@ -313,7 +350,7 @@ a.addRestaurant:hover {
 	width: 80px;
 }
 .create_outlet {
-	padding: 30px 0;
+	padding: 0 0 30px;
 }
 .successMsg {
 	color: green;
@@ -328,6 +365,7 @@ a.addRestaurant:hover {
 .rightPanel {
 	float: left;
 	width: 70%;
+	 padding: 10px 0;
 	margin-left: 5%;
 }
 .leftPanel ul {
@@ -380,9 +418,13 @@ a.addRestaurant:hover {
 	border: 1px solid #CCCCCC;
 	border-radius: 5px 5px 5px 5px;
 }
-#location .location_select{padding: 10px 20px;}
-#location .location_map{float: left;
-    width: 75%;}
+#location .location_select {
+	padding: 10px 20px;
+}
+#location .location_map {
+	float: left;
+	width: 75%;
+}
 .manager_list ul li {
 	list-style: none outside none;
 	border-bottom: 1px solid #CCCCCC;
@@ -434,7 +476,7 @@ ul.taketour li a:hover {
 	width: 100px;
 }
 /**Create Invitation**/
-#login .input-help{
+#login .input-help {
 	left: 160px;
 }
 

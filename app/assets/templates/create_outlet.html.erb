@@ -1,4 +1,4 @@
-<div data-role="page" style="height: 520px;" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
+<div data-role="page" style="height: 570px;" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
 	<style>
 		input[type="image"], input[type="checkbox"], input[type="radio"] {
 			margin: 0;
@@ -11,12 +11,18 @@
 		}
 		#map_canvas {
 			/*width:100%;*/
-			height: 435px;
+			height: 450px;
 			border: 1px solid #333335;
 			margin: 0 20px;
 	</style>
+	<div class="header_title">
+			<span class="manager_outlet">Manage Outlet</span>
+			<span class="arrow-right blank_span">&nbsp;</span>
+			<span class="create_rest"><%= image_tag 'icon_new_restaurant_outlet.png' %>Create Restaurant Outlet</span>
+		</div>
 	<div class="create_outlet innerDiv" data-role="content">
-		<div ></div>
+		
+		<div class="clr"></div>
 		<div class="leftPanel" >
 			<ul class="">
 				<li data-ng-class="{active:profileShow,create_outlet:true }">
