@@ -18,7 +18,8 @@
 	<div class="header_title">
 			<span class="manager_outlet">Manage Outlet</span>
 			<span class="arrow-right blank_span">&nbsp;</span>
-			<span class="create_rest"><%= image_tag 'icon_new_restaurant_outlet.png' %>Create Restaurant Outlet</span>
+			<span class="create_rest" ng-show="action"><%= image_tag 'icon_new_restaurant_outlet.png' %>Create Restaurant Outlet</span>
+			<span class="create_rest" ng-hide="action"><%= image_tag 'icon_new_restaurant_outlet.png' %>Update Restaurant Outlet</span>
 		</div>
 	<div class="create_outlet innerDiv" data-role="content">
 		
@@ -53,7 +54,8 @@
 		</div>
 		<div ng-show="profileShow">
 			<div data-role="fieldcontain" class="rightPanel">
-				<h1>Create Restaurant Outlet</h1>
+				<h1 ng-show="action">Create Restaurant Outlet</h1>
+				<h1 ng-hide="action">Update Restaurant Outlet</h1>
 				<form  name="createOutlet" ng-submit="create_outlet(createOutlet)" ng-app>
 					<div class="ui-input-data">
 						<lable>
