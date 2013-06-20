@@ -17,6 +17,10 @@ html, body {
     display: inline !important;
     padding: 3px !important;
 }
+.startMsg{
+	color: #C64957 !important;
+    display: inline !important;
+}
 body {
 	margin: 0 !important;
 	padding: 0 !important;
