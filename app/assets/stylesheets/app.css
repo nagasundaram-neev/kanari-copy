@@ -3,11 +3,11 @@
 	margin: 0;
 }
 html, body {
-	height: 100%;
+	height: 98%;
 	
 }
 .content {
-	min-height: 100%;
+	min-height: 98%;
 	height: auto !important;
 	height: 100%;
 	margin: 0 auto 0em;
@@ -230,13 +230,13 @@ a.addRestaurant {
 	background: none repeat scroll 0 0 #F5BA44;
 	border-radius: 5px 5px 5px 5px;
 	color: #664765;
-	font-size: 18px;
+	font-size: 17px;
 	margin: 20px 5px;
 	padding: 2px 10px;
 	float: right;
 }
 a.addRestaurant img {
-	vertical-align: text-bottom;
+	vertical-align: text-top;
 }
 a.createPayment {
 	float: left;
