@@ -32,7 +32,7 @@
 		<div class="content" ng-controller="commonCtrl">
 			<div class="header">
 				<div class="span12">
-					<a class="" href="#/outlets"><%= image_tag 'Kanari-Logo-Horizontal-300x77.png' %></a>
+					<a class="" href="" ng-click="goTOOulet()"><%= image_tag 'Kanari-Logo-Horizontal-300x77.png' %></a>
 					<div class="welcome">
 						Hello <a ng-click="goTOOulet()" class="userName" id="userName">{{userName}}</a>
 						<%= image_tag 'div_line_logout.jpg' %>
@@ -44,13 +44,13 @@
 			<div class="navBarCls">
 				<ul class="span12 nav nav-tabs">
 					<li id="account">
-						<a href="#/view_account"><%= image_tag 'icon_outlet_in.png' %> Account</a>
+						<a href="#/view_account"><%= image_tag 'logo_account_in.png' %> Account</a>
 					</li>
 					<li id="dasboard" class="diffLinks">
 						<a href="#/createInvitation" class="active"><%= image_tag 'icon_dasboard_in.png' %> Dashboard</a>
 					</li>
 					<li class="active" id="outlet" class="diffLinks">
-						<a href="#/outlets"><%= image_tag 'logo_account_in.png' %> Outlets</a>
+						<a href="#/outlets"><%= image_tag 'icon_outlet_in.png' %> Outlets</a>
 					</li>
 				</ul>
 			</div>
