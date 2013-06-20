@@ -556,7 +556,7 @@ module.controller('listPaymentInvoiceCtrl', function($rootScope, $scope, $http, 
 
 module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams, $http, $location) {
 	if (getCookie('authToken')) {
-
+		$scope.action = true;
 		$rootScope.header = "Create Outlet | Kanari";
 		$scope.profileShow = true;
 		$scope.managerField = false;
@@ -688,6 +688,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.getOutlet = function() {
 			if ($routeParams.outletId) {
 				$rootScope.header = "Update Outlet | Kanari";
+				$scope.action = false;
 				console.log($scope.auth_token);
 				console.log($routeParams.outletId);
 				var param = {
