@@ -215,7 +215,7 @@ body {
 	/*display: inline !important;*/
 	/*font-size: 14px !important;*/
 }
-.paddingRememberMe input{width:auto}
+.paddingRememberMe input{width:auto !important;}
 /***Home Page**/
 .innerDiv {
 	padding: 30px;
