@@ -442,8 +442,10 @@ module.controller('createInvitation', function($rootScope, $scope, $http, $locat
 				console.log("data in error" + data + " status " + status);
 				if (userEmail) {
 					$scope.errortext = "An invitation url for this email is already created.";
+					$scope.statement = false;
 					$scope.erromsg = true;
 				}
+				$scope.statement = false;
 			});
 
 		};
@@ -487,7 +489,6 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 				$scope.paymentInvoiceFail = true;
 			});
 
-			
 			$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
 
 		};
@@ -606,7 +607,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			}).success(function(data, status) {
 				$scope.error = false;
 				$scope.cuisineTypes = data.cuisine_types;
-				
+
 				$scope.success = true;
 
 			}).error(function(data, status) {
@@ -698,16 +699,13 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.email_address = data.outlet.email;
 					$scope.contact_number = data.outlet.phone_number;
 					$scope.fromTime = data.outlet.open_hours.split("-")[0];
-					$scope.toTime = data.outlet.open_hours.split("-")[1]
-					if (data.outlet.has_delivery) {
-						$scope.Delivery = data.outlet.has_delivery.toString();
-					}
-					if (data.outlet.serves_alcohol) {
-						$scope.serves_alcohol = data.outlet.serves_alcohol.toString();
-					}
-					if (data.outlet.has_outdoor_seating) {
-						$scope.outdoor_Seating = data.outlet.has_outdoor_seating.toString();
-					}
+					$scope.toTime = data.outlet.open_hours.split("-")[1];
+					var radio_btn1 = data.outlet.has_delivery.toString();
+					$scope.Delivery = radio_btn1;
+					var radio_btn2 = data.outlet.serves_alcohol.toString();
+					$scope.serves_alcohol = radio_btn2;
+					var radio_btn3 = data.outlet.has_outdoor_seating.toString();
+					$scope.outdoor_Seating = radio_btn3;
 					setCookie('latitude', data.outlet.latitude, 0.29);
 					setCookie('logitude', data.outlet.longitude, 0.29);
 					if (data.outlet.manager) {
@@ -747,7 +745,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.$broadcast('clickMessageFromParent', {
 						data : "SOME msg to the child"
 					})
-
 
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
@@ -809,7 +806,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				$scope.cuisineError = false;
 				$scope.checkedCuisineTypes[0] = $scope.formcuisine1;
 			}
-			
+
 		}
 		$scope.selectCuisine2 = function() {
 			$scope.form_cuisine3 = true;
@@ -821,7 +818,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				$scope.cuisineError = false;
 				$scope.checkedCuisineTypes[1] = $scope.formcuisine2;
 			}
-			
+
 		}
 		$scope.selectCuisine3 = function() {
 			if ($scope.formcuisine3 == $scope.formcuisine1 || $scope.formcuisine3 == $scope.formcuisine2) {
@@ -832,9 +829,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				$scope.cuisineError = false;
 				$scope.checkedCuisineTypes[2] = $scope.formcuisine3;
 			}
-			
+
 		}
-		
 		/* Adding for creating the outlet*/
 		$scope.create_outlet = function(createOutlet) {
 			//$scope.checked_cuisine = [1, 2, 3, 4];
@@ -872,16 +868,16 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				}).success(function(data, status) {
 					console.log("data in success hi " + data + " status " + status);
 					$scope.error = false;
-					console.log( $scope.checkedOutletTypes);
+					console.log($scope.checkedOutletTypes);
 					setCookie('currentOutletList', JSON.stringify($scope.checkedOutletTypes), 1);
 					setCookie('currentCuisineList', JSON.stringify($scope.checkedCuisineTypes), 1);
 					$scope.$broadcast('clickMessageFromParent', {
-					data : "SOME msg to the child"
-				})
+						data : "SOME msg to the child"
+					})
 					if (data.outlet) {
 						$scope.outletID = data.outlet.id;
 						setCookie('currentOutlet', data.outlet.id, 1);
-						
+
 						$scope.updateMode = true;
 						$('#location').css({
 							'opacity' : '1'
@@ -1338,7 +1334,7 @@ module.controller('createKanariCodeCtrl', function($scope, $routeParams, $route,
 			}).error(function(data, status) {
 				console.log("data in errorrr" + data + " status " + status);
 			});
-			
+
 		}
 	};
 
