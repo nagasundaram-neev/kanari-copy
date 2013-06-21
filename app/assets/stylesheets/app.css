@@ -215,6 +215,7 @@ body {
 	/*display: inline !important;*/
 	/*font-size: 14px !important;*/
 }
+.paddingRememberMe input{width:auto !important;}
 /***Home Page**/
 .innerDiv {
 	padding: 30px;
@@ -292,11 +293,12 @@ a.addRestaurant:hover {
 }
 .outlet_name, .manager_name, .action {
 	float: left;
-	height: 40px;
-	padding: 10px;
+	min-height: 70px;
+	padding: 10px 0 1000px 10px;
+	 margin-bottom: -1000px;
 }
 .outlet_name {
-	width: 170px;
+	width: 290px;
 }
 .manager_name {
 	width: 110px;
@@ -324,7 +326,7 @@ a.addRestaurant:hover {
 }
 .outlet_name span.address {
 	margin-left: 23px;
-	padding: 0;
+	 padding: 0 0 10px;
 	font-size: 12px;
 }
 .action .checkbox_lable {
