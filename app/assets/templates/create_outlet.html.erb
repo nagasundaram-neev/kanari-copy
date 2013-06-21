@@ -1,4 +1,4 @@
-<div data-role="page" style="height: 570px;" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
+<div data-role="page" style="height: 600px;" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
 	<style>
 		input[type="image"], input[type="checkbox"], input[type="radio"] {
 		margin: 0;
@@ -52,6 +52,7 @@
 				</li>
 			</ul>
 		</div>
+		
 		<div ng-show="profileShow">
 			<div data-role="fieldcontain" class="rightPanel">
 				<h1 ng-show="action">Create Restaurant Outlet</h1>
@@ -88,6 +89,9 @@
 								Email Address
 							</lable>
 							<input data-theme="a" data-inline="true" placeholder="Email Address" type="email" name="txtPassword" ng-model="email_address" class="passwordTxt" required />
+							<div class="input-help">
+								<h4>Invalid Email</h4>
+							</div>
 						</div>
 					</div>
 
@@ -96,11 +100,17 @@
 							<lable style="margin: 0;">
 								Outlet Type
 							</lable>
-							<span ng-repeat="outletType in outletTypes" style="display: inline; font-size: 13px; padding: 0;" >
-								<input  type="checkbox" ng-model="outletType.checked" name="group-one" value="{{outletType.id}}" >
-								{{outletType.name}}
-								</input> <!-- <span ng-show="outletType.checked" ></span>
-								<span ng-hide="outletType.checked" >error</span>  --> </span>
+							<select ng-model='formoutlet1' ng-change="selectOutlet1()" required ng-options='outletType.id as outletType.name for outletType in outletTypes'>
+								<option value="">Select Outlet</option>
+							</select>
+							<select ng-show="form_outlet2" ng-model='formoutlet2' ng-change="selectOutlet2()"  ng-options='outletType.id as outletType.name for outletType in outletTypes'>
+								<option value="">Select Outlet</option>
+							</select>
+							<select ng-show="form_outlet3" ng-model='formoutlet3' ng-change="selectOutlet3()"  ng-options='outletType.id as outletType.name for outletType in outletTypes'>
+								<option value="">Select Outlet</option>
+							</select><br>
+							<span class="customErr input-help" ng-show="outletError">Please select different outlet type.</span>
+							
 						</div>
 					</div>
 					<div class="control-group">
@@ -108,10 +118,17 @@
 							<lable style="margin: 0;">
 								Cuisine Type
 							</lable>
-							<span ng-repeat="cuisineType in cuisineTypes" style="display: inline; font-size: 13px; padding: 0;">
-								<input  type="checkbox" value="{{cuisineType.id}}" ng-checked="{{checkedCuisineTypes.checked}}" name="cousine{{cuisineType.id}}">
-								{{cuisineType.name}}
-								</input> </span>
+							<select ng-model='formcuisine1' ng-change="selectCuisine1()" required ng-options='cuisineType.id as cuisineType.name for cuisineType in cuisineTypes'>
+								<option value="">Select Cuisine</option>
+							</select>
+							<select ng-show="form_cuisine2" ng-model='formcuisine2' ng-change="selectCuisine2()"  ng-options='cuisineType.id as cuisineType.name for cuisineType in cuisineTypes'>
+								<option value="">Select Cuisine</option>
+							</select>
+							<select ng-show="form_cuisine3" ng-model='formcuisine3' ng-change="selectCuisine3()"  ng-options='cuisineType.id as cuisineType.name for cuisineType in cuisineTypes'>
+								<option value="">Select Cuisine</option>
+							</select>
+							<br/>
+							<span class="customErr input-help" ng-show="cuisineError">Please select different cuisine type.</span>
 						</div>
 					</div>
 					<div class="control-group">
@@ -120,7 +137,8 @@
 								Opening Hours
 							</lable>
 							<span class="vertical_center">from</span>
-							<select ng-model="fromTime">
+							<select ng-model="fromTime" required>
+								<option value="">Select from time</option>
 								<option value="10.00am">10.00am</option>
 								<option value="11.00am">11.00am</option>
 								<option value="12.00pm">12.00pm</option>
@@ -128,7 +146,8 @@
 							</select>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<span class="vertical_center left_margin"> to</span>
-							<select ng-model="toTime">
+							<select ng-model="toTime" required>
+								<option value="">Select to time</option>
 								<option value="10.00pm">10.00pm</option>
 								<option value="11.00pm">11.00pm</option>
 								<option value="12.00am">12.00am</option>
@@ -140,8 +159,9 @@
 						<div class="controls">
 							<lable style="margin: 0;">
 								Delivery
+								
 							</lable>
-							<input type="radio" name="delivery" ng-model="Delivery" value="true">
+							<input type="radio" name="delivery" ng-model="Delivery" value="true" required>
 							Yes &nbsp;&nbsp;&nbsp;
 							<input type="radio"  name="delivery" ng-model="Delivery" value="false">
 							No
@@ -152,7 +172,7 @@
 							<lable style="margin: 0;">
 								Serves Alcohol
 							</lable>
-							<input type="radio"  name="serves_alcohol"  ng-model="serves_alcohol" value="true">
+							<input type="radio"  name="serves_alcohol"  ng-model="serves_alcohol" value="true" required>
 							Yes &nbsp;&nbsp;&nbsp;
 							<input type="radio" ng-model="serves_alcohol" name="serves_alcohol" value="false">
 							No
@@ -163,7 +183,7 @@
 							<lable style="margin: 0;">
 								Outdoor Seating
 							</lable>
-							<input type="radio"  ng-model="outdoor_Seating" name="outdoor_Seating" value="true">
+							<input type="radio"  ng-model="outdoor_Seating" name="outdoor_Seating" value="true" required>
 							Yes &nbsp;&nbsp;&nbsp;
 							<input type="radio"  ng-model="outdoor_Seating" name="outdoor_Seating" value="false">
 							No

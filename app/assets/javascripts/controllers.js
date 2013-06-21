@@ -181,7 +181,6 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 	}
 
 	$scope.getLogin = function() {
-		console.log("under get login")
 		if (getCookie('userRole') == "kanari_admin") {
 			$location.url("/createInvitation");
 		} else if (getCookie('userRole') == "customer_admin") {
@@ -345,7 +344,6 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 		$('#account').show();
 		//alert($scope.userName);
 		$scope.auth_token = getCookie('authToken');
-		console.log("auth token = " + $scope.auth_token)
 		$scope.userRole = getCookie('userRole');
 		$scope.outlets = []
 
@@ -359,7 +357,6 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 		}).success(function(data, status) {
 			console.log("data in success " + data.lenght + " status " + status);
 			$scope.outlets = data.outlets;
-			//console.log($scope.outlets.lenght);
 			$scope.error = data.auth_token;
 			$scope.statement = true;
 			$scope.erromsg = false;
@@ -371,10 +368,8 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 		$location.url("/login");
 	}
 	$scope.disableOutlet = function($event, id) {
-		console.log(id);
 		$scope.auth_token = getCookie('authToken');
 		checkbox = $event.target;
-		console.log(checkbox.checked);
 		var params = {
 			"outlet" : {
 				"disabled" : checkbox.checked
@@ -438,11 +433,9 @@ module.controller('createInvitation', function($rootScope, $scope, $http, $locat
 				if (!window.location.origin) {
 					baseurl = window.location.protocol + "//" + window.location.host;
 				} else {
-					console.log("under else");
 					baseurl = window.location.origin
 				}
 				$scope.invitation_token = baseurl + "/#/accept_invitation?invi_token=" + data.invitation_token;
-				//$scope.invitation_token = $location.host()+":"+$location.port()+"/#/accept_invitation?invi_token=" + data.invitation_token;
 				$scope.statement = true;
 				$scope.erromsg = false;
 			}).error(function(data, status) {
@@ -471,7 +464,6 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 		$scope.paymentInvoiceSuccess = false;
 		$scope.paymentInvoiceFail = false;
 		$scope.payment_invoice = function() {
-			//console.log("in Payment Invoice" + this.url);
 			var invoiceId = $scope.kanari_invoice_id;
 			var receiptDate = $scope.receipt_date;
 			var amount = $scope.amount_paid;
@@ -489,15 +481,13 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 				data : param,
 			}).success(function(data, status) {
 				console.log("data in success " + data + " status " + status);
-				//$location.url("/list_payment_invoice");
 				$scope.paymentInvoiceSuccess = true;
 			}).error(function(data, status) {
 				console.log("data in error" + data + " status " + status);
 				$scope.paymentInvoiceFail = true;
 			});
 
-			console.log("auth_token " + getCookie('authToken'));
-
+			
 			$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
 
 		};
@@ -565,6 +555,10 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.ReportShow = false;
 		$scope.updateMode = false;
 		$scope.success1 = false;
+		$scope.form_outlet2 = false;
+		$scope.form_outlet3 = false;
+		$scope.form_cuisine2 = false;
+		$scope.form_cuisine3 = false;
 		$('.welcome').show();
 		$('#dasboard').hide();
 		var managerId;
@@ -575,8 +569,10 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.outletTypes = [];
 		$scope.cuisineTypes = [];
 		$scope.managerList = [];
-		$scope.checkedCuisineTypes = []
-		//	console.log($routeParams.outletId);
+		$scope.checkedCuisineTypes = [];
+		$scope.checkedOutletTypes = [];
+		$scope.checked_CuisineTypes = [];
+		$scope.checked_OutletTypes = [];
 
 		$scope.getOutletTypes = function() {
 
@@ -590,7 +586,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			}).success(function(data, status) {
 				$scope.error = false;
 				$scope.outletTypes = data.outlet_types;
-				console.log('$scope.outletTypes'+$scope.outletTypes);
 				$scope.success = true;
 
 			}).error(function(data, status) {
@@ -609,14 +604,9 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				url : '/api/cuisine_types',
 				params : param,
 			}).success(function(data, status) {
-				//console.log(data);
-				//console.log("data in success " + data + " status " + status);
 				$scope.error = false;
 				$scope.cuisineTypes = data.cuisine_types;
-				//console.log($scope.OutletTypes)
-				$scope.$broadcast('clickMessageFromParent', {
-					data : "SOME msg to the child"
-				})
+				
 				$scope.success = true;
 
 			}).error(function(data, status) {
@@ -689,8 +679,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			if ($routeParams.outletId) {
 				$rootScope.header = "Update Outlet | Kanari";
 				$scope.action = false;
-				console.log($scope.auth_token);
-				console.log($routeParams.outletId);
 				var param = {
 					"auth_token" : $scope.auth_token
 				}
@@ -711,14 +699,14 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.contact_number = data.outlet.phone_number;
 					$scope.fromTime = data.outlet.open_hours.split("-")[0];
 					$scope.toTime = data.outlet.open_hours.split("-")[1]
-					if( data.outlet.has_delivery){
-					$scope.Delivery = data.outlet.has_delivery.toString();
+					if (data.outlet.has_delivery) {
+						$scope.Delivery = data.outlet.has_delivery.toString();
 					}
-					if( data.outlet.serves_alcohol){
-					$scope.serves_alcohol = data.outlet.serves_alcohol.toString();
+					if (data.outlet.serves_alcohol) {
+						$scope.serves_alcohol = data.outlet.serves_alcohol.toString();
 					}
-					if( data.outlet.has_outdoor_seating){
-					$scope.outdoor_Seating = data.outlet.has_outdoor_seating.toString();
+					if (data.outlet.has_outdoor_seating) {
+						$scope.outdoor_Seating = data.outlet.has_outdoor_seating.toString();
 					}
 					setCookie('latitude', data.outlet.latitude, 0.29);
 					setCookie('logitude', data.outlet.longitude, 0.29);
@@ -729,21 +717,37 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 						$scope.manager_show = false;
 					}
 					$scope.updateMode = true;
-					$scope.checkedCuisineTypes = data.outlet.cuisine_types;
-					for ( i = 0; i < $scope.checkedCuisineTypes; i++) {
-						$scope.checkedCuisineTypes[i]["checked"] = true;
-						console.log($scope.checkedCuisineTypes[i])
-					}
+					$scope.checked_CuisineTypes = data.outlet.cuisine_types;
+					for ( i = 0; i < $scope.checked_CuisineTypes.length; i++) {
+						$scope.checkedCuisineTypes.push($scope.checked_CuisineTypes[i]["id"]);
+						if (i == 0) {
+							$scope.formcuisine1 = $scope.checked_CuisineTypes[i]["id"];
+							$scope.form_cuisine2 = true;
+						} else if (i == 1) {
+							$scope.formcuisine2 = $scope.checked_CuisineTypes[i]["id"];
+							$scope.form_cuisine3 = true;
+						} else if (i == 2) {
+							$scope.formcuisine3 = $scope.checked_CuisineTypes[i]["id"];
+						}
 
+					}
+					$scope.checked_OutletTypes = data.outlet.outlet_types;
+					for ( i = 0; i < $scope.checked_OutletTypes.length; i++) {
+						$scope.checkedOutletTypes.push($scope.checked_OutletTypes[i]["id"]);
+						if (i == 0) {
+							$scope.formoutlet1 = $scope.checked_OutletTypes[i]["id"];
+							$scope.form_outlet2 = true;
+						} else if (i == 1) {
+							$scope.formoutlet2 = $scope.checked_OutletTypes[i]["id"];
+							$scope.form_outlet3 = true;
+						} else if (i == 2) {
+							$scope.formoutlet3 = $scope.checked_OutletTypes[i]["id"];
+						}
+					}
 					$scope.$broadcast('clickMessageFromParent', {
 						data : "SOME msg to the child"
 					})
 
-					console.log($scope.checkedCuisineTypes)
-
-					console.log($scope.cusineTypes)
-					//$scope.successMsg = true;
-					//$location.url("/outlets");
 
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
@@ -762,14 +766,79 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			}
 		};
 
+		$scope.selectOutlet1 = function() {
+			$scope.form_outlet2 = true;
+			if ($scope.formoutlet1 == $scope.formoutlet2 || $scope.formoutlet1 == $scope.formoutlet3) {
+				$scope.outletError = true;
+				$scope.checkedOutletTypes[0] = 0;
+				$scope.formoutlet1 = 0;
+			} else {
+				$scope.outletError = false;
+				$scope.checkedOutletTypes[0] = $scope.formoutlet1;
+				setCookie('currentOutletList', $scope.checkedOutletTypes, 1);
+			}
+		}
+		$scope.selectOutlet2 = function() {
+			$scope.form_outlet3 = true;
+			if ($scope.formoutlet2 == $scope.formoutlet1 || $scope.formoutlet2 == $scope.formoutlet3) {
+				$scope.outletError = true;
+				$scope.checkedOutletTypes[1] = 0;
+				$scope.formoutlet2 = 0;
+			} else {
+				$scope.outletError = false;
+				$scope.checkedOutletTypes[1] = $scope.formoutlet2;
+			}
+		}
+		$scope.selectOutlet3 = function() {
+			if ($scope.formoutlet3 == $scope.formoutlet1 || $scope.formoutlet3 == $scope.formoutlet2) {
+				$scope.outletError = true;
+				$scope.checkedOutletTypes[2] = 0;
+				$scope.formoutlet3 = 0;
+			} else {
+				$scope.outletError = false;
+				$scope.checkedOutletTypes[2] = $scope.formoutlet3;
+			}
+		}
+		$scope.selectCuisine1 = function() {
+			$scope.form_cuisine2 = true;
+			if ($scope.formcuisine1 == $scope.formcuisine2 || $scope.formcuisine1 == $scope.formcuisine3) {
+				$scope.cuisineError = true;
+				$scope.checkedOutletTypes[0] = 0;
+				$scope.formcuisine1 = 0;
+			} else {
+				$scope.cuisineError = false;
+				$scope.checkedCuisineTypes[0] = $scope.formcuisine1;
+			}
+			
+		}
+		$scope.selectCuisine2 = function() {
+			$scope.form_cuisine3 = true;
+			if ($scope.formcuisine2 == $scope.formcuisine1 || $scope.formcuisine2 == $scope.formcuisine3) {
+				$scope.cuisineError = true;
+				$scope.checkedOutletTypes[1] = 0;
+				$scope.formcuisine2 = 0;
+			} else {
+				$scope.cuisineError = false;
+				$scope.checkedCuisineTypes[1] = $scope.formcuisine2;
+			}
+			
+		}
+		$scope.selectCuisine3 = function() {
+			if ($scope.formcuisine3 == $scope.formcuisine1 || $scope.formcuisine3 == $scope.formcuisine2) {
+				$scope.cuisineError = true;
+				$scope.checkedOutletTypes[2] = 0;
+				$scope.formcuisine3 = 0;
+			} else {
+				$scope.cuisineError = false;
+				$scope.checkedCuisineTypes[2] = $scope.formcuisine3;
+			}
+			
+		}
+		
 		/* Adding for creating the outlet*/
 		$scope.create_outlet = function(createOutlet) {
-			$scope.checked_cuisine = [1, 2, 3, 4];
+			//$scope.checked_cuisine = [1, 2, 3, 4];
 			if ($scope.createOutlet.$valid) {
-
-				//$scope.checked_cuisine = $scope.cuisineType.checked;
-				console.log($scope.checked_cuisine);
-				//console.log($scope.cuisineType);
 				var url = "/api/outlets"
 				var method = "post"
 				if ($scope.updateMode) {
@@ -777,40 +846,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 
 					method = "PUT";
 				}
-				if (!managerId) {
-					var param = {
-						"outlet" : {
-							"name" : $scope.restaurant_name,
-							"address" : $scope.restaurant_location,
-							"website_url" : "http://batmansdonuts.com",
-							"email" : $scope.email_address,
-							"phone_number" : $scope.contact_number,
-							"open_hours" : $scope.fromTime + "-" + $scope.toTime,
-							"has_delivery" : $scope.Delivery,
-							"serves_alcohol" : $scope.serves_alcohol,
-							"has_outdoor_seating" : $scope.outdoor_Seating,
-							"cuisine_type_ids" : $scope.checked_cuisine
-						},
-						"auth_token" : $scope.auth_token
-					}
-				} else {
-					var param = {
-						"outlet" : {
-							"name" : $scope.restaurant_name,
-							"address" : $scope.restaurant_location,
-							"website_url" : "http://batmansdonuts.com",
-							"email" : $scope.email_address,
-							"phone_number" : $scope.contact_number,
-							"manager_id" : managerId,
-							"open_hours" : $scope.fromTime + "-" + $scope.toTime,
-							"has_delivery" : $scope.Delivery,
-							"serves_alcohol" : $scope.serves_alcohol,
-							"has_outdoor_seating" : $scope.outdoor_Seating,
-							"cuisine_type_ids" : $scope.checked_cuisine
-						},
-						"auth_token" : $scope.auth_token
-					}
-				}
+
 				var param = {
 					"outlet" : {
 						"name" : $scope.restaurant_name,
@@ -823,7 +859,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 						"has_delivery" : $scope.Delivery,
 						"serves_alcohol" : $scope.serves_alcohol,
 						"has_outdoor_seating" : $scope.outdoor_Seating,
-						"cuisine_type_ids" : $scope.checked_cuisine
+						"cuisine_type_ids" : $scope.checkedCuisineTypes,
+						"outlet_type_ids" : $scope.checkedOutletTypes
 					},
 					"auth_token" : $scope.auth_token
 				}
@@ -835,9 +872,16 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				}).success(function(data, status) {
 					console.log("data in success hi " + data + " status " + status);
 					$scope.error = false;
+					console.log( $scope.checkedOutletTypes);
+					setCookie('currentOutletList', JSON.stringify($scope.checkedOutletTypes), 1);
+					setCookie('currentCuisineList', JSON.stringify($scope.checkedCuisineTypes), 1);
+					$scope.$broadcast('clickMessageFromParent', {
+					data : "SOME msg to the child"
+				})
 					if (data.outlet) {
-						console.log(data.outlet.id);
 						$scope.outletID = data.outlet.id;
+						setCookie('currentOutlet', data.outlet.id, 1);
+						
 						$scope.updateMode = true;
 						$('#location').css({
 							'opacity' : '1'
@@ -856,7 +900,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				});
 			} else {
 				$scope.error = true;
-				//console.log("form false");
 			}
 
 		};
@@ -865,7 +908,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		}
 		$scope.create_manager = function(createManager) {
 			if ($scope.createManager.$valid) {
-				console.log("in create manager call first")
 				var param = {
 					"user" : {
 						"email" : $scope.email_address_manager,
@@ -964,7 +1006,6 @@ module.controller('acceptInvitationCtrl', function($rootScope, $scope, $routePar
 
 	});
 	$scope.acceptInvitation = function(acceptInv) {
-		console.log($routeParams.invi_token);
 		if ($scope.acceptInv.$valid) {
 			var param = {
 				"user" : {
@@ -1007,10 +1048,8 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 			$('.welcome').show();
 		}
 		$scope.auth_token = getCookie('authToken');
-		console.log($scope.auth_token);
 		$scope.acceptInvitation2 = function(acceptInv2) {
 			if ($scope.acceptInv2.$valid) {
-				console.log($routeParams.invi_token);
 				var param = {
 					"customer" : {
 						"name" : $scope.name,
@@ -1034,14 +1073,10 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 					url : '/api/customers',
 					data : param,
 				}).success(function(data, status) {
-					console.log(data)
 					console.log("data in success " + data + " status " + status);
 					$scope.error = false;
 					$scope.success = true;
-					//$location.url("/login");
-					//$location.url("/login");
 				}).error(function(data, status) {
-					console.log(data)
 					console.log("data in error" + data + " status " + status);
 					$scope.errorMsg = data.errors[0];
 					$scope.error = true;
@@ -1227,10 +1262,10 @@ module.controller('changePassCtrl', function($rootScope, $scope, $routeParams, $
 		$scope.success = false;
 		$scope.error = false;
 
-		$scope.BackLink = function(){
+		$scope.BackLink = function() {
 			$location.url("/view_account");
 		};
-			
+
 		$scope.changePassword = function(changePass) {
 			if ($scope.changePass.$valid) {
 				var param2 = {
@@ -1296,17 +1331,11 @@ module.controller('createKanariCodeCtrl', function($scope, $routeParams, $route,
 				data : param,
 			}).success(function(data, status) {
 				console.log("data in success " + data + " status " + status);
-				//$scope.success = true;
-				//$scope.error = false;
 
 			}).error(function(data, status) {
 				console.log("data in errorrr" + data + " status " + status);
-				//$scope.success = false;
-				//$scope.error = true;
-				//$scope.errormsg = data.errors[0];
 			});
-
-			//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
+			
 		}
 	};
 
