@@ -17,6 +17,7 @@ html, body {
     display: inline !important;
     padding: 3px !important;
 }
+
 .startMsg{
 	color: #C64957 !important;
     display: inline !important;
@@ -142,6 +143,31 @@ body {
 .rememberMe input {
 	float: left;
 }
+.signInBtn{
+	float:right;
+	margin-right: 36px;
+}
+.rememberMe{
+	float:left;
+	display:inline;
+}
+
+#login input, textarea, select, .uneditable-input{
+	width: 323px;
+}
+
+#login .paddingRememberMe{
+	padding: 7px 0 0;
+}
+#login h1{
+	float:left;
+}
+
+/*#login .outerDiv{
+	border:1px solid #664765;
+	padding:2px;
+}*/
+
 .rememberMe label {
 	float: left;
 	margin-left: 5px;
