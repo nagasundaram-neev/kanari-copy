@@ -1,29 +1,38 @@
-<div data-role="page" class="main_content span12" data-theme="b" id="login" ng-controller="listPaymentInvoiceCtrl">
+<div data-role="page" class="main_content span12" data-theme="b" id="paymentList" ng-controller="listPaymentInvoiceCtrl">
 	<div class="loginDiv innerDiv" data-role="content">
 		<h1>List Of Payment Invoices</h1>
 		<div class="acceptInv outerDiv">
 			<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 41%;">
-				<form  name="listOfPay" ng-submit="list_payment_invoice(listOfPay)" ng-app>
-					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
-						<lable >
-							Start Date
-						</lable>
-						<input data-theme="a" data-inline="true" type="number" name="txtPassword" ng-model="start_date" class="passwordTxt" placeholder="Start Date" required/>
+				<form ng-app="form-example"  name="listOfPay" class="row form-horizontal" ng-submit="list_payment_invoice(listOfPay)" novalidate>
+					<div class="control-group">
+						<div class="controls">
+							<lable >
+								Start Date
+							</lable>
+							<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="start_date" class="passwordTxt" placeholder="Start Date" required/>
+						</div>
 					</div>
-					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
-						<lable >
-							End Date
-						</lable>
-						<input data-theme="a" data-inline="true" type="number" name="txtPassword" ng-model="end_date" class="passwordTxt" placeholder="End Date" required/>
+					<div class="control-group">
+						<div class="controls">
+							<lable >
+								End Date
+							</lable>
+							<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="end_date" class="passwordTxt" placeholder="End Date" required/>
+						</div>
 					</div>
-					<div style="margin: 10px 0 0 145px;">
-						<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="BackLink()" >
-							Submit
-						</button>
-						
+					<div class="control-group" style="margin: 10px 0 0 145px;">
+						<div class="controls">
+							<button type="submit" class="btn">
+								Submit
+							</button>
+							<button class="btn" disabled>
+								Submit
+							</button>
+
+						</div>
 					</div>
 			</div>
-			
+
 			<table ng-show="InvoiceList.length" style="display: block">
 				<tr>
 					<th style="text-align: left;font-size: 14px;">Customer Id</th>
@@ -38,10 +47,9 @@
 			</table>
 			</form>
 			</button>
-						<p ng-show="paymentInvoiceSuccess" style="">
-					There is no payment invoice generated for this date.
-				</p>
+			<p ng-show="paymentInvoiceSuccess" style="">
+				There is no payment invoice generated for this date.
+			</p>
 		</div>
 	</div>
-</div>
 </div>
