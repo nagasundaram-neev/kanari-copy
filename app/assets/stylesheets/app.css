@@ -400,6 +400,11 @@ a.addRestaurant:hover {
 #createOutlet select {
 	width: 125px;
 }
+#createOutlet .timeSetting {
+	width: 40px;
+	 color: #5C5C5C;
+    font-size: 14px;
+}
 .create_outlet {
 	padding: 0 0 30px;
 }
