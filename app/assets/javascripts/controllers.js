@@ -906,6 +906,9 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.add_new_manager = function() {
 			$('.add_manager').show();
 		}
+		$scope.close_manager = function() {
+			$('.add_manager').hide();
+		}
 		$scope.create_manager = function(createManager) {
 			if ($scope.createManager.$valid) {
 				var param = {

@@ -1,4 +1,4 @@
-<div data-role="page" style="height: 600px;" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
+<div data-role="page" style="height: 630px;" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
 	<style>
 		input[type="image"], input[type="checkbox"], input[type="radio"] {
 		margin: 0;
@@ -52,16 +52,17 @@
 				</li>
 			</ul>
 		</div>
-		
+
 		<div ng-show="profileShow">
-			<div data-role="fieldcontain" class="rightPanel">
+			<div data-role="fieldcontain" class="createOutletDiv rightPanel">
 				<h1 ng-show="action">Create Restaurant Outlet</h1>
 				<h1 ng-hide="action">Update Restaurant Outlet</h1>
+				<span class="mandatoryFld" 	><div class="startMsg">*</div> Indicates mandatory fields</span>
 				<form name="createOutlet" ng-app="form-example" ng-submit="create_outlet(createOutlet)" class="row form-horizontal" novalidate>
 					<div class="control-group">
 						<div class="controls">
 							<lable>
-								Restaurant Name
+								Restaurant Name<span class="star">*</span>
 							</lable>
 
 							<input data-theme="a" data-inline="true" placeholder="Restaurant Name" type="text" name="restaurant_name" ng-model="restaurant_name" class="passwordTxt" required />
@@ -70,7 +71,7 @@
 					<div class="control-group">
 						<div class="controls">
 							<lable>
-								Restaurant Location
+								Restaurant Location<span class="star">*</span>
 							</lable>
 							<input data-theme="a" data-inline="true" placeholder="Restaurant Location" type="text" name="restaurant_location"  ng-model="restaurant_location" class="passwordTxt" required />
 						</div>
@@ -78,7 +79,7 @@
 					<div class="control-group">
 						<div class="controls">
 							<lable>
-								Contact Number
+								Contact Number<span class="star">*</span>
 							</lable>
 							<input data-theme="a" data-inline="true" placeholder="Contact Number" type="text" min="0" number-mask="" maxlength="11" name="txtPassword" ng-model="contact_number" class="passwordTxt" required />
 						</div>
@@ -86,7 +87,7 @@
 					<div class="control-group">
 						<div class="controls">
 							<lable>
-								Email Address
+								Email Address<span class="star">*</span>
 							</lable>
 							<input data-theme="a" data-inline="true" placeholder="Email Address" type="email" name="txtPassword" ng-model="email_address" class="passwordTxt" required />
 							<div class="input-help">
@@ -98,7 +99,7 @@
 					<div class="control-group">
 						<div class="controls">
 							<lable style="margin: 0;">
-								Outlet Type
+								Outlet Type<span class="star">*</span>
 							</lable>
 							<select ng-model='formoutlet1' ng-change="selectOutlet1()" required ng-options='outletType.id as outletType.name for outletType in outletTypes'>
 								<option value="">Select Outlet</option>
@@ -108,15 +109,16 @@
 							</select>
 							<select ng-show="form_outlet3" ng-model='formoutlet3' ng-change="selectOutlet3()"  ng-options='outletType.id as outletType.name for outletType in outletTypes'>
 								<option value="">Select Outlet</option>
-							</select><br>
+							</select>
+							<br>
 							<span class="customErr input-help" ng-show="outletError">Please select different outlet type.</span>
-							
+
 						</div>
 					</div>
 					<div class="control-group">
 						<div class="controls">
 							<lable style="margin: 0;">
-								Cuisine Type
+								Cuisine Type<span class="star">*</span>
 							</lable>
 							<select ng-model='formcuisine1' ng-change="selectCuisine1()" required ng-options='cuisineType.id as cuisineType.name for cuisineType in cuisineTypes'>
 								<option value="">Select Cuisine</option>
@@ -134,7 +136,7 @@
 					<div class="control-group">
 						<div class="controls">
 							<lable >
-								Opening Hours
+								Opening Hours<span class="star">*</span>
 							</lable>
 							<span class="vertical_center">from</span>
 							<select ng-model="fromTime" required>
@@ -158,8 +160,8 @@
 					<div class="control-group">
 						<div class="controls">
 							<lable style="margin: 0;">
-								Delivery
-								
+								Delivery<span class="star">*</span>
+
 							</lable>
 							<input type="radio" class="radioBtn" name="delivery" ng-model="Delivery" value="true" required>
 							Yes &nbsp;&nbsp;&nbsp;
@@ -170,7 +172,7 @@
 					<div class="control-group">
 						<div class="controls">
 							<lable style="margin: 0;">
-								Serves Alcohol
+								Serves Alcohol<span class="star">*</span>
 							</lable>
 							<input type="radio"  class="radioBtn" name="serves_alcohol"  ng-model="serves_alcohol" value="true" required>
 							Yes &nbsp;&nbsp;&nbsp;
@@ -181,7 +183,7 @@
 					<div class="control-group">
 						<div class="controls">
 							<lable style="margin: 0;">
-								Outdoor Seating
+								Outdoor Seating<span class="star">*</span>
 							</lable>
 							<input type="radio"  class="radioBtn" ng-model="outdoor_Seating" name="outdoor_Seating" value="true" required>
 							Yes &nbsp;&nbsp;&nbsp;
@@ -241,49 +243,98 @@
 			</div>
 			<div data-role="fieldcontain" class="add_manager rightPanel">
 				<h1>Add a new manager</h1>
-				<form  name="createManager" ng-submit="create_manager(createManager)" ng-app>
-					<div class="ui-input-data">
-						<lable>
-							First Name
-						</lable>
-						<input data-theme="a" data-inline="true" type="text" name="txtFirstName" ng-model="first_name" class="passwordTxt" placeholder="Enter first name" required/>
+				<span class="mandatoryFld"><div class="startMsg">*</div> Indicates mandatory fields</span>
+				<form ng-app="form-example" class="row form-horizontal" name="createManager" ng-submit="create_manager(createManager)" novalidate>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								First Name<span class="star">*</span>
+							</lable>
+							<input type="text"  placeholder="First Name" ng-model="first_name" required>
+						</div>
 					</div>
-					<div class="ui-input-data">
-						<lable>
-							Last Name
-						</lable>
-						<input data-theme="a" data-inline="true" type="text" name="txtLastName" ng-model="last_name" class="passwordTxt" placeholder="Enter last name" required/>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Last Name<span class="star">*</span>
+							</lable>
+							<input type="text" placeholder="Last Name" ng-model="last_name" required>
+						</div>
 					</div>
-					<div class="ui-input-data">
-						<lable>
-							Email Address
-						</lable>
-						<input data-theme="a" data-inline="true" type="email" name="txtEmail" ng-model="email_address_manager" class="passwordTxt" placeholder="Enter email address" required/>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Email Address<span class="star">*</span>
+							</lable>
+							<input type="email" placeholder="Email Address" ng-model="email_address_manager" required>
+							<div class="input-help">
+								<h4>Invalid Email</h4>
+							</div>
+						</div>
 					</div>
-					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
-						<lable>
-							Password
-						</lable>
-						<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="password" class="passwordTxt" placeholder="Enter password" required/>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Password<span class="star">*</span>
+							</lable>
+							<input ng-model="password" class="" password-validate required type="password" placeholder="Password">
+							<div class="input-help">
+								<h4>Password must meet the following requirements:</h4>
+								<ul>
+									<li ng-class="pwdHasLetter">
+										At least <strong>one letter</strong>
+									</li>
+									<li ng-class="pwdHasNumber">
+										At least <strong>one number</strong>
+									</li>
+									<li ng-class="pwdValidLength">
+										At least <strong>8 characters long</strong>
+									</li>
+								</ul>
+							</div>
+						</div>
 					</div>
-					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
-						<lable>
-							Confirm Password
-						</lable>
-						<input data-theme="a" data-inline="true" type="password" name="txtResetPassword" ng-model="confirmpassword" class="passwordTxt" placeholder="Enter confirm password" required/>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Confirm Password<span class="star">*</span>
+							</lable>
+							<input ng-model="confirmpassword" class="" password-validate required type="password"  placeholder="Password">
+							<div class="input-help">
+								<h4>Password must meet the following requirements:</h4>
+								<ul>
+									<li ng-class="pwdHasLetter">
+										At least <strong>one letter</strong>
+									</li>
+									<li ng-class="pwdHasNumber">
+										At least <strong>one number</strong>
+									</li>
+									<li ng-class="pwdValidLength">
+										At least <strong>8 characters long</strong>
+									</li>
+								</ul>
+							</div>
+						</div>
 					</div>
-					<div class="ui-input-data">
-						<lable>
-							Phone
-						</lable>
-						<input style="float: left;" data-theme="a" data-inline="true" type="text" min="0" number-mask="" max="99" name="add_contact_number"  ng-model="add_contact_number" class="passwordTxt" placeholder="Enter phone no" required/>
-
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Phone Number<span class="star">*</span>
+							</lable>
+							<input type="text" placeholder="Phone Number" min="0" number-mask="" maxlength="11" ng-model="add_contact_number" required>
+						</div>
 					</div>
-					<div class="clr"></div>
-					<div style="margin: 10px 0 0 131px;">
-						<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true">
-							Add Manager
-						</button>
+					<div class="control-group" style="margin: 10px 0 0 145px;">
+						<div class="controls">
+					<button type="submit" class="btn">
+								Add Manager
+							</button>
+							<button class="btn" disabled>
+								Add Manager
+							</button>
+							<button  ng-click="close_manager()" class="cancelBtn submitBtn btn btn-primary btn-large"  >
+						Cancel
+					</button>
 						<p ng-show="error" class="errorMsg">
 							{{errorMsg}}
 						</p>
@@ -292,6 +343,7 @@
 							Manager added successfully.
 						</p>
 						<p ng-hide="success" ></p>
+					</div>
 					</div>
 				</form>
 			</div>
