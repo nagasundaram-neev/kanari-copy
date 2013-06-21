@@ -1,13 +1,14 @@
 <div data-role="page" class="main_content span12" data-theme="b" id="paymentList" ng-controller="listPaymentInvoiceCtrl">
 	<div class="loginDiv innerDiv" data-role="content">
 		<h1>List Of Payment Invoices</h1>
+		<span class="mandatoryFld"><div class="startMsg">*</div> Indicates mandatory fields</span>
 		<div class="acceptInv outerDiv">
 			<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 41%;">
 				<form ng-app="form-example"  name="listOfPay" class="row form-horizontal" ng-submit="list_payment_invoice(listOfPay)" novalidate>
 					<div class="control-group">
 						<div class="controls">
 							<lable >
-								Start Date
+								Start Date<span class="star">*</span>
 							</lable>
 							<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="start_date" class="passwordTxt" placeholder="Start Date" required/>
 						</div>
@@ -15,7 +16,7 @@
 					<div class="control-group">
 						<div class="controls">
 							<lable >
-								End Date
+								End Date<span class="star">*</span>
 							</lable>
 							<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="end_date" class="passwordTxt" placeholder="End Date" required/>
 						</div>

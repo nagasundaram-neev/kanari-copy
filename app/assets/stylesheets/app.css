@@ -393,9 +393,10 @@ a.addRestaurant:hover {
 #createOutlet .radioBtn{margin-top:-2px}
 .rightPanel lable {
 	float: left;
-	width: 130px;
+	width: 145px;
 	margin-top: 4px;
 }
+.createOutletDiv lable{width: 160px;}
 #createOutlet select {
 	width: 125px;
 }
@@ -415,7 +416,7 @@ a.addRestaurant:hover {
 .rightPanel {
 	float: left;
 	width: 70%;
-	padding: 10px 0;
+	margin-top: 20px;
 	margin-left: 5%;
 }
 .leftPanel ul {
@@ -460,6 +461,7 @@ a.addRestaurant:hover {
 	display: none;
 	margin-left: 20px;
 	padding-left: 20px;
+	margin-top: 20px;
 	border-left: 2px solid #CCCCCC;
 }
 .manager_list ul {
@@ -540,6 +542,7 @@ ul.taketour li a:hover {
 	float: left;
 	width: 270px;
 }
+#acceptInvitationStep2 lable{width: 190px;}
 
 /***Change Password**/
 .
