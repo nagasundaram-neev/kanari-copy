@@ -371,7 +371,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 			params : param
 		}).success(function(data, status) {
 			console.log("User Role " + data + " status " + status);
-			var date = new Date();
+			//var date = new Date();
 			date = data.user.date_of_birth.split("-");
 			console.log("date "+date);
 			console.log(date[0]+" "+date[1]+" "+date[2]);
