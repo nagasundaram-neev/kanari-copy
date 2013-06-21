@@ -700,12 +700,18 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.contact_number = data.outlet.phone_number;
 					$scope.fromTime = data.outlet.open_hours.split("-")[0];
 					$scope.toTime = data.outlet.open_hours.split("-")[1];
-					var radio_btn1 = data.outlet.has_delivery.toString();
-					$scope.Delivery = radio_btn1;
-					var radio_btn2 = data.outlet.serves_alcohol.toString();
-					$scope.serves_alcohol = radio_btn2;
-					var radio_btn3 = data.outlet.has_outdoor_seating.toString();
-					$scope.outdoor_Seating = radio_btn3;
+					if (data.outlet.has_delivery) {
+						var radio_btn1 = data.outlet.has_delivery.toString();
+						$scope.Delivery = radio_btn1;
+					}
+					if (data.outlet.serves_alcohol) {
+						var radio_btn2 = data.outlet.serves_alcohol.toString();
+						$scope.serves_alcohol = radio_btn2;
+					}
+					if (data.outlet.has_outdoor_seating) {
+						var radio_btn3 = data.outlet.has_outdoor_seating.toString();
+						$scope.outdoor_Seating = radio_btn3;
+					}
 					setCookie('latitude', data.outlet.latitude, 0.29);
 					setCookie('logitude', data.outlet.longitude, 0.29);
 					if (data.outlet.manager) {
