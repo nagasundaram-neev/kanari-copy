@@ -386,6 +386,7 @@ a.addRestaurant:hover {
 	display: block;
 	left: 505px;
 }
+#createOutlet .radioBtn{margin-top:-2px}
 .rightPanel lable {
 	float: left;
 	width: 130px;
