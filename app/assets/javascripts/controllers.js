@@ -645,12 +645,13 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		};
 		$scope.getManagerList();
 
-		$scope.selectAction = function(value) {
-			managerId = $scope.myOption;
-			var deleteUser = confirm('Are you sure you want to change manager?');
-
-			if (deleteUser) {
-				//alert('Going to delete the user');
+		$scope.selectAction = function(select_Action) {
+			if ($scope.select_Action.$valid) {
+				managerId = $scope.myOption;
+				// var deleteUser = confirm('Are you sure you want to change manager?');
+				//
+				// if (deleteUser) {
+				// //alert('Going to delete the user');
 
 				var param = {
 					"outlet" : {
@@ -672,7 +673,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.successmgr = false;
 				});
 			}
-
 		}
 		/* Adding for updating the outlet*/
 
@@ -703,24 +703,21 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					if (data.outlet.has_delivery) {
 						var radio_btn1 = data.outlet.has_delivery.toString();
 						$scope.Delivery = radio_btn1;
-					}
-					else if (data.outlet.has_delivery = "false"){
+					} else if (data.outlet.has_delivery = "false") {
 						var radio_btn1 = data.outlet.has_delivery.toString();
 						$scope.Delivery = radio_btn1;
 					}
 					if (data.outlet.serves_alcohol) {
 						var radio_btn2 = data.outlet.serves_alcohol.toString();
 						$scope.serves_alcohol = radio_btn2;
-					}
-					else if (data.outlet.serves_alcohol = "false"){
+					} else if (data.outlet.serves_alcohol = "false") {
 						var radio_btn2 = data.outlet.serves_alcohol.toString();
 						$scope.serves_alcohol = radio_btn2;
 					}
 					if (data.outlet.has_outdoor_seating) {
 						var radio_btn3 = data.outlet.has_outdoor_seating.toString();
 						$scope.outdoor_Seating = radio_btn3;
-					}
-					else if (data.outlet.has_delivery = "false"){
+					} else if (data.outlet.has_delivery = "false") {
 						var radio_btn3 = data.outlet.has_outdoor_seating.toString();
 						$scope.outdoor_Seating = radio_btn3;
 					}
@@ -891,7 +888,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					setCookie('currentCuisineList', JSON.stringify($scope.checkedCuisineTypes), 1);
 					setCookie('radiobtn1', $scope.Delivery, 1);
 					setCookie('radiobtn2', $scope.serves_alcohol, 1);
-					setCookie('radiobtn3',  $scope.outdoor_Seating, 1);
+					setCookie('radiobtn3', $scope.outdoor_Seating, 1);
 					$scope.$broadcast('clickMessageFromParent', {
 						data : "SOME msg to the child"
 					})
