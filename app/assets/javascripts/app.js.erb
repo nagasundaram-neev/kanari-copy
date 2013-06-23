@@ -37,7 +37,6 @@ module.directive('map', function($http) {
 		},
 		link : function(scope, element, attrs) {
 			scope.$on('clickMessageFromParent',  function (scopeDetails, msgFromParent) {
-				console.log("in directive");
 			var queryStringId = getUrlVars()["outletId"];
 			var geocoder = new google.maps.Geocoder();
 			var myOptions = {
@@ -80,14 +79,12 @@ module.directive('map', function($http) {
 			lng : event.latLng.lng()
 			});
 
-			console.log(event);
 			});
 
 			geocoder.geocode({
 			"latLng" : event.latLng
 			}, function(results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
-			console.log(results[0].formatted_address);
 			var infoWindow = new google.maps.InfoWindow();
 			var html = results[0].formatted_address;
 
@@ -110,10 +107,19 @@ module.directive('map', function($http) {
 			var myLatlng = new google.maps.LatLng(pos.lat, pos.lng);
 			setCookie('latitude', pos.lat, 0.29);
 			setCookie('logitude', pos.lng, 0.29);
+			scope.cuisineTypesapp = [];
+			scope.outletTypesapp = [];
+			scope.cuisineTypesapp = getCookie('currentCuisineList');
+			scope.outletTypesapp = getCookie('currentOutletList');
 			var params = {
 			"outlet" : {
 			"latitude" : pos.lat,
-			"longitude" : pos.lng
+			"longitude" : pos.lng,
+			"cuisine_type_ids" : JSON.parse(scope.cuisineTypesapp),
+			"outlet_type_ids" : JSON.parse(scope.outletTypesapp),
+			"has_delivery" :getCookie('radiobtn1'),
+			"serves_alcohol" : getCookie('radiobtn2'),
+			"has_outdoor_seating" : getCookie('radiobtn3')
 			},
 			"auth_token" : getCookie('authToken')
 			}
@@ -132,8 +138,8 @@ module.directive('map', function($http) {
 			}
 			else{
 			$http({
-			method : "post",
-			url : '/api/outlets/',
+			method : "PUT",
+			url : '/api/outlets/' + getCookie('currentOutlet'),
 			data : params,
 			}).success(function(data, status) {
 
