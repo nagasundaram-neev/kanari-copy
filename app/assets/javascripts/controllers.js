@@ -1339,3 +1339,21 @@ function deleteCookie(name) {
 	setCookie(name, "", -1);
 }
 
+$(document).ready(function() {
+		$("#phoneNumber").blur(validateNumber);
+	});
+	
+	function validateNumber(){
+	var a = $("#phoneNumber").val();
+	var filter = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
+	//if it's valid number
+	if (filter.test(a)) {
+		console.log("valid phone number");
+		return true;
+	}
+	//if it's NOT valid
+	else {
+		return false;
+	}
+	}
+

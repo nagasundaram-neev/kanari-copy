@@ -11,28 +11,28 @@ width: 45px;
 }
 .nextArrow{
 background-image: url(<%= asset_path 'sprite_mobile.png' %>
+);
+background-position: -464px -608px;
+cursor: pointer;
+float: right;
+height: 23px;
+width: 21px;
+}
+.food {
+background-image: url(<%= asset_path 'sprite_mobile.png' %>
+);
+background-position: -489px -654px;
+cursor: pointer;
+height: 86px;
+width: 106px;
+}
+.friendliness{
+background-image: url(<%= asset_path 'sprite_mobile.png' %>
 	);
-	background-position: -464px -608px;
+	background-position: -489px -654px;
 	cursor: pointer;
-	float: right;
-	height: 23px;
-	width: 21px;
-	}
-	.food {
-		background-image: url(<%= asset_path 'sprite_mobile.png' %>
-	);
-		background-position: -489px -654px;
-		cursor: pointer;
-		height: 86px;
-		width: 106px;
-	}
-	.friendliness{
-		background-image: url(<%= asset_path 'sprite_mobile.png' %>
-	);
-		background-position: -489px -654px;
-		cursor: pointer;
-		height: 86px;
-		width: 106px;
+	height: 86px;
+	width: 106px;
 	}
 	</style>
 	<div data-role="content">
@@ -44,60 +44,63 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			<div class="clr"></div>
 		</div>
 		<div class="outerDiv">
-			<div>
+			<div ng-show="dislike">
 				What do you think the restaurant did not do particular well?
+			</div>
+			<div ng-show="like">
+				What do you think the restaurant did particular well?
 			</div>
 		</div>
 		<div class="keypad">
 			<div class="menDiv">
-				<div class="backColr">
-					<%= image_tag 'b_food_1.png' %>
-					<!-- <div class="food"></div> -->
+				<div class="backColr" id="food" ng-click="select_feedback_category('food')">
+					<%= image_tag 'b_food_1.png' %> 
 					<span class="feedbackStep2Txt">FOOD</span>
 				</div>
-				<div class="backColr">
-					<div class="friendliness"></div>
+				<div class="backColr" id="friendlines" ng-click="select_feedback_category('friendlines')">
+					<%= image_tag 'b_friendlines_1.png' %>
 					<span class="feedbackStep2Txt">FRIENDLINESS</span>
 				</div>
 				<div class="clr"></div>
 			</div>
 			<div class="menDiv">
-				<div class="backColr">
-					<div class="count"></div>
+				<div class="backColr" id="speed" ng-click="select_feedback_category('speed',2)">
+					<%= image_tag 'b_speed_1.png' %>
+					<span class="feedbackStep2Txt">SPEED</span>
 				</div>
-				<div class="backColr">
-					<div class="count"></div>
+				<div class="backColr" id="ambiance" ng-click="select_feedback_category('ambiance',3)">
+					<%= image_tag 'b_ambiance_1.png' %>
+					<span class="feedbackStep2Txt">AMBIANCE</span>
 				</div>
 				<div class="clr"></div>
 			</div>
 			<div class="menDiv">
-				<div class="backColr">
-					<div class="count"></div>
+				<div class="backColr" id="cleanliness" ng-click="select_feedback_category('cleanliness',4)">
+					<%= image_tag 'b_cleanliness_1.png' %>
+					<span class="feedbackStep2Txt">CLEANLINESS</span>
 				</div>
-				<div class="backColr">
-					<div class="count"></div>
+				<div class="backColr" id="value" ng-click="select_feedback_category('value',5)">
+					<%= image_tag 'b_value_1.png' %>
+					<span class="feedbackStep2Txt">VALUE FOR MONEY</span>
 				</div>
 				<div class="clr"></div>
 			</div>
-			<!-- <div class="secondRow">
-			<div class="clearBackColr">
-			<div class="clear">
-			C
+		</div>
+		<div class="footerDiv">	
+			<div class="prev">
+				<div class="prevTxt" ng-click="previous()">
+					PREVIOUS
+				</div>
+				<%= image_tag 'p_arrow_left.png' %>
 			</div>
+			<div class="nxt">
+				<div class="nxtTxt" ng-click="next()">
+					NEXT
+				</div>
+				<%= image_tag 'y_arrow_right.png' %>
+				<div class="clr"></div>
 			</div>
-			<div class="backColr">
-			<div class="count">
-			0
-			</div>
-			</div>
-			<div class="nextBackColr">
-			<div class="next">
-			NEXT
-			</div>
-			<div class="nextArrow"></div>
-			</div>
-			<div class="clr"></div>
-			</div> -->
 		</div>
 
 	</div>
+
