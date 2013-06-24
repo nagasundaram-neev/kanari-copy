@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130614080934) do
+ActiveRecord::Schema.define(version: 20130624092847) do
 
   create_table "cuisine_types", force: true do |t|
     t.string   "name"
@@ -53,7 +53,6 @@ ActiveRecord::Schema.define(version: 20130614080934) do
     t.integer  "cleanliness"
     t.integer  "value_for_money"
     t.text     "comment"
-    t.boolean  "will_recommend"
     t.boolean  "completed"
     t.integer  "points"
     t.integer  "rewards_pool_after_feedback", default: 0
@@ -63,6 +62,7 @@ ActiveRecord::Schema.define(version: 20130614080934) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "generated_by"
+    t.integer  "recommendation_rating"
   end
 
   add_index "feedbacks", ["code"], name: "index_feedbacks_on_code", using: :btree

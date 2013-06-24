@@ -5,7 +5,7 @@ FactoryGirl.define do
     code "MyString"
     score "MyText"
     comment "MyText"
-    will_recommend false
+    recommendation_rating -1
     completed false
     points 1
     user nil

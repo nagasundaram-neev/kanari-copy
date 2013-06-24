@@ -18,7 +18,7 @@ And /^the feedback with id "([^"]*)" should have the following attributes$/ do |
   feedback.cleanliness.should == attr["ceanliness"].to_i
   feedback.value_for_money.should == attr["value_for_money"].to_i
   feedback.comment.should == attr["comment"]
-  feedback.will_recommend.to_s.should == attr["will_recommend"]
+  feedback.recommendation_rating.to_s.should == attr["recommendation_rating"]
 end
 
 Then(/^the feedback with id "(.*?)" should belong to user with id "(.*?)"$/) do |feedback_id, user_id|
