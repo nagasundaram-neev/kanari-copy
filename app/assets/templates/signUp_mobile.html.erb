@@ -6,15 +6,14 @@
 		<div class="clr"></div>
 		<div class="outerDiv">
 			<p class="alreadyUser">
-				NEW to Kanari? Sign up
+				New to Kanari? Sign up
 			</p>
-		</div>
+
 		<div data-role="fieldcontain" class="loginDiv">
-			<div class="ui-input-text ui-body-a">
+			<div class="ui-input-text ui-body-a nameContainer">
 				<input data-theme="a" data-inline="true" type="text" name="txtUsername" ng-model="firstName" placeholder="First Name"/>
-			</div>
-			<div class="ui-input-text ui-body-a">
-				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="lastName" class="passwordTxt" placeholder="Last Name"/>
+			<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="lastName" class="passwordTxt" placeholder="Last Name" style="margin-left:2%!important"/>
+						<div class="clr"></div>
 			</div>
 			<div class="ui-input-text ui-body-a">
 				<input data-theme="a" data-inline="true" type="email" name="txtPassword" ng-model="email" class="passwordTxt" placeholder="Email"/>
@@ -30,20 +29,23 @@
 			<p class="errorMsg" ng-show="errorMsg">
 				{{error}}
 			</p>
-		</div>
-		<div class="border"></div>
+			<div class="border"></div>
 		<div class="clr"></div>
 		<div class="or">
 			or
 		</div>
-		<div class="loginFb">
+		<!-- <div class="loginFb">
 			<div class="fbIcon">
 				<%= image_tag 'icon_fb.png' %>
 			</div>
 			<div style="font-size: 1em;">
 				LOGIN WITH FACEBOOK
 			</div>
+		</div> -->
+		<input type="button" class="loginBtn" data-inline="true" value="LOGIN WITH FACEBOOK"/>
 		</div>
+				</div>
+		
 	</div>
 </div>
 
