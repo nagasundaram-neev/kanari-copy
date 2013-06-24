@@ -287,7 +287,7 @@ module.controller('homeController', function($scope, $http, $location) {
 
 module.controller('commonCtrl', function($scope, $http, $location) {
 	if (getCookie('authToken')) {
-		$location.url('/home');
+		//$location.url('/home');
 	} else {
 		// $location.url('/index');
 	}
@@ -480,6 +480,8 @@ module.controller('settingsController', function($scope, $http, $location) {
 	};
 });
 
+var pointsEarned = 0;
+
 module.controller('feedbackController', function($scope, $http, $location) {
 
 	$scope.digit1 = "";
@@ -543,19 +545,23 @@ module.controller('feedbackController', function($scope, $http, $location) {
 });
 
 module.controller('feedback_step2Controller', function($scope, $http, $location) {
-
-	//var dislike;
-
-	// var categories = new Array("food", "friendlines", "speed", "ambiance", "cleanliness", "value");
-	// for (var i = 0; i < 6; i++) {
-	// var response = categories[i];
-	// response = 0;
-	// }
+	$scope.nextFlag = 0;
+	$scope.prevFlag = -1;
 	$scope.like = false;
 	$scope.dislike = true;
-	var feedback = new Array();
-	for (var i = 0; i < 6; i++) {
-		feedback[i] = 0;
+	$scope.optionKeypad = true;
+	$scope.recomendation = false;
+	$scope.recomendationBar = false;
+	$scope.counts = [];
+	$scope.willRecommend = "";
+	$scope.feedBackArray = [0, 0, 0, 0, 0, 0];
+	$scope.feedBackSize = 6;
+	$scope.feedBackCategoryName = ["food", "friendlines", "speed", "ambiance", "cleanliness", "value"];
+
+	var yBarCount = 0;
+
+	for (var i = 0; i <= 10; i++) {
+		$scope.counts[i] = i;
 	}
 
 	$scope.food_quality = 0;
@@ -565,127 +571,242 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 	$scope.cleanliness_quality = 0;
 	$scope.value_quality = 0;
 
-	var response = 0;
-	$scope.select_feedback_category = function(category) {
-		category_switch = 0
-		switch (category) {
-			case "food":
-				if ($scope.food_quality != 0 && $scope.dislike) {
-					$scope.food_quality = 0
-					category_switch = 0
-				} else if ($scope.food_quality == 0 && $scope.dislike) {
-					$scope.food_quality = -1
-					category_switch = 1
-				} else if ($scope.food_quality != 0 && $scope.like) {
-					$scope.food_quality = 0
-					category_switch = 0
-				} else if ($scope.food_quality == 0 && $scope.like) {
-					$scope.food_quality = 1
-					category_switch = 1
-				}
-				break;
-			case "friendlines":
-				if ($scope.friendlines_quality != 0 && $scope.dislike) {
-					$scope.friendlines_quality = 0
-					category_switch = 0
-				} else if ($scope.friendlines_quality == 0 && $scope.dislike) {
-					$scope.friendlines_quality = -1
-					category_switch = 1
-				} else if ($scope.friendlines_quality != 0 && $scope.like) {
-					$scope.friendlines_quality = 0
-					category_switch = 0
-				} else if ($scope.friendlines_quality == 0 && $scope.like) {
-					$scope.friendlines_quality = 1
-					category_switch = 1
-				}
-				break;
-		}
-		if ($scope.dislike) {
-			if (category_switch == 0) {
-				$("#" + category + " img").attr('src', '/assets/b_' + category + '_1.png');
-				$("#" + category).css("background-color", "#E5E6E8");
-				$("#" + category + " span").css("color", "#664765");
-			} else {
-				$("#" + category + " img").attr('src', '/assets/b_' + category + '_2.png');
-				$("#" + category).css("background-color", "#664765");
-				$("#" + category + " span").css("color", "#E5E6E8");
+	$scope.home = function() {
+		$location.url("/home");
+	};
+
+	$scope.recommendation = function(count) {
+
+		if ($('#feedback_' + count).hasClass('Ybar')) {
+			for (var i = 0; i <= count; i++) {
+				yBarCount = i;
+				$("#feedback_" + i).removeClass("Ybar").addClass("Pbar");
 			}
 		} else {
-			if (category_switch == 0) {
-				$("#" + category + " img").attr('src', '/assets/b_' + category + '_3.png');
-				$("#" + category).css("background-color", "#E5E6E8");
-				$("#" + category + " span").css("color", "#664765");
-			} else {
-				$("#" + category + " img").attr('src', '/assets/b_' + category + '_4.png');
-				$("#" + category).css("background-color", "#664765");
-				$("#" + category + " span").css("color", "#E5E6E8");
+			for (var i = count + 1; i <= yBarCount; i++) {
+				$("#feedback_" + i).removeClass("Pbar").addClass("Ybar");
 			}
 		}
 
-		console.log($scope.friendlines_quality)
+		$scope.willRecommend = parseInt(yBarCount);
 
-		/*if (feedback[count] == '-1') {
-		 $("#" + category).children('img').attr('src', '/assets/b_' + category + '_1.png');
-		 $("#" + category).css("background-color", "#E5E6E8");
-		 $("#" + category).children('span').css("color","#664765");
-		 feedback[count] = 1;
-		 //response = 1;
-		 //$scope.quality
-		 } else if (feedback[count] == '1' || feedback[count] == '0') {
-		 $("#" + category).children('img').attr('src', '/assets/b_' + category + '_2.png');
-		 $("#" + category).css("background-color", "#664765");
-		 $("#" + category).children('span').css("color","#E5E6E8");
-		 feedback[count] = -1;
-		 }*/
+	};
+
+	var response = 0;
+	$scope.categoryname = "";
+	$scope.select_feedback_category = function(category) {
+		category_switch = 0;
+		if ($scope.dislike) {
+			if ($scope.feedBackArray[category] == 0) {
+				$scope.feedBackArray[category] = -1;
+				$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_2.png');
+				$("#feed_" + category).css("background-color", "#664765");
+				$("#feed_" + category + " span").css("color", "#E5E6E8");
+			} else if ($scope.feedBackArray[category] == -1) {
+				$scope.feedBackArray[category] = 0;
+				$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_1.png');
+				$("#feed_" + category).css("background-color", "#E5E6E8");
+				$("#feed_" + category + " span").css("color", "#664765");
+			}
+
+		} else {
+			if ($scope.feedBackArray[category] == 0) {
+				$scope.feedBackArray[category] = 1;
+				$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_4.png');
+				$("#feed_" + category).css("background-color", "#664765");
+				$("#feed_" + category + " span").css("color", "#E5E6E8");
+			} else if ($scope.feedBackArray[category] == 1) {
+				$scope.feedBackArray[category] = 0;
+				$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_3.png');
+				$("#feed_" + category).css("background-color", "#E5E6E8");
+				$("#feed_" + category + " span").css("color", "#664765");
+			}
+		}
+
+		/*switch (category) {
+		case "food":
+		if ($scope.food_quality != 0 && $scope.dislike) {
+		$scope.food_quality = 0
+		category_switch = 0
+		} else if ($scope.food_quality == 0 && $scope.dislike) {
+		$scope.food_quality = -1
+		category_switch = 1
+		} else if ($scope.food_quality != 0 && $scope.like) {
+		$scope.food_quality = 0
+		category_switch = 0
+		} else if ($scope.food_quality == 0 && $scope.like) {
+		$scope.food_quality = 1
+		category_switch = 1
+		}
+		break;
+		case "friendlines":
+		if ($scope.friendlines_quality != 0 && $scope.dislike) {
+		$scope.friendlines_quality = 0
+		category_switch = 0
+		} else if ($scope.friendlines_quality == 0 && $scope.dislike) {
+		$scope.friendlines_quality = -1
+		category_switch = 1
+		} else if ($scope.friendlines_quality != 0 && $scope.like) {
+		$scope.friendlines_quality = 0
+		category_switch = 0
+		} else if ($scope.friendlines_quality == 0 && $scope.like) {
+		$scope.friendlines_quality = 1
+		category_switch = 1
+		}
+		break;
+		}*/
+		// if ($scope.dislike) {
+		// if (category_switch == 0) {
+		// $("#" + category + " img").attr('src', '/assets/b_' + category + '_1.png');
+		// $("#" + category).css("background-color", "#E5E6E8");
+		// $("#" + category + " span").css("color", "#664765");
+		// } else {
+		// $("#" + category + " img").attr('src', '/assets/b_' + category + '_2.png');
+		// $("#" + category).css("background-color", "#664765");
+		// $("#" + category + " span").css("color", "#E5E6E8");
+		// }
+		// } else {
+		// if (category_switch == 0) {
+		// $("#" + category + " img").attr('src', '/assets/b_' + category + '_3.png');
+		// $("#" + category).css("background-color", "#E5E6E8");
+		// $("#" + category + " span").css("color", "#664765");
+		// } else {
+		// $("#" + category + " img").attr('src', '/assets/b_' + category + '_4.png');
+		// $("#" + category).css("background-color", "#664765");
+		// $("#" + category + " span").css("color", "#E5E6E8");
+		// }
+		// }
+
+		//console.log($scope.friendlines_quality)
+
 	};
 
 	$scope.next = function() {
 
-		$scope.like = true;
-		$scope.dislike = false;
+		if ($scope.nextFlag == 0) {
+			//alert("hi ")
+			for (var i = 0; i < $scope.feedBackSize; i++) {
+				if ($scope.feedBackArray[i] == 0) {
+					$scope.feedBackArray[i] = 0;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_3.png');
+					$("#feed_" + i).css("background-color", "#E5E6E8");
+					$("#feed_" + i + " span").css("color", "#664765");
+				} else if ($scope.feedBackArray[i] == -1) {
+					$scope.feedBackArray[i] = -1;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_4.png');
+					$("#feed_" + i).css("background-color", "#CCCCCC");
+					$("#feed_" + i + " span").css("color", "#664765");
+				}
+			}
+			$scope.like = true;
+			$scope.optionKeypad = true;
+			$scope.dislike = false;
+			$scope.recomendation = false;
+			$scope.nextFlag = 1;
+			$scope.prevFlag = 0;
+			$scope.recomendationBar = false;
+		} else if ($scope.nextFlag == 1) {
+			$scope.like = false;
+			$scope.dislike = false;
+			$scope.recomendation = true;
+			$scope.recomendationBar = true;
+			$scope.optionKeypad = false;
+			//$scope.nextFlag = 0;
+			$scope.prevFlag = 1;
+			$scope.nextFlag = -1;
+			console.log("feedback " + $scope.feedBackArray);
+		} else if ($scope.nextFlag == -1) {
+			alert("submitting feedback");
 
-		var categories = new Array("food", "friendlines", "speed", "ambiance", "cleanliness", "value");
-		for (var i = 0; i < 6; i++) {
-			$("#" + categories[i]).children('img').attr('src', '/assets/b_' + categories[i] + '_3.png');
+			var param = {
+				"feedback" : {
+					"food_quality" : parseInt($scope.feedBackArray[0]),
+					"speed_of_service" : parseInt($scope.feedBackArray[2]),
+					"friendliness_of_service" : parseInt($scope.feedBackArray[1]),
+					"ambience" : parseInt($scope.feedBackArray[3]),
+					"cleanliness" : parseInt($scope.feedBackArray[4]),
+					"value_for_money" : parseInt($scope.feedBackArray[5]),
+					"comment" : $scope.comment,
+					"will_recommend" : false
+				}
+			};
+
+			$http({
+				method : 'put',
+				url : '/api/feedbacks/' + getCookie('feedbackId'),
+				data : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				pointsEarned = data.points;
+				$location.url("/feedbackSubmitSuccess");
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status);
+			});
 
 		}
-		if ($scope.food_quality != 0) {
-			$("food").hide();
-		}
-		if ($scope.friendlines_quality != 0) {
-			$("food").hide();
-		}
-		$scope.speed_quality = 0;
-		$scope.ambiance_quality = 0;
-		$scope.cleanliness_quality = 0;
-		$scope.value_quality = 0;
 
 	};
 
 	$scope.previous = function() {
 
-		$scope.like = false;
-		$scope.dislike = true;
+		if ($scope.prevFlag == 0) {
+			for (var i = 0; i < $scope.feedBackSize; i++) {
+				if ($scope.feedBackArray[i] == 0) {
+					$scope.feedBackArray[i] = 0;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_1.png');
+					$("#feed_" + i).css("background-color", "#E5E6E8");
+					$("#feed_" + i + " span").css("color", "#664765");
+				} else if ($scope.feedBackArray[i] == 1) {
+					$scope.feedBackArray[i] = 1;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_2.png');
+					$("#feed_" + i).css("background-color", "#CCCCCC");
+					$("#feed_" + i + " span").css("color", "#664765");
+				} else if ($scope.feedBackArray[i] == -1) {
+					$scope.feedBackArray[i] = -1;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_2.png');
+					$("#feed_" + i).css("background-color", "#664765");
+					$("#feed_" + i + " span").css("color", "#E5E6E8");
+				}
+			}
+			$scope.like = false;
+			$scope.dislike = true;
+			$scope.optionKeypad = true;
+			$scope.recomendationBar = false;
+			$scope.recomendation = false;
+			$scope.prevFlag = 1;
+			$scope.nextFlag = 0;
+			$scope.prevFlag = -1;
+		} else if ($scope.prevFlag == 1) {
+			$scope.like = true;
+			$scope.dislike = false;
+			$scope.recomendationBar = false;
+			$scope.recomendation = false;
+			$scope.optionKeypad = true;
+			$scope.prevFlag = 0;
+			$scope.nextFlag = 1;
+		} else if ($scope.prevFlag == -1) {
+			$location.url("/feedback");
+		}
 
-		var categories = new Array("food", "friendlines", "speed", "ambiance", "cleanliness", "value");
-		for (var i = 0; i < 6; i++) {
-			$("#" + categories[i]).children('img').attr('src', '/assets/b_' + categories[i] + '_1.png');
-		}
-		if ($scope.food_quality != 0) {
-			$("food").show();
-		}
-		if ($scope.friendlines_quality != 0) {
-			$("food").show();
-		}
 	};
 
 });
 
-module.controller('restaurantListController', function($scope, $http, $location) {
-	
+module.controller('feedbackSubmitController', function($scope, $http, $location) {
+
+	$scope.points = pointsEarned;
+
+});
+
+module.controller('feedbackSubmitController', function($scope, $http, $location) {
+
+	$scope.home = function() {
+		$location.url("/home");
+	};
+
 	$scope.authToken = getCookie('authToken');
 	console.log($scope.authToken);
-		
+
 	$scope.getRestaurantList = function() {
 
 		var param = {
@@ -711,7 +832,6 @@ module.controller('restaurantListController', function($scope, $http, $location)
 });
 
 module.controller('redeemPointsController', function($scope, $http, $location) {
-	
 
 });
 

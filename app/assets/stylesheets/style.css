@@ -6,6 +6,10 @@
 	font-family: kanariFont;
 src: url('Roboto-Regular.ttf');
 }
+@font-face {
+	font-family: kanariLightFont;
+src: url('Roboto-Light.ttf');
+}
 
 .ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button{
 	font-family:"kanariFont",sans-serif !important;
@@ -17,11 +21,11 @@ src: url('Roboto-Regular.ttf');
 	font-family:"kanariFont",sans-serif;
 }
 
-#splash ,#login,#landPage,#forgotpass{
-	background: #FEbf3B !important;
+#splash ,#login,#landPage,#forgotpass,#signUp{
+	background: #F9C040 !important;
 }
 
-#signUp, #settings, #home, #feedback, #feedback_step2,#redeemPoints,#restaurantList{
+ #settings, #home, #feedback, #feedback_step2,#redeemPoints,#restaurantList,#feedbackSub{
 	background: #FFFFFF !important;
 }
 
@@ -60,11 +64,25 @@ src: url('Roboto-Regular.ttf');
 	border-radius: 0;
 }
 
+.adviceDiv .ui-corner-all{
+	border-radius: 0;
+}
+
 .instructionDiv .ui-corner-all{
 	border-radius: 0;
 }
 
 .searchDiv .ui-body-a, .ui-overlay-a{
+	background-image: -webkit-gradient(linear,left top,left bottom,from( #E5E6E8 ),to( #E5E6E8 ));
+	background-image: -webkit-linear-gradient( #E5E6E8,#E5E6E8 );
+	background-image: -moz-linear-gradient( #E5E6E8,#E5E6E8 );
+	background-image: -ms-linear-gradient( #E5E6E8,#E5E6E8 );
+	background-image: -o-linear-gradient( #E5E6E8,#E5E6E8 );
+	background-image: linear-gradient( #E5E6E8,#E5E6E8 );
+	border: none;
+}
+
+.adviceDiv .ui-body-a, .ui-overlay-a{
 	background-image: -webkit-gradient(linear,left top,left bottom,from( #E5E6E8 ),to( #E5E6E8 ));
 	background-image: -webkit-linear-gradient( #E5E6E8,#E5E6E8 );
 	background-image: -moz-linear-gradient( #E5E6E8,#E5E6E8 );
@@ -105,9 +123,83 @@ text-shadow: none;
 	float: left;
     /*padding: 1em 1.1em;*/
 }
+.recommendationDiv{
+	margin: 8% 0 0;
+}
 .pointsTxt{
 	float: right;
     /*padding: 1em;*/
+}
+
+.Ybar{
+	background-color: #FDBE3B;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    float: left;
+    margin-bottom: 2%;
+    width: 8%;
+}
+.thanksMsg{
+	color:#664765;
+	margin:8% 0 0;
+}
+.pointsEarned{
+	color:#593F5A;
+	font-size:7em;
+}
+.pointsEarnedDiv{
+	color:#664765;
+}
+.pointsTxt{
+	color:#593F5A;
+	font-size: 1em;
+}
+.thanksMsg div{
+	width:41%;
+}
+.Pbar{
+   background-color: #664765;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    float: left;
+    margin-bottom: 2%;
+    width: 8%;	
+}
+.yesNoDiv{
+	color:#664765;
+	margin:0 0 0 0;
+}
+
+.no{
+	float:left;
+}
+
+.yes{
+	float:right;
+	margin: 0 3% 0 0;
+}
+.yellowBorder{
+	border:1px solid #FDBE3B;
+	margin: 4% 3% 7% 0;
+}
+.adviceDiv{
+	color:#664765;
+}
+
+.adviceDiv .ui-shadow-inset{
+	box-shadow:none;
+}
+
+.adviceDiv .ui-body-a, .ui-overlay-a{
+	color:#664765;
+	text-shadow: none;
+	text-align:center;
+	vertical-align: top;
+}
+
+.adviceDiv div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text, .ui-input-search input.ui-input-text{
+	/*padding:4.5em 0;*/
+	height:150px;
 }
 .restListTitleDivLeft{
 	background-color: #664765;
@@ -129,6 +221,11 @@ text-shadow: none;
 }
 
 .searchDiv input::-moz-placeholder, textarea::-moz-placeholder{
+	color: #B1B2B4;
+	text-shadow:none;
+}
+
+.adviceDiv input::-moz-placeholder, textarea::-moz-placeholder{
 	color: #B1B2B4;
 	text-shadow:none;
 }
@@ -163,6 +260,9 @@ text-shadow: none;
 	margin-top:4px;
 }
 .searchDiv .ui-input-text.ui-focus, .ui-input-search.ui-focus{
+	box-shadow:none;
+}
+.adviceDiv .ui-input-text.ui-focus, .ui-input-search.ui-focus{
 	box-shadow:none;
 }
 
@@ -260,12 +360,13 @@ body {
 }
 img, object {
 	max-height: 90%;
-	max-width: 90%;
+	max-width: 80%;
 }
 .logo_btm img {
 	max-height: 90%;
-	max-width: 75%;
+	max-width: 40%;
 	float: left;
+	margin: 2% 0 2% 6%;
 }
 #login .ui-btn-corner-all {
 	border-radius: 0px;
@@ -333,7 +434,8 @@ img, object {
 }
 
 .prevTxt{
-	color:#664765;	
+	color:#664765;
+	float:right;	
 }
 
 .footerDivRedeemPoints .prevTxt{
@@ -356,6 +458,8 @@ img, object {
 }
 .nxtTxt{
 	color:#FDBE3A;
+	float:left;
+	padding: 0 20%;
 }
 .footerDivRedeemPoints .nxtTxt{
 	color:#664765;	
@@ -373,6 +477,7 @@ img, object {
 
 .border {
 	border: 1px solid #664765;
+	margin: 2% 3.5%;
 }
 
 .secondRow{
@@ -389,10 +494,10 @@ img, object {
     padding: 2% 0 0 8%;
 }
 
-#landPage .ui-body-b, .ui-overlay-b, .ui-body-c, .ui-overlay-c {
+/*#landPage .ui-body-b, .ui-overlay-b, .ui-body-c, .ui-overlay-c {
 	background: #FEbf3B !important;
 	height: 500px;
-}
+}*/
 
 /**Splash Page**/
 #splash {
@@ -407,6 +512,7 @@ img, object {
 	/*bottom: 0;*/
 	/*width: 89%;*/
 	/*margin: 0 6%;*/
+margin-top:15%;
 }
 
 .number{
@@ -422,9 +528,11 @@ img, object {
 
 .forgotpass{
 	text-decoration: none;
-	font-size: 0.9em;
+	font-size: 0.8em;
 	color:#66475E;
 	float: right;
+	padding-top:2.7%;
+	width:49%;
 }
 
 .userClick {
@@ -766,16 +874,19 @@ img, object {
 }
 .rememberMe .ui-checkbox .ui-btn-icon-left .ui-btn-inner, .ui-radio .ui-btn-icon-left .ui-btn-inner{
     padding-top: 0;
+    padding-left:25px;
 }
 
 .rememberMe  .ui-controlgroup .ui-checkbox label, .ui-controlgroup .ui-radio label{
 	font-size: 0.9em;
 }
 .rememberMe .ui-field-contain .ui-controlgroup, .ui-field-contain fieldset.ui-controlgroup{
-	 /*float: left;*/
-	 display: inline;
+	 float: left;
+   	 width: 50%;
+	 /*display: inline;*/
     /*width: 50%;*/
 }
+.ui-field-contain .ui-controlgroup-controls{width:auto}
 /*.rememberMe .ui-checkbox .ui-btn-icon-left .ui-icon, .ui-radio .ui-btn-icon-left .ui-icon{
 	left: 2px;
 }*/
@@ -815,6 +926,7 @@ img, object {
 }
 .rememberMe {
 	border: none;	
+	 margin: 0.5em;
 }
 .rememberMe .ui-btn-up-b, .rememberMe .ui-btn-hover-b {
 	background: transparent;
@@ -827,10 +939,15 @@ img, object {
 	background: #FFF;
 }
 .rememberMe .ui-btn-text {
-	text-shadow: none;
-	font-size: 0.9em;
-	color: #664765;
+  color: #664765;
+    display: block;
+    font-size: 0.8em;
+   padding-top: 9px;
+    text-shadow: none;
 }
+.rememberMe .ui-checkbox{left: -2px; margin: 0;}
+.rememberMe .ui-checkbox .ui-btn-icon-left .ui-icon{left: 2px;}
+.rememberMe .ui-checkbox input{left: 4px;  margin: -5px 0 0;}
 #login .ui-btn-left, #login .ui-btn-right, #login .ui-btn-inline, input {
 	width: 94%;
 }
@@ -854,10 +971,26 @@ img, object {
 .code {
 	color: #664765;
 	text-shadow: none;
-	font-size: 28px;
+	/*font-size: 2em;
+	  font-family: KanariLightFont;
+	    font-weight: 600;*/
+	    font: 600 95% KanariLightFont;
 }
 .loginBtn {
 	width: 100% !important;
+}
+.loginFb{
+  background-color: #664765;
+    color: #FFFFFF;
+    margin: 4% 3%;
+    padding: 2%;
+    width: 90% !important;
+		
+}
+.loginFb .fbIcon{
+	opacity:1;
+	width:10px;
+	
 }
 .username {
 	background: none repeat scroll 0 0 #664765;
@@ -881,9 +1014,20 @@ img, object {
 }
 .or {
 	color: #664765;
-	font-size: 28px;
+	font: 600 95% KanariLightFont;
+	margin: 1% 0;
+}
+.dotSeparator{
+   background-color: #664765;
+    float: left;
+    height: 1%;
+    width: 1%;
+    border-radius:5%;
 }
 .rightBtn {
+}
+#login .ui-field-contain, fieldset.ui-field-contain{
+	border-width:0;
 }
 .forgotPass .ui-link {
 	color: #664765;
@@ -895,5 +1039,5 @@ img, object {
 }
 .logo_btm {
 	/*bottom: 0;*/
-	position: absolute;
-}z
+	position: relative;
+}
