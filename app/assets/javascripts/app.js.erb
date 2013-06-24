@@ -40,8 +40,8 @@ module.directive('map', function($http) {
 			var queryStringId = getUrlVars()["outletId"];
 			var geocoder = new google.maps.Geocoder();
 			var myOptions = {
-			zoom : 6,
-			center : new google.maps.LatLng(46.87916, -3.32910),
+			zoom :9,
+			center : new google.maps.LatLng(25.18971, 55.17745),
 			mapTypeId : google.maps.MapTypeId.ROADMAP
 			};
 			 var map = new google.maps.Map(document.getElementById(attrs.id), myOptions);
