@@ -716,8 +716,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			$scope.nextFlag = -1;
 			console.log("feedback " + $scope.feedBackArray);
 		} else if ($scope.nextFlag == -1) {
-			alert("submitting feedback");
-
+			console.log("submitting feedback");
 			var param = {
 				"feedback" : {
 					"food_quality" : parseInt($scope.feedBackArray[0]),
@@ -727,9 +726,10 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 					"cleanliness" : parseInt($scope.feedBackArray[4]),
 					"value_for_money" : parseInt($scope.feedBackArray[5]),
 					"comment" : $scope.comment,
-					"will_recommend" : false
-				}
-			};
+					"recommendation_rating" : $scope.willRecommend
+				},
+				"auth_token" : getCookie('authToken')
+			}
 
 			$http({
 				method : 'put',

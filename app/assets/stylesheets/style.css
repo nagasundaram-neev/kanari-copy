@@ -348,7 +348,7 @@ text-shadow: none;
     border-right: 3px solid #FFFFFF;
     border-top: 3px solid #FFFFFF;
     float: left;
-    padding: 9% 0;
+    padding: 8.8% 0;
     width: 30%;
 }
 
@@ -357,7 +357,7 @@ text-shadow: none;
     border-right: 3px solid #FFFFFF;
     border-top: 3px solid #FFFFFF;
     float: left;
-   	padding: 11% 0;
+   	padding: 10.9% 0;
     width: 30%;
 }
 
@@ -389,7 +389,7 @@ img, object {
 }
 
 #feedback .menDiv {
-    margin: 7% 0 0 4%;
+    margin: 2% 0 0 4%;
     width: 100%;
 }
 
@@ -856,6 +856,7 @@ margin-top:15%;
     padding: 8% 0;
     width: 30%;
 }
+.enter_code{margin-top:3% }
 .loginDiv {
 	/*border: 1px solid #D9A432 !important;*/
 	border-radius: 10px;
