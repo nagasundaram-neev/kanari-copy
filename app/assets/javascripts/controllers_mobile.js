@@ -832,8 +832,6 @@ module.controller('feedbackSubmitController', function($scope, $http, $location)
 });
 
 module.controller('redeemPointsController', function($scope, $http, $location) {
-	
-	$scope.points = 
 
 });
 
