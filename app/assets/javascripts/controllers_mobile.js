@@ -170,8 +170,8 @@ module.controller('loginController', function($scope, $http, $location) {
 	$scope.forgotPassword = function() {
 		$location.url('/forgotPassword');
 	};
-	
-	$scope.home = function(){
+
+	$scope.home = function() {
 		$location.url("/index");
 	};
 
@@ -188,8 +188,8 @@ module.controller('loginController', function($scope, $http, $location) {
 module.controller('forgotPasswordController', function($scope, $http, $location) {
 
 	$scope.success = false;
-	
-	$scope.cancel = function(){
+
+	$scope.cancel = function() {
 		$location.url("/login");
 	};
 
@@ -267,9 +267,13 @@ module.controller('homeController', function($scope, $http, $location) {
 		$scope.homeClk = function() {
 			$location.url("/home");
 		};
-		
-		$scope.feedback = function(){
-			$location.url("/feedback");			
+
+		$scope.feedback = function() {
+			$location.url("/feedback");
+		};
+
+		$scope.redeemPoints = function() {
+			$location.url("/redeemPoints");
 		};
 
 		$scope.setting = function() {
@@ -283,7 +287,7 @@ module.controller('homeController', function($scope, $http, $location) {
 
 module.controller('commonCtrl', function($scope, $http, $location) {
 	if (getCookie('authToken')) {
-		$location.url('/home');
+		//$location.url('/home');
 	} else {
 		// $location.url('/index');
 	}
@@ -323,13 +327,13 @@ module.controller('signUpController', function($scope, $http, $location) {
 			}).error(function(data, status) {
 				console.log("data in error " + $scope.email + " status " + status);
 				if (data.errors[0] == "Email can't be blank") {
-					console.log("data.errors[0] "+data.errors[0]);
+					console.log("data.errors[0] " + data.errors[0]);
 					$scope.error = "Please enter a valid email";
 					$scope.errorMsg = true;
-				}else if(data.errors[0] == "Email has already been taken"){
+				} else if (data.errors[0] == "Email has already been taken") {
 					$scope.error = "This email belongs to an existing account";
 					$scope.errorMsg = true;
-				}else {
+				} else {
 					$scope.error = data.errors[0];
 					$scope.errorMsg = true;
 				}
@@ -372,18 +376,31 @@ module.controller('settingsController', function($scope, $http, $location) {
 		}).success(function(data, status) {
 			console.log("User Role " + data + " status " + status);
 			//var date = new Date();
-			date = data.user.date_of_birth.split("-");
-			console.log("date "+date);
-			console.log(date[0]+" "+date[1]+" "+date[2]);
-			$scope.firstName = data.user.first_name;
-			$scope.lastName = data.user.last_name;
-			$scope.email = data.user.email;
-			$scope.password = data.user.password;
-			$scope.date = date[2];
-			$scope.month = date[1];
-			$scope.year = date[0];
-			$scope.gender = data.user.gender;
-			$scope.location = data.user.location;
+			if (data.user.date_of_birth) {
+				date = data.user.date_of_birth.split("-");
+				console.log("date " + date);
+				console.log(date[0] + " " + date[1] + " " + date[2]);
+				$scope.firstName = data.user.first_name;
+				$scope.lastName = data.user.last_name;
+				$scope.email = data.user.email;
+				$scope.password = data.user.password;
+				$scope.date = date[2];
+				$scope.month = date[1];
+				$scope.year = date[0];
+				$scope.gender = data.user.gender;
+				$scope.location = data.user.location;
+			} else {
+				$scope.firstName = data.user.first_name;
+				$scope.lastName = data.user.last_name;
+				$scope.email = data.user.email;
+				$scope.password = data.user.password;
+				$scope.date = "";
+				$scope.month = "";
+				$scope.year = "";
+				$scope.gender = data.user.gender;
+				$scope.location = data.user.location;
+			}
+
 		}).error(function(data, status) {
 			console.log("data " + data + " status " + status);
 		});
@@ -396,44 +413,44 @@ module.controller('settingsController', function($scope, $http, $location) {
 	$scope.saveProfile = function() {
 
 		//console.log("length year"+$scope.year.length);
-		var date = $scope.date+"/"+$scope.month+"/"+$scope.year;
+		var date = $scope.date + "/" + $scope.month + "/" + $scope.year;
 		if (!$scope.date && !$scope.month && !$scope.year) {
 			$scope.error = "Enter the date of birth";
 			$scope.errorMsg = true;
-		} else if(!isDate(date)) {
+		} else if (!isDate(date)) {
 			$scope.error = "Enter valid Date of birth";
 			$scope.errorMsg = true;
-		}else{
+		} else {
 			var param = {
-			"user" : {
-				"first_name" : $scope.firstName,
-				"last_name" : $scope.lastName,
-				"email" : $scope.email,
-				"password" : $scope.newPassword,
-				"password_confirmation" : $scope.confirmPassword,
-				"date_of_birth" : $scope.date+"-"+$scope.month+"-"+$scope.year,
-				"gender" : $scope.gender,
-				"location" : $scope.location,
-				"current_password" : $scope.currentPassword
-			},
-			"auth_token" : getCookie('authToken')
-		}
+				"user" : {
+					"first_name" : $scope.firstName,
+					"last_name" : $scope.lastName,
+					"email" : $scope.email,
+					"password" : $scope.newPassword,
+					"password_confirmation" : $scope.confirmPassword,
+					"date_of_birth" : $scope.date + "-" + $scope.month + "-" + $scope.year,
+					"gender" : $scope.gender,
+					"location" : $scope.location,
+					"current_password" : $scope.currentPassword
+				},
+				"auth_token" : getCookie('authToken')
+			}
 
-		$http({
-			method : 'put',
-			url : '/api/users',
-			data : param
-		}).success(function(data, status) {
-			console.log("User Role " + data + " status " + status);
-			setCookie('authToken', data.auth_token, 0.29);
-			$scope.errorMsg = false;
-			$scope.succMsg = true;
-		}).error(function(data, status) {
-			console.log("data " + data + " status " + status);
-			$scope.error = data.errors[0];
-			$scope.errorMsg = true;
-			$scope.succMsg = false;
-		});
+			$http({
+				method : 'put',
+				url : '/api/users',
+				data : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				setCookie('authToken', data.auth_token, 0.29);
+				$scope.errorMsg = false;
+				$scope.succMsg = true;
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status);
+				$scope.error = data.errors[0];
+				$scope.errorMsg = true;
+				$scope.succMsg = false;
+			});
 
 		}
 		//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('') + ':X');
@@ -463,24 +480,360 @@ module.controller('settingsController', function($scope, $http, $location) {
 	};
 });
 
+var pointsEarned = 0;
+
 module.controller('feedbackController', function($scope, $http, $location) {
-	
-	$scope.home = function(){
+
+	$scope.digit1 = "";
+	$scope.digit2 = "";
+	$scope.digit3 = "";
+	$scope.digit4 = "";
+	$scope.digit5 = "";
+	$scope.error = false;
+
+	$scope.home = function() {
 		$location.url("/home");
 	};
-	
-	$scope.next = function(){
-		$location.url("/feedback_step2");
+
+	$scope.clear = function() {
+		$scope.digit1 = "";
+		$scope.digit2 = "";
+		$scope.digit3 = "";
+		$scope.digit4 = "";
+		$scope.digit5 = "";
 	};
-	
+
+	$scope.enterValues = function(val) {
+		//console.log("digit1 " + $scope.digit1);
+		if (!$scope.digit1 || $scope.digit1 == "") {
+			$scope.digit1 = val;
+		} else if (!$scope.digit2 || $scope.digit2 == "") {
+			$scope.digit2 = val;
+		} else if (!$scope.digit3 || $scope.digit3 == "") {
+			$scope.digit3 = val;
+		} else if (!$scope.digit4 || $scope.digit4 == "") {
+			$scope.digit4 = val;
+		} else if (!$scope.digit5 || $scope.digit5 == "") {
+			$scope.digit5 = val;
+		}
+	};
+
+	$scope.next = function() {
+		var kanariCode;
+		if ($scope.digit1 && $scope.digit2 && $scope.digit3 && $scope.digit4 && $scope.digit5) {
+			kanariCode = $scope.digit1 + "" + $scope.digit2 + "" + $scope.digit3 + "" + $scope.digit4 + "" + $scope.digit5;
+		} else {
+			kanaricode = "";
+		}
+
+		$http({
+			method : 'get',
+			url : '/api/kanari_codes/' + kanariCode,
+			//params : param
+		}).success(function(data, status) {
+			console.log("User Role " + data + " status " + status);
+			setCookie("feedbackId", data.feedback_id, 0.29);
+			$location.url("/feedback_step2");
+		}).error(function(data, status) {
+			console.log("data " + data + " status " + status);
+			$scope.errorMsg = data.errors[0];
+			$scope.error = true;
+		});
+
+	};
+
 });
 
 module.controller('feedback_step2Controller', function($scope, $http, $location) {
-	
+	$scope.nextFlag = 0;
+	$scope.prevFlag = -1;
+	$scope.like = false;
+	$scope.dislike = true;
+	$scope.optionKeypad = true;
+	$scope.recomendation = false;
+	$scope.recomendationBar = false;
+	$scope.counts = [];
+	$scope.willRecommend = "";
+	$scope.feedBackArray = [0, 0, 0, 0, 0, 0];
+	$scope.feedBackSize = 6;
+	$scope.feedBackCategoryName = ["food", "friendlines", "speed", "ambiance", "cleanliness", "value"];
+
+	var yBarCount = 0;
+
+	for (var i = 0; i <= 10; i++) {
+		$scope.counts[i] = i;
+	}
+
+	$scope.food_quality = 0;
+	$scope.friendlines_quality = 0;
+	$scope.speed_quality = 0;
+	$scope.ambiance_quality = 0;
+	$scope.cleanliness_quality = 0;
+	$scope.value_quality = 0;
+
+	$scope.home = function() {
+		$location.url("/home");
+	};
+
+	$scope.recommendation = function(count) {
+
+		if ($('#feedback_' + count).hasClass('Ybar')) {
+			for (var i = 0; i <= count; i++) {
+				yBarCount = i;
+				$("#feedback_" + i).removeClass("Ybar").addClass("Pbar");
+			}
+		} else {
+			for (var i = count + 1; i <= yBarCount; i++) {
+				$("#feedback_" + i).removeClass("Pbar").addClass("Ybar");
+			}
+		}
+
+		$scope.willRecommend = parseInt(yBarCount);
+
+	};
+
+	var response = 0;
+	$scope.categoryname = "";
+	$scope.select_feedback_category = function(category) {
+		category_switch = 0;
+		if ($scope.dislike) {
+			if ($scope.feedBackArray[category] == 0) {
+				$scope.feedBackArray[category] = -1;
+				$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_2.png');
+				$("#feed_" + category).css("background-color", "#664765");
+				$("#feed_" + category + " span").css("color", "#E5E6E8");
+			} else if ($scope.feedBackArray[category] == -1) {
+				$scope.feedBackArray[category] = 0;
+				$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_1.png');
+				$("#feed_" + category).css("background-color", "#E5E6E8");
+				$("#feed_" + category + " span").css("color", "#664765");
+			}
+
+		} else {
+			if ($scope.feedBackArray[category] == 0) {
+				$scope.feedBackArray[category] = 1;
+				$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_4.png');
+				$("#feed_" + category).css("background-color", "#664765");
+				$("#feed_" + category + " span").css("color", "#E5E6E8");
+			} else if ($scope.feedBackArray[category] == 1) {
+				$scope.feedBackArray[category] = 0;
+				$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_3.png');
+				$("#feed_" + category).css("background-color", "#E5E6E8");
+				$("#feed_" + category + " span").css("color", "#664765");
+			}
+		}
+
+		/*switch (category) {
+		case "food":
+		if ($scope.food_quality != 0 && $scope.dislike) {
+		$scope.food_quality = 0
+		category_switch = 0
+		} else if ($scope.food_quality == 0 && $scope.dislike) {
+		$scope.food_quality = -1
+		category_switch = 1
+		} else if ($scope.food_quality != 0 && $scope.like) {
+		$scope.food_quality = 0
+		category_switch = 0
+		} else if ($scope.food_quality == 0 && $scope.like) {
+		$scope.food_quality = 1
+		category_switch = 1
+		}
+		break;
+		case "friendlines":
+		if ($scope.friendlines_quality != 0 && $scope.dislike) {
+		$scope.friendlines_quality = 0
+		category_switch = 0
+		} else if ($scope.friendlines_quality == 0 && $scope.dislike) {
+		$scope.friendlines_quality = -1
+		category_switch = 1
+		} else if ($scope.friendlines_quality != 0 && $scope.like) {
+		$scope.friendlines_quality = 0
+		category_switch = 0
+		} else if ($scope.friendlines_quality == 0 && $scope.like) {
+		$scope.friendlines_quality = 1
+		category_switch = 1
+		}
+		break;
+		}*/
+		// if ($scope.dislike) {
+		// if (category_switch == 0) {
+		// $("#" + category + " img").attr('src', '/assets/b_' + category + '_1.png');
+		// $("#" + category).css("background-color", "#E5E6E8");
+		// $("#" + category + " span").css("color", "#664765");
+		// } else {
+		// $("#" + category + " img").attr('src', '/assets/b_' + category + '_2.png');
+		// $("#" + category).css("background-color", "#664765");
+		// $("#" + category + " span").css("color", "#E5E6E8");
+		// }
+		// } else {
+		// if (category_switch == 0) {
+		// $("#" + category + " img").attr('src', '/assets/b_' + category + '_3.png');
+		// $("#" + category).css("background-color", "#E5E6E8");
+		// $("#" + category + " span").css("color", "#664765");
+		// } else {
+		// $("#" + category + " img").attr('src', '/assets/b_' + category + '_4.png');
+		// $("#" + category).css("background-color", "#664765");
+		// $("#" + category + " span").css("color", "#E5E6E8");
+		// }
+		// }
+
+		//console.log($scope.friendlines_quality)
+
+	};
+
+	$scope.next = function() {
+
+		if ($scope.nextFlag == 0) {
+			//alert("hi ")
+			for (var i = 0; i < $scope.feedBackSize; i++) {
+				if ($scope.feedBackArray[i] == 0) {
+					$scope.feedBackArray[i] = 0;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_3.png');
+					$("#feed_" + i).css("background-color", "#E5E6E8");
+					$("#feed_" + i + " span").css("color", "#664765");
+				} else if ($scope.feedBackArray[i] == -1) {
+					$scope.feedBackArray[i] = -1;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_4.png');
+					$("#feed_" + i).css("background-color", "#CCCCCC");
+					$("#feed_" + i + " span").css("color", "#664765");
+				}
+			}
+			$scope.like = true;
+			$scope.optionKeypad = true;
+			$scope.dislike = false;
+			$scope.recomendation = false;
+			$scope.nextFlag = 1;
+			$scope.prevFlag = 0;
+			$scope.recomendationBar = false;
+		} else if ($scope.nextFlag == 1) {
+			$scope.like = false;
+			$scope.dislike = false;
+			$scope.recomendation = true;
+			$scope.recomendationBar = true;
+			$scope.optionKeypad = false;
+			//$scope.nextFlag = 0;
+			$scope.prevFlag = 1;
+			$scope.nextFlag = -1;
+			console.log("feedback " + $scope.feedBackArray);
+		} else if ($scope.nextFlag == -1) {
+			alert("submitting feedback");
+
+			var param = {
+				"feedback" : {
+					"food_quality" : parseInt($scope.feedBackArray[0]),
+					"speed_of_service" : parseInt($scope.feedBackArray[2]),
+					"friendliness_of_service" : parseInt($scope.feedBackArray[1]),
+					"ambience" : parseInt($scope.feedBackArray[3]),
+					"cleanliness" : parseInt($scope.feedBackArray[4]),
+					"value_for_money" : parseInt($scope.feedBackArray[5]),
+					"comment" : $scope.comment,
+					"will_recommend" : false
+				}
+			};
+
+			$http({
+				method : 'put',
+				url : '/api/feedbacks/' + getCookie('feedbackId'),
+				data : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				pointsEarned = data.points;
+				$location.url("/feedbackSubmitSuccess");
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status);
+			});
+
+		}
+
+	};
+
+	$scope.previous = function() {
+
+		if ($scope.prevFlag == 0) {
+			for (var i = 0; i < $scope.feedBackSize; i++) {
+				if ($scope.feedBackArray[i] == 0) {
+					$scope.feedBackArray[i] = 0;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_1.png');
+					$("#feed_" + i).css("background-color", "#E5E6E8");
+					$("#feed_" + i + " span").css("color", "#664765");
+				} else if ($scope.feedBackArray[i] == 1) {
+					$scope.feedBackArray[i] = 1;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_2.png');
+					$("#feed_" + i).css("background-color", "#CCCCCC");
+					$("#feed_" + i + " span").css("color", "#664765");
+				} else if ($scope.feedBackArray[i] == -1) {
+					$scope.feedBackArray[i] = -1;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_2.png');
+					$("#feed_" + i).css("background-color", "#664765");
+					$("#feed_" + i + " span").css("color", "#E5E6E8");
+				}
+			}
+			$scope.like = false;
+			$scope.dislike = true;
+			$scope.optionKeypad = true;
+			$scope.recomendationBar = false;
+			$scope.recomendation = false;
+			$scope.prevFlag = 1;
+			$scope.nextFlag = 0;
+			$scope.prevFlag = -1;
+		} else if ($scope.prevFlag == 1) {
+			$scope.like = true;
+			$scope.dislike = false;
+			$scope.recomendationBar = false;
+			$scope.recomendation = false;
+			$scope.optionKeypad = true;
+			$scope.prevFlag = 0;
+			$scope.nextFlag = 1;
+		} else if ($scope.prevFlag == -1) {
+			$location.url("/feedback");
+		}
+
+	};
+
 });
 
+module.controller('feedbackSubmitController', function($scope, $http, $location) {
 
+	$scope.points = pointsEarned;
 
+});
+
+module.controller('feedbackSubmitController', function($scope, $http, $location) {
+
+	$scope.home = function() {
+		$location.url("/home");
+	};
+
+	$scope.authToken = getCookie('authToken');
+	console.log($scope.authToken);
+
+	$scope.getRestaurantList = function() {
+
+		var param = {
+			"auth_token" : $scope.authToken,
+			"password" : 'X'
+		};
+
+		$http({
+			method : 'get',
+			url : '/api/outlets',
+			params : param
+		}).success(function(data, status) {
+			console.log("User Role " + data + " status " + status);
+		}).error(function(data, status) {
+			console.log("data " + data + " status " + status);
+		});
+
+		//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
+
+	};
+	$scope.getRestaurantList();
+
+});
+
+module.controller('redeemPointsController', function($scope, $http, $location) {
+
+});
 
 function setCookie(name, value, days) {
 	//alert(value);

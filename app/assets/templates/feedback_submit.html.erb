@@ -1,0 +1,44 @@
+<div data-role="page" data-theme="b" id="feedbackSub" ng-controller="feedbackSubmitController">
+	<style>
+.home {
+background-image: url(<%= asset_path 'sprite_mobile.png' %>
+);
+background-position: -309px -471px;
+cursor: pointer;
+float: left;
+height: 56px;
+width: 45px;
+}
+.nextArrow{
+background-image: url(<%= asset_path 'sprite_mobile.png' %>
+	);
+	background-position: -464px -608px;
+	cursor: pointer;
+	float: right;
+	height: 23px;
+	width: 21px;
+	}
+	</style>
+	<div data-role="content">
+		<div class="username">
+			<div class="signUp">
+				THANKS!
+			</div>
+			<div class="clr"></div>
+		</div>
+		<div  class="thanksMsg" align="center">
+			<div class="innerDiv">
+				Thank you for leaving your feedback you earned
+			</div>
+		</div>
+		<div align="center" class="pointsEarnedDiv">
+			<div align="center" class="pointsEarned">
+				{{points}}
+			</div>
+			<div>
+				POINTS
+			</div>
+			<div class="clr"></div>
+		</div>
+	</div>
+</div>
