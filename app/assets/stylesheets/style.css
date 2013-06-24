@@ -14,8 +14,13 @@ src: url('Roboto-Light.ttf');
 .ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button{
 	font-family:"kanariFont",sans-serif !important;
 }
+.Roboto-normal-100 {
+font-family: 'Roboto' !important;
+font-style: normal;
+font-weight: 100;
+}
 .ui-body-b, .ui-body-b input, .ui-body-b select, .ui-body-b textarea, .ui-body-b button{
-	font-family:"kanariFont",sans-serif !important;
+	font-family: 'Roboto' !important;
 }
 .ui-btn-up-b, .ui-btn-hover-b, .ui-btn-down-b{
 	font-family:"kanariFont",sans-serif;
@@ -48,13 +53,13 @@ src: url('Roboto-Light.ttf');
 .dobDiv input::-moz-placeholder, .dobDiv textarea::-moz-placeholder{
 	background:#664765;
 }
-
+.ui-content{padding:0}
 .roundBtn img{
 	width: 30%;
 }
 .menDiv{
 	width:100%;	
-	margin: 7% 0 0;
+	margin: 3% 0 0;
 }
 .imgDiv{
 	
@@ -291,16 +296,18 @@ text-shadow: none;
 }
 .yellowBack{
 	float:left;
-	padding: 5% 0;
-	width:48%;
+	padding: 2% 0;
+	width:49.7%;
 	background-color:#F8BE40;
 	border-right:2px solid #FFFFFF;
 }
 .count{
-	font-size: 2em;
+	font-size: 1.5em;
+	 
 }
+#feedback .count{padding: 10% 0;}
 .descript{
-	font-size: 0.9em;
+	font-size: 0.8em;
 }
 .actDate{
 	color: #FFFFFF;
@@ -309,7 +316,7 @@ text-shadow: none;
 }
 .bottomDiv{
 	background-color: #593F5A;
-    margin: 15% 0 0;
+    margin: 10% 0 0;
 }
 .recentAct{
 	color: #ECBD3A;
@@ -317,7 +324,7 @@ text-shadow: none;
     margin: 0 0 0 2%;
 }
 .whatLike{
-	margin: 9% 0;
+	margin: 3% 0;
 }
 .recentActDiv{
 	float: left;
@@ -328,7 +335,7 @@ text-shadow: none;
 	background-color: #E5E6E8;
 	padding: 5% 0;
 	float: left;
-    width: 32%;
+    width: 32.8%;
     border-right: 3px solid #FFFFFF;
 }
 .clear{
@@ -350,7 +357,7 @@ text-shadow: none;
     border-right: 3px solid #FFFFFF;
     border-top: 3px solid #FFFFFF;
     float: left;
-   	padding: 12% 0;
+   	padding: 11% 0;
     width: 30%;
 }
 
@@ -517,12 +524,12 @@ margin-top:15%;
 
 .number{
 	color:#593F5A;
-	font-size:10em;
-	margin-bottom: -21px;
+	font-size:5em;
+	margin-bottom: -3px;
 }
 
 .points{
-	font-size: 1.6em;
+	font-size: 1.3em;
     letter-spacing: 0.4em;
 }
 
@@ -827,8 +834,8 @@ margin-top:15%;
 }
 /***Login  Page***/
 .outerDiv {
-	margin: 1% 0 0 3%;
-	width: 93%;
+	/*margin: 5% 0 0 3%;*/
+	width: 100%;
 	text-align: center;
 	text-shadow: none;
 	color:#593F5A;
@@ -910,8 +917,9 @@ margin-top:15%;
 }
 
 .errorMsg{
-	color:#FF0000;
+	color:#C64957;
 	text-shadow:none;
+	margin: 2% 12%;
 }
 .succMsg{
 	color:#0F9D58;
@@ -1006,7 +1014,7 @@ margin-top:15%;
 .username {
 	background: none repeat scroll 0 0 #664765;
     color: #FFFFFF;
-    padding: 0.6em;
+    padding: 0.1em;
     text-shadow: none;
 }
 .username a {
@@ -1016,12 +1024,13 @@ margin-top:15%;
 .username .ui-link{
 	color:#FFFFFF !important;
 	display:block;
-	margin: 12px 0 0;
+	margin: 8px 0 0;
 	width: 168px;
 }
 .role{
 	display:block;
 	width: 168px;
+	font-size: 12px;
 }
 .or {
 	color: #664765;
