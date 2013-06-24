@@ -648,7 +648,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.selectAction = function(select_Action) {
 			if ($scope.select_Action.$valid) {
 				managerId = $scope.myOption;
-				$scope.manager = managerId;
+				//$scope.manager = managerId;
 				var param = {
 					"outlet" : {
 						"manager_id" : managerId
@@ -663,7 +663,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				}).success(function(data, status) {
 					console.log("data in success hi " + data + " status " + status);
 					$scope.successmgr = true;
-					$scope.manager_show = true;
+					//$scope.manager_show = true;
 					$scope.getOutlet();
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
