@@ -3,18 +3,40 @@
 	margin: 0;
 }
 html, body {
-	height: 100%;
+	height: 98%;
 }
 .content {
-	min-height: 100%;
+	min-height: 98%;
 	height: auto !important;
 	height: 100%;
 	margin: 0 auto 0em;
+}
+.star {
+	color: #C64957 !important;
+	display: inline !important;
+	padding: 3px !important;
+}
+lable{
+	color: #5C5C5C;
+	font-size: 14px;
+}
+.startMsg {
+	color: #C64957 !important;
+	display: inline !important;
 }
 body {
 	margin: 0 !important;
 	padding: 0 !important;
 	background: none repeat scroll 0 0 #E4E3E1 !important;
+	font-family: 'Open Sans', sans-serif !important;
+}
+
+.main_content .mandatoryFld {
+	padding: 0;
+	font-size: 13px;
+}
+.left_margin {
+	margin-left: -17px;
 }
 .clr {
 	margin: 0;
@@ -123,12 +145,37 @@ body {
 .rememberMe input {
 	float: left;
 }
+.signInBtn {
+	float: right;
+	margin-right: 36px;
+}
+.rememberMe {
+	float: left;
+	display: inline;
+}
+
+#login input, textarea, select, .uneditable-input {
+	width: 323px;
+}
+
+#login .paddingRememberMe {
+	padding: 7px 0 0;
+}
+#login h1 {
+	float: left;
+}
+
+/*#login .outerDiv{
+ border:1px solid #664765;
+ padding:2px;
+ }*/
+
 .rememberMe label {
 	float: left;
 	margin-left: 5px;
 }
 .errorMsg {
-	color: red;
+	color: #C64957;
 	margin-top: 10px;
 	text-align: left;
 	font-size: 14px;
@@ -151,6 +198,7 @@ body {
 }
 .cancelBtn {
 	background: none repeat scroll 0 0 #DCDBD9 !important;
+	color: #848381 !important;
 }
 .loginDiv {
 	text-align: center;
@@ -169,6 +217,9 @@ body {
 	/*color: red !important;*/
 	/*display: inline !important;*/
 	/*font-size: 14px !important;*/
+}
+.paddingRememberMe input {
+	width: auto !important;
 }
 /***Home Page**/
 .innerDiv {
@@ -202,6 +253,7 @@ body {
 	color: #5A4166;
 	font-weight: normal;
 	padding: 0 0 15px;
+	font-family: 'Roboto', sans-serif !important;
 }
 .main_content span {
 	color: #5A4166;
@@ -214,13 +266,13 @@ a.addRestaurant {
 	background: none repeat scroll 0 0 #F5BA44;
 	border-radius: 5px 5px 5px 5px;
 	color: #664765;
-	font-size: 18px;
+	font-size: 17px;
 	margin: 20px 5px;
 	padding: 2px 10px;
 	float: right;
 }
 a.addRestaurant img {
-	vertical-align: text-bottom;
+	vertical-align: text-top;
 }
 a.createPayment {
 	float: left;
@@ -246,11 +298,12 @@ a.addRestaurant:hover {
 }
 .outlet_name, .manager_name, .action {
 	float: left;
-	height: 40px;
-	padding: 10px;
+	min-height: 70px;
+	padding: 10px 0 1000px 10px;
+	margin-bottom: -1000px;
 }
 .outlet_name {
-	width: 170px;
+	width: 290px;
 }
 .manager_name {
 	width: 110px;
@@ -278,7 +331,7 @@ a.addRestaurant:hover {
 }
 .outlet_name span.address {
 	margin-left: 23px;
-	padding: 0;
+	padding: 0 0 10px;
 	font-size: 12px;
 }
 .action .checkbox_lable {
@@ -289,19 +342,71 @@ a.addRestaurant:hover {
 	border-right: 1px solid #CCCCCC;
 }
 /***createOutlet****/
+.header_title {
+	background: none repeat scroll 0 0 #F5BA44;
+	overflow: hidden;
+	height: 38px;
+}
+
+.header_title span {
+	padding: 10px;
+	float: left;
+	margin: 0;
+	font-size: 18px;
+}
+.header_title span.manager_outlet {
+	background: none repeat scroll 0 0 #664766;
+	color: #FFFFFF;
+}
+.header_title span.blank_span {
+
+	padding: 0;
+}
+.arrow-right {
+	width: 0;
+	height: 0;
+	border-top: 19px solid transparent;
+	border-bottom: 19px solid transparent;
+	border-left: 19px solid #664766;
+}
+.header_title span.create_rest {
+	padding: 6px;
+}
+.header_title span.create_rest img {
+	vertical-align: text-bottom;
+}
 #createOutlet .ui-input-data {
 	padding: 5px 0;
 }
+#createOutlet .input-help:before {
+	color: #EC3F41;
+}
+#createOutlet .input-help {
+	color: #EC3F41;
+	border-color: #EC3F41;
+	padding: 10px;
+}
+#createOutlet .customErr {
+	display: block;
+	left: 505px;
+}
+#createOutlet .radioBtn{margin-top:-2px}
 .rightPanel lable {
 	float: left;
-	width: 130px;
+	width: 145px;
 	margin-top: 4px;
 }
+.createOutletDiv lable{width: 160px;}
 #createOutlet select {
-	width: 80px;
+	width: 125px;
+}
+#createOutlet .timeSetting {
+	width: 40px;
+	 color: #5C5C5C;
+    font-size: 14px;
 }
 .create_outlet {
-	padding: 30px 0;
+	padding: 0 0 30px;
 }
 .successMsg {
 	color: green;
@@ -316,6 +421,7 @@ a.addRestaurant:hover {
 .rightPanel {
 	float: left;
 	width: 70%;
+	margin-top: 20px;
 	margin-left: 5%;
 }
 .leftPanel ul {
@@ -360,6 +466,7 @@ a.addRestaurant:hover {
 	display: none;
 	margin-left: 20px;
 	padding-left: 20px;
+	margin-top: 20px;
 	border-left: 2px solid #CCCCCC;
 }
 .manager_list ul {
@@ -368,9 +475,13 @@ a.addRestaurant:hover {
 	border: 1px solid #CCCCCC;
 	border-radius: 5px 5px 5px 5px;
 }
-#location .location_select{padding: 10px 20px;}
-#location .location_map{float: left;
-    width: 75%;}
+#location .location_select {
+	padding: 10px 20px;
+}
+#location .location_map {
+	float: left;
+	width: 75%;
+}
 .manager_list ul li {
 	list-style: none outside none;
 	border-bottom: 1px solid #CCCCCC;
@@ -419,11 +530,11 @@ ul.taketour li a:hover {
 	width: 130px !important;
 }
 .select_option lable {
-	width: 100px;
+	width: 130px;
 }
 /**Create Invitation**/
-#createInvitation .input-help, #paymentInvoice .input-help {
-	left: 240px;
+#login .input-help {
+	left: 160px;
 }
 
 /**accept Invitation**/
@@ -436,6 +547,7 @@ ul.taketour li a:hover {
 	float: left;
 	width: 270px;
 }
+#acceptInvitationStep2 lable{width: 190px;}
 
 /***Change Password**/
 .
@@ -450,6 +562,10 @@ ul.taketour li a:hover {
 }
 #viewaccount .passwordTxt {
 	width: 250px;
+}
+#viewaccount .control-group {
+	margin-left: 247px;
+	margin-bottom: 10px;
 }
 .section {
 	border-bottom: 1px solid #CCCCCC;
@@ -489,7 +605,7 @@ a.changePassword:hover {
 	position: absolute;
 	z-index: 100;
 	top: -6px;
-	left: 160px;
+	left: 240px;
 	width: 180px;
 	padding: 10px;
 	background: #fefefe;

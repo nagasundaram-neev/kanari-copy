@@ -1,29 +1,30 @@
 <div data-role="page" data-theme="b" id="login" ng-controller="Login" class="main_content span12">
-	<div class="loginDiv innerDiv" data-role="content" style="width: 17%;">
+	<div class="loginDiv innerDiv" data-role="content" style="width: 33%;">
 		<div class="outerDiv">
 			<h1>Sign In</h1>
+			<div class="clr"></div>
 			<div class="innerLoginDiv">
 				<p class="alreadyUser">
 					Already a user? Log in to Kanari
 				</p>
 				<!-- <form class="cmxform" id="commentForm" ng-submit="chkLogin(login)" name="login" ng-app>
-					<input type="email" name="email" ng-model="email" placeholder="Email Address" required />
-					<br/>
-					<span class="help-inline" ng-show="submitted && form.email.$error.required">Required</span>
-					<span class="help-inline" ng-show="submitted && form.email.$error.email">Invalid email</span>
-					<input type="password" name="password" ng-model="password" placeholder="Password" required />
-					<br/>
-					<span class="help-inline" ng-show="submitted && form.password.$error.required">Required</span>
-					<span class="help-inline" ng-show="submitted && form.password.$error.email">Invalid email</span>
-					<input type="checkbox" name="chkrememberMe" ng-click="rememberMe(value,this)" id="checkbox-1" class="custom" ng-model="value" />
-					<label for="checkbox-1">Remember Me</label>
-					<br/>
-					
-					<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true">
-						Login
-					</button>
-				</form> -->
+				<input type="email" name="email" ng-model="email" placeholder="Email Address" required />
+				<br/>
+				<span class="help-inline" ng-show="submitted && form.email.$error.required">Required</span>
+				<span class="help-inline" ng-show="submitted && form.email.$error.email">Invalid email</span>
+				<input type="password" name="password" ng-model="password" placeholder="Password" required />
+				<br/>
+				<span class="help-inline" ng-show="submitted && form.password.$error.required">Required</span>
+				<span class="help-inline" ng-show="submitted && form.password.$error.email">Invalid email</span>
+				<input type="checkbox" name="chkrememberMe" ng-click="rememberMe(value,this)" id="checkbox-1" class="custom" ng-model="value" />
+				<label for="checkbox-1">Remember Me</label>
+				<br/>
 
+				<button type="submit" class="submitBtn btn btn-primary btn-large" ng-click="submitted=true">
+				Login
+				</button>
+				</form> -->
+				<span class="mandatoryFld"><div class="startMsg">*</div> Indicates mandatory fields</span>
 				<form ng-app="form-example" class="row form-horizontal" name="login" ng-submit="chkLogin(login)" novalidate>
 					<div class="control-group">
 						<div class="controls">
@@ -31,6 +32,7 @@
 							<div class="input-help">
 								<h4>Invalid Email</h4>
 							</div>
+							<span class="star">*</span>
 						</div>
 					</div>
 					<div class="control-group">
@@ -50,25 +52,36 @@
 									</li>
 								</ul>
 							</div>
+							<span class="star">*</span>
+						</div>
+					</div>
+					<div class="control-group rememberMe">
+						<div class="controls">
+							<fieldset class="paddingRememberMe" data-role="controlgroup">
+								<input type="checkbox" name="chkrememberMe" id="checkbox-1" class="custom" ng-model="remember" />
+								<label for="checkbox-1">Remember Me</label>
+							</fieldset>
 						</div>
 					</div>
 					<div class="control-group">
 						<div class="controls">
-							<button type="submit" class="btn">
-								Login
+							<button type="submit" class="signInBtn btn">
+								Sign in
 							</button>
-							<button class="btn" disabled>
-								Login
+							<button class="signInBtn btn" disabled>
+								Sign in
 							</button>
 						</div>
 					</div>
+					<p ng-show="erromsg" class="errorMsg">
+						{{error}}
+					</p>
+					<p class="forgotPass">
+						<a href="#/forgot_pass" >Forgot your password?</a>
+					</p>
 				</form>
-				<p ng-show="erromsg" class="errorMsg">
-							{{error}}
-						</p>
-				<p class="forgotPass">
-					<a href="#/forgot_pass" >Forgot your password?</a>
-				</p>
+
+				<div class="clr"></div>
 			</div>
 		</div>
 		<div class="logo_btm"></div>
