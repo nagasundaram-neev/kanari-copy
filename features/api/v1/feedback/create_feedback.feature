@@ -28,7 +28,7 @@ Feature: Create Feedback
           "cleanliness": 0,
           "value_for_money": 1,
           "comment": "Affordable place for a casual dinner",
-          "will_recommend" : false
+          "recommendation_rating" : 4
         }
       }
       """
@@ -47,7 +47,7 @@ Feature: Create Feedback
       |cleanliness|0|
       |value_for_money|1|
       |comment|Affordable place for a casual dinner|
-      |will_recommend|false|
+      |recommendation_rating|4|
 
     Scenario: User not authenticated
       Given a customer named "Subway" exists with id "100"
@@ -68,8 +68,7 @@ Feature: Create Feedback
           "ambience": -1,
           "cleanliness": 0,
           "value_for_money": 1,
-          "comment": "Affordable place for a casual dinner",
-          "will_recommend" : false
+          "comment": "Affordable place for a casual dinner"
         }
       }
       """
@@ -87,7 +86,7 @@ Feature: Create Feedback
       |cleanliness|0|
       |value_for_money|1|
       |comment|Affordable place for a casual dinner|
-      |will_recommend|false|
+      |recommendation_rating||
 
     Scenario Outline: User's role is not 'user'
       Given a customer named "Subway" exists with id "100"
@@ -114,7 +113,7 @@ Feature: Create Feedback
           "cleanliness": 0,
           "value_for_money": 1,
           "comment": "Affordable place for a casual dinner",
-          "will_recommend" : false
+          "recommendation_rating" : 2
         }
       }
       """
