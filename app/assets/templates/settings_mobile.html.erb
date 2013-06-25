@@ -28,6 +28,9 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			</div>
 			<div class="clr"></div>
 		</div>
+		<div data-role="fieldcontain" class="profileText" align="center">
+			<h2>My Profile</h2>
+		</div>
 		<div data-role="fieldcontain" class="settingDiv" align="center">
 			<div class="ui-input-text ui-body-a">
 				<input data-theme="a" data-inline="true" type="text" name="txtUsername" ng-model="firstName" placeholder="First Name"/>
@@ -50,7 +53,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			<div class="ui-input-text ui-body-a">
 				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="location" class="passwordTxt" placeholder="Location"/>
 			</div>
-			<div data-role="fieldcontain" class="genderBtn">
+			<div data-role="fieldcontain" class="genderBtn ui-input-text ui-body-a">
 				<label for="toggleswitch1"> Gender </label>
 				<select name="toggleswitch1" id="toggleswitch1" data-theme="a" ng-model="gender" data-role="slider"
 				data-mini="true">
@@ -67,6 +70,37 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				</div>
 				<div class="clr"></div>
 			</div>
+			<div data-role="fieldcontain" class="profileTextBottom" align="center">
+				<h2>Notifications</h2>
+			</div>
+			<div class="ui-input-text ui-body-a notificationCheckbox">
+				<label>@</label>
+				<input type="checkbox" ng-model="notification" maxlength="2"/>
+				<div class="clr"></div>
+			</div>
+			<div data-role="fieldcontain" class="profileTextBottom" align="center">
+				<h2>Social</h2>
+			</div>
+			<div class="ui-input-text ui-body-a notificationCheckbox">
+				<label><%= image_tag 'round_login.png' %></label>
+				<input type="checkbox" ng-model="facebookSetting" maxlength="2"/>
+				<div class="clr"></div>
+			</div>
+			<div class="ui-input-text ui-body-a notificationCheckboxTwitter">
+				<label>t</label>
+				<input type="checkbox" ng-model="twitterSetting" maxlength="2"/>
+				<div class="clr"></div>
+			</div>
+
+			<div data-role="fieldcontain" class="profileTextBottom" align="center">
+				<h2>Invite friends</h2>
+			</div>
+
+			<div class="ui-input-text ui-body-a">
+				<input data-theme="a" data-inline="true" type="text" name="txtUsername" ng-model="firstName" placeholder="First Name"/>
+			</div>
+			<div class="border"></div>
+			<div id="transactionHistory"> Transaction History</div>
 			<input type="button" class="signBtn" ng-click="saveProfile()" data-inline="true" value="Save"/>
 			<p class="errorMsg" ng-show="errorMsg">
 				{{error}}
