@@ -883,6 +883,10 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 	$scope.home = function(){
 		$location.url("/home");
 	};
+	
+	$scope.previous = function(){
+		$location.url("/redeemPoints");
+	};
 
 });
 
