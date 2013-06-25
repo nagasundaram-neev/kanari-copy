@@ -19,6 +19,7 @@ font-family: 'Roboto' !important;
 font-style: normal;
 font-weight: 100;
 }*/
+.genderBtn input::-webkit-input-placeholder{color:#F5C03F!important}
 .ui-body-b, .ui-body-b input, .ui-body-b select, .ui-body-b textarea, .ui-body-b button{
 	font-family: 'Roboto' !important;
 }
@@ -691,7 +692,7 @@ margin-top:15%;
 }
 .date {
 	float:left;
-	width:49%;
+	width:49%;::-webkit-input-placeholder
 	margin-left: 13%;
 }
 .dateInner{
@@ -719,7 +720,7 @@ margin-top:15%;
     padding: 5% 0 0;
     text-transform: uppercase;
 }
-.profileText h2,.profileTextBottom h2{margin:0!important;text-shadow: none;}
+.profileText h2,.profileTextBottom h2{margin:0!important;text-shadow: none; font-size: 114%;}
 .profileTextBottom{padding-top: 0.7% !important;}
 #settings .ui-btn-inline{clear:both;width:98%;border:0!important}
 #settings .ui-btn-inline span.ui-btn-text{color: #664765;text-transform:uppercase}
@@ -760,8 +761,8 @@ margin-top:15%;
 	color: #664765;
     float: left;
     font-family: KanariLightFont !important;
-    font-size: 18px;
-    margin: 0.9% 0 0;
+    font-size: 16px;
+    margin: 1.5% 0 0;
     text-align: left;
     text-shadow: none;
     width: 24%;
@@ -776,14 +777,25 @@ margin-top:15%;
 	background-image: linear-gradient( #FACC4A,#F9C040 );
 }
 .notificationCheckbox,.notificationCheckboxTwitter{padding:0.1em 0 !important}
-.notificationCheckboxTwitter{margin-top:0!important}
-.notificationCheckbox label,.notificationCheckboxTwitter label{  float: left;font-size: 2em; margin-left: 2%;}
-.notificationCheckbox input[type="checkbox"],.notificationCheckboxTwitter input[type="checkbox"]{float:right;margin-right:2%;margin-top:3%}
+.notificationCheckboxTwitter,.notificationCheckboxFb{margin-top:0!important;padding:0!important}
+.notificationCheckbox label,.notificationCheckboxTwitter label,.notificationCheckboxFb label{  float: left;font-size: 2em; margin-left:4%;}
+.notificationCheckboxTwitter label,.notificationCheckboxFb label{margin-top:2%}
+.notificationCheckbox label img,.notificationCheckboxTwitter label img,.notificationCheckboxFb label img{vertical-align: middle;}
+.notificationCheckbox img,.notificationCheckboxTwitter img,.notificationCheckboxFb img{float:right;margin-right:2%;}
+.notificationCheckboxTwitter img,.notificationCheckboxFb img{}
+.inviteFriends{background:none!important;border: 0 none !important; margin: 2% 0 !important;}
+.inviteFriends a{
+	  background-color: #664765;
+    display: inline-block;
+    padding: 1.5% 2%;
+    width: 16%;
+}
+.settingDiv .border{margin:5% 3%}
 #transactionHistory{   
 	background-color: #664765;
     color: #F9C040;
-    font: 104% KanariLightFont;
-    padding: 0.5em 0;
+    font: 104% KanariFont;
+    padding: 0.2em 0 0;
     text-align: center;
     text-shadow: none;
     text-transform: uppercase;
@@ -791,7 +803,9 @@ margin-top:15%;
 .proceedBtn .ui-btn-corner-all{
 	 border-radius: 0.4em 0.4em 0.4em 0.4em;
 }
-
+#transactionHistory span{float:left;margin:4% 0 0 3% }
+#transactionHistory a{float:right;margin: 0 1% 0 0}
+#transactionHistory a img{vertical-align: top;}
 .proceedBtn .ui-focus, .ui-btn:focus{
 	box-shadow:none;
 }
