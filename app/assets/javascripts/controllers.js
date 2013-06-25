@@ -648,11 +648,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.selectAction = function(select_Action) {
 			if ($scope.select_Action.$valid) {
 				managerId = $scope.myOption;
-				// var deleteUser = confirm('Are you sure you want to change manager?');
-				//
-				// if (deleteUser) {
-				// //alert('Going to delete the user');
-
+				//$scope.manager = managerId;
 				var param = {
 					"outlet" : {
 						"manager_id" : managerId
@@ -667,6 +663,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				}).success(function(data, status) {
 					console.log("data in success hi " + data + " status " + status);
 					$scope.successmgr = true;
+					//$scope.manager_show = true;
 					$scope.getOutlet();
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
@@ -902,15 +899,15 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 						});
 					}
 					$scope.successMsg = true;
-					$scope.profileShow = false;
-					$scope.locationShow = true;
+					//$scope.profileShow = false;
+					$scope.successoutlet = true;
 					$('#location').css({
 						'opacity' : '1'
 					});
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
 					$scope.error = true;
-					$scope.success = false;
+					$scope.successoutlet = false;
 				});
 			} else {
 				$scope.error = true;
@@ -1299,7 +1296,7 @@ module.controller('changePassCtrl', function($rootScope, $scope, $routeParams, $
 					data : param2,
 				}).success(function(data, status) {
 					console.log("data in success " + data + " status " + status);
-
+					setCookie('authToken', data.auth_token, 7);
 					$scope.success = true;
 					$scope.error = false;
 

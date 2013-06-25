@@ -3,10 +3,10 @@
 .setting {
 background-image: url(<%= asset_path 'sprite_mobile.png' %>
 );
-background-position: -197px -477px;
+background-position: -197px -479px;
 cursor: pointer;
 float: right;
-height: 57px;
+height: 54px;
 width: 56px;
 }
 
@@ -35,11 +35,11 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 	cursor: pointer;
 	float: right;
 	height: 48px;
-	margin-left: 8%;
-	width: 50px;
+	margin-right 0;
+	width: 51px;
 	}
 	</style>
-	<div data-role="content">
+	<div data-role="content" style="padding: 0px;">
 		<div class="username">
 			<div class="setting" ng-click="setting()"></div>
 			<a ng-click="homeClk()">{{userName}}</a>
@@ -71,7 +71,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 						AED Saved
 					</div>
 				</div>
-				<div class="backColr">
+				<div class="backColr" style="border-right: medium none;">
 					<div class="count">
 						60
 					</div>
@@ -91,7 +91,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 					</div>
 					<span class="feedbackTxt">LEAVE FEEDBACK</span>
 				</div>
-				<div class="yellowBack" ng-click="redeemPoints()">
+				<div class="yellowBack" ng-click="redeemPoints()" style="border-right: medium none;">
 					<div class="redeems">
 						<%= image_tag 'feed2.png' %>
 					</div>

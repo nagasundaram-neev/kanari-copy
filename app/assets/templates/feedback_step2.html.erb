@@ -44,57 +44,86 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			<div class="clr"></div>
 		</div>
 		<div class="outerDiv">
-			<div ng-show="dislike">
+			<div ng-show="dislike" class="enter_code">
 				What do you think the restaurant did not do particular well?
 			</div>
-			<div ng-show="like">
+			<div ng-show="like" class="enter_code">
 				What do you think the restaurant did particular well?
 			</div>
+			<div ng-show="recomendation" class="enter_code">
+				How likely are you recommend this place to a friend or colleague?
+			</div>
 		</div>
-		<div class="keypad">
+		<div class="keypad" ng-show="optionKeypad">
 			<div class="menDiv">
-				<div class="backColr" id="food" ng-click="select_feedback_category('food')">
-					<%= image_tag 'b_food_1.png' %> 
+				<div class="backColr" id="feed_0" ng-click="select_feedback_category('0')">
+					<%= image_tag 'b_food_1.png' %>
 					<span class="feedbackStep2Txt">FOOD</span>
 				</div>
-				<div class="backColr" id="friendlines" ng-click="select_feedback_category('friendlines')">
+				<div class="backColr" id="feed_1" ng-click="select_feedback_category('1')">
 					<%= image_tag 'b_friendlines_1.png' %>
 					<span class="feedbackStep2Txt">FRIENDLINESS</span>
 				</div>
 				<div class="clr"></div>
 			</div>
 			<div class="menDiv">
-				<div class="backColr" id="speed" ng-click="select_feedback_category('speed',2)">
+				<div class="backColr" id="feed_2" ng-click="select_feedback_category('2')">
 					<%= image_tag 'b_speed_1.png' %>
 					<span class="feedbackStep2Txt">SPEED</span>
 				</div>
-				<div class="backColr" id="ambiance" ng-click="select_feedback_category('ambiance',3)">
+				<div class="backColr" id="feed_3" ng-click="select_feedback_category('3')">
 					<%= image_tag 'b_ambiance_1.png' %>
 					<span class="feedbackStep2Txt">AMBIANCE</span>
 				</div>
 				<div class="clr"></div>
 			</div>
 			<div class="menDiv">
-				<div class="backColr" id="cleanliness" ng-click="select_feedback_category('cleanliness',4)">
+				<div class="backColr" id="feed_4" ng-click="select_feedback_category('4')">
 					<%= image_tag 'b_cleanliness_1.png' %>
 					<span class="feedbackStep2Txt">CLEANLINESS</span>
 				</div>
-				<div class="backColr" id="value" ng-click="select_feedback_category('value',5)">
+				<div class="backColr" id="feed_5" ng-click="select_feedback_category('5')">
 					<%= image_tag 'b_value_1.png' %>
 					<span class="feedbackStep2Txt">VALUE FOR MONEY</span>
 				</div>
 				<div class="clr"></div>
 			</div>
 		</div>
-		<div class="footerDiv">	
-			<div class="prev">
-				<div class="prevTxt" ng-click="previous()">
+		<div class="recommendationDiv" ng-show="recomendationBar">
+			<div>
+				<div ng-repeat="count in counts" id="feedback_{{count}}" class="Ybar" ng-click="recommendation(count)">
+					{{count}}
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="yesNoDiv">
+				<div class="no">
+					NO
+				</div>
+				<div class="yes">
+					YES
+				</div>
+			</div>
+			<div class="clr"></div>
+			<div class="yellowBorder"></div>
+			<div class="adviceDiv" align="center">
+				<div class="msg">
+					What advice would you leave for the manager?
+				</div>
+				<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
+					<input data-theme="a" data-inline="true" type="text" ng-model="comment" placeholder="...."/>
+				</div>
+			</div>
+		</div>
+		<div class="footerDiv">
+			<div class="prev" ng-click="previous()">
+				<%= image_tag 'p_arrow_left.png' %>
+				<div class="prevTxt" >
 					PREVIOUS
 				</div>
-				<%= image_tag 'p_arrow_left.png' %>
 			</div>
-			<div class="nxt">
-				<div class="nxtTxt" ng-click="next()">
+			<div class="nxt" ng-click="next()">
+				<div class="nxtTxt" >
 					NEXT
 				</div>
 				<%= image_tag 'y_arrow_right.png' %>
