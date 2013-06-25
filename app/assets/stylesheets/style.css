@@ -306,7 +306,7 @@ text-shadow: none;
 .adviceDiv .ui-input-text.ui-focus, .ui-input-search.ui-focus{
 	box-shadow:none;
 }
-
+.searchDiv input{text-shadow:none;width:80% !important;}
 .instructionDiv .ui-input-text.ui-focus, .ui-input-search.ui-focus{
 	box-shadow:none;
 }
