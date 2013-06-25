@@ -800,7 +800,11 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 
 	console.log("points " + pointsEarned);
 	$scope.points = pointsEarned;
-	console.log("scope variable " + $scope.points)
+	console.log("scope variable " + $scope.points);
+	
+	$scope.home = function(){
+		$location.url("/home");
+	};
 
 });
 
@@ -838,6 +842,7 @@ module.controller('restaurantListController', function($scope, $http, $location)
 	$scope.getRestaurantList();
 
 	$scope.showRestaurant = function(outletId) {
+		console.log(outletId);
 		$location.url("/showRestaurant?outletId=" + outletId);
 	};
 
@@ -845,7 +850,10 @@ module.controller('restaurantListController', function($scope, $http, $location)
 
 module.controller('showRestaurantController', function($scope, $http, $routeParams, $location) {
 
-	if ($routeParams.outletId) {
+
+	$scope.outlets = [];
+	$scope.cuisineTypes = [];
+
 		var param = {
 			"auth_token" : $scope.auth_token
 		}
@@ -858,16 +866,23 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 			$scope.outletID = data.outlet.id;
 			$scope.restaurant_name = data.outlet.name;
 			$scope.restaurant_address = data.outlet.address;
-			// $scope.email_address = data.outlet.email;
-			// $scope.contact_number = data.outlet.phone_number;
-			// $scope.fromTime = data.outlet.open_hours.split("-")[0];
-			// $scope.toTime = data.outlet.open_hours.split("-")[1];
+			$scope.email_address = data.outlet.email;
+			$scope.contact_number = data.outlet.phone_number;
+			$scope.outlets = data.outlet.outlet_types;
+			$scope.cuisineTypes = data.outlet.cuisine_types;
+			$scope.fromTime = data.outlet.open_hours.split("-")[0];
+			$scope.toTime = data.outlet.open_hours.split("-")[1];
+			$scope.delivery = data.outlet.has_delivery.toString();
+			$scope.alcohol = data.outlet.serves_alcohol.toString();
+			$scope.outDoor_seating = data.outlet.has_outdoor_seating.toString();
 		}).error(function(data, status) {
 			console.log("data in error" + data + " status " + status);
 			
 		});
 
-	}
+	$scope.home = function(){
+		$location.url("/home");
+	};
 
 });
 

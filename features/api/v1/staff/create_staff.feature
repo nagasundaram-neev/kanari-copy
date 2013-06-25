@@ -14,7 +14,7 @@ Feature: Create Staff
       """
       {
         "user" : {
-          "username" : "staff1",
+          "email" : "staff1@gmail.com",
           "password" : "password123",
           "password_confirmation" : "password123",
           "outlet_id": 10
@@ -24,6 +24,7 @@ Feature: Create Staff
       Then the response status should be "201"
       And the JSON response should have "staff_id"
       And a staff should be created for outlet "10" and customer "100"
+      And a new user with email "staff1@gmail.com" should be created
 
     Scenario: Username already taken
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"

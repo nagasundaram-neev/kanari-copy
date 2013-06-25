@@ -19,12 +19,14 @@
  font-style: normal;
  font-weight: 100;
  }*/
+
 .genderBtn input::-webkit-input-placeholder {
 	color: #F5C03F !important
 }
 .ui-body-b, .ui-body-b input, .ui-body-b select, .ui-body-b textarea, .ui-body-b button {
 	font-family: "kanariFont", sans-serif !important;
 }
+
 .ui-btn-up-b, .ui-btn-hover-b, .ui-btn-down-b {
 	font-family: "kanariFont", sans-serif;
 }
@@ -38,6 +40,7 @@
 }
 
 #home, #feedback, #feedback_step2, #redeemPoints, #restaurantList, #feedbackSub, #showRestaurant, #transaction_history {
+
 	background: #FFFFFF !important;
 }
 #settings .ui-field-contain input.ui-input-text {
@@ -127,61 +130,74 @@
 	float: left;
 	text-shadow: none;
 	width: 100%;
+	overflow: hidden;
 }
 .pointsDiv {
 	background-color: #FDBE3B;
-	border-bottom: 2px solid #FFFFFF;
+	/*border-bottom: 2px solid #FFFFFF;*/
 	color: #664765;
 	float: left;
-	padding: 5% 0%;
+	margin-bottom: -1000px;
+	padding: 5% 6% 1000px 4%;
 	text-shadow: none;
-	width: 45%;
+	width: 36.5%;
+}
+.restAddr {
+	padding-bottom: 5%;
 }
 .aedTxt {
 	float: left;
-	/*padding: 1em 1.1em;*/
+	padding: 9% 0;
 }
+
 /***Transction history css ***/
 .headDiv {
 	color: #FFFFFF;
 	margin-top: 4%;
 }
-.headTitle,.headTitleLast{
-  	background-color: #664765;
-    border-right: 1px solid #FFFFFF;
-    float: left;
-    font-size: 0.7em;
-    text-shadow: none;
-    width: 33%;
+.headTitle, .headTitleLast {
+	background-color: #664765;
+	border-right: 1px solid #FFFFFF;
+	float: left;
+	font-size: 0.7em;
+	text-shadow: none;
+	width: 33%;
 }
-.headTitleLast{
+.headTitleLast {
 	border-right: 0 none;
-    width: 33.3%;}
-.headTitle span,.contentText span,.headTitleLast span{
- 	display: block;
-    padding: 16% 0 16% 7%;
-    text-align: left;
+	width: 33.3%;
 }
-.contentText span{
-	    padding: 12% 0 12% 7%;
+.headTitle span, .contentText span, .headTitleLast span {
+	display: block;
+	padding: 16% 0 16% 7%;
+	text-align: left;
 }
-.historyDataContainer{ 
-	   border-bottom:thin solid #eaeaea;
-	   padding:2% 1%;
+.contentText span {
+	padding: 12% 0 12% 7%;
 }
-.contentText{   
-	 color: #664765;
-    float: left;
-    font-size: 0.8em;
-    text-align: left;
-    text-shadow: none;
-    width: 32.9%;
- }
+.historyDataContainer {
+	border-bottom: thin solid #eaeaea;
+	padding: 2% 1%;
+}
+.contentText {
+	color: #664765;
+	float: left;
+	font-size: 0.8em;
+	text-align: left;
+	text-shadow: none;
+	width: 32.9%;
+}
+
 .recommendationDiv {
 	margin: 2% 5%;
 }
+
 .parentDivName {
-	width: 50%;
+	border-right: 2px solid #FFFFFF;
+	float: left;
+	margin-bottom: -1000px;
+	padding: 5% 0 1000px 2%;
+	width: 51%;
 }
 
 .titleDiv {
@@ -210,7 +226,7 @@
 }
 .thanksMsg {
 	color: #664765;
-	margin: 8% 0 0;
+	margin: 5% 0 0;
 }
 .pointsEarned {
 	color: #593F5A;
@@ -224,9 +240,25 @@
 }
 .pointsTxt {
 	color: #593F5A;
-	font-size: 1em;
-    float: right;
+	font-size: 1.8em;
+	float: right;
 }
+
+.thanksMsg {
+	color: #664765;
+	margin: 8% 0 0;
+}
+.pointsEarned {
+	color: #593F5A;
+	font-size: 5em;
+}
+.pointsEarnedDiv {
+	color: #664765;
+}
+.shareTxt {
+	color: #664765;
+}
+
 .backColorYellow {
 	background-color: #F8BE40;
 	width: 17%;
@@ -236,13 +268,14 @@
 .shareIconsDiv {
 	margin: 5% 0;
 }
+
 .borderFeedBackSubmit {
 	border: 1px solid #593F5A;
 	margin: 5% 0;
 	width: 49%;
 }
 .thanksMsg div {
-	width: 49%;
+	width: 75%;
 }
 
 .yesNoDiv {
@@ -289,6 +322,7 @@
 	padding: 6% 0;
 	text-shadow: none;
 	width: 53%;
+	text-align: center;
 }
 
 .restListTitleDivRight {
@@ -297,7 +331,11 @@
 	float: left;
 	padding: 6% 0%;
 	text-shadow: none;
-	width: 45%;
+	width: 46.5%;
+	text-align: center;
+}
+.searchDiv {
+	margin: 0 2%;
 }
 
 .searchDiv input::-moz-placeholder, textarea::-moz-placeholder {
@@ -346,7 +384,12 @@
 .searchDiv input {
 	text-shadow: none;
 	width: 80% !important;
+	color: #999999;
 }
+.restListOuterDiv {
+	font-size: 0.8em
+}
+
 .instructionDiv .ui-input-text.ui-focus, .ui-input-search.ui-focus {
 	box-shadow: none;
 }
@@ -489,7 +532,8 @@ img, object {
 	background-color: #FDBE3A;
 	border-right: 3px solid #FFFFFF;
 	float: left;
-	padding: 0.8em 0;
+	padding: 1.31em 0;
+	border-bottom: 1px solid #FFFFFF;
 	width: 49.5%;
 	text-align: center;
 }
@@ -510,6 +554,7 @@ img, object {
 .nxtTxt {
 	color: #FDBE3A;
 	display: inline;
+	font-size: 100%;
 	/*padding: 0 20%;*/
 }
 .footerDivRedeemPoints .prev {
@@ -530,19 +575,43 @@ img, object {
 	margin: 11% 0 0;
 	text-shadow: none;
 }
-#transaction_history .footerDiv{margin: 5% 0 0;}
-#transaction_history .prev{padding: 0.74em 0;  background-color: #664765; font-size: 0.9em;border-right: 0 none;margin-right:1%}
-#transaction_history .prev img{max-height: 16px;}
-#transaction_history .nxt{padding: 0.74em 0;  background-color: #FDBE3A; font-size: 0.9em;width:49.4%}
-#transaction_history .prevTxt{color:#FEBE3B}
+#transaction_history .footerDiv {
+	margin: 5% 0 0;
+}
+#transaction_history .prev {
+	padding: 0.74em 0;
+	background-color: #664765;
+	font-size: 0.9em;
+	border-right: 0 none;
+	margin-right: 1%
+}
+#transaction_history .prev img {
+	max-height: 16px;
+}
+#transaction_history .nxt {
+	padding: 0.74em 0;
+	background-color: #FDBE3A;
+	font-size: 0.9em;
+	width: 49.4%
+}
+#transaction_history .prevTxt {
+	color: #FEBE3B
+}
 .feedback_footerDiv {
 	margin: -1.5% 0 0;
 }
-#transaction_history  .nxtTxt{  color: #664765;}
+#transaction_history  .nxtTxt {
+	color: #664765;
+}
+
+.feedback_footerDiv {
+	margin: -1.5% 0 0;
+}
 .footerDivRedeemPoints {
 	margin: 16% 0 0;
 	text-shadow: none;
 }
+
 .footerDivRedeemPoints .prevTxt {
 	color: #FDBE3B;
 	float: right;
@@ -734,7 +803,7 @@ img, object {
 }
 .date {
 	float: left;
-	width: 49%;::-webkit-input-placeholder
+	width: 49%;
 	margin-left: 13%;
 }
 .dateInner {
@@ -845,6 +914,26 @@ img, object {
 .notificationCheckbox, .notificationCheckboxTwitter {
 	padding: 0.1em 0 !important
 }
+
+.notificationCheckboxTwitter {
+	margin-top: 0 !important
+}
+.notificationCheckbox label, .notificationCheckboxTwitter label {
+	float: left;
+	font-size: 2em;
+	margin-left: 2%;
+}
+.notificationCheckbox input[type="checkbox"], .notificationCheckboxTwitter input[type="checkbox"] {
+	float: right;
+	margin-right: 2%;
+	margin-top: 3%
+}
+#transactionHistory {
+	background-color: #664765;
+	color: #F9C040;
+	font: 104% KanariLightFont;
+	padding: 0.5em 0;
+}
 .notificationCheckboxTwitter, .notificationCheckboxFb {
 	margin-top: 0 !important;
 	padding: 0 !important
@@ -893,6 +982,7 @@ img, object {
 .proceedBtn .ui-btn-corner-all {
 	border-radius: 0.4em 0.4em 0.4em 0.4em;
 }
+
 #transactionHistory span {
 	float: left;
 	margin: 4% 0 0 3%
@@ -1270,4 +1360,54 @@ img, object {
 .logo_btm {
 	/*bottom: 0;*/
 	position: relative;
+}
+
+/**Restaurant Info**/
+.rest_name {
+	font-size: 1.5em;
+	margin: 4% 0;
+}
+#showRestaurant .rest_info img {
+	vertical-align: middle;
+}
+#showRestaurant .rest_info {
+	margin: 0.4% 0;
+	text-align: left;
+	padding: 0 3%;
+}
+.outlet_div {
+	background: #CCCCCC;
+	margin: 1px 0 !important;
+	overflow: hidden;
+}
+.outlet_info span {
+	display: inline-block;
+	padding: 1% 0;
+}
+.outlet_serves img {
+	float: right;
+}
+.outlet_title {
+	border-right: 1px solid #FFFFFF;
+	float: left;
+	margin: 0 !important;
+	width: 60%;
+	text-shadow: none;
+}
+.outlet_info {
+	float: right;
+	text-shadow: none;
+	width: 39%;
+}
+.title_outlet {
+	display: inline-block;
+}
+.img_outlet {
+	display: inline-block;
+	text-align: center;
+	width: 30%;
+}
+.rest_name span {
+	display: block;
+	font-size: 0.6em;
 }
