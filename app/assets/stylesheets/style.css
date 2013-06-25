@@ -14,11 +14,11 @@ src: url('Roboto-Light.ttf');
 .ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button{
 	font-family:"kanariFont",sans-serif !important;
 }
-.Roboto-normal-100 {
+/*.Roboto-normal-100 {
 font-family: 'Roboto' !important;
 font-style: normal;
 font-weight: 100;
-}
+}*/
 .ui-body-b, .ui-body-b input, .ui-body-b select, .ui-body-b textarea, .ui-body-b button{
 	font-family: 'Roboto' !important;
 }
@@ -53,7 +53,9 @@ font-weight: 100;
 .dobDiv input::-moz-placeholder, .dobDiv textarea::-moz-placeholder{
 	background:#664765;
 }
+
 .ui-content{padding:0}
+
 .roundBtn img{
 	width: 30%;
 }
@@ -150,17 +152,29 @@ text-shadow: none;
 }
 .pointsEarned{
 	color:#593F5A;
-	font-size:7em;
+	font-size:5em;
 }
 .pointsEarnedDiv{
+	color:#664765;
+}
+.shareTxt{
 	color:#664765;
 }
 .pointsTxt{
 	color:#593F5A;
 	font-size: 1em;
 }
+.backColorYellow{
+	background-color: #F8BE40;
+	width:17%;
+}
+.borderFeedBackSubmit{
+	border: 1px solid #593F5A;
+    margin: 5% 0;
+    width: 49%;
+}
 .thanksMsg div{
-	width:41%;
+	width:49%;
 }
 .Pbar{
    background-color: #664765;
