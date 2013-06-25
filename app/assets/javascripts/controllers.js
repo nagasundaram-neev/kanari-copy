@@ -1296,7 +1296,7 @@ module.controller('changePassCtrl', function($rootScope, $scope, $routeParams, $
 					data : param2,
 				}).success(function(data, status) {
 					console.log("data in success " + data + " status " + status);
-
+					setCookie('authToken', data.auth_token, 7);
 					$scope.success = true;
 					$scope.error = false;
 

@@ -29,8 +29,11 @@ font-weight: 100;
 #splash ,#login,#landPage,#forgotpass,#signUp{
 	background: #F9C040 !important;
 }
+
 #settings{background-color: #E5E6E8!important}
-#home, #feedback, #feedback_step2,#redeemPoints,#restaurantList,#feedbackSub{
+
+
+#home, #feedback, #feedback_step2,#redeemPoints,#restaurantList,#feedbackSub,#showRestaurant{
 	background: #FFFFFF !important;
 }
 #settings .ui-field-contain input.ui-input-text{display:inline}
@@ -115,7 +118,7 @@ font-weight: 100;
     color: #664765;
     float: left;
 text-shadow: none;
-    width: 54%;
+    width: 100%;
 }
 .pointsDiv{
 	background-color: #FDBE3B;
@@ -131,11 +134,25 @@ text-shadow: none;
     /*padding: 1em 1.1em;*/
 }
 .recommendationDiv{
-	margin: 8% 0 0;
+	margin: 2% 5%;
 }
 .pointsTxt{
 	float: right;
     /*padding: 1em;*/
+}
+.parentDivName{
+	width:50%;
+}
+
+.titleDiv{
+	color: #664765;
+}
+
+.name{
+	
+}
+.address{
+	
 }
 
 .Ybar{
@@ -144,7 +161,19 @@ text-shadow: none;
     color: #FFFFFF;
     float: left;
     margin-bottom: 2%;
-    width: 8%;
+     padding: 0.75%;
+    text-align: center;
+    width: 7%;
+}
+.Pbar{
+   background-color: #664765;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    float: left;
+    margin-bottom: 2%;
+     padding: 0.75%;
+    text-align: center;
+    width: 7%;
 }
 .thanksMsg{
 	color:#664765;
@@ -167,7 +196,10 @@ text-shadow: none;
 .backColorYellow{
 	background-color: #F8BE40;
 	width:17%;
+	display:inline-block;
+	 padding: 0.5% 0;
 }
+.shareIconsDiv{margin: 5% 0;}
 .borderFeedBackSubmit{
 	border: 1px solid #593F5A;
     margin: 5% 0;
@@ -176,14 +208,7 @@ text-shadow: none;
 .thanksMsg div{
 	width:49%;
 }
-.Pbar{
-   background-color: #664765;
-    border: 1px solid #FFFFFF;
-    color: #FFFFFF;
-    float: left;
-    margin-bottom: 2%;
-    width: 8%;	
-}
+
 .yesNoDiv{
 	color:#664765;
 	margin:0 0 0 0;
@@ -426,10 +451,27 @@ img, object {
 	background-color: #FDBE3A;
     border-right: 3px solid #FFFFFF;
     float: left;
-    padding: 0.8em;
-    width: 40%;
+    padding: 0.8em 0;
+    width: 49.5%;
+    text-align: center;
 }
-
+.prev img, .nxt img{vertical-align: text-bottom;}
+.prevTxt{
+	color:#664765;
+	display:inline;
+}
+.nxt{
+	background-color: #664765;
+	float:left;
+	padding: 0.8em 0;
+    width: 49.5%;
+     text-align: center;
+}
+.nxtTxt{
+	color:#FDBE3A;
+	display:inline;
+	/*padding: 0 20%;*/
+}
 .footerDivRedeemPoints .prev{
 	background-color: #664765;
     border-right: 3px solid #FFFFFF;
@@ -448,16 +490,14 @@ img, object {
 	margin: 11% 0 0;
 	text-shadow:none;
 }
-
+.feedback_footerDiv{
+	margin: -1.5% 0 0;
+}
 .footerDivRedeemPoints{
 	margin: 16% 0 0;
 	text-shadow:none;
 }
 
-.prevTxt{
-	color:#664765;
-	float:right;	
-}
 
 .footerDivRedeemPoints .prevTxt{
 	color:#FDBE3B;	
@@ -471,17 +511,7 @@ img, object {
 	content:url(<%= asset_path 'b_food_1.png' %>);
 }*/
 
-.nxt{
-	background-color: #664765;
-	float:left;
-	padding: 0.8em;
-    width: 40%;
-}
-.nxtTxt{
-	color:#FDBE3A;
-	float:left;
-	padding: 0 20%;
-}
+
 .footerDivRedeemPoints .nxtTxt{
 	color:#664765;	
 }
@@ -509,6 +539,7 @@ img, object {
 	max-height: 90%;
 	max-width: 75%;
 }
+
 .next{
 	float: left;
     font-size: 1em;
@@ -892,7 +923,7 @@ margin-top:15%;
 	color:#593F5A;
 }
 .keypad{
-	margin: 5% 0 0 3%;
+	margin: 2% 0 0 3%;
 	width: 93%;
 	text-align: center;
 	text-shadow: none;
@@ -907,7 +938,7 @@ margin-top:15%;
     padding: 8% 0;
     width: 30%;
 }
-.enter_code{margin-top:3% }
+.enter_code{margin:3% }
 .loginDiv {
 	/*border: 1px solid #D9A432 !important;*/
 	border-radius: 10px;
@@ -1077,7 +1108,7 @@ margin-top:15%;
 	color:#FFFFFF !important;
 	display:block;
 	margin: 8px 0 0;
-	width: 168px;
+	/*width: 168px;*/
 }
 .role{
 	display:block;
