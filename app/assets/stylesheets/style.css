@@ -30,7 +30,7 @@ font-weight: 100;
 	background: #F9C040 !important;
 }
 
- #settings, #home, #feedback, #feedback_step2,#redeemPoints,#restaurantList,#feedbackSub{
+ #settings, #home, #feedback, #feedback_step2,#redeemPoints,#restaurantList,#feedbackSub,#showRestaurant{
 	background: #FFFFFF !important;
 }
 
@@ -115,7 +115,7 @@ font-weight: 100;
     color: #664765;
     float: left;
 text-shadow: none;
-    width: 54%;
+    width: 100%;
 }
 .pointsDiv{
 	background-color: #FDBE3B;
@@ -136,6 +136,20 @@ text-shadow: none;
 .pointsTxt{
 	float: right;
     /*padding: 1em;*/
+}
+.parentDivName{
+	width:50%;
+}
+
+.titleDiv{
+	color: #664765;
+}
+
+.name{
+	
+}
+.address{
+	
 }
 
 .Ybar{
