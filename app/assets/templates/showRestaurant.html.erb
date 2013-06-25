@@ -33,17 +33,17 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				<span class="address">{{restaurant_address}}</span>
 			</div>
 			<div class="username rest_info">
-				<%= image_tag 'ic_customer_care.png' %> {{contact_number}}
+				<span class="img_outlet" style="width: 20%;"><%= image_tag 'ic_customer_care.png' %></span> {{contact_number}}
 			</div>
 			<div class="username rest_info">
-				<%= image_tag 'ic_at_white.png' %> {{email_address}}
+				<span class="img_outlet" style="width: 20%;"><%= image_tag 'ic_at_white.png' %></span> {{email_address}}
 			</div>
 			<div class="username rest_info">
-				<%= image_tag 'ic_location_white.png' %> Location map
+				<span class="img_outlet" style="width: 20%;"><%= image_tag 'ic_location_white.png' %></span> Location map
 			</div>
 			<div class="outlet_div rest_info">
 				<div class="outlet_title ">
-					<%= image_tag 'ic_outlet.png' %> Outlet Type
+					<span class="img_outlet"><%= image_tag 'ic_outlet.png' %></span> <span class="title_outlet">Outlet Type</span>
 				</div>
 				<div class="outlet_info">
 					<span ng-repeat="outlet in outlets">{{outlet.name}}<span ng-show=" ! $last ">, </span></span>
@@ -52,7 +52,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			</div>
 			<div class="outlet_div rest_info">
 				<div class="outlet_title ">
-					<%= image_tag 'ic_cuisine.png' %> Cuisine Type
+					<span class="img_outlet"><%= image_tag 'ic_cuisine.png' %></span> <span class="title_outlet"> Cuisine Type</span>
 				</div>
 				<div class="outlet_info">
 					<span ng-repeat="cuisine in cuisineTypes">{{cuisine.name}}<span ng-show=" ! $last ">, </span></span>
@@ -61,7 +61,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			</div>
 			<div class="outlet_div rest_info">
 				<div class="outlet_title ">
-					<%= image_tag 'ic_opening_hrs.png' %> Opening hours
+					<span class="img_outlet"><%= image_tag 'ic_opening_hrs.png' %></span> <span class="title_outlet"> Opening hours</span>
 				</div>
 				<div class="outlet_info">
 					<span>{{fromTime}} to {{toTime}}</span>
@@ -71,7 +71,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 
 			<div class="outlet_div rest_info ">
 				<div class="outlet_title">
-					<%= image_tag 'ic_delivery.png' %> delivery
+					<span class="img_outlet"><%= image_tag 'ic_delivery.png' %></span> <span class="title_outlet"> Delivery</span>
 				</div>
 				<div class="outlet_info outlet_serves">
 					<img src="/assets/ic_ticks.png" ng-show="delivery" />
@@ -79,10 +79,11 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 					<!-- <%= image_tag 'ic_ticks.png' %>
 					<%= image_tag 'ic_ticks_grey.png' %> -->
 				</div>
+				<div class="clr"></div>
 			</div>
 			<div class="outlet_div rest_info">
 				<div class="outlet_title">
-					<%= image_tag 'ic_alcohol.png' %> alcohol
+					<span class="img_outlet"><%= image_tag 'ic_alcohol.png' %></span> <span class="title_outlet"> Alcohol</span>
 				</div>
 				<div class="outlet_info outlet_serves">
 					<img src="/assets/ic_ticks.png" ng-show="alcohol" />
@@ -90,10 +91,11 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 					<!-- <%= image_tag 'ic_ticks.png' %>
 					<%= image_tag 'ic_ticks_grey.png' %> -->
 				</div>
+				<div class="clr"></div>
 			</div>
 			<div class="outlet_div rest_info">
 				<div class="outlet_title ">
-					<%= image_tag 'ic_outdoor.png' %> outDoor_seating
+					<span class="img_outlet"><%= image_tag 'ic_outdoor.png' %></span> <span class="title_outlet"> OutDoor Seating</span>
 				</div>
 				<div class="outlet_info outlet_serves">
 					<img src="/assets/ic_ticks.png" ng-show="outDoor_seating" />
@@ -101,6 +103,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 					<!-- <%= image_tag 'ic_ticks.png' %>
 					<%= image_tag 'ic_ticks_grey.png' %> -->
 				</div>
+				<div class="clr"></div>
 			</div>
 		</div>
 		<div class="footerDiv">
@@ -113,7 +116,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			</div>
 			<div class="nxt" ng-click="next()">
 				<div class="nxtTxt" >
-					REDEEM UP TO AED 100
+					REDEEM UP TO<br/> AED 100
 				</div>
 
 				<div class="clr"></div>

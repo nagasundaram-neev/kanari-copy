@@ -362,6 +362,10 @@ module.controller('settingsController', function($scope, $http, $location) {
 	$scope.home = function() {
 		$location.url("/home");
 	};
+	
+	$scope.tansactionHistory = function(){
+		$location.url("/transactionHistory");
+	}
 
 	$scope.getProfile = function() {
 
@@ -796,7 +800,11 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 
 	console.log("points " + pointsEarned);
 	$scope.points = pointsEarned;
-	console.log("scope variable " + $scope.points)
+	console.log("scope variable " + $scope.points);
+	
+	$scope.home = function(){
+		$location.url("/home");
+	};
 
 });
 
@@ -845,8 +853,7 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 
 	$scope.outlets = [];
 	$scope.cuisineTypes = [];
-	
-	if ($routeParams.outletId) {
+
 		var param = {
 			"auth_token" : $scope.auth_token
 		}
@@ -873,11 +880,17 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 			
 		});
 
-	}
+	$scope.home = function(){
+		$location.url("/home");
+	};
 
 });
 
 module.controller('redeemPointsController', function($scope, $http, $location) {
+
+});
+
+module.controller('transactionHistoryController', function($scope, $http, $location) {
 
 });
 

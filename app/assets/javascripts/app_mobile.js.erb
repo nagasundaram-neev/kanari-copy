@@ -22,6 +22,7 @@ var module = angular.module("kanariMobile", []).config(function($routeProvider,$
         .when('/redeemPoints',{templateUrl: "<%= asset_path 'restaurantList.html' %>" })
         .when('/feedbackSubmitSuccess',{templateUrl: "<%= asset_path 'feedback_submit.html' %>" })
         .when('/showRestaurant',{templateUrl: "<%= asset_path 'showRestaurant.html' %>" })
+        .when('/transactionHistory',{templateUrl: "<%= asset_path 'transactionHistory.html' %>" })
         .when('/api/users/password/edit', {templateUrl: "<%= asset_path 'reset_password_mobile.html' %>"})
         .otherwise({redirectTo: '/index'});
 });
