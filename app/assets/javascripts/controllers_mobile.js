@@ -362,6 +362,10 @@ module.controller('settingsController', function($scope, $http, $location) {
 	$scope.home = function() {
 		$location.url("/home");
 	};
+	
+	$scope.tansactionHistory = function(){
+		$location.url("/transactionHistory");
+	}
 
 	$scope.getProfile = function() {
 
@@ -868,6 +872,10 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 });
 
 module.controller('redeemPointsController', function($scope, $http, $location) {
+
+});
+
+module.controller('transactionHistoryController', function($scope, $http, $location) {
 
 });
 
