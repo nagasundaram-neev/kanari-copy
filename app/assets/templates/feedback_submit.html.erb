@@ -3,12 +3,35 @@
 .home {
 background-image: url(<%= asset_path 'sprite_mobile.png' %>
 	);
-	background-position: -309px -471px;
+	background-position: -309px -474px;
 	cursor: pointer;
-	float: left;
 	height: 56px;
 	width: 45px;
 	}
+	.fb_image{
+	background-image: url(<%= asset_path 'sprite_mobile.png' %>
+	);
+	background-position: 5px -477px;
+	cursor: pointer;
+	height: 56px;
+	width: 45px;
+}
+.twit_image{
+	background-image: url(<%= asset_path 'sprite_mobile.png' %>
+	);
+	background-position: -33px -477px;
+	cursor: pointer;
+	height: 56px;
+	width: 45px;
+}
+.google_image{
+	background-image: url(<%= asset_path 'sprite_mobile.png' %>
+	);
+	background-position: -84px -477px;
+	cursor: pointer;
+	height: 56px;
+	width: 35px;
+}
 	</style>
 	<div data-role="content">
 		<div class="username">
@@ -35,11 +58,21 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 		<div class="shareDiv" align="center">
 			<div class="shareTxt">Share your experience</div>
 			<div class="shareIconsDiv">
-				<div class="backColorYellow"></div>
-				<div class="backColorYellow"></div>
-				<div class="backColorYellow"></div>
+				<div class="backColorYellow"><div ng-click="facebook()" class="fb_image"></div></div>
+				<div class="backColorYellow"><div ng-click="twitter()" class="twit_image"></div></div>
+				<div class="backColorYellow"><div ng-click="google()" class="google_image"></div></div>
 				<div class="clr"></div>
 			</div>
 		</div>
 	</div>
+	<div class="logo_btm">
+			<%= image_tag 'bird_yellow_k.png' %>
+		</div>
+		<div class="clr"></div>
+	<div class="username feedback_footerDiv">
+			<div style="padding: 0 45%;">
+				<div ng-click="home()" class="home"></div>
+			</div>
+			<div class="clr"></div>
+		</div>
 </div>

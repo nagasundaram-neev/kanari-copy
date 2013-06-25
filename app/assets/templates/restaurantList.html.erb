@@ -3,10 +3,10 @@
 .home {
 background-image: url(<%= asset_path 'sprite_mobile.png' %>
 );
-background-position: -309px -471px;
+background-position: -309px -476px;
 cursor: pointer;
 float: left;
-height: 56px;
+height: 54px;
 width: 45px;
 }
 .searchIcon{
@@ -44,26 +44,30 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			<div class="clr"></div>
 		</div>
 		<div>
-			<div class="nameDiv" ng-click="">
-				<div class="restName">
-					800 PIZZA
-				</div>
-				<div class="restAddr">
-					Dubailand,Dubai,UAE
-				</div>
-			</div>
-			<div class="pointsDiv">
-				<div class="aedTxt">
-					<div>
-						AED
+			<div ng-repeat="outlet in outlets" class="nameDiv" ng-click="showRestaurant(outlet.id)">
+				<div class="parentDivName">
+					<div class="restName">
+						{{outlet.name}}
+					</div>
+					<div class="restAddr">
+						{{outlet.address}}
 					</div>
 				</div>
-				<div class="pointsTxt">
-					<div>
-						1000
+				<div class="pointsDiv">
+					<div class="aedTxt">
+						<div>
+							AED
+						</div>
+					</div>
+					<div class="pointsTxt">
+						<div>
+							{{outlet.redeemable_points}}
+						</div>
 					</div>
 				</div>
+				<div class="clr"></div>
 			</div>
+
 			<div class="clr"></div>
 		</div>
 	</div>

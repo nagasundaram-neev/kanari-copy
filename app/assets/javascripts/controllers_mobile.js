@@ -362,6 +362,10 @@ module.controller('settingsController', function($scope, $http, $location) {
 	$scope.home = function() {
 		$location.url("/home");
 	};
+	
+	$scope.tansactionHistory = function(){
+		$location.url("/transactionHistory");
+	}
 
 	$scope.getProfile = function() {
 
@@ -792,15 +796,21 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 
 });
 
-module.controller('feedbackSubmitController', function($scope, $http, $location) {
+module.controller('feedbackSubmitController', function($scope, $http, $routeParams, $location) {
 
-	console.log("points "+pointsEarned);
+	console.log("points " + pointsEarned);
 	$scope.points = pointsEarned;
-	console.log("scope variable "+$scope.points)
+	console.log("scope variable " + $scope.points);
+	
+	$scope.home = function(){
+		$location.url("/home");
+	};
 
 });
 
 module.controller('restaurantListController', function($scope, $http, $location) {
+
+	$scope.outlets = [];
 
 	$scope.home = function() {
 		$location.url("/home");
@@ -822,18 +832,73 @@ module.controller('restaurantListController', function($scope, $http, $location)
 			params : param
 		}).success(function(data, status) {
 			console.log("User Role " + data + " status " + status);
+			$scope.outlets = data.outlets;
 		}).error(function(data, status) {
 			console.log("data " + data + " status " + status);
 		});
 
 		//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
-
 	};
 	$scope.getRestaurantList();
+
+	$scope.showRestaurant = function(outletId) {
+		console.log(outletId);
+		$location.url("/showRestaurant?outletId=" + outletId);
+	};
+
+});
+
+module.controller('showRestaurantController', function($scope, $http, $routeParams, $location) {
+
+
+	$scope.outlets = [];
+	$scope.cuisineTypes = [];
+
+		var param = {
+			"auth_token" : $scope.auth_token
+		}
+		$http({
+			method : 'get',
+			url : '/api/outlets/' + $routeParams.outletId,
+			params : param,
+		}).success(function(data, status) {
+			console.log("data in success " + data + " status " + status);
+			$scope.outletID = data.outlet.id;
+			$scope.restaurant_name = data.outlet.name;
+			$scope.restaurant_address = data.outlet.address;
+			$scope.email_address = data.outlet.email;
+			$scope.contact_number = data.outlet.phone_number;
+			$scope.outlets = data.outlet.outlet_types;
+			$scope.cuisineTypes = data.outlet.cuisine_types;
+			$scope.fromTime = data.outlet.open_hours.split("-")[0];
+			$scope.toTime = data.outlet.open_hours.split("-")[1];
+			$scope.delivery = data.outlet.has_delivery.toString();
+			$scope.alcohol = data.outlet.serves_alcohol.toString();
+			$scope.outDoor_seating = data.outlet.has_outdoor_seating.toString();
+		}).error(function(data, status) {
+			console.log("data in error" + data + " status " + status);
+			
+		});
+
+	$scope.home = function(){
+		$location.url("/home");
+	};
 
 });
 
 module.controller('redeemPointsController', function($scope, $http, $location) {
+
+});
+
+module.controller('transactionHistoryController', function($scope, $http, $location) {
+	
+	$scope.home = function(){
+		$location.url("/home");	
+	};
+	
+	$scope.previous = function(){
+		$location.url("/settings");
+	};
 
 });
 

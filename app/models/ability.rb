@@ -48,8 +48,10 @@ class Ability
       can :create, User, role: 'manager'
       can :read, User, role: 'manager'
       can :generate_code, Outlet, customer: user.customer
+      cannot :create_staff, Outlet
     when 'manager'
       can :read, Outlet, manager_id: user.id
+      can :create_staff, Outlet, manager_id: user.id
       can :read_pending_redemptions, Outlet
       can :generate_code, Outlet, manager_id: user.id
     when 'staff'

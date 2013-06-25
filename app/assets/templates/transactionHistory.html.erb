@@ -1,0 +1,90 @@
+<div data-role="page" data-theme="b" id="transaction_history" ng-controller="transactionHistoryController">
+	<style>
+.home {
+background-image: url(<%= asset_path 'sprite_mobile.png' %>
+	);
+	background-position: -309px -471px;
+	cursor: pointer;
+	float: left;
+	height: 56px;
+	width: 45px;
+	}
+	</style>
+	<div data-role="content">
+		<div class="username">
+			<div class="home" ng-click="home()"></div>
+			<div class="signUp">
+				SETTINGS
+			</div>
+			<div class="clr"></div>
+		</div>
+		<div data-role="fieldcontain" class="profileText" align="center">
+			<h2>TRANSACTION HISTORY</h2>
+			<div class="clr"></div>
+		</div>
+		<div class="headDiv">
+			<div class="headTitle">
+				<span>DATE</span>
+			</div>
+			<div class="headTitle">
+				<span>RESTAURANT</span>
+			</div>
+			<div class="headTitleLast">
+				<span>POINTS</span>
+			</div>
+			<div class="clr"></div>
+		</div>
+		<div class="historyDataContainer">
+			<div class="contentText">
+				<span>05.03.2013</span>
+			</div>
+			<div class="contentText">
+				<span>Pavillion</span>
+			</div>
+			<div class="contentText">
+				<span><b>100</b> earned</span>
+			</div>
+			<div class="clr"></div>
+		</div>
+		<div class="historyDataContainer">
+			<div class="contentText">
+				<span>05.03.2013</span>
+			</div>
+			<div class="contentText">
+				<span>Pavillion</span>
+			</div>
+			<div class="contentText">
+				<span><b>100</b> earned</span>
+			</div>
+			<div class="clr"></div>
+		</div>
+		<div class="historyDataContainer">
+			<div class="contentText">
+				<span>05.03.2013</span>
+			</div>
+			<div class="contentText">
+				<span>Pavillion</span>
+			</div>
+			<div class="contentText">
+				<span><b>100</b> earned</span>
+			</div>
+			<div class="clr"></div>
+		</div>
+		<div class="footerDiv">
+			<div class="prev" ng-click="previous()">
+
+				<%= image_tag 'y_arrow_left.png' %>
+				<div class="prevTxt" >
+					BACK
+				</div>
+			</div>
+			<div class="nxt" ng-click="next()">
+				<div class="nxtTxt" >
+					SAVE
+				</div>
+
+			</div>
+			<div class="clr"></div>
+		</div>
+	</div>
+</div>
