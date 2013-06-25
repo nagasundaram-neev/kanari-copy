@@ -342,7 +342,7 @@ module.controller('signUpController', function($scope, $http, $location) {
 		}
 	};
 
-	$scope.cancel = function() {
+	$scope.home = function() {
 		$location.url("/index");
 	};
 
@@ -794,11 +794,13 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 
 module.controller('feedbackSubmitController', function($scope, $http, $location) {
 
+	console.log("points "+pointsEarned);
 	$scope.points = pointsEarned;
+	console.log("scope variable "+$scope.points)
 
 });
 
-module.controller('feedbackSubmitController', function($scope, $http, $location) {
+module.controller('restaurantListController', function($scope, $http, $location) {
 
 	$scope.home = function() {
 		$location.url("/home");
