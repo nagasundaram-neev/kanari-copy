@@ -1,0 +1,39 @@
+<div data-role="page" data-theme="b" id="showRestaurant" ng-controller="showRestaurantController">
+	<style>
+.home {
+background-image: url(<%= asset_path 'sprite_mobile.png' %>
+);
+background-position: -309px -471px;
+cursor: pointer;
+float: left;
+height: 56px;
+width: 45px;
+}
+.searchIcon{
+background-image: url(<%= asset_path 'sprite_mobile.png' %>
+	);
+	background-position: -145px -475px;
+	cursor: pointer;
+	float: right;
+	height: 60px;
+	width: 53px;
+	}
+	</style>
+	<div data-role="content">
+		<div class="username">
+			<div class="home" ng-click="home()"></div>
+			<div class="signUp">
+				RESTAURANT DETAILS
+			</div>
+			<div class="clr"></div>
+		</div>
+		<div align="center" class="titleDiv">
+			<div class="name">
+					{{restaurant_name}}
+			</div>
+			<div class="address">
+				{{restaurant_address}}
+			</div>
+		</div>
+	</div>
+</div>
