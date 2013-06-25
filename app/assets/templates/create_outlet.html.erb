@@ -203,9 +203,10 @@
 								Save
 							</button>
 						</div>
-						<p ng-show="successoutlet" class="successMsg">
-							Your outlet get added successfully.
-						</p>
+						<div ng-show="successoutlet" class="successMsg">
+							Your outlet get <div class="create_rest" ng-show="action"> added</div>
+							<div class="create_rest" ng-hide="action">updated</div> successfully.
+						</div>
 
 					</div>
 				</form>
