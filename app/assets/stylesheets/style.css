@@ -146,17 +146,20 @@
 	color: #FFFFFF;
 	margin-top: 4%;
 }
-.headTitle {
+.headTitle,.headTitleLast{
   	background-color: #664765;
     border-right: 1px solid #FFFFFF;
     float: left;
     font-size: 0.7em;
     text-shadow: none;
-    width: 32.9%;
+    width: 33%;
 }
-.headTitle span,.contentText span{
+.headTitleLast{
+	border-right: 0 none;
+    width: 33.3%;}
+.headTitle span,.contentText span,.headTitleLast span{
  	display: block;
-    padding: 17% 0 17% 7%;
+    padding: 16% 0 16% 7%;
     text-align: left;
 }
 .contentText span{
@@ -176,10 +179,6 @@
  }
 .recommendationDiv {
 	margin: 2% 5%;
-}
-.pointsTxt {
-	float: right;
-	/*padding: 1em;*/
 }
 .parentDivName {
 	width: 50%;
@@ -226,6 +225,7 @@
 .pointsTxt {
 	color: #593F5A;
 	font-size: 1em;
+    float: right;
 }
 .backColorYellow {
 	background-color: #F8BE40;
@@ -530,14 +530,19 @@ img, object {
 	margin: 11% 0 0;
 	text-shadow: none;
 }
+#transaction_history .footerDiv{margin: 5% 0 0;}
+#transaction_history .prev{padding: 0.74em 0;  background-color: #664765; font-size: 0.9em;border-right: 0 none;margin-right:1%}
+#transaction_history .prev img{max-height: 16px;}
+#transaction_history .nxt{padding: 0.74em 0;  background-color: #FDBE3A; font-size: 0.9em;width:49.4%}
+#transaction_history .prevTxt{color:#FEBE3B}
 .feedback_footerDiv {
 	margin: -1.5% 0 0;
 }
+#transaction_history  .nxtTxt{  color: #664765;}
 .footerDivRedeemPoints {
 	margin: 16% 0 0;
 	text-shadow: none;
 }
-
 .footerDivRedeemPoints .prevTxt {
 	color: #FDBE3B;
 	float: right;

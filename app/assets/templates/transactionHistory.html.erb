@@ -23,29 +23,68 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			<div class="clr"></div>
 		</div>
 		<div class="headDiv">
-			<div class="headTitle"><span>DATE</span></div>
-			<div class="headTitle"><span>RESTAURANT</span></div>
-			<div class="headTitle"><span>POINTS</span></div>	
+			<div class="headTitle">
+				<span>DATE</span>
+			</div>
+			<div class="headTitle">
+				<span>RESTAURANT</span>
+			</div>
+			<div class="headTitleLast">
+				<span>POINTS</span>
+			</div>
 			<div class="clr"></div>
 		</div>
-		<div class="historyDataContainer">			
-			<div class="contentText"><span>05.03.2013</span></div>
-			<div class="contentText"><span>Pavillion</span></div>
-			<div class="contentText"><span><b>100</b> earned</span></div>
+		<div class="historyDataContainer">
+			<div class="contentText">
+				<span>05.03.2013</span>
+			</div>
+			<div class="contentText">
+				<span>Pavillion</span>
+			</div>
+			<div class="contentText">
+				<span><b>100</b> earned</span>
+			</div>
 			<div class="clr"></div>
 		</div>
-		<div class="historyDataContainer">			
-			<div class="contentText"><span>05.03.2013</span></div>
-			<div class="contentText"><span>Pavillion</span></div>
-			<div class="contentText"><span><b>100</b> earned</span></div>
+		<div class="historyDataContainer">
+			<div class="contentText">
+				<span>05.03.2013</span>
+			</div>
+			<div class="contentText">
+				<span>Pavillion</span>
+			</div>
+			<div class="contentText">
+				<span><b>100</b> earned</span>
+			</div>
 			<div class="clr"></div>
 		</div>
-		<div class="historyDataContainer">			
-			<div class="contentText"><span>05.03.2013</span></div>
-			<div class="contentText"><span>Pavillion</span></div>
-			<div class="contentText"><span><b>100</b> earned</span></div>
+		<div class="historyDataContainer">
+			<div class="contentText">
+				<span>05.03.2013</span>
+			</div>
+			<div class="contentText">
+				<span>Pavillion</span>
+			</div>
+			<div class="contentText">
+				<span><b>100</b> earned</span>
+			</div>
 			<div class="clr"></div>
 		</div>
-		
+		<div class="footerDiv">
+			<div class="prev" ng-click="previous()">
+
+				<%= image_tag 'y_arrow_left.png' %>
+				<div class="prevTxt" >
+					BACK
+				</div>
+			</div>
+			<div class="nxt" ng-click="next()">
+				<div class="nxtTxt" >
+					SAVE
+				</div>
+
+			</div>
+			<div class="clr"></div>
+		</div>
 	</div>
 </div>

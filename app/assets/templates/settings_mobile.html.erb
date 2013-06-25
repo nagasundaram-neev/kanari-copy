@@ -70,6 +70,12 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				</div>
 				<div class="clr"></div>
 			</div>
+			<p class="errorMsg" ng-show="errorMsg">
+				{{error}}
+			</p>
+			<p class="succMsg" ng-show="succMsg">
+				Profile updated successfully!!!
+			</p>
 			<div data-role="fieldcontain" class="profileTextBottom" align="center">
 				<h2>Notifications</h2>
 			</div>
@@ -108,12 +114,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				<div class="clr"></div>
 			</div>
 			<input type="button" class="signBtn" ng-click="saveProfile()" data-inline="true" value="Save"/>
-			<p class="errorMsg" ng-show="errorMsg">
-				{{error}}
-			</p>
-			<p class="succMsg" ng-show="succMsg">
-				Profile updated successfully!!!
-			</p>
+			
 		</div>
 	</div>
 </div>
