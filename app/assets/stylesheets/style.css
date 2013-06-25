@@ -532,11 +532,12 @@ img, object {
 	background-color: #FDBE3A;
 	border-right: 3px solid #FFFFFF;
 	float: left;
-	padding: 1.31em 0;
+	padding: 0.8em 0;
 	border-bottom: 1px solid #FFFFFF;
 	width: 49.5%;
 	text-align: center;
 }
+#showRestaurant .prev{padding: 1.31em 0;}
 .prev img, .nxt img {
 	vertical-align: text-bottom;
 }
