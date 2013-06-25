@@ -64,9 +64,9 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			<div class="ui-input-text ui-body-a dateDiv">
 				<label class="dateLabel"> Date of birth</label>
 				<div class="date">
-					<input data-theme="a" data-inline="true" type="date" name="date" ng-model="date" maxlength="2" class="dateInner" placeholder="D"/>
-					<input data-theme="a" data-inline="true" type="date" name="date" ng-model="month" maxlength="2" class="dateInner" placeholder="M"/>
-					<input data-theme="a" data-inline="true" type="date" name="date" ng-model="year" maxlength="4" class="dateInner" placeholder="Y"/>
+					<input data-theme="a" data-inline="true" type="text" name="date" ng-model="date" maxlength="2" class="dateInner" placeholder="D"/>
+					<input data-theme="a" data-inline="true" type="text" name="date" ng-model="month" maxlength="2" class="dateInner" placeholder="M"/>
+					<input data-theme="a" data-inline="true" type="text" name="date" ng-model="year" maxlength="4" class="dateInner" placeholder="Y"/>
 				</div>
 				<div class="clr"></div>
 			</div>
@@ -75,20 +75,20 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			</div>
 			<div class="ui-input-text ui-body-a notificationCheckbox">
 				<label>@</label>
-				<input type="checkbox" ng-model="notification" maxlength="2"/>
+				<%= image_tag 'ic_ticks.png' %>
 				<div class="clr"></div>
 			</div>
 			<div data-role="fieldcontain" class="profileTextBottom" align="center">
 				<h2>Social</h2>
 			</div>
-			<div class="ui-input-text ui-body-a notificationCheckbox">
-				<label><%= image_tag 'round_login.png' %></label>
-				<input type="checkbox" ng-model="facebookSetting" maxlength="2"/>
+			<div class="ui-input-text ui-body-a notificationCheckboxFb">
+				<label><%= image_tag 'ic_fb_small_purple.png' %></label>
+				<%= image_tag 'ic_ticks_grey.png' %>
 				<div class="clr"></div>
 			</div>
 			<div class="ui-input-text ui-body-a notificationCheckboxTwitter">
-				<label>t</label>
-				<input type="checkbox" ng-model="twitterSetting" maxlength="2"/>
+				<label><%= image_tag 'ic_twitter_small_purple.png' %></label>
+				<%= image_tag 'ic_ticks_grey.png' %>
 				<div class="clr"></div>
 			</div>
 
@@ -96,11 +96,17 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				<h2>Invite friends</h2>
 			</div>
 
-			<div class="ui-input-text ui-body-a">
-				<input data-theme="a" data-inline="true" type="text" name="txtUsername" ng-model="firstName" placeholder="First Name"/>
+			<div class="ui-input-text ui-body-a inviteFriends">
+				<a href="#"><%= image_tag 'ic_fb_yellow.png' %></a>
+				<a href="#"><%= image_tag 'ic_twitter_yellow.png' %></a>
+				<a href="#" style="padding-top: 2%"><%= image_tag 'ic_gplus_yellow.png' %></a>
 			</div>
 			<div class="border"></div>
-			<div id="transactionHistory"> Transaction History</div>
+			<div id="transactionHistory">
+				<span>Transaction History</span>
+				<a href="#"><%= image_tag 'ic_calender_yellow.png' %></a>
+				<div class="clr"></div>
+			</div>
 			<input type="button" class="signBtn" ng-click="saveProfile()" data-inline="true" value="Save"/>
 			<p class="errorMsg" ng-show="errorMsg">
 				{{error}}
