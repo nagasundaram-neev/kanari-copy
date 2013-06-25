@@ -16,7 +16,7 @@ html, body {
 	display: inline !important;
 	padding: 3px !important;
 }
-lable{
+lable {
 	color: #5C5C5C;
 	font-size: 14px;
 }
@@ -310,7 +310,8 @@ a.addRestaurant:hover {
 }
 .outlet_name a {
 	color: #5A4166;
-	font-size: 14px;vi	text-transform: uppercase;
+	font-size: 14px;
+	vi	text-transform: uppercase;
 }
 .outlet_text {
 	padding: 0px !important;
@@ -374,6 +375,11 @@ a.addRestaurant:hover {
 .header_title span.create_rest img {
 	vertical-align: text-bottom;
 }
+div.create_rest {
+	display: inline-block;
+	color: green !important;
+	padding: 0 !important;
+}
 #createOutlet .ui-input-data {
 	padding: 5px 0;
 }
@@ -389,20 +395,24 @@ a.addRestaurant:hover {
 	display: block;
 	left: 505px;
 }
-#createOutlet .radioBtn{margin-top:-2px}
+#createOutlet .radioBtn {
+	margin-top: -2px
+}
 .rightPanel lable {
 	float: left;
 	width: 145px;
 	margin-top: 4px;
 }
-.createOutletDiv lable{width: 160px;}
+.createOutletDiv lable {
+	width: 160px;
+}
 #createOutlet select {
 	width: 125px;
 }
 #createOutlet .timeSetting {
 	width: 40px;
-	 color: #5C5C5C;
-    font-size: 14px;
+	color: #5C5C5C;
+	font-size: 14px;
 }
 .create_outlet {
 	padding: 0 0 30px;
@@ -546,8 +556,12 @@ ul.taketour li a:hover {
 	float: left;
 	width: 270px;
 }
-#acceptInvitationStep2 lable{width: 190px;}
-.acceptInv .input-help ul{margin-top:-2px}
+#acceptInvitationStep2 lable {
+	width: 190px;
+}
+.acceptInv .input-help ul {
+	margin-top: -2px
+}
 /***Change Password**/
 .
 .changePass {
