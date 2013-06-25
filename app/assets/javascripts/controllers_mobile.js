@@ -891,6 +891,14 @@ module.controller('redeemPointsController', function($scope, $http, $location) {
 });
 
 module.controller('transactionHistoryController', function($scope, $http, $location) {
+	
+	$scope.home = function(){
+		$location.url("/home");	
+	};
+	
+	$scope.previous = function(){
+		$location.url("/settings");
+	};
 
 });
 
