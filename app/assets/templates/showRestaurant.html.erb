@@ -3,10 +3,10 @@
 .home {
 background-image: url(<%= asset_path 'sprite_mobile.png' %>
 );
-background-position: -309px -471px;
+background-position: -309px -476px;
 cursor: pointer;
 float: left;
-height: 56px;
+height: 54px;
 width: 45px;
 }
 .searchIcon{
@@ -28,11 +28,95 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			<div class="clr"></div>
 		</div>
 		<div align="center" class="titleDiv">
-			<div class="name">
-					{{restaurant_name}}
+			<div class="rest_name">
+				{{restaurant_name}}
+				<span class="address">{{restaurant_address}}</span>
 			</div>
-			<div class="address">
-				{{restaurant_address}}
+			<div class="username rest_info">
+				<%= image_tag 'ic_customer_care.png' %> {{contact_number}}
+			</div>
+			<div class="username rest_info">
+				<%= image_tag 'ic_at_white.png' %> {{email_address}}
+			</div>
+			<div class="username rest_info">
+				<%= image_tag 'ic_location_white.png' %> Location map
+			</div>
+			<div class="outlet_div rest_info">
+				<div class="outlet_title ">
+					<%= image_tag 'ic_outlet.png' %> Outlet Type
+				</div>
+				<div class="outlet_info">
+					<span ng-repeat="outlet in outlets">{{outlet.name}}<span ng-show=" ! $last ">, </span></span>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="outlet_div rest_info">
+				<div class="outlet_title ">
+					<%= image_tag 'ic_cuisine.png' %> Cuisine Type
+				</div>
+				<div class="outlet_info">
+					<span ng-repeat="cuisine in cuisineTypes">{{cuisine.name}}<span ng-show=" ! $last ">, </span></span>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="outlet_div rest_info">
+				<div class="outlet_title ">
+					<%= image_tag 'ic_opening_hrs.png' %> Opening hours
+				</div>
+				<div class="outlet_info">
+					<span>{{fromTime}} to {{toTime}}</span>
+				</div>
+				<div class="clr"></div>
+			</div>
+
+			<div class="outlet_div rest_info ">
+				<div class="outlet_title">
+					<%= image_tag 'ic_delivery.png' %> delivery
+				</div>
+				<div class="outlet_info outlet_serves">
+					<img src="/assets/ic_ticks.png" ng-show="delivery" />
+					<img src="/assets/ic_ticks_grey.png" ng-hide="delivery"/>
+					<!-- <%= image_tag 'ic_ticks.png' %>
+					<%= image_tag 'ic_ticks_grey.png' %> -->
+				</div>
+			</div>
+			<div class="outlet_div rest_info">
+				<div class="outlet_title">
+					<%= image_tag 'ic_alcohol.png' %> alcohol
+				</div>
+				<div class="outlet_info outlet_serves">
+					<img src="/assets/ic_ticks.png" ng-show="alcohol" />
+					<img src="/assets/ic_ticks_grey.png" ng-hide="alcohol"/>
+					<!-- <%= image_tag 'ic_ticks.png' %>
+					<%= image_tag 'ic_ticks_grey.png' %> -->
+				</div>
+			</div>
+			<div class="outlet_div rest_info">
+				<div class="outlet_title ">
+					<%= image_tag 'ic_outdoor.png' %> outDoor_seating
+				</div>
+				<div class="outlet_info outlet_serves">
+					<img src="/assets/ic_ticks.png" ng-show="outDoor_seating" />
+					<img src="/assets/ic_ticks_grey.png" ng-hide="outDoor_seating"/>
+					<!-- <%= image_tag 'ic_ticks.png' %>
+					<%= image_tag 'ic_ticks_grey.png' %> -->
+				</div>
+			</div>
+		</div>
+		<div class="footerDiv">
+			<div class="prev" ng-click="previous()">
+
+				<%= image_tag 'p_arrow_left.png' %>
+				<div class="prevTxt" >
+					PREVIOUS
+				</div>
+			</div>
+			<div class="nxt" ng-click="next()">
+				<div class="nxtTxt" >
+					REDEEM UP TO AED 100
+				</div>
+
+				<div class="clr"></div>
 			</div>
 		</div>
 	</div>
