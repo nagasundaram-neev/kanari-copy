@@ -1382,7 +1382,7 @@ img, object {
 }
 .outlet_info span {
 	display: inline-block;
-	padding: 1% 0;
+	font-size: 90%;
 }
 .outlet_serves img {
 	float: right;
@@ -1391,6 +1391,7 @@ img, object {
 	border-right: 1px solid #FFFFFF;
 	float: left;
 	margin: 0 !important;
+	 min-height: 48px;
 	width: 60%;
 	text-shadow: none;
 }

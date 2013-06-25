@@ -45,7 +45,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				<div class="outlet_title ">
 					<span class="img_outlet"><%= image_tag 'ic_outlet.png' %></span> <span class="title_outlet">Outlet Type</span>
 				</div>
-				<div class="outlet_info">
+				<div class="outlet_info" style="padding: 1% 0;">
 					<span ng-repeat="outlet in outlets">{{outlet.name}}<span ng-show=" ! $last ">, </span></span>
 				</div>
 				<div class="clr"></div>
@@ -54,7 +54,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				<div class="outlet_title ">
 					<span class="img_outlet"><%= image_tag 'ic_cuisine.png' %></span> <span class="title_outlet"> Cuisine Type</span>
 				</div>
-				<div class="outlet_info">
+				<div class="outlet_info" style="padding: 1% 0;">
 					<span ng-repeat="cuisine in cuisineTypes">{{cuisine.name}}<span ng-show=" ! $last ">, </span></span>
 				</div>
 				<div class="clr"></div>
@@ -63,7 +63,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				<div class="outlet_title ">
 					<span class="img_outlet"><%= image_tag 'ic_opening_hrs.png' %></span> <span class="title_outlet"> Opening hours</span>
 				</div>
-				<div class="outlet_info">
+				<div class="outlet_info" style="padding: 1% 0;">
 					<span>{{fromTime}} to {{toTime}}</span>
 				</div>
 				<div class="clr"></div>
