@@ -498,7 +498,7 @@ body {
 }
 img, object {
 	max-height: 90%;
-	max-width: 80%;
+	/*max-width: 80%;*/
 }
 .logo_btm img {
 	max-height: 90%;
@@ -658,6 +658,26 @@ img, object {
 	width: 90%;
 	margin: 0 0 0 10%;
 }
+.home {
+  background-image: url("/assets/ic_home_yellow.png");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    float: left;
+    height: 40px;
+    margin: 2% 0 0 2%;
+    width: 36px;
+	}
+.logout {
+	background-image: url("/assets/ic_logoff_yellow.png");
+	background-position: 0 0;
+	 background-repeat: no-repeat;
+	cursor: pointer;
+	float: right;
+	height: 37px;
+	width: 37px;
+	margin-top:2%;
+}
 .homeImg img {
 	max-height: 90%;
 	max-width: 75%;
@@ -726,6 +746,7 @@ img, object {
 	padding: 6% 0;
 	position: relative;
 	text-align: center;
+	margin-top:9%;
 }
 .socialBtn {
 	color: #664765 !important;
@@ -1044,7 +1065,7 @@ color:#F5C03F!important;text-align: center;
 
 #transactionHistory span {
 	float: left;
-	margin: 3% 0 0 3%
+	margin: 2.5% 0 0 3%
 }
 #transactionHistory a {
 	float: right;
@@ -1063,7 +1084,7 @@ color:#F5C03F!important;text-align: center;
 
 .signUp {
 	text-align: center;
-	margin: 5%;
+	margin: 4% 0 0;
 	font-size: 20px;
 }
 
@@ -1081,7 +1102,15 @@ color:#F5C03F!important;text-align: center;
 .settingDiv {
 	padding-top: 1.2em;
 }
-
+.searchIcon{
+	background-image: url("/assets/ic_search_purple.png");
+    background-position: 0 0;
+    cursor: pointer;
+    float: right;
+    height: 39px;
+    margin: 2% 0 0;
+    width: 39px;
+	}
 #signUp .ui-field-contain .ui-input-search, .ui-field-contain div.ui-input-text {
 	background: none repeat scroll 0 0 #FFFFFF;
 /*	border-bottom: thin solid #E5E5E5;*/
@@ -1376,6 +1405,7 @@ color:#F5C03F!important;text-align: center;
 	padding: 0.1em;
 	text-shadow: none;
 }
+#home .username{padding:0.2em}
 .username a {
 	text-decoration: none;
 	text-transform: uppercase;
@@ -1383,13 +1413,14 @@ color:#F5C03F!important;text-align: center;
 .username .ui-link {
 	color: #FFFFFF !important;
 	display: block;
-	margin: 8px 0 0;
+	margin: 8px 0 0 2%;
 	/*width: 168px;*/
 }
 .role {
 	display: block;
 	width: 168px;
 	font-size: 12px;
+	margin-left:2%;
 }
 .or {
 	color: #664765;
@@ -1465,7 +1496,7 @@ color:#F5C03F!important;text-align: center;
 .img_outlet {
 	display: inline-block;
 	text-align: center;
-	width: 30%;
+	width: 22%;
 }
 .rest_name span {
 	display: block;
