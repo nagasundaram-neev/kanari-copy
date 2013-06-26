@@ -8,4 +8,8 @@ class Api::V1::OutletTypesController < ApplicationController
     render json: OutletType.all
   end
 
+  def show
+    render json: OutletType.find(params[:id])
+  end
+
 end
