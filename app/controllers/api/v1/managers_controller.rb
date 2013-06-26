@@ -21,9 +21,10 @@ class Api::V1::ManagersController < ApplicationController
   def index
     authorize! :read, User
     #TODO: Query to be optimized
-    assigned_managers = current_user.customer.outlets.collect(&:manager).uniq rescue []
+    assigned_managers = current_user.customer.outlets.collect(&:manager) rescue []
     unassigned_managers = User.includes(:employed_customer).where(customers: {id: current_user.customer.id}) rescue []
-    managers = assigned_managers + unassigned_managers
+    managers = (assigned_managers + unassigned_managers).uniq
+    managers.delete(nil)
     render json: managers, each_serializer: ManagerSerializer
   end
 
