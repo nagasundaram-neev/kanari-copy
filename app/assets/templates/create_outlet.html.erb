@@ -104,7 +104,7 @@
 							<lable style="margin: 0;">
 								Outlet Type<span class="star">*</span>
 							</lable>
-							<select ng-model='formoutlet1' ng-change="selectOutlet1()" required ng-options='outletType.id as outletType.name for outletType in outletTypes'>
+							<select ng-hide="form_outlet1" ng-model='formoutlet1' ng-change="selectOutlet1()" required ng-options='outletType.id as outletType.name for outletType in outletTypes'>
 								<option value="">Select Outlet</option>
 							</select>
 							<select ng-show="form_outlet2" ng-model='formoutlet2' ng-change="selectOutlet2()"  ng-options='outletType.id as outletType.name for outletType in outletTypes'>

@@ -777,71 +777,83 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 
 		$scope.selectOutlet1 = function() {
 			$scope.form_outlet2 = true;
-			if ($scope.formoutlet1 == $scope.formoutlet2 || $scope.formoutlet1 == $scope.formoutlet3) {
-				$scope.outletError = true;
-				$scope.checkedOutletTypes[0] = 0;
-				$scope.formoutlet1 = 0;
-			} else {
-				$scope.outletError = false;
-				$scope.checkedOutletTypes[0] = $scope.formoutlet1;
-				setCookie('currentOutletList', $scope.checkedOutletTypes, 1);
+			console.log($scope.formoutlet1);
+			if ($scope.formoutlet1) {
+				if ($scope.formoutlet1 == $scope.formoutlet2 || $scope.formoutlet1 == $scope.formoutlet3) {
+					$scope.outletError = true;
+					$scope.checkedOutletTypes[0] = 0;
+					$scope.formoutlet1 = 0;
+				} else {
+					$scope.outletError = false;
+					$scope.checkedOutletTypes[0] = $scope.formoutlet1;
+					setCookie('currentOutletList', $scope.checkedOutletTypes, 1);
+				}
 			}
+			
 		}
 		$scope.selectOutlet2 = function() {
 			$scope.form_outlet3 = true;
-			if ($scope.formoutlet2 == $scope.formoutlet1 || $scope.formoutlet2 == $scope.formoutlet3) {
-				$scope.outletError = true;
-				$scope.checkedOutletTypes[1] = 0;
-				$scope.formoutlet2 = 0;
-			} else {
-				$scope.outletError = false;
-				$scope.checkedOutletTypes[1] = $scope.formoutlet2;
+			if ($scope.formoutlet2) {				
+				if ($scope.formoutlet2 == $scope.formoutlet1 || $scope.formoutlet2 == $scope.formoutlet3) {
+					$scope.outletError = true;
+					$scope.checkedOutletTypes[1] = 0;
+					$scope.formoutlet2 = 0;
+					
+				} else {
+					$scope.outletError = false;
+					$scope.checkedOutletTypes[1] = $scope.formoutlet2;
+				}
 			}
 		}
 		$scope.selectOutlet3 = function() {
-			if ($scope.formoutlet3 == $scope.formoutlet1 || $scope.formoutlet3 == $scope.formoutlet2) {
-				$scope.outletError = true;
-				$scope.checkedOutletTypes[2] = 0;
-				$scope.formoutlet3 = 0;
-			} else {
-				$scope.outletError = false;
-				$scope.checkedOutletTypes[2] = $scope.formoutlet3;
+			if ($scope.formoutlet3) {
+				if ($scope.formoutlet3 == $scope.formoutlet1 || $scope.formoutlet3 == $scope.formoutlet2) {
+					$scope.outletError = true;
+					$scope.checkedOutletTypes[2] = 0;
+					$scope.formoutlet3 = 0;
+				} else {
+					$scope.outletError = false;
+					$scope.checkedOutletTypes[2] = $scope.formoutlet3;
+				}
 			}
 		}
 		$scope.selectCuisine1 = function() {
 			$scope.form_cuisine2 = true;
-			if ($scope.formcuisine1 == $scope.formcuisine2 || $scope.formcuisine1 == $scope.formcuisine3) {
-				$scope.cuisineError = true;
-				$scope.checkedOutletTypes[0] = 0;
-				$scope.formcuisine1 = 0;
-			} else {
-				$scope.cuisineError = false;
-				$scope.checkedCuisineTypes[0] = $scope.formcuisine1;
+			if ($scope.formcuisine1) {
+				if ($scope.formcuisine1 == $scope.formcuisine2 || $scope.formcuisine1 == $scope.formcuisine3) {
+					$scope.cuisineError = true;
+					$scope.checkedOutletTypes[0] = 0;
+					$scope.formcuisine1 = 0;
+				} else {
+					$scope.cuisineError = false;
+					$scope.checkedCuisineTypes[0] = $scope.formcuisine1;
+				}
 			}
-
 		}
 		$scope.selectCuisine2 = function() {
 			$scope.form_cuisine3 = true;
-			if ($scope.formcuisine2 == $scope.formcuisine1 || $scope.formcuisine2 == $scope.formcuisine3) {
-				$scope.cuisineError = true;
-				$scope.checkedOutletTypes[1] = 0;
-				$scope.formcuisine2 = 0;
-			} else {
-				$scope.cuisineError = false;
-				$scope.checkedCuisineTypes[1] = $scope.formcuisine2;
+			if ($scope.formcuisine2) {
+				if ($scope.formcuisine2 == $scope.formcuisine1 || $scope.formcuisine2 == $scope.formcuisine3) {
+					$scope.cuisineError = true;
+					$scope.checkedOutletTypes[1] = 0;
+					$scope.formcuisine2 = 0;
+				} else {
+					$scope.cuisineError = false;
+					$scope.checkedCuisineTypes[1] = $scope.formcuisine2;
+				}
 			}
-
 		}
 		$scope.selectCuisine3 = function() {
-			if ($scope.formcuisine3 == $scope.formcuisine1 || $scope.formcuisine3 == $scope.formcuisine2) {
-				$scope.cuisineError = true;
-				$scope.checkedOutletTypes[2] = 0;
-				$scope.formcuisine3 = 0;
-			} else {
-				$scope.cuisineError = false;
-				$scope.checkedCuisineTypes[2] = $scope.formcuisine3;
+			if ($scope.formcuisine3) {
+				if ($scope.formcuisine3 == $scope.formcuisine1 || $scope.formcuisine3 == $scope.formcuisine2) {
+					$scope.cuisineError = true;
+					$scope.checkedOutletTypes[2] = 0;
+					$scope.formcuisine3 = 0;
+				} else {
+					$scope.cuisineError = false;
+					$scope.checkedCuisineTypes[2] = $scope.formcuisine3;
+				}
 			}
-
 		}
 		/* Adding for creating the outlet*/
 		$scope.create_outlet = function(createOutlet) {
@@ -946,9 +958,9 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					// $scope.email_address_manager = "";
 					// $scope.first_name = "";
 					// $scope.last_name = "";
-					 // $scope.add_contact_number ="";
-					 // $scope.confirmpassword = "";
-					 // $scope.password = "";
+					// $scope.add_contact_number ="";
+					// $scope.confirmpassword = "";
+					// $scope.password = "";
 					// $("#formid").removeClass("row form-horizontal");
 					// $("#formid input").removeClass("ng-dirty ng-invalid");
 					// $("#formid .input-help").hide();
@@ -962,10 +974,10 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			}
 		}
 		// $scope.update = function() {
-			// $("#formid").addClass("row form-horizontal");
-			// $("#formid input").addClass("ng-dirty ng-invalid");
-			// $("#formid .input-help").show();
-			// //$("#formid input").removeClass(".ng-dirty.ng-invalid");
+		// $("#formid").addClass("row form-horizontal");
+		// $("#formid input").addClass("ng-dirty ng-invalid");
+		// $("#formid .input-help").show();
+		// //$("#formid input").removeClass(".ng-dirty.ng-invalid");
 		// }
 
 		$scope.changeTab = function(currentTab) {
@@ -1397,11 +1409,12 @@ function deleteCookie(name) {
 	setCookie(name, "", -1);
 }
 
+
 $(document).ready(function() {
-		$("#phoneNumber").blur(validateNumber);
-	});
-	
-	function validateNumber(){
+	$("#phoneNumber").blur(validateNumber);
+});
+
+function validateNumber() {
 	var a = $("#phoneNumber").val();
 	var filter = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
 	//if it's valid number
@@ -1413,5 +1426,5 @@ $(document).ready(function() {
 	else {
 		return false;
 	}
-	}
+}
 
