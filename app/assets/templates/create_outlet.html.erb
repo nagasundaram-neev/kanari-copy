@@ -263,13 +263,13 @@
 					<div class="startMsg">
 						*
 					</div> Indicates mandatory fields</span>
-				<form ng-app="form-example" class="row form-horizontal" name="createManager" ng-submit="create_manager(createManager)" novalidate>
+				<form id="formid" ng-app="form-example" class="row form-horizontal" name="createManager" ng-submit="create_manager(createManager)" novalidate>
 					<div class="control-group">
 						<div class="controls">
 							<lable>
 								First Name<span class="star">*</span>
 							</lable>
-							<input type="text"  placeholder="First Name" ng-model="first_name" required>
+							<input type="text" ng-change="update()" placeholder="First Name" ng-model="first_name" required>
 						</div>
 					</div>
 					<div class="control-group">
