@@ -1413,3 +1413,19 @@ img, object {
 	display: block;
 	font-size: 0.6em;
 }
+
+.fblogin{
+	background-color:#6E4D6C; 
+	color:#FFFFFF;
+}
+
+.fblogin img{
+	width: 2.5em;
+	float:left;
+	vertical-align: middle;
+}
+
+.fblogin div{
+	font-size: 97%;
+	padding:3% 0;
+}
