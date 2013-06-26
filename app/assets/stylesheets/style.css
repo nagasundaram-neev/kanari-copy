@@ -501,10 +501,10 @@ img, object {
 	max-width: 80%;
 }
 .logo_btm img {
-	max-height: 90%;
-	max-width: 40%;
-	float: left;
-	margin: 2% 0 1% 6%;
+  	float: left;
+    margin: 10% 0 1%;
+    max-height: 90%;
+    max-width: 40%;
 }
 #login .ui-btn-corner-all {
 	border-radius: 0px;
@@ -651,7 +651,7 @@ img, object {
 
 .border {
 	border: 1px solid #664765;
-	margin: 2% 3.5%;
+	margin: 9% 3.5%;
 }
 
 .secondRow {
@@ -710,7 +710,7 @@ img, object {
 	color: #66475E;
 	float: right;
 	padding-top: 2.7%;
-	width: 49%;
+	width: 50%;
 }
 
 .userClick {
@@ -786,7 +786,7 @@ img, object {
 
 /* Sign Up*/
 #signUp .ui-content {
-	padding: 0 !important;
+	padding: 8% !important;
 }
 #signedUp .ui-content {
 	padding: 0 !important;
@@ -1037,7 +1037,7 @@ color:#F5C03F!important;text-align: center;
 
 #transactionHistory span {
 	float: left;
-	margin: 3% 0 0 3%
+	margin: 2% 0 0 3%
 }
 #transactionHistory a {
 	float: right;
@@ -1202,7 +1202,7 @@ color:#F5C03F!important;text-align: center;
 .outerDiv .ui-body-a, .ui-overlay-a {
 	background: none repeat scroll 0 0 #FFFFFF;
 	border: none;
-	color: #664765 !important;
+	color: #C6C7C9 !important;
 	text-shadow: none;
 }
 .outerDiv .ui-field-contain:last-child {
@@ -1216,7 +1216,7 @@ color:#F5C03F!important;text-align: center;
 
 }
 #login .ui-content {
-	padding: 10px;
+	padding: 8%;
 }
 .forgotPass {
 }
@@ -1230,7 +1230,8 @@ color:#F5C03F!important;text-align: center;
 }
 .rememberMe .ui-field-contain .ui-controlgroup, .ui-field-contain fieldset.ui-controlgroup {
 	float: left;
-	width: 50%;
+	width: 49%;
+	padding: 0 !important;
 	/*display: inline;*/
 	/*width: 50%;*/
 }
@@ -1245,7 +1246,7 @@ color:#F5C03F!important;text-align: center;
 	border: 0;
 }
 .loginDiv div.ui-input-text {
-	margin: 0.4em 0 0.4em 0.5em;
+	margin: 0.2em 0;
 }
 
 .signUpDiv div.ui-input-text {
@@ -1273,12 +1274,16 @@ color:#F5C03F!important;text-align: center;
 	box-shadow: none;
 }
 .loginDiv .ui-corner-all, .loginDiv .ui-btn-corner-all {
-	border-radius: 0px
+	border-radius: 0px;
+	
+}
+.loginDiv .ui-corner-all{
+	padding: 0.8em !important;
 }
 .rememberMe {
 	border: none;
-	margin: 0 0.5em;
-	padding: 0.1em 0;
+/*	margin: 0 0.5em;*/
+	padding:1.3em 0 0.1em;
 }
 .rememberMe .ui-btn-up-b, .rememberMe .ui-btn-hover-b {
 	background: transparent;
@@ -1294,7 +1299,7 @@ color:#F5C03F!important;text-align: center;
 	color: #664765;
 	display: block;
 	font-size: 0.8em;
-	padding-top: 9px;
+	padding-top: 8px;
 	text-shadow: none;
 }
 .rememberMe .ui-checkbox {
@@ -1309,9 +1314,10 @@ color:#F5C03F!important;text-align: center;
 	margin: -5px 0 0;
 }
 #login .ui-btn-left, #login .ui-btn-right, #login .ui-btn-inline, input, #signUp .ui-btn-inline {
-	width: 98%;
+   	margin: 4% 0 3%;
+    width: 100%;
 }
-
+#signUp .ui-btn-inline { margin: 12% 0 3%;}
 #forgotpass .ui-btn-left, #forgotpass .ui-btn-right, #forgotpass .ui-btn-inline, input {
 	width: 40%;
 }
@@ -1323,7 +1329,7 @@ color:#F5C03F!important;text-align: center;
 	background: none repeat scroll 0 0 #FFFFFF !important;
 	float: left;
 	padding: 6px !important;
-	width: 45% !important;
+	width: 40.2% !important;
 }
 .nameContainer .ui-input-text input {
 	width: 100% !important
@@ -1366,7 +1372,7 @@ color:#F5C03F!important;text-align: center;
 .username {
 	background: none repeat scroll 0 0 #664765;
 	color: #FFFFFF;
-	padding: 0.1em;
+	padding: 0.2em 0.3em;
 	text-shadow: none;
 }
 .username a {
@@ -1412,6 +1418,7 @@ color:#F5C03F!important;text-align: center;
 .logo_btm {
 	/*bottom: 0;*/
 	position: relative;
+	clear: both;
 }
 
 /**Restaurant Info**/
@@ -1468,10 +1475,12 @@ color:#F5C03F!important;text-align: center;
 .fblogin{
 	background-color:#6E4D6C; 
 	color:#FFFFFF;
+	margin: 0 1%;
+	padding: 0.2em 0;
 }
 
 .fblogin img{
-	width: 2.5em;
+	width: 2.3em;
 	float:left;
 	vertical-align: middle;
 }
@@ -1479,4 +1488,7 @@ color:#F5C03F!important;text-align: center;
 .fblogin div{
 	font-size: 97%;
 	padding:3% 0;
+}
+.loginDiv input.ui-input-text {
+	padding: 0.8em !important;
 }
