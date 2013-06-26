@@ -25,14 +25,30 @@
 							{{outlet.manager.first_name}}
 						</div>
 						<div class="action">
-							<b>Disable?</b>
-							<br/>
-							<input type="checkbox" ng-show="outlet.disabled" checked ng-click="disableOutlet($event,outlet.id)" />
-							
-							<input type="checkbox" ng-hide="outlet.disabled" ng-click="disableOutlet($event,outlet.id)" />
+							<div class="outlet_action">
+								<b>Disable?</b>
+								<br/>
+								<input type="checkbox" ng-show="outlet.disabled" checked ng-click="disableOutlet($event,outlet.id)" />
+
+								<input type="checkbox" ng-hide="outlet.disabled" ng-click="disableOutlet($event,outlet.id)" />
+							</div>
 							<!-- <span class="checkbox_lable" ng-hide="outlet.disabled">Disable</span>
 							<span class="checkbox_lable" ng-show="outlet.disabled">Enable</span> -->
-							
+							<a href="#/create_outlet?outletId={{outlet.id}}" class="outlet_action actions" >
+								<%= image_tag 'icon_view_dashboard.png' %>
+								<br/>
+								View Dashboard
+							</a>
+							<a href="#/create_outlet?outletId={{outlet.id}}" class="outlet_action actions" >
+								<%= image_tag 'icon_modify_profile.png' %>
+								<br/>
+								Modify Profile
+							</a>
+							<a href="#/create_outlet?outletId={{outlet.id}}" class="outlet_action actions" >
+								<%= image_tag 'icon_download_report.png' %>
+								<br/>
+								Download Report
+							</a>
 						</div>
 					</div>
 				</div>

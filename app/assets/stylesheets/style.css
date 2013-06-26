@@ -23,6 +23,17 @@
 .genderBtn input::-webkit-input-placeholder {
 	color: #F5C03F !important
 }
+.genderBtn input:-moz-placeholder { /* Firefox 18- */
+	color: #F5C03F !important
+}
+
+.genderBtn input::-moz-placeholder {  /* Firefox 19+ */
+ 	color: #F5C03F !important
+}
+
+.genderBtn input:-ms-input-placeholder {  
+   	color: #F5C03F !important 
+}
 .ui-body-b, .ui-body-b input, .ui-body-b select, .ui-body-b textarea, .ui-body-b button {
 	font-family: "kanariFont", sans-serif !important;
 }
@@ -651,7 +662,7 @@ img, object {
 	max-height: 90%;
 	max-width: 75%;
 }
-
+#settings .home img{margin-top:14%;}
 .next {
 	float: left;
 	font-size: 1em;
@@ -800,7 +811,7 @@ img, object {
 	float: left;
 	font-size: 18px;
 	margin: 0.9% 0 0;
-	font-family: KanariLightFont;
+	font-family: bold 16px KanariLightFont  !important;
 }
 .date {
 	float: left;
@@ -821,7 +832,30 @@ img, object {
 #settings .dateDiv .dateInner {
 	color: #F5C03F;
 }
+#settings .ui-field-contain input::-webkit-input-placeholder{color:#664765;}
+#settings .ui-field-contain input:-moz-placeholder { /* Firefox 18- */
+color:#664765;
+}
 
+#settings .ui-field-contain input::-moz-placeholder {  /* Firefox 19+ */
+color:#664765;
+}
+
+#settings .ui-field-contain input:-ms-input-placeholder {  
+color:#664765;
+}
+#settings .dateDiv input::-webkit-input-placeholder{color:#F5C03F!important;text-align: center;}
+#settings .dateDiv input:-moz-placeholder { /* Firefox 18- */
+color:#F5C03F!important;text-align: center;
+}
+
+#settings .dateDiv input::-moz-placeholder {  /* Firefox 19+ */
+color:#F5C03F!important;text-align: center;
+}
+
+#settings .dateDiv input:-ms-input-placeholder {  
+color:#F5C03F!important;text-align: center;
+}
 .settingDiv {
 	color: #664765;
 }
@@ -914,8 +948,7 @@ img, object {
 .genderBtn .ui-field-contain label.ui-slider, .ui-field-contain label.ui-slider {
 	color: #664765;
 	float: left;
-	font-family: KanariLightFont !important;
-	font-size: 16px;
+	font: bold 16px KanariLightFont  !important;
 	margin: 1.5% 0 0;
 	text-align: left;
 	text-shadow: none;
@@ -1089,7 +1122,7 @@ img, object {
 	border-radius: 6px 6px 6px 6px;
 }
 .settingDiv .ui-corner-all, .settingDiv .ui-btn-corner-all {
-	border-radius: 6px 6px 6px 6px;
+	border-radius: 0;
 }
 .dateDiv .ui-corner-all, .dateDiv .ui-btn-corner-all {
 	border-radius: 0 !important;
