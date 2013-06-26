@@ -12,4 +12,20 @@ class Api::V1::OutletTypesController < ApplicationController
     render json: OutletType.find(params[:id])
   end
 
+  def create
+    outlet_type = OutletType.new(outlet_params)
+    authorize! :create, OutletType
+    if outlet_type.save
+      render json: outlet_type, status: :created
+    else
+      render json: {errors: outlet_type.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+    def outlet_params
+      params.fetch(:outlet_type).permit([:name])
+    end
+
 end
