@@ -10,9 +10,9 @@ height: 54px;
 width: 48px;
 }
 .home {
-background-image: url(<%= asset_path 'sprite_mobile.png' %>
+/*background-image: url(<%= asset_path 'sprite_mobile.png' %>
 	);
-	background-position: -309px -471px;
+	background-position: -309px -471px;*/
 	cursor: pointer;
 	float: left;
 	height: 56px;
@@ -22,7 +22,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 	<div data-role="content">
 		<div class="username">
 			<div class="logout" ng-click="logout()"></div>
-			<div class="home" ng-click="home()"></div>
+			<div class="home" ng-click="home()"><%= image_tag 'ic_home_yellow.png' %></div>
 			<div class="signUp">
 				SETTINGS!
 			</div>
