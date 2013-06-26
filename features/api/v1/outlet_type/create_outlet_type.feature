@@ -7,7 +7,6 @@ Feature: Create Outlet Type
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"
         And his role is "kanari_admin"
         And his authentication token is "auth_token_123"
-      Given a customer named "Subway" exists with id "100" with admin "user@gmail.com"
       When I authenticate as the user "auth_token_123" with the password "random string"
       And I send a POST request to "/api/outlet_types" with the following:
       """
@@ -28,7 +27,6 @@ Feature: Create Outlet Type
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"
         And his role is "<role>"
         And his authentication token is "auth_token_1234"
-      Given a customer named "Subway" exists with id "100" with admin "user@gmail.com"
       When I authenticate as the user "auth_token_1234" with the password "random string"
       And I send a POST request to "/api/outlet_types" with the following:
       """
