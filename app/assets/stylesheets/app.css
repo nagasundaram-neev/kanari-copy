@@ -354,8 +354,7 @@ a.actions {
 	padding: 5px;
 	 color: #5A4166;
 }
-a.actions:hover{text-decoration: none;color: #5A4166;}
-width: 85px;}
+a.actions:hover{text-decoration: none;color: #5A4166;width: 85px;}
 /***createOutlet****/
 .header_title {
 	background: none repeat scroll 0 0 #F5BA44;
@@ -384,9 +383,7 @@ width: 85px;}
 	border-bottom: 19px solid transparent;
 	border-left: 19px solid #664766;
 }
-.header_title span.create_rest {
-	padding: 6px;
-}
+
 .header_title span.create_rest img {
 	vertical-align: text-bottom;
 }
