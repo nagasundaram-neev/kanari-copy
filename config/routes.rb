@@ -19,7 +19,7 @@ Kanari::Application.routes.draw do
       resources :managers, only: [:create, :index]
       resources :staffs, only: [:create, :index]
       resources :cuisine_types, only: [:index]
-      resources :outlet_types, only: [:index]
+      resources :outlet_types, only: [:index, :show]
       resources :kanari_codes, only: [:show, :create]
 
       resources :customers do
