@@ -16,7 +16,7 @@ html, body {
 	display: inline !important;
 	padding: 3px !important;
 }
-lable{
+lable {
 	color: #5C5C5C;
 	font-size: 14px;
 }
@@ -221,7 +221,7 @@ body {
 .paddingRememberMe input {
 	width: auto !important;
 }
-/***Home Page**/
+/***Outlet Page**/
 .innerDiv {
 	padding: 30px;
 	min-height: 300px;
@@ -303,14 +303,15 @@ a.addRestaurant:hover {
 	margin-bottom: -1000px;
 }
 .outlet_name {
-	width: 290px;
+	width: 205px;
 }
 .manager_name {
 	width: 110px;
 }
 .outlet_name a {
 	color: #5A4166;
-	font-size: 14px;vi	text-transform: uppercase;
+	font-size: 18px;
+	text-transform: uppercase;
 }
 .outlet_text {
 	padding: 0px !important;
@@ -340,6 +341,21 @@ a.addRestaurant:hover {
 .border_right {
 	border-right: 1px solid #CCCCCC;
 }
+.outlet_action {
+	float: left
+}
+a.actions {
+	background: none repeat scroll 0 0 #E5E5E5;
+	border-radius: 5px 5px 5px 5px;
+	margin: 0 5px;
+	text-align: center;
+	width: 85px;
+	width: 105px;
+	padding: 5px;
+	 color: #5A4166;
+}
+a.actions:hover{text-decoration: none;color: #5A4166;}
+width: 85px;}
 /***createOutlet****/
 .header_title {
 	background: none repeat scroll 0 0 #F5BA44;
@@ -374,6 +390,11 @@ a.addRestaurant:hover {
 .header_title span.create_rest img {
 	vertical-align: text-bottom;
 }
+div.create_rest {
+	display: inline-block;
+	color: green !important;
+	padding: 0 !important;
+}
 #createOutlet .ui-input-data {
 	padding: 5px 0;
 }
@@ -389,20 +410,24 @@ a.addRestaurant:hover {
 	display: block;
 	left: 505px;
 }
-#createOutlet .radioBtn{margin-top:-2px}
+#createOutlet .radioBtn {
+	margin-top: -2px
+}
 .rightPanel lable {
 	float: left;
 	width: 145px;
 	margin-top: 4px;
 }
-.createOutletDiv lable{width: 160px;}
+.createOutletDiv lable {
+	width: 160px;
+}
 #createOutlet select {
 	width: 125px;
 }
 #createOutlet .timeSetting {
 	width: 40px;
-	 color: #5C5C5C;
-    font-size: 14px;
+	color: #5C5C5C;
+	font-size: 14px;
 }
 .create_outlet {
 	padding: 0 0 30px;
@@ -432,7 +457,7 @@ a.addRestaurant:hover {
 	background-image: url('bg_left_tab.jpg');
 	background-position: 100% 100%;
 	border-bottom: 1px solid #CCCCCC;
-	border-right: 1px solid #CCCCCC
+	border-right: 1px solid  #CCCCCC
 }
 .leftPanel ul li.active {
 	background: none;
@@ -546,8 +571,12 @@ ul.taketour li a:hover {
 	float: left;
 	width: 270px;
 }
-#acceptInvitationStep2 lable{width: 190px;}
-.acceptInv .input-help ul{margin-top:-2px}
+#acceptInvitationStep2 lable {
+	width: 190px;
+}
+.acceptInv .input-help ul {
+	margin-top: -2px
+}
 /***Change Password**/
 .
 .changePass {

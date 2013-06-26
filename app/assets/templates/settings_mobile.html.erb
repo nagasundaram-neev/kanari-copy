@@ -70,6 +70,12 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				</div>
 				<div class="clr"></div>
 			</div>
+			<p class="errorMsg" ng-show="errorMsg">
+				{{error}}
+			</p>
+			<p class="succMsg" ng-show="succMsg">
+				Profile updated successfully!!!
+			</p>
 			<div data-role="fieldcontain" class="profileTextBottom" align="center">
 				<h2>Notifications</h2>
 			</div>
@@ -99,7 +105,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			<div class="ui-input-text ui-body-a inviteFriends">
 				<a href="#"><%= image_tag 'ic_fb_yellow.png' %></a>
 				<a href="#"><%= image_tag 'ic_twitter_yellow.png' %></a>
-				<a href="#" style="padding-top: 2%"><%= image_tag 'ic_gplus_yellow.png' %></a>
+				<a href="#"><%= image_tag 'ic_gplus_yellow.png' %></a>
 			</div>
 			<div class="border"></div>
 			<div id="transactionHistory" ng-click="tansactionHistory()">
@@ -108,12 +114,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				<div class="clr"></div>
 			</div>
 			<input type="button" class="signBtn" ng-click="saveProfile()" data-inline="true" value="Save"/>
-			<p class="errorMsg" ng-show="errorMsg">
-				{{error}}
-			</p>
-			<p class="succMsg" ng-show="succMsg">
-				Profile updated successfully!!!
-			</p>
+			
 		</div>
 	</div>
 </div>
