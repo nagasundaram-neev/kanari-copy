@@ -898,7 +898,7 @@ color:#F5C03F!important;text-align: center;
 	padding-top: 0.5em;
 	/*width: 88%;*/
 }
-.genderBtn .ui-btn-down-a {
+.genderBtn .ui-btn-down-a .ui-btn-active {
 	background: linear-gradient(#593F5A, #593F5A) repeat scroll 0 0 #593F5A;
 	background: -webkit-linear-gradient( #593F5A,#593F5A ) repeat scroll 0 0 #593F5A;
 	background:	-moz-linear-gradient( #593F5A,#593F5A ) repeat scroll 0 0 #593F5A;
@@ -941,7 +941,14 @@ color:#F5C03F!important;text-align: center;
 	background-image: linear-gradient( #593F5A,#593F5A );*/
 	background-color: #593F5A;
 }
-
+.genderBtn .ui-btn-active,.genderBtn .ui-btn-down-a{
+   background-image: -webkit-gradient(linear,left top,left bottom,from( #593F5A ),to( #593F5A ));
+	background-image: -webkit-linear-gradient( #593F5A,#593F5A );
+	background-image: -moz-linear-gradient( #593F5A,#593F5A );
+	background-image: -ms-linear-gradient( #593F5A,#593F5A );
+	background-image: -o-linear-gradient( #593F5A,#593F5A );
+	background-image: linear-gradient( #593F5A,#593F5A );
+}
 .genderBtn .ui-field-contain, .ui-mobile fieldset.ui-field-contain {
 	margin: none !important;
 }
