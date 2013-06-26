@@ -1,0 +1,1082 @@
+have_func: checking for rb_thread_blocking_region()... -------------------- yes
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I.  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L.  -rdynamic -Wl,-export-dynamic     '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main(int argc, char **argv)
+4: {
+5:   return 0;
+6: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I.  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L.  -rdynamic -Wl,-export-dynamic     '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))rb_thread_blocking_region; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+
+have_func: checking for rb_wait_for_single_fd()... -------------------- yes
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I.  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L.  -rdynamic -Wl,-export-dynamic     '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘rb_wait_for_single_fd’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))rb_wait_for_single_fd; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I.  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L.  -rdynamic -Wl,-export-dynamic     '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘rb_wait_for_single_fd’ [-Wimplicit-function-declaration]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { rb_wait_for_single_fd(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+
+find_library: checking for mysql_query() in -lmysqlclient... -------------------- no
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic     '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic     '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘mysql_query’ [-Wimplicit-function-declaration]
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { mysql_query(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic     '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic     '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘mysql_query’ [-Wimplicit-function-declaration]
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { mysql_query(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L/usr/local/lib/mysql -Wl,-R/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic     '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L/usr/local/lib/mysql -Wl,-R/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic     '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘mysql_query’ [-Wimplicit-function-declaration]
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { mysql_query(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+
+have_library: checking for main() in -lm... -------------------- yes
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic     '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘main’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))main; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic     '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘main’ [-Wimplicit-function-declaration]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { main(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+
+find_library: checking for mysql_query() in -lmysqlclient... -------------------- no
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘mysql_query’ [-Wimplicit-function-declaration]
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { mysql_query(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘mysql_query’ [-Wimplicit-function-declaration]
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { mysql_query(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L/usr/local/lib/mysql -Wl,-R/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic    -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L/usr/local/lib/mysql -Wl,-R/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic    -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘mysql_query’ [-Wimplicit-function-declaration]
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { mysql_query(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+
+have_library: checking for main() in -lz... -------------------- yes
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘main’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))main; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘main’ [-Wimplicit-function-declaration]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { main(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+
+find_library: checking for mysql_query() in -lmysqlclient... -------------------- no
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘mysql_query’ [-Wimplicit-function-declaration]
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { mysql_query(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘mysql_query’ [-Wimplicit-function-declaration]
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { mysql_query(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L/usr/local/lib/mysql -Wl,-R/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic    -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L/usr/local/lib/mysql -Wl,-R/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic    -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘mysql_query’ [-Wimplicit-function-declaration]
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { mysql_query(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+
+have_library: checking for main() in -lsocket... -------------------- no
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lsocket -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘main’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))main; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lsocket -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘main’ [-Wimplicit-function-declaration]
+/usr/bin/ld: cannot find -lsocket
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { main(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+
+find_library: checking for mysql_query() in -lmysqlclient... -------------------- no
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘mysql_query’ [-Wimplicit-function-declaration]
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { mysql_query(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘mysql_query’ [-Wimplicit-function-declaration]
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { mysql_query(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L/usr/local/lib/mysql -Wl,-R/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic    -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L/usr/local/lib/mysql -Wl,-R/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic    -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘mysql_query’ [-Wimplicit-function-declaration]
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { mysql_query(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+
+have_library: checking for main() in -lnsl... -------------------- yes
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lnsl -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘main’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))main; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lnsl -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘main’ [-Wimplicit-function-declaration]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { main(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+
+find_library: checking for mysql_query() in -lmysqlclient... -------------------- no
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lnsl -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lnsl -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘mysql_query’ [-Wimplicit-function-declaration]
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { mysql_query(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lnsl -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lnsl -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘mysql_query’ [-Wimplicit-function-declaration]
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { mysql_query(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L/usr/local/lib/mysql -Wl,-R/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lnsl -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L/usr/local/lib/mysql -Wl,-R/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lnsl -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘mysql_query’ [-Wimplicit-function-declaration]
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { mysql_query(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+
+have_library: checking for main() in -lmygcc... -------------------- no
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmygcc -lnsl -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘main’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))main; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmygcc -lnsl -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘main’ [-Wimplicit-function-declaration]
+/usr/bin/ld: cannot find -lmygcc
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { main(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+
+find_library: checking for mysql_query() in -lmysqlclient... -------------------- no
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lnsl -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lnsl -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘mysql_query’ [-Wimplicit-function-declaration]
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { mysql_query(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lnsl -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lnsl -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘mysql_query’ [-Wimplicit-function-declaration]
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { mysql_query(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L/usr/local/lib/mysql -Wl,-R/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lnsl -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:4:53: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:4:28: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"gcc -o conftest -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/i686-linux -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1/ruby/backward -I/home/admin1/.rvm/rubies/ruby-1.9.3-p429/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64   -O3 -ggdb -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC conftest.c  -L. -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -Wl,-R/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/usr/local/lib -Wl,-R/usr/local/lib -L/usr/local/lib/mysql -Wl,-R/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lz -lm  '-Wl,-rpath,/../lib' -Wl,-R -Wl,/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -L/home/admin1/.rvm/rubies/ruby-1.9.3-p429/lib -lruby -lmysqlclient -lnsl -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:4:1: warning: implicit declaration of function ‘mysql_query’ [-Wimplicit-function-declaration]
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { mysql_query(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+
