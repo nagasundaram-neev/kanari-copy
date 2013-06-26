@@ -1026,7 +1026,7 @@ img, object {
 
 #signUp .ui-field-contain .ui-input-search, .ui-field-contain div.ui-input-text {
 	background: none repeat scroll 0 0 #FFFFFF;
-	border-bottom: thin solid #E5E5E5;
+/*	border-bottom: thin solid #E5E5E5;*/
 	border-left: 0 none !important;
 	border-right: 0 none !important;
 	border-top: 0 none;
