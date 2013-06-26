@@ -21,7 +21,7 @@
 						<label for="checkbox-1">Remember Me</label>
 					</fieldset>
 					<!-- <div class="dotSeparator">&nbsp;</div> -->
-						<a data-role="none" class="forgotpass" ng-click="forgotPassword()">Forgot your password?</a>
+					<a data-role="none" class="forgotpass" ng-click="forgotPassword()">Forgot your password?</a>
 					<div class="clr"></div>
 				</div>
 				<input type="button" class="loginBtn" ng-click="chkLogin()" data-inline="true" value="LOG IN" />
@@ -34,7 +34,9 @@
 			<div class="or">
 				or
 			</div>
-		<input type="button" class="loginBtn" data-inline="true" value="LOGIN WITH FACEBOOK"/>
+			<div class="fblogin clr">
+				<%= image_tag 'icon_f.png' %> <div>LOGIN WITH FACEBOOK</div>
+			</div>
 		</div>
 		<div class="logo_btm">
 			<%= image_tag 'login_bird.png' %>
