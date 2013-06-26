@@ -900,6 +900,12 @@ color:#F5C03F!important;text-align: center;
 }
 .genderBtn .ui-btn-down-a {
 	background: linear-gradient(#593F5A, #593F5A) repeat scroll 0 0 #593F5A;
+	background: -webkit-linear-gradient( #593F5A,#593F5A ) repeat scroll 0 0 #593F5A;
+	background:	-moz-linear-gradient( #593F5A,#593F5A ) repeat scroll 0 0 #593F5A;
+	background: -ms-linear-gradient( #593F5A,#593F5A ) repeat scroll 0 0 #593F5A;
+	background:	-o-linear-gradient( #593F5A,#593F5A ) repeat scroll 0 0 #593F5A;
+	background: linear-gradient( #593F5A,#593F5A ) repeat scroll 0 0 #593F5A;
+}
 }
 .genderBtn .ui-corner-all, .genderBtn .ui-btn-corner-all {
 	border-radius: 0 !important;
@@ -909,6 +915,11 @@ color:#F5C03F!important;text-align: center;
 }
 .genderBtn .ui-btn-up-a, .ui-btn-hover-a {
 	background: linear-gradient(#E5E6E8, #E5E6E8) repeat scroll 0 0 #E5E6E8;
+	background: -webkit-linear-gradient( #E5E6E8,#E5E6E8 ) repeat scroll 0 0 #E5E6E8;
+	background:	-moz-linear-gradient( #E5E6E8,#E5E6E8 ) repeat scroll 0 0 #E5E6E8;
+	background: -ms-linear-gradient( #E5E6E8,#E5E6E8 ) repeat scroll 0 0 #E5E6E8;
+	background:	-o-linear-gradient( #E5E6E8,#E5E6E8 ) repeat scroll 0 0 #E5E6E8;
+	background: linear-gradient( #E5E6E8,#E5E6E8 ) repeat scroll 0 0 #E5E6E8;
 }
 
 /*.genderBtn .ui-slider-switch .ui-btn.ui-slider-handle{
@@ -920,8 +931,15 @@ color:#F5C03F!important;text-align: center;
  width: 42px;
  }*/
 
-.genderBtn .ui-btn-down-b, .genderBtn .ui-btn-active {
-	background: linear-gradient(#593F5A, #593F5A) repeat scroll 0 0 #593F5A;
+.genderBtn .ui-btn-down-b .ui-btn-down-a, .genderBtn .ui-btn-active {
+	/*background: linear-gradient(#593F5A, #593F5A) repeat scroll 0 0 #593F5A;*/
+	/*background-image: -webkit-gradient(linear,left top,left bottom,from( #593F5A ),to( #593F5A ));
+	background-image: -webkit-linear-gradient( #593F5A,#593F5A );
+	background-image: -moz-linear-gradient( #593F5A,#593F5A );
+	background-image: -ms-linear-gradient( #593F5A,#593F5A );
+	background-image: -o-linear-gradient( #593F5A,#593F5A );
+	background-image: linear-gradient( #593F5A,#593F5A );*/
+	background-color: #593F5A;
 }
 
 .genderBtn .ui-field-contain, .ui-mobile fieldset.ui-field-contain {
