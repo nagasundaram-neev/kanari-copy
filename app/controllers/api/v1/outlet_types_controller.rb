@@ -22,6 +22,16 @@ class Api::V1::OutletTypesController < ApplicationController
     end
   end
 
+  def update
+    authorize! :create, OutletType
+    outlet_type = OutletType.find(params[:id])
+    if outlet_type.update(outlet_params)
+      render json: nil
+    else
+      render json: {errors: outlet_type.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
   private
 
     def outlet_params

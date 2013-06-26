@@ -898,7 +898,7 @@ color:#F5C03F!important;text-align: center;
 	padding-top: 0.5em;
 	/*width: 88%;*/
 }
-.genderBtn .ui-btn-down-a {
+.genderBtn .ui-btn-down-a .ui-btn-active {
 	background: linear-gradient(#593F5A, #593F5A) repeat scroll 0 0 #593F5A;
 	background: -webkit-linear-gradient( #593F5A,#593F5A ) repeat scroll 0 0 #593F5A;
 	background:	-moz-linear-gradient( #593F5A,#593F5A ) repeat scroll 0 0 #593F5A;
