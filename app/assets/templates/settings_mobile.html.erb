@@ -10,9 +10,9 @@ height: 54px;
 width: 48px;
 }
 .home {
-background-image: url(<%= asset_path 'sprite_mobile.png' %>
+/*background-image: url(<%= asset_path 'sprite_mobile.png' %>
 	);
-	background-position: -309px -471px;
+	background-position: -309px -471px;*/
 	cursor: pointer;
 	float: left;
 	height: 56px;
@@ -22,7 +22,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 	<div data-role="content">
 		<div class="username">
 			<div class="logout" ng-click="logout()"></div>
-			<div class="home" ng-click="home()"></div>
+			<div class="home" ng-click="home()"><%= image_tag 'ic_home_yellow.png' %></div>
 			<div class="signUp">
 				SETTINGS!
 			</div>
@@ -64,9 +64,9 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			<div class="ui-input-text ui-body-a dateDiv">
 				<label class="dateLabel"> Date of birth</label>
 				<div class="date">
-					<input data-theme="a" data-inline="true" type="text" name="date" ng-model="date" maxlength="2" class="dateInner" placeholder="D"/>
-					<input data-theme="a" data-inline="true" type="text" name="date" ng-model="month" maxlength="2" class="dateInner" placeholder="M"/>
-					<input data-theme="a" data-inline="true" type="text" name="date" ng-model="year" maxlength="4" class="dateInner" placeholder="Y"/>
+					<input data-theme="a" data-inline="true" type="number" name="date" ng-model="date" maxlength="2" class="dateInner" placeholder="D"/>
+					<input data-theme="a" data-inline="true" type="number" name="date" ng-model="month" maxlength="2" class="dateInner" placeholder="M"/>
+					<input data-theme="a" data-inline="true" type="number" name="date" ng-model="year" maxlength="4" class="dateInner" placeholder="Y"/>
 				</div>
 				<div class="clr"></div>
 			</div>

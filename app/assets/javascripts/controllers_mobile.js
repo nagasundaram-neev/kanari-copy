@@ -258,7 +258,6 @@ module.controller('resetPassController', function($scope, $http, $location, $rou
 });
 
 module.controller('homeController', function($scope, $http, $location) {
-	if (getCookie('authToken')) {
 		$scope.userName = getCookie('userName');
 		$scope.role = getCookie('userRole');
 		//document.body.style.background = #FFFFFF;
@@ -279,14 +278,10 @@ module.controller('homeController', function($scope, $http, $location) {
 		$scope.setting = function() {
 			$location.url("/settings");
 		};
-	} else {
-		$location.url('/login');
-	}
 
 });
 
 module.controller('commonCtrl', function($scope, $http, $location) {
-	if (getCookie('authToken')) {
 		//$location.url('/home');
 		$scope.emailCLick = function() {
 			$location.url("/login");
@@ -294,9 +289,6 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 		$scope.signUpCLick = function() {
 			$location.url("/signUp");
 		};
-	} else {
-		$location.url('/login');
-	}
 });
 
 module.controller('signUpController', function($scope, $http, $location) {
