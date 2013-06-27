@@ -2,12 +2,12 @@
 	<style>
 .setting {
   background-image: url("/assets/ic_setting_yellow.png");
-    background-position: 0 0;
+    background-position: 0 3px;
     background-repeat: no-repeat;
     cursor: pointer;
     float: right;
     height: 47px;
-    width: 47px;
+    width: 42px;
 }
 
 /*.feedback {
@@ -40,7 +40,7 @@ background-image: url(<%= asset_path 'ic_calender_yellow.png' %>
     width: 45px;
 }
 	</style>
-	<div data-role="content" style="padding: 0px;">
+	<div data-role="content">
 		<div class="username">
 			<div class="setting" ng-click="setting()"></div>
 			<a ng-click="homeClk()">{{userName}}</a>
