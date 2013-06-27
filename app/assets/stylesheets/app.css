@@ -349,12 +349,11 @@ a.actions {
 	border-radius: 5px 5px 5px 5px;
 	margin: 0 5px;
 	text-align: center;
-	width: 85px;
 	width: 105px;
 	padding: 5px;
 	 color: #5A4166;
 }
-a.actions:hover{text-decoration: none;color: #5A4166;width: 85px;}
+a.actions:hover{text-decoration: none;color: #5A4166;}
 /***createOutlet****/
 .header_title {
 	background: none repeat scroll 0 0 #F5BA44;
