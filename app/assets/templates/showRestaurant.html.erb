@@ -1,24 +1,4 @@
 <div data-role="page" data-theme="b" id="showRestaurant" ng-controller="showRestaurantController">
-	<style>
-.home {
-background-image: url(<%= asset_path 'sprite_mobile.png' %>
-);
-background-position: -309px -476px;
-cursor: pointer;
-float: left;
-height: 54px;
-width: 45px;
-}
-.searchIcon{
-background-image: url(<%= asset_path 'sprite_mobile.png' %>
-	);
-	background-position: -145px -475px;
-	cursor: pointer;
-	float: right;
-	height: 60px;
-	width: 53px;
-	}
-	</style>
 	<div data-role="content">
 		<div class="username">
 			<div class="home" ng-click="home()"></div>
@@ -33,13 +13,13 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				<span class="address">{{restaurant_address}}</span>
 			</div>
 			<div class="username rest_info">
-				<span class="img_outlet" style="width: 20%;"><%= image_tag 'ic_customer_care.png' %></span> {{contact_number}}
+				<span class="img_outlet" style="width: 15%;"><%= image_tag 'ic_customer_care.png' %></span> {{contact_number}}
 			</div>
 			<div class="username rest_info">
-				<span class="img_outlet" style="width: 20%;"><%= image_tag 'ic_at_white.png' %></span> {{email_address}}
+				<span class="img_outlet" style="width: 15%;"><%= image_tag 'ic_at_white.png' %></span> {{email_address}}
 			</div>
 			<div class="username rest_info">
-				<span class="img_outlet" style="width: 20%;"><%= image_tag 'ic_location_white.png' %></span> Location map
+				<span class="img_outlet" style="width: 15%;"><%= image_tag 'ic_location_white.png' %></span> Location map
 			</div>
 			<div class="outlet_div rest_info">
 				<div class="outlet_title ">
