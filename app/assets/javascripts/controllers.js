@@ -780,33 +780,46 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			console.log($scope.formoutlet1);
 			if ($scope.formoutlet1) {
 				if ($scope.formoutlet1 == $scope.formoutlet2 || $scope.formoutlet1 == $scope.formoutlet3) {
+					$scope.outletError1 = false;
 					$scope.outletError = true;
 					$scope.checkedOutletTypes[0] = 0;
 					$scope.formoutlet1 = 0;
+
 				} else {
 					$scope.outletError = false;
 					$scope.checkedOutletTypes[0] = $scope.formoutlet1;
 					setCookie('currentOutletList', $scope.checkedOutletTypes, 1);
+					$scope.outletError1 = false;
+					$scope.outletError2 = false;
 				}
 			}
-			
+
 		}
 		$scope.selectOutlet2 = function() {
 			$scope.form_outlet3 = true;
-			if ($scope.formoutlet2) {				
+			if ($scope.formoutlet2 && $scope.formoutlet1) {
 				if ($scope.formoutlet2 == $scope.formoutlet1 || $scope.formoutlet2 == $scope.formoutlet3) {
 					$scope.outletError = true;
 					$scope.checkedOutletTypes[1] = 0;
 					$scope.formoutlet2 = 0;
-					
+
 				} else {
 					$scope.outletError = false;
 					$scope.checkedOutletTypes[1] = $scope.formoutlet2;
+					$scope.outletError2 = false;
 				}
+			} else {
+				if ($scope.formoutlet1) {
+				} else {
+					$scope.outletError1 = true;
+					$scope.formoutlet2 = 0;
+					$scope.formoutlet3 = 0;
+				}
+
 			}
 		}
 		$scope.selectOutlet3 = function() {
-			if ($scope.formoutlet3) {
+			if ($scope.formoutlet3 && $scope.formoutlet1 && $scope.formoutlet2) {
 				if ($scope.formoutlet3 == $scope.formoutlet1 || $scope.formoutlet3 == $scope.formoutlet2) {
 					$scope.outletError = true;
 					$scope.checkedOutletTypes[2] = 0;
@@ -815,6 +828,13 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.outletError = false;
 					$scope.checkedOutletTypes[2] = $scope.formoutlet3;
 				}
+			} else {
+				if ($scope.formoutlet1 && $scope.formoutlet2) {
+					$scope.outletError2 = false;
+				} else {
+					$scope.outletError2 = true;
+					$scope.formoutlet3 = 0;
+				}
 			}
 		}
 		$scope.selectCuisine1 = function() {
@@ -822,36 +842,56 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			if ($scope.formcuisine1) {
 				if ($scope.formcuisine1 == $scope.formcuisine2 || $scope.formcuisine1 == $scope.formcuisine3) {
 					$scope.cuisineError = true;
+					scope.cuisineError1 = false;
 					$scope.checkedOutletTypes[0] = 0;
 					$scope.formcuisine1 = 0;
 				} else {
 					$scope.cuisineError = false;
+					scope.cuisineError1 = false;
 					$scope.checkedCuisineTypes[0] = $scope.formcuisine1;
 				}
 			}
 		}
 		$scope.selectCuisine2 = function() {
 			$scope.form_cuisine3 = true;
-			if ($scope.formcuisine2) {
+			if ($scope.formcuisine2 && $scope.formcuisine1) {
 				if ($scope.formcuisine2 == $scope.formcuisine1 || $scope.formcuisine2 == $scope.formcuisine3) {
 					$scope.cuisineError = true;
 					$scope.checkedOutletTypes[1] = 0;
 					$scope.formcuisine2 = 0;
+					$scope.cuisineError2 = false;
 				} else {
 					$scope.cuisineError = false;
 					$scope.checkedCuisineTypes[1] = $scope.formcuisine2;
+					$scope.cuisineError2 = false;
 				}
+			} else {
+				if ($scope.formcuisine1) {
+				} else {
+					$scope.cuisineError1 = true;
+					$scope.formcuisine2 = 0;
+					$scope.formcuisine3 = 0;
+				}
+
 			}
 		}
 		$scope.selectCuisine3 = function() {
-			if ($scope.formcuisine3) {
+			if ($scope.formcuisine3 && $scope.formcuisine1 && $scope.formcuisine2) {
 				if ($scope.formcuisine3 == $scope.formcuisine1 || $scope.formcuisine3 == $scope.formcuisine2) {
 					$scope.cuisineError = true;
 					$scope.checkedOutletTypes[2] = 0;
 					$scope.formcuisine3 = 0;
+					$scope.cuisineError2 = false;
 				} else {
 					$scope.cuisineError = false;
 					$scope.checkedCuisineTypes[2] = $scope.formcuisine3;
+				}
+			} else {
+				if ($scope.formcuisine1 && $scope.formcuisine2) {
+					$scope.cuisineError2 = false;
+				} else {
+					$scope.cuisineError2 = true;
+					$scope.formcuisine3 = 0;
 				}
 			}
 		}
