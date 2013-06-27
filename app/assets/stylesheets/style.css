@@ -78,7 +78,7 @@
 }
 
 .ui-content {
-	padding: 0
+ 	padding: 0 1.5%;
 }
 
 .roundBtn img {
@@ -342,11 +342,11 @@
 	float: left;
 	padding: 6% 0%;
 	text-shadow: none;
-	width: 46.5%;
+	width: 46%;
 	text-align: center;
 }
 .searchDiv {
-	margin: 0 2%;
+/*	margin: 0 2%;*/
 }
 
 .searchDiv input::-moz-placeholder, textarea::-moz-placeholder {
@@ -447,7 +447,7 @@
 }
 .bottomDiv {
 	background-color: #593F5A;
-	margin: 10% 0 0;
+	margin: 5% 0 1%;
 }
 .recentAct {
 	color: #ECBD3A;
@@ -459,14 +459,15 @@
 }
 .recentActDiv {
 	float: left;
-	padding: 3% 0;
-	width: 74%;
+    margin-left: 2%;
+    padding: 4% 0 3%;
+    width: 74%;
 }
 .backColr {
 	background-color: #E5E6E8;
 	padding: 5% 0;
 	float: left;
-	width: 32.8%;
+	width: 32.7%;
 	border-right: 3px solid #FFFFFF;
 }
 .clear {
@@ -479,7 +480,7 @@
 	border-right: 3px solid #FFFFFF;
 	border-top: 3px solid #FFFFFF;
 	float: left;
-	padding: 8.8% 0;
+	padding: 5% 0;
 	width: 30%;
 }
 
@@ -488,7 +489,7 @@
 	border-right: 3px solid #FFFFFF;
 	border-top: 3px solid #FFFFFF;
 	float: left;
-	padding: 10.9% 0;
+	padding: 7.3% 0;
 	width: 30%;
 }
 
@@ -514,13 +515,13 @@ img, object {
 	background-color: #E5E6E8;
 	border-right: 3px solid #FFFFFF;
 	float: left;
-	padding: 8% 0;
-	width: 18%;
+	padding: 4% 0;
+	width: 19.2%;
 	height: 43px;
 }
 
 #feedback .menDiv {
-	margin: 2% 0 0 4%;
+	margin: 2% 0 0 0;
 	width: 100%;
 }
 
@@ -540,7 +541,7 @@ img, object {
 }
 
 .prev {
-	background-color: #FDBE3A;
+	background-color: #664765;
 	border-right: 3px solid #FFFFFF;
 	float: left;
 	padding: 0.8em 0;
@@ -553,18 +554,18 @@ img, object {
 	vertical-align: text-bottom;
 }
 .prevTxt {
-	color: #664765;
+	color: #FDBE3A;
 	display: inline;
 }
 .nxt {
-	background-color: #664765;
+	background-color: #FDBE3A;
 	float: left;
 	padding: 0.8em 0;
 	width: 49.5%;
 	text-align: center;
 }
 .nxtTxt {
-	color: #FDBE3A;
+	color: #664765;
 	display: inline;
 	font-size: 100%;
 	/*padding: 0 20%;*/
@@ -640,7 +641,7 @@ img, object {
 }
 
 #feedback_step2 .menDiv {
-	margin: 0 0 0 4%;
+	margin: 0 0 0 2.4%;
 	width: 100%;
 }
 
@@ -656,7 +657,7 @@ img, object {
 
 .secondRow {
 	width: 90%;
-	margin: 0 0 0 10%;
+	margin: 0 0 0 9%;
 }
 .home {
   background-image: url("/assets/ic_home_yellow.png");
@@ -682,7 +683,7 @@ img, object {
 	max-height: 90%;
 	max-width: 75%;
 }
-#settings .home img{margin-top:14%;}
+.home img{margin-top:14%;}
 .next {
 	float: left;
 	font-size: 1em;
@@ -1065,11 +1066,11 @@ color:#F5C03F!important;text-align: center;
 
 #transactionHistory span {
 	float: left;
-	margin: 2% 0 0 3%
+	margin: 2.6% 0 0 3%
 }
 #transactionHistory a {
 	float: right;
-	margin: 0 1% 0 0
+	margin: 0 2% 0 0
 }
 #transactionHistory a img {
 	vertical-align: top;
@@ -1086,6 +1087,10 @@ color:#F5C03F!important;text-align: center;
 	text-align: center;
 	margin: 4% 0 0;
 	font-size: 20px;
+}
+#feedbackSub .signUp{
+	margin-top: 0;
+    padding: 2% 0;
 }
 
 /*#signUp .outDiv{
@@ -1224,7 +1229,7 @@ color:#F5C03F!important;text-align: center;
 	border-right: 3px solid #FFFFFF;
 	border-top: 3px solid #FFFFFF;
 	float: left;
-	padding: 8% 0;
+	padding: 4% 0;
 	width: 30%;
 }
 .enter_code {
@@ -1238,7 +1243,7 @@ color:#F5C03F!important;text-align: center;
 .outerDiv .ui-body-a, .ui-overlay-a {
 	background: none repeat scroll 0 0 #FFFFFF;
 	border: none;
-	color: #C6C7C9 !important;
+	color: #bbb !important;
 	text-shadow: none;
 }
 .outerDiv .ui-field-contain:last-child {
@@ -1251,7 +1256,7 @@ color:#F5C03F!important;text-align: center;
 .chkbox {
 
 }
-#login .ui-content {
+#login .ui-content,#forgotpass .ui-content{
 	padding: 8%;
 }
 .forgotPass {
@@ -1349,11 +1354,11 @@ color:#F5C03F!important;text-align: center;
 	left: 4px;
 	margin: -5px 0 0;
 }
-#login .ui-btn-left, #login .ui-btn-right, #login .ui-btn-inline, input, #signUp .ui-btn-inline {
+#login .ui-btn-left, #login .ui-btn-right {
    	margin: 4% 0 3%;
     width: 100%;
 }
-#signUp .ui-btn-inline { margin: 12% 0 3%;}
+#login .ui-btn-inline, input, #signUp .ui-btn-inline{ margin:  4% 0 3%;width:100%;}
 #forgotpass .ui-btn-left, #forgotpass .ui-btn-right, #forgotpass .ui-btn-inline, input {
 	width: 40%;
 }
@@ -1391,8 +1396,9 @@ color:#F5C03F!important;text-align: center;
 	 font-weight: 600;*/
 	font: 600 95% KanariLightFont;
 }
-.loginBtn {
+.loginBtn,.signBtn{
 	width: 100% !important;
+	margin:0!important;
 }
 .loginFb {
 	background-color: #664765;

@@ -258,6 +258,8 @@ module.controller('resetPassController', function($scope, $http, $location, $rou
 });
 
 module.controller('homeController', function($scope, $http, $location) {
+
+	if (getCookie("authToken")) {
 		$scope.userName = getCookie('userName');
 		$scope.role = getCookie('userRole');
 		//document.body.style.background = #FFFFFF;
@@ -278,17 +280,20 @@ module.controller('homeController', function($scope, $http, $location) {
 		$scope.setting = function() {
 			$location.url("/settings");
 		};
+	} else {
+		$location.url("/login");
+	}
 
 });
 
 module.controller('commonCtrl', function($scope, $http, $location) {
-		//$location.url('/home');
-		$scope.emailCLick = function() {
-			$location.url("/login");
-		};
-		$scope.signUpCLick = function() {
-			$location.url("/signUp");
-		};
+	//$location.url('/home');
+	$scope.emailCLick = function() {
+		$location.url("/login");
+	};
+	$scope.signUpCLick = function() {
+		$location.url("/signUp");
+	};
 });
 
 module.controller('signUpController', function($scope, $http, $location) {
@@ -439,6 +444,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 					data : param
 				}).success(function(data, status) {
 					console.log("User Role " + data + " status " + status);
+					deleteCookie('authToken');
 					setCookie('authToken', data.auth_token, 0.29);
 					$scope.errorMsg = false;
 					$scope.succMsg = true;
@@ -454,17 +460,23 @@ module.controller('settingsController', function($scope, $http, $location) {
 		};
 
 		$scope.logout = function() {
-			console.log("in Logout");
-
+			console.log("in Logout" + getCookie('authToken'));
+			
+			var param = {
+				"auth_token": getCookie('authToken')
+			}
+			
+			
 			$http({
 				method : 'delete',
 				url : '/api/users/sign_out',
-				//data : param
+				data : param
 			}).success(function(data, status) {
 				console.log("User Role " + data + " status " + status);
 				deleteCookie('authToken');
 				deleteCookie('userRole');
 				deleteCookie('userName');
+				deleteCookie('feedbackId');
 				$location.url("/login");
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + "authToken" + getCookie('authToken'));
@@ -473,6 +485,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 			deleteCookie('authToken');
 			deleteCookie('userRole');
 			deleteCookie('userName');
+			deleteCookie('feedbackId');
 			$location.url("/login");
 		};
 	} else {
