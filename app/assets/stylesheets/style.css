@@ -560,7 +560,7 @@ img, object {
 .nxt {
 	background-color: #FDBE3A;
 	float: left;
-	padding: 0.8em 0;
+	padding: 0.75em 0;
 	width: 49.5%;
 	text-align: center;
 }
@@ -585,7 +585,7 @@ img, object {
 	width: 40%;
 }
 .footerDiv {
-	margin: 11% 0 0;
+	margin: 5% 0 2%;
 	text-shadow: none;
 }
 #transaction_history .footerDiv {
@@ -1088,6 +1088,7 @@ color:#F5C03F!important;text-align: center;
 	margin: 4% 0 0;
 	font-size: 20px;
 }
+#restaurantList .signUp,#showRestaurant .signUp{margin: 2.6 0 0;}
 #feedbackSub .signUp{
 	margin-top: 0;
     padding: 2% 0;
