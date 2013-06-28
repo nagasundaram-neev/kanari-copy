@@ -1333,6 +1333,7 @@ color:#F5C03F!important;text-align: center;
 /*	margin: 0 0.5em;*/
 	padding:0.5em 0 0.1em;
 }
+.rememberMe .ui-icon{ background-color: #6E4D6C;} 
 .rememberMe .ui-btn-up-b, .rememberMe .ui-btn-hover-b {
 	background: transparent;
 	border: 0;
@@ -1358,7 +1359,7 @@ color:#F5C03F!important;text-align: center;
 	left: 2px;
 }
 .rememberMe .ui-checkbox input {
-	left: 3px;
+	left: 1px;
 	margin: -8px 0 0;
 }
 #login .ui-btn-left, #login .ui-btn-right {
