@@ -812,7 +812,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				if ($scope.formoutlet1 == $scope.formoutlet2 || $scope.formoutlet1 == $scope.formoutlet3) {
 					$scope.outletError1 = false;
 					$scope.outletError = true;
-					$scope.checkedOutletTypes[0] = 0;
+					$scope.checkedOutletTypes.splice(0,1);
 					$scope.formoutlet1 = 0;
 
 				} else {
@@ -830,7 +830,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			if ($scope.formoutlet2 && $scope.formoutlet1) {
 				if ($scope.formoutlet2 == $scope.formoutlet1 || $scope.formoutlet2 == $scope.formoutlet3) {
 					$scope.outletError = true;
-					$scope.checkedOutletTypes[1] = 0;
+					$scope.checkedOutletTypes.splice(1,1);
 					$scope.formoutlet2 = 0;
 
 				} else {
@@ -854,7 +854,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			if ($scope.formoutlet3 && $scope.formoutlet1 && $scope.formoutlet2) {
 				if ($scope.formoutlet3 == $scope.formoutlet1 || $scope.formoutlet3 == $scope.formoutlet2) {
 					$scope.outletError = true;
-					$scope.checkedOutletTypes[2] = 0;
+					$scope.checkedOutletTypes.splice(2,1);
 					$scope.formoutlet3 = 0;
 				} else {
 					$scope.outletError = false;
@@ -862,7 +862,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				}
 			} else {
 				
-				if ($scope.formoutlet1) {
+				if ($scope.formoutlet1 && $scope.formoutlet2) {
 					$scope.outletError2 = false;
 					$scope.checkedOutletTypes.splice(2,1);
 				} else {
@@ -876,8 +876,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			if ($scope.formcuisine1) {
 				if ($scope.formcuisine1 == $scope.formcuisine2 || $scope.formcuisine1 == $scope.formcuisine3) {
 					$scope.cuisineError = true;
-					scope.cuisineError1 = false;
-					$scope.checkedOutletTypes[0] = 0;
+					$scope.cuisineError1 = false;
+					$scope.checkedCuisineTypes.splice(0,1);
 					$scope.formcuisine1 = 0;
 				} else {
 					$scope.cuisineError = false;
@@ -891,7 +891,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			if ($scope.formcuisine2 && $scope.formcuisine1) {
 				if ($scope.formcuisine2 == $scope.formcuisine1 || $scope.formcuisine2 == $scope.formcuisine3) {
 					$scope.cuisineError = true;
-					$scope.checkedOutletTypes[1] = 0;
+					$scope.checkedCuisineTypes.splice(1,1);
 					$scope.formcuisine2 = 0;
 					$scope.cuisineError2 = false;
 				} else {
@@ -914,7 +914,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			if ($scope.formcuisine3 && $scope.formcuisine1 && $scope.formcuisine2) {
 				if ($scope.formcuisine3 == $scope.formcuisine1 || $scope.formcuisine3 == $scope.formcuisine2) {
 					$scope.cuisineError = true;
-					$scope.checkedOutletTypes[2] = 0;
+					$scope.checkedCuisineTypes.splice(2,1);
 					$scope.formcuisine3 = 0;
 					$scope.cuisineError2 = false;
 				} else {
