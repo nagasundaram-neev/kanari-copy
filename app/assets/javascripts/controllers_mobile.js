@@ -192,6 +192,10 @@ module.controller('forgotPasswordController', function($scope, $http, $location)
 	$scope.cancel = function() {
 		$location.url("/login");
 	};
+	
+	$scope.home = function(){
+		$location.url("/index");
+	};
 
 	$scope.sendLink = function() {
 		var userEmail = $scope.email;
@@ -472,6 +476,9 @@ module.controller('settingsController', function($scope, $http, $location) {
 					setCookie('authToken', data.auth_token, 0.29);
 					$scope.errorMsg = false;
 					$scope.succMsg = true;
+					$scope.currentPassword = "";
+					$scope.confirmPassword = "";
+					$scope.newPassword = "";
 				}).error(function(data, status) {
 					console.log("data " + data + " status " + status);
 					$scope.error = data.errors[0];
@@ -725,9 +732,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 				}).error(function(data, status) {
 					console.log("data " + data + " status " + status);
 				});
-
 			}
-
 		};
 
 		$scope.previous = function() {
