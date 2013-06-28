@@ -936,6 +936,12 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			//$scope.checked_cuisine = [1, 2, 3, 4];
 			if ($scope.createOutlet.$valid && $(".phoneno_1").val()) {
 				$scope.valide_phone = false;
+				$scope.cuisineError = false;
+				$scope.cuisineError1 = false;
+				$scope.cuisineError2 = false;
+				$scope.outletError = false;
+				$scope.outletError1 = false;
+				$scope.outletError2 = false;
 				var url = "/api/outlets"
 				var method = "post"
 				if ($scope.updateMode) {
