@@ -647,11 +647,41 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 
 		$scope.selectAction = function(select_Action) {
 			if ($scope.select_Action.$valid) {
+				var pos_lat;
+				var pos_lng;
+				var param = {
+					"auth_token" : $scope.auth_token
+				}
+				$http({
+					method : 'get',
+					url : '/api/outlets/' + $scope.outletID,
+					params : param,
+				}).success(function(data, status) {
+					if(data.outlet.latitude)
+					{
+						pos_lat = data.outlet.latitude;
+					}
+					
+					if(data.outlet.longitude)
+					{
+						pos_lng = data.outlet.longitude;
+					}
+				}).error(function(data, status) {
+
+				});
+
 				managerId = $scope.myOption;
 				//$scope.manager = managerId;
 				var param = {
 					"outlet" : {
-						"manager_id" : managerId
+						"manager_id" : managerId,
+						"latitude" : pos_lat,
+						"longitude" : pos_lng,
+						"cuisine_type_ids" : JSON.parse(getCookie('currentCuisineList')),
+						"outlet_type_ids" : JSON.parse(getCookie('currentOutletList')),
+						"has_delivery" : getCookie('radiobtn1'),
+						"serves_alcohol" : getCookie('radiobtn2'),
+						"has_outdoor_seating" : getCookie('radiobtn3')
 					},
 					"auth_token" : $scope.auth_token
 				}
@@ -694,7 +724,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.restaurant_name = data.outlet.name;
 					$scope.restaurant_location = data.outlet.address;
 					$scope.email_address = data.outlet.email;
-					$scope.contact_number = data.outlet.phone_number;
+					$(".phoneno_1").val(data.outlet.phone_number);
 					$scope.fromTime = data.outlet.open_hours.split("-")[0];
 					$scope.toTime = data.outlet.open_hours.split("-")[1];
 					if (data.outlet.has_delivery) {
@@ -847,7 +877,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.formcuisine1 = 0;
 				} else {
 					$scope.cuisineError = false;
-					scope.cuisineError1 = false;
+					$scope.cuisineError1 = false;
 					$scope.checkedCuisineTypes[0] = $scope.formcuisine1;
 				}
 			}
@@ -898,7 +928,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		/* Adding for creating the outlet*/
 		$scope.create_outlet = function(createOutlet) {
 			//$scope.checked_cuisine = [1, 2, 3, 4];
-			if ($scope.createOutlet.$valid) {
+			if ($scope.createOutlet.$valid && $(".phoneno_1").val()) {
+				$scope.valide_phone = false;
 				var url = "/api/outlets"
 				var method = "post"
 				if ($scope.updateMode) {
@@ -913,7 +944,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 						"address" : $scope.restaurant_location,
 						"website_url" : "http://batmansdonuts.com",
 						"email" : $scope.email_address,
-						"phone_number" : $scope.contact_number,
+						"phone_number" : $(".phoneno_1").val(),
 						"manager_id" : managerId,
 						"open_hours" : $scope.fromTime + "-" + $scope.toTime,
 						"has_delivery" : $scope.Delivery,
@@ -963,6 +994,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				});
 			} else {
 				$scope.error = true;
+				$scope.valide_phone = true;
 			}
 
 		};
@@ -973,13 +1005,14 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$('.add_manager').hide();
 		}
 		$scope.create_manager = function(createManager) {
-			if ($scope.createManager.$valid) {
+			if ($scope.createManager.$valid && $(".phoneno_2").val()) {
+				$scope.valide_phone = false;
 				var param = {
 					"user" : {
 						"email" : $scope.email_address_manager,
 						"first_name" : $scope.first_name,
 						"last_name" : $scope.last_name,
-						"phone_number" : $scope.add_contact_number,
+						"phone_number" : $(".phoneno_2").val(),
 						"password" : $scope.password,
 						"password_confirmation" : $scope.confirmpassword
 					},
@@ -1011,6 +1044,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.error = true;
 					$scope.success1 = false;
 				});
+			} else {
+				$scope.valide_phone = true;
 			}
 		}
 		// $scope.update = function() {
@@ -1087,14 +1122,15 @@ module.controller('acceptInvitationCtrl', function($rootScope, $scope, $routePar
 
 	});
 	$scope.acceptInvitation = function(acceptInv) {
-		if ($scope.acceptInv.$valid) {
+		if ($scope.acceptInv.$valid && $(".phoneno_1").val()) {
+			$scope.valide_phone = false;
 			var param = {
 				"user" : {
 					"password" : $scope.password,
 					"password_confirmation" : $scope.password_confirmation,
 					"first_name" : $scope.first_name,
 					"last_name" : $scope.last_name,
-					"phone_number" : $scope.phone_no,
+					"phone_number" : $(".phoneno_1").val(),
 					"invitation_token" : $routeParams.invi_token
 				}
 			}
@@ -1119,6 +1155,7 @@ module.controller('acceptInvitationCtrl', function($rootScope, $scope, $routePar
 		} else {
 			$scope.errorClient = true;
 			$scope.success = false;
+			$scope.valide_phone = true;
 		}
 	}
 });
@@ -1130,11 +1167,12 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 		}
 		$scope.auth_token = getCookie('authToken');
 		$scope.acceptInvitation2 = function(acceptInv2) {
-			if ($scope.acceptInv2.$valid) {
+			if ($scope.acceptInv2.$valid && $(".phoneno_1").val()) {
+				$scope.valide_phone = false;
 				var param = {
 					"customer" : {
 						"name" : $scope.name,
-						"phone_number" : $scope.phone_number,
+						"phone_number" : $(".phoneno_1").val(),
 						"registered_address_line_1" : $scope.registered_address_line_1,
 						"registered_address_line_2" : $scope.registered_address_line_2,
 						"registered_address_city" : $scope.registered_address_city,
@@ -1164,6 +1202,8 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 					$scope.success = false;
 				});
 
+			} else {
+				$scope.valide_phone = true;
 			}
 		}
 	} else {
@@ -1249,9 +1289,9 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 			$scope.first_name = data.customer.customer_admin.first_name;
 			$scope.last_name = data.customer.customer_admin.last_name;
 			$scope.email = data.customer.customer_admin.email;
-			$scope.phoneno = data.customer.customer_admin.phone_number;
+			$(".phoneno_1").val(data.customer.customer_admin.phone_number);
 			$scope.compnyNm = data.customer.name;
-			$scope.contactNo = data.customer.phone_number;
+			$(".phoneno_2").val(data.customer.phone_number);
 			$scope.add1 = data.customer.registered_address_line_1;
 			$scope.add2 = data.customer.registered_address_line_2;
 			$scope.city = data.customer.mailing_address_city;
@@ -1262,7 +1302,8 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 		});
 
 		$scope.view_account = function(viewAcc) {
-			if ($scope.viewAcc.$valid) {
+			if ($scope.viewAcc.$valid && $(".phoneno_1").val() && $(".phoneno_2").val()) {
+				$scope.valide_phone = false;
 				var param = {
 					"customer" : {
 						"name" : $scope.compnyNm,
@@ -1271,7 +1312,7 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 						"registered_address_line_2" : $scope.add2,
 						"mailing_address_city" : $scope.city,
 						"mailing_address_country" : $scope.country,
-						"phone_number" : $scope.contactNo
+						"phone_number" : $(".phoneno_2").val()
 					},
 					"auth_token" : getCookie('authToken')
 				}
@@ -1293,7 +1334,7 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 						"first_name" : $scope.first_name,
 						"last_name" : $scope.last_name,
 						"email" : $scope.email,
-						"phone_number" : $scope.phoneno,
+						"phone_number" : $(".phoneno_1").val(),
 						//	"password": $scope.first_name,
 						//"password_confirmation": $scope.first_name,
 						//"date_of_birth": "06-05-1987",
@@ -1303,13 +1344,14 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 					},
 					"auth_token" : getCookie('authToken')
 				}
+				console.log($scope.phoneno_1);
 				$http({
 					method : 'put',
 					url : '/api/users/',
 					data : param2,
 				}).success(function(data, status) {
 					console.log("data in success " + data + " status " + status);
-
+					setCookie('authToken', data.auth_token, 7);
 					$scope.success = true;
 					$scope.error = false;
 
@@ -1321,7 +1363,9 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 				});
 
 			} else {
+				console.log("here");
 				$scope.success = false;
+				$scope.valide_phone = true;
 			}
 		}
 		$scope.gotoChangePassword = function() {
@@ -1468,3 +1512,6 @@ function validateNumber() {
 	}
 }
 
+// function formatPhone(obj) {
+// $(obj).addClass('ng-pristine');
+// }
