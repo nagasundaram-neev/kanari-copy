@@ -258,12 +258,36 @@ module.controller('resetPassController', function($scope, $http, $location, $rou
 });
 
 module.controller('homeController', function($scope, $http, $location) {
-
+	$scope.points = "";
 	if (getCookie("authToken")) {
+
+		$scope.getProfile = function() {
+
+			var param = {
+				"auth_token" : getCookie('authToken')
+			}
+
+			$http({
+				method : 'get',
+				url : '/api/users',
+				params : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				//var date = new Date();
+				$scope.points = data.user.points_available;
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+
+			});
+
+			//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
+		};
+
+		$scope.getProfile();
+
 		$scope.userName = getCookie('userName');
 		$scope.role = getCookie('userRole');
 		//document.body.style.background = #FFFFFF;
-		$('body').css('background', '#FFF');
 
 		$scope.homeClk = function() {
 			$location.url("/home");
@@ -465,7 +489,6 @@ module.controller('settingsController', function($scope, $http, $location) {
 			var param = {
 				"auth_token" : getCookie('authToken')
 			}
-
 			$http({
 				method : 'delete',
 				url : '/api/users/sign_out',
@@ -857,7 +880,7 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 		};
 
 		$scope.locationMap = function() {
-			$location.url("/locationMap?outletId="+$routeParams.outletId+"&lat=" + $scope.lattitude + "&long=" + $scope.longitude);
+			$location.url("/locationMap?outletId=" + $routeParams.outletId + "&lat=" + $scope.lattitude + "&long=" + $scope.longitude);
 		};
 		$.mobile.loading('hide');
 	} else {
@@ -898,49 +921,49 @@ module.controller('locationMapController', function($scope, $http, $location, $r
 	// $scope.$broadcast('clickMessageFromParent', {
 	// data : "SOME msg to the child"
 	// })
-google.maps.visualRefresh = true;
+	google.maps.visualRefresh = true;
 
 	angular.extend($scope, {
 
-	    position: {
-	      coords: {
-	        latitude: $routeParams.lat,
-	        longitude: $routeParams.long
-	      }
-	    },
+		position : {
+			coords : {
+				latitude : $routeParams.lat,
+				longitude : $routeParams.long
+			}
+		},
 
 		/** the initial center of the map */
-		centerProperty: {
-			latitude: $routeParams.lat,
-			longitude: $routeParams.long
+		centerProperty : {
+			latitude : $routeParams.lat,
+			longitude : $routeParams.long
 		},
 
 		/** the initial zoom level of the map */
-		zoomProperty: 9,
+		zoomProperty : 9,
 
 		/** list of markers to put in the map */
-		markersProperty: [ {
-				latitude: $routeParams.lat,
-				longitude: $routeParams.long
-			}],
+		markersProperty : [{
+			latitude : $routeParams.lat,
+			longitude : $routeParams.long
+		}],
 
 		// These 2 properties will be set when clicking on the map
-		//clickedLatitudeProperty: null,	
+		//clickedLatitudeProperty: null,
 		//clickedLongitudeProperty: null,
 
-		eventsProperty: {
-		  click: function (mapModel, eventName, originalEventArgs) {	
-		    // 'this' is the directive's scope
-		    $log.log("user defined event on map directive with scope", this);
-		    $log.log("user defined event: " + eventName, mapModel, originalEventArgs);
-		  }
+		eventsProperty : {
+			click : function(mapModel, eventName, originalEventArgs) {
+				// 'this' is the directive's scope
+				$log.log("user defined event on map directive with scope", this);
+				$log.log("user defined event: " + eventName, mapModel, originalEventArgs);
+			}
 		}
 	});
-	
-	$scope.back = function(){
-		$location.url("/showRestaurant?outletId="+$routeParams.outletId);
+
+	$scope.back = function() {
+		$location.url("/showRestaurant?outletId=" + $routeParams.outletId);
 	};
-$.mobile.loading('hide');
+	$.mobile.loading('hide');
 
 });
 
