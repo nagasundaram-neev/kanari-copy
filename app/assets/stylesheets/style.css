@@ -561,7 +561,7 @@ img, object {
 .nxt {
 	background-color: #FDBE3A;
 	float: left;
-	padding: 0.75em 0;
+	padding: 0.735em 0;
 	width: 49.5%;
 	text-align: center;
 }
@@ -1179,6 +1179,10 @@ color:#F5C03F!important;text-align: center;
 #signUp .ui-btn-left, .ui-btn-right, .ui-btn-inline, input {
 	width: 40%;
 }
+#signedUp .ui-btn-inline{border: 0 none;
+    color: #664765;
+    text-transform: uppercase;
+    width: 100%;}
 .signUpDiv .ui-btn-up-b, .ui-btn-hover-b {
 	background-image: -webkit-gradient(linear,left top,left bottom,from( #FACC4A ),to( #F9C040 ));
 	background-image: -webkit-linear-gradient( #FACC4A,#F9C040 );
