@@ -1289,15 +1289,25 @@ color:#F5C03F!important;text-align: center;
 .chkbox {
 
 }
-#login .ui-content,#forgotpass .ui-content{
+#login .ui-content{
 	margin:1% 5%;
 	padding:0;
+}
+#forgotpass .ui-content{
+	overflow: hidden;
 }
 .forgotPass {
 }
 .rememberMe .ui-checkbox .ui-btn-icon-left .ui-btn-inner, .ui-radio .ui-btn-icon-left .ui-btn-inner {
 	padding-top: 0;
 	padding-left: 25px;
+}
+
+.backBtn {
+	float:left;
+}
+.backBtn img {
+	vertical-align: middle;
 }
 
 .rememberMe  .ui-controlgroup .ui-checkbox label, .ui-controlgroup .ui-radio label {
