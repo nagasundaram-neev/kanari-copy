@@ -1,0 +1,27 @@
+<div data-role="page" data-theme="b" id="locationMap" ng-controller="locationMapController">
+	<!-- <div ng-app="kanariMobile">
+	<div >
+	<map id="map_canvas"></map>
+	</div>
+	</div> -->
+	<div class="username">
+		<div class="home" ng-click="home()"></div>
+		<div class="signUp">
+			MAP DETAILS
+		</div>
+		<div class="clr"></div>
+	</div>
+	<div class="map">
+		<div class="google-map"
+		center="position.coords"
+		zoom="zoomProperty"
+		markers="markersProperty"
+		latitude="clickedLatitudeProperty"
+		longitude="clickedLongitudeProperty"
+		mark-click="false"
+		draggable="true"
+		fit="true"
+		events="eventsProperty"
+		style="height: 800px; width: 100%"></div>
+	</div>
+</div>
