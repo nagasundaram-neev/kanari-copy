@@ -812,7 +812,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				if ($scope.formoutlet1 == $scope.formoutlet2 || $scope.formoutlet1 == $scope.formoutlet3) {
 					$scope.outletError1 = false;
 					$scope.outletError = true;
-					$scope.checkedOutletTypes[0] = 0;
+					$scope.checkedOutletTypes.splice(0,1);
 					$scope.formoutlet1 = 0;
 
 				} else {
@@ -830,7 +830,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			if ($scope.formoutlet2 && $scope.formoutlet1) {
 				if ($scope.formoutlet2 == $scope.formoutlet1 || $scope.formoutlet2 == $scope.formoutlet3) {
 					$scope.outletError = true;
-					$scope.checkedOutletTypes[1] = 0;
+					$scope.checkedOutletTypes.splice(1,1);
 					$scope.formoutlet2 = 0;
 
 				} else {
@@ -839,6 +839,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.outletError2 = false;
 				}
 			} else {
+				//$scope.checkedCuisineTypes.splice( $.inArray(1,$scope.checkedCuisineTypes) ,1 );
+				$scope.checkedOutletTypes.splice(1,1);
 				if ($scope.formoutlet1) {
 				} else {
 					$scope.outletError1 = true;
@@ -852,15 +854,17 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			if ($scope.formoutlet3 && $scope.formoutlet1 && $scope.formoutlet2) {
 				if ($scope.formoutlet3 == $scope.formoutlet1 || $scope.formoutlet3 == $scope.formoutlet2) {
 					$scope.outletError = true;
-					$scope.checkedOutletTypes[2] = 0;
+					$scope.checkedOutletTypes.splice(2,1);
 					$scope.formoutlet3 = 0;
 				} else {
 					$scope.outletError = false;
 					$scope.checkedOutletTypes[2] = $scope.formoutlet3;
 				}
 			} else {
+				
 				if ($scope.formoutlet1 && $scope.formoutlet2) {
 					$scope.outletError2 = false;
+					$scope.checkedOutletTypes.splice(2,1);
 				} else {
 					$scope.outletError2 = true;
 					$scope.formoutlet3 = 0;
@@ -872,8 +876,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			if ($scope.formcuisine1) {
 				if ($scope.formcuisine1 == $scope.formcuisine2 || $scope.formcuisine1 == $scope.formcuisine3) {
 					$scope.cuisineError = true;
-					scope.cuisineError1 = false;
-					$scope.checkedOutletTypes[0] = 0;
+					$scope.cuisineError1 = false;
+					$scope.checkedCuisineTypes.splice(0,1);
 					$scope.formcuisine1 = 0;
 				} else {
 					$scope.cuisineError = false;
@@ -887,7 +891,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			if ($scope.formcuisine2 && $scope.formcuisine1) {
 				if ($scope.formcuisine2 == $scope.formcuisine1 || $scope.formcuisine2 == $scope.formcuisine3) {
 					$scope.cuisineError = true;
-					$scope.checkedOutletTypes[1] = 0;
+					$scope.checkedCuisineTypes.splice(1,1);
 					$scope.formcuisine2 = 0;
 					$scope.cuisineError2 = false;
 				} else {
@@ -897,6 +901,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				}
 			} else {
 				if ($scope.formcuisine1) {
+					$scope.checkedCuisineTypes.splice(1,1);
 				} else {
 					$scope.cuisineError1 = true;
 					$scope.formcuisine2 = 0;
@@ -909,7 +914,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			if ($scope.formcuisine3 && $scope.formcuisine1 && $scope.formcuisine2) {
 				if ($scope.formcuisine3 == $scope.formcuisine1 || $scope.formcuisine3 == $scope.formcuisine2) {
 					$scope.cuisineError = true;
-					$scope.checkedOutletTypes[2] = 0;
+					$scope.checkedCuisineTypes.splice(2,1);
 					$scope.formcuisine3 = 0;
 					$scope.cuisineError2 = false;
 				} else {
@@ -917,8 +922,9 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.checkedCuisineTypes[2] = $scope.formcuisine3;
 				}
 			} else {
-				if ($scope.formcuisine1 && $scope.formcuisine2) {
+				if ($scope.formcuisine1) {
 					$scope.cuisineError2 = false;
+					$scope.checkedCuisineTypes.splice(2,1);
 				} else {
 					$scope.cuisineError2 = true;
 					$scope.formcuisine3 = 0;
@@ -927,9 +933,14 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		}
 		/* Adding for creating the outlet*/
 		$scope.create_outlet = function(createOutlet) {
-			//$scope.checked_cuisine = [1, 2, 3, 4];
 			if ($scope.createOutlet.$valid && $(".phoneno_1").val()) {
 				$scope.valide_phone = false;
+				$scope.cuisineError = false;
+				$scope.cuisineError1 = false;
+				$scope.cuisineError2 = false;
+				$scope.outletError = false;
+				$scope.outletError1 = false;
+				$scope.outletError2 = false;
 				var url = "/api/outlets"
 				var method = "post"
 				if ($scope.updateMode) {
@@ -1466,6 +1477,108 @@ module.controller('createKanariCodeCtrl', function($scope, $routeParams, $route,
 
 });
 
+module.controller('outletCuisineTypeCtrl', function($scope,$rootScope, $routeParams, $route, $http, $location) {
+	if (getCookie('authToken')) {
+		$('.welcome').show();
+		$('.navBarCls').show();
+		$('.navBarCls ul li').removeClass('active');
+		$('#outlet').hide();
+		$('#account').hide();
+		$('#dasboard').addClass('active');
+		$rootScope.header = "Add Outlet/Cuiseine Type | Kanari";
+		$scope.outletTypes = [];
+		$scope.cuisineTypes = [];
+		$scope.getOutletTypes = function() {
+
+			var param = {
+				"auth_token" : getCookie('authToken')
+			}
+			$http({
+				method : 'get',
+				url : '/api/outlet_types',
+				params : param,
+			}).success(function(data, status) {
+				$scope.error = false;
+				$scope.outletTypes = data.outlet_types;
+				$scope.success = true;
+
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+				$scope.error = true;
+				$scope.success = false;
+			});
+		};
+		$scope.getOutletTypes();
+		$scope.getCuisineTypes = function() {
+			var param = {
+				"auth_token" : getCookie('authToken')
+			}
+			$http({
+				method : 'get',
+				url : '/api/cuisine_types',
+				params : param,
+			}).success(function(data, status) {
+				$scope.error = false;
+				$scope.cuisineTypes = data.cuisine_types;
+
+				$scope.success = true;
+
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+				$scope.error = true;
+				$scope.success = false;
+			});
+		};
+		$scope.getCuisineTypes();
+
+		$scope.add_outlet_type = function(outlet_type) {
+			if ($scope.outlet_type.$valid) {
+				var param = {
+					"outlet_type" : {
+						"name" : $scope.outlet_types
+					},
+					"auth_token" : getCookie('authToken')
+				}
+
+				$http({
+					method : 'POST',
+					url : '/api/outlet_types',
+					data : param,
+				}).success(function(data, status) {
+					console.log("data in success " + data + " status " + status);
+
+				}).error(function(data, status) {
+					console.log("data in errorrr" + data + " status " + status);
+				});
+
+			}
+		};
+		
+		$scope.add_cuisine_type = function(cuisine_type) {
+			if ($scope.cuisine_type.$valid) {
+				var param = {
+					"cuisine_type" : {
+						"name" : $scope.cuisine_types
+					},
+					"auth_token" : getCookie('authToken')
+				}
+
+				$http({
+					method : 'POST',
+					url : '/api/cuisine_types',
+					data : param,
+				}).success(function(data, status) {
+					console.log("data in success " + data + " status " + status);
+
+				}).error(function(data, status) {
+					console.log("data in errorrr" + data + " status " + status);
+				});
+
+			}
+		};
+		
+	}
+});
 function setCookie(name, value, days) {
 	if (days) {
 		var date = new Date();
