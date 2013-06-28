@@ -814,6 +814,7 @@ module.controller('restaurantListController', function($scope, $http, $location)
 
 module.controller('showRestaurantController', function($scope, $http, $routeParams, $location) {
 	if (getCookie('authToken')) {
+		$.mobile.loading('show');
 		$scope.lattitude = "";
 		$scope.longitude = "";
 		$scope.outlets = [];
@@ -856,8 +857,9 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 		};
 
 		$scope.locationMap = function() {
-			$location.url("/locationMap?lat=" + $scope.lattitude + "&long=" + $scope.longitude);
+			$location.url("/locationMap?outletId="+$routeParams.outletId+"&lat=" + $scope.lattitude + "&long=" + $scope.longitude);
 		};
+		$.mobile.loading('hide');
 	} else {
 		$location.url("/login");
 	}
@@ -888,6 +890,7 @@ module.controller('transactionHistoryController', function($scope, $http, $locat
 });
 
 module.controller('locationMapController', function($scope, $http, $location, $routeParams) {
+	$.mobile.loading('show');
 	// $scope.MapCtrl = function() {
 	// console.log("lattitude " + $routeParams.lat + " longitude " + $routeParams.long);
 	// }
@@ -913,7 +916,7 @@ google.maps.visualRefresh = true;
 		},
 
 		/** the initial zoom level of the map */
-		zoomProperty: 10,
+		zoomProperty: 9,
 
 		/** list of markers to put in the map */
 		markersProperty: [ {
@@ -933,7 +936,11 @@ google.maps.visualRefresh = true;
 		  }
 		}
 	});
-
+	
+	$scope.back = function(){
+		$location.url("/showRestaurant?outletId="+$routeParams.outletId);
+	};
+$.mobile.loading('hide');
 
 });
 
