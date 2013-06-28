@@ -78,7 +78,8 @@
 }
 
 .ui-content {
- 	padding: 0 1.5%;
+ 	/*padding: 0 1.5%;*/
+ 	padding: 0;
 }
 
 .roundBtn img {
@@ -560,7 +561,7 @@ img, object {
 .nxt {
 	background-color: #FDBE3A;
 	float: left;
-	padding: 0.75em 0;
+	padding: 0.735em 0;
 	width: 49.5%;
 	text-align: center;
 }
@@ -1178,6 +1179,10 @@ color:#F5C03F!important;text-align: center;
 #signUp .ui-btn-left, .ui-btn-right, .ui-btn-inline, input {
 	width: 40%;
 }
+#signedUp .ui-btn-inline{border: 0 none;
+    color: #664765;
+    text-transform: uppercase;
+    width: 100%;}
 .signUpDiv .ui-btn-up-b, .ui-btn-hover-b {
 	background-image: -webkit-gradient(linear,left top,left bottom,from( #FACC4A ),to( #F9C040 ));
 	background-image: -webkit-linear-gradient( #FACC4A,#F9C040 );
@@ -1333,6 +1338,7 @@ color:#F5C03F!important;text-align: center;
 /*	margin: 0 0.5em;*/
 	padding:0.5em 0 0.1em;
 }
+.rememberMe .ui-icon{ background-color: #6E4D6C;} 
 .rememberMe .ui-btn-up-b, .rememberMe .ui-btn-hover-b {
 	background: transparent;
 	border: 0;
@@ -1358,7 +1364,7 @@ color:#F5C03F!important;text-align: center;
 	left: 2px;
 }
 .rememberMe .ui-checkbox input {
-	left: 3px;
+	left: 1px;
 	margin: -8px 0 0;
 }
 #login .ui-btn-left, #login .ui-btn-right {
