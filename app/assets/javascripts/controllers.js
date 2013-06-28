@@ -933,7 +933,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		}
 		/* Adding for creating the outlet*/
 		$scope.create_outlet = function(createOutlet) {
-			//$scope.checked_cuisine = [1, 2, 3, 4];
 			if ($scope.createOutlet.$valid && $(".phoneno_1").val()) {
 				$scope.valide_phone = false;
 				$scope.cuisineError = false;
@@ -1478,6 +1477,108 @@ module.controller('createKanariCodeCtrl', function($scope, $routeParams, $route,
 
 });
 
+module.controller('outletCuisineTypeCtrl', function($scope,$rootScope, $routeParams, $route, $http, $location) {
+	if (getCookie('authToken')) {
+		$('.welcome').show();
+		$('.navBarCls').show();
+		$('.navBarCls ul li').removeClass('active');
+		$('#outlet').hide();
+		$('#account').hide();
+		$('#dasboard').addClass('active');
+		$rootScope.header = "Add Outlet/Cuiseine Type | Kanari";
+		$scope.outletTypes = [];
+		$scope.cuisineTypes = [];
+		$scope.getOutletTypes = function() {
+
+			var param = {
+				"auth_token" : getCookie('authToken')
+			}
+			$http({
+				method : 'get',
+				url : '/api/outlet_types',
+				params : param,
+			}).success(function(data, status) {
+				$scope.error = false;
+				$scope.outletTypes = data.outlet_types;
+				$scope.success = true;
+
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+				$scope.error = true;
+				$scope.success = false;
+			});
+		};
+		$scope.getOutletTypes();
+		$scope.getCuisineTypes = function() {
+			var param = {
+				"auth_token" : getCookie('authToken')
+			}
+			$http({
+				method : 'get',
+				url : '/api/cuisine_types',
+				params : param,
+			}).success(function(data, status) {
+				$scope.error = false;
+				$scope.cuisineTypes = data.cuisine_types;
+
+				$scope.success = true;
+
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+				$scope.error = true;
+				$scope.success = false;
+			});
+		};
+		$scope.getCuisineTypes();
+
+		$scope.add_outlet_type = function(outlet_type) {
+			if ($scope.outlet_type.$valid) {
+				var param = {
+					"outlet_type" : {
+						"name" : $scope.outlet_types
+					},
+					"auth_token" : getCookie('authToken')
+				}
+
+				$http({
+					method : 'POST',
+					url : '/api/outlet_types',
+					data : param,
+				}).success(function(data, status) {
+					console.log("data in success " + data + " status " + status);
+
+				}).error(function(data, status) {
+					console.log("data in errorrr" + data + " status " + status);
+				});
+
+			}
+		};
+		
+		$scope.add_cuisine_type = function(cuisine_type) {
+			if ($scope.cuisine_type.$valid) {
+				var param = {
+					"cuisine_type" : {
+						"name" : $scope.cuisine_types
+					},
+					"auth_token" : getCookie('authToken')
+				}
+
+				$http({
+					method : 'POST',
+					url : '/api/cuisine_types',
+					data : param,
+				}).success(function(data, status) {
+					console.log("data in success " + data + " status " + status);
+
+				}).error(function(data, status) {
+					console.log("data in errorrr" + data + " status " + status);
+				});
+
+			}
+		};
+		
+	}
+});
 function setCookie(name, value, days) {
 	if (days) {
 		var date = new Date();
