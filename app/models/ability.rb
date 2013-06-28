@@ -37,6 +37,7 @@ class Ability
       can :read, Customer
       can :read_pending_redemptions, Outlet
       can :create, OutletType
+      can :create, CuisineType
     when 'customer_admin'
       #Customer admin's permissions
       can :read, PaymentInvoice

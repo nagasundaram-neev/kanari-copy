@@ -1,5 +1,5 @@
 
-var module = angular.module("kanariMobile", []).config(function($routeProvider,$locationProvider){
+var module = angular.module("kanariMobile", ["google-maps"]).config(function($routeProvider,$locationProvider){
     // bring back /# urls by turning OFF html5 paths
     // JQueryMobileAngularAdapter turns in ON by default
     // https://github.com/tigbro/jquery-mobile-angular-adapter/issues/163#issuecomment-16928255
@@ -23,6 +23,7 @@ var module = angular.module("kanariMobile", []).config(function($routeProvider,$
         .when('/feedbackSubmitSuccess',{templateUrl: "<%= asset_path 'feedback_submit.html' %>" })
         .when('/showRestaurant',{templateUrl: "<%= asset_path 'showRestaurant.html' %>" })
         .when('/transactionHistory',{templateUrl: "<%= asset_path 'transactionHistory.html' %>" })
+        .when('/locationMap',{templateUrl: "<%= asset_path 'locationMap.html' %>" })
         .when('/api/users/password/edit', {templateUrl: "<%= asset_path 'reset_password_mobile.html' %>"})
         .otherwise({redirectTo: '/index'});
 });

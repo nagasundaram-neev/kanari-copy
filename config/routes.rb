@@ -18,7 +18,7 @@ Kanari::Application.routes.draw do
       resources :payment_invoices, only: [:index]
       resources :managers, only: [:create, :index]
       resources :staffs, only: [:create, :index]
-      resources :cuisine_types, only: [:index]
+      resources :cuisine_types, only: [:index, :show, :create, :update]
       resources :outlet_types, only: [:index, :show, :create, :update]
       resources :kanari_codes, only: [:show, :create]
 
