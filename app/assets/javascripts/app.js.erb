@@ -173,6 +173,18 @@ module.directive('map', function($http) {
 	};
 });
 
+module.directive('showtab',
+    function () {
+        return {
+            link: function (scope, element, attrs) {
+                element.click(function(e) {
+                    e.preventDefault();
+                    $(element).tab('show');
+                });
+            }
+        };
+    });
+  
 function getCookie(name) {
 	var nameEQ = name + "=";
 	var ca = document.cookie.split(';');
