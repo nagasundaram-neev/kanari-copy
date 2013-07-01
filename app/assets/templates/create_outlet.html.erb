@@ -1,21 +1,24 @@
 <div data-role="page" style="height: 640px;" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
 	<style>
 		input[type="image"], input[type="checkbox"], input[type="radio"] {
-		margin: 0;
+			margin: 0;
 		}
 		.main_content span.vertical_center {
-		display: inline !important;
-		vertical-align: middle !important;
-		margin-right: 0px;
-		padding: 0 0 4px 0;
+			display: inline !important;
+			vertical-align: middle !important;
+			margin-right: 0px;
+			padding: 0 0 4px 0;
 		}
 		#map_canvas {
-		/*width:100%;*/
-		height: 450px;
-		border: 1px solid #333335;
-		margin: 0 20px;
+			/*width:100%;*/
+			height: 400px;
+			width: 750px;
+			border: 1px solid #333335;
+			margin: 0 20px;
 		}
-		.createOutletDiv .input-help{left: 392px;}
+		.createOutletDiv .input-help {
+			left: 392px;
+		}
 	</style>
 	<div class="header_title">
 		<span class="manager_outlet">Manage Outlet</span>
@@ -212,10 +215,16 @@
 							</button>
 						</div>
 						<div ng-show="successoutlet" class="successMsg">
-							<div class="create_rest" ng-show="action"> Your outlet get added successfully</div>
-							<div class="create_rest" ng-hide="action">Your outlet has been updated successfully.</div>
+							<div class="create_rest" ng-show="action">
+								Your outlet get added successfully
+							</div>
+							<div class="create_rest" ng-hide="action">
+								Your outlet has been updated successfully.
+							</div>
 						</div>
-						<p ng-show="valide_phone" class="errorMsg">Invalid Contact Number</p>
+						<p ng-show="valide_phone" class="errorMsg">
+							Invalid Contact Number
+						</p>
 					</div>
 				</form>
 			</div>
@@ -371,7 +380,9 @@
 								Manager added successfully.
 							</p>
 							<p ng-hide="success" ></p>
-							<p ng-show="valide_phone" class="errorMsg">Invalid Phone Number</p>
+							<p ng-show="valide_phone" class="errorMsg">
+								Invalid Phone Number
+							</p>
 						</div>
 					</div>
 				</form>
@@ -385,16 +396,31 @@
 		<div id ="location" >
 			<div ng-app="kanari" class="location_map">
 				<span class="location_select"> Please select your location </span>
-				<div ng-controller="MapCtrl">
+				<div ng-controller="MapCtrl" ng-controller="MapCtrl">
 					<map id="map_canvas"></map>
+					<div style="margin: 10px 20px;">
+						<div class="addMarker">
+							<button ng-click="addMark()" type="submit" class="enabel_Btn btn">
+								Save
+							</button>
+							<button disabled class="disable_Btn btn">
+								Save
+							</button>
+						</div>
+						<div class="updateMarker">
+							<button ng-click="addMark()" type="submit" class="btn">
+								Update
+							</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 <script>
-$(document).ready(function () {
-    $(".setTelephone").mask("(+999)-99-9999999");
-  //  doValidation();
-});
+	$(document).ready(function() {
+		$(".setTelephone").mask("(+999)-99-9999999");
+		//  doValidation();
+	}); 
 </script>

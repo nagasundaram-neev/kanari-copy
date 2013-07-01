@@ -500,12 +500,15 @@ div.create_rest {
 	border-radius: 5px 5px 5px 5px;
 }
 #location .location_select {
-	padding: 10px 20px;
+	display: block;
+	padding: 12px 20px;
 }
 #location .location_map {
 	float: left;
-	width: 75%;
+	/*width: 75%;*/
 }
+#location img { max-width: none; }
+button.enabel_Btn{display: none;}
 .manager_list ul li {
 	list-style: none outside none;
 	border-bottom: 1px solid #CCCCCC;
