@@ -20,6 +20,7 @@ var module = angular.module('kanari', []).
      when('/take_tour',{templateUrl:"<%= asset_path 'takeTour.html'%>"}).
      when('/create_kanari_code',{templateUrl:"<%= asset_path 'createKanariCode.html'%>"}).
        when('/view_account',{templateUrl:"<%= asset_path 'viewAccount.html.erb'%>"}).
+        when('/add_outlet_cuisine_type', {templateUrl: "<%= asset_path 'add_outlet_cuisine_type.html' %>"}).
      when('/logout', {templateUrl: "<%= asset_path 'logOut.html' %>"}).
       when('/change_password', {templateUrl: "<%= asset_path 'changePassword.html' %>"}).
       otherwise({redirectTo: '/login'});
@@ -216,13 +217,6 @@ module.directive('passwordValidate', function() {
 	};
 }); 
 
-module.directive('numberMask', function() {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-            $(element).numeric();
-        }
-    }
-});
+
 
 

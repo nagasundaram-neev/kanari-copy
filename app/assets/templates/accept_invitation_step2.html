@@ -1,4 +1,7 @@
 <div data-role="page" data-theme="b" id="acceptInvitationStep2" ng-controller="acceptInvitation2Ctrl" class="main_content span12">
+	<style>
+		.input-help{ left: 483px;}
+	</style>
 	<div class="loginDiv innerDiv" data-role="content" style=" width: 45%;">
 		<h1>Create Profile</h1>
 		<span class="mandatoryFld">
@@ -22,7 +25,8 @@
 							Phone Number<span class="star">*</span>
 						</lable>
 						<div class="controls">
-							<input data-theme="a" data-inline="true" type="text" min="0" number-mask="" name="phone_number" ng-model="phone_number" maxlength="11" placeholder="Phone Number" required/>
+							<input data-theme="a" data-inline="true" type="text" class="phoneno_1 setTelephone" name="contactNo" placeholder="Contact Number" />
+							<!-- <input data-theme="a" data-inline="true" type="text" min="0" number-mask="" name="phone_number" ng-model="phone_number" maxlength="11" placeholder="Phone Number" required/> -->
 							<div class="clr"></div>
 						</div>
 					</div>
@@ -133,9 +137,16 @@
 							Click here for <a href="#/login">login.</a>
 						</p>
 						<p ng-hide="success"></p>
+						<p ng-show="valide_phone" class="errorMsg">Invalid Phone Number</p
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
+<script>
+$(document).ready(function () {
+    $(".setTelephone").mask("(+999)-99-9999999");
+  //  doValidation();
+});
+</script>

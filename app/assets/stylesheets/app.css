@@ -3,10 +3,10 @@
 	margin: 0;
 }
 html, body {
-	height: 98%;
+	height: 100%;
 }
 .content {
-	min-height: 98%;
+	min-height: 100%;
 	height: auto !important;
 	height: 100%;
 	margin: 0 auto 0em;
@@ -258,8 +258,8 @@ body {
 .main_content span {
 	color: #5A4166;
 	font-size: 15px;
-	padding: 25px 0 35px;
-	display: block;
+	/*padding: 25px 0 35px;*/
+	/*display: block;*/
 	margin-right: 8px;
 }
 a.addRestaurant {
@@ -554,7 +554,7 @@ ul.taketour li a:hover {
 }
 /**Create Invitation**/
 #login .input-help {
-	left: 160px;
+	left: 345px;
 }
 
 /**accept Invitation**/
@@ -580,6 +580,7 @@ ul.taketour li a:hover {
 }
 
 /**View Account Details**/
+	.phoneno{display:none;}
 .viewAccPage {
 	margin: 20px 50px;
 	padding: 10px 0;

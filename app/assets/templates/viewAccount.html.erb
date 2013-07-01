@@ -1,4 +1,7 @@
 <div data-role="page" class="main_content span12" data-theme="b" id="viewaccount" ng-controller="viewaccountCtrl">
+	<style>
+		.input-help{left: 295px;}
+	</style>
 	<div class="header_title">
 		<span class="manager_outlet">Manage Account</span>
 		<span class="arrow-right blank_span">&nbsp;</span>
@@ -63,12 +66,11 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<div class="controls">
+				<div class="phoneno_valid controls">
 					<lable>
 						Phone<span class="star">*</span>
 					</lable>
-					<input style="width: 130px;" data-theme="a" data-inline="true" placeholder="Phone Number" type="text" min="0" number-mask="" max="99" maxlength="11" name="phoneno" ng-model="phoneno" class="passwordTxt" required/>
-					<span class="help-inline" ng-show="submitted && viewAcc.phoneno.$error.number">Invalid Phone Number</span>
+					<input style="width: 130px;" data-theme="a" data-inline="true" placeholder="Phone Number" type="text" class="phoneno_1 setTelephone" name="phoneno_1" />					
 				</div>
 			</div>
 			<div class="section">
@@ -87,8 +89,9 @@
 					<lable>
 						Contact Number<span class="star">*</span>
 					</lable>
-					<input data-theme="a" style="width: 130px;" data-inline="true" type="text" min="0" maxlength="11" name="contactNo" placeholder="Contact Number" ng-model="contactNo" required />
-					<span class="help-inline" ng-show="submitted && viewAcc.contactNo.$error.number">Invalid Phone Number</span>
+					
+					<input data-theme="a" style="width: 130px;" data-inline="true" type="text" class="phoneno_2 setTelephone" name="contactNo" placeholder="Contact Number" />
+					
 				</div>
 			</div>
 			<div class="control-group">
@@ -144,6 +147,7 @@
 					<p ng-show="error" class="errorMsg">
 						{{errormsg}}
 					</p>
+					<p ng-show="valide_phone" class="errorMsg">Invalid Phone/Contact Number</p>
 				</div>
 			</div>
 
@@ -152,3 +156,9 @@
 	</div>
 
 </div>
+<script>
+$(document).ready(function () {
+    $(".setTelephone").mask("(+999)-99-9999999");
+  //  doValidation();
+});
+</script>

@@ -18,7 +18,7 @@
 			<div class="username rest_info">
 				<span class="img_outlet" style="width: 15%;"><%= image_tag 'ic_at_white.png' %></span> {{email_address}}
 			</div>
-			<div class="username rest_info">
+			<div class="username rest_info" ng-click="locationMap()">
 				<span class="img_outlet" style="width: 15%;"><%= image_tag 'ic_location_white.png' %></span> Location map
 			</div>
 			<div class="outlet_div rest_info">
@@ -63,7 +63,7 @@
 			</div>
 			<div class="outlet_div rest_info">
 				<div class="outlet_title">
-					<span class="img_outlet"><%= image_tag 'ic_alcohol.png' %></span> <span class="title_outlet"> Alcohol</span>
+					<span class="img_outlet"><%= image_tag 'ic_alcohol.png' %></span> <span class="title_outlet">Serves Alcohol</span>
 				</div>
 				<div class="outlet_info outlet_serves">
 					<img src="/assets/ic_ticks.png" ng-show="alcohol" />
@@ -75,7 +75,7 @@
 			</div>
 			<div class="outlet_div rest_info">
 				<div class="outlet_title ">
-					<span class="img_outlet"><%= image_tag 'ic_outdoor.png' %></span> <span class="title_outlet"> OutDoor Seating</span>
+					<span class="img_outlet"><%= image_tag 'ic_outdoor.png' %></span> <span class="title_outlet"> Outdoor seating</span>
 				</div>
 				<div class="outlet_info outlet_serves">
 					<img src="/assets/ic_ticks.png" ng-show="outDoor_seating" />
@@ -89,7 +89,7 @@
 		<div class="footerDiv">
 			<div class="prev" ng-click="previous()">
 
-				<%= image_tag 'p_arrow_left.png' %>
+				<%= image_tag 'y_arrow_left.png' %>
 				<div class="prevTxt" >
 					PREVIOUS
 				</div>

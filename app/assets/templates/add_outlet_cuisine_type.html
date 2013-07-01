@@ -1,0 +1,94 @@
+<div data-role="page" class="main_content span12" data-theme="b" id="outletCuisineType" ng-controller="outletCuisineTypeCtrl">
+	<div class="loginDiv innerDiv" data-role="content">
+		<h1>Add Outlet Type</h1>
+		<div class="acceptInv outerDiv" style="overflow: hidden;">
+			<span class="mandatoryFld"><div class="startMsg">*</div> Indicates mandatory fields</span>
+			<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 41%;">
+				<form ng-app="form-example" class="row form-horizontal" name="outlet_type" ng-submit="add_outlet_type(outlet_type)" novalidate>
+					<div class="control-group">
+						<div class="controls">
+							<lable >
+								Available Outlet Types
+							</lable>
+							<select ng-hide="form_outlet1" ng-model='formoutlet1' ng-options='outletType.id as outletType.name for outletType in outletTypes'>
+								<option value="">Available Outlet Types</option>
+							</select>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable >
+								Outlet Type<span class="star">*</span>
+							</lable>
+							<input type="text" placeholder="Outlet Type" name="outlet_types" ng-model="outlet_types" required />
+							
+						</div>
+					</div>
+					<div style="margin: 10px 0 0 145px;" class="control-group">
+						<div class="controls">
+							<button type="submit" class="btn">
+								Save
+							</button>
+							<button class="btn" disabled>
+								Save
+							</button>
+						</div>
+						<p ng-show="outletSuccess">
+							Outlet Type Sucessfully added
+						</p>
+						<p ng-hide="outletSuccess"></p>
+						<p class="errorMsg" ng-show="outletFail">
+							Please fill the details
+						</p>
+						<p ng-hide="outletFail"></p>
+					</div>
+				</form>
+			</div>
+		</div>
+		<h1>Add Cuisine Type</h1>
+		<div class="acceptInv outerDiv" style="overflow: hidden;">
+			<span class="mandatoryFld"><div class="startMsg">*</div> Indicates mandatory fields</span>
+			<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 41%;">
+				<form ng-app="form-example" class="row form-horizontal" name="cuisine_type" ng-submit="add_cuisine_type(cuisine_type)" novalidate>
+					<div class="control-group">
+						<div class="controls">
+							<lable >
+								Available Cuisine Types
+							</lable>
+							<select ng-model='formcuisine1' ng-options='cuisineType.id as cuisineType.name for cuisineType in cuisineTypes'>
+								<option value="">Available Cuisine Type</option>
+							</select>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable >
+								Cuisine Type<span class="star">*</span>
+							</lable>
+							<input type="text" placeholder="Cuisine Type" name="cuisine_types" ng-model="cuisine_types" required />
+							
+						</div>
+					</div>
+					<div style="margin: 10px 0 0 145px;" class="control-group">
+						<div class="controls">
+							<button type="submit" class="btn">
+								Save
+							</button>
+							<button class="btn" disabled>
+								Save
+							</button>
+						</div>
+						<p ng-show="outletSuccess">
+							Outlet Type Sucessfully added
+						</p>
+						<p ng-hide="outletSuccess"></p>
+						<p class="errorMsg" ng-show="outletFail">
+							Please fill the details
+						</p>
+						<p ng-hide="outletFail"></p>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

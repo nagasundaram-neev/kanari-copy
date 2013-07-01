@@ -192,6 +192,10 @@ module.controller('forgotPasswordController', function($scope, $http, $location)
 	$scope.cancel = function() {
 		$location.url("/login");
 	};
+	
+	$scope.home = function(){
+		$location.url("/index");
+	};
 
 	$scope.sendLink = function() {
 		var userEmail = $scope.email;
@@ -258,12 +262,36 @@ module.controller('resetPassController', function($scope, $http, $location, $rou
 });
 
 module.controller('homeController', function($scope, $http, $location) {
-
+	$scope.points = "";
 	if (getCookie("authToken")) {
+
+		$scope.getProfile = function() {
+
+			var param = {
+				"auth_token" : getCookie('authToken')
+			}
+
+			$http({
+				method : 'get',
+				url : '/api/users',
+				params : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				//var date = new Date();
+				$scope.points = data.user.points_available;
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+
+			});
+
+			//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
+		};
+
+		$scope.getProfile();
+
 		$scope.userName = getCookie('userName');
 		$scope.role = getCookie('userRole');
 		//document.body.style.background = #FFFFFF;
-		$('body').css('background', '#FFF');
 
 		$scope.homeClk = function() {
 			$location.url("/home");
@@ -448,6 +476,9 @@ module.controller('settingsController', function($scope, $http, $location) {
 					setCookie('authToken', data.auth_token, 0.29);
 					$scope.errorMsg = false;
 					$scope.succMsg = true;
+					$scope.currentPassword = "";
+					$scope.confirmPassword = "";
+					$scope.newPassword = "";
 				}).error(function(data, status) {
 					console.log("data " + data + " status " + status);
 					$scope.error = data.errors[0];
@@ -461,12 +492,10 @@ module.controller('settingsController', function($scope, $http, $location) {
 
 		$scope.logout = function() {
 			console.log("in Logout" + getCookie('authToken'));
-			
+
 			var param = {
-				"auth_token": getCookie('authToken')
+				"auth_token" : getCookie('authToken')
 			}
-			
-			
 			$http({
 				method : 'delete',
 				url : '/api/users/sign_out',
@@ -703,9 +732,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 				}).error(function(data, status) {
 					console.log("data " + data + " status " + status);
 				});
-
 			}
-
 		};
 
 		$scope.previous = function() {
@@ -815,6 +842,9 @@ module.controller('restaurantListController', function($scope, $http, $location)
 
 module.controller('showRestaurantController', function($scope, $http, $routeParams, $location) {
 	if (getCookie('authToken')) {
+		$.mobile.loading('show');
+		$scope.lattitude = "";
+		$scope.longitude = "";
 		$scope.outlets = [];
 		$scope.cuisineTypes = [];
 
@@ -839,6 +869,8 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 			$scope.delivery = data.outlet.has_delivery.toString();
 			$scope.alcohol = data.outlet.serves_alcohol.toString();
 			$scope.outDoor_seating = data.outlet.has_outdoor_seating.toString();
+			$scope.lattitude = data.outlet.latitude;
+			$scope.longitude = data.outlet.longitude;
 		}).error(function(data, status) {
 			console.log("data in error" + data + " status " + status);
 
@@ -851,6 +883,11 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 		$scope.previous = function() {
 			$location.url("/redeemPoints");
 		};
+
+		$scope.locationMap = function() {
+			$location.url("/locationMap?outletId=" + $routeParams.outletId + "&lat=" + $scope.lattitude + "&long=" + $scope.longitude);
+		};
+		$.mobile.loading('hide');
 	} else {
 		$location.url("/login");
 	}
@@ -878,6 +915,61 @@ module.controller('transactionHistoryController', function($scope, $http, $locat
 	} else {
 		$location.url("/login");
 	}
+});
+
+module.controller('locationMapController', function($scope, $http, $location, $routeParams) {
+	$.mobile.loading('show');
+	// $scope.MapCtrl = function() {
+	// console.log("lattitude " + $routeParams.lat + " longitude " + $routeParams.long);
+	// }
+	console.log("lattitude " + $routeParams.lat + " longitude " + $routeParams.long);
+	// $scope.$broadcast('clickMessageFromParent', {
+	// data : "SOME msg to the child"
+	// })
+	google.maps.visualRefresh = true;
+
+	angular.extend($scope, {
+
+		position : {
+			coords : {
+				latitude : $routeParams.lat,
+				longitude : $routeParams.long
+			}
+		},
+
+		/** the initial center of the map */
+		centerProperty : {
+			latitude : $routeParams.lat,
+			longitude : $routeParams.long
+		},
+
+		/** the initial zoom level of the map */
+		zoomProperty : 9,
+
+		/** list of markers to put in the map */
+		markersProperty : [{
+			latitude : $routeParams.lat,
+			longitude : $routeParams.long
+		}],
+
+		// These 2 properties will be set when clicking on the map
+		//clickedLatitudeProperty: null,
+		//clickedLongitudeProperty: null,
+
+		eventsProperty : {
+			click : function(mapModel, eventName, originalEventArgs) {
+				// 'this' is the directive's scope
+				$log.log("user defined event on map directive with scope", this);
+				$log.log("user defined event: " + eventName, mapModel, originalEventArgs);
+			}
+		}
+	});
+
+	$scope.back = function() {
+		$location.url("/showRestaurant?outletId=" + $routeParams.outletId);
+	};
+	$.mobile.loading('hide');
+
 });
 
 function setCookie(name, value, days) {
