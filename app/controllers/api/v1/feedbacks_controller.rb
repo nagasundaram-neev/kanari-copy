@@ -45,6 +45,8 @@ class Api::V1::FeedbacksController < ApplicationController
     current_user = warden.authenticate(scope: :user)
     if current_user.nil?
       if @feedback.update(feedback_params)
+        @feedback.code = nil
+        @feedback.save
         render json: {points: @feedback.points}, status: :ok
       else
         render json: {errors: @feedback.errors.full_messages}, status: :unprocessable_entity

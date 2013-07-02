@@ -178,6 +178,7 @@ function MapCtrl($scope,$http) {
 	});
 	
 	$scope.addMark = function(){
+		console.log(getCookie('authToken'));
 		var queryStringId = getUrlVars()["outletId"];
 		$scope.cuisineTypesapp = [];
 			$scope.outletTypesapp = [];
