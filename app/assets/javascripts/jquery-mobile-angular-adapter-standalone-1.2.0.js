@@ -12710,8 +12710,10 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 			aPagePadB = parseFloat( aPage.css( "padding-bottom" ) ),
 			aPageBorderT = parseFloat( aPage.css( "border-top-width" ) ),
 			aPageBorderB = parseFloat( aPage.css( "border-bottom-width" ) );
-
-		aPage.css( "min-height", getScreenHeight() - aPagePadT - aPagePadB - aPageBorderT - aPageBorderB );
+        var totalHeight=getScreenHeight() - aPagePadT - aPagePadB - aPageBorderT - aPageBorderB;
+        var totalfinalHeight=totalHeight-totalHeight*1/100;
+		aPage.css( "min-height",totalfinalHeight);
+        
 	}
 
 	//shared page enhancements
