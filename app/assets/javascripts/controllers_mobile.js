@@ -310,11 +310,6 @@ module.controller('homeController', function($scope, $http, $location) {
 		}
 
 		//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
-		function minHeightToPage(){
-		var height=$(document).height()-$(document).height()*17.3/100;
-		$('.outerDiv').css('minHeight',height+'px');	
-		};
-		minHeightToPage();
 		$scope.userName = getCookie('userName');
 		$scope.role = getCookie('userRole');
 		//document.body.style.background = #FFFFFF;
@@ -354,7 +349,6 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 });
 
 module.controller('signUpController', function($scope, $http, $location) {
-
 	$scope.confPassword = "";
 	console.log("flag"+feedbackFlag);
 	if (feedbackFlag == 1) {
@@ -366,10 +360,11 @@ module.controller('signUpController', function($scope, $http, $location) {
 	}
 
 	$scope.signUp = function() {
-		if (!$scope.firstName && !$scope.lastName && $scope.confPassword == "") {
+		if (!$scope.firstName && !$scope.lastName) {
 			$scope.error = "First Name and Last Name is required. Please enter it to continue";
 			$scope.errorMsg = true;
-		} else {
+		} 
+		else {
 			var param = {
 				"user" : {
 					"first_name" : $scope.firstName,
@@ -543,6 +538,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 				deleteCookie('userRole');
 				deleteCookie('userName');
 				deleteCookie('feedbackId');
+				deleteCookie("signInCount")
 				$location.url("/login");
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + "authToken" + getCookie('authToken'));
@@ -552,6 +548,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 			deleteCookie('userRole');
 			deleteCookie('userName');
 			deleteCookie('feedbackId');
+			deleteCookie("signInCount")
 			$location.url("/login");
 		};
 	} else {
