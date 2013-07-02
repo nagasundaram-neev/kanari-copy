@@ -1015,6 +1015,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.close_manager = function() {
 			$('.add_manager').hide();
 		}
+		$scope.master= {};
 		$scope.create_manager = function(createManager) {
 			if ($scope.createManager.$valid && $(".phoneno_2").val()) {
 				$scope.valide_phone = false;
@@ -1039,16 +1040,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.error = false;
 					$scope.manager_id = data.manager.id;
 					$scope.success1 = true;
-					// $scope.email_address_manager = "";
-					// $scope.first_name = "";
-					// $scope.last_name = "";
-					// $scope.add_contact_number ="";
-					// $scope.confirmpassword = "";
-					// $scope.password = "";
-					// $("#formid").removeClass("row form-horizontal");
-					// $("#formid input").removeClass("ng-dirty ng-invalid");
-					// $("#formid .input-help").hide();
 					$scope.getManagerList();
+					$('#formid')[0].reset();
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
 					$scope.errorMsg = data.errors[0];
