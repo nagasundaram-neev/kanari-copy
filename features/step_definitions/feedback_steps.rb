@@ -22,5 +22,9 @@ And /^the feedback with id "([^"]*)" should have the following attributes$/ do |
 end
 
 Then(/^the feedback with id "(.*?)" should belong to user with id "(.*?)"$/) do |feedback_id, user_id|
-  Feedback.find(feedback_id).user_id.should == user_id.to_i
+  Feedback.find(feedback_id).user_id.should == (user_id == "nil" ? nil : user_id.to_i)
+end
+
+Then(/^the feedback with id "(.*?)" should have no kanari code$/)do |feedback_id|
+  Feedback.find(feedback_id).code.should == nil
 end
