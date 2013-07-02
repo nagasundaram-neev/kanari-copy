@@ -450,8 +450,13 @@ margin:0 10%;
 }
 .bottomDiv {
 	background-color: #593F5A;
-	margin: 5% 0 1%;
+	margin: 0;
 }
+/*#home .bottomDiv{background-color: #593F5A;
+    bottom: 0;
+    margin: 5% 0 1%;
+    position: fixed;
+    width: 100%;}*/
 .recentAct {
 	color: #ECBD3A;
 	float: left;

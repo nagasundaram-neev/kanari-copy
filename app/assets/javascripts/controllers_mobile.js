@@ -287,7 +287,11 @@ module.controller('homeController', function($scope, $http, $location) {
 
 			//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
 		};
-
+	function minHeightToPage(){
+	var height=$(document).height()-$(document).height()*17.3/100;
+	$('.outerDiv').css('minHeight',height+'px');	
+	};
+		minHeightToPage();
 		$scope.getProfile();
 
 		$scope.userName = getCookie('userName');
