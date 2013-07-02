@@ -1050,3 +1050,82 @@ function isDate(txtDate, separator) {
 	return true;
 }
 
+/*** Facebook Connect ***/
+module.run(function($rootScope, Facebook) {
+
+  $rootScope.Facebook = Facebook;
+
+})
+module.factory('Facebook',function($http,$location) {
+
+    var self = this;
+    this.auth = null;
+
+    return {
+
+      getAuth: function() {
+        return self.auth;
+      },
+
+      login: function() {
+        FB.login(function(response) {
+          if (response.authResponse) {
+            console.log('Welcome!  Fetching your information.... ');
+            self.auth = response.authResponse;  
+             FB.api('/me', function(response) {
+               var param = {
+                "user" : {
+                    "first_name" : response.first_name,
+                    "last_name" : response.last_name,
+                    "email" : response.email,
+                    "password" :12345678,
+                    "password_confirmation" :12345678, 
+                }
+            };
+            $http({
+                method : 'post',
+                url : '/api/users',
+                data : param,
+             }).success(function(data){
+                if(data.registration_complete==true){
+                	setCookie('userRole', data.user_role, 7);
+				setCookie('authToken', data.auth_token, 7);
+				setCookie('userName', data.first_name + ' ' + data.last_name, 7);
+                $location.url('/home');
+               }
+                else{
+         
+                }
+               });
+
+      });
+          } else {
+            console.log('Facebook login failed', response);
+          }
+        }, {
+        scope: 'email'
+    });
+                },
+              
+            signUp:function(){
+              $('#loginForm').addClass('loginClosed');
+            $('#loginForm').replaceWith($('#registerFormContainer').html());
+            },
+    }
+
+  });
+
+window.fbAsyncInit = function() {
+  FB.init({
+    appId: '229509360519289'
+  });
+};
+
+// Load the SDK Asynchronously
+(function(d){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all.js";
+    ref.parentNode.insertBefore(js, ref);
+}(document));
