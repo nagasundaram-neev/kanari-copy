@@ -91,8 +91,8 @@
 	width: 100%;
 	margin: 3% 0 0;
 }
-.imgDiv {
-
+#home .imgDiv {
+margin:0 10%;
 }
 
 .searchDiv .ui-corner-all {
@@ -430,7 +430,7 @@
 .yellowBack {
 	float: left;
 	padding: 2% 0;
-	width: 49.7%;
+	width: 49.1%;
 	background-color: #F8BE40;
 	border-right: 2px solid #FFFFFF;
 }
