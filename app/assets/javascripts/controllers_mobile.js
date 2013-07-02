@@ -362,10 +362,11 @@ module.controller('signUpController', function($scope, $http, $location) {
 	}
 
 	$scope.signUp = function() {
-		if (!$scope.firstName && !$scope.lastName && $scope.confPassword == "") {
+		if (!$scope.firstName && !$scope.lastName) {
 			$scope.error = "First Name and Last Name is required. Please enter it to continue";
 			$scope.errorMsg = true;
-		} else {
+		} 
+		else {
 			var param = {
 				"user" : {
 					"first_name" : $scope.firstName,
@@ -539,6 +540,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 				deleteCookie('userRole');
 				deleteCookie('userName');
 				deleteCookie('feedbackId');
+				deleteCookie("signInCount")
 				$location.url("/login");
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + "authToken" + getCookie('authToken'));
@@ -548,6 +550,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 			deleteCookie('userRole');
 			deleteCookie('userName');
 			deleteCookie('feedbackId');
+			deleteCookie("signInCount")
 			$location.url("/login");
 		};
 	} else {
