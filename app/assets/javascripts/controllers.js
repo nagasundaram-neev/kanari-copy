@@ -367,30 +367,7 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 	} else {
 		$location.url("/login");
 	}
-	$scope.disableOutlet = function($event, id) {
-		$scope.auth_token = getCookie('authToken');
-		checkbox = $event.target;
-		var params = {
-			"outlet" : {
-				"disabled" : checkbox.checked
-			},
-			"auth_token" : $scope.auth_token
-		}
-		$http({
-			method : 'PUT',
-			url : '/api/outlets/' + id,
-			data : params,
-		}).success(function(data, status) {
-			console.log("data in success " + data + " status " + status);
-
-			$scope.error = data.auth_token;
-			$scope.statement = true;
-			$scope.erromsg = false;
-		}).error(function(data, status) {
-			console.log("data in error" + data + " status " + status);
-			$scope.erromsg = true;
-		});
-	};
+	
 	$scope.changeTab = function(currentTab) {
 		//setCookie('selectedTab', currentTab, 7);
 		$location.url("/take_tour");
@@ -725,6 +702,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$(".phoneno_1").val(data.outlet.phone_number);
 					$scope.fromTime = data.outlet.open_hours.split("-")[0];
 					$scope.toTime = data.outlet.open_hours.split("-")[1];
+					$scope.outlet_disabled = data.outlet.disabled;
 					if (data.outlet.has_delivery) {
 						var radio_btn1 = data.outlet.has_delivery.toString();
 						$scope.Delivery = radio_btn1;
@@ -929,6 +907,30 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				}
 			}
 		}
+		$scope.disableOutlet = function($event) {
+		$scope.auth_token = getCookie('authToken');
+		checkbox = $event.target;
+		var params = {
+			"outlet" : {
+				"disabled" : checkbox.checked
+			},
+			"auth_token" : $scope.auth_token
+		}
+		$http({
+			method : 'PUT',
+			url : '/api/outlets/' + $scope.outletID,
+			data : params,
+		}).success(function(data, status) {
+			console.log("data in success " + data + " status " + status);
+
+			$scope.error = data.auth_token;
+			$scope.statement = true;
+			$scope.erromsg = false;
+		}).error(function(data, status) {
+			console.log("data in error" + data + " status " + status);
+			$scope.erromsg = true;
+		});
+	};
 		/* Adding for creating the outlet*/
 		$scope.create_outlet = function(createOutlet) {
 			if ($scope.createOutlet.$valid && $(".phoneno_1").val()) {
