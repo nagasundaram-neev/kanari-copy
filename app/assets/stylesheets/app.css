@@ -131,7 +131,7 @@ body {
 	margin-right: 1px;
 	padding: 2px 12px;
 }
-.navBarCls .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
+.navBarCls .nav-tabs > .active > a, .navBarCls .nav-tabs > .active > a:hover {
 	color: #5A4166;
 	padding: 2px 12px;
 	background: none repeat scroll 0 0 #E4E3E1;
@@ -351,9 +351,13 @@ a.actions {
 	text-align: center;
 	width: 105px;
 	padding: 5px;
-	 color: #5A4166;
+	color: #5A4166;
 }
-a.actions:hover{text-decoration: none;color: #5A4166;}
+a.actions:hover {
+	text-decoration: none;
+	color: #5A4166;
+}
+
 /***createOutlet****/
 .header_title {
 	background: none repeat scroll 0 0 #F5BA44;
@@ -453,7 +457,7 @@ div.create_rest {
 	background-image: url('bg_left_tab.jpg');
 	background-position: 100% 100%;
 	border-bottom: 1px solid #CCCCCC;
-	border-right: 1px solid  #CCCCCC
+	border-right: 1px solid #CCCCCC
 }
 .leftPanel ul li.active {
 	background: none;
@@ -496,12 +500,15 @@ div.create_rest {
 	border-radius: 5px 5px 5px 5px;
 }
 #location .location_select {
-	padding: 10px 20px;
+	display: block;
+	padding: 12px 20px;
 }
 #location .location_map {
 	float: left;
-	width: 75%;
+	/*width: 75%;*/
 }
+#location img { max-width: none; }
+button.enabel_Btn{display: none;}
 .manager_list ul li {
 	list-style: none outside none;
 	border-bottom: 1px solid #CCCCCC;
@@ -580,7 +587,9 @@ ul.taketour li a:hover {
 }
 
 /**View Account Details**/
-	.phoneno{display:none;}
+.phoneno {
+	display: none;
+}
 .viewAccPage {
 	margin: 20px 50px;
 	padding: 10px 0;
@@ -624,6 +633,18 @@ a.changePassword:hover {
 #location {
 	opacity: 0
 }
+
+/***Add Outlet And CuisineType***/
+ul.outlet_cuisine_type{
+	border-bottom:none;
+}
+ul.outlet_cuisine_type li a {
+	color: #5A4166;
+	font-size: 15px;
+	padding-bottom: 12px;
+}
+.updateBtn{display:none;}
+
 
 .input-help {
 	display: none;

@@ -1,94 +1,161 @@
 <div data-role="page" class="main_content span12" data-theme="b" id="outletCuisineType" ng-controller="outletCuisineTypeCtrl">
+	<div class="header_title">
+		<ul class="outlet_cuisine_type  nav nav-tabs">
+			<li class="active">
+				<a href="#addOutlet">Add Outlet Type</a>
+			</li>
+			<li>
+				<a href="#addCuisine">Add Cuisine Type</a>
+			</li>
+		</ul>
+	</div>
 	<div class="loginDiv innerDiv" data-role="content">
-		<h1>Add Outlet Type</h1>
-		<div class="acceptInv outerDiv" style="overflow: hidden;">
-			<span class="mandatoryFld"><div class="startMsg">*</div> Indicates mandatory fields</span>
-			<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 41%;">
-				<form ng-app="form-example" class="row form-horizontal" name="outlet_type" ng-submit="add_outlet_type(outlet_type)" novalidate>
-					<div class="control-group">
-						<div class="controls">
-							<lable >
-								Available Outlet Types
-							</lable>
-							<select ng-hide="form_outlet1" ng-model='formoutlet1' ng-options='outletType.id as outletType.name for outletType in outletTypes'>
-								<option value="">Available Outlet Types</option>
-							</select>
+
+		<div class="calendarNav tab-pane fade in active" id="addOutlet">
+			<h1>Add Outlet Type</h1>
+			<div class="acceptInv outerDiv" style="overflow: hidden;">
+				<span class="mandatoryFld">
+					<div class="startMsg">
+						*
+					</div> Indicates mandatory fields</span>
+				<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 41%;">
+					<form ng-app="form-example" class="row form-horizontal" name="outlet_type" ng-submit="add_outlet_type(outlet_type)" novalidate>
+						<div class="control-group">
+							<div class="controls">
+								<lable >
+
+								</lable>
+								<select id="list" ng-change="updateOutletType(formoutlet1)" ng-hide="form_outlet1" ng-model='formoutlet1' >
+									<option value="">Update Outlet Types</option>
+									<option ng-repeat="outletType in outletTypes" value="{{outletType.id}}" title="{{outletType.name}}"
+									>{{outletType.name}}</option>
+								</select>
+							</div>
 						</div>
-					</div>
-					<div class="control-group">
-						<div class="controls">
-							<lable >
-								Outlet Type<span class="star">*</span>
-							</lable>
-							<input type="text" placeholder="Outlet Type" name="outlet_types" ng-model="outlet_types" required />
-							
+						<div class="control-group">
+							<div class="controls">
+								<lable >
+									Outlet Type<span class="star">*</span>
+								</lable>
+								<input type="text" placeholder="Outlet Type" name="outlet_types" ng-model="outlet_types" required />
+
+							</div>
 						</div>
-					</div>
-					<div style="margin: 10px 0 0 145px;" class="control-group">
-						<div class="controls">
-							<button type="submit" class="btn">
-								Save
-							</button>
-							<button class="btn" disabled>
-								Save
-							</button>
+						<div style="margin: 10px 0 0 145px;" class="control-group">
+							<div class="controls">
+								<div class="saveBtn">
+									<button type="submit" class="btn">
+										Save
+									</button>
+									<button class="btn" disabled>
+										Save
+									</button>
+								</div>
+								<div class="updateBtn">
+									<button  type="submit" class="btn" >
+										Update
+									</button>
+								</div>
+
+							</div>
+							<br/>
+							<div ng-show="outletSuccess" class="successMsg">
+								<div class="create_rest" ng-hide="updateOMode">
+									Outlet type sucessfully added.
+								</div>
+								<div class="create_rest" ng-show="updateOMode">
+									Outlet type has been updated successfully.
+								</div>
+							</div>
+							<p ng-hide="outletSuccess"></p>
+							<p class="errorMsg" ng-show="outletFail">
+								Please fill the details
+							</p>
+							<p ng-hide="outletFail"></p>
 						</div>
-						<p ng-show="outletSuccess">
-							Outlet Type Sucessfully added
-						</p>
-						<p ng-hide="outletSuccess"></p>
-						<p class="errorMsg" ng-show="outletFail">
-							Please fill the details
-						</p>
-						<p ng-hide="outletFail"></p>
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
+
 		</div>
-		<h1>Add Cuisine Type</h1>
-		<div class="acceptInv outerDiv" style="overflow: hidden;">
-			<span class="mandatoryFld"><div class="startMsg">*</div> Indicates mandatory fields</span>
-			<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 41%;">
-				<form ng-app="form-example" class="row form-horizontal" name="cuisine_type" ng-submit="add_cuisine_type(cuisine_type)" novalidate>
-					<div class="control-group">
-						<div class="controls">
-							<lable >
-								Available Cuisine Types
-							</lable>
-							<select ng-model='formcuisine1' ng-options='cuisineType.id as cuisineType.name for cuisineType in cuisineTypes'>
-								<option value="">Available Cuisine Type</option>
-							</select>
+		<div id="addCuisine" class="tab-pane fade">
+			<h1>Add Cuisine Type</h1>
+			<div class="acceptInv outerDiv" style="overflow: hidden;">
+				<span class="mandatoryFld">
+					<div class="startMsg">
+						*
+					</div> Indicates mandatory fields</span>
+				<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 41%;">
+					<form ng-app="form-example" class="row form-horizontal" name="cuisine_type" ng-submit="add_cuisine_type(cuisine_type)" novalidate>
+						<div class="control-group">
+							<div class="controls">
+								<lable >
+
+								</lable>
+								<select id="Clist" ng-change="updateCuisineType(formcuisine1)" ng-model='formcuisine1' >
+									<option value="">Update Cuisine Types</option>
+									<option ng-repeat="cuisineType in cuisineTypes" value="{{cuisineType.id}}" title="{{cuisineType.name}}"
+									>{{cuisineType.name}}</option>
+								</select>
+							</div>
 						</div>
-					</div>
-					<div class="control-group">
-						<div class="controls">
-							<lable >
-								Cuisine Type<span class="star">*</span>
-							</lable>
-							<input type="text" placeholder="Cuisine Type" name="cuisine_types" ng-model="cuisine_types" required />
-							
+						<div class="control-group">
+							<div class="controls">
+								<lable >
+									Cuisine Type<span class="star">*</span>
+								</lable>
+								<input type="text" placeholder="Cuisine Type" name="cuisine_types" ng-model="cuisine_types" required />
+
+							</div>
 						</div>
-					</div>
-					<div style="margin: 10px 0 0 145px;" class="control-group">
-						<div class="controls">
-							<button type="submit" class="btn">
-								Save
-							</button>
-							<button class="btn" disabled>
-								Save
-							</button>
+						<div style="margin: 10px 0 0 145px;" class="control-group">
+							<div class="controls">
+							<div class="saveCBtn">
+									<button type="submit" class="btn">
+										Save
+									</button>
+									<button class="btn" disabled>
+										Save
+									</button>
+								</div>
+								<div class="updateCBtn">
+									<button  type="submit" class="btn" >
+										Update
+									</button>
+								</div>
+
+							</div>
+							<br/>
+							<div ng-show="cuisineSuccess" class="successMsg">
+								<div class="create_rest" ng-hide="updateCMode">
+									Cuisine type sucessfully added.
+								</div>
+								<div class="create_rest" ng-show="updateCMode">
+									Cuisine type has been updated successfully.
+								</div>
+							</div>
+						
+							<p ng-hide="outletSuccess"></p>
+							<p class="errorMsg" ng-show="outletFail">
+								Please fill the details
+							</p>
+							<p ng-hide="outletFail"></p>
 						</div>
-						<p ng-show="outletSuccess">
-							Outlet Type Sucessfully added
-						</p>
-						<p ng-hide="outletSuccess"></p>
-						<p class="errorMsg" ng-show="outletFail">
-							Please fill the details
-						</p>
-						<p ng-hide="outletFail"></p>
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<script>
+	$('#addCuisine').hide();
+	$(document).ready(function() {
+		$('.nav-tabs a').click(function(e) {
+			e.preventDefault();
+			$(this).tab('show');
+			var a_href = $(this).attr('href');
+			$('.tab-pane').hide();
+			$(a_href).show();
+		});
+	}); 
+</script>
