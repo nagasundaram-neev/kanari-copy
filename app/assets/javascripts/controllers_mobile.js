@@ -127,6 +127,7 @@ var Base64 = {
 
 var baseUrl = "localhost:8080";
 var auth_token = "";
+var feedbackFlag = 0;
 
 module.controller('loginController', function($scope, $http, $location) {
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
@@ -322,11 +323,23 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 	$scope.signUpCLick = function() {
 		$location.url("/signUp");
 	};
+	$scope.leaveFeedback = function(){
+		$location.url("/feedback");
+	};
 });
 
 module.controller('signUpController', function($scope, $http, $location) {
 
 	$scope.confPassword = "";
+	
+	if(feedbackFlag == 1){
+		$scope.feedBackMsg = true;
+		$scope.message = false;
+	}else{
+		$scope.message = true;
+		$scope.feedBackMsg = false;
+	}
+	
 	$scope.signUp = function() {
 		if (!$scope.firstName && !$scope.lastName && $scope.confPassword == "") {
 			$scope.error = "First Name and Last Name is required. Please enter it to continue";
@@ -361,7 +374,6 @@ module.controller('signUpController', function($scope, $http, $location) {
 					$scope.error = data.errors[0];
 					$scope.errorMsg = true;
 				}
-
 			});
 		}
 	};
@@ -525,7 +537,6 @@ module.controller('settingsController', function($scope, $http, $location) {
 var pointsEarned = 0;
 
 module.controller('feedbackController', function($scope, $http, $location) {
-	if (getCookie('authToken')) {
 		$scope.digit1 = "";
 		$scope.digit2 = "";
 		$scope.digit3 = "";
@@ -583,14 +594,9 @@ module.controller('feedbackController', function($scope, $http, $location) {
 			});
 
 		};
-	} else {
-		$location.url("/login");
-	}
-
 });
 
 module.controller('feedback_step2Controller', function($scope, $http, $location) {
-	if (getCookie('authToken')) {
 		$scope.nextFlag = 0;
 		$scope.prevFlag = -1;
 		$scope.like = false;
@@ -728,7 +734,13 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 				}).success(function(data, status) {
 					console.log("User Role " + data + " status " + status);
 					pointsEarned = data.points;
-					$location.url("/feedbackSubmitSuccess");
+					if (getCookie('authToken')) {
+						$location.url("/feedbackSubmitSuccess");
+					}else{
+						feedbackFlag = 1;
+						$location.url("/signUp");
+					}
+					
 				}).error(function(data, status) {
 					console.log("data " + data + " status " + status);
 				});
@@ -777,23 +789,19 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			}
 
 		};
-	} else {
-		$location.url("/login");
-	}
 });
 
 module.controller('feedbackSubmitController', function($scope, $http, $routeParams, $location) {
 	if (getCookie('authToken')) {
-		console.log("points " + pointsEarned);
+		//console.log("points " + pointsEarned);
 		$scope.points = pointsEarned;
-		console.log("scope variable " + $scope.points);
-
+		//console.log("scope variable " + $scope.points);
 		$scope.home = function() {
 			$location.url("/home");
 		};
-	} else {
-		$location.url("/login");
-	}
+	 } else {
+		 $location.url("/login");
+	 }
 });
 
 module.controller('restaurantListController', function($scope, $http, $location) {

@@ -464,6 +464,7 @@
 	float: left;
     margin-left: 2%;
     padding: 4% 0 3%;
+    text-shadow: none;
     width: 74%;
 }
 .backColr {
@@ -1064,7 +1065,7 @@ color:#F5C03F!important;text-align: center;
 	text-align: center;
 	text-shadow: none;
 	text-transform: uppercase;
-	width: 94%;
+	width: 97%;
 }
 .proceedBtn .ui-btn-corner-all {
 	border-radius: 0.4em 0.4em 0.4em 0.4em;
