@@ -904,7 +904,10 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 
 module.controller('redeemPointsController', function($scope, $http, $location) {
 	if (getCookie('authToken')) {
-
+		$scope.previous = function(){
+			//previous
+			$location.url("/")
+		}
 	} else {
 		$location.url("/login");
 	}
