@@ -157,8 +157,20 @@
 
 </div>
 <script>
-$(document).ready(function () {
-    $(".setTelephone").mask("(+999)-99-9999999");
-  //  doValidation();
-});
+$(document).ready(function() {
+		$(".setTelephone").mask("(+999)-9?9-9999999");
+		$(".setTelephone").on("blur", function() {
+			var last = $(this).val().substr($(this).val().lastIndexOf("-") + 1);
+			// alert(last.length);
+			if (last.length == 6) {
+				var move = $(this).val().substr($(this).val().lastIndexOf("-") - 1, 1);
+
+				var lastfour = move + last;
+
+				var first = $(this).val().substr(0, 8);
+
+				$(this).val(first + '-' + lastfour);
+			}
+		});
+	}); 
 </script>
