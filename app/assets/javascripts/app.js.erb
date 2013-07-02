@@ -45,6 +45,17 @@ module.directive('map', function($http) {
 			center : new google.maps.LatLng(25.18971, 55.17745),
 			mapTypeId : google.maps.MapTypeId.ROADMAP
 			};
+			if(getCookie('latitude') == "null")
+			{
+				$('.addMarker').show();
+				$('.updateMarker').hide();				
+			}
+			else{
+				
+			$('.updateMarker').show();
+			$('.addMarker').hide();
+				
+			}
 			 var map = new google.maps.Map(document.getElementById(attrs.id), myOptions);
 			var markersArray = [];
 			addMarker({
@@ -103,21 +114,81 @@ module.directive('map', function($http) {
 			// end click listener
 
 			var addMarker = function(pos) {
-
+			$('button.enabel_Btn').show();
+			$('button.disable_Btn').hide();
 			clearOverlays()
 			var myLatlng = new google.maps.LatLng(pos.lat, pos.lng);
 			setCookie('latitude', pos.lat, 0.29);
 			setCookie('logitude', pos.lng, 0.29);
-			scope.cuisineTypesapp = [];
-			scope.outletTypesapp = [];
-			scope.cuisineTypesapp = getCookie('currentCuisineList');
-			scope.outletTypesapp = getCookie('currentOutletList');
+			
+			}//end addMarker
+			function clearOverlays() {
+			if (markersArray) {
+			for (i in markersArray) {
+			markersArray[i].setMap(null);
+			}
+			}
+			}
+
+			function getUrlVars() {
+			var vars = [], hash;
+			var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+			for (var i = 0; i < hashes.length; i++) {
+			hash = hashes[i].split('=');
+			vars.push(hash[0]);
+			vars[hash[0]] = hash[1];
+			}
+			return vars;
+			}
+
+			})
+		}
+	};
+});
+
+module.directive('showtab',
+    function () {
+        return {
+            link: function (scope, element, attrs) {
+                element.click(function(e) {
+                    e.preventDefault();
+                    $(element).tab('show');
+                });
+            }
+        };
+    });
+  
+function getCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for (var i = 0; i < ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0) == ' ')
+		c = c.substring(1, c.length);
+		if (c.indexOf(nameEQ) == 0)
+			return c.substring(nameEQ.length, c.length);
+	}
+	return null;
+}
+
+function MapCtrl($scope,$http) {
+
+	$scope.$broadcast('clickMessageFromParent', {
+		// data: "SOME msg to the child"
+	});
+	
+	$scope.addMark = function(){
+		var queryStringId = getUrlVars()["outletId"];
+		$scope.cuisineTypesapp = [];
+			$scope.outletTypesapp = [];
+			$scope.cuisineTypesapp = getCookie('currentCuisineList');
+			$scope.outletTypesapp = getCookie('currentOutletList');
 			var params = {
 			"outlet" : {
-			"latitude" : pos.lat,
-			"longitude" : pos.lng,
-			"cuisine_type_ids" : JSON.parse(scope.cuisineTypesapp),
-			"outlet_type_ids" : JSON.parse(scope.outletTypesapp),
+			"latitude" : getCookie('latitude'),
+			"longitude" : getCookie('logitude'),
+			"cuisine_type_ids" : JSON.parse($scope.cuisineTypesapp),
+			"outlet_type_ids" : JSON.parse($scope.outletTypesapp),
 			"has_delivery" :getCookie('radiobtn1'),
 			"serves_alcohol" : getCookie('radiobtn2'),
 			"has_outdoor_seating" : getCookie('radiobtn3')
@@ -148,16 +219,9 @@ module.directive('map', function($http) {
 
 			});
 			}
-			}//end addMarker
-			function clearOverlays() {
-			if (markersArray) {
-			for (i in markersArray) {
-			markersArray[i].setMap(null);
-			}
-			}
-			}
+	}
 
-			function getUrlVars() {
+function getUrlVars() {
 			var vars = [], hash;
 			var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
 			for (var i = 0; i < hashes.length; i++) {
@@ -167,31 +231,6 @@ module.directive('map', function($http) {
 			}
 			return vars;
 			}
-
-			})
-		}
-	};
-});
-
-function getCookie(name) {
-	var nameEQ = name + "=";
-	var ca = document.cookie.split(';');
-	for (var i = 0; i < ca.length; i++) {
-		var c = ca[i];
-		while (c.charAt(0) == ' ')
-		c = c.substring(1, c.length);
-		if (c.indexOf(nameEQ) == 0)
-			return c.substring(nameEQ.length, c.length);
-	}
-	return null;
-}
-
-function MapCtrl($scope) {
-
-	$scope.$broadcast('clickMessageFromParent', {
-		// data: "SOME msg to the child"
-	})
-
 }
 
 module.directive('passwordValidate', function() {
