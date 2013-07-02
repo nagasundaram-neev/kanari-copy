@@ -720,7 +720,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					if (data.outlet.has_outdoor_seating) {
 						var radio_btn3 = data.outlet.has_outdoor_seating.toString();
 						$scope.outdoor_Seating = radio_btn3;
-					} else if (data.outlet.has_delivery = "false") {
+					} else if (data.outlet.has_outdoor_seating = "false") {
 						var radio_btn3 = data.outlet.has_outdoor_seating.toString();
 						$scope.outdoor_Seating = radio_btn3;
 					}
