@@ -7,6 +7,7 @@ var module = angular.module('kanariTablet', []).
   	
   $routeProvider.
      when('/signup', {templateUrl: "<%= asset_path 'tablet_signup.html' %>"}).
+     when('/insights', {templateUrl: "<%= asset_path 'insights.html' %>"}).
      otherwise({redirectTo: '/signup'});
      $locationProvider.hashPrefix = "";
 }]);
