@@ -531,6 +531,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.locationShow = false;
 		$scope.permissionShow = false;
 		$scope.ReportShow = false;
+		$scope.TabletIdShow = false;
 		$scope.updateMode = false;
 		$scope.success1 = false;
 		$scope.form_outlet2 = false;
@@ -1067,6 +1068,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					});
 					$scope.profileShow = true;
 					$scope.locationShow = false;
+					$scope.TabletIdShow = false;
 					$scope.permissionShow = false;
 					$scope.successMsg = false;
 					$scope.ReportShow = false;
@@ -1076,6 +1078,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					});
 					$scope.profileShow = false;
 					$scope.locationShow = true;
+					$scope.TabletIdShow = false;
 					$scope.permissionShow = false;
 					$scope.ReportShow = false;
 				} else if (currentTab == "permissionShow") {
@@ -1084,6 +1087,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					});
 					$scope.profileShow = false;
 					$scope.locationShow = false;
+					$scope.TabletIdShow = false;
 					$scope.permissionShow = true;
 					$scope.ReportShow = false;
 				} else if (currentTab == "ReportShow") {
@@ -1093,7 +1097,17 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.profileShow = false;
 					$scope.locationShow = false;
 					$scope.permissionShow = false;
+					$scope.TabletIdShow = false;
 					$scope.ReportShow = true;
+				}else if (currentTab == "TabletIdShow") {
+					$('#location').css({
+						'opacity' : '0'
+					});
+					$scope.profileShow = false;
+					$scope.locationShow = false;
+					$scope.permissionShow = false;
+					$scope.ReportShow = false;
+					$scope.TabletIdShow = true;
 				}
 			}
 		}

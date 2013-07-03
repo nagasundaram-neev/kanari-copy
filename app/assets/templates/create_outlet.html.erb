@@ -56,8 +56,8 @@
 					<span>Who gets the reports and how often</span> </a>
 				</li>
 				<li data-ng-class="{active:TabletIdShow,create_tabletId:true}">
-					<a ng-click="changeTab('ReportShow')"> <%= image_tag 'icon_reports.png' %>
-					Reports
+					<a ng-click="changeTab('TabletIdShow')"> <%= image_tag 'icon_create_tablet_id.png' %>
+					Tablet Id
 					<br/>
 					<span>Who gets the reports and how often</span> </a>
 				</li>
@@ -406,6 +406,133 @@
 		</div>
 		<div id ="reports" ng-show="ReportShow" style="height: 267px;">
 			This is reports based div only
+		</div>
+		<div id ="tabletIds" ng-show="TabletIdShow" style="height: 267px;">
+			<div data-role="fieldcontain" class="manager_list rightPanel">
+				<div ng-hide="manager_show" class="change_manager">
+					Tablet Ids
+				</div>
+				<div class="listIds">
+					<div class="tabletId">
+						test1
+					</div>
+				</div>
+				<input type="button" class="btn_cls" ng-click="create_tablet_id()" data-inline="true" value="Create Tablet Id" />
+				<div data-role="fieldcontain" class="add_manager rightPanel">
+				<h1>Create Tablet ID</h1>
+				<span class="mandatoryFld">
+					<div class="startMsg">
+						*
+					</div> Indicates mandatory fields</span>
+				<form id="formid" ng-app="form-example" class="row form-horizontal" name="createManager" ng-submit="create_manager(createManager)" novalidate>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Tablet Id<span class="star">*</span>
+							</lable>
+							<input type="text" placeholder="Tablet Id" ng-model="first_name" required>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Last Name<span class="star">*</span>
+							</lable>
+							<input type="text" placeholder="Last Name" ng-model="last_name" required>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Email Address<span class="star">*</span>
+							</lable>
+							<input type="email" placeholder="Email Address" ng-model="email_address_manager" required>
+							<div  class="input-help">
+									<h4>Invalid Email</h4>
+								</div>
+							
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Password<span class="star">*</span>
+							</lable>
+							<input ng-model="password" class="" password-validate required type="password" placeholder="Password">
+							<div class="input-help">
+								<h4>Password must meet the following requirements:</h4>
+								<ul>
+									<li ng-class="pwdHasLetter">
+										At least <strong>one letter</strong>
+									</li>
+									<li ng-class="pwdHasNumber">
+										At least <strong>one number</strong>
+									</li>
+									<li ng-class="pwdValidLength">
+										At least <strong>8 characters long</strong>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Confirm Password<span class="star">*</span>
+							</lable>
+							<input ng-model="confirmpassword" class="" password-validate required type="password"  placeholder="Password">
+							<div class="input-help">
+								<h4>Password must meet the following requirements:</h4>
+								<ul>
+									<li ng-class="pwdHasLetter">
+										At least <strong>one letter</strong>
+									</li>
+									<li ng-class="pwdHasNumber">
+										At least <strong>one number</strong>
+									</li>
+									<li ng-class="pwdValidLength">
+										At least <strong>8 characters long</strong>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Phone Number<span class="star">*</span>
+							</lable>
+							<input data-theme="a" data-inline="true" type="text" class="phoneno_2 setTelephone" name="contactNo" placeholder="Phone Number" />
+							<!-- <input type="text" placeholder="Phone Number" min="0" number-mask="" maxlength="11" ng-model="add_contact_number" required> -->
+						</div>
+					</div>
+					<div class="control-group" style="margin: 10px 0 0 145px;">
+						<div class="controls">
+							<button type="submit" class="btn">
+								Add Manager
+							</button>
+							<button class="btn" disabled>
+								Add Manager
+							</button>
+							<button  ng-click="close_manager()" class="cancelBtn submitBtn btn btn-primary btn-large"  >
+								Cancel
+							</button>
+							<p ng-show="error" class="errorMsg">
+								{{errorMsg}}
+							</p>
+							<p ng-hide="error" ></p>
+							<p ng-show="success1" class="successMsg">
+								Manager added successfully.
+							</p>
+							<p ng-hide="success" ></p>
+							<p ng-show="valide_phone" class="errorMsg">
+								Invalid Phone Number
+							</p>
+						</div>
+					</div>
+				</form>
+			</div>
+			</div>
 		</div>
 		<div id ="location" >
 			<div ng-app="kanari" class="location_map">
