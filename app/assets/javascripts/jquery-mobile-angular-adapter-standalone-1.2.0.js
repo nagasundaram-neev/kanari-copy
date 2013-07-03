@@ -12710,8 +12710,11 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 			aPagePadB = parseFloat( aPage.css( "padding-bottom" ) ),
 			aPageBorderT = parseFloat( aPage.css( "border-top-width" ) ),
 			aPageBorderB = parseFloat( aPage.css( "border-bottom-width" ) );
-
-		aPage.css( "min-height", getScreenHeight() - aPagePadT - aPagePadB - aPageBorderT - aPageBorderB );
+		aPage.css( "min-height",getScreenHeight() - aPagePadT - aPagePadB - aPageBorderT - aPageBorderB);
+      var heightHome=$(document).height()-$(document).height()*17/100;
+       var heightSignUp=$(document).height()-$(document).height()*28/100;
+        $('#home .outerDiv').css('minHeight',heightHome+'px');    
+          $('#signUp .outerDiv').css('minHeight',heightSignUp+'px');  
 	}
 
 	//shared page enhancements

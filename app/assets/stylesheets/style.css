@@ -91,8 +91,8 @@
 	width: 100%;
 	margin: 3% 0 0;
 }
-.imgDiv {
-
+#home .imgDiv {
+margin:0 10%;
 }
 
 .searchDiv .ui-corner-all {
@@ -430,7 +430,7 @@
 .yellowBack {
 	float: left;
 	padding: 2% 0;
-	width: 49.7%;
+	width: 49.1%;
 	background-color: #F8BE40;
 	border-right: 2px solid #FFFFFF;
 }
@@ -450,8 +450,13 @@
 }
 .bottomDiv {
 	background-color: #593F5A;
-	margin: 5% 0 1%;
+	margin: 0.5% 0 0;
 }
+/*#home .bottomDiv{background-color: #593F5A;
+    bottom: 0;
+    margin: 5% 0 1%;
+    position: fixed;
+    width: 100%;}*/
 .recentAct {
 	color: #ECBD3A;
 	float: left;
@@ -464,6 +469,7 @@
 	float: left;
     margin-left: 2%;
     padding: 4% 0 3%;
+    text-shadow: none;
     width: 74%;
 }
 .backColr {
@@ -506,7 +512,7 @@ img, object {
 }
 .logo_btm img {
   	float: left;
-    margin: 5% 0 1%;
+    margin: 5% 0 0;
     max-height: 90%;
     max-width: 40%;
 }
@@ -813,7 +819,7 @@ img, object {
 
 /* Sign Up*/
 #signUp .ui-content {
-	margin:1% 5% !important;
+	margin:1% 5% 0!important;
 	padding:0;
 }
 #signedUp .ui-content {
@@ -907,7 +913,8 @@ color:#F5C03F!important;text-align: center;
 #settings .ui-btn-inline {
 	clear: both;
 	width: 98%;
-	border: 0 !important
+	border: 0 !important;
+	margin:2% 0 0;
 }
 #settings .ui-btn-inline span.ui-btn-text {
 	color: #664765;
@@ -1060,11 +1067,12 @@ color:#F5C03F!important;text-align: center;
 	background-color: #664765;
 	color: #F9C040;
 	font: 104% KanariFont;
-	padding: 0.2em 0 0;
+	padding: 0;
 	text-align: center;
 	text-shadow: none;
 	text-transform: uppercase;
-	width: 94%;
+	width: 98%;
+	margin:0;
 }
 .proceedBtn .ui-btn-corner-all {
 	border-radius: 0.4em 0.4em 0.4em 0.4em;
@@ -1072,11 +1080,11 @@ color:#F5C03F!important;text-align: center;
 
 #transactionHistory span {
 	float: left;
-	margin: 2.6% 0 0 3%
+	margin: 3.6% 0 0 3%;
 }
 #transactionHistory a {
 	float: right;
-	margin: 0 2% 0 0
+	margin:0.7% 2% 0 0;
 }
 #transactionHistory a img {
 	vertical-align: top;

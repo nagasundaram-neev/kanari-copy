@@ -127,6 +127,8 @@ var Base64 = {
 
 var baseUrl = "localhost:8080";
 var auth_token = "";
+var feedbackFlag = 0;
+var signInCount = "";
 
 module.controller('loginController', function($scope, $http, $location) {
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
@@ -152,10 +154,12 @@ module.controller('loginController', function($scope, $http, $location) {
 				setCookie('userRole', data.user_role, 7);
 				setCookie('authToken', data.auth_token, 7);
 				setCookie('userName', data.first_name + ' ' + data.last_name, 7);
+				setCookie('signInCount', data.sign_in_count);
 			} else {
 				setCookie('userRole', data.user_role, 0.29);
 				setCookie('authToken', data.auth_token, 0.29);
 				setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
+				setCookie('signInCount', data.sign_in_count);
 			}
 			$location.url("/home");
 		}).error(function(data, status) {
@@ -192,8 +196,8 @@ module.controller('forgotPasswordController', function($scope, $http, $location)
 	$scope.cancel = function() {
 		$location.url("/login");
 	};
-	
-	$scope.home = function(){
+
+	$scope.home = function() {
 		$location.url("/index");
 	};
 
@@ -263,10 +267,30 @@ module.controller('resetPassController', function($scope, $http, $location, $rou
 
 module.controller('homeController', function($scope, $http, $location) {
 	$scope.points = "";
+	console.log("sign in Count"+getCookie("signInCount"));
 	if (getCookie("authToken")) {
+		if (getCookie("signInCount") == 1) {
+			console.log("sign in Count if "+signInCount);
+			var param = {
+				"feedback_id" : getCookie('feedbackId')
+			}
 
-		$scope.getProfile = function() {
+			$http({
+				method : 'post',
+				url : '/api/new_registration_points',
+				data : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				//var date = new Date();
+				$scope.points = data.points;
+				signInCount = 0;
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 
+			});
+
+		} else {
+			console.log("sign in Count else "+getCookie("signInCount"));
 			var param = {
 				"auth_token" : getCookie('authToken')
 			}
@@ -283,12 +307,9 @@ module.controller('homeController', function($scope, $http, $location) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 
 			});
+		}
 
-			//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
-		};
-
-		$scope.getProfile();
-
+		//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
 		$scope.userName = getCookie('userName');
 		$scope.role = getCookie('userRole');
 		//document.body.style.background = #FFFFFF;
@@ -322,16 +343,28 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 	$scope.signUpCLick = function() {
 		$location.url("/signUp");
 	};
+	$scope.leaveFeedback = function() {
+		$location.url("/feedback");
+	};
 });
 
 module.controller('signUpController', function($scope, $http, $location) {
-
 	$scope.confPassword = "";
+	console.log("flag"+feedbackFlag);
+	if (feedbackFlag == 1) {
+		$scope.feedBackMsg = true;
+		$scope.message = false;
+	} else {
+		$scope.message = true;
+		$scope.feedBackMsg = false;
+	}
+
 	$scope.signUp = function() {
-		if (!$scope.firstName && !$scope.lastName && $scope.confPassword == "") {
+		if (!$scope.firstName && !$scope.lastName) {
 			$scope.error = "First Name and Last Name is required. Please enter it to continue";
 			$scope.errorMsg = true;
-		} else {
+		} 
+		else {
 			var param = {
 				"user" : {
 					"first_name" : $scope.firstName,
@@ -361,7 +394,6 @@ module.controller('signUpController', function($scope, $http, $location) {
 					$scope.error = data.errors[0];
 					$scope.errorMsg = true;
 				}
-
 			});
 		}
 	};
@@ -506,6 +538,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 				deleteCookie('userRole');
 				deleteCookie('userName');
 				deleteCookie('feedbackId');
+				deleteCookie("signInCount")
 				$location.url("/login");
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + "authToken" + getCookie('authToken'));
@@ -515,6 +548,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 			deleteCookie('userRole');
 			deleteCookie('userName');
 			deleteCookie('feedbackId');
+			deleteCookie("signInCount")
 			$location.url("/login");
 		};
 	} else {
@@ -525,269 +559,265 @@ module.controller('settingsController', function($scope, $http, $location) {
 var pointsEarned = 0;
 
 module.controller('feedbackController', function($scope, $http, $location) {
-	if (getCookie('authToken')) {
+	$scope.digit1 = "";
+	$scope.digit2 = "";
+	$scope.digit3 = "";
+	$scope.digit4 = "";
+	$scope.digit5 = "";
+	$scope.error = false;
+
+	$scope.home = function() {
+		$location.url("/home");
+	};
+
+	$scope.clear = function() {
 		$scope.digit1 = "";
 		$scope.digit2 = "";
 		$scope.digit3 = "";
 		$scope.digit4 = "";
 		$scope.digit5 = "";
-		$scope.error = false;
+	};
 
-		$scope.home = function() {
-			$location.url("/home");
-		};
+	$scope.enterValues = function(val) {
+		//console.log("digit1 " + $scope.digit1);
+		if (!$scope.digit1 || $scope.digit1 == "") {
+			$scope.digit1 = val;
+		} else if (!$scope.digit2 || $scope.digit2 == "") {
+			$scope.digit2 = val;
+		} else if (!$scope.digit3 || $scope.digit3 == "") {
+			$scope.digit3 = val;
+		} else if (!$scope.digit4 || $scope.digit4 == "") {
+			$scope.digit4 = val;
+		} else if (!$scope.digit5 || $scope.digit5 == "") {
+			$scope.digit5 = val;
+		}
+	};
 
-		$scope.clear = function() {
-			$scope.digit1 = "";
-			$scope.digit2 = "";
-			$scope.digit3 = "";
-			$scope.digit4 = "";
-			$scope.digit5 = "";
-		};
+	$scope.next = function() {
+		var kanariCode;
+		if ($scope.digit1 && $scope.digit2 && $scope.digit3 && $scope.digit4 && $scope.digit5) {
+			kanariCode = $scope.digit1 + "" + $scope.digit2 + "" + $scope.digit3 + "" + $scope.digit4 + "" + $scope.digit5;
+		} else {
+			kanaricode = "";
+		}
 
-		$scope.enterValues = function(val) {
-			//console.log("digit1 " + $scope.digit1);
-			if (!$scope.digit1 || $scope.digit1 == "") {
-				$scope.digit1 = val;
-			} else if (!$scope.digit2 || $scope.digit2 == "") {
-				$scope.digit2 = val;
-			} else if (!$scope.digit3 || $scope.digit3 == "") {
-				$scope.digit3 = val;
-			} else if (!$scope.digit4 || $scope.digit4 == "") {
-				$scope.digit4 = val;
-			} else if (!$scope.digit5 || $scope.digit5 == "") {
-				$scope.digit5 = val;
-			}
-		};
+		$http({
+			method : 'get',
+			url : '/api/kanari_codes/' + kanariCode,
+			//params : param
+		}).success(function(data, status) {
+			console.log("User Role " + data + " status " + status);
+			setCookie("feedbackId", data.feedback_id, 0.29);
+			$location.url("/feedback_step2");
+		}).error(function(data, status) {
+			console.log("data " + data + " status " + status);
+			$scope.errorMsg = data.errors[0];
+			$scope.error = true;
+		});
 
-		$scope.next = function() {
-			var kanariCode;
-			if ($scope.digit1 && $scope.digit2 && $scope.digit3 && $scope.digit4 && $scope.digit5) {
-				kanariCode = $scope.digit1 + "" + $scope.digit2 + "" + $scope.digit3 + "" + $scope.digit4 + "" + $scope.digit5;
-			} else {
-				kanaricode = "";
-			}
-
-			$http({
-				method : 'get',
-				url : '/api/kanari_codes/' + kanariCode,
-				//params : param
-			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
-				setCookie("feedbackId", data.feedback_id, 0.29);
-				$location.url("/feedback_step2");
-			}).error(function(data, status) {
-				console.log("data " + data + " status " + status);
-				$scope.errorMsg = data.errors[0];
-				$scope.error = true;
-			});
-
-		};
-	} else {
-		$location.url("/login");
-	}
-
+	};
 });
 
 module.controller('feedback_step2Controller', function($scope, $http, $location) {
-	if (getCookie('authToken')) {
-		$scope.nextFlag = 0;
-		$scope.prevFlag = -1;
-		$scope.like = false;
-		$scope.dislike = true;
-		$scope.optionKeypad = true;
-		$scope.recomendation = false;
-		$scope.recomendationBar = false;
-		$scope.counts = [];
-		$scope.willRecommend = "";
-		$scope.feedBackArray = [0, 0, 0, 0, 0, 0];
-		$scope.feedBackSize = 6;
-		$scope.feedBackCategoryName = ["food", "friendlines", "speed", "ambiance", "cleanliness", "value"];
+	$scope.nextFlag = 0;
+	$scope.prevFlag = -1;
+	$scope.like = false;
+	$scope.dislike = true;
+	$scope.optionKeypad = true;
+	$scope.recomendation = false;
+	$scope.recomendationBar = false;
+	$scope.counts = [];
+	$scope.willRecommend = "";
+	$scope.feedBackArray = [0, 0, 0, 0, 0, 0];
+	$scope.feedBackSize = 6;
+	$scope.feedBackCategoryName = ["food", "friendlines", "speed", "ambiance", "cleanliness", "value"];
 
-		var yBarCount = 0;
+	var yBarCount = 0;
 
-		for (var i = 0; i <= 10; i++) {
-			$scope.counts[i] = i;
+	for (var i = 0; i <= 10; i++) {
+		$scope.counts[i] = i;
+	}
+
+	$scope.food_quality = 0;
+	$scope.friendlines_quality = 0;
+	$scope.speed_quality = 0;
+	$scope.ambiance_quality = 0;
+	$scope.cleanliness_quality = 0;
+	$scope.value_quality = 0;
+
+	$scope.home = function() {
+		$location.url("/home");
+	};
+
+	$scope.recommendation = function(count) {
+
+		if ($('#feedback_' + count).hasClass('Ybar')) {
+			for (var i = 0; i <= count; i++) {
+				yBarCount = i;
+				$("#feedback_" + i).removeClass("Ybar").addClass("Pbar");
+			}
+		} else {
+			for (var i = count + 1; i <= yBarCount; i++) {
+				$("#feedback_" + i).removeClass("Pbar").addClass("Ybar");
+			}
 		}
 
-		$scope.food_quality = 0;
-		$scope.friendlines_quality = 0;
-		$scope.speed_quality = 0;
-		$scope.ambiance_quality = 0;
-		$scope.cleanliness_quality = 0;
-		$scope.value_quality = 0;
+		$scope.willRecommend = parseInt(yBarCount);
 
-		$scope.home = function() {
-			$location.url("/home");
-		};
+	};
 
-		$scope.recommendation = function(count) {
-
-			if ($('#feedback_' + count).hasClass('Ybar')) {
-				for (var i = 0; i <= count; i++) {
-					yBarCount = i;
-					$("#feedback_" + i).removeClass("Ybar").addClass("Pbar");
-				}
-			} else {
-				for (var i = count + 1; i <= yBarCount; i++) {
-					$("#feedback_" + i).removeClass("Pbar").addClass("Ybar");
-				}
+	var response = 0;
+	$scope.categoryname = "";
+	$scope.select_feedback_category = function(category) {
+		category_switch = 0;
+		if ($scope.dislike) {
+			if ($scope.feedBackArray[category] == 0) {
+				$scope.feedBackArray[category] = -1;
+				$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_2.png');
+				$("#feed_" + category).css("background-color", "#664765");
+				$("#feed_" + category + " span").css("color", "#E5E6E8");
+			} else if ($scope.feedBackArray[category] == -1) {
+				$scope.feedBackArray[category] = 0;
+				$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_1.png');
+				$("#feed_" + category).css("background-color", "#E5E6E8");
+				$("#feed_" + category + " span").css("color", "#664765");
 			}
 
-			$scope.willRecommend = parseInt(yBarCount);
+		} else {
+			if ($scope.feedBackArray[category] == 0) {
+				$scope.feedBackArray[category] = 1;
+				$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_4.png');
+				$("#feed_" + category).css("background-color", "#664765");
+				$("#feed_" + category + " span").css("color", "#E5E6E8");
+			} else if ($scope.feedBackArray[category] == 1) {
+				$scope.feedBackArray[category] = 0;
+				$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_3.png');
+				$("#feed_" + category).css("background-color", "#E5E6E8");
+				$("#feed_" + category + " span").css("color", "#664765");
+			}
+		}
 
-		};
+	};
 
-		var response = 0;
-		$scope.categoryname = "";
-		$scope.select_feedback_category = function(category) {
-			category_switch = 0;
-			if ($scope.dislike) {
-				if ($scope.feedBackArray[category] == 0) {
-					$scope.feedBackArray[category] = -1;
-					$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_2.png');
-					$("#feed_" + category).css("background-color", "#664765");
-					$("#feed_" + category + " span").css("color", "#E5E6E8");
-				} else if ($scope.feedBackArray[category] == -1) {
-					$scope.feedBackArray[category] = 0;
-					$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_1.png');
-					$("#feed_" + category).css("background-color", "#E5E6E8");
-					$("#feed_" + category + " span").css("color", "#664765");
-				}
+	$scope.next = function() {
 
-			} else {
-				if ($scope.feedBackArray[category] == 0) {
-					$scope.feedBackArray[category] = 1;
-					$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_4.png');
-					$("#feed_" + category).css("background-color", "#664765");
-					$("#feed_" + category + " span").css("color", "#E5E6E8");
-				} else if ($scope.feedBackArray[category] == 1) {
-					$scope.feedBackArray[category] = 0;
-					$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_3.png');
-					$("#feed_" + category).css("background-color", "#E5E6E8");
-					$("#feed_" + category + " span").css("color", "#664765");
+		if ($scope.nextFlag == 0) {
+			//alert("hi ")
+			for (var i = 0; i < $scope.feedBackSize; i++) {
+				if ($scope.feedBackArray[i] == 0) {
+					$scope.feedBackArray[i] = 0;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_3.png');
+					$("#feed_" + i).css("background-color", "#E5E6E8");
+					$("#feed_" + i + " span").css("color", "#664765");
+				} else if ($scope.feedBackArray[i] == -1) {
+					$scope.feedBackArray[i] = -1;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_4.png');
+					$("#feed_" + i).css("background-color", "#CCCCCC");
+					$("#feed_" + i + " span").css("color", "#664765");
 				}
 			}
+			$scope.like = true;
+			$scope.optionKeypad = true;
+			$scope.dislike = false;
+			$scope.recomendation = false;
+			$scope.nextFlag = 1;
+			$scope.prevFlag = 0;
+			$scope.recomendationBar = false;
+		} else if ($scope.nextFlag == 1) {
+			$scope.like = false;
+			$scope.dislike = false;
+			$scope.recomendation = true;
+			$scope.recomendationBar = true;
+			$scope.optionKeypad = false;
+			//$scope.nextFlag = 0;
+			$scope.prevFlag = 1;
+			$scope.nextFlag = -1;
+			console.log("feedback " + $scope.feedBackArray);
+		} else if ($scope.nextFlag == -1) {
+			console.log("submitting feedback");
+			var param = {
+				"feedback" : {
+					"food_quality" : parseInt($scope.feedBackArray[0]),
+					"speed_of_service" : parseInt($scope.feedBackArray[2]),
+					"friendliness_of_service" : parseInt($scope.feedBackArray[1]),
+					"ambience" : parseInt($scope.feedBackArray[3]),
+					"cleanliness" : parseInt($scope.feedBackArray[4]),
+					"value_for_money" : parseInt($scope.feedBackArray[5]),
+					"comment" : $scope.comment,
+					"recommendation_rating" : $scope.willRecommend
+				},
+				"auth_token" : getCookie('authToken')
+			}
 
-		};
-
-		$scope.next = function() {
-
-			if ($scope.nextFlag == 0) {
-				//alert("hi ")
-				for (var i = 0; i < $scope.feedBackSize; i++) {
-					if ($scope.feedBackArray[i] == 0) {
-						$scope.feedBackArray[i] = 0;
-						$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_3.png');
-						$("#feed_" + i).css("background-color", "#E5E6E8");
-						$("#feed_" + i + " span").css("color", "#664765");
-					} else if ($scope.feedBackArray[i] == -1) {
-						$scope.feedBackArray[i] = -1;
-						$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_4.png');
-						$("#feed_" + i).css("background-color", "#CCCCCC");
-						$("#feed_" + i + " span").css("color", "#664765");
-					}
-				}
-				$scope.like = true;
-				$scope.optionKeypad = true;
-				$scope.dislike = false;
-				$scope.recomendation = false;
-				$scope.nextFlag = 1;
-				$scope.prevFlag = 0;
-				$scope.recomendationBar = false;
-			} else if ($scope.nextFlag == 1) {
-				$scope.like = false;
-				$scope.dislike = false;
-				$scope.recomendation = true;
-				$scope.recomendationBar = true;
-				$scope.optionKeypad = false;
-				//$scope.nextFlag = 0;
-				$scope.prevFlag = 1;
-				$scope.nextFlag = -1;
-				console.log("feedback " + $scope.feedBackArray);
-			} else if ($scope.nextFlag == -1) {
-				console.log("submitting feedback");
-				var param = {
-					"feedback" : {
-						"food_quality" : parseInt($scope.feedBackArray[0]),
-						"speed_of_service" : parseInt($scope.feedBackArray[2]),
-						"friendliness_of_service" : parseInt($scope.feedBackArray[1]),
-						"ambience" : parseInt($scope.feedBackArray[3]),
-						"cleanliness" : parseInt($scope.feedBackArray[4]),
-						"value_for_money" : parseInt($scope.feedBackArray[5]),
-						"comment" : $scope.comment,
-						"recommendation_rating" : $scope.willRecommend
-					},
-					"auth_token" : getCookie('authToken')
-				}
-
-				$http({
-					method : 'put',
-					url : '/api/feedbacks/' + getCookie('feedbackId'),
-					data : param
-				}).success(function(data, status) {
-					console.log("User Role " + data + " status " + status);
-					pointsEarned = data.points;
+			$http({
+				method : 'put',
+				url : '/api/feedbacks/' + getCookie('feedbackId'),
+				data : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				pointsEarned = data.points;
+				if (getCookie('authToken')) {
 					$location.url("/feedbackSubmitSuccess");
-				}).error(function(data, status) {
-					console.log("data " + data + " status " + status);
-				});
-			}
-		};
-
-		$scope.previous = function() {
-
-			if ($scope.prevFlag == 0) {
-				for (var i = 0; i < $scope.feedBackSize; i++) {
-					if ($scope.feedBackArray[i] == 0) {
-						$scope.feedBackArray[i] = 0;
-						$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_1.png');
-						$("#feed_" + i).css("background-color", "#E5E6E8");
-						$("#feed_" + i + " span").css("color", "#664765");
-					} else if ($scope.feedBackArray[i] == 1) {
-						$scope.feedBackArray[i] = 1;
-						$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_2.png');
-						$("#feed_" + i).css("background-color", "#CCCCCC");
-						$("#feed_" + i + " span").css("color", "#664765");
-					} else if ($scope.feedBackArray[i] == -1) {
-						$scope.feedBackArray[i] = -1;
-						$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_2.png');
-						$("#feed_" + i).css("background-color", "#664765");
-						$("#feed_" + i + " span").css("color", "#E5E6E8");
-					}
+				} else {
+					feedbackFlag = 1;
+					$location.url("/signUp");
 				}
-				$scope.like = false;
-				$scope.dislike = true;
-				$scope.optionKeypad = true;
-				$scope.recomendationBar = false;
-				$scope.recomendation = false;
-				$scope.prevFlag = 1;
-				$scope.nextFlag = 0;
-				$scope.prevFlag = -1;
-			} else if ($scope.prevFlag == 1) {
-				$scope.like = true;
-				$scope.dislike = false;
-				$scope.recomendationBar = false;
-				$scope.recomendation = false;
-				$scope.optionKeypad = true;
-				$scope.prevFlag = 0;
-				$scope.nextFlag = 1;
-			} else if ($scope.prevFlag == -1) {
-				$location.url("/feedback");
-			}
 
-		};
-	} else {
-		$location.url("/login");
-	}
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status);
+			});
+		}
+	};
+
+	$scope.previous = function() {
+
+		if ($scope.prevFlag == 0) {
+			for (var i = 0; i < $scope.feedBackSize; i++) {
+				if ($scope.feedBackArray[i] == 0) {
+					$scope.feedBackArray[i] = 0;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_1.png');
+					$("#feed_" + i).css("background-color", "#E5E6E8");
+					$("#feed_" + i + " span").css("color", "#664765");
+				} else if ($scope.feedBackArray[i] == 1) {
+					$scope.feedBackArray[i] = 1;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_2.png');
+					$("#feed_" + i).css("background-color", "#CCCCCC");
+					$("#feed_" + i + " span").css("color", "#664765");
+				} else if ($scope.feedBackArray[i] == -1) {
+					$scope.feedBackArray[i] = -1;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_2.png');
+					$("#feed_" + i).css("background-color", "#664765");
+					$("#feed_" + i + " span").css("color", "#E5E6E8");
+				}
+			}
+			$scope.like = false;
+			$scope.dislike = true;
+			$scope.optionKeypad = true;
+			$scope.recomendationBar = false;
+			$scope.recomendation = false;
+			$scope.prevFlag = 1;
+			$scope.nextFlag = 0;
+			$scope.prevFlag = -1;
+		} else if ($scope.prevFlag == 1) {
+			$scope.like = true;
+			$scope.dislike = false;
+			$scope.recomendationBar = false;
+			$scope.recomendation = false;
+			$scope.optionKeypad = true;
+			$scope.prevFlag = 0;
+			$scope.nextFlag = 1;
+		} else if ($scope.prevFlag == -1) {
+			$location.url("/feedback");
+		}
+
+	};
 });
 
 module.controller('feedbackSubmitController', function($scope, $http, $routeParams, $location) {
 	if (getCookie('authToken')) {
-		console.log("points " + pointsEarned);
+		//console.log("points " + pointsEarned);
 		$scope.points = pointsEarned;
-		console.log("scope variable " + $scope.points);
-
+		//console.log("scope variable " + $scope.points);
 		$scope.home = function() {
 			$location.url("/home");
 		};
@@ -896,7 +926,10 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 
 module.controller('redeemPointsController', function($scope, $http, $location) {
 	if (getCookie('authToken')) {
-
+		$scope.previous = function() {
+			//previous
+			//$location.url("/")
+		}
 	} else {
 		$location.url("/login");
 	}
@@ -1039,3 +1072,82 @@ function isDate(txtDate, separator) {
 	return true;
 }
 
+/*** Facebook Connect ***/
+module.run(function($rootScope, Facebook) {
+
+  $rootScope.Facebook = Facebook;
+
+})
+module.factory('Facebook',function($http,$location) {
+
+    var self = this;
+    this.auth = null;
+
+    return {
+
+      getAuth: function() {
+        return self.auth;
+      },
+
+      login: function() {
+        FB.login(function(response) {
+          if (response.authResponse) {
+            console.log('Welcome!  Fetching your information.... ');
+            self.auth = response.authResponse;  
+             FB.api('/me', function(response) {
+               var param = {
+                "user" : {
+                    "first_name" : response.first_name,
+                    "last_name" : response.last_name,
+                    "email" : response.email,
+                    "password" :12345678,
+                    "password_confirmation" :12345678, 
+                }
+            };
+            $http({
+                method : 'post',
+                url : '/api/users',
+                data : param,
+             }).success(function(data){
+                if(data.registration_complete==true){
+                	setCookie('userRole', data.user_role, 7);
+				setCookie('authToken', data.auth_token, 7);
+				setCookie('userName', data.first_name + ' ' + data.last_name, 7);
+                $location.url('/home');
+               }
+                else{
+         
+                }
+               });
+
+      });
+          } else {
+            console.log('Facebook login failed', response);
+          }
+        }, {
+        scope: 'email'
+    });
+                },
+              
+            signUp:function(){
+              $('#loginForm').addClass('loginClosed');
+            $('#loginForm').replaceWith($('#registerFormContainer').html());
+            },
+    }
+
+  });
+
+window.fbAsyncInit = function() {
+  FB.init({
+    appId: '229509360519289'
+  });
+};
+
+// Load the SDK Asynchronously
+(function(d){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all.js";
+    ref.parentNode.insertBefore(js, ref);
+}(document));

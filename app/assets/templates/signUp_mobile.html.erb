@@ -5,8 +5,11 @@
 		</div>
 		<div class="clr"></div>
 		<div class="outerDiv">
-			<p class="alreadyUser">
+			<p class="alreadyUser" ng-show="message">
 				New to Kanari? Sign up
+			</p>
+			<p class="alreadyUser" ng-show="feedBackMsg">
+				Thank you for leaving feedback. Sign up for earning points on your feedback
 			</p>
 			<div data-role="fieldcontain" class="loginDiv">
 				<div class="ui-input-text ui-body-a nameContainer" style="margin-right:1%!important">
