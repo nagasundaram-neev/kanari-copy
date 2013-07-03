@@ -360,7 +360,7 @@ module.controller('signUpController', function($scope, $http, $location) {
 	}
 
 	$scope.signUp = function() {
-		if (!$scope.firstName && !$scope.lastName) {
+		if (!$scope.firstName || !$scope.lastName) {
 			$scope.error = "First Name and Last Name is required. Please enter it to continue";
 			$scope.errorMsg = true;
 		} 
