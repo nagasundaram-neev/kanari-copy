@@ -664,7 +664,7 @@ ul.outlet_cuisine_type li a {
 	font-size: 15px;
 	padding-bottom: 12px;
 }
-.updateBtn {
+.updateBtn, .updateCBtn {
 	display: none;
 }
 
