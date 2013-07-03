@@ -1,0 +1,17 @@
+'use strict';
+
+/* App Module */
+
+var module = angular.module('kanariTablet', []).
+  config(['$routeProvider','$locationProvider', function($routeProvider,$locationProvider) {
+  	
+  $routeProvider.
+     when('/signup', {templateUrl: "<%= asset_path 'tablet_signup.html' %>"}).
+     otherwise({redirectTo: '/signup'});
+     $locationProvider.hashPrefix = "";
+}]);
+
+
+
+
+
