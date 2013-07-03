@@ -55,18 +55,24 @@
 									<button  type="submit" class="btn" >
 										Update
 									</button>
+									<a href="javascript:void(0)" ng-click="deleteOutletType()"  class="btn" >
+										Delete
+									</a>
 								</div>
 
 							</div>
 							<br/>
 							<div ng-show="outletSuccess" class="successMsg">
-								<div class="create_rest" ng-hide="updateOMode">
+								<p class="successMsg" ng-hide="updateOMode">
 									Outlet type has been added successfully.
-								</div>
-								<div class="create_rest" ng-show="updateOMode">
+								</p>
+								<p class="successMsg" ng-show="updateOMode">
 									Outlet type has been updated successfully.
-								</div>
+								</p>
 							</div>
+							<p class="successMsg">
+									{{outlet_deleted}}
+								</p>
 							<p ng-hide="outletSuccess"></p>
 							<p class="errorMsg" ng-show="outletFail">
 								Please fill the details
@@ -122,19 +128,24 @@
 									<button  type="submit" class="btn" >
 										Update
 									</button>
+									<a href="javascript:void(0)" ng-click="deleteCuisineType()"  class="btn" >
+										Delete
+									</a>
 								</div>
 
 							</div>
 							<br/>
-							<div ng-show="cuisineSuccess" class="successMsg">
-								<div class="create_rest" ng-hide="updateCMode">
+							<div ng-show="cuisineSuccess" >
+								<p class="successMsg" ng-hide="updateCMode">
 									Cuisine type has been added successfully.
-								</div>
-								<div class="create_rest" ng-show="updateCMode">
+								</p>
+								<p class="successMsg" ng-show="updateCMode">
 									Cuisine type has been updated successfully.
-								</div>
+								</p>
 							</div>
-						
+							<p class="successMsg">
+									{{cuisine_deleted}}
+								</p>
 							<p ng-hide="outletSuccess"></p>
 							<p class="errorMsg" ng-show="outletFail">
 								Please fill the details

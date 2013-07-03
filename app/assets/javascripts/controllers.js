@@ -367,7 +367,7 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 	} else {
 		$location.url("/login");
 	}
-	
+
 	$scope.changeTab = function(currentTab) {
 		//setCookie('selectedTab', currentTab, 7);
 		$location.url("/take_tour");
@@ -908,29 +908,29 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			}
 		}
 		$scope.disableOutlet = function($event) {
-		$scope.auth_token = getCookie('authToken');
-		checkbox = $event.target;
-		var params = {
-			"outlet" : {
-				"disabled" : checkbox.checked
-			},
-			"auth_token" : $scope.auth_token
-		}
-		$http({
-			method : 'PUT',
-			url : '/api/outlets/' + $scope.outletID,
-			data : params,
-		}).success(function(data, status) {
-			console.log("data in success " + data + " status " + status);
+			$scope.auth_token = getCookie('authToken');
+			checkbox = $event.target;
+			var params = {
+				"outlet" : {
+					"disabled" : checkbox.checked
+				},
+				"auth_token" : $scope.auth_token
+			}
+			$http({
+				method : 'PUT',
+				url : '/api/outlets/' + $scope.outletID,
+				data : params,
+			}).success(function(data, status) {
+				console.log("data in success " + data + " status " + status);
 
-			$scope.error = data.auth_token;
-			$scope.statement = true;
-			$scope.erromsg = false;
-		}).error(function(data, status) {
-			console.log("data in error" + data + " status " + status);
-			$scope.erromsg = true;
-		});
-	};
+				$scope.error = data.auth_token;
+				$scope.statement = true;
+				$scope.erromsg = false;
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+				$scope.erromsg = true;
+			});
+		};
 		/* Adding for creating the outlet*/
 		$scope.create_outlet = function(createOutlet) {
 			if ($scope.createOutlet.$valid && $(".phoneno_1").val()) {
@@ -1015,7 +1015,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.close_manager = function() {
 			$('.add_manager').hide();
 		}
-		$scope.master= {};
+		$scope.master = {};
 		$scope.create_manager = function(createManager) {
 			if ($scope.createManager.$valid && $(".phoneno_2").val()) {
 				$scope.valide_phone = false;
@@ -1576,6 +1576,7 @@ module.controller('outletCuisineTypeCtrl', function($scope, $rootScope, $routePa
 					$('.saveBtn').show();
 					$('.updateBtn').hide();
 					$scope.formoutlet1 = "";
+					$scope.outlet_deleted ="";
 					$scope.outlet_types = "";
 
 				}).error(function(data, status) {
@@ -1585,7 +1586,25 @@ module.controller('outletCuisineTypeCtrl', function($scope, $rootScope, $routePa
 
 			}
 		};
-
+		$scope.deleteOutletType = function() {
+			var param = {
+				"auth_token" : getCookie('authToken')
+			};
+			$http({
+				method : 'delete',
+				url : '/api/outlet_types/' + $scope.formoutlet1,
+				params : param,
+			}).success(function(data, status) {
+				console.log("Data in success " + data + " status " + status);
+				$scope.outlet_deleted = "Outlet type has been deleted successfully"
+				$scope.getOutletTypes();
+				$('.saveBtn').show();
+				$('.updateBtn').hide();
+				$scope.outlet_types = "";
+			}).error(function(data, status) {
+				console.log("data in error " + data + " status " + status);
+			});
+		}
 		$scope.updateCuisineType = function(optU) {
 			var optu_text = $("#Clist option[value='" + optU + "']").text();
 			if ($scope.formcuisine1) {
@@ -1639,6 +1658,7 @@ module.controller('outletCuisineTypeCtrl', function($scope, $rootScope, $routePa
 					$scope.cuisineSuccess = true;
 					$scope.getCuisineTypes();
 					$('.saveCBtn').show();
+					$scope.cuisine_deleted = "";
 					$('.updateCBtn').hide();
 					$scope.formcuisine1 = "";
 					$scope.cuisine_types = "";
@@ -1650,7 +1670,25 @@ module.controller('outletCuisineTypeCtrl', function($scope, $rootScope, $routePa
 
 			}
 		};
-
+		$scope.deleteCuisineType = function() {
+			var param = {
+				"auth_token" : getCookie('authToken')
+			};
+			$http({
+				method : 'delete',
+				url : '/api/cuisine_types/' + $scope.formcuisine1,
+				params : param,
+			}).success(function(data, status) {
+				console.log("Data in success " + data + " status " + status);
+				$scope.cuisine_deleted = "Cuisine type has been deleted successfully"
+				$scope.getCuisineTypes();
+				$('.saveCBtn').show();
+				$('.updateCBtn').hide();
+				$scope.cuisine_types = "";
+			}).error(function(data, status) {
+				console.log("data in error " + data + " status " + status);
+			});
+		}
 	}
 });
 function setCookie(name, value, days) {

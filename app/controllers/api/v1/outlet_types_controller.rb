@@ -32,6 +32,12 @@ class Api::V1::OutletTypesController < ApplicationController
     end
   end
 
+  def destroy
+    authorize! :create, OutletType
+    OutletType.destroy(params[:id])
+    render json: nil
+  end
+
   private
 
     def outlet_params

@@ -538,7 +538,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 				deleteCookie('userRole');
 				deleteCookie('userName');
 				deleteCookie('feedbackId');
-				deleteCookie("signInCount")
+				deleteCookie("signInCount");
 				$location.url("/login");
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + "authToken" + getCookie('authToken'));
@@ -548,7 +548,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 			deleteCookie('userRole');
 			deleteCookie('userName');
 			deleteCookie('feedbackId');
-			deleteCookie("signInCount")
+			deleteCookie("signInCount");
 			$location.url("/login");
 		};
 	} else {
