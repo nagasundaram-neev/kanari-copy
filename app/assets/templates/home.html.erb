@@ -7,8 +7,8 @@
 			<span class="outlet_text" ng-show="outlets.length">Below are the outlets you are managing through Kanari. You can update their details, view and download the latest reports and access  the advanced analytics to learn more about
 				what your customers are saying about your business.</span>
 			<!-- <a ng-show="outlets.length" href="#/list_payment_invoice" title="Payment Invoice Link" class="addRestaurant"><%= image_tag "icon_new_restaurant_outlet.png" %>List Payment Invoices</a> -->
-			<a href="#/create_outlet" title="addRestaurant" class="addRestaurant"><%= image_tag "icon_new_restaurant_outlet.png" %>New Restaurant Outlet</a>
-
+			<a ng-show="userAction" href="#/create_outlet" title="addRestaurant" class="addRestaurant"><%= image_tag "icon_new_restaurant_outlet.png" %>New Restaurant Outlet</a>
+			<div ng-hide="userAction">&nbsp;</div>
 			<div class="clr"></div>
 			<div ng-show="outlets.length">
 				<span class="outlet_lenght"> Viewing {{outlets.length}} outlets</span>

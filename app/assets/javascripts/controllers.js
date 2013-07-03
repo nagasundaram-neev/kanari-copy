@@ -137,6 +137,8 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 		$scope.userName = getCookie('userRole');
 	} else if (getCookie('userRole') == "customer_admin") {
 		$scope.userName = getCookie('userName');
+	} else if (getCookie('userRole') == "manager") {
+		$scope.userName = getCookie('userName');
 	}
 
 	$scope.logout = function() {
@@ -160,6 +162,8 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 		if (getCookie('userRole') == "kanari_admin") {
 			$location.url("/createInvitation");
 		} else if (getCookie('userRole') == "customer_admin") {
+			$location.url("/outlets");
+		}else if (getCookie('userRole') == "manager") {
 			$location.url("/outlets");
 		}
 	}
@@ -223,10 +227,10 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 					$("#userName").text(getCookie('userRole'));
 				} else if (getCookie('userRole') == "customer_admin") {
 					$("#userName").text(getCookie('userName'));
-				}else if (getCookie('userRole') == "manager") {
+				} else if (getCookie('userRole') == "manager") {
 					$("#userName").text(getCookie('userName'));
 				}
-				
+
 				if (getCookie('userRole') == "kanari_admin") {
 					$location.url("/createInvitation");
 				} else if (getCookie('userRole') == "customer_admin" && data.registration_complete) {
@@ -350,7 +354,12 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 		$scope.auth_token = getCookie('authToken');
 		$scope.userRole = getCookie('userRole');
 		$scope.outlets = []
-
+		if (getCookie('userRole') == "customer_admin"){
+			$scope.userAction = true;
+		}
+		else{
+				$('#account').hide();
+		}
 		var param = {
 			"auth_token" : getCookie('authToken')
 		};
@@ -556,7 +565,15 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.checkedOutletTypes = [];
 		$scope.checked_CuisineTypes = [];
 		$scope.checked_OutletTypes = [];
-
+		
+		
+		if (getCookie('userRole') == "customer_admin"){
+			$scope.userAction = true;
+		}
+		else{
+				$('#account').hide();
+		}
+		
 		$scope.getOutletTypes = function() {
 
 			var param = {
@@ -652,7 +669,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 
 				managerId = $scope.myOption;
 				//$scope.manager = managerId;
-				console.log("Test"+getCookie('currentCuisineList'));
+				console.log("Test" + getCookie('currentCuisineList'));
 				var param = {
 					"outlet" : {
 						"manager_id" : managerId,
@@ -1301,7 +1318,11 @@ module.controller('takeTourCtrl', function($rootScope, $scope, $routeParams, $ht
 		$scope.register = false;
 		$scope.srchRestaurant = false;
 		$scope.deals = false;
-
+		
+		if (getCookie('userRole') == "manager"){
+			$('#account').hide();
+		}
+		
 		$scope.changeTab = function(currentTab) {
 			//alert('in');
 			$location.url("/take_tour");
