@@ -1057,7 +1057,50 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			} else {
 				$scope.valide_phone = true;
 			}
-		}
+		};
+
+		$scope.create_tablet_id = function() {
+			$('.tabletId').show();
+		};
+		$scope.close_tabletId = function() {
+			$('.tabletId').hide();
+		};
+
+		$scope.create_tabletId = function(createTabletId) {
+			if ($scope.createTabletId.$valid) {
+				alert("in submit");
+				var param = {
+					"user" : {
+						"email" : $scope.tabletId + "@kanari.co",
+						"password" : $scope.tabletId_password,
+						"password_confirmation" : $scope.tabletId_confirm_password,
+						"outlet_id" : $routeParams.outletId
+					},
+					"auth_token" : getCookie('authToken')
+					
+				}
+
+				$http({
+					method : 'post',
+					url : '/api/staffs',
+					data : param,
+				}).success(function(data, status) {
+					console.log("data in success " + data + " status " + status);
+					$scope.error = false;
+					//$scope.manager_id = data.manager.id;
+					$scope.success1 = true;
+					//$scope.getManagerList();
+					$('#formid')[0].reset();
+				}).error(function(data, status) {
+					console.log("data in error" + data + " status " + status);
+					$scope.errorMsg = data.errors[0];
+					$scope.error = true;
+					$scope.success1 = false;
+				});
+
+			}
+
+		};
 		// $scope.update = function() {
 		// $("#formid").addClass("row form-horizontal");
 		// $("#formid input").addClass("ng-dirty ng-invalid");
@@ -1104,10 +1147,11 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.permissionShow = false;
 					$scope.TabletIdShow = false;
 					$scope.ReportShow = true;
-				}else if (currentTab == "TabletIdShow") {
+				} else if (currentTab == "TabletIdShow") {
 					$('#location').css({
 						'opacity' : '0'
 					});
+					$('.tabletId').hide();
 					$scope.profileShow = false;
 					$scope.locationShow = false;
 					$scope.permissionShow = false;
@@ -1595,7 +1639,7 @@ module.controller('outletCuisineTypeCtrl', function($scope, $rootScope, $routePa
 					$('.saveBtn').show();
 					$('.updateBtn').hide();
 					$scope.formoutlet1 = "";
-					$scope.outlet_deleted ="";
+					$scope.outlet_deleted = "";
 					$scope.outlet_types = "";
 
 				}).error(function(data, status) {
