@@ -223,16 +223,20 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 					$("#userName").text(getCookie('userRole'));
 				} else if (getCookie('userRole') == "customer_admin") {
 					$("#userName").text(getCookie('userName'));
+				}else if (getCookie('userRole') == "manager") {
+					$("#userName").text(getCookie('userName'));
 				}
+				
 				if (getCookie('userRole') == "kanari_admin") {
 					$location.url("/createInvitation");
 				} else if (getCookie('userRole') == "customer_admin" && data.registration_complete) {
 					$location.url("/outlets");
-
-				} else if (getCookie('userRole') == "customer_admin" && !data.registration_complete) {
-					$location.url("/acceptInvitationStep2");
+				} else if (getCookie('userRole') == "manager" && !data.registration_complete) {
+					$location.url("/outlets");
 				} else if (getCookie('userRole') == "staff" && data.registration_complete) {
 					$location.url("/create_kanari_code");
+				} else if (getCookie('userRole') == "manager" && data.registration_complete) {
+					$location.url("/outlets");
 				}
 
 			}).error(function(data, status) {
@@ -576,7 +580,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.getOutletTypes();
 		$scope.getCuisineTypes = function() {
 			var param = {
-				"auth_token" : $scope.auth_token
+				"auth_token" : getCookie('authToken')
 			}
 			$http({
 				method : 'get',
@@ -598,7 +602,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 
 		$scope.getManagerList = function() {
 			var param = {
-				"auth_token" : $scope.auth_token
+				"auth_token" : getCookie('authToken')
 			}
 			$http({
 				method : 'get',
@@ -628,7 +632,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				var pos_lat;
 				var pos_lng;
 				var param = {
-					"auth_token" : $scope.auth_token
+					"auth_token" : getCookie('authToken')
 				}
 				$http({
 					method : 'get',
@@ -648,6 +652,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 
 				managerId = $scope.myOption;
 				//$scope.manager = managerId;
+				console.log("Test"+getCookie('currentCuisineList'));
 				var param = {
 					"outlet" : {
 						"manager_id" : managerId,
@@ -659,7 +664,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 						"serves_alcohol" : getCookie('radiobtn2'),
 						"has_outdoor_seating" : getCookie('radiobtn3')
 					},
-					"auth_token" : $scope.auth_token
+					"auth_token" : getCookie('authToken')
 				}
 
 				$http({
