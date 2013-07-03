@@ -43,7 +43,7 @@
 					<br/>
 					<span>Specify the exact location of your outlet</span> </a>
 				</li>
-				<li data-ng-class="{active:permissionShow,create_manager:true}">
+				<li ng-show="userAction" data-ng-class="{active:permissionShow,create_manager:true}">
 					<a ng-click="changeTab('permissionShow')"> <%= image_tag 'icon_permissions.png' %>
 					Permission
 					<br/>
