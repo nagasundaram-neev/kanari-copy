@@ -1061,14 +1061,19 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 
 		$scope.create_tablet_id = function() {
 			$('.tabletId').show();
+			$scope.successTabletId = false;
+			$scope.errorTabletId = false;
 		};
 		$scope.close_tabletId = function() {
 			$('.tabletId').hide();
+			$('#tabletIdForm')[0].reset();
+			$scope.successTabletId = false;
+			$scope.errorTabletId = false;
 		};
 
 		$scope.create_tabletId = function(createTabletId) {
 			if ($scope.createTabletId.$valid) {
-				alert("in submit");
+				//alert("in submit");
 				var param = {
 					"user" : {
 						"email" : $scope.tabletId + "@kanari.co",
@@ -1077,7 +1082,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 						"outlet_id" : $routeParams.outletId
 					},
 					"auth_token" : getCookie('authToken')
-					
 				}
 
 				$http({
@@ -1086,16 +1090,16 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					data : param,
 				}).success(function(data, status) {
 					console.log("data in success " + data + " status " + status);
-					$scope.error = false;
+					$scope.errorTabletId = false;
 					//$scope.manager_id = data.manager.id;
-					$scope.success1 = true;
+					$scope.successTabletId = true;
 					//$scope.getManagerList();
-					$('#formid')[0].reset();
+					$('#tabletIdForm')[0].reset();
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
 					$scope.errorMsg = data.errors[0];
-					$scope.error = true;
-					$scope.success1 = false;
+					$scope.errorTabletId = true;
+					$scope.successTabletId = false;
 				});
 
 			}

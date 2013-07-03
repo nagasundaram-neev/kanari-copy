@@ -425,7 +425,7 @@
 					<div class="startMsg">
 						*
 					</div> Indicates mandatory fields</span>
-				<form id="formid" ng-app="form-example" class="row form-horizontal" name="createTabletId" ng-submit="create_tabletId(createTabletId)" novalidate>
+				<form id="tabletIdForm" ng-app="form-example" class="row form-horizontal" name="createTabletId" ng-submit="create_tabletId(createTabletId)" novalidate>
 					<div class="control-group">
 						<div class="controls">
 							<lable>
@@ -439,7 +439,7 @@
 							<lable>
 								Password<span class="star">*</span>
 							</lable>
-							<input type="password" placeholder="Password" ng-model="tabletId_password" required>
+							<input type="password" placeholder="Password" password-validate ng-model="tabletId_password" required>
 							<div class="input-help">
 								<h4>Password must meet the following requirements:</h4>
 								<ul>
@@ -461,7 +461,7 @@
 							<lable>
 								Confirm Password<span class="star">*</span>
 							</lable>
-							<input type="password" placeholder="Confirm Password" ng-model="tabletId_confirm_password" required>
+							<input type="password" placeholder="Confirm Password" password-validate ng-model="tabletId_confirm_password" required>
 							<div class="input-help">
 								<h4>Password must meet the following requirements:</h4>
 								<ul>
@@ -486,14 +486,14 @@
 							<button class="btn" disabled>
 								Create Tablet Id
 							</button>
-							<button  ng-click="close_tabletId()" class="cancelBtn submitBtn btn btn-primary btn-large"  >
+							<a ng-click="close_tabletId()" class="cancelBtn submitBtn btn btn-primary btn-large">
 								Cancel
-							</button>
-							<p ng-show="error" class="errorMsg">
+							</a>
+							<p ng-show="errorTabletId" class="errorMsg">
 								{{errorMsg}}
 							</p>
 							<p ng-hide="error" ></p>
-							<p ng-show="success1" class="successMsg">
+							<p ng-show="successTabletId" class="successMsg">
 								Tablet Id created successfully.
 							</p>
 							<p ng-hide="success" ></p>
