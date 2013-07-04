@@ -60,6 +60,62 @@ ul, ol {
 p {
 	margin: 0;
 }
+/* jquery mobile modified global classes starts here*/
+.ui-body-c,
+.ui-overlay-c {
+	text-shadow: none ;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #fff /*{c-body-background-start}*/), to( #fff /*{c-body-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #fff /*{c-body-background-start}*/, #fff /*{c-body-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #fff /*{c-body-background-start}*/, #fff /*{c-body-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #fff /*{c-body-background-start}*/, #fff /*{c-body-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #fff /*{c-body-background-start}*/, #fff /*{c-body-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #fff /*{c-body-background-start}*/, #fff /*{c-body-background-end}*/);
+}
+.ui-btn-up-c{text-shadow:none;}
+input.ui-input-text, textarea.ui-input-text {
+	background: #fff;
+	box-shadow:none;
+	-webkit-box-shadow:none;
+	-moz-box-shadow:none;
+	border-radius: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border:0;
+	color:#999;
+	width:90%; 
+	margin: 0 0 3%;
+	padding: 3.5% 2.7%;
+	font-size: 17px
+}
+.ui-btn {
+	 box-shadow:none;
+	-webkit-box-shadow:none;
+	-moz-box-shadow:none;
+	border-radius: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	width:96%; 
+}
+.ui-btn-inner{
+ 	border:0;
+}
+.ui-btn-hover-c  { 
+	background: #6E4D6C;
+	color:#fff;
+	border:0;
+	background-image:none;
+	text-shadow:none;
+}
+.ui-icon {
+	background: #664765;
+}
+.ui-checkbox input {
+	left: 10px;
+}
+.ui-checkbox .ui-btn-icon-left .ui-icon, .ui-radio .ui-btn-icon-left .ui-icon {
+	left: 10px;
+}
+/* jquery mobile modified global classes ends here */
 
 /* Common classes */
 .floatLeft {
@@ -75,37 +131,20 @@ p {
 	border: 1px solid #ccc
 }
 
-
-/* Sign In css starts here */
-
-.yellowBg {
-	background-color: #FEC03B;
+/* Body css starts here */
+@font-face {
+	font-family: kanariFont;
+	src: url('Roboto-Regular.ttf');
+}
+@font-face {
+	font-family: kanariLightFont;
+	src: url('Roboto-Light.ttf');
 }
 
-.logoDiv img {
-	margin: 9% 0 0;
+.ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button {
+	font:16px "kanariFont", sans-serif;
 }
-
-.loginTxt{
-	color: #644766;
-    font-size: 1.8em;
-    margin: 5% 0 0;
-}
-.signInFormDiv{
-	width:35%;
-	padding: 2% 0;
-	border:1px solid #D4A437;
-}
-
-.paddingRememberMe{
-	padding:1% 0 0;
-}
-.paddingRememberMe label {
-	display: inline;	
-	color: #644766;
-}
-
-/*Sign Up css ends here */
+/* Body css ends here */
 
 /* Header css starts here */
 #header_menu .navbar-inner {
@@ -121,11 +160,55 @@ p {
 	 padding: 9px 39%;
 	  border-right: 1px solid #FFFFFF;
 }
-#header_menu .nav > li > a:hover{
+#header_menu .nav > li > a:hover {
 	background-color: #FEC03B;
 }
 #header_menu .nav .active > a, #header_menu .nav .active > a:hover {
 	background-color: #FEC03B;
 }
-/* Header css starts here */
+/* Header css ends here */
+
+/* Sign In css starts here */
+#signIn {
+	background: #FEBF3B;
+	font-family: kanariLightFont;
+}
+.logo img {
+	margin: 5% 0 0;
+}
+
+.loginTxt {
+	color: #644766;
+    font-size: 2em;
+    margin: 5% 0 1%;
+}
+.signInForm {
+	width: 35%;
+	padding: 2% 0.5% 0.5%;
+	border: 2px solid #D9A432;
+	border-radius: 7px;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+}
+
+.rememberMe {
+	padding:1% 0 0;
+}
+.rememberMe label {
+	display: inline;	
+	color: #644766;
+}
+.rememberMe .ui-btn-text {
+	 color: #666;
+    font-size: 1.1em;
+}
+#signIn .ui-btn { 
+	background: #6E4D6C;
+	color:#fff;
+	border:0;
+	font-weight: normal;
+}
+
+/*Sign Up css ends here */
+
 
