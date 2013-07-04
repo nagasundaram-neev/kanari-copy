@@ -1,12 +1,12 @@
-<div id="header_menu" class="navbar" data-role="header">
+<div id="header_menu" class="navbar" data-role="header" ng-controller="headerCtrl">
 	<div data-role="controlgroup" data-type="horizontal">
-		<a href="#"  data-role="button" class="ui-btn-active-c"><%= image_tag 'ic_feedback.png' %><br/>
+		<a href="#" ng-class="{uibtnactivec: active1}" ng-click="clickf('feedback')" data-role="button" ><%= image_tag 'ic_feedback.png' %><br/>
 		Feedback</a>
-		<a href="#"  data-role="button"><%= image_tag 'ic_insights.png' %><br/>
+		<a href="#" ng-class="{uibtnactivec: active2}" ng-click="clickf('insights')" data-role="button"><%= image_tag 'ic_insights.png' %><br/>
 		Insights</a>
-		<a href="#"  data-role="button"><%= image_tag 'ic_redemptions.png' %><br/>
+		<a href="#"  ng-class="{uibtnactivec: active3}" ng-click="clickf('redemption')" data-role="button"><%= image_tag 'ic_redemptions.png' %><br/>
 		Redemptions</a>
-		<a href="#"  data-role="button"><%= image_tag 'ic_code.png' %><br/>
+		<a href="#"  ng-class="{uibtnactivec: active4}"  ng-click="clickf('numeric_code')" data-role="button"><%= image_tag 'ic_code.png' %><br/>
 		Code</a>
 	</div>
 	<div class="floatRight logoutDiv"><%= image_tag 'ic_logoff_yellow.png' %></div>
