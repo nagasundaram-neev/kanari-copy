@@ -2,7 +2,9 @@
 	<div ng:include="'<%= asset_path 'tablet_header.html' %>'"></div>
 	<h1 align="center" class="numericTxt"> Please enter bill amount </h1>
 	<div>
-		<input type="number" placeholder="Enter bill amount.." ng-model="billAmount">
+		<input type="text" placeholder="Enter bill amount.." ng-model="billAmount">
 	</div>
 	<button type="submit" class="signInBtn btn" ng-click="generateCode()">Generate Code</button>
+	<p ng-show="succmsg" class="succMsg">{{success}}</p>
+	<p ng-show="erromsg" class="errorMsg">{{error}}</p>
 </div>

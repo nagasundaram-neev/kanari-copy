@@ -130,34 +130,34 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 		$location.url('/' + getroot);
 	};
 
-		$scope.logout = function() {
-			console.log("in Logout" + getCookie('authToken'));
-			var param = {
-				"auth_token" : getCookie('authToken')
-			}
-			$http({
-				method : 'delete',
-				url : '/api/users/sign_out',
-				data : param
-			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
-				deleteCookie('authToken');
-				deleteCookie('userRole');
-				deleteCookie('userName');
-				deleteCookie('feedbackId');
-				deleteCookie("signInCount");
-				$location.url("/signin");
-			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + "authToken" + getCookie('authToken'));
-			});
-			//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken'));
+	$scope.logout = function() {
+		console.log("in Logout" + getCookie('authToken'));
+		var param = {
+			"auth_token" : getCookie('authToken')
+		}
+		$http({
+			method : 'delete',
+			url : '/api/users/sign_out',
+			data : param
+		}).success(function(data, status) {
+			console.log("User Role " + data + " status " + status);
 			deleteCookie('authToken');
 			deleteCookie('userRole');
 			deleteCookie('userName');
 			deleteCookie('feedbackId');
 			deleteCookie("signInCount");
 			$location.url("/signin");
-		};
+		}).error(function(data, status) {
+			console.log("data " + data + " status " + status + "authToken" + getCookie('authToken'));
+		});
+		//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken'));
+		deleteCookie('authToken');
+		deleteCookie('userRole');
+		deleteCookie('userName');
+		deleteCookie('feedbackId');
+		deleteCookie("signInCount");
+		$location.url("/signin");
+	};
 });
 
 module.controller('signInController', function($scope, $http, $location) {
@@ -220,6 +220,35 @@ module.controller('redemeController', function($scope, $http, $location) {
 });
 module.controller('numericCodeController', function($scope, $http, $location) {
 	$scope.active4 = true;
+	$scope.erromsg = false;
+	$scope.generateCode = function(createKanariCode) {
+		if (!$scope.billAmount) {
+			$scope.error = "Please enter the bill amount";
+			$scope.erromsg = true;
+		} else {
+			$scope.erromsg = false;
+			console.log("amount "+$scope.billAmount)
+			var param = {
+				"bill_amount" : parseInt($scope.billAmount),
+				"auth_token" : getCookie("authToken")
+				}
+
+			$http({
+				method : 'POST',
+				url : '/api/kanari_codes',
+				data : param,
+			}).success(function(data, status) {
+				console.log("data in success " + data + " status " + status);
+				$scope.success = "Code generated successfully"
+				$scope.error = false;
+			}).error(function(data, status) {
+				console.log("data in errorrr" + data + " status " + status);
+				//$scope.error = data.error[0];
+				$scope.erromsg = true;
+			});
+		}
+	};
+
 });
 
 /* Cookie functions	*/
