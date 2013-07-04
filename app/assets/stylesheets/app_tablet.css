@@ -31,7 +31,6 @@ h1, h2, h3, h4, h5, h6 {
 
 	margin: 0;
 	font-weight: normal;
-
 }
 
 /* Forms */
@@ -71,7 +70,9 @@ p {
 	background-image:      -o-linear-gradient( #fff /*{c-body-background-start}*/, #fff /*{c-body-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #fff /*{c-body-background-start}*/, #fff /*{c-body-background-end}*/);
 }
-.ui-btn-up-c{text-shadow:none;}
+.ui-btn-up-c{ 
+	text-shadow:none;
+}
 input.ui-input-text, textarea.ui-input-text {
 	background: #fff;
 	box-shadow:none;
@@ -131,6 +132,7 @@ input.ui-input-text, textarea.ui-input-text {
 	border: 1px solid #ccc
 }
 
+
 /* Body css starts here */
 @font-face {
 	font-family: kanariFont;
@@ -146,25 +148,34 @@ input.ui-input-text, textarea.ui-input-text {
 }
 /* Body css ends here */
 
-/* Header css starts here */
-#header_menu .navbar-inner {
-	background-color: transparent;
-	background-image: none;
-	box-shadow: none;
-}
-#header_menu .nav > li > a {
-	background-color: #664766;
+/* Validation CSS starts here*/
+.errorMsg {
+	color: #C64957;
 	text-shadow: none;
-	color: #FFFFFF;
-	text-align: center;
-	 padding: 9px 39%;
-	  border-right: 1px solid #FFFFFF;
+	margin: 2% 12%;
 }
-#header_menu .nav > li > a:hover {
-	background-color: #FEC03B;
+/* Validation CSS ends here*/
+
+
+
+/* Header css starts here */
+#header_menu ul li{float: left;}
+/*#header_menu img{display:block;}*/
+#header_menu .ui-controlgroup-controls{ width: 100%; margin: 0 0.3%;}
+#header_menu .ui-controlgroup-horizontal .ui-btn{width: 24.7%;}
+#header_menu .ui-btn-up-c {
+    background: none repeat scroll 0 0 #664766;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    font-weight: normal;
+    text-shadow: none;
 }
-#header_menu .nav .active > a, #header_menu .nav .active > a:hover {
-	background-color: #FEC03B;
+#header_menu .ui-btn-hover-c, #header_menu .ui-btn-active-c, #header_menu .ui-btn-focus-c {
+    background: none repeat scroll 0 0 #FEC03B;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    font-weight: normal;
+    text-shadow: none;
 }
 /* Header css ends here */
 
@@ -209,6 +220,6 @@ input.ui-input-text, textarea.ui-input-text {
 	font-weight: normal;
 }
 
-/*Sign Up css ends here */
+/*Sign In css ends here */
 
 
