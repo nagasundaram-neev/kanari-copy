@@ -132,7 +132,6 @@ input.ui-input-text, textarea.ui-input-text {
 	border: 1px solid #ccc
 }
 
-
 /* Body css starts here */
 @font-face {
 	font-family: kanariFont;
@@ -220,4 +219,12 @@ input.ui-input-text, textarea.ui-input-text {
 
 /*Sign In css ends here */
 
+
+/* Numeric Code CSS starts here	*/
+.numericTxt{
+	color:#363636;
+		
+}
+
+/* Numeric Code CSS ends here	*/
 
