@@ -239,7 +239,8 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 				data : param,
 			}).success(function(data, status) {
 				console.log("data in success " + data + " status " + status);
-				$scope.success = "Code generated successfully"
+				$scope.success = "Code generated successfully";
+				$scope.succmsg = true;
 				$scope.error = false;
 			}).error(function(data, status) {
 				console.log("data in errorrr" + data + " status " + status);

@@ -245,6 +245,14 @@ input.ui-input-text, textarea.ui-input-text {
 
 
 /* Numeric Code CSS starts here	*/
+
+.succMsg {
+	color: green;
+	margin-top: 10px;
+	/*text-align: left;*/
+	/*font-size: 14px;*/	
+}
+
 .numericTxt {
 	color:#333;
 	font-size: 1.2em;
@@ -273,7 +281,7 @@ input.ui-input-text, textarea.ui-input-text {
 }
 .dateTimeList {
 	 width:65%;
-	 margin:5% 0 3%;
+	 padding:5% 0 3%;
 }
 .dateTimeListhead {
 	color:#664766;
