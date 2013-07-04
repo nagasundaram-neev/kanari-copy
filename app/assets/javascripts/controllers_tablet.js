@@ -1,6 +1,6 @@
 module.controller('commonCtrl', function($scope, $http, $location) {
 	//$location.url('/home');
-	$('body').removeClass('yellowBg');
+
 	$scope.emailCLick = function() {
 		$location.url("/login");
 	};
@@ -13,6 +13,4 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 });
 
 module.controller('signInController', function($scope, $http, $location) {
-	$('body').addClass('yellowBg');
-	
 });
