@@ -156,6 +156,13 @@ module.controller('signInController', function($scope, $http, $location) {
 				setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
 				setCookie('signInCount', data.sign_in_count);
 			}
+			$scope.erromsg = false;
+			if (getCookie('userRole') == "manager" && data.registration_complete) {
+				$location.url("/feedback");
+			} else if (getCookie('userRole') == "staff" && data.registration_complete) {
+				$location.url("/feedback");
+			}
+			
 		}).error(function(data, status) {
 			//console.log($scope.password)
 			console.log("data " + $scope.email + " status " + status);
@@ -171,13 +178,19 @@ module.controller('signInController', function($scope, $http, $location) {
 });
 
 module.controller('homePageController', function($scope, $http, $location) {
-	
+
 });
 
 module.controller('insightsController', function($scope, $http, $location) {
 
 });
 
+module.controller('numericCodeController', function($scope, $http, $location) {
+
+});
+module.controller('redemeController', function($scope, $http, $location) {
+
+});
 
 /* Cookie functions	*/
 function setCookie(name, value, days) {
@@ -208,9 +221,3 @@ function deleteCookie(name) {
 	setCookie(name, "", -1);
 }
 
-module.controller('numericCodeController', function($scope, $http, $location) {
-	
-});
-module.controller('redemeController', function($scope, $http, $location) {
-	
-});
