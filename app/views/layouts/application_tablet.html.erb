@@ -5,8 +5,6 @@
 		<meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no"  />
 		<title>Kanari</title>
 		<meta name="description" content="Kanari">
-		<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 		<%= javascript_include_tag "jquery-mobile-angular-adapter-standalone-1.2.0.js" %>
 		<%= javascript_include_tag "app_tablet" %>
 		<%= javascript_include_tag "controllers_tablet.js" %>
@@ -15,6 +13,7 @@
 		<%= stylesheet_link_tag "app_tablet.css", :media => "all" %>
 	</head>
 	<body>
+		<!-- <div ></div>
 		<div id="header_menu" class="navbar">
 			<div class="navbar-inner">
 				<ul class="nav">
@@ -37,6 +36,30 @@
 				</ul>
 			</div>
 		</div>
-		
+		<div >test</div> -->
+		<div id="splash" data-role="page" ng-controller="commonCtrl">
+			<div id="header_menu" class="navbar" data-role="header">
+			<div class="navbar-inner">
+				<ul class="nav">
+					<li class="active">
+						<a href="#"><%= image_tag 'ic_feedback.png' %>
+						<br/>Feedback</a>
+					</li>
+					<li>
+						<a href="#"><%= image_tag 'ic_insights.png' %>
+						<br/>Insights</a>
+					</li>
+					<li>
+						<a href="#"><%= image_tag 'ic_redemptions.png' %><br/>
+						Redemptions</a>
+					</li>
+					<li>
+						<a href="#"><%= image_tag 'ic_code.png' %><br/>
+						Code</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		</div>
 	</body>
 </html>

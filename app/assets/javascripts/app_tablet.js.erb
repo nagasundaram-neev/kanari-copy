@@ -7,10 +7,9 @@ var module = angular.module('kanariTablet', []).
   	  $locationProvider.html5Mode(false);
     $locationProvider.hashPrefix("");
   $routeProvider.
-     when('/signup', {templateUrl: "<%= asset_path 'tablet_signup.html' %>"}).
+     when('/signin', {templateUrl: "<%= asset_path 'tablet_signin.html' %>"}).
      when('/insights', {templateUrl: "<%= asset_path 'insights.html' %>"}).
      otherwise({redirectTo: '/signup'});
-     $locationProvider.hashPrefix = "";
 }]);
 
 
