@@ -8,7 +8,10 @@ var module = angular.module('kanariTablet', []).
     $locationProvider.hashPrefix("");
   $routeProvider.
      when('/signin', {templateUrl: "<%= asset_path 'tablet_signin.html' %>"}).
-     when('/insights', {templateUrl: "<%= asset_path 'insights.html' %>"}).
+     when('/feedback', {templateUrl: "<%= asset_path 'homepage.html' %>"}).
+       when('/insights', {templateUrl: "<%= asset_path 'insights.html' %>"}).
+         when('/redemption', {templateUrl: "<%= asset_path 'redemptions.html' %>"}).
+           when('/numeric_code', {templateUrl: "<%= asset_path 'numeric_code.html' %>"}).
      otherwise({redirectTo: '/insights'});
 }]);
 
