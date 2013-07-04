@@ -170,9 +170,14 @@ module.controller('signInController', function($scope, $http, $location) {
 
 });
 
+module.controller('homePageController', function($scope, $http, $location) {
+	
+});
+
 module.controller('insightsController', function($scope, $http, $location) {
 
 });
+
 
 /* Cookie functions	*/
 function setCookie(name, value, days) {
@@ -202,3 +207,10 @@ function getCookie(name) {
 function deleteCookie(name) {
 	setCookie(name, "", -1);
 }
+
+module.controller('numericCodeController', function($scope, $http, $location) {
+	
+});
+module.controller('redemeController', function($scope, $http, $location) {
+	
+});
