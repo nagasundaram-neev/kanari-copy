@@ -11,10 +11,10 @@ class HomeController < ApplicationController
   private
 
   def choose_layout
-    if is_mobile?(request.user_agent)
-      "application_mobile"
-    elsif is_tablet?(request.user_agent)
+    if is_tablet?(request.user_agent)
       "application_tablet"
+    elsif is_mobile?(request.user_agent)
+      "application_mobile"
     else
       "application"
     end

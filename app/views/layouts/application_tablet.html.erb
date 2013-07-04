@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html ng-app="kanariTablet">
-<head>
+	<head>
 		<meta charset="utf-8">
 		<title ng-bind="header"></title>
 		<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 		<%= stylesheet_link_tag "bootstrap.css", :media => "all" %>
 		<%= stylesheet_link_tag "bootstrap-responsive.css", :media => "all" %>
+<<<<<<< HEAD
+
+=======
 		<%= stylesheet_link_tag "app_tablet.css", :media => "all" %>
 		
+>>>>>>> a56b6d0e141298e6b5dd113705919f51f15af957
 		<%= favicon_link_tag 'favicon.ico' %>
 		<%= javascript_include_tag "jquery.js" %>
-<!-- 		<%= javascript_include_tag "jquery.maskedinput.js" %>
+		<!-- 		<%= javascript_include_tag "jquery.maskedinput.js" %>
 		<%= javascript_include_tag "jquery.validate.js" %> -->
 
 		<%= javascript_include_tag "angular.js" %>
@@ -22,6 +26,28 @@
 		<%= javascript_include_tag "bootstrap.js" %>
 	</head>
 	<body>
+		<div id="header_menu" class="navbar">
+			<div class="navbar-inner">
+				<ul class="nav">
+					<li class="active">
+						<a href="#"><%= image_tag 'ic_feedback.png' %>
+						<br/>Feedback</a>
+					</li>
+					<li>
+						<a href="#"><%= image_tag 'ic_insights.png' %>
+						<br/>Insights</a>
+					</li>
+					<li>
+						<a href="#"><%= image_tag 'ic_redemptions.png' %><br/>
+						Redemptions</a>
+					</li>
+					<li>
+						<a href="#"><%= image_tag 'ic_code.png' %><br/>
+						Code</a>
+					</li>
+				</ul>
+			</div>
+		</div>
 		<div class="ngView" ng-view></div>
 	</body>
 </html>
