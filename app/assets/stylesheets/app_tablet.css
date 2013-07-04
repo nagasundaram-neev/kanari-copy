@@ -31,7 +31,6 @@ h1, h2, h3, h4, h5, h6 {
 
 	margin: 0;
 	font-weight: normal;
-
 }
 
 /* Forms */
@@ -75,6 +74,13 @@ p {
 	border: 1px solid #ccc
 }
 
+/* Validation CSS starts here*/
+.errorMsg {
+	color: #C64957;
+	text-shadow: none;
+	margin: 2% 12%;
+}
+/* Validation CSS ends here*/
 
 /* Sign In css starts here */
 
@@ -86,22 +92,22 @@ p {
 	margin: 9% 0 0;
 }
 
-.loginTxt{
+.loginTxt {
 	color: #644766;
-    font-size: 1.8em;
-    margin: 5% 0 0;
+	font-size: 1.8em;
+	margin: 5% 0 0;
 }
-.signInFormDiv{
-	width:35%;
+.signInFormDiv {
+	width: 35%;
 	padding: 2% 0;
-	border:1px solid #D4A437;
+	border: 1px solid #D4A437;
 }
 
-.paddingRememberMe{
-	padding:1% 0 0;
+.paddingRememberMe {
+	padding: 1% 0 0;
 }
 .paddingRememberMe label {
-	display: inline;	
+	display: inline;
 	color: #644766;
 }
 
@@ -118,10 +124,10 @@ p {
 	text-shadow: none;
 	color: #FFFFFF;
 	text-align: center;
-	 padding: 9px 39%;
-	  border-right: 1px solid #FFFFFF;
+	padding: 9px 39%;
+	border-right: 1px solid #FFFFFF;
 }
-#header_menu .nav > li > a:hover{
+#header_menu .nav > li > a:hover {
 	background-color: #FEC03B;
 }
 #header_menu .nav .active > a, #header_menu .nav .active > a:hover {
