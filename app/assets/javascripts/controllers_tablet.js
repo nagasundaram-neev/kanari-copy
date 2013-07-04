@@ -125,8 +125,10 @@ var Base64 = {
 	}
 }
 
-module.controller('commonCtrl', function($scope, $http, $location) {
-
+module.controller('headerCtrl', function($scope, $http, $location) {
+	$scope.clickf = function(getroot) {
+		$location.url('/' + getroot);
+	}
 });
 
 module.controller('signInController', function($scope, $http, $location) {
@@ -171,11 +173,17 @@ module.controller('signInController', function($scope, $http, $location) {
 });
 
 module.controller('homePageController', function($scope, $http, $location) {
-	
+	$scope.active1 = true;
 });
 
 module.controller('insightsController', function($scope, $http, $location) {
-
+	$scope.active2 = true;
+});
+module.controller('redemeController', function($scope, $http, $location) {
+	$scope.active3 = true;
+});
+module.controller('numericCodeController', function($scope, $http, $location) {
+	$scope.active4 = true;
 });
 
 
@@ -208,9 +216,3 @@ function deleteCookie(name) {
 	setCookie(name, "", -1);
 }
 
-module.controller('numericCodeController', function($scope, $http, $location) {
-	
-});
-module.controller('redemeController', function($scope, $http, $location) {
-	
-});

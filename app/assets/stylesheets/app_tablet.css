@@ -145,7 +145,7 @@ p {
     font-weight: normal;
     text-shadow: none;
 }
-#header_menu .ui-btn-hover-c, #header_menu .ui-btn-active-c, #header_menu .ui-btn-focus-c {
+#header_menu .ui-btn-hover-c, #header_menu .ui-btn-active-c, #header_menu .uibtnactivec {
     background: none repeat scroll 0 0 #FEC03B;
     border: 1px solid #FFFFFF;
     color: #FFFFFF;
