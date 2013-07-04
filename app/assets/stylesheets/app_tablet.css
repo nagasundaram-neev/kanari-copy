@@ -28,13 +28,10 @@ a:hover {
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
-<<<<<<< HEAD
-	margin-bottom: 0;
-=======
+
 	margin: 0;
 	font-weight: normal;
-	
->>>>>>> a56b6d0e141298e6b5dd113705919f51f15af957
+
 }
 
 /* Forms */
