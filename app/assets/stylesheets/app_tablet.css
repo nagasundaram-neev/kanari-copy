@@ -1,41 +1,108 @@
 /***Reset css ***/
-* { margin:0; padding:0; }
-html {
-    height: 100%;
-    width: 100%;
+* {
+	margin: 0;
+	padding: 0;
 }
-body{margin:0;padding:0;font:12px arial;}
-img           { border:0; vertical-align:top; }
-a             {	text-decoration:none;}
-a:hover       { text-decoration:none;}
-:focus        { outline:0; }
+html {
+	height: 100%;
+	width: 100%;
+}
+body {
+	margin: 0;
+	padding: 0;
+	font: 12px arial;
+}
+img {
+	border: 0;
+	vertical-align: top;
+}
+a {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+}
+:focus {
+	outline: 0;
+}
 
 /* Headings */
-h1,h2,h3,h4,h5,h6{margin-bottom:0; }
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	font-weight: normal;
+	
+}
 
 /* Forms */
-form          { display:inline; }
-fieldset      { border:0; }
+form {
+	display: inline;
+}
+fieldset {
+	border: 0;
+}
 
 /* Table */
-table         { border:0; border-collapse:collapse; border-spacing:0; empty-cells:show; font-size:100%; }
+table {
+	border: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
+	empty-cells: show;
+	font-size: 100%;
+}
 
 /* Lists */
-ul,ol         { list-style:none; }
+ul, ol {
+	list-style: none;
+}
 
 /* Paragraphs */
-p{margin:0;}
-
+p {
+	margin: 0;
+}
 
 /* Common classes */
-.floatLeft{float: left;}
-.floatRight{float: right;}
-.clr{clear: both;}
-.border{border: 1px solid #ccc}
+.floatLeft {
+	float: left;
+}
+.floatRight {
+	float: right;
+}
+.clr {
+	clear: both;
+}
+.border {
+	border: 1px solid #ccc
+}
+
+/* Sign In css starts here */
+
+.yellowBg {
+	background-color: #FEC03B;
+}
+
+.logoDiv img {
+	margin: 9% 0 0;
+}
+
+.loginTxt{
+	color: #644766;
+    font-size: 1.8em;
+    margin: 5% 0 0;
+}
+.signInFormDiv{
+	width:35%;
+	padding: 2% 0;
+	border:1px solid #D4A437;
+}
+
+.paddingRememberMe{
+	padding:1% 0 0;
+}
+.paddingRememberMe label {
+	display: inline;	
+	color: #644766;
+}
 
 
-/* Sign Up css starts here */
 
-.yellowBg {background-color:#FEC03B; }
-
-/*Sign Up css starts here */
+/*Sign In css Ends here */
