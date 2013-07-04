@@ -127,5 +127,24 @@ p {
 #header_menu .nav .active > a, #header_menu .nav .active > a:hover {
 	background-color: #FEC03B;
 }
+
+#header_menu ul li{float: left;}
+/*#header_menu img{display:block;}*/
+#header_menu .ui-controlgroup-controls{ width: 100%; margin: 0 0.3%;}
+#header_menu .ui-controlgroup-horizontal .ui-btn{width: 24.7%;}
+#header_menu .ui-btn-up-c {
+    background: none repeat scroll 0 0 #664766;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    font-weight: normal;
+    text-shadow: none;
+}
+#header_menu .ui-btn-hover-c, #header_menu .ui-btn-active-c, #header_menu .ui-btn-focus-c {
+    background: none repeat scroll 0 0 #FEC03B;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    font-weight: normal;
+    text-shadow: none;
+}
 /* Header css starts here */
 
