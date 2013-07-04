@@ -107,6 +107,9 @@ input.ui-input-text, textarea.ui-input-text {
 	background-image:none;
 	text-shadow:none;
 }
+.ui-btn-hover-c:hover {
+	color: #fff;
+}
 .ui-icon {
 	background: #664765;
 }
@@ -116,9 +119,14 @@ input.ui-input-text, textarea.ui-input-text {
 .ui-checkbox .ui-btn-icon-left .ui-icon, .ui-radio .ui-btn-icon-left .ui-icon {
 	left: 10px;
 }
+.ui-btn { 
+	color:#fff;
+	border:0;
+	font-weight: normal;
+}
 /* jquery mobile modified global classes ends here */
 
-/* Common classes */
+/* Common classes starts here*/
 .floatLeft {
 	float: left;
 }
@@ -131,6 +139,27 @@ input.ui-input-text, textarea.ui-input-text {
 .border {
 	border: 1px solid #ccc
 }
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+}
+.clearfix { 
+	 display: inline-block;
+ }
+/* start commented backslash hack \*/
+* html .clearfix { 
+	 height: 1%; 
+}
+.clearfix { 
+	 display: block; 
+}
+/* close commented backslash hack */
+
+/* Common classes ends here*/
 
 /* Body css starts here */
 @font-face {
@@ -143,7 +172,7 @@ input.ui-input-text, textarea.ui-input-text {
 }
 
 .ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button {
-	font:16px "kanariFont", sans-serif;
+	font:16px "kanariLightFont", sans-serif;
 }
 /* Body css ends here */
 
@@ -179,7 +208,6 @@ input.ui-input-text, textarea.ui-input-text {
 /* Sign In css starts here */
 #signIn {
 	background: #FEBF3B;
-	font-family: kanariLightFont;
 }
 .logo img {
 	margin: 5% 0 0;
@@ -207,24 +235,69 @@ input.ui-input-text, textarea.ui-input-text {
 	color: #644766;
 }
 .rememberMe .ui-btn-text {
-	 color: #666;
+	color: #666;
     font-size: 1.1em;
 }
-#signIn .ui-btn { 
-	background: #6E4D6C;
-	color:#fff;
-	border:0;
-	font-weight: normal;
+#signIn .ui-btn {
+	 background: #6E4D6C;
 }
-
 /*Sign In css ends here */
 
 
 /* Numeric Code CSS starts here	*/
-.numericTxt{
-	color:#363636;
-		
+.numericTxt {
+	color:#333;
+	font-size: 1.2em;
+	margin-bottom: 5%;		
 }
-
+#numericCode .ui-input-text {
+	border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -moz-box-shadow: inset 0px 1px 4px 		rgba(0,0,0,.2);
+	-webkit-box-shadow: inset 0px 1px 4px 	rgba(0,0,0,.2);
+	box-shadow: inset 0px 1px 4px 			rgba(0,0,0,.2);
+	padding: 3%;
+}
+#numericCode .ui-submit {
+	 background: #FEC03B;
+	 color: #555;
+	 margin-top:7%;
+}
+#numericCode .ui-submit span.ui-btn-text {
+	 font-size: 1.1em;
+}
+.numericCodeContainer {
+	 width: 45%;
+}
+.dateTimeList {
+	 width:65%;
+	 margin:3% 0;
+}
+.dateTimeListhead {
+	color:#664766;
+	font-weight: bold;
+}
+.dateTimeList .col1,.dateTimeList .col2 {	
+	padding: 2%;
+	float: left;
+	border: 1px solid #ccc;
+	border-right:0;
+	border-top: 0;
+}
+.dateTimeList .col1 { 
+	width: 35%;
+	text-align: left;
+}
+.dateTimeList .col2 { 
+	width: 16%;
+}
+.dateTimeList .colBorderTop {
+	border-top: 1px solid #ccc;
+}
+.dateTimeList .colBorderRight {
+	border-right: 1px solid #ccc;
+}
 /* Numeric Code CSS ends here	*/
 
