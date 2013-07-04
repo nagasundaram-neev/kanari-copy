@@ -28,7 +28,13 @@ a:hover {
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
+<<<<<<< HEAD
 	margin-bottom: 0;
+=======
+	margin: 0;
+	font-weight: normal;
+	
+>>>>>>> a56b6d0e141298e6b5dd113705919f51f15af957
 }
 
 /* Forms */
@@ -72,13 +78,37 @@ p {
 	border: 1px solid #ccc
 }
 
-/* Sign Up css starts here */
+
+/* Sign In css starts here */
 
 .yellowBg {
 	background-color: #FEC03B;
 }
 
-/*Sign Up css starts here */
+.logoDiv img {
+	margin: 9% 0 0;
+}
+
+.loginTxt{
+	color: #644766;
+    font-size: 1.8em;
+    margin: 5% 0 0;
+}
+.signInFormDiv{
+	width:35%;
+	padding: 2% 0;
+	border:1px solid #D4A437;
+}
+
+.paddingRememberMe{
+	padding:1% 0 0;
+}
+.paddingRememberMe label {
+	display: inline;	
+	color: #644766;
+}
+
+/*Sign Up css ends here */
 
 /* Header css starts here */
 #header_menu .navbar-inner {
@@ -101,3 +131,4 @@ p {
 	background-color: #FEC03B;
 }
 /* Header css starts here */
+

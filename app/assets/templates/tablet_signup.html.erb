@@ -1,0 +1,20 @@
+<div id="signIn" ng-controller="signInController" align="center">
+	<div class="logoDiv">
+		<%= image_tag 'logo_tablet.png' %>
+		<!-- <img src="/asssets/images/logo_tablet.png" /> -->
+	</div>
+	<h1 class="loginTxt"> Log in to Kanari </h1>
+	<div class="signInFormDiv">
+		<div>
+			<input type="email" placeholder="Email address" ng-model="email">
+		</div>
+		<div>
+			<input type="password" placeholder="Password" ng-model="password">
+		</div>
+		<fieldset class="paddingRememberMe" data-role="controlgroup">
+			<input type="checkbox" name="chkrememberMe" id="checkbox-1" class="custom" ng-model="rememberMe" />
+			<label for="checkbox-1">Remember Me</label>
+		</fieldset>
+		<button type="submit" class="signInBtn btn" ng-click="login">Login</button>
+	</div>
+</div>
