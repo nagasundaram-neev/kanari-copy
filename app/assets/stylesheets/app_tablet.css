@@ -220,7 +220,7 @@ input.ui-input-text, textarea.ui-input-text {
 	background: none repeat scroll 0 0 #C9C7C8;
 }
 #header_menu .logoutDiv .ui-btn-inner {
-	 padding: 2.15em 0.1%;
+	padding: 2.15em 0.1%;
 }
 #header_menu .ui-btn-hover-c, #header_menu .ui-btn-active-c, #header_menu .uibtnactivec {
 	background: none repeat scroll 0 0 #FEC03B;
@@ -335,11 +335,11 @@ input.ui-input-text, textarea.ui-input-text {
 	float: left;
 	margin-top: 2%;
 }
-.ratePValue{
+.ratePValue {
 	background: none repeat scroll 0 0 transparent;
-    color: #664766;
-    font-weight: bold;
-    margin-left: 1%;
+	color: #664766;
+	font-weight: bold;
+	margin-left: 1%;
 }
 
 .rate_minus {
@@ -347,11 +347,11 @@ input.ui-input-text, textarea.ui-input-text {
 	float: right;
 	margin-top: 0%;
 }
-.rateMValue{
+.rateMValue {
 	background: none repeat scroll 0 0 transparent;
-    color: #664766;
-    font-weight: bold;
-    margin-left: 1%;
+	color: #664766;
+	font-weight: bold;
+	margin-left: 1%;
 }
 .rate1V {
 	width: 34%;
@@ -386,8 +386,8 @@ input.ui-input-text, textarea.ui-input-text {
 }
 .score_final {
 	background: none repeat scroll 0 0 #E6E7E9;
-	 border-top: 12px solid #D6D6D6;
-    overflow: hidden;
+	border-top: 12px solid #D6D6D6;
+	overflow: hidden;
 }
 .score_final .net_score, .score_final .daily_change {
 	text-align: center;
@@ -458,4 +458,48 @@ input.ui-input-text, textarea.ui-input-text {
 	border-right: 1px solid #ccc;
 }
 /* Numeric Code CSS ends here	*/
+
+/*Home Page CSS starts here*/
+.home_page_view {
+	width: 100%
+}
+.feedback_step {
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	overflow: hidden;
+	padding: 1% 0;
+}
+.promo_code {
+	float: left;
+	width: 20%;
+	border-right: 1px solid #D6D6D6;
+	height: 135px;
+	color: #674665;
+}
+.promo_code_def {
+	float: left;
+	width: 29%;
+	border-right: 1px solid #D6D6D6;
+}
+.promo_code_desc {
+	float: left;
+	width: 50%;
+	height: 135px;
+	position:relative;
+}
+.update_time{
+	position: absolute;
+   bottom: 0;
+   right: 0;
+}
+.def_icon {
+	float: left;
+	margin: 3% 5%;
+	text-align: center;
+	width: 23%;
+	color: #999999;
+}
+.promo_txt{font-size: 166%;}
+.promo_value{font-size: 200%;}
+/*Home Page CSS ends here*/
 
