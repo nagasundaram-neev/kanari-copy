@@ -493,17 +493,36 @@ input.ui-input-text, textarea.ui-input-text {
 
 /* Redemptions css starts here */
 .redemptionsList {
-	width: 35%;
-	text-align: left;	
+	width: 100%;
+	text-align: center;	
+	color: #664766;
 }
 .redemptionsListRow {
-	border:1px solid #ccc;
-	padding:1%;
+	border-top:1px solid #ccc;
+	padding:2% 1%;
 }
 .redemptionsListRow .col1,.redemptionsListRow .col2,.redemptionsListRow .col3 {
 	float: left;
-	width: 33%;
+	font-size: 1.2em;
 }
+.redemptionsListRow .col1 {
+	width: 40%;
+}
+.redemptionsListRow .col2 {
+	width: 40%;
+}
+.redemptionsListRow .col3 {
+	width: 20%;
+}
+.redemptionsListRow .col3 span {
+	background: #FEC03B;
+	padding: 1.5% 10%;
+	width: 25%;
+	color: #555555;
+ }
+ .redemptionsList:last-child {
+ 	border-bottom: 1px solid #ccc;
+ }
 /* Redemptions css ends here */
 
 
