@@ -1,29 +1,44 @@
 <div id="header_menu" class="navbar" data-role="header" ng-controller="headerCtrl">
 	<div data-role="controlgroup" data-type="horizontal">
 		<div class="headerDiv">
-		<a href="#" ng-class="{uibtnactivec: active1}" ng-click="clickf('feedback')" data-role="button" ><%= image_tag 'ic_feedback.png' %><br/>
-		Feedback</a>
-		<span ng-class="{showArrow: active1}" class="arrow-down">&nbsp;</span>
+			<a href="#" ng-class="{uibtnactivec: active1}" ng-click="clickf('feedback')" data-role="button" ><%= image_tag 'ic_feedback.png' %>
+			<br/>
+			Feedback</a>
+			<span ng-class="{showArrow: active1}" class="arrow-down">&nbsp;</span>
 		</div>
 		<div class="headerDiv">
-		<a href="#" ng-class="{uibtnactivec: active2}" ng-click="clickf('insights')" data-role="button"><%= image_tag 'ic_insights.png' %><br/>
-		Insights</a>
-		<span ng-class="{showArrow: active2}" class="arrow-down">&nbsp;</span>
+			<a href="#" ng-class="{uibtnactivec: active2}" ng-click="clickf('insights')" data-role="button"><%= image_tag 'ic_insights.png' %>
+			<br/>
+			Insights</a>
+			<span ng-class="{showArrow: active2}" class="arrow-down">&nbsp;</span>
 		</div>
 		<div class="headerDiv">
-		<a href="#"  ng-class="{uibtnactivec: active3}" ng-click="clickf('redemption')" data-role="button"><%= image_tag 'ic_redemptions.png' %><br/>
-		Redemptions</a>
-		<span ng-class="{showArrow: active3}" class="arrow-down">&nbsp;</span>
+			<a href="#"  ng-class="{uibtnactivec: active3}" ng-click="clickf('redemption')" data-role="button"><%= image_tag 'ic_redemptions.png' %>
+			<br/>
+			Redemptions</a>
+			<span ng-class="{showArrow: active3}" class="arrow-down">&nbsp;</span>
 		</div>
 		<div class="headerDiv">
-		<a href="#"  ng-class="{uibtnactivec: active4}"  ng-click="clickf('numeric_code')" data-role="button"><%= image_tag 'ic_code.png' %><br/>
-		Code</a>
-		<span ng-class="{showArrow: active4}" class="arrow-down">&nbsp;</span>
+			<a href="#"  ng-class="{uibtnactivec: active4}"  ng-click="clickf('numeric_code')" data-role="button"><%= image_tag 'ic_code.png' %>
+			<br/>
+			Code</a>
+			<span ng-class="{showArrow: active4}" class="arrow-down">&nbsp;</span>
 		</div>
 		<div class="logoutDiv headerDiv">
-		<a href="#" class="logOut" ng-click="logout()" data-role="button"><%= image_tag 'ic_logout.png' %></a>
+			<a href="#" class="logOut" ng-click="showPopup()" data-role="button"><%= image_tag 'ic_logout.png' %></a>
 		</div>
 	</div>
-	<div class="floatRight logoutDiv" ng-click=""></div>
-	<div class="clr"></div>
-</div>
+	<div ng-show="popup" class="popup clearfix">
+		<h4>Are you sure you want to log out?</h4>
+		<div class="btn floatLeft">
+			<button ng-click="logout()">
+				Yes
+			</button>
+		</div>
+		<div class="btn floatLeft">
+			<button ng-click="cancel()">
+				No
+			</button>
+		</div>
+	</div>
+
