@@ -241,7 +241,24 @@ module.controller('homePageController', function($scope, $http, $location) {
 });
 
 module.controller('insightsController', function($scope, $http, $location) {
-	$scope.active2 = true;
+	$scope.active2 = true;	 	
+   
+    // $scope.chart = {
+        // options: {
+            // chart: {
+                // type: 'bar'
+            // }
+        // },
+        // series: [{
+            // data: [10, 15, 12, 8, 7]
+        // },
+        // {
+            // data: [-10, -15, -12, -8, -7]
+        // }],
+        // title: {
+            // text: 'Hello'
+        // }
+    // }
 });
 module.controller('redemeController', function($scope, $http, $location) {
 	$scope.active3 = true;
