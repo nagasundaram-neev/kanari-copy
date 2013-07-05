@@ -126,8 +126,9 @@ var Base64 = {
 }
 
 module.controller('headerCtrl', function($scope, $http, $location) {
-	var overlay = $('<div id="overlaySuccess"></div>');;
+	//var overlay = 
 	//$( "#popupBasic" ).popup( "close");
+	var overlayDiv = $("#overlaySuccess");
 	$scope.popup = false;
 	$scope.clickf = function(getroot) {
 		$location.url('/' + getroot);
@@ -135,25 +136,13 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 
 	$scope.showPopup = function(){
 		$scope.popup = true;
-
-		if(overlay){
-			console.log("in overlay");
-			overlay.appendTo(document.body)
-		}else{
-			$("#overlaySuccess").attr('display','block');
-		}
-        
+		overlayDiv.css({'z-index':'10','background-color':'#000'});
 	};
 	
 	$scope.cancel = function(){
 		$scope.popup = false;
-		if(overlay){
-		$("#overlaySuccess").hide();	
-		}else{
-			$("#overlaySuccess").attr('display','none');
-		}
-		
 		console.log("IN");
+		overlayDiv.css({'z-index':'0','background-color':'transparent'});
 	};
 
 	$scope.logout = function() {
@@ -173,7 +162,7 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 			deleteCookie('feedbackId');
 			deleteCookie("signInCount");
 			$location.url("/signin");
-			$("#overlaySuccess").hide();
+			overlayDiv.css({'z-index':'0','background-color':'transparent'});
 		}).error(function(data, status) {
 			console.log("data " + data + " status " + status + "authToken" + getCookie('authToken'));
 		});
@@ -184,7 +173,7 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 		deleteCookie('feedbackId');
 		deleteCookie("signInCount");
 		$location.url("/signin");
-		$("#overlaySuccess").hide();
+		overlayDiv.css({'z-index':'0','background-color':'transparent'});
 	};
 });
 
