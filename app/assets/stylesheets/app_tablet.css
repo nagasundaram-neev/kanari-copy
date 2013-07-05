@@ -107,6 +107,9 @@ input.ui-input-text, textarea.ui-input-text {
 	background-image: none;
 	text-shadow: none;
 }
+.ui-btn-hover-c:hover {
+	color: #fff;
+}
 .ui-icon {
 	background: #664765;
 }
@@ -116,9 +119,14 @@ input.ui-input-text, textarea.ui-input-text {
 .ui-checkbox .ui-btn-icon-left .ui-icon, .ui-radio .ui-btn-icon-left .ui-icon {
 	left: 10px;
 }
+.ui-btn {
+	color: #fff;
+	border: 0;
+	font-weight: normal;
+}
 /* jquery mobile modified global classes ends here */
 
-/* Common classes */
+/* Common classes starts here*/
 .floatLeft {
 	float: left;
 }
@@ -131,6 +139,25 @@ input.ui-input-text, textarea.ui-input-text {
 .border {
 	border: 1px solid #ccc
 }
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+.clearfix {
+	display: inline-block;
+}
+/* start commented backslash hack \*/
+* html .clearfix {
+	height: 1%;
+}
+.clearfix {
+	display: block;
+}
+/* close commented backslash hack */
 
 /* Body css starts here */
 @font-face {
@@ -143,7 +170,7 @@ input.ui-input-text, textarea.ui-input-text {
 }
 
 .ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button {
-	font: 16px "kanariFont", sans-serif;
+	font: 16px "kanariLightFont", sans-serif;
 }
 /* Body css ends here */
 
@@ -162,16 +189,20 @@ input.ui-input-text, textarea.ui-input-text {
 /*#header_menu img{display:block;}*/
 #header_menu .ui-controlgroup-controls {
 	width: 100%;
-	margin: 0 0.3%;
+	/*margin: 0 0.3%;*/
 }
+
 #header_menu .ui-btn {
 	width: 100%;
 }
 #header_menu .headerDiv {
 	float: left;
-	margin: 0 0.1%;
-    width: 24.61%;
+	/*margin: 0 0.13%;*/
+	width: 23%;
 }
+/*#header_menu .ui-controlgroup-horizontal .ui-btn {
+ width: 23.7%;
+ }*/
 #header_menu .ui-btn-up-c {
 	background: none repeat scroll 0 0 #664766;
 	border: 1px solid #FFFFFF;
@@ -181,6 +212,16 @@ input.ui-input-text, textarea.ui-input-text {
 	text-shadow: none;
 	border-radius: 5px 5px 5px 5px;
 }
+#header_menu .logoutDiv {
+	text-align: center;
+	width: 8% !important;
+}
+#header_menu .logOut {
+	background: none repeat scroll 0 0 #C9C7C8;
+}
+#header_menu .logoutDiv .ui-btn-inner {
+	 padding: 2.15em 0.1%;
+}
 #header_menu .ui-btn-hover-c, #header_menu .ui-btn-active-c, #header_menu .uibtnactivec {
 	background: none repeat scroll 0 0 #FEC03B;
 	border: 1px solid #FFFFFF;
@@ -189,6 +230,9 @@ input.ui-input-text, textarea.ui-input-text {
 	font-weight: normal;
 	text-shadow: none;
 	border-radius: 5px 5px 5px 5px;
+}
+#header_menu .logout:hover {
+	background: none repeat scroll 0 0 #C9C7C8;
 }
 .arrow-down {
 	border-left: 10px solid transparent;
@@ -205,13 +249,15 @@ input.ui-input-text, textarea.ui-input-text {
 .headerDiv {
 	float: left;
 	width: 24.8%;
+	color: #FFFFFF;
+	font-weight: normal;
+	text-shadow: none;
 }
 /* Header css ends here */
 
 /* Sign In css starts here */
 #signIn {
 	background: #FEBF3B;
-	font-family: kanariLightFont;
 }
 .logo img {
 	margin: 5% 0 0;
@@ -248,7 +294,6 @@ input.ui-input-text, textarea.ui-input-text {
 	border: 0;
 	font-weight: normal;
 }
-
 /*Sign In css ends here */
 
 /*Insight css ends here */
@@ -265,26 +310,71 @@ input.ui-input-text, textarea.ui-input-text {
 }
 .net_score {
 	float: left;
-	 border-right: 1px solid #664766;
+	border-right: 1px solid #664766;
 	text-align: left;
 	width: 49%;
 	padding: 1% 0;
-	 height: 45px;
+	height: 45px;
 }
 .daily_change {
 	float: left;
 	text-align: right;
-    width: 49%;
-    padding: 1% 0;
+	width: 49%;
+	padding: 1% 0;
 }
-.txt1{font-size: 100%;color: #000000;}
-.value1{font-size: 140%;color: #664766;}
-.rate_plus{ background: none repeat scroll 0 0 #FEC03B;float: left;margin-top: 2%;}
-.rate_minus{background: none repeat scroll 0 0 #C84A58;float: right;margin-top: 0%;}
-.rate1V{width: 34%;}
-.rate2V{width:27%;}
-.rate3V{width:5%;}
-.main_score{
+.txt1 {
+	font-size: 100%;
+	color: #000000;
+}
+.value1 {
+	font-size: 140%;
+	color: #664766;
+}
+.rate_plus {
+	background: none repeat scroll 0 0 #FEC03B;
+	float: left;
+	margin-top: 2%;
+}
+.ratePValue{
+	background: none repeat scroll 0 0 transparent;
+    color: #664766;
+    font-weight: bold;
+    margin-left: 1%;
+}
+
+.rate_minus {
+	background: none repeat scroll 0 0 #C84A58;
+	float: right;
+	margin-top: 0%;
+}
+.rateMValue{
+	background: none repeat scroll 0 0 transparent;
+    color: #664766;
+    font-weight: bold;
+    margin-left: 1%;
+}
+.rate1V {
+	width: 34%;
+}
+.rate2V {
+	width: 27%;
+}
+.rate3V {
+	width: 11%;
+}
+.rate4V {
+	width: 12%;
+}
+.rate5V {
+	width: 27%;
+}
+.rate6V {
+	width: 81%;
+}
+.rate7V {
+	width: 69%;
+}
+.main_score {
 	border-radius: 5px 5px 5px 5px;
 	border: 1px solid #C3C3C3;
 	margin: 0 0.5%;
@@ -293,6 +383,79 @@ input.ui-input-text, textarea.ui-input-text {
 	overflow: hidden;
 	padding: 0 1%;
 	border-bottom: 1px solid #C3C3C3;
-}   
+}
+.score_final {
+	background: none repeat scroll 0 0 #E6E7E9;
+	 border-top: 12px solid #D6D6D6;
+    overflow: hidden;
+}
+.score_final .net_score, .score_final .daily_change {
+	text-align: center;
+}
 /*Insight css ends here */
+
+/* Numeric Code CSS starts here	*/
+
+.succMsg {
+	color: green;
+	margin-top: 10px;
+	/*text-align: left;*/
+	/*font-size: 14px;*/
+}
+
+.numericTxt {
+	color: #333;
+	font-size: 1.2em;
+	margin-bottom: 5%;
+}
+#numericCode .ui-input-text {
+	border: 1px solid #CCCCCC;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-moz-box-shadow: inset 0px 1px 4px rgba(0,0,0,.2);
+	-webkit-box-shadow: inset 0px 1px 4px rgba(0,0,0,.2);
+	box-shadow: inset 0px 1px 4px rgba(0,0,0,.2);
+	padding: 3%;
+}
+#numericCode .ui-submit {
+	background: #FEC03B;
+	color: #555;
+	margin-top: 7%;
+}
+#numericCode .ui-submit span.ui-btn-text {
+	font-size: 1.1em;
+}
+.numericCodeContainer {
+	width: 45%;
+}
+.dateTimeList {
+	width: 65%;
+	padding: 5% 0 3%;
+}
+.dateTimeListhead {
+	color: #664766;
+	font-weight: bold;
+}
+.dateTimeList .col1, .dateTimeList .col2 {
+	padding: 2%;
+	float: left;
+	border: 1px solid #ccc;
+	border-right: 0;
+	border-top: 0;
+}
+.dateTimeList .col1 {
+	width: 35%;
+	text-align: left;
+}
+.dateTimeList .col2 {
+	width: 16%;
+}
+.dateTimeList .colBorderTop {
+	border-top: 1px solid #ccc;
+}
+.dateTimeList .colBorderRight {
+	border-right: 1px solid #ccc;
+}
+/* Numeric Code CSS ends here	*/
 
