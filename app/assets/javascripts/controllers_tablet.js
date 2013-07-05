@@ -126,8 +126,34 @@ var Base64 = {
 }
 
 module.controller('headerCtrl', function($scope, $http, $location) {
+	var overlay = $('<div id="overlaySuccess"></div>');;
+	//$( "#popupBasic" ).popup( "close");
+	$scope.popup = false;
 	$scope.clickf = function(getroot) {
 		$location.url('/' + getroot);
+	};
+
+	$scope.showPopup = function(){
+		$scope.popup = true;
+
+		if(overlay){
+			console.log("in overlay");
+			overlay.appendTo(document.body)
+		}else{
+			$("#overlaySuccess").attr('display','block');
+		}
+        
+	};
+	
+	$scope.cancel = function(){
+		$scope.popup = false;
+		if(overlay){
+		$("#overlaySuccess").hide();	
+		}else{
+			$("#overlaySuccess").attr('display','none');
+		}
+		
+		console.log("IN");
 	};
 
 	$scope.logout = function() {
@@ -147,6 +173,7 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 			deleteCookie('feedbackId');
 			deleteCookie("signInCount");
 			$location.url("/signin");
+			$("#overlaySuccess").hide();
 		}).error(function(data, status) {
 			console.log("data " + data + " status " + status + "authToken" + getCookie('authToken'));
 		});
@@ -157,6 +184,7 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 		deleteCookie('feedbackId');
 		deleteCookie("signInCount");
 		$location.url("/signin");
+		$("#overlaySuccess").hide();
 	};
 });
 
@@ -227,11 +255,11 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 			$scope.erromsg = true;
 		} else {
 			$scope.erromsg = false;
-			console.log("amount "+$scope.billAmount)
+			console.log("amount " + $scope.billAmount)
 			var param = {
 				"bill_amount" : parseInt($scope.billAmount),
 				"auth_token" : getCookie("authToken")
-				}
+			}
 
 			$http({
 				method : 'POST',

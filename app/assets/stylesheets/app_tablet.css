@@ -181,6 +181,19 @@ input.ui-input-text, textarea.ui-input-text {
 	text-shadow: none;
 	margin: 2% 12%;
 }
+#overlaySuccess {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	filter: alpha(opacity=50);
+	-moz-opacity: 0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.5;
+	z-index: 10;
+}
 /* Validation CSS ends here*/
 
 /* Header css starts here */
@@ -202,10 +215,10 @@ input.ui-input-text, textarea.ui-input-text {
 	font-weight: normal;
 	text-shadow: none;
 }
-#header_menu .logout{
+#header_menu .logout {
 	padding: 1.5% 0;
 	background: none repeat scroll 0 0 #C9C7C8;
-    width: 4% !important;
+	width: 4% !important;
 }
 
 #header_menu .ui-btn-hover-c, #header_menu .ui-btn-active-c, #header_menu .uibtnactivec {
@@ -215,6 +228,24 @@ input.ui-input-text, textarea.ui-input-text {
 	font-weight: normal;
 	text-shadow: none;
 }
+
+.popup {
+	width: 20%;
+	border: 3px solid #C9C7C8;
+	background-color: #FFFFFF;
+    border: 0 none;
+    box-shadow: 2px 2px 2px #FFFFFF;
+    left: 40%;
+    position: absolute;
+    z-index: 11;
+}
+
+.btn {
+	display: block;
+	padding: 1%;
+	width: 48%;
+}
+
 /* Header css ends here */
 
 /* Sign In css starts here */
@@ -319,4 +350,22 @@ input.ui-input-text, textarea.ui-input-text {
 	border-right: 1px solid #ccc;
 }
 /* Numeric Code CSS ends here	*/
+
+/* Redemptions css starts here */
+.redemptionsList {
+	width: 35%;
+	text-align: left;	
+}
+.redemptionsListRow {
+	border:1px solid #ccc;
+	padding:1%;
+}
+.redemptionsListRow .col1,.redemptionsListRow .col2,.redemptionsListRow .col3 {
+	float: left;
+	width: 33%;
+}
+/* Redemptions css ends here */
+
+
+
 
