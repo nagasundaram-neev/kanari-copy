@@ -36,6 +36,7 @@ class Ability
       can :read_all, Customer
       can :read, Customer
       can :read_pending_redemptions, Outlet
+      can :read_all_redemptions, Outlet
       can :create, OutletType
       can :create, CuisineType
     when 'customer_admin'

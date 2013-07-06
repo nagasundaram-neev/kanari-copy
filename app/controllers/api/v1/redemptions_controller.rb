@@ -4,6 +4,25 @@ class Api::V1::RedemptionsController < ApplicationController
 
   respond_to :json
 
+  def index
+    outlet = nil
+    if params[:outlet_id].present?
+      outlet = Outlet.find(params[:outlet_id])
+    else
+      outlet = current_user.outlets.first
+    end
+    if outlet.nil?
+      render json: {errors: ["Outlet not found"]}, status: :unprocessable_entity and return
+    end
+    if params[:type] && params[:type] == 'pending'
+      authorize! :read_pending_redemptions, outlet
+      @redemptions = outlet.pending_redemptions
+    else
+      authorize! :read_all_redemptions, outlet
+      @redemptions = outlet.redemptions
+    end
+    render json: @redemptions
+  end
 
   def create
     authorize! :request, Redemption
