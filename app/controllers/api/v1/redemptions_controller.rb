@@ -45,13 +45,47 @@ class Api::V1::RedemptionsController < ApplicationController
   # PATCH/PUT /redemptions/1
   # PATCH/PUT /redemptions/1.json
   def update
-    respond_to do |format|
-      if @redemption.update(redemption_params)
-        format.html { redirect_to @redemption, notice: 'Redemption was successfully updated.' }
-        format.json { head :no_content }
+    redemption = Redemption.where(id: params[:id], approved_by: nil).first
+    if redemption.nil?
+      render json: {errors: ["Requested redemption not found"]}, status: :unprocessable_entity and return
+    end
+    outlet = redemption.outlet
+    authorize! :approve_redemptions, outlet
+    user = redemption.user
+    points = redemption.points
+
+    if params[:redemption][:approve]
+    # Approve redemption
+      if outlet.rewards_pool > points
+        Redemption.transaction do 
+          outlet.with_lock do
+            outlet.rewards_pool = outlet.rewards_pool.to_i - points
+            outlet.points_redeemed = outlet.points_redeemed.to_i + points
+            outlet.save
+          end
+          user.with_lock do
+            user.points_redeemed = user.points_redeemed.to_i + points
+            user.save
+          end
+          redemption_parameters = { approved_by: current_user.id, 
+                                    rewards_pool_after_redemption: outlet.rewards_pool, 
+                                    user_points_after_redemption: user.points_available }
+
+          if redemption.update(redemption_parameters)
+            render json: nil, status: :ok
+          else
+            render json: redemption.errors, status: :unprocessable_entity
+          end
+        end
       else
-        format.html { render action: 'edit' }
-        format.json { render json: @redemption.errors, status: :unprocessable_entity }
+        render json: {errors: ["Outlet doesn't have enough rewards points."]}, status: :unprocessable_entity
+      end
+    else
+    # Update redemption
+      if redemption.update(redemption_params)
+        render json: nil, status: :ok
+      else
+        render json: redemption.errors, status: :unprocessable_entity
       end
     end
   end
