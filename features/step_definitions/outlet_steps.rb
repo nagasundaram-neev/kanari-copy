@@ -68,3 +68,8 @@ Then(/^the outlet's email should still be "(.*?)"$/) do |email|
   @existing_outlet.email.should == email
 end
 
+Then(/^the outlet's latitude and longitude should be "(.*?)" and "(.*?)"$/) do |latitude, longitude|
+  @existing_outlet.latitude.should == latitude.to_f
+  @existing_outlet.longitude.should == longitude.to_f
+end
+

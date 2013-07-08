@@ -18,7 +18,9 @@ Feature: Update Outlet
       {
         "outlet" : {
           "name" : "China Pearl - Bengaluru",
-          "disabled" : true
+		  "disabled" : true,
+		  "latitude": "12.97",
+		  "longitude": "77.61"
         }
       }
       """
@@ -29,6 +31,7 @@ Feature: Update Outlet
       """
       And the outlet "China Pearl - Bengaluru" should be present under customer with id "100"
       And the outlet's email should still be "outlet@outlet.com"
+      And the outlet's latitude and longitude should be "12.97" and "77.61"
       And the outlet should be disabled
 
     Scenario: Update manager
