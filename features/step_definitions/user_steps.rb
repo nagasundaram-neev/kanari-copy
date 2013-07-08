@@ -131,3 +131,7 @@ end
 And /^the user should have "([^"]*)" points$/ do |points|
   @user.reload.points_available.should == points.to_i
 end
+
+And /^the user should have "([^"]*)" redeemed points$/ do |points|
+  @user.reload.points_redeemed.should == points.to_i
+end
