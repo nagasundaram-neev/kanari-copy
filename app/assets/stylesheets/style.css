@@ -1626,6 +1626,10 @@ img, object {
 	padding: 0.8em 0.6em !important;
 }
 
+.innrDiv{
+	margin: 5% 0;
+}
+
 #redeemPoints .ui-body-a, #redeemPoints .ui-overlay-a {
 	text-shadow: none;
 	color: #664765;
