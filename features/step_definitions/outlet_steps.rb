@@ -58,3 +58,13 @@ end
 And /^the outlet's rewards pool should have "([^"]*)" points$/ do |points|
   @outlet.reload.rewards_pool.should == points.to_i
 end
+
+Given(/^the outlet's email is "(.*?)"$/) do |email|
+  @outlet.email = email
+  @outlet.save!
+end
+
+Then(/^the outlet's email should still be "(.*?)"$/) do |email|
+  @existing_outlet.email.should == email
+end
+
