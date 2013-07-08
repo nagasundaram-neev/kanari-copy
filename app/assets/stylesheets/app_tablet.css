@@ -268,15 +268,14 @@ input.ui-input-text, textarea.ui-input-text {
 }
 
 .popup {
-	width: 20%;
-	border: 3px solid #C9C7C8;
 	background-color: #FFFFFF;
-	border: 0 none;
-	box-shadow: 2px 2px 2px #FFFFFF;
-	left: 40%;
-	position: absolute;
-	z-index: 11;
-	padding: 1%;
+    border: 0 none;
+    box-shadow: 2px 2px 2px #FFFFFF;
+    left: 40%;
+    padding: 1%;
+    position: absolute;
+    width: 40%;
+    z-index: 11;
 }
 
 .btn {
@@ -549,6 +548,12 @@ input.ui-input-text, textarea.ui-input-text {
 /*Home Page CSS ends here*/
 
 /* Redemptions css starts here */
+.redemptionMsg{
+	color: #664765;
+    margin: 4% 0;
+    vertical-align: middle;	
+}
+
 .redemptionsList {
 	width: 100%;
 	text-align: center;
@@ -564,6 +569,7 @@ input.ui-input-text, textarea.ui-input-text {
 }
 .redemptionsListRow .col1 {
 	width: 40%;
+	text-transform: capitalize;
 }
 .redemptionsListRow .col2 {
 	width: 40%;
