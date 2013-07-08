@@ -1,25 +1,11 @@
 <div id="redeme" align="center" ng-controller="redemeController" data-role="page">
 		<div ng:include="'<%= asset_path 'tablet_header.html' %>'"></div>
-		<div class="redemptionsList">
-			<div class="redemptionsListRow clearfix">
-				<div class="col1">Aadil</div>
-				<div class="col2">Dhs 27</div>
-				<div class="col3"><span>Confirm</span></div>
-			</div>
-			<div class="redemptionsListRow clearfix">
-				<div class="col1">Aadil</div>
-				<div class="col2">Dhs 27</div>
-				<div class="col3"><span>Confirm</span></div>
-			</div>
-			<div class="redemptionsListRow clearfix">
-				<div class="col1">Aadil</div>
-				<div class="col2">Dhs 27</div>
-				<div class="col3"><span>Confirm</span></div>
-			</div>
-			<div class="redemptionsListRow clearfix">
-				<div class="col1">Aadil</div>
-				<div class="col2">Dhs 27</div>
-				<div class="col3"><span>Confirm</span></div>
+		<h1 class="redemptionMsg" ng-show="!redemptionList.length">Currently you dont have any redemptions</h1>
+		<div class="redemptionsList" ng-show="redemptionList.length">
+			<div ng-repeat="redemptions in redemptionList" class="redemptionsListRow clearfix">
+				<div class="col1">{{redemptions.user.first_name}} {{redemptions.user.last_name}}</div>
+				<div class="col2">Dhs {{redemptions.points}}</div>
+				<div class="col3" ng-click="confirm(redemptions.id)"><span>Confirm</span></div>
 			</div>
 		</div>
 </div>

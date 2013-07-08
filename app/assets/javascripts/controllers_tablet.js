@@ -246,6 +246,53 @@ module.controller('insightsController', function($scope, $http, $location) {
 });
 module.controller('redemeController', function($scope, $http, $location) {
 	$scope.active3 = true;
+
+	$scope.redemptionList = [];
+
+	$scope.listRedemptions = function() {
+		var param = {
+			"type" : "pending",
+			"auth_token" : getCookie('authToken')
+		}
+
+		$http({
+			method : 'get',
+			url : '/api/redemptions',
+			params : param
+		}).success(function(data, status) {
+			console.log("User Role " + data + " status " + status);
+			$scope.redemptionList = data.redemptions;
+			console.log("list" + $scope.redemptionList)
+		}).error(function(data, status) {
+			console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+
+		});
+	};
+	$scope.listRedemptions();
+
+	$scope.confirm = function(id) {
+		console.log("confirmed"+id);
+		var param = {
+			"redemption" : {
+				"approve" : true
+			},
+			"auth_token" : getCookie('authToken')
+		}
+
+		$http({
+			method : 'put',
+			url : '/api/redemptions/'+id,
+			data : param
+		}).success(function(data, status) {
+			console.log("User Role " + data + " status " + status);
+			$scope.listRedemptions();
+		}).error(function(data, status) {
+			console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+
+		});
+
+	};
+
 });
 module.controller('numericCodeController', function($scope, $http, $location) {
 	$scope.active4 = true;
