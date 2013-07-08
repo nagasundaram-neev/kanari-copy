@@ -43,7 +43,7 @@
 					<br/>
 					<span>Specify the exact location of your outlet</span> </a>
 				</li>
-				<li data-ng-class="{active:permissionShow,create_manager:true}">
+				<li ng-show="userAction" data-ng-class="{active:permissionShow,create_manager:true}">
 					<a ng-click="changeTab('permissionShow')"> <%= image_tag 'icon_permissions.png' %>
 					Permission
 					<br/>
@@ -259,10 +259,10 @@
 						<lable>
 							Select Manager<span class="star">*</span>
 						</lable>
-						<select ng-model="myOption" ng-options="value.id as value.first_name for value in managerList" required>
+						<select ng-model="myOption" ng-options="value.id as value.first_name + ' ' + value.last_name for value in managerList" required>
 							<option value="">Select Manager</option>
 						</select>
-						<div class="control-group" style="margin: 10px 0 0 130px;">
+						<div class="control-group" style="margin: 10px 0 0 130px;"	>
 							<div class="controls">
 								<button  type="submit" class="btn">
 									Save
@@ -317,9 +317,9 @@
 							</lable>
 							<input type="email" placeholder="Email Address" ng-model="email_address_manager" required>
 							<div  class="input-help">
-									<h4>Invalid Email</h4>
-								</div>
-							
+								<h4>Invalid Email</h4>
+							</div>
+
 						</div>
 					</div>
 					<div class="control-group">
@@ -409,48 +409,29 @@
 		</div>
 		<div id ="tabletIds" ng-show="TabletIdShow" style="height: 267px;">
 			<div data-role="fieldcontain" class="manager_list rightPanel">
-				<div ng-hide="manager_show" class="change_manager">
+				<div class="change_manager">
 					Tablet Ids
 				</div>
 				<div class="listIds">
-					<div class="tabletId">
+					<div>
 						test1
 					</div>
 				</div>
 				<input type="button" class="btn_cls" ng-click="create_tablet_id()" data-inline="true" value="Create Tablet Id" />
-				<div data-role="fieldcontain" class="add_manager rightPanel">
+			</div>
+			<div data-role="fieldcontain" class="tabletId rightPanel">
 				<h1>Create Tablet ID</h1>
 				<span class="mandatoryFld">
 					<div class="startMsg">
 						*
 					</div> Indicates mandatory fields</span>
-				<form id="formid" ng-app="form-example" class="row form-horizontal" name="createManager" ng-submit="create_manager(createManager)" novalidate>
+				<form id="tabletIdForm" ng-app="form-example" class="row form-horizontal" name="createTabletId" ng-submit="create_tabletId(createTabletId)" novalidate>
 					<div class="control-group">
 						<div class="controls">
 							<lable>
 								Tablet Id<span class="star">*</span>
 							</lable>
-							<input type="text" placeholder="Tablet Id" ng-model="first_name" required>
-						</div>
-					</div>
-					<div class="control-group">
-						<div class="controls">
-							<lable>
-								Last Name<span class="star">*</span>
-							</lable>
-							<input type="text" placeholder="Last Name" ng-model="last_name" required>
-						</div>
-					</div>
-					<div class="control-group">
-						<div class="controls">
-							<lable>
-								Email Address<span class="star">*</span>
-							</lable>
-							<input type="email" placeholder="Email Address" ng-model="email_address_manager" required>
-							<div  class="input-help">
-									<h4>Invalid Email</h4>
-								</div>
-							
+							<input type="text" placeholder="Tablet Id" ng-model="tabletId" required>
 						</div>
 					</div>
 					<div class="control-group">
@@ -458,7 +439,7 @@
 							<lable>
 								Password<span class="star">*</span>
 							</lable>
-							<input ng-model="password" class="" password-validate required type="password" placeholder="Password">
+							<input type="password" placeholder="Password" password-validate ng-model="tabletId_password" required>
 							<div class="input-help">
 								<h4>Password must meet the following requirements:</h4>
 								<ul>
@@ -480,7 +461,7 @@
 							<lable>
 								Confirm Password<span class="star">*</span>
 							</lable>
-							<input ng-model="confirmpassword" class="" password-validate required type="password"  placeholder="Password">
+							<input type="password" placeholder="Confirm Password" password-validate ng-model="tabletId_confirm_password" required>
 							<div class="input-help">
 								<h4>Password must meet the following requirements:</h4>
 								<ul>
@@ -497,41 +478,28 @@
 							</div>
 						</div>
 					</div>
-					<div class="control-group">
-						<div class="controls">
-							<lable>
-								Phone Number<span class="star">*</span>
-							</lable>
-							<input data-theme="a" data-inline="true" type="text" class="phoneno_2 setTelephone" name="contactNo" placeholder="Phone Number" />
-							<!-- <input type="text" placeholder="Phone Number" min="0" number-mask="" maxlength="11" ng-model="add_contact_number" required> -->
-						</div>
-					</div>
 					<div class="control-group" style="margin: 10px 0 0 145px;">
 						<div class="controls">
 							<button type="submit" class="btn">
-								Add Manager
+								Create Tablet Id
 							</button>
 							<button class="btn" disabled>
-								Add Manager
+								Create Tablet Id
 							</button>
-							<button  ng-click="close_manager()" class="cancelBtn submitBtn btn btn-primary btn-large"  >
+							<a ng-click="close_tabletId()" class="cancelBtn submitBtn btn btn-primary btn-large">
 								Cancel
-							</button>
-							<p ng-show="error" class="errorMsg">
+							</a>
+							<p ng-show="errorTabletId" class="errorMsg">
 								{{errorMsg}}
 							</p>
 							<p ng-hide="error" ></p>
-							<p ng-show="success1" class="successMsg">
-								Manager added successfully.
+							<p ng-show="successTabletId" class="successMsg">
+								Tablet Id created successfully.
 							</p>
 							<p ng-hide="success" ></p>
-							<p ng-show="valide_phone" class="errorMsg">
-								Invalid Phone Number
-							</p>
 						</div>
 					</div>
 				</form>
-			</div>
 			</div>
 		</div>
 		<div id ="location" >
@@ -553,6 +521,8 @@
 								Update
 							</button>
 						</div>
+						<p ng-show="successLocation" class="successMsg">
+								Your location get saved successfully.</p>
 					</div>
 				</div>
 			</div>

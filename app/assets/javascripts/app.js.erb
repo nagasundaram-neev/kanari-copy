@@ -204,9 +204,10 @@ function MapCtrl($scope,$http) {
 			data : params,
 			}).success(function(data, status) {
 			console.log("data in success " + data + " status " + status);
-
+			$scope.successLocation = true;
 			}).error(function(data, status) {
 			console.log("data in error" + data + " status " + status);
+			$scope.successLocation = false;
 			});
 			}
 			else{
@@ -215,8 +216,10 @@ function MapCtrl($scope,$http) {
 			url : '/api/outlets/' + getCookie('currentOutlet'),
 			data : params,
 			}).success(function(data, status) {
+				$scope.successLocation = true;
 
 			}).error(function(data, status) {
+				$scope.successLocation = false;
 
 			});
 			}

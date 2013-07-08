@@ -1,0 +1,55 @@
+<div id="numericCode" align="center" ng-controller="numericCodeController" data-role="page">
+	<div ng:include="'<%= asset_path 'tablet_header.html' %>'"></div>
+	<div class="numericCodeContainer">
+		<h1 align="center" class="numericTxt"> Please enter bill amount </h1>
+		<div>
+			<input type="text" placeholder="Enter bill amount.." ng-model="billAmount">
+		</div>
+		<button type="submit" class="signInBtn btn" ng-click="generateCode()">
+			Generate Code
+		</button>
+
+		<span ng-show="succmsg" class="succMsg">
+			{{success}}
+		</span>
+		<span ng-show="erromsg" class="errorMsg">
+			{{error}}
+		</span>
+
+	</div>
+	<div class="dateTimeList">
+		<div class="dateTimeListhead clearfix">
+			<div class="col1 colBorderTop">
+				Date & Time
+			</div>
+			<div class="col1 colBorderTop">
+				Bill Size
+			</div>
+			<div class="col2 colBorderTop colBorderRight">
+				Code
+			</div>
+		</div>
+		<div class="dateTimeListRow clearfix">
+			<div class="col1">
+				25/06/2013
+			</div>
+			<div class="col1">
+				350
+			</div>
+			<div class="col2 colBorderRight">
+				14364
+			</div>
+		</div>
+		<div class="dateTimeListRow clearfix">
+			<div class="col1">
+				25/06/2013
+			</div>
+			<div class="col1">
+				350
+			</div>
+			<div class="col2 colBorderRight">
+				14364
+			</div>
+		</div>
+	</div>
+</div>

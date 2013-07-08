@@ -267,10 +267,10 @@ module.controller('resetPassController', function($scope, $http, $location, $rou
 
 module.controller('homeController', function($scope, $http, $location) {
 	$scope.points = "";
-	console.log("sign in Count"+getCookie("signInCount"));
+	console.log("sign in Count" + getCookie("signInCount"));
 	if (getCookie("authToken")) {
 		if (getCookie("signInCount") == 1) {
-			console.log("sign in Count if "+signInCount);
+			console.log("sign in Count if " + signInCount);
 			var param = {
 				"feedback_id" : getCookie('feedbackId')
 			}
@@ -290,7 +290,7 @@ module.controller('homeController', function($scope, $http, $location) {
 			});
 
 		} else {
-			console.log("sign in Count else "+getCookie("signInCount"));
+			console.log("sign in Count else " + getCookie("signInCount"));
 			var param = {
 				"auth_token" : getCookie('authToken')
 			}
@@ -350,7 +350,7 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 
 module.controller('signUpController', function($scope, $http, $location) {
 	$scope.confPassword = "";
-	console.log("flag"+feedbackFlag);
+	console.log("flag" + feedbackFlag);
 	if (feedbackFlag == 1) {
 		$scope.feedBackMsg = true;
 		$scope.message = false;
@@ -363,8 +363,7 @@ module.controller('signUpController', function($scope, $http, $location) {
 		if (!$scope.firstName || !$scope.lastName) {
 			$scope.error = "First Name and Last Name is required. Please enter it to continue";
 			$scope.errorMsg = true;
-		} 
-		else {
+		} else {
 			var param = {
 				"user" : {
 					"first_name" : $scope.firstName,
@@ -914,6 +913,10 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 			$location.url("/redeemPoints");
 		};
 
+		$scope.redeemUpto = function() {
+			$location.url("/confirmRedeem?outletId=" + $routeParams.outletId);
+		};
+
 		$scope.locationMap = function() {
 			$location.url("/locationMap?outletId=" + $routeParams.outletId + "&lat=" + $scope.lattitude + "&long=" + $scope.longitude);
 		};
@@ -924,12 +927,73 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 
 });
 
-module.controller('redeemPointsController', function($scope, $http, $location) {
+module.controller('redeemPointsController', function($scope, $http, $location, $routeParams) {
 	if (getCookie('authToken')) {
+
+		$scope.successMsg = false;
+		$scope.erromsg = false;
+
 		$scope.previous = function() {
-			//previous
-			//$location.url("/")
-		}
+			$location.url("/showRestaurant?outletId=" + $routeParams.outletId);
+		};
+		$scope.home = function() {
+			$location.url("/home");
+		};
+
+		$scope.listPoints = function() {
+			var param = {
+				"auth_token" : getCookie('authToken')
+			}
+
+			$http({
+				method : 'get',
+				url : '/api/users',
+				params : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				//var date = new Date();
+				$scope.points = data.user.points_available;
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+			});
+		};
+		$scope.listPoints();
+
+		$scope.confirmRedeem = function() {
+			if (!$scope.amount) {
+				console.log("in if");
+				$scope.error = "Please enter amount for redemption";
+				$scope.successMsg = false;
+				$scope.erromsg = true;
+			} else {
+				var param = {
+					"redemption" : {
+						"outlet_id" : $routeParams.outletId,
+						"points" : $scope.amount
+					},
+					"auth_token" : getCookie('authToken')
+				}
+
+				$http({
+					method : 'post',
+					url : '/api/redemptions',
+					data : param
+				}).success(function(data, status) {
+					console.log("User Role " + data + " status " + status);
+					$scope.success = "You have successfully redeemed for "+$scope.amount+" points";
+					$scope.listPoints();
+					$scope.successMsg = true;
+					$scope.erromsg = false;
+				}).error(function(data, status) {
+					console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+					$scope.error = data.errors[0];
+					$scope.successMsg = false;
+					$scope.erromsg = true;
+				});
+			}
+
+		};
+
 	} else {
 		$location.url("/login");
 	}
@@ -1075,79 +1139,82 @@ function isDate(txtDate, separator) {
 /*** Facebook Connect ***/
 module.run(function($rootScope, Facebook) {
 
-  $rootScope.Facebook = Facebook;
+	$rootScope.Facebook = Facebook;
 
 })
-module.factory('Facebook',function($http,$location) {
+module.factory('Facebook', function($http, $location) {
 
-    var self = this;
-    this.auth = null;
+	var self = this;
+	this.auth = null;
 
-    return {
+	return {
 
-      getAuth: function() {
-        return self.auth;
-      },
+		getAuth : function() {
+			return self.auth;
+		},
 
-      login: function() {
-        FB.login(function(response) {
-          if (response.authResponse) {
-            console.log('Welcome!  Fetching your information.... ');
-            self.auth = response.authResponse;  
-             FB.api('/me', function(response) {
-               var param = {
-                "user" : {
-                    "first_name" : response.first_name,
-                    "last_name" : response.last_name,
-                    "email" : response.email,
-                    "password" :12345678,
-                    "password_confirmation" :12345678, 
-                }
-            };
-            $http({
-                method : 'post',
-                url : '/api/users',
-                data : param,
-             }).success(function(data){
-                if(data.registration_complete==true){
-                	setCookie('userRole', data.user_role, 7);
-				setCookie('authToken', data.auth_token, 7);
-				setCookie('userName', data.first_name + ' ' + data.last_name, 7);
-                $location.url('/home');
-               }
-                else{
-         
-                }
-               });
+		login : function() {
+			FB.login(function(response) {
+				if (response.authResponse) {
+					console.log('Welcome!  Fetching your information.... ');
+					self.auth = response.authResponse;
+					FB.api('/me', function(response) {
+						var param = {
+							"user" : {
+								"first_name" : response.first_name,
+								"last_name" : response.last_name,
+								"email" : response.email,
+								"password" : 12345678,
+								"password_confirmation" : 12345678,
+							}
+						};
+						$http({
+							method : 'post',
+							url : '/api/users',
+							data : param,
+						}).success(function(data) {
+							if (data.registration_complete == true) {
+								setCookie('userRole', data.user_role, 7);
+								setCookie('authToken', data.auth_token, 7);
+								setCookie('userName', data.first_name + ' ' + data.last_name, 7);
+								$location.url('/home');
+							} else {
 
-      });
-          } else {
-            console.log('Facebook login failed', response);
-          }
-        }, {
-        scope: 'email'
-    });
-                },
-              
-            signUp:function(){
-              $('#loginForm').addClass('loginClosed');
-            $('#loginForm').replaceWith($('#registerFormContainer').html());
-            },
-    }
+							}
+						});
 
-  });
+					});
+				} else {
+					console.log('Facebook login failed', response);
+				}
+			}, {
+				scope : 'email'
+			});
+		},
+
+		signUp : function() {
+			$('#loginForm').addClass('loginClosed');
+			$('#loginForm').replaceWith($('#registerFormContainer').html());
+		},
+	}
+
+});
 
 window.fbAsyncInit = function() {
-  FB.init({
-    appId: '229509360519289'
-  });
+	FB.init({
+		appId : '229509360519289'
+	});
 };
 
 // Load the SDK Asynchronously
-(function(d){
-    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement('script'); js.id = id; js.async = true;
-    js.src = "//connect.facebook.net/en_US/all.js";
-    ref.parentNode.insertBefore(js, ref);
-}(document));
+( function(d) {
+		var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+		if (d.getElementById(id)) {
+			return;
+		}
+		js = d.createElement('script');
+		js.id = id;
+		js.async = true;
+		js.src = "//connect.facebook.net/en_US/all.js";
+		ref.parentNode.insertBefore(js, ref);
+	}(document));

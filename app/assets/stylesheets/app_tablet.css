@@ -1,0 +1,584 @@
+/***Reset css ***/
+* {
+	margin: 0;
+	padding: 0;
+}
+html {
+	height: 100%;
+	width: 100%;
+}
+body {
+	margin: 0;
+	padding: 0;
+	font: 12px 'Open Sans', sans-serif !important;
+	/*font-family: 'Open Sans', sans-serif !important;*/
+}
+img {
+	border: 0;
+	vertical-align: top;
+}
+a {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+}
+:focus {
+	outline: 0;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+
+	margin: 0;
+	font-weight: normal;
+}
+
+/* Forms */
+form {
+	display: inline;
+}
+fieldset {
+	border: 0;
+}
+
+/* Table */
+table {
+	border: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
+	empty-cells: show;
+	font-size: 100%;
+}
+
+/* Lists */
+ul, ol {
+	list-style: none;
+}
+
+/* Paragraphs */
+p {
+	margin: 0;
+}
+/* jquery mobile modified global classes starts here*/
+.ui-body-c, .ui-overlay-c {
+	text-shadow: none;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #fff /*{c-body-background-start}*/), to( #fff /*{c-body-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #fff /*{c-body-background-start}*/, #fff /*{c-body-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image: -moz-linear-gradient( #fff /*{c-body-background-start}*/, #fff /*{c-body-background-end}*/); /* FF3.6 */
+	background-image: -ms-linear-gradient( #fff /*{c-body-background-start}*/, #fff /*{c-body-background-end}*/); /* IE10 */
+	background-image: -o-linear-gradient( #fff /*{c-body-background-start}*/, #fff /*{c-body-background-end}*/); /* Opera 11.10+ */
+	background-image: linear-gradient( #fff /*{c-body-background-start}*/, #fff /*{c-body-background-end}*/);
+}
+.ui-btn-up-c {
+	text-shadow: none;
+}
+input.ui-input-text, textarea.ui-input-text {
+	background: #fff;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	border-radius: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border: 0;
+	color: #999;
+	width: 90%;
+	margin: 0 0 3%;
+	padding: 3.5% 2.7%;
+	font-size: 17px
+}
+.ui-btn {
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	border-radius: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	width: 96%;
+}
+.ui-btn-inner {
+	border: 0;
+}
+.ui-btn-hover-c {
+	background: #6E4D6C;
+	color: #fff;
+	border: 0;
+	background-image: none;
+	text-shadow: none;
+}
+.ui-btn-hover-c:hover {
+	color: #fff;
+}
+.ui-icon {
+	background: #664765;
+}
+.ui-checkbox input {
+	left: 10px;
+}
+.ui-checkbox .ui-btn-icon-left .ui-icon, .ui-radio .ui-btn-icon-left .ui-icon {
+	left: 10px;
+}
+.ui-btn {
+	color: #fff;
+	border: 0;
+	font-weight: normal;
+}
+/* jquery mobile modified global classes ends here */
+
+/* Common classes starts here*/
+.floatLeft {
+	float: left;
+}
+.floatRight {
+	float: right;
+}
+.clr {
+	clear: both;
+}
+.border {
+	border: 1px solid #ccc
+}
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+.clearfix {
+	display: inline-block;
+}
+/* start commented backslash hack \*/
+* html .clearfix {
+	height: 1%;
+}
+.clearfix {
+	display: block;
+}
+/* close commented backslash hack */
+
+/* Body css starts here */
+@font-face {
+	font-family: kanariFont;
+	src: url('Roboto-Regular.ttf');
+}
+@font-face {
+	font-family: kanariLightFont;
+	src: url('Roboto-Light.ttf');
+}
+
+.ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button {
+	font: 16px "kanariLightFont", sans-serif;
+}
+/* Body css ends here */
+
+/* Validation CSS starts here*/
+.errorMsg {
+	color: #C64957;
+	text-shadow: none;
+	margin: 2% 12%;
+}
+#overlaySuccess {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	/*background-color: #000;*/
+	filter: alpha(opacity=50);
+	-moz-opacity: 0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.5;
+	/*z-index: 10;*/
+}
+/* Validation CSS ends here*/
+
+/* Header css starts here */
+#header_menu ul li {
+	float: left;
+}
+/*#header_menu img{display:block;}*/
+#header_menu .ui-controlgroup-controls {
+	width: 100%;
+	/*margin: 0 0.3%;*/
+}
+
+#header_menu .ui-btn {
+	width: 100%;
+}
+#header_menu .headerDiv {
+	float: left;
+	/*margin: 0 0.13%;*/
+	width: 23%;
+}
+/*#header_menu .ui-controlgroup-horizontal .ui-btn {
+ width: 23.7%;
+ }*/
+#header_menu .ui-btn-up-c {
+	background: none repeat scroll 0 0 #664766;
+	border: 1px solid #FFFFFF;
+	border-bottom: none;
+	color: #FFFFFF;
+	font-weight: normal;
+	text-shadow: none;
+	border-radius: 5px 5px 5px 5px;
+}
+#header_menu .logoutDiv {
+	text-align: center;
+	width: 8% !important;
+}
+#header_menu .logOut {
+	background: none repeat scroll 0 0 #C9C7C8;
+}
+#header_menu .logoutDiv .ui-btn-inner {
+	padding: 2.15em 0.1%;
+}
+#header_menu .ui-btn-hover-c, #header_menu .ui-btn-active-c, #header_menu .uibtnactivec {
+	background: none repeat scroll 0 0 #FEC03B;
+	border: 1px solid #FFFFFF;
+	border-bottom: none;
+	color: #FFFFFF;
+	font-weight: normal;
+	text-shadow: none;
+	border-radius: 5px 5px 5px 5px;
+}
+#header_menu .logout:hover {
+	background: none repeat scroll 0 0 #C9C7C8;
+}
+.arrow-down {
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 10px solid #FEC03B;
+	display: none;
+	height: 0;
+	margin-top: -2px;
+	width: 0;
+}
+.showArrow {
+	display: block
+}
+.headerDiv {
+	float: left;
+	width: 24.8%;
+	color: #FFFFFF;
+	font-weight: normal;
+	text-shadow: none;
+}
+
+.popup {
+	width: 20%;
+	border: 3px solid #C9C7C8;
+	background-color: #FFFFFF;
+	border: 0 none;
+	box-shadow: 2px 2px 2px #FFFFFF;
+	left: 40%;
+	position: absolute;
+	z-index: 11;
+	padding: 1%;
+}
+
+.btn {
+	display: block;
+	padding: 1%;
+	width: 48%;
+}
+
+/* Header css ends here */
+
+/* Sign In css starts here */
+#signIn {
+	background: #FEBF3B;
+}
+.logo img {
+	margin: 5% 0 0;
+}
+
+.loginTxt {
+	color: #644766;
+	font-size: 2em;
+	margin: 5% 0 1%;
+}
+.signInForm {
+	width: 35%;
+	padding: 2% 0.5% 0.5%;
+	border: 2px solid #D9A432;
+	border-radius: 7px;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+}
+
+.rememberMe {
+	padding: 1% 0 0;
+}
+.rememberMe label {
+	display: inline;
+	color: #644766;
+}
+.rememberMe .ui-btn-text {
+	color: #666;
+	font-size: 1.1em;
+}
+#signIn .ui-btn {
+	background: #6E4D6C;
+	color: #fff;
+	border: 0;
+	font-weight: normal;
+}
+/*Sign In css ends here */
+
+/*Insight css ends here */
+.insight_graph {
+	width: 100%
+}
+.score_1 {
+	background: none repeat scroll 0 0 #E6E7E9;
+	border-radius: 5px 5px 5px 5px;
+	margin: 0.51%;
+	overflow: hidden;
+	padding: 0 1%;
+	border: 1px solid #C3C3C3;
+}
+.net_score {
+	float: left;
+	border-right: 1px solid #664766;
+	text-align: left;
+	width: 49%;
+	padding: 1% 0;
+	height: 45px;
+}
+.daily_change {
+	float: left;
+	text-align: right;
+	width: 49%;
+	padding: 1% 0;
+}
+.txt1 {
+	font-size: 100%;
+	color: #000000;
+}
+.value1 {
+	font-size: 140%;
+	color: #664766;
+}
+.rate_plus {
+	background: none repeat scroll 0 0 #FEC03B;
+	float: left;
+	margin-top: 2%;
+}
+.ratePValue {
+	background: none repeat scroll 0 0 transparent;
+	color: #664766;
+	font-weight: bold;
+	margin-left: 1%;
+}
+
+.rate_minus {
+	background: none repeat scroll 0 0 #C84A58;
+	float: right;
+	margin-top: 0%;
+}
+.rateMValue {
+	background: none repeat scroll 0 0 transparent;
+	color: #664766;
+	font-weight: bold;
+	margin-left: 1%;
+}
+.rate1V {
+	width: 34%;
+}
+.rate2V {
+	width: 27%;
+}
+.rate3V {
+	width: 11%;
+}
+.rate4V {
+	width: 12%;
+}
+.rate5V {
+	width: 27%;
+}
+.rate6V {
+	width: 81%;
+}
+.rate7V {
+	width: 69%;
+}
+.main_score {
+	border-radius: 5px 5px 5px 5px;
+	border: 1px solid #C3C3C3;
+	margin: 0 0.5%;
+}
+.score_div {
+	overflow: hidden;
+	padding: 0 1%;
+	border-bottom: 1px solid #C3C3C3;
+}
+.score_final {
+	background: none repeat scroll 0 0 #E6E7E9;
+	border-top: 12px solid #D6D6D6;
+	overflow: hidden;
+}
+.score_final .net_score, .score_final .daily_change {
+	text-align: center;
+}
+/*Insight css ends here */
+
+/* Numeric Code CSS starts here	*/
+
+.succMsg {
+	color: green;
+	margin-top: 10px;
+	/*text-align: left;*/
+	/*font-size: 14px;*/
+}
+
+.numericTxt {
+	color: #333;
+	font-size: 1.2em;
+	margin-bottom: 5%;
+}
+#numericCode .ui-input-text {
+	border: 1px solid #CCCCCC;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-moz-box-shadow: inset 0px 1px 4px rgba(0,0,0,.2);
+	-webkit-box-shadow: inset 0px 1px 4px rgba(0,0,0,.2);
+	box-shadow: inset 0px 1px 4px rgba(0,0,0,.2);
+	padding: 3%;
+}
+#numericCode .ui-submit {
+	background: #FEC03B;
+	color: #555;
+	margin-top: 7%;
+}
+#numericCode .ui-submit span.ui-btn-text {
+	font-size: 1.1em;
+}
+.numericCodeContainer {
+	width: 45%;
+}
+.dateTimeList {
+	width: 65%;
+	padding: 5% 0 3%;
+}
+.dateTimeListhead {
+	color: #664766;
+	font-weight: bold;
+}
+.dateTimeList .col1, .dateTimeList .col2 {
+	padding: 2%;
+	float: left;
+	border: 1px solid #ccc;
+	border-right: 0;
+	border-top: 0;
+}
+.dateTimeList .col1 {
+	width: 35%;
+	text-align: left;
+}
+.dateTimeList .col2 {
+	width: 16%;
+}
+.dateTimeList .colBorderTop {
+	border-top: 1px solid #ccc;
+}
+.dateTimeList .colBorderRight {
+	border-right: 1px solid #ccc;
+}
+/* Numeric Code CSS ends here	*/
+
+/*Home Page CSS starts here*/
+.home_page_view {
+	width: 100%
+}
+.feedback_step {
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	overflow: hidden;
+	padding: 1% 0;
+	 position: relative;
+}
+.feedback_step .divPadding {
+	/*padding: 0 0 1000px 0;
+	margin-bottom: -1000px;*/
+}
+.promo_code {
+	float: left;
+	width: 20%;
+	/*height: 135px;*/
+	color: #674665;
+}
+.promo_code_def {
+	float: left;
+	width: 30%;
+	border-left: 1px solid #D6D6D6;
+	border-right: 1px solid #D6D6D6;
+}
+.promo_code_desc {
+	float: left;
+    padding: 1% 2%;
+    position: relative;
+    text-align: justify;
+    width: 45%;
+}
+.update_time {
+	 bottom: 3%;
+    position: absolute;
+    right: 3%;
+}
+.def_icon {
+	float: left;
+	margin: 3% 5%;
+	text-align: center;
+	width: 70px;
+	/*margin: 5px 17px;
+    text-align: center;
+    width: 90px;*/
+	color: #999999;
+}
+.promo_txt {
+	font-size: 166%;
+}
+.promo_value {
+	font-size: 200%;
+}
+/*Home Page CSS ends here*/
+
+/* Redemptions css starts here */
+.redemptionsList {
+	width: 100%;
+	text-align: center;
+	color: #664766;
+}
+.redemptionsListRow {
+	border-top: 1px solid #ccc;
+	padding: 2% 1%;
+}
+.redemptionsListRow .col1, .redemptionsListRow .col2, .redemptionsListRow .col3 {
+	float: left;
+	font-size: 1.2em;
+}
+.redemptionsListRow .col1 {
+	width: 40%;
+}
+.redemptionsListRow .col2 {
+	width: 40%;
+}
+.redemptionsListRow .col3 {
+	width: 20%;
+}
+.redemptionsListRow .col3 span {
+	background: #FEC03B;
+	padding: 1.5% 10%;
+	width: 25%;
+	color: #555555;
+}
+.redemptionsList:last-child {
+	border-bottom: 1px solid #ccc;
+}
+/* Redemptions css ends here */
+

@@ -137,6 +137,8 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 		$scope.userName = getCookie('userRole');
 	} else if (getCookie('userRole') == "customer_admin") {
 		$scope.userName = getCookie('userName');
+	} else if (getCookie('userRole') == "manager") {
+		$scope.userName = getCookie('userName');
 	}
 
 	$scope.logout = function() {
@@ -160,6 +162,8 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 		if (getCookie('userRole') == "kanari_admin") {
 			$location.url("/createInvitation");
 		} else if (getCookie('userRole') == "customer_admin") {
+			$location.url("/outlets");
+		}else if (getCookie('userRole') == "manager") {
 			$location.url("/outlets");
 		}
 	}
@@ -223,16 +227,20 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 					$("#userName").text(getCookie('userRole'));
 				} else if (getCookie('userRole') == "customer_admin") {
 					$("#userName").text(getCookie('userName'));
+				} else if (getCookie('userRole') == "manager") {
+					$("#userName").text(getCookie('userName'));
 				}
+
 				if (getCookie('userRole') == "kanari_admin") {
 					$location.url("/createInvitation");
 				} else if (getCookie('userRole') == "customer_admin" && data.registration_complete) {
 					$location.url("/outlets");
-
-				} else if (getCookie('userRole') == "customer_admin" && !data.registration_complete) {
-					$location.url("/acceptInvitationStep2");
+				} else if (getCookie('userRole') == "manager" && !data.registration_complete) {
+					$location.url("/outlets");
 				} else if (getCookie('userRole') == "staff" && data.registration_complete) {
 					$location.url("/create_kanari_code");
+				} else if (getCookie('userRole') == "manager" && data.registration_complete) {
+					$location.url("/outlets");
 				}
 
 			}).error(function(data, status) {
@@ -346,7 +354,12 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 		$scope.auth_token = getCookie('authToken');
 		$scope.userRole = getCookie('userRole');
 		$scope.outlets = []
-
+		if (getCookie('userRole') == "customer_admin"){
+			$scope.userAction = true;
+		}
+		else{
+				$('#account').hide();
+		}
 		var param = {
 			"auth_token" : getCookie('authToken')
 		};
@@ -552,7 +565,15 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.checkedOutletTypes = [];
 		$scope.checked_CuisineTypes = [];
 		$scope.checked_OutletTypes = [];
-
+		
+		
+		if (getCookie('userRole') == "customer_admin"){
+			$scope.userAction = true;
+		}
+		else{
+				$('#account').hide();
+		}
+		
 		$scope.getOutletTypes = function() {
 
 			var param = {
@@ -576,7 +597,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.getOutletTypes();
 		$scope.getCuisineTypes = function() {
 			var param = {
-				"auth_token" : $scope.auth_token
+				"auth_token" : getCookie('authToken')
 			}
 			$http({
 				method : 'get',
@@ -598,7 +619,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 
 		$scope.getManagerList = function() {
 			var param = {
-				"auth_token" : $scope.auth_token
+				"auth_token" : getCookie('authToken')
 			}
 			$http({
 				method : 'get',
@@ -628,7 +649,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				var pos_lat;
 				var pos_lng;
 				var param = {
-					"auth_token" : $scope.auth_token
+					"auth_token" : getCookie('authToken')
 				}
 				$http({
 					method : 'get',
@@ -648,6 +669,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 
 				managerId = $scope.myOption;
 				//$scope.manager = managerId;
+				console.log("Test" + getCookie('currentCuisineList'));
 				var param = {
 					"outlet" : {
 						"manager_id" : managerId,
@@ -659,7 +681,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 						"serves_alcohol" : getCookie('radiobtn2'),
 						"has_outdoor_seating" : getCookie('radiobtn3')
 					},
-					"auth_token" : $scope.auth_token
+					"auth_token" : getCookie('authToken')
 				}
 
 				$http({
@@ -728,7 +750,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					setCookie('latitude', data.outlet.latitude, 0.29);
 					setCookie('logitude', data.outlet.longitude, 0.29);
 					if (data.outlet.manager) {
-						$scope.manager = data.outlet.manager.first_name;
+						$scope.manager = data.outlet.manager.first_name +' '+data.outlet.manager.last_name;
 						$scope.manager_show = true;
 					} else {
 						$scope.manager_show = false;
@@ -1052,7 +1074,54 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			} else {
 				$scope.valide_phone = true;
 			}
-		}
+		};
+
+		$scope.create_tablet_id = function() {
+			$('.tabletId').show();
+			$scope.successTabletId = false;
+			$scope.errorTabletId = false;
+		};
+		$scope.close_tabletId = function() {
+			$('.tabletId').hide();
+			$('#tabletIdForm')[0].reset();
+			$scope.successTabletId = false;
+			$scope.errorTabletId = false;
+		};
+
+		$scope.create_tabletId = function(createTabletId) {
+			if ($scope.createTabletId.$valid) {
+				//alert("in submit");
+				var param = {
+					"user" : {
+						"email" : $scope.tabletId + "@kanari.co",
+						"password" : $scope.tabletId_password,
+						"password_confirmation" : $scope.tabletId_confirm_password,
+						"outlet_id" : $routeParams.outletId
+					},
+					"auth_token" : getCookie('authToken')
+				}
+
+				$http({
+					method : 'post',
+					url : '/api/staffs',
+					data : param,
+				}).success(function(data, status) {
+					console.log("data in success " + data + " status " + status);
+					$scope.errorTabletId = false;
+					//$scope.manager_id = data.manager.id;
+					$scope.successTabletId = true;
+					//$scope.getManagerList();
+					$('#tabletIdForm')[0].reset();
+				}).error(function(data, status) {
+					console.log("data in error" + data + " status " + status);
+					$scope.errorMsg = data.errors[0];
+					$scope.errorTabletId = true;
+					$scope.successTabletId = false;
+				});
+
+			}
+
+		};
 		// $scope.update = function() {
 		// $("#formid").addClass("row form-horizontal");
 		// $("#formid input").addClass("ng-dirty ng-invalid");
@@ -1099,10 +1168,11 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.permissionShow = false;
 					$scope.TabletIdShow = false;
 					$scope.ReportShow = true;
-				}else if (currentTab == "TabletIdShow") {
+				} else if (currentTab == "TabletIdShow") {
 					$('#location').css({
 						'opacity' : '0'
 					});
+					$('.tabletId').hide();
 					$scope.profileShow = false;
 					$scope.locationShow = false;
 					$scope.permissionShow = false;
@@ -1248,7 +1318,11 @@ module.controller('takeTourCtrl', function($rootScope, $scope, $routeParams, $ht
 		$scope.register = false;
 		$scope.srchRestaurant = false;
 		$scope.deals = false;
-
+		
+		if (getCookie('userRole') == "manager"){
+			$('#account').hide();
+		}
+		
 		$scope.changeTab = function(currentTab) {
 			//alert('in');
 			$location.url("/take_tour");
@@ -1476,9 +1550,9 @@ module.controller('createKanariCodeCtrl', function($scope, $routeParams, $route,
 				console.log("data in success " + data + " status " + status);
 
 			}).error(function(data, status) {
-				console.log("data in errorrr" + data + " status " + status);
+				console.log("data in errorr" + data + " status " + status);
+				
 			});
-
 		}
 	};
 
@@ -1590,7 +1664,7 @@ module.controller('outletCuisineTypeCtrl', function($scope, $rootScope, $routePa
 					$('.saveBtn').show();
 					$('.updateBtn').hide();
 					$scope.formoutlet1 = "";
-					$scope.outlet_deleted ="";
+					$scope.outlet_deleted = "";
 					$scope.outlet_types = "";
 
 				}).error(function(data, status) {
