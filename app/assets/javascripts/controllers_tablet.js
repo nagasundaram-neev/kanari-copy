@@ -126,7 +126,7 @@ var Base64 = {
 }
 
 module.controller('headerCtrl', function($scope, $http, $location) {
-	//var overlay = 
+	//var overlay =
 	//$( "#popupBasic" ).popup( "close");
 	var overlayDiv = $("#overlaySuccess");
 	$scope.popup = false;
@@ -134,15 +134,21 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 		$location.url('/' + getroot);
 	};
 
-	$scope.showPopup = function(){
+	$scope.showPopup = function() {
 		$scope.popup = true;
-		overlayDiv.css({'z-index':'10','background-color':'#000'});
+		overlayDiv.css({
+			'z-index' : '10',
+			'background-color' : '#000'
+		});
 	};
-	
-	$scope.cancel = function(){
+
+	$scope.cancel = function() {
 		$scope.popup = false;
 		console.log("IN");
-		overlayDiv.css({'z-index':'0','background-color':'transparent'});
+		overlayDiv.css({
+			'z-index' : '0',
+			'background-color' : 'transparent'
+		});
 	};
 
 	$scope.logout = function() {
@@ -162,7 +168,10 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 			deleteCookie('feedbackId');
 			deleteCookie("signInCount");
 			$location.url("/signin");
-			overlayDiv.css({'z-index':'0','background-color':'transparent'});
+			overlayDiv.css({
+				'z-index' : '0',
+				'background-color' : 'transparent'
+			});
 		}).error(function(data, status) {
 			console.log("data " + data + " status " + status + "authToken" + getCookie('authToken'));
 		});
@@ -173,7 +182,10 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 		deleteCookie('feedbackId');
 		deleteCookie("signInCount");
 		$location.url("/signin");
-		overlayDiv.css({'z-index':'0','background-color':'transparent'});
+		overlayDiv.css({
+			'z-index' : '0',
+			'background-color' : 'transparent'
+		});
 	};
 });
 
@@ -230,24 +242,7 @@ module.controller('homePageController', function($scope, $http, $location) {
 });
 
 module.controller('insightsController', function($scope, $http, $location) {
-	$scope.active2 = true;	 	
-   
-    // $scope.chart = {
-        // options: {
-            // chart: {
-                // type: 'bar'
-            // }
-        // },
-        // series: [{
-            // data: [10, 15, 12, 8, 7]
-        // },
-        // {
-            // data: [-10, -15, -12, -8, -7]
-        // }],
-        // title: {
-            // text: 'Hello'
-        // }
-    // }
+	$scope.active2 = true;
 });
 module.controller('redemeController', function($scope, $http, $location) {
 	$scope.active3 = true;
