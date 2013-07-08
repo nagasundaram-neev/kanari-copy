@@ -271,12 +271,12 @@ input.ui-input-text, textarea.ui-input-text {
 	width: 20%;
 	border: 3px solid #C9C7C8;
 	background-color: #FFFFFF;
-    border: 0 none;
-    box-shadow: 2px 2px 2px #FFFFFF;
-    left: 40%;
-    position: absolute;
-    z-index: 11;
-    padding:1%;
+	border: 0 none;
+	box-shadow: 2px 2px 2px #FFFFFF;
+	left: 40%;
+	position: absolute;
+	z-index: 11;
+	padding: 1%;
 }
 
 .btn {
@@ -491,7 +491,6 @@ input.ui-input-text, textarea.ui-input-text {
 }
 /* Numeric Code CSS ends here	*/
 
-
 /*Home Page CSS starts here*/
 .home_page_view {
 	width: 100%
@@ -501,52 +500,65 @@ input.ui-input-text, textarea.ui-input-text {
 	border-radius: 10px;
 	overflow: hidden;
 	padding: 1% 0;
+	 position: relative;
+}
+.feedback_step .divPadding {
+	/*padding: 0 0 1000px 0;
+	margin-bottom: -1000px;*/
 }
 .promo_code {
 	float: left;
 	width: 20%;
-	border-right: 1px solid #D6D6D6;
-	height: 135px;
+	/*height: 135px;*/
 	color: #674665;
 }
 .promo_code_def {
 	float: left;
 	width: 29%;
+	border-left: 1px solid #D6D6D6;
 	border-right: 1px solid #D6D6D6;
 }
 .promo_code_desc {
 	float: left;
-	width: 50%;
-	height: 135px;
-	position:relative;
+    padding: 1% 2%;
+    position: relative;
+    text-align: justify;
+    width: 46%;
 }
-.update_time{
-	position: absolute;
-   bottom: 0;
-   right: 0;
+.update_time {
+	 bottom: 3%;
+    position: absolute;
+    right: 3%;
 }
 .def_icon {
 	float: left;
-	margin: 3% 5%;
+	/*margin: 3% 5%;
 	text-align: center;
-	width: 23%;
+	width: 23%;*/
+	margin: 5px 17px;
+    text-align: center;
+    width: 90px;
 	color: #999999;
 }
-.promo_txt{font-size: 166%;}
-.promo_value{font-size: 200%;}
+.promo_txt {
+	font-size: 166%;
+}
+.promo_value {
+	font-size: 200%;
+}
 /*Home Page CSS ends here*/
 
 /* Redemptions css starts here */
 .redemptionsList {
 	width: 100%;
-	text-align: center;	
+	text-align: center;
 	color: #664766;
 }
 .redemptionsListRow {
-	border-top:1px solid #ccc;
-	padding:2% 1%;
+	border-top: 1px solid #ccc;
+	padding: 2% 1%;
 }
-.redemptionsListRow .col1,.redemptionsListRow .col2,.redemptionsListRow .col3 {
+.redemptionsListRow .col1, .redemptionsListRow .col2, .redemptionsListRow .col3 {
 	float: left;
 	font-size: 1.2em;
 }
@@ -564,12 +576,9 @@ input.ui-input-text, textarea.ui-input-text {
 	padding: 1.5% 10%;
 	width: 25%;
 	color: #555555;
- }
- .redemptionsList:last-child {
- 	border-bottom: 1px solid #ccc;
- }
+}
+.redemptionsList:last-child {
+	border-bottom: 1px solid #ccc;
+}
 /* Redemptions css ends here */
-
-
-
 
