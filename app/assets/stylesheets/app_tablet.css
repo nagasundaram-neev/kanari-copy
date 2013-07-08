@@ -514,7 +514,7 @@ input.ui-input-text, textarea.ui-input-text {
 }
 .promo_code_def {
 	float: left;
-	width: 29%;
+	width: 30%;
 	border-left: 1px solid #D6D6D6;
 	border-right: 1px solid #D6D6D6;
 }
@@ -523,7 +523,7 @@ input.ui-input-text, textarea.ui-input-text {
     padding: 1% 2%;
     position: relative;
     text-align: justify;
-    width: 46%;
+    width: 45%;
 }
 .update_time {
 	 bottom: 3%;
@@ -532,12 +532,12 @@ input.ui-input-text, textarea.ui-input-text {
 }
 .def_icon {
 	float: left;
-	/*margin: 3% 5%;
+	margin: 3% 5%;
 	text-align: center;
-	width: 23%;*/
-	margin: 5px 17px;
+	width: 70px;
+	/*margin: 5px 17px;
     text-align: center;
-    width: 90px;
+    width: 90px;*/
 	color: #999999;
 }
 .promo_txt {
