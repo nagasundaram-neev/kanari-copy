@@ -37,8 +37,8 @@ class Api::V1::OutletsController < ApplicationController
   # PATCH/PUT /outlets/1
   def update
     authorize! :update, @outlet
-    @outlet.outlet_types = OutletType.find(params[:outlet][:outlet_type_ids]) rescue []
-    @outlet.cuisine_types = CuisineType.find(params[:outlet][:cuisine_type_ids]) rescue []
+    @outlet.outlet_types = OutletType.find(params[:outlet][:outlet_type_ids]) rescue [] if params[:outlet][:outlet_type_ids].present?
+    @outlet.cuisine_types = CuisineType.find(params[:outlet][:cuisine_type_ids]) rescue [] if params[:outlet][:cuisine_type_ids].present?
     if @outlet.update(outlet_params)
       render json: nil, status: 200
     else
