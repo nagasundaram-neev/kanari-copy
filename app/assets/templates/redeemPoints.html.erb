@@ -13,7 +13,7 @@
 					You have
 				</div>
 				<div class="number">
-					255
+					{{points}}
 				</div>
 				<span class="points">POINTS</span>
 				<div class="clr"></div>
@@ -25,19 +25,21 @@
 				Fill the amount you want to redeem at the selected restaurant
 			</div>
 			<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
-				<input
-				 data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="amount" class="passwordTxt" placeholder="Amount"/>
+				<input data-theme="a" data-inline="true" type="number" name="txtPassword" ng-model="amount" class="passwordTxt" placeholder="Amount"/>
 			</div>
+
+			<span ng-show="successMsg" class="succMsg">{{success}}</span>
+			<span class="errorMsg" ng-show="erromsg">{{error}}</span>
 		</div>
-		<div class="footerDivRedeemPoints">
+		<div class="footerDiv">
 			<div class="prev" ng-click="previous()">
 				<%= image_tag 'y_arrow_left.png' %>
 				<div class="prevTxt">
 					PREVIOUS
 				</div>
 			</div>
-			<div class="nxt">
-				<div class="nxtTxt" ng-click="next()">
+			<div class="nxt" ng-click="confirmRedeem()">
+				<div class="nxtTxt" >
 					REDEEM POINTS
 				</div>
 				<div class="clr"></div>

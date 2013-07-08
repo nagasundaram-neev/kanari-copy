@@ -28,17 +28,28 @@ class Api::V1::RedemptionsController < ApplicationController
     authorize! :request, Redemption
     redemption = Redemption.new(redemption_params)
     redemption.user_id = current_user.id
+    outlet = redemption.outlet
+
+    if outlet.blank?
+      render json: {errors: ["Outlet is not available"]}, status: :unprocessable_entity and return
+    end
 
     if !redemption.points_available?
       render json: {errors: ["Points not available"]}, status: :unprocessable_entity and return
     end
 
-    if redemption.save
-      current_user.points_available -= redemption.points
-      current_user.save
-      render json: nil, status: :created
-    else
-      render json: {errors: redemption.errors.full_messages}, status: :unprocessable_entity
+    Redemption.transaction do
+      if redemption.save
+        current_user.points_available -= redemption.points
+        current_user.save
+        outlet.with_lock do 
+          outlet.rewards_pool -= redemption.points
+          outlet.save
+        end
+        render json: nil, status: :created
+      else
+        render json: {errors: redemption.errors.full_messages}, status: :unprocessable_entity
+      end
     end
   end
 
