@@ -17,4 +17,8 @@ class Outlet < ActiveRecord::Base
   def points_pending_redemption
     redemptions.where(approved_by: nil).sum(:points)
   end
+  
+  def pending_redemptions
+    redemptions.where({approved_by: nil})
+  end
 end

@@ -750,7 +750,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					setCookie('latitude', data.outlet.latitude, 0.29);
 					setCookie('logitude', data.outlet.longitude, 0.29);
 					if (data.outlet.manager) {
-						$scope.manager = data.outlet.manager.first_name;
+						$scope.manager = data.outlet.manager.first_name +' '+data.outlet.manager.last_name;
 						$scope.manager_show = true;
 					} else {
 						$scope.manager_show = false;
@@ -1550,9 +1550,9 @@ module.controller('createKanariCodeCtrl', function($scope, $routeParams, $route,
 				console.log("data in success " + data + " status " + status);
 
 			}).error(function(data, status) {
-				console.log("data in errorrr" + data + " status " + status);
+				console.log("data in errorr" + data + " status " + status);
+				
 			});
-
 		}
 	};
 
