@@ -10,6 +10,7 @@ Feature: Update Outlet
       Given a customer named "China Pearl" exists with id "100"
         And the customer with id "100" has an outlet named "China Pearl - Bangalore"
         And the outlet's id is "20"
+        And the outlet's email is "outlet@outlet.com"
       And he is the admin for customer "China Pearl"
       When I authenticate as the user "auth_token_123" with the password "random string"
       And I send a PUT request to "/api/outlets/20" with the following:
@@ -17,7 +18,9 @@ Feature: Update Outlet
       {
         "outlet" : {
           "name" : "China Pearl - Bengaluru",
-          "disabled" : true
+		  "disabled" : true,
+		  "latitude": "12.97",
+		  "longitude": "77.61"
         }
       }
       """
@@ -27,6 +30,8 @@ Feature: Update Outlet
       null
       """
       And the outlet "China Pearl - Bengaluru" should be present under customer with id "100"
+      And the outlet's email should still be "outlet@outlet.com"
+      And the outlet's latitude and longitude should be "12.97" and "77.61"
       And the outlet should be disabled
 
     Scenario: Update manager
