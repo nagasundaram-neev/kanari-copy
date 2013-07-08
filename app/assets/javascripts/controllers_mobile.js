@@ -913,6 +913,10 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 		$scope.previous = function() {
 			$location.url("/redeemPoints");
 		};
+		
+		$scope.redeemUpto = function(){
+			$location.url("/confirmRedeem?outletId=" + $routeParams.outletId);	
+		};
 
 		$scope.locationMap = function() {
 			$location.url("/locationMap?outletId=" + $routeParams.outletId + "&lat=" + $scope.lattitude + "&long=" + $scope.longitude);
@@ -924,12 +928,14 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 
 });
 
-module.controller('redeemPointsController', function($scope, $http, $location) {
+module.controller('redeemPointsController', function($scope, $http, $location,$routeParams) {
 	if (getCookie('authToken')) {
 		$scope.previous = function() {
-			//previous
-			//$location.url("/")
-		}
+			$location.url("/showRestaurant?outletId=" + $routeParams.outletId);
+		};
+		$scope.home = function(){
+			$location.url("/home");
+		};
 	} else {
 		$location.url("/login");
 	}
