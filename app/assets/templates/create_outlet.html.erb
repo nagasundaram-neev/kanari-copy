@@ -259,10 +259,10 @@
 						<lable>
 							Select Manager<span class="star">*</span>
 						</lable>
-						<select ng-model="myOption" ng-options="value.id as value.first_name for value in managerList" required>
+						<select ng-model="myOption" ng-options="value.id as value.first_name + ' ' + value.last_name for value in managerList" required>
 							<option value="">Select Manager</option>
 						</select>
-						<div class="control-group" style="margin: 10px 0 0 130px;">
+						<div class="control-group" style="margin: 10px 0 0 130px;"	>
 							<div class="controls">
 								<button  type="submit" class="btn">
 									Save
@@ -521,6 +521,8 @@
 								Update
 							</button>
 						</div>
+						<p ng-show="successLocation" class="successMsg">
+								Your location get saved successfully.</p>
 					</div>
 				</div>
 			</div>
