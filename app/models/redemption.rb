@@ -4,7 +4,7 @@ class Redemption < ActiveRecord::Base
   belongs_to :staff, class_name: 'User', foreign_key: 'approved_by'
 
   def points_available?
-    return ((user.points_available > points) && (outlet.rewards_pool > points))
+    return ((user.points_available > points) && outlet && (outlet.rewards_pool > points))
   end
 
 end
