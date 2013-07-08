@@ -55,6 +55,12 @@ Given /^outlet "(.*?)" has staffs$/ do |outlet_name, table|
   outlet.save!
 end
 
+Given /^outlet "(.*?)" was created before "(.*?)" days$/ do |outlet_name, created_ago|
+  outlet = Outlet.where(name: outlet_name).first
+  outlet.created_at = Time.zone.now - created_ago.to_i.days
+  outlet.save!
+end
+
 And /^the outlet's rewards pool should have "([^"]*)" points$/ do |points|
   @outlet.reload.rewards_pool.should == points.to_i
 end

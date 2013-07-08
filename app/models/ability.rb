@@ -33,6 +33,7 @@ class Ability
       #Kanari admin's permissions
       can :create, PaymentInvoice
       can :read, Outlet
+      can :read_feedbacks, Outlet
       can :read_all, Customer
       can :read, Customer
       can :read_all_redemptions, Outlet
@@ -53,15 +54,18 @@ class Ability
       can :create, User, role: 'manager'
       can :read, User, role: 'manager'
       can :generate_code, Outlet, customer: user.customer
+      can :read_feedbacks, Outlet, customer: user.customer
       cannot :create_staff, Outlet
     when 'manager'
       can :read, Outlet, manager_id: user.id
       can :create_staff, Outlet, manager_id: user.id
+      can :read_feedbacks, Outlet, manager_id: user.id
       can :read_pending_redemptions, Outlet, manager_id: user.id
       can :approve_redemptions, Outlet, manager_id: user.id
       can :generate_code, Outlet, manager_id: user.id
     when 'staff'
       can :read, Outlet, id: (user.employed_outlet.id rescue nil)
+      can :read_feedbacks, Outlet, id: (user.employed_outlet.id rescue nil)
       can :read_pending_redemptions, Outlet, id: (user.employed_outlet.id rescue nil)
       can :approve_redemptions, Outlet, id: (user.employed_outlet.id rescue nil)
       can :generate_code, Outlet, id: (user.employed_outlet.id rescue nil)

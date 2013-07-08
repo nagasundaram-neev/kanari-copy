@@ -8,6 +8,14 @@ Given(/^A feedback exists with the following attributes:$/) do |table|
   Feedback.create!(table.rows_hash)
 end
 
+Given "the following feedbacks exist" do |hashes|
+  feedback_hashes = hashes.hashes
+  feedback_hashes.each do |feedback_hash|
+    Feedback.create!(feedback_hash)
+  end
+  Feedback.count.should == feedback_hashes.size
+end
+
 And /^the feedback with id "([^"]*)" should have the following attributes$/ do |feedback_id, table|
   feedback = Feedback.find(feedback_id)
   attr = table.rows_hash
@@ -27,4 +35,8 @@ end
 
 Then(/^the feedback with id "(.*?)" should have no kanari code$/)do |feedback_id|
   Feedback.find(feedback_id).code.should == nil
+end
+
+Then(/^the feedback with id "(.*?)" should be completed$/)do |feedback_id|
+  Feedback.find(feedback_id).completed.should == true
 end

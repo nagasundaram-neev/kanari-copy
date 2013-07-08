@@ -25,7 +25,7 @@ Kanari::Application.routes.draw do
       resources :customers do
         resources :payment_invoices, only: [:create]
       end
-      resources :feedbacks
+      resources :feedbacks, :only => [:index, :update]
       resources :social_network_accounts
       resources :users, :only => [:index]
       resources :new_registration_points, :only => [:create]
