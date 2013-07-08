@@ -54,6 +54,7 @@
 #home, #feedback, #feedback_step2, #redeemPoints, #restaurantList, #feedbackSub, #showRestaurant, #transaction_history {
 
 	background: #FFFFFF !important;
+	 position: relative;
 }
 #settings .ui-field-contain input.ui-input-text {
 	display: inline
@@ -595,8 +596,11 @@ img, object {
 	width: 40%;
 }
 .footerDiv {
-	margin: 5% 0 2%;
-	text-shadow: none;
+	bottom: 0;
+    margin: 5% 0 0%;
+    position: absolute;
+    text-shadow: none;
+    width: 100%;
 }
 #transaction_history .footerDiv {
 	margin: 5% 0 0;
