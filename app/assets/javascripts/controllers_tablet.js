@@ -254,14 +254,14 @@ module.controller('homePageController', function($scope, $http, $location) {
 				params : param
 			}).success(function(data, status) {
 				console.log("User Role " + data + " status " + status);
-				$scope.feedbackList = data.feedbacks; 
-				
+				$scope.feedbackList = data.feedbacks;
+
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 
 			});
 		};
-		
+
 		$scope.listFeedbacks();
 		refreshIntervalId  = window.setInterval(function() {
 			$scope.listFeedbacks();
