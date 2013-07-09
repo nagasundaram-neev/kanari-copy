@@ -13,7 +13,7 @@ when('/feedback', {templateUrl: "<%= asset_path 'homepage.html' %>"}).
 when('/insights', {templateUrl: "<%= asset_path 'insights.html' %>"}).
 when('/redemption', {templateUrl: "<%= asset_path 'redemptions.html' %>"}).
 when('/numeric_code', {templateUrl: "<%= asset_path 'numeric_code.html' %>"}).
-otherwise({redirectTo: '/insights'});
+otherwise({redirectTo: '/signin'});
 }]);
 
 module.directive('highchart', function () {

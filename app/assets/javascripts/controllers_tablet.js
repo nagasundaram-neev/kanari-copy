@@ -190,7 +190,6 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 });
 
 module.controller('signInController', function($scope, $http, $location) {
-
 	$scope.chkLogin = function() {
 		if ($scope.email == "" && $scope.password == "" && !$scope.email && !$scope.password) {
 			console.log("email is blank");
@@ -238,93 +237,135 @@ module.controller('signInController', function($scope, $http, $location) {
 });
 
 module.controller('homePageController', function($scope, $http, $location) {
-	$scope.active1 = true;
-});
+	if (getCookie('authToken')) {
+		$scope.active1 = true;
+		$scope.feedbackList = [];
 
-module.controller('insightsController', function($scope, $http, $location) {
-	$scope.active2 = true;
-});
-module.controller('redemeController', function($scope, $http, $location) {
-	$scope.active3 = true;
-
-	$scope.redemptionList = [];
-
-	$scope.listRedemptions = function() {
-		var param = {
-			"type" : "pending",
-			"auth_token" : getCookie('authToken')
-		}
-
-		$http({
-			method : 'get',
-			url : '/api/redemptions',
-			params : param
-		}).success(function(data, status) {
-			console.log("User Role " + data + " status " + status);
-			$scope.redemptionList = data.redemptions;
-			console.log("list" + $scope.redemptionList)
-		}).error(function(data, status) {
-			console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
-
-		});
-	};
-	$scope.listRedemptions();
-
-	$scope.confirm = function(id) {
-		console.log("confirmed"+id);
-		var param = {
-			"redemption" : {
-				"approve" : true
-			},
-			"auth_token" : getCookie('authToken')
-		}
-
-		$http({
-			method : 'put',
-			url : '/api/redemptions/'+id,
-			data : param
-		}).success(function(data, status) {
-			console.log("User Role " + data + " status " + status);
-			$scope.listRedemptions();
-		}).error(function(data, status) {
-			console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
-
-		});
-
-	};
-
-});
-module.controller('numericCodeController', function($scope, $http, $location) {
-	$scope.active4 = true;
-	$scope.erromsg = false;
-	$scope.generateCode = function(createKanariCode) {
-		if (!$scope.billAmount) {
-			$scope.error = "Please enter the bill amount";
-			$scope.erromsg = true;
-		} else {
-			$scope.erromsg = false;
-			console.log("amount " + $scope.billAmount)
+		$scope.listFeedbacks = function() {
 			var param = {
-				"bill_amount" : parseInt($scope.billAmount),
-				"auth_token" : getCookie("authToken")
+				"auth_token" : getCookie('authToken'),
+				"password" : "X"
 			}
 
 			$http({
-				method : 'POST',
-				url : '/api/kanari_codes',
-				data : param,
+				method : 'get',
+				url : '/api/feedbacks',
+				params : param
 			}).success(function(data, status) {
-				console.log("data in success " + data + " status " + status);
-				$scope.success = "Code generated successfully";
-				$scope.succmsg = true;
-				$scope.error = false;
+				console.log("User Role " + data + " status " + status);
+				$scope.feedbackList = data.feedbacks; 
+				
 			}).error(function(data, status) {
-				console.log("data in errorrr" + data + " status " + status);
-				//$scope.error = data.error[0];
-				$scope.erromsg = true;
+				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+
 			});
-		}
-	};
+		};
+		
+		$scope.listFeedbacks();
+
+	} else {
+		$location.url("/signin");
+	}
+
+});
+
+module.controller('insightsController', function($scope, $http, $location) {
+	if (getCookie('authToken')) {
+		$scope.active2 = true;
+	} else {
+		$location.url("/signin");
+	}
+
+});
+module.controller('redemeController', function($scope, $http, $location) {
+	if (getCookie('authToken')) {
+		$scope.active3 = true;
+
+		$scope.redemptionList = [];
+
+		$scope.listRedemptions = function() {
+			var param = {
+				"type" : "pending",
+				"auth_token" : getCookie('authToken')
+			}
+
+			$http({
+				method : 'get',
+				url : '/api/redemptions',
+				params : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				$scope.redemptionList = data.redemptions;
+				console.log("list" + $scope.redemptionList)
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+
+			});
+		};
+		$scope.listRedemptions();
+
+		$scope.confirm = function(id) {
+			console.log("confirmed" + id);
+			var param = {
+				"redemption" : {
+					"approve" : true
+				},
+				"auth_token" : getCookie('authToken')
+			}
+
+			$http({
+				method : 'put',
+				url : '/api/redemptions/' + id,
+				data : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				$scope.listRedemptions();
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+
+			});
+
+		};
+	} else {
+		$location.url("/signin")
+	}
+
+});
+module.controller('numericCodeController', function($scope, $http, $location) {
+	if (getCookie('authToken')) {
+		$scope.active4 = true;
+		$scope.erromsg = false;
+		$scope.generateCode = function(createKanariCode) {
+			if (!$scope.billAmount) {
+				$scope.error = "Please enter the bill amount";
+				$scope.erromsg = true;
+			} else {
+				$scope.erromsg = false;
+				console.log("amount " + $scope.billAmount)
+				var param = {
+					"bill_amount" : parseInt($scope.billAmount),
+					"auth_token" : getCookie("authToken")
+				}
+
+				$http({
+					method : 'POST',
+					url : '/api/kanari_codes',
+					data : param,
+				}).success(function(data, status) {
+					console.log("data in success " + data + " status " + status);
+					$scope.success = "Code generated successfully";
+					$scope.succmsg = true;
+					$scope.error = false;
+				}).error(function(data, status) {
+					console.log("data in errorrr" + data + " status " + status);
+					//$scope.error = data.error[0];
+					$scope.erromsg = true;
+				});
+			}
+		};
+	} else {
+		$location.url("/signin");
+	}
 
 });
 
