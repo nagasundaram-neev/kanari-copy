@@ -25,7 +25,7 @@ class Outlet < ActiveRecord::Base
   def get_feedbacks params
     start_time = normalize_date(params[:start_time]) || self.created_at
     end_time   = normalize_date(params[:end_time]) || Time.zone.now
-    self.feedbacks.where({completed: true, updated_at: start_time..end_time}).order("updated_at desc")
+    self.feedbacks.completed.where({updated_at: start_time..end_time}).order("updated_at desc")
   end
 
   private
