@@ -42,10 +42,6 @@ class Api::V1::RedemptionsController < ApplicationController
       if redemption.save
         current_user.points_available -= redemption.points
         current_user.save
-        outlet.with_lock do 
-          outlet.rewards_pool -= redemption.points
-          outlet.save
-        end
         render json: nil, status: :created
       else
         render json: {errors: redemption.errors.full_messages}, status: :unprocessable_entity
