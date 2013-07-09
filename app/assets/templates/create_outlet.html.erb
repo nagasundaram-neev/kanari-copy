@@ -1,4 +1,4 @@
-<div data-role="page" style="height: 640px;" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
+<div data-role="page" style="height: 575px;" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
 	<style>
 		input[type="image"], input[type="checkbox"], input[type="radio"] {
 			margin: 0;
@@ -23,8 +23,8 @@
 	<div class="header_title">
 		<span class="manager_outlet">Manage Outlet</span>
 		<span class="arrow-right blank_span">&nbsp;</span>
-		<!-- <span class="create_rest" ng-show="action">Create Restaurant Outlet</span>
-		<span class="create_rest" ng-hide="action">Update Restaurant Outlet</span> -->
+		<span class="create_rest" ng-show="action">Create Restaurant Outlet</span>
+		<span class="create_rest" ng-hide="action">Update Restaurant Outlet</span>
 	</div>
 	<div class="create_outlet innerDiv" data-role="content">
 
@@ -66,8 +66,13 @@
 
 		<div ng-show="profileShow">
 			<div data-role="fieldcontain" class="createOutletDiv rightPanel">
-				<h1 ng-show="action">Create Restaurant Outlet</h1>
-				<h1 ng-hide="action">Update Restaurant Outlet</h1>
+				<!-- <h1 ng-show="action">Create Restaurant Outlet</h1>
+				<h1 ng-hide="action">Update Restaurant Outlet</h1> -->
+
+				<span class="mandatoryFld" 	>
+					<div class="startMsg">
+						*
+					</div> Indicates mandatory fields</span>
 				<div class="disable_outlet" ng-hide="action">
 					<b>Disable Outlet?</b>
 					<input type="checkbox" ng-show="outlet_disabled" checked ng-click="disableOutlet($event)" />
@@ -75,10 +80,6 @@
 					<input type="checkbox" ng-hide="outlet_disabled" ng-click="disableOutlet($event)" />
 				</div>
 				<div class="clr"></div>
-				<span class="mandatoryFld" 	>
-					<div class="startMsg">
-						*
-					</div> Indicates mandatory fields</span>
 				<form name="createOutlet" ng-app="form-example" ng-submit="create_outlet(createOutlet)" class="row form-horizontal" novalidate>
 					<div class="control-group">
 						<div class="controls">
@@ -486,9 +487,7 @@
 							<button class="btn" disabled>
 								Create Tablet Id
 							</button>
-							<a ng-click="close_tabletId()" class="cancelBtn submitBtn btn btn-primary btn-large">
-								Cancel
-							</a>
+							<a ng-click="close_tabletId()" class="cancelBtn submitBtn btn btn-primary btn-large"> Cancel </a>
 							<p ng-show="errorTabletId" class="errorMsg">
 								{{errorMsg}}
 							</p>
@@ -522,7 +521,8 @@
 							</button>
 						</div>
 						<p ng-show="successLocation" class="successMsg">
-								Your location get saved successfully.</p>
+							Your location get saved successfully.
+						</p>
 					</div>
 				</div>
 			</div>
