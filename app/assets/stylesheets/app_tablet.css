@@ -291,15 +291,13 @@ input.ui-input-text, textarea.ui-input-text {
 	background: #FEBF3B;
 }
 .arrow-up{
-	border-bottom: 12px solid #FEC03B;
+	/*border-bottom: 12px solid #FEC03B;
     border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
+    border-right: 12px solid transparent;*/
     display: block;
-    height: 0;
-    margin-left: 16%;
-    margin-top: -2.95%;
+   margin-left: 47%;
+   top: -7px;
     position: absolute;
-    width: 0;
 }
 .logo img {
 	margin: 5% 0 0;
@@ -317,6 +315,7 @@ input.ui-input-text, textarea.ui-input-text {
 	border-radius: 7px;
 	-webkit-border-radius: 7px;
 	-moz-border-radius: 7px;
+	position:relative;
 }
 
 .rememberMe {
