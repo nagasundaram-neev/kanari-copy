@@ -38,7 +38,7 @@ Feature: Lists Feedback
             "comment": "I really enjoyed the pizza's in the out area by the street",
             "points": 400,
             "updated_at": "2013-07-08 00:00:00",
-            "recommendation_rating": 9
+            "promoter_score": 9
 		  },
           {
             "id": 2,
@@ -51,7 +51,7 @@ Feature: Lists Feedback
             "comment": "I am dissapointed with the service",
             "points": 100,
             "updated_at": "2013-07-07 01:00:00",
-            "recommendation_rating": 4
+            "promoter_score": 4
           }
         ]
       }
@@ -95,7 +95,7 @@ Feature: Lists Feedback
             "comment": "I really enjoyed the pizza's in the out area by the street",
             "points": 400,
             "updated_at": "2013-07-08 00:00:00",
-            "recommendation_rating": 9
+            "promoter_score": 9
 		  }
         ]
       }
@@ -139,7 +139,7 @@ Feature: Lists Feedback
             "comment": "I am dissapointed with the service",
             "points": 100,
             "updated_at": "2013-07-07 01:00:00",
-            "recommendation_rating": 4
+            "promoter_score": 4
 		  }
         ]
       }
