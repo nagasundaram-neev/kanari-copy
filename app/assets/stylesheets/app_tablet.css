@@ -271,7 +271,7 @@ input.ui-input-text, textarea.ui-input-text {
 	background-color: #FFFFFF;
     border: 0 none;
     box-shadow: 2px 2px 2px #FFFFFF;
-    left: 40%;
+    left: 30%;
     padding: 1%;
     position: absolute;
     width: 40%;
@@ -289,6 +289,17 @@ input.ui-input-text, textarea.ui-input-text {
 /* Sign In css starts here */
 #signIn {
 	background: #FEBF3B;
+}
+.arrow-up{
+	border-bottom: 12px solid #FEC03B;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    display: block;
+    height: 0;
+    margin-left: 16%;
+    margin-top: -2.95%;
+    position: absolute;
+    width: 0;
 }
 .logo img {
 	margin: 5% 0 0;
@@ -499,6 +510,7 @@ input.ui-input-text, textarea.ui-input-text {
 	border-radius: 10px;
 	overflow: hidden;
 	padding: 1% 0;
+	margin: 0.4% 0;
 	 position: relative;
 }
 .feedback_step .divPadding {
