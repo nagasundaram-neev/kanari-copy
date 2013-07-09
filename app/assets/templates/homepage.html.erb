@@ -1,56 +1,76 @@
 <div id="homePage" align="center" ng-controller="homePageController" data-role="page">
 	<div ng:include="'<%= asset_path 'tablet_header.html' %>'"></div>
 	<div class="home_page_view">
-		<div class="feedback_step">
+		<div ng-repeat="feedbacks in feedbackList" class="feedback_step">
 			<div class="divPadding promo_code">
 				<span class="promo_txt">Promoter Score</span>
 				<br/>
-				<span class="promo_value">10</span>
+				<span class="promo_value">{{feedbacks.promoter_score}}</span>
 			</div>
 			<div class="divPadding promo_code_def">
 				<div style=" margin: 0 auto;width: 100%">
 					<div class="def_icon">
-						<%= image_tag 'ic_yellow_tick.png' %>
-						<br/>
+						<div ng-switch on="feedbacks.food_quality">
+							<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
+							<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
+							<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
+						</div>
+						
 						Food
 					</div>
 					<div class="def_icon">
-						<%= image_tag 'ic_yellow_tick.png' %>
-						<br/>
+						<div ng-switch on="feedbacks.speed_of_service">
+							<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
+							<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
+							<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
+						</div>
 						Speed
 					</div>
 					<div class="def_icon">
-						<%= image_tag 'ic_red_cross.png' %>
-						<br/>
+						<div ng-switch on="feedbacks.ambience">
+							<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
+							<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
+							<img ng-switch-when="0"	 src="/assets/ic_grey_round.png" />
+						</div>
 						Ambiance
 					</div>
 					<div class="def_icon">
-						<%= image_tag 'ic_yellow_tick.png' %>
-						<br/>
+						<div ng-switch on="feedbacks.value_for_money">
+							<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
+							<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
+							<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
+						</div>
 						Value
 					</div>
 					<div class="def_icon">
-						<%= image_tag 'ic_red_cross.png' %>
-						<br/>
+						<div ng-switch on="feedbacks.friendliness_of_service">
+							<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
+							<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
+							<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
+						</div>
 						Friendliness
 					</div>
 					<div class="def_icon">
-						<%= image_tag 'ic_grey_round.png' %>
-						<br/>
+						<div ng-switch on="feedbacks.cleanliness">
+							<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
+							<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
+							<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
+						</div>	
 						Clean
 					</div>
 				</div>
 			</div>
 			<div class="divPadding promo_code_desc">
-				<span>The smokehouse BBQ chicken is the best sandwich that has ever been added to the
+				<span>{{feedbacks.comment}} <!-- The smokehouse BBQ chicken is the best sandwich that has ever been added to the
 					stole of satwiches. It has all the flavour of fattning sandwiches but
-					with the healthy side...</span>
+					with the healthy side... --></span>
 			</div>
 			<div class="clr"></div>
 			<div class="update_time">
-				5 minutes ago
+				<span timeago-autoupdate="feedbacks.updated_at"></span>
+				
 			</div>
 		</div>
-
 	</div>
 </div>
+

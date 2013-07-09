@@ -13,7 +13,7 @@ when('/feedback', {templateUrl: "<%= asset_path 'homepage.html' %>"}).
 when('/insights', {templateUrl: "<%= asset_path 'insights.html' %>"}).
 when('/redemption', {templateUrl: "<%= asset_path 'redemptions.html' %>"}).
 when('/numeric_code', {templateUrl: "<%= asset_path 'numeric_code.html' %>"}).
-otherwise({redirectTo: '/insights'});
+otherwise({redirectTo: '/signin'});
 }]);
 
 module.directive('highchart', function () {
@@ -99,3 +99,18 @@ module.directive('highchart', function () {
             }
         }
     });
+module.directive('timeagoAutoupdate', function($timeout) {
+  return {
+    restrict: 'A',
+    link: function(scope, elem, attrs) {
+      var updateTime = function() {
+        if (attrs.timeagoAutoupdate) {
+          var time = scope.$eval(attrs.timeagoAutoupdate);
+          elem.text(jQuery.timeago(time));
+          $timeout(updateTime, 15000);
+        }
+      };
+      scope.$watch(attrs.timeago, updateTime);
+    }
+  };
+});
