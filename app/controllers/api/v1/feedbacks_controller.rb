@@ -1,12 +1,25 @@
 class Api::V1::FeedbacksController < ApplicationController
   before_action :set_feedback, only: [:show, :edit, :update, :destroy]
 
+  before_action :authenticate_user!, only: [:index]
+
   respond_to :json
 
   # GET /feedbacks
   # GET /feedbacks.json
   def index
-    @feedbacks = Feedback.all
+    if params[:outlet_id].present?
+      outlet = Outlet.where(id: params[:outlet_id])
+    else
+      outlet = current_user.outlets.first
+    end
+    if outlet.nil?
+      render json: {errors: ["Outlet not found"]}, status: :unprocessable_entity and return
+    end
+
+    authorize! :read_feedbacks, outlet
+    @feedbacks = outlet.get_feedbacks(params)
+    render json: @feedbacks
   end
 
   # GET /feedbacks/1
@@ -46,6 +59,7 @@ class Api::V1::FeedbacksController < ApplicationController
     if current_user.nil?
       if @feedback.update(feedback_params)
         @feedback.code = nil
+        @feedback.completed = true 
         @feedback.save
         render json: {points: @feedback.points}, status: :ok
       else
@@ -68,6 +82,7 @@ class Api::V1::FeedbacksController < ApplicationController
         end
         @feedback.user = current_user
         @feedback.code = nil
+        @feedback.completed = true 
         if @feedback.update(feedback_params)
           render json: {points: @feedback.points}, status: :ok
         else

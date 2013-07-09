@@ -34,6 +34,7 @@ Feature: Update feedback
       And the user should have "220" points
       And the feedback with id "10" should belong to user with id "130"
       And the feedback with id "10" should have no kanari code
+      And the feedback with id "10" should be completed 
 
     Scenario: Successfully update feedback when user is not authenticated
       Given a customer named "Subway" exists with id "100"
@@ -60,3 +61,4 @@ Feature: Update feedback
       And the outlet's rewards pool should have "1000" points
       And the feedback with id "10" should belong to user with id "nil"
       And the feedback with id "10" should have no kanari code
+      And the feedback with id "10" should be completed 

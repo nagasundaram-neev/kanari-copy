@@ -21,4 +21,16 @@ class Outlet < ActiveRecord::Base
   def pending_redemptions
     redemptions.where({approved_by: nil})
   end
+
+  def get_feedbacks params
+    start_time = normalize_date(params[:start_time]) || self.created_at
+    end_time   = normalize_date(params[:end_time]) || Time.zone.now
+    self.feedbacks.where({completed: true, updated_at: start_time..end_time})
+  end
+
+  private
+
+  def normalize_date date
+    DateTime.parse(date) rescue nil
+  end
 end
