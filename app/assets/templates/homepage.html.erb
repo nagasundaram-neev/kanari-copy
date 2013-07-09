@@ -15,8 +15,7 @@
 							<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
 							<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
 						</div>
-						<!-- <%= image_tag 'ic_yellow_tick.png' %> -->
-						<br/>
+						
 						Food
 					</div>
 					<div class="def_icon">
@@ -25,18 +24,14 @@
 							<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
 							<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
 						</div>
-						<!-- <%= image_tag 'ic_yellow_tick.png' %> -->
-						<br/>
 						Speed
 					</div>
 					<div class="def_icon">
 						<div ng-switch on="feedbacks.ambience">
 							<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
 							<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
-							<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
+							<img ng-switch-when="0"	 src="/assets/ic_grey_round.png" />
 						</div>
-						<!-- <%= image_tag 'ic_red_cross.png' %> -->
-						<br/>
 						Ambiance
 					</div>
 					<div class="def_icon">
@@ -45,8 +40,6 @@
 							<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
 							<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
 						</div>
-						<!-- <%= image_tag 'ic_yellow_tick.png' %> -->
-						<br/>
 						Value
 					</div>
 					<div class="def_icon">
@@ -55,8 +48,6 @@
 							<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
 							<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
 						</div>
-						<!-- <%= image_tag 'ic_red_cross.png' %> -->
-						<br/>
 						Friendliness
 					</div>
 					<div class="def_icon">
@@ -64,23 +55,22 @@
 							<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
 							<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
 							<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
-						</div>
-						<!-- <%= image_tag 'ic_grey_round.png' %> -->
-						<br/>
+						</div>	
 						Clean
 					</div>
 				</div>
 			</div>
 			<div class="divPadding promo_code_desc">
-				<span>{{feedbacks.comment}}
-					<!-- The smokehouse BBQ chicken is the best sandwich that has ever been added to the
+				<span>{{feedbacks.comment}} <!-- The smokehouse BBQ chicken is the best sandwich that has ever been added to the
 					stole of satwiches. It has all the flavour of fattning sandwiches but
 					with the healthy side... --></span>
 			</div>
 			<div class="clr"></div>
 			<div class="update_time">
-				 <abbr class="time-ago" title="2013-07-08T09:24:17Z">July 08, 2013</abbr>
+				<span timeago-autoupdate="feedbacks.updated_at"></span>
+				
 			</div>
 		</div>
 	</div>
 </div>
+

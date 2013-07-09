@@ -124,10 +124,8 @@ var Base64 = {
 		return string;
 	}
 }
-
+var refreshIntervalId;
 module.controller('headerCtrl', function($scope, $http, $location) {
-	//var overlay =
-	//$( "#popupBasic" ).popup( "close");
 	var overlayDiv = $("#overlaySuccess");
 	$scope.popup = false;
 	$scope.clickf = function(getroot) {
@@ -168,6 +166,7 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 			deleteCookie('feedbackId');
 			deleteCookie("signInCount");
 			$location.url("/signin");
+			$scope.popup = false;
 			overlayDiv.css({
 				'z-index' : '0',
 				'background-color' : 'transparent'
@@ -182,6 +181,7 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 		deleteCookie('feedbackId');
 		deleteCookie("signInCount");
 		$location.url("/signin");
+		$scope.popup = false;
 		overlayDiv.css({
 			'z-index' : '0',
 			'background-color' : 'transparent'
@@ -190,6 +190,7 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 });
 
 module.controller('signInController', function($scope, $http, $location) {
+	clearInterval(refreshIntervalId);
 	$scope.chkLogin = function() {
 		if ($scope.email == "" && $scope.password == "" && !$scope.email && !$scope.password) {
 			console.log("email is blank");
@@ -262,6 +263,9 @@ module.controller('homePageController', function($scope, $http, $location) {
 		};
 		
 		$scope.listFeedbacks();
+		refreshIntervalId  = window.setInterval(function() {
+			$scope.listFeedbacks();
+		}, 8000);
 
 	} else {
 		$location.url("/signin");
@@ -270,6 +274,7 @@ module.controller('homePageController', function($scope, $http, $location) {
 });
 
 module.controller('insightsController', function($scope, $http, $location) {
+	clearInterval(refreshIntervalId);
 	if (getCookie('authToken')) {
 		$scope.active2 = true;
 	} else {
@@ -278,6 +283,7 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 });
 module.controller('redemeController', function($scope, $http, $location) {
+	clearInterval(refreshIntervalId);
 	if (getCookie('authToken')) {
 		$scope.active3 = true;
 
@@ -332,6 +338,7 @@ module.controller('redemeController', function($scope, $http, $location) {
 
 });
 module.controller('numericCodeController', function($scope, $http, $location) {
+	clearInterval(refreshIntervalId);
 	if (getCookie('authToken')) {
 		$scope.active4 = true;
 		$scope.erromsg = false;
