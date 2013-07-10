@@ -341,16 +341,17 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 	clearInterval(refreshIntervalId);
 	if (getCookie('authToken')) {
 		$scope.active4 = true;
+		$scope.succmsg = false;
 		$scope.erromsg = false;
 		$scope.generateCode = function(createKanariCode) {
 			if (!$scope.billAmount) {
 				$scope.error = "Please enter the bill amount";
+				$scope.succmsg = false;
 				$scope.erromsg = true;
 			} else {
-				$scope.erromsg = false;
 				console.log("amount " + $scope.billAmount)
 				var param = {
-					"bill_amount" : parseInt($scope.billAmount),
+					"bill_amount" :$scope.billAmount,
 					"auth_token" : getCookie("authToken")
 				}
 
@@ -365,7 +366,8 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 					$scope.error = false;
 				}).error(function(data, status) {
 					console.log("data in errorrr" + data + " status " + status);
-					//$scope.error = data.error[0];
+					$scope.error = data.error[0];
+					$scope.succmsg = false;
 					$scope.erromsg = true;
 				});
 			}
