@@ -444,12 +444,19 @@ div.create_rest {
 .create_outlet {
 	padding: 0 0 30px;
 }
+.controls .successMsg {
+	color: green;
+	margin-top: 10px;
+	font-size: 14px;
+	margin: 1% -18%; 
+} 
 .successMsg {
 	color: green;
 	margin-top: 10px;
 	text-align: left;
 	font-size: 14px;
-}
+	
+} 
 .createOutletDiv h1 {
 	width: 401px;
 	float: left;

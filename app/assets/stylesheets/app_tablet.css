@@ -110,8 +110,11 @@ input.ui-input-text, textarea.ui-input-text {
 .ui-btn-hover-c:hover {
 	color: #fff;
 }
+.ui-checkbox-on .ui-icon, .ui-radio-on .ui-icon{
+	background-color:#664765 !important;
+}
 .ui-icon {
-	background: #664765;
+	background: #ffffff;
 }
 .ui-checkbox input {
 	left: 10px;
@@ -320,6 +323,10 @@ input.ui-input-text, textarea.ui-input-text {
 
 .rememberMe {
 	padding: 1% 0 0;
+}
+
+.rememberMe input{
+	display: none;
 }
 .rememberMe label {
 	display: inline;
