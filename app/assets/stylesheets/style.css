@@ -610,17 +610,18 @@ img, object {
 	background-color: #664765;
 	font-size: 0.9em;
 	border-right: 0 none;
-	margin-right: 1%
+	margin-right: 1%;
+	width: 100% !important;
 }
 #transaction_history .prev img {
 	max-height: 16px;
 }
-#transaction_history .nxt {
+/*#transaction_history .nxt {
 	padding: 0.74em 0;
 	background-color: #FDBE3A;
 	font-size: 0.9em;
 	width: 49.4%
-}
+}*/
 #transaction_history .prevTxt {
 	color: #FEBE3B
 }
