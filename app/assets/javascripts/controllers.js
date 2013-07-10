@@ -237,9 +237,7 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 					$location.url("/outlets");
 				} else if (getCookie('userRole') == "manager" && !data.registration_complete) {
 					$location.url("/outlets");
-				} else if (getCookie('userRole') == "staff" && data.registration_complete) {
-					$location.url("/create_kanari_code");
-				} else if (getCookie('userRole') == "manager" && data.registration_complete) {
+				}  else if (getCookie('userRole') == "manager" && data.registration_complete) {
 					$location.url("/outlets");
 				}
 
