@@ -230,6 +230,10 @@ body {
 	float: left !important;
 	width: 75% !important;
 }
+span.full_name {
+	font-size: 13px;
+	text-transform: capitalize
+}
 .divRight {
 	border: 1px solid #CCCCCC;
 	border-radius: 10px 10px 10px 10px;
@@ -429,7 +433,9 @@ div.create_rest {
 }
 #createOutlet select {
 	width: 125px;
+	 text-transform: capitalize
 }
+
 #createOutlet .timeSetting {
 	width: 40px;
 	color: #5C5C5C;
@@ -502,7 +508,9 @@ div.create_rest {
 .manager_list {
 	width: 28%
 }
-.manager_list h3{ font-size: 15px;}
+.manager_list h3 {
+	font-size: 15px;
+}
 .add_manager {
 	width: 35%;
 	display: none;
