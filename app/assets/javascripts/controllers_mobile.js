@@ -418,6 +418,10 @@ module.controller('settingsController', function($scope, $http, $location) {
 		$scope.home = function() {
 			$location.url("/home");
 		};
+		
+		// $scope.changePassword = function(){
+			// alert("change password");
+		// }
 
 		$scope.tansactionHistory = function() {
 			$location.url("/transactionHistory");

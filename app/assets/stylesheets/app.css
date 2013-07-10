@@ -230,6 +230,10 @@ body {
 	float: left !important;
 	width: 75% !important;
 }
+span.full_name {
+	font-size: 13px;
+	text-transform: capitalize
+}
 .divRight {
 	border: 1px solid #CCCCCC;
 	border-radius: 10px 10px 10px 10px;
@@ -429,7 +433,9 @@ div.create_rest {
 }
 #createOutlet select {
 	width: 125px;
+	 text-transform: capitalize
 }
+
 #createOutlet .timeSetting {
 	width: 40px;
 	color: #5C5C5C;
@@ -438,12 +444,19 @@ div.create_rest {
 .create_outlet {
 	padding: 0 0 30px;
 }
+.controls .successMsg {
+	color: green;
+	margin-top: 10px;
+	font-size: 14px;
+	margin: 1% -18%; 
+} 
 .successMsg {
 	color: green;
 	margin-top: 10px;
 	text-align: left;
 	font-size: 14px;
-}
+	
+} 
 .createOutletDiv h1 {
 	width: 401px;
 	float: left;
@@ -502,7 +515,9 @@ div.create_rest {
 .manager_list {
 	width: 28%
 }
-.manager_list h3{ font-size: 15px;}
+.manager_list h3 {
+	font-size: 15px;
+}
 .add_manager {
 	width: 35%;
 	display: none;
