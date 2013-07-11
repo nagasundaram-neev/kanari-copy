@@ -450,11 +450,37 @@ input.ui-input-text, textarea.ui-input-text {
 	/*text-align: left;*/
 	/*font-size: 14px;*/
 }
-
+.codeGenerated{
+	background: none repeat scroll 0 0 #EFEFEF;
+    color: #664766;
+    font-size: 153%;
+    font-weight: bold;
+    margin: 2%;
+    padding: 2.5% 0;
+}
 .numericTxt {
 	color: #333;
 	font-size: 1.2em;
 	margin-bottom: 5%;
+}
+.loaderDiv{
+	
+}
+.loader{
+	float: right;
+    margin-top: 3%;
+}
+
+.billAmountTxtBox{
+	float:left;
+}
+
+.doneOterDiv .ui-btn {
+	background: #FEC03B;
+	color: #555;
+}
+.doneOterDiv{
+	margin-top: 7%;
 }
 #numericCode .ui-input-text {
 	border: 1px solid #CCCCCC;
@@ -469,13 +495,14 @@ input.ui-input-text, textarea.ui-input-text {
 #numericCode .ui-submit {
 	background: #FEC03B;
 	color: #555;
-	margin-top: 7%;
+	margin: 7% 3.1% 0 0;
 }
 #numericCode .ui-submit span.ui-btn-text {
 	font-size: 1.1em;
 }
 .numericCodeContainer {
-	width: 45%;
+	width: 35%;
+	margin-top: 9%;
 }
 .dateTimeList {
 	width: 65%;

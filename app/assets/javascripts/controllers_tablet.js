@@ -263,7 +263,7 @@ module.controller('homePageController', function($scope, $http, $location) {
 		};
 
 		$scope.listFeedbacks();
-		refreshIntervalId  = window.setInterval(function() {
+		refreshIntervalId = window.setInterval(function() {
 			$scope.listFeedbacks();
 		}, 8000);
 
@@ -277,6 +277,38 @@ module.controller('insightsController', function($scope, $http, $location) {
 	clearInterval(refreshIntervalId);
 	if (getCookie('authToken')) {
 		$scope.active2 = true;
+		
+		$scope.foodLike = "";
+		$scope.foodDisLike = "";
+		$scope.foodDailyChangeLike = "";
+		$scope.foodDailyChangeDisLike = "";
+		
+		$scope.speedLike = "";
+		$scope.speedDisLike = "";
+		$scope.speedDailyChangeLike = "";
+		$scope.speedDailyChangeDisLike = "";
+		
+		$scope.friendlinessLike = "";
+		$scope.friendlinessDisLike = "";
+		$scope.friendlinessDailyChangeLike = "";
+		$scope.friendlinessDailyChangeDisLike = "";
+		
+		$scope.cleanlinessLike = "";
+		$scope.cleanlinessDisLike = "";
+		$scope.cleanlinessDailyChangeLike = "";
+		$scope.cleanlinessDailyChangeDisLike = "";
+		
+		$scope.ambienceLike = "";
+		$scope.ambienceDisLike = "";
+		$scope.ambienceDailyChangeLike = "";
+		$scope.ambienceDailyChangeDisLike = "";
+		
+		$scope.valueLike = "";
+		$scope.valueDisLike = "";
+		$scope.valueDailyChangeLike = "";
+		$scope.valueDailyChangeDisLike = "";
+
+		
 	} else {
 		$location.url("/signin");
 	}
@@ -340,8 +372,11 @@ module.controller('redemeController', function($scope, $http, $location) {
 module.controller('numericCodeController', function($scope, $http, $location) {
 	clearInterval(refreshIntervalId);
 	if (getCookie('authToken')) {
+		$scope.loader = false;
+		$scope.codeGenerate = true;
+		$scope.codeGenerated = false;
+		$scope.billAmount = "";
 		$scope.active4 = true;
-		$scope.succmsg = false;
 		$scope.erromsg = false;
 		$scope.generateCode = function(createKanariCode) {
 			if (!$scope.billAmount) {
@@ -350,8 +385,9 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 				$scope.erromsg = true;
 			} else {
 				console.log("amount " + $scope.billAmount)
+				$scope.loader = true;
 				var param = {
-					"bill_amount" :$scope.billAmount,
+					"bill_amount" : $scope.billAmount,
 					"auth_token" : getCookie("authToken")
 				}
 
@@ -361,16 +397,30 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 					data : param,
 				}).success(function(data, status) {
 					console.log("data in success " + data + " status " + status);
-					$scope.success = "Code generated successfully "+data.code;
-					$scope.succmsg = true;
-					$scope.error = false;
+					$scope.erromsg = false;
+					$scope.codeGenerate = false;
+					$scope.codeGenerated = true;
+					$scope.code = data.code;
+					$scope.billAmount = "";
+					$scope.loader = false;
 				}).error(function(data, status) {
 					console.log("data in errorrr" + data + " status " + status);
 					$scope.error = data.error[0];
 					$scope.succmsg = false;
 					$scope.erromsg = true;
+					$scope.loader = false;
 				});
 			}
+		};
+
+		$scope.done = function() {
+			//console.log("in done btn pressed");
+			$scope.codeGenerate = true;
+			$scope.loader = false;
+			$scope.codeGenerated = false;
+			$scope.billAmount = "";
+			//$scope.active4 = true;
+			$scope.erromsg = false;
 		};
 	} else {
 		$location.url("/signin");

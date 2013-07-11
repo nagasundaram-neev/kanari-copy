@@ -4,93 +4,171 @@
 		<!-- <highchart id="chart1" series="chart.series" title="chart.title" options="chart.options"></highchart> -->
 		<div class="score_1">
 			<div class="net_score">
-				<span class="txt1">Net Promoter Score</span><br/>
+				<span class="txt1">Net Promoter Score</span>
+				<br/>
 				<span class="value1">34%</span>
 			</div>
 			<div class="daily_change">
 				<span class="rate_plus rate1V">&nbsp;</span>
-				<span class="txt1">Daily Change</span><br/>
+				<span class="txt1">Daily Change</span>
+				<br/>
 				<%= image_tag 'ic_yellow_arrow.png' %>
 				<span class="value1">2%</span>
 			</div>
 		</div>
 		<div class="main_score">
-		<div class="score_div">
-			<div class="net_score">
-				<span class="txt1">Food</span>
+			<div class="score_div">
+				<div class="net_score">
+					<span class="txt1">Food</span>
+				</div>
+				<div class="daily_change">
+					<span class="rate_plus" style="width: {{foodLike}}%">&nbsp;</span>
+					<span class="ratePValue rate_plus">{{foodLike}}%</span>
+					<%= image_tag 'ic_yellow_arrow.png' %>
+					<span class="value1">+{{foodDailyChangeLike}}%</span>
+				</div>
 			</div>
-			<div class="daily_change">
-				<span class="rate_plus rate2V">&nbsp;</span>
-				<span class="ratePValue rate_plus">27%</span>
-				<%= image_tag 'ic_yellow_arrow.png' %>
-				<span class="value1">+2%</span>
+			<div class="score_div">
+				<div class="net_score">
+					<span class="txt1">Food</span>
+					<span class="rate_minus" style="width: {{foodDisLike}}%">&nbsp;</span>
+					<span class="rateMValue rate_minus">-{{foodDisLike}}%</span>
+				</div>
+				<div class="daily_change">
+					<%= image_tag 'ic_red_arrow.png' %>
+					<span class="value1">-{{foodDailyChangeDisLike}}%</span>
+				</div>
 			</div>
+			<div class="score_div">
+				<div class="net_score">
+					<span class="txt1">Speed of
+						<br/>
+						Service</span>
+				</div>
+				<div class="daily_change">
+					<span class="rate_plus" style="width: {{speedLike}}%">&nbsp;</span>
+					<span class="ratePValue rate_plus">{{speedLike}}%</span>
+					<%= image_tag 'ic_yellow_arrow.png' %>
+					<span class="value1">+{{speedDailyChangeLike}}%</span>
+				</div>
 			</div>
-		<div class="score_div">
-			<div class="net_score">
-				<span class="txt1">Speed of <br/>Service</span>
-				<span class="rate_minus rate3V">&nbsp;</span>
-				<span class="rateMValue rate_minus">-11%</span>
+			<div class="score_div">
+				<div class="net_score">
+					<span class="txt1">Speed of
+						<br/>
+						Service</span>
+					<span class="rate_minus" style="width: {{speedDisLike}}%">&nbsp;</span>
+					<span class="rateMValue rate_minus">-{{speedDisLike}}%</span>
+				</div>
+				<div class="daily_change">
+					<%= image_tag 'ic_red_arrow.png' %>
+					<span class="value1">-{{speedDailyChangeDisLike}}%</span>
+				</div>
 			</div>
-			<div class="daily_change">
-				<%= image_tag 'ic_yellow_arrow.png' %>
-				<span class="value1">-5%</span>
+			<div class="score_div">
+				<div class="net_score">
+					<span class="txt1">Friendliness
+						<br/>
+						of Service</span>
+				</div>
+				<div class="daily_change">
+					<span class="rate_plus" style="width: {{friendlinessLike}}%">&nbsp;</span>
+					<span class="ratePValue rate_plus">{{friendlinessLike}}%</span>
+					<%= image_tag 'ic_yellow_arrow.png' %>
+					<span class="value1">+{{friendlinessDailyChangeLike}}%</span>
+				</div>
+			</div>
+			<div class="score_div">
+				<div class="net_score">
+					<span class="txt1">Friendliness
+						<br/>
+						of Service</span>
+					<span class="rate_minus" style="width: {{friendlinessDisLike}}%">&nbsp;</span>
+					<span class="rateMValue rate_minus">-{{friendlinessDisLike}}%</span>
+				</div>
+				<div class="daily_change">
+					<%= image_tag 'ic_red_arrow.png' %>
+					<span class="value1">-{{friendlinessDailyChangeDisLike}}%</span>
+				</div>
+			</div>
+			<div class="score_div">
+				<div class="net_score">
+					<span class="txt1">Cleanliness</span>
+				</div>
+				<div class="daily_change">
+					<span class="rate_plus" style="width: {{cleanlinessLike}}%">&nbsp;</span>
+					<span class="ratePValue rate_plus">{{cleanlinessLike}}%</span>
+					<%= image_tag 'ic_yellow_arrow.png' %>
+					<span class="value1">+{{cleanlinessDailyChangeLike}}%</span>
+				</div>
+			</div>
+			<div class="score_div">
+				<div class="net_score">
+					<span class="txt1">Cleanliness</span>
+					<span class="rate_minus" style="width: {{cleanlinessDisLike}}%">&nbsp;</span>
+					<span class="rateMValue rate_minus">-{{cleanlinessDisLike}}%</span>
+				</div>
+				<div class="daily_change">
+					<%= image_tag 'ic_red_arrow.png' %>
+					<span class="value1">-{{cleanlinessDailyChangeDisLike}}%</span>
+				</div>
+			</div>
+			<div class="score_div">
+				<div class="net_score">
+					<span class="txt1">Ambience</span>
+				</div>
+				<div class="daily_change">
+					<span class="rate_plus" style="width: {{ambienceLike}}%">&nbsp;</span>
+					<span class="ratePValue rate_plus">{{ambienceLike}}%</span>
+					<%= image_tag 'ic_yellow_arrow.png' %>
+					<span class="value1">+{{ambienceDailyChangeLike}}%</span>
+				</div>
+			</div>
+			<div class="score_div">
+				<div class="net_score">
+					<span class="txt1">Ambience</span>
+					<span class="rate_minus" style="width: {{ambienceDisLike}}%">&nbsp;</span>
+					<span class="rateMValue rate_minus">-{{ambienceDisLike}}%</span>
+				</div>
+				<div class="daily_change">
+					<%= image_tag 'ic_yellow_arrow.png' %>
+					<span class="value1">-{{ambienceDailyChangeDisLike}}%</span>
+				</div>
+			</div>
+			<div class="score_div">
+				<div class="net_score">
+					<span class="txt1">Value for Money</span>
+				</div>
+				<div class="daily_change">
+					<span class="rate_plus" style="width: {{valueLike}}%">&nbsp;</span>
+					<span class="ratePValue rate_plus">{{valueLike}}%</span>
+					<%= image_tag 'ic_yellow_arrow.png' %>
+					<span class="value1">+{{valueDailyChangeLike}}%</span>
+				</div>
+			</div>
+			<div class="score_div">
+				<div class="net_score">
+					<span class="txt1">Value for Money</span>
+					<span class="rate_minus" style="width: {{valueDisLike}}%">&nbsp;</span>
+					<span class="rateMValue rate_minus">-{{valueDisLike}}%</span>
+				</div>
+				<div class="daily_change">
+					<%= image_tag 'ic_red_arrow.png' %>
+					<span class="value1">-{{valueDailyChangeDisLike}}%</span>
+				</div>
+			</div>
+			<div class="score_final">
+				<div class="net_score">
+					<span class="txt1">Feedback Submissions</span>
+					<br/>
+					<span class="value1">34</span>
+				</div>
+				<div class="daily_change">
+					<span class="txt1">Rewards Pool</span>
+					<br/>
+					<span class="value1">Dhs. 831</span>
+				</div>
 			</div>
 		</div>
-		<div class="score_div">
-			<div class="net_score">
-				<span class="txt1">Friendliness <br/>of Service</span>
-			</div>
-			<div class="daily_change">
-				<span class="rate_plus rate4V">&nbsp;</span>
-				<span class="ratePValue rate_plus">5%</span>
-				<%= image_tag 'ic_yellow_arrow.png' %>
-				<span class="value1">12%</span>
-			</div>
-		</div>
-		<div class="score_div">
-			<div class="net_score">
-				<span class="txt1">Cleanliness</span>
-			</div>
-			<div class="daily_change">
-				<span class="rate_plus rate5V">&nbsp;</span>
-				<span class="ratePValue rate_plus">17%</span>
-				<%= image_tag 'ic_yellow_arrow.png' %>
-				<span class="value1">+27%</span>
-			</div>
-		</div>
-		<div class="score_div">
-			<div class="net_score">
-				<span class="txt1">Ambience</span>
-				<span class="rate_minus rate6V">&nbsp;</span>
-				<span class="rateMValue rate_minus">-81%</span>
-			</div>
-			<div class="daily_change">
-				<%= image_tag 'ic_yellow_arrow.png' %>
-				<span class="value1">-160%</span>
-			</div>
-		</div>
-		<div class="score_div">
-			<div class="net_score">
-				<span class="txt1">Value for Money</span>
-			</div>
-			<div class="daily_change">
-				<span class="rate_plus rate7V">&nbsp;</span>
-				<span class="ratePValue rate_plus">69%</span>
-				<%= image_tag 'ic_yellow_arrow.png' %>
-				<span class="value1">0%</span>
-			</div>
-		</div>
-		<div class="score_final">
-			<div class="net_score">
-				<span class="txt1">Feedback Submissions</span><br/>
-				<span class="value1">34</span>
-			</div>
-			<div class="daily_change">
-				<span class="txt1">Rewards Pool</span><br/>
-				<span class="value1">Dhs. 831</span>
-			</div>
-		</div>
-	</div>
 	</div>
 </div>

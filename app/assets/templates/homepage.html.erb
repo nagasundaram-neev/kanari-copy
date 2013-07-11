@@ -1,6 +1,7 @@
 <div id="homePage" align="center" ng-controller="homePageController" data-role="page">
 	<div ng:include="'<%= asset_path 'tablet_header.html' %>'"></div>
-	<div class="home_page_view">
+	<h3 class="redemptionMsg" ng-show="!feedbackList.length">Currently you dont have any feedbacks to list</h3>
+	<div ng-show="feedbackList.length" class="home_page_view">
 		<div ng-repeat="feedbacks in feedbackList" class="feedback_step">
 			<div class="divPadding promo_code">
 				<span class="promo_txt">Promoter Score</span>
