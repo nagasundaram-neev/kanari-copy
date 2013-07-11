@@ -1,25 +1,22 @@
 class Api::V1::FeedbacksController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :metrics]
   before_action :set_feedback, only: [:show, :edit, :update, :destroy]
-
-  before_action :authenticate_user!, only: [:index]
+  before_action :set_outlet, only: [:index, :metrics]
 
   respond_to :json
 
   # GET /feedbacks
   # GET /feedbacks.json
   def index
-    if params[:outlet_id].present?
-      outlet = Outlet.where(id: params[:outlet_id])
-    else
-      outlet = current_user.outlets.first
-    end
-    if outlet.nil?
-      render json: {errors: ["Outlet not found"]}, status: :unprocessable_entity and return
-    end
-
-    authorize! :read_feedbacks, outlet
-    @feedbacks = outlet.get_feedbacks(params)
+    authorize! :read_feedbacks, @outlet
+    @feedbacks = @outlet.get_feedbacks(params)
     render json: @feedbacks
+  end
+
+  def metrics
+    authorize! :read_feedbacks, @outlet
+    @feedback_insights = @outlet.insights(params)
+    render json: @feedback_insights.to_json
   end
 
   # GET /feedbacks/1
@@ -106,6 +103,18 @@ class Api::V1::FeedbacksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_feedback
       @feedback = Feedback.find(params[:id])
+    end
+
+    # Use callbacks to share common setup or constraints between actions.
+    def set_outlet
+      if params[:outlet_id].present?
+        @outlet = Outlet.where(id: params[:outlet_id]).first
+      else
+        @outlet = current_user.outlets.first
+      end
+      if @outlet.nil?
+        render json: {errors: ["Outlet not found"]}, status: :unprocessable_entity and return
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
