@@ -199,6 +199,73 @@ Feature: Metrics for Feedback
       }
 	  """
 
+	Scenario: Outlet doesn't have any feedbacks
+      Given the following users exist
+         |id        |first_name |email                          | password    | authentication_token  | role            |
+         |101       |Donald     |staff.bangalore.1@subway.com   | password123 | donald_auth_token     | staff           |
+      Given a customer named "Subway" exists with id "100" with admin "admin@subway.com"
+	    And the customer with id "100" has an outlet named "Subway - Bangalore" with id "10" with manager "manager@subway.com"
+        And outlet "Subway - Bangalore" was created before "10" days
+        And outlet "Subway - Bangalore" has staffs
+          |staff.bangalore.1@subway.com   |
+          |staff.bangalore.2@subway.com   |
+        And the outlet doesn't have any feedback
+      When I authenticate as the user "donald_auth_token" with the password "random string"
+      And I send a GET request to "/api/feedbacks/metrics"
+	  Then the response status should be "200"
+      And the JSON response should be:
+      """
+      {
+	    "feedback_insights": {
+         "food_quality": {
+           "like"    : 0,
+           "dislike" : 0,
+           "neutral" : 0,
+           "change"  : 0 
+         },
+         "speed_of_service": {
+           "like"    : 0,
+           "dislike" : 0,
+           "neutral" : 0,
+           "change"  : 0
+         },
+         "friendliness_of_service": {
+           "like"    : 0,
+           "dislike" : 0,
+           "neutral" : 0,
+           "change"  : 0 
+         },
+         "ambience": {
+           "like"    : 0,
+           "dislike" : 0,
+           "neutral" : 0,
+           "change"  : 0
+         },
+         "cleanliness": {
+           "like"    : 0,
+           "dislike" : 0,
+           "neutral" : 0,
+           "change"  : 0
+         },
+         "value_for_money": {
+           "like"    : 0,
+           "dislike" : 0,
+           "neutral" : 0,
+           "change"  : 0
+         },
+         "net_promoter_score": {
+           "like"    : 0,
+           "dislike" : 0,
+           "neutral" : 0,
+           "change"  : 0 
+         },
+         "feedbacks_count": 0,
+         "rewards_pool": 0
+        }
+      }
+	  """
+
+
 	Scenario: User is not authorized : Staff of one Outlet accesses insights from another outlet
       Given the following users exist
          |id        |first_name |email                          | password    | authentication_token  | role            |
