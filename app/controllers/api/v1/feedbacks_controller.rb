@@ -108,7 +108,7 @@ class Api::V1::FeedbacksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_outlet
       if params[:outlet_id].present?
-        @outlet = Outlet.where(id: params[:outlet_id]).first
+        @outlet = Outlet.where(id: params[:outlet_id].strip).first
       else
         @outlet = current_user.outlets.first
       end
