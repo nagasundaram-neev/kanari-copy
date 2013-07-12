@@ -41,6 +41,17 @@ Then(/^the feedback with id "(.*?)" should be completed$/)do |feedback_id|
   Feedback.find(feedback_id).completed.should == true
 end
 
+Given(/^the following feedbacks exist for "(.*?)"$/) do |date, hashes|
+  feedback_hashes = hashes.hashes
+  feedback_hashes.each do |feedback_hash|
+    feedback_hash.delete("updated_at")
+    feedback_hash[:updated_at] = date
+    Feedback.create!(feedback_hash)
+  end
+  Feedback.where(updated_at: date).count.should == feedback_hashes.size
+end
+
+
 Given(/^the following feedbacks exist for today$/) do |hashes|
   feedback_hashes = hashes.hashes
   today = Time.zone.now.beginning_of_day

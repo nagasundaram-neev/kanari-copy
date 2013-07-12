@@ -34,7 +34,7 @@ class Outlet < ActiveRecord::Base
   end
 
   def insights params={}
-    today     = params[:date] || Date.today
+    today     = normalize_date(params[:date]) || Date.today
     yesterday = today - 1.day
     tomorrow  = today + 1.day
 
