@@ -55,7 +55,7 @@ class Ability
       can :read, User, role: 'manager'
       can :generate_code, Outlet, customer: user.customer
       can :read_feedbacks, Outlet, customer: user.customer
-      cannot :create_staff, Outlet
+      can :create_staff, Outlet, customer: user.customer
     when 'manager'
       can :read, Outlet, manager_id: user.id
       can :create_staff, Outlet, manager_id: user.id
