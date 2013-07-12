@@ -6,14 +6,28 @@
 			<div class="net_score">
 				<span class="txt1">Net Promoter Score</span>
 				<br/>
-				<span class="value1">34%</span>
+				<span class="value1">{{netScoreLike}}%</span>
 			</div>
 			<div class="daily_change">
-				<span class="rate_plus rate1V">&nbsp;</span>
+				<span class="rate_plus" style="width: {{netScoreLike}}%">&nbsp;</span>
 				<span class="txt1">Daily Change</span>
 				<br/>
 				<%= image_tag 'ic_yellow_arrow.png' %>
-				<span class="value1">2%</span>
+				<span class="value1">+{{netScoreDailyChange}}%</span>
+			</div>
+		</div>
+		<div class="score_1">
+			<div class="net_score">
+				<span class="txt1">Net Promoter Score</span>
+				<br/>
+				<span class="value1">{{netScoreDisLike}}%</span>
+			</div>
+			<div class="daily_change">
+				<span class="rate_minus" style="width: {{netScoreDisLike}}%">&nbsp;</span>
+				<span class="txt1">Daily Change</span>
+				<br/>
+				<%= image_tag 'ic_yellow_arrow.png' %>
+				<span class="value1">-{{netScoreDailyChange}}%</span>
 			</div>
 		</div>
 		<div class="main_score">
@@ -161,12 +175,12 @@
 				<div class="net_score">
 					<span class="txt1">Feedback Submissions</span>
 					<br/>
-					<span class="value1">34</span>
+					<span class="value1">{{feedCount}}</span>
 				</div>
 				<div class="daily_change">
 					<span class="txt1">Rewards Pool</span>
 					<br/>
-					<span class="value1">Dhs. 831</span>
+					<span class="value1">Dhs. {{points}}</span>
 				</div>
 			</div>
 		</div>

@@ -277,38 +277,101 @@ module.controller('insightsController', function($scope, $http, $location) {
 	clearInterval(refreshIntervalId);
 	if (getCookie('authToken')) {
 		$scope.active2 = true;
-		
+
 		$scope.foodLike = "";
 		$scope.foodDisLike = "";
 		$scope.foodDailyChangeLike = "";
 		$scope.foodDailyChangeDisLike = "";
-		
+
 		$scope.speedLike = "";
 		$scope.speedDisLike = "";
 		$scope.speedDailyChangeLike = "";
 		$scope.speedDailyChangeDisLike = "";
-		
+
 		$scope.friendlinessLike = "";
 		$scope.friendlinessDisLike = "";
 		$scope.friendlinessDailyChangeLike = "";
 		$scope.friendlinessDailyChangeDisLike = "";
-		
+
 		$scope.cleanlinessLike = "";
 		$scope.cleanlinessDisLike = "";
 		$scope.cleanlinessDailyChangeLike = "";
 		$scope.cleanlinessDailyChangeDisLike = "";
-		
+
 		$scope.ambienceLike = "";
 		$scope.ambienceDisLike = "";
 		$scope.ambienceDailyChangeLike = "";
 		$scope.ambienceDailyChangeDisLike = "";
-		
+
 		$scope.valueLike = "";
 		$scope.valueDisLike = "";
 		$scope.valueDailyChangeLike = "";
 		$scope.valueDailyChangeDisLike = "";
 
+		$scope.feedbackMetrics = function() {
+			var param = {
+				"auth_token" : getCookie('authToken'),
+				"password" : "X"
+			}
+
+			$http({
+				method : 'get',
+				url : '/api/feedbacks/metrics',
+				params : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+
+				$scope.foodLike = data.feedback_insights.food_quality.like;
+				$scope.foodDisLike = data.feedback_insights.food_quality.dislike;
+				$scope.foodDailyChangeLike = data.feedback_insights.food_quality.change;
+				if($scope.foodDailyChangeLike > 0){
+					flag = 1;
+				}else{
+					flag = 0;
+				}
+				$scope.foodDailyChangeDisLike = data.feedback_insights.food_quality.change;
+
+				$scope.speedLike = data.feedback_insights.speed_of_service.like;
+				$scope.speedDisLike = data.feedback_insights.speed_of_service.dislike;
+				$scope.speedDailyChangeLike = data.feedback_insights.speed_of_service.change;
+				$scope.speedDailyChangeDisLike = data.feedback_insights.speed_of_service.change;
+
+				$scope.friendlinessLike = data.feedback_insights.friendliness_of_service.like;
+				$scope.friendlinessDisLike = data.feedback_insights.friendliness_of_service.dislike;
+				$scope.friendlinessDailyChangeLike = data.feedback_insights.friendliness_of_service.change;
+				$scope.friendlinessDailyChangeDisLike = data.feedback_insights.friendliness_of_service.change;
+
+				$scope.cleanlinessLike = data.feedback_insights.cleanliness.like;
+				$scope.cleanlinessDisLike = data.feedback_insights.cleanliness.dislike;
+				$scope.cleanlinessDailyChangeLike = data.feedback_insights.cleanliness.change;
+				$scope.cleanlinessDailyChangeDisLike = data.feedback_insights.cleanliness.change;
+
+				$scope.ambienceLike = data.feedback_insights.ambience.like;
+				$scope.ambienceDisLike = data.feedback_insights.ambience.dislike;
+				$scope.ambienceDailyChangeLike = data.feedback_insights.ambience.change;
+				$scope.ambienceDailyChangeDisLike = data.feedback_insights.ambience.change;
+
+				$scope.valueLike = data.feedback_insights.value_for_money.like;
+				$scope.valueDisLike = data.feedback_insights.value_for_money.dislike;
+				$scope.valueDailyChangeLike = data.feedback_insights.value_for_money.change;
+				$scope.valueDailyChangeDisLike = data.feedback_insights.value_for_money.change;
+				
+				$scope.netScoreLike = data.feedback_insights.net_promoter_score.like;
+				$scope.netScoreDisLike = data.feedback_insights.net_promoter_score.dislike;
+				$scope.netScoreDailyChange = data.feedback_insights.net_promoter_score.change; 
+				
+				$scope.feedCount = data.feedback_insights.feedbacks_count;
+				$scope.points = data.feedback_insights.rewards_pool;
+				
+
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+
+			});
+		};
 		
+		$scope.feedbackMetrics();
+
 	} else {
 		$location.url("/signin");
 	}
