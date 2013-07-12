@@ -359,7 +359,7 @@ input.ui-input-text, textarea.ui-input-text {
 	border-radius: 5px 5px 5px 5px;
 	margin: 0.51%;
 	overflow: hidden;
-	padding: 0 1%;
+	padding: 0 0 0 1%;
 	border: 1px solid #C3C3C3;
 }
 .net_score {
