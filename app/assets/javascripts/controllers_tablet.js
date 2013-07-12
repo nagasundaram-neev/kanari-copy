@@ -138,6 +138,7 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 			'z-index' : '10',
 			'background-color' : '#000'
 		});
+		$(".popup").focus();
 	};
 
 	$scope.cancel = function() {
@@ -278,36 +279,6 @@ module.controller('insightsController', function($scope, $http, $location) {
 	if (getCookie('authToken')) {
 		$scope.active2 = true;
 
-		$scope.foodLike = "";
-		$scope.foodDisLike = "";
-		$scope.foodDailyChangeLike = "";
-		$scope.foodDailyChangeDisLike = "";
-
-		$scope.speedLike = "";
-		$scope.speedDisLike = "";
-		$scope.speedDailyChangeLike = "";
-		$scope.speedDailyChangeDisLike = "";
-
-		$scope.friendlinessLike = "";
-		$scope.friendlinessDisLike = "";
-		$scope.friendlinessDailyChangeLike = "";
-		$scope.friendlinessDailyChangeDisLike = "";
-
-		$scope.cleanlinessLike = "";
-		$scope.cleanlinessDisLike = "";
-		$scope.cleanlinessDailyChangeLike = "";
-		$scope.cleanlinessDailyChangeDisLike = "";
-
-		$scope.ambienceLike = "";
-		$scope.ambienceDisLike = "";
-		$scope.ambienceDailyChangeLike = "";
-		$scope.ambienceDailyChangeDisLike = "";
-
-		$scope.valueLike = "";
-		$scope.valueDisLike = "";
-		$scope.valueDailyChangeLike = "";
-		$scope.valueDailyChangeDisLike = "";
-
 		$scope.feedbackMetrics = function() {
 			var param = {
 				"auth_token" : getCookie('authToken'),
@@ -320,56 +291,84 @@ module.controller('insightsController', function($scope, $http, $location) {
 				params : param
 			}).success(function(data, status) {
 				console.log("User Role " + data + " status " + status);
-
 				$scope.foodLike = data.feedback_insights.food_quality.like;
 				$scope.foodDisLike = data.feedback_insights.food_quality.dislike;
-				$scope.foodDailyChangeLike = data.feedback_insights.food_quality.change;
-				if($scope.foodDailyChangeLike > 0){
-					flag = 1;
-				}else{
-					flag = 0;
+				$scope.foodDailyChange = data.feedback_insights.food_quality.change;
+
+				if ($scope.foodDailyChange > 0) {
+					$scope.foodFlag = 1;
+				} else {
+					$scope.foodFlag = 0;
 				}
-				$scope.foodDailyChangeDisLike = data.feedback_insights.food_quality.change;
 
 				$scope.speedLike = data.feedback_insights.speed_of_service.like;
 				$scope.speedDisLike = data.feedback_insights.speed_of_service.dislike;
-				$scope.speedDailyChangeLike = data.feedback_insights.speed_of_service.change;
-				$scope.speedDailyChangeDisLike = data.feedback_insights.speed_of_service.change;
+				$scope.speedDailyChange = data.feedback_insights.speed_of_service.change;
+
+				if ($scope.speedDailyChange > 0) {
+					$scope.speedFlag = 1;
+				} else {
+					$scope.speedFlag = 0;
+				}
 
 				$scope.friendlinessLike = data.feedback_insights.friendliness_of_service.like;
 				$scope.friendlinessDisLike = data.feedback_insights.friendliness_of_service.dislike;
-				$scope.friendlinessDailyChangeLike = data.feedback_insights.friendliness_of_service.change;
-				$scope.friendlinessDailyChangeDisLike = data.feedback_insights.friendliness_of_service.change;
+				$scope.friendlinessDailyChange = data.feedback_insights.friendliness_of_service.change;
+
+				if ($scope.friendlinessDailyChange > 0) {
+					$scope.friendlinessFlag = 1;
+				} else {
+					$scope.friendlinessFlag = 0;
+				}
 
 				$scope.cleanlinessLike = data.feedback_insights.cleanliness.like;
 				$scope.cleanlinessDisLike = data.feedback_insights.cleanliness.dislike;
-				$scope.cleanlinessDailyChangeLike = data.feedback_insights.cleanliness.change;
-				$scope.cleanlinessDailyChangeDisLike = data.feedback_insights.cleanliness.change;
+				$scope.cleanlinessDailyChange = data.feedback_insights.cleanliness.change;
+
+				if ($scope.cleanlinessDailyChange > 0) {
+					$scope.cleanlinessFlag = 1;
+				} else {
+					$scope.cleanlinessFlag = 0;
+				}
 
 				$scope.ambienceLike = data.feedback_insights.ambience.like;
 				$scope.ambienceDisLike = data.feedback_insights.ambience.dislike;
-				$scope.ambienceDailyChangeLike = data.feedback_insights.ambience.change;
-				$scope.ambienceDailyChangeDisLike = data.feedback_insights.ambience.change;
+				$scope.ambienceDailyChange = data.feedback_insights.ambience.change;
+				
+				if($scope.ambienceDailyChange > 0){
+					$scope.ambienceFlag = 1;
+				}else{
+					$scope.ambienceFlag = 0;
+				}
 
 				$scope.valueLike = data.feedback_insights.value_for_money.like;
 				$scope.valueDisLike = data.feedback_insights.value_for_money.dislike;
-				$scope.valueDailyChangeLike = data.feedback_insights.value_for_money.change;
-				$scope.valueDailyChangeDisLike = data.feedback_insights.value_for_money.change;
+				$scope.valueDailyChange = data.feedback_insights.value_for_money.change;
 				
+				if($scope.valueDailyChange > 0){
+					$scope.valueFlag = 1;
+				}else{
+					$scope.valueFlag = 1;
+				}
+
 				$scope.netScoreLike = data.feedback_insights.net_promoter_score.like;
 				$scope.netScoreDisLike = data.feedback_insights.net_promoter_score.dislike;
-				$scope.netScoreDailyChange = data.feedback_insights.net_promoter_score.change; 
-				
+				$scope.netScoreDailyChange = data.feedback_insights.net_promoter_score.change;
+
+				if ($scope.netScoreDailyChange > 0) {
+					$scope.netflag = 1;
+				} else {
+					$scope.netflag = 0;
+				}
 				$scope.feedCount = data.feedback_insights.feedbacks_count;
 				$scope.points = data.feedback_insights.rewards_pool;
-				
 
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 
 			});
 		};
-		
+
 		$scope.feedbackMetrics();
 
 	} else {
@@ -443,7 +442,7 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 		$scope.erromsg = false;
 		$scope.generateCode = function(createKanariCode) {
 			if (!$scope.billAmount) {
-				$scope.error = "Please enter the bill amount";
+				$scope.error = "Please enter valid bill amount";
 				$scope.succmsg = false;
 				$scope.erromsg = true;
 			} else {

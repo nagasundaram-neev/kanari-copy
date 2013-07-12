@@ -12,8 +12,16 @@
 				<span class="rate_plus" style="width: {{netScoreLike}}%">&nbsp;</span>
 				<span class="txt1">Daily Change</span>
 				<br/>
-				<%= image_tag 'ic_yellow_arrow.png' %>
-				<span class="value1">+{{netScoreDailyChange}}%</span>
+				<div ng-switch on="netflag">
+					<div ng-switch-when="1">
+						<%= image_tag 'ic_yellow_arrow.png' %>
+						<span class="value1">+{{netScoreDailyChange}}%</span>
+					</div>
+					<div ng-switch-when="0">
+						<%= image_tag 'ic_red_arrow.png' %>
+						<span class="value1">+{{netScoreDailyChange}}%</span>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="score_1">
@@ -34,36 +42,23 @@
 			<div class="score_div">
 				<div class="net_score">
 					<span class="txt1">Food</span>
-				</div>
-				<div class="daily_change">
-					<span class="rate_plus" style="width: {{foodLike}}%">&nbsp;</span>
-					<span class="ratePValue rate_plus">{{foodLike}}%</span>
-					<%= image_tag 'ic_yellow_arrow.png' %>
-					<span class="value1">+{{foodDailyChangeLike}}%</span>
-				</div>
-			</div>
-			<div class="score_div">
-				<div class="net_score">
-					<span class="txt1">Food</span>
 					<span class="rate_minus" style="width: {{foodDisLike}}%">&nbsp;</span>
 					<span class="rateMValue rate_minus">-{{foodDisLike}}%</span>
 				</div>
+
 				<div class="daily_change">
-					<%= image_tag 'ic_red_arrow.png' %>
-					<span class="value1">-{{foodDailyChangeDisLike}}%</span>
-				</div>
-			</div>
-			<div class="score_div">
-				<div class="net_score">
-					<span class="txt1">Speed of
-						<br/>
-						Service</span>
-				</div>
-				<div class="daily_change">
-					<span class="rate_plus" style="width: {{speedLike}}%">&nbsp;</span>
-					<span class="ratePValue rate_plus">{{speedLike}}%</span>
-					<%= image_tag 'ic_yellow_arrow.png' %>
-					<span class="value1">+{{speedDailyChangeLike}}%</span>
+					<span class="rate_plus" style="width: {{foodLike}}%">&nbsp;</span>
+					<span class="ratePValue rate_plus">{{foodLike}}%</span>
+					<div ng-switch on="foodFlag">
+						<div ng-switch-when="1">
+							<%= image_tag 'ic_yellow_arrow.png' %>
+							<span class="value1">+{{foodDailyChange}}%</span>
+						</div>
+						<div ng-switch-when="0">
+							<%= image_tag 'ic_red_arrow.png' %>
+							<span class="value1">{{foodDailyChange}}%</span>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="score_div">
@@ -75,21 +70,18 @@
 					<span class="rateMValue rate_minus">-{{speedDisLike}}%</span>
 				</div>
 				<div class="daily_change">
-					<%= image_tag 'ic_red_arrow.png' %>
-					<span class="value1">-{{speedDailyChangeDisLike}}%</span>
-				</div>
-			</div>
-			<div class="score_div">
-				<div class="net_score">
-					<span class="txt1">Friendliness
-						<br/>
-						of Service</span>
-				</div>
-				<div class="daily_change">
-					<span class="rate_plus" style="width: {{friendlinessLike}}%">&nbsp;</span>
-					<span class="ratePValue rate_plus">{{friendlinessLike}}%</span>
-					<%= image_tag 'ic_yellow_arrow.png' %>
-					<span class="value1">+{{friendlinessDailyChangeLike}}%</span>
+					<span class="rate_plus" style="width: {{speedLike}}%">&nbsp;</span>
+					<span class="ratePValue rate_plus">{{speedLike}}%</span>
+					<div ng-switch on="speedFlag">
+						<div ng-switch-when="1">
+							<%= image_tag 'ic_yellow_arrow.png' %>
+							<span class="value1">+{{speedDailyChange}}%</span>
+						</div>
+						<div ng-switch-when="0">
+							<%= image_tag 'ic_red_arrow.png' %>
+							<span class="value1">{{speedDailyChange}}%</span>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="score_div">
@@ -101,19 +93,18 @@
 					<span class="rateMValue rate_minus">-{{friendlinessDisLike}}%</span>
 				</div>
 				<div class="daily_change">
-					<%= image_tag 'ic_red_arrow.png' %>
-					<span class="value1">-{{friendlinessDailyChangeDisLike}}%</span>
-				</div>
-			</div>
-			<div class="score_div">
-				<div class="net_score">
-					<span class="txt1">Cleanliness</span>
-				</div>
-				<div class="daily_change">
-					<span class="rate_plus" style="width: {{cleanlinessLike}}%">&nbsp;</span>
-					<span class="ratePValue rate_plus">{{cleanlinessLike}}%</span>
-					<%= image_tag 'ic_yellow_arrow.png' %>
-					<span class="value1">+{{cleanlinessDailyChangeLike}}%</span>
+					<span class="rate_plus" style="width: {{friendlinessLike}}%">&nbsp;</span>
+					<span class="ratePValue rate_plus">{{friendlinessLike}}%</span>
+					<div ng-switch on="friendlinessFlag">
+						<div ng-switch-when="1">
+							<%= image_tag 'ic_yellow_arrow.png' %>
+							<span class="value1">+{{friendlinessDailyChange}}%</span>
+						</div>
+						<div ng-switch-when="0">
+							<%= image_tag 'ic_red_arrow.png' %>
+							<span class="value1">{{friendlinessDailyChange}}%</span>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="score_div">
@@ -123,19 +114,18 @@
 					<span class="rateMValue rate_minus">-{{cleanlinessDisLike}}%</span>
 				</div>
 				<div class="daily_change">
-					<%= image_tag 'ic_red_arrow.png' %>
-					<span class="value1">-{{cleanlinessDailyChangeDisLike}}%</span>
-				</div>
-			</div>
-			<div class="score_div">
-				<div class="net_score">
-					<span class="txt1">Ambience</span>
-				</div>
-				<div class="daily_change">
-					<span class="rate_plus" style="width: {{ambienceLike}}%">&nbsp;</span>
-					<span class="ratePValue rate_plus">{{ambienceLike}}%</span>
-					<%= image_tag 'ic_yellow_arrow.png' %>
-					<span class="value1">+{{ambienceDailyChangeLike}}%</span>
+					<span class="rate_plus" style="width: {{cleanlinessLike}}%">&nbsp;</span>
+					<span class="ratePValue rate_plus">{{cleanlinessLike}}%</span>
+					<div ng-switch on="cleanlinessFlag">
+						<div ng-switch-when="1">
+							<%= image_tag 'ic_yellow_arrow.png' %>
+							<span class="value1">+{{cleanlinessDailyChange}}%</span>
+						</div>
+						<div ng-switch-when="0">
+							<%= image_tag 'ic_red_arrow.png' %>
+							<span class="value1">{{cleanlinessDailyChange}}%</span>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="score_div">
@@ -145,19 +135,18 @@
 					<span class="rateMValue rate_minus">-{{ambienceDisLike}}%</span>
 				</div>
 				<div class="daily_change">
-					<%= image_tag 'ic_yellow_arrow.png' %>
-					<span class="value1">-{{ambienceDailyChangeDisLike}}%</span>
-				</div>
-			</div>
-			<div class="score_div">
-				<div class="net_score">
-					<span class="txt1">Value for Money</span>
-				</div>
-				<div class="daily_change">
-					<span class="rate_plus" style="width: {{valueLike}}%">&nbsp;</span>
-					<span class="ratePValue rate_plus">{{valueLike}}%</span>
-					<%= image_tag 'ic_yellow_arrow.png' %>
-					<span class="value1">+{{valueDailyChangeLike}}%</span>
+					<span class="rate_plus" style="width: {{ambienceLike}}%">&nbsp;</span>
+					<span class="ratePValue rate_plus">{{ambienceLike}}%</span>
+					<div ng-switch on="ambienceFlag">
+						<div ng-switch-when="1">
+							<%= image_tag 'ic_yellow_arrow.png' %>
+							<span class="value1">+{{ambienceDailyChange}}%</span>
+						</div>
+						<div ng-switch-when="0">
+							<%= image_tag 'ic_red_arrow.png' %>
+							<span class="value1">{{ambienceDailyChange}}%</span>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="score_div">
@@ -167,8 +156,18 @@
 					<span class="rateMValue rate_minus">-{{valueDisLike}}%</span>
 				</div>
 				<div class="daily_change">
-					<%= image_tag 'ic_red_arrow.png' %>
-					<span class="value1">-{{valueDailyChangeDisLike}}%</span>
+					<span class="rate_plus" style="width: {{valueLike}}%">&nbsp;</span>
+					<span class="ratePValue rate_plus">{{valueLike}}%</span>
+					<div ng-switch on="valueFlag">
+						<div ng-switch-when="1">
+							<%= image_tag 'ic_yellow_arrow.png' %>
+							<span class="value1">+{{valueDailyChange}}%</span>
+						</div>
+						<div ng-switch-when="0">
+							<%= image_tag 'ic_red_arrow.png' %>
+							<span class="value1">{{valueDailyChange}}%</span>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="score_final">
