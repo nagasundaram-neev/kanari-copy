@@ -55,13 +55,11 @@ class Outlet < ActiveRecord::Base
       :rewards_pool               =>  self.rewards_pool
     }
 
-    if feedbacks_till_today.blank?
-      return feedback_metrics
-    end
-
-    feedback_metrics[:net_promoter_score] = get_net_promoter_score(feedbacks_till_yesterday, feedbacks_till_today)
-    ["food_quality", "speed_of_service", "friendliness_of_service", "ambience", "cleanliness", "value_for_money"].each do |category|
-      feedback_metrics[category.to_sym] = get_field_metrics(feedbacks_yesterday, feedbacks_today, category)
+    unless feedbacks_till_today.blank?
+      feedback_metrics[:net_promoter_score] = get_net_promoter_score(feedbacks_till_yesterday, feedbacks_till_today)
+      ["food_quality", "speed_of_service", "friendliness_of_service", "ambience", "cleanliness", "value_for_money"].each do |category|
+        feedback_metrics[category.to_sym] = get_field_metrics(feedbacks_yesterday, feedbacks_today, category)
+      end
     end
 
     return {:feedback_insights => feedback_metrics}
