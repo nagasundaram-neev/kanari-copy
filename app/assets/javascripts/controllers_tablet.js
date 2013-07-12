@@ -138,6 +138,7 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 			'z-index' : '10',
 			'background-color' : '#000'
 		});
+		$(".popup").focus();
 	};
 
 	$scope.cancel = function() {
@@ -263,7 +264,7 @@ module.controller('homePageController', function($scope, $http, $location) {
 		};
 
 		$scope.listFeedbacks();
-		refreshIntervalId  = window.setInterval(function() {
+		refreshIntervalId = window.setInterval(function() {
 			$scope.listFeedbacks();
 		}, 8000);
 
@@ -277,6 +278,99 @@ module.controller('insightsController', function($scope, $http, $location) {
 	clearInterval(refreshIntervalId);
 	if (getCookie('authToken')) {
 		$scope.active2 = true;
+
+		$scope.feedbackMetrics = function() {
+			var param = {
+				"auth_token" : getCookie('authToken'),
+				"password" : "X"
+			}
+
+			$http({
+				method : 'get',
+				url : '/api/feedbacks/metrics',
+				params : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				$scope.foodLike = data.feedback_insights.food_quality.like;
+				$scope.foodDisLike = data.feedback_insights.food_quality.dislike;
+				$scope.foodDailyChange = data.feedback_insights.food_quality.change;
+
+				if ($scope.foodDailyChange > 0) {
+					$scope.foodFlag = 1;
+				} else {
+					$scope.foodFlag = 0;
+				}
+
+				$scope.speedLike = data.feedback_insights.speed_of_service.like;
+				$scope.speedDisLike = data.feedback_insights.speed_of_service.dislike;
+				$scope.speedDailyChange = data.feedback_insights.speed_of_service.change;
+
+				if ($scope.speedDailyChange > 0) {
+					$scope.speedFlag = 1;
+				} else {
+					$scope.speedFlag = 0;
+				}
+
+				$scope.friendlinessLike = data.feedback_insights.friendliness_of_service.like;
+				$scope.friendlinessDisLike = data.feedback_insights.friendliness_of_service.dislike;
+				$scope.friendlinessDailyChange = data.feedback_insights.friendliness_of_service.change;
+
+				if ($scope.friendlinessDailyChange > 0) {
+					$scope.friendlinessFlag = 1;
+				} else {
+					$scope.friendlinessFlag = 0;
+				}
+
+				$scope.cleanlinessLike = data.feedback_insights.cleanliness.like;
+				$scope.cleanlinessDisLike = data.feedback_insights.cleanliness.dislike;
+				$scope.cleanlinessDailyChange = data.feedback_insights.cleanliness.change;
+
+				if ($scope.cleanlinessDailyChange > 0) {
+					$scope.cleanlinessFlag = 1;
+				} else {
+					$scope.cleanlinessFlag = 0;
+				}
+
+				$scope.ambienceLike = data.feedback_insights.ambience.like;
+				$scope.ambienceDisLike = data.feedback_insights.ambience.dislike;
+				$scope.ambienceDailyChange = data.feedback_insights.ambience.change;
+				
+				if($scope.ambienceDailyChange > 0){
+					$scope.ambienceFlag = 1;
+				}else{
+					$scope.ambienceFlag = 0;
+				}
+
+				$scope.valueLike = data.feedback_insights.value_for_money.like;
+				$scope.valueDisLike = data.feedback_insights.value_for_money.dislike;
+				$scope.valueDailyChange = data.feedback_insights.value_for_money.change;
+				
+				if($scope.valueDailyChange > 0){
+					$scope.valueFlag = 1;
+				}else{
+					$scope.valueFlag = 1;
+				}
+
+				$scope.netScoreLike = data.feedback_insights.net_promoter_score.like;
+				$scope.netScoreDisLike = data.feedback_insights.net_promoter_score.dislike;
+				$scope.netScoreDailyChange = data.feedback_insights.net_promoter_score.change;
+
+				if ($scope.netScoreDailyChange > 0) {
+					$scope.netflag = 1;
+				} else {
+					$scope.netflag = 0;
+				}
+				$scope.feedCount = data.feedback_insights.feedbacks_count;
+				$scope.points = data.feedback_insights.rewards_pool;
+
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+
+			});
+		};
+
+		$scope.feedbackMetrics();
+
 	} else {
 		$location.url("/signin");
 	}
@@ -340,18 +434,22 @@ module.controller('redemeController', function($scope, $http, $location) {
 module.controller('numericCodeController', function($scope, $http, $location) {
 	clearInterval(refreshIntervalId);
 	if (getCookie('authToken')) {
+		$scope.loader = false;
+		$scope.codeGenerate = true;
+		$scope.codeGenerated = false;
+		$scope.billAmount = "";
 		$scope.active4 = true;
-		$scope.succmsg = false;
 		$scope.erromsg = false;
 		$scope.generateCode = function(createKanariCode) {
 			if (!$scope.billAmount) {
-				$scope.error = "Please enter the bill amount";
+				$scope.error = "Please enter valid bill amount";
 				$scope.succmsg = false;
 				$scope.erromsg = true;
 			} else {
 				console.log("amount " + $scope.billAmount)
+				$scope.loader = true;
 				var param = {
-					"bill_amount" :$scope.billAmount,
+					"bill_amount" : $scope.billAmount,
 					"auth_token" : getCookie("authToken")
 				}
 
@@ -361,16 +459,30 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 					data : param,
 				}).success(function(data, status) {
 					console.log("data in success " + data + " status " + status);
-					$scope.success = "Code generated successfully "+data.code;
-					$scope.succmsg = true;
-					$scope.error = false;
+					$scope.erromsg = false;
+					$scope.codeGenerate = false;
+					$scope.codeGenerated = true;
+					$scope.code = data.code;
+					$scope.billAmount = "";
+					$scope.loader = false;
 				}).error(function(data, status) {
 					console.log("data in errorrr" + data + " status " + status);
 					$scope.error = data.error[0];
 					$scope.succmsg = false;
 					$scope.erromsg = true;
+					$scope.loader = false;
 				});
 			}
+		};
+
+		$scope.done = function() {
+			//console.log("in done btn pressed");
+			$scope.codeGenerate = true;
+			$scope.loader = false;
+			$scope.codeGenerated = false;
+			$scope.billAmount = "";
+			//$scope.active4 = true;
+			$scope.erromsg = false;
 		};
 	} else {
 		$location.url("/signin");

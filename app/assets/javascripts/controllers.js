@@ -1021,6 +1021,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					});
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
+					$scope.errormsg = data.errors[0];
 					$scope.error = true;
 					$scope.successoutlet = false;
 				});
@@ -1113,6 +1114,9 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
 					$scope.errorMsg = data.errors[0];
+					if($scope.errorMsg == "Email has already been taken"){
+						$scope.errorMsg = "Id has already been taken";
+					}
 					$scope.errorTabletId = true;
 					$scope.successTabletId = false;
 				});

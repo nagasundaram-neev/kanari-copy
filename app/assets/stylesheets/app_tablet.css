@@ -275,6 +275,7 @@ input.ui-input-text, textarea.ui-input-text {
     border: 0 none;
     box-shadow: 2px 2px 2px #FFFFFF;
     left: 30%;
+    top: 44%;
     padding: 1%;
     position: absolute;
     width: 40%;
@@ -348,6 +349,11 @@ input.ui-input-text, textarea.ui-input-text {
 .insight_graph {
 	width: 100%
 }
+.daily_change_span{
+	 float: right;
+    text-align: left;
+    width: 14%;
+}
 .score_1 {
 	background: none repeat scroll 0 0 #E6E7E9;
 	border-radius: 5px 5px 5px 5px;
@@ -367,7 +373,7 @@ input.ui-input-text, textarea.ui-input-text {
 .daily_change {
 	float: left;
 	text-align: right;
-	width: 49%;
+	width: 50%;
 	padding: 1% 0;
 }
 .txt1 {
@@ -429,7 +435,7 @@ input.ui-input-text, textarea.ui-input-text {
 }
 .score_div {
 	overflow: hidden;
-	padding: 0 1%;
+	padding: 0 0 0 1%;
 	border-bottom: 1px solid #C3C3C3;
 }
 .score_final {
@@ -450,11 +456,37 @@ input.ui-input-text, textarea.ui-input-text {
 	/*text-align: left;*/
 	/*font-size: 14px;*/
 }
-
+.codeGenerated{
+	background: none repeat scroll 0 0 #EFEFEF;
+    color: #664766;
+    font-size: 153%;
+    font-weight: bold;
+    margin: 2%;
+    padding: 2.5% 0;
+}
 .numericTxt {
 	color: #333;
 	font-size: 1.2em;
 	margin-bottom: 5%;
+}
+.loaderDiv{
+	
+}
+.loader{
+	float: right;
+    margin-top: 3%;
+}
+
+.billAmountTxtBox{
+	float:left;
+}
+
+.doneOterDiv .ui-btn {
+	background: #FEC03B;
+	color: #555;
+}
+.doneOterDiv{
+	margin-top: 7%;
 }
 #numericCode .ui-input-text {
 	border: 1px solid #CCCCCC;
@@ -469,13 +501,14 @@ input.ui-input-text, textarea.ui-input-text {
 #numericCode .ui-submit {
 	background: #FEC03B;
 	color: #555;
-	margin-top: 7%;
+	margin: 7% 3.1% 0 0;
 }
 #numericCode .ui-submit span.ui-btn-text {
 	font-size: 1.1em;
 }
 .numericCodeContainer {
-	width: 45%;
+	width: 35%;
+	margin-top: 9%;
 }
 .dateTimeList {
 	width: 65%;
