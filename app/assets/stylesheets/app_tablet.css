@@ -275,7 +275,7 @@ input.ui-input-text, textarea.ui-input-text {
     border: 0 none;
     box-shadow: 2px 2px 2px #FFFFFF;
     left: 30%;
-    top: 44%;
+    top: 40%;
     padding: 1%;
     position: absolute;
     width: 40%;
@@ -352,7 +352,8 @@ input.ui-input-text, textarea.ui-input-text {
 .daily_change_span{
 	 float: right;
     text-align: left;
-    width: 14%;
+    padding-top:3%;
+    width: 21%;
 }
 .score_1 {
 	background: none repeat scroll 0 0 #E6E7E9;
@@ -363,18 +364,26 @@ input.ui-input-text, textarea.ui-input-text {
 	border: 1px solid #C3C3C3;
 }
 .net_score {
-	float: left;
+	/*float: left;
 	border-right: 1px solid #664766;
 	text-align: left;
 	width: 49%;
 	padding: 1% 0;
-	height: 45px;
+	height: 45px;*/
+	border-right: 1px solid #664766;
+    float: left;
+    height: 45px;
+    margin-bottom: -1000px;
+    padding-bottom: 1000px;
+    padding-top: 20px;
+    text-align: left;
+    width: 49%;
 }
 .daily_change {
 	float: left;
 	text-align: right;
 	width: 50%;
-	padding: 1% 0;
+	/*padding: 1% 0;*/
 }
 .txt1 {
 	font-size: 100%;
