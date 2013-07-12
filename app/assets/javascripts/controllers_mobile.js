@@ -966,7 +966,7 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 		$scope.confirmRedeem = function() {
 			if (!$scope.amount) {
 				console.log("in if");
-				$scope.error = "Please enter amount for redemption";
+				$scope.error = "Please enter valid amount for redemption";
 				$scope.successMsg = false;
 				$scope.erromsg = true;
 			} else {
