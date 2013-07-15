@@ -228,7 +228,9 @@ body {
 }
 .divLeft {
 	float: left !important;
-	width: 75% !important;
+	padding: 0 10%;
+	margin-left:0 !important;
+    width: 80% !important;
 }
 span.full_name {
 	font-size: 13px;
@@ -303,11 +305,11 @@ a.addRestaurant:hover {
 .outlet_name, .manager_name, .action {
 	float: left;
 	min-height: 70px;
-	padding: 10px 0 1000px 10px;
+	padding: 10px 0 1000px 8px;
 	margin-bottom: -1000px;
 }
 .outlet_name {
-	width: 230px;
+	width: 285px;
 }
 .manager_name {
 	width: 140px;
@@ -359,7 +361,7 @@ a.actions {
 	border-radius: 5px 5px 5px 5px;
 	margin: 0 5px;
 	text-align: center;
-	width: 105px;
+	width: 108px;
 	padding: 5px;
 	color: #5A4166;
 }
@@ -433,7 +435,7 @@ div.create_rest {
 }
 #createOutlet select {
 	width: 125px;
-	 text-transform: capitalize
+	 text-transform: capitalize;
 }
 
 #createOutlet .timeSetting {
@@ -832,4 +834,35 @@ input {
 }
 .innerDiv form {
 	margin: 10px 0 !important
+}
+
+
+/* Tablet Id table css */
+.dateTimeList {
+	width: 100%;
+	padding: 5% 0 3%;
+}
+.dateTimeListhead {
+	color: #664766;
+	font-weight: bold;
+}
+.dateTimeList .col1, .dateTimeList .col2 {
+	padding: 2%;
+	float: left;
+	border: 1px solid #ccc;
+	border-right: 0;
+	border-top: 0;
+}
+.dateTimeList .col1 {
+	width: 29%;
+	text-align: left;
+}
+.dateTimeList .col2 {
+	width: 21%;
+}
+.dateTimeList .colBorderTop {
+	border-top: 1px solid #ccc;
+}
+.dateTimeList .colBorderRight {
+	border-right: 1px solid #ccc;
 }

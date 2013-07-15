@@ -58,6 +58,7 @@ class Ability
       can :create_staff, Outlet, customer: user.customer
     when 'manager'
       can :read, Outlet, manager_id: user.id
+      can :manage, Outlet, manager_id: user.id
       can :create_staff, Outlet, manager_id: user.id
       can :read_feedbacks, Outlet, manager_id: user.id
       can :read_pending_redemptions, Outlet, manager_id: user.id

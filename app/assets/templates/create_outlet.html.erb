@@ -45,9 +45,9 @@
 				</li>
 				<li ng-show="userAction" data-ng-class="{active:permissionShow,create_manager:true}">
 					<a ng-click="changeTab('permissionShow')"> <%= image_tag 'icon_permissions.png' %>
-					Permission
+					Manager
 					<br/>
-					<span>Set user permissions for your manager</span> </a>
+					<span>Assign a manager to your outlet</span> </a>
 				</li>
 				<li data-ng-class="{active:ReportShow,create_report:true}">
 					<a ng-click="changeTab('ReportShow')"> <%= image_tag 'icon_reports.png' %>
@@ -59,7 +59,7 @@
 					<a ng-click="changeTab('TabletIdShow')"> <%= image_tag 'icon_create_tablet_id.png' %>
 					Tablet Id
 					<br/>
-					<span>Set user permissions for your staff</span> </a>
+					<span>Create a tablet login for your outlet</span> </a>
 				</li>
 			</ul>
 		</div>
@@ -414,8 +414,40 @@
 					Tablet Ids
 				</div>
 				<div class="listIds">
-					<div>
-						test1
+					<div class="dateTimeList">
+						<div class="dateTimeListhead clearfix">
+							<div class="col1 colBorderTop">
+								Date 
+							</div>
+							<div class="col1 colBorderTop">
+								Tablet Id
+							</div>
+							<div class="col2 colBorderTop colBorderRight">
+								Password
+							</div>
+						</div>
+						<div class="dateTimeListRow clearfix">
+							<div class="col1">
+								25/06/2013
+							</div>
+							<div class="col1">
+								14364
+							</div>
+							<div class="col2 colBorderRight">
+								kanari123
+							</div>
+						</div>
+						<div class="dateTimeListRow clearfix">
+							<div class="col1">
+								25/06/2013
+							</div>
+							<div class="col1">
+								14364
+							</div>
+							<div class="col2 colBorderRight">
+								kanari123
+							</div>
+						</div>
 					</div>
 				</div>
 				<input type="button" class="btn_cls" ng-click="create_tablet_id()" data-inline="true" value="Create Tablet Id" />
@@ -432,7 +464,7 @@
 							<lable>
 								Tablet Id<span class="star">*</span>
 							</lable>
-							<input type="number" placeholder="Tablet Id" maxlength="6" ng-model="tabletId" required>
+							<input type="number" placeholder="Tablet Id" min="1" max="999999" pattern="[0-9]*" maxlength="6" ng-model="tabletId" required>
 							<div  class="input-help">
 								<h4>Id should be number ranging from 000001 to 999999</h4>
 							</div>

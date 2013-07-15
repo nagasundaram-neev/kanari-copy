@@ -199,7 +199,7 @@ module.controller('signInController', function($scope, $http, $location) {
 			$scope.erromsg = true;
 			return false;
 		}
-		var param = "{email:'" + $scope.email + "','password:'" + $scope.password + "'}";
+		var param = "{email:'" + $scope.email + "@kanari.co','password:'" + $scope.password + "'}";
 
 		$http({
 			method : 'post',
@@ -219,7 +219,7 @@ module.controller('signInController', function($scope, $http, $location) {
 			}
 			$scope.erromsg = false;
 			if (getCookie('userRole') == "manager" && data.registration_complete) {
-				$location.url("/feedback");
+				$location.url("/login");
 			} else if (getCookie('userRole') == "staff" && data.registration_complete) {
 				$location.url("/feedback");
 			}
@@ -233,7 +233,7 @@ module.controller('signInController', function($scope, $http, $location) {
 	};
 
 	$scope.$watch('email + password', function() {
-		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
+		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + '@kanari.co:' + $scope.password);
 	});
 
 });
@@ -259,7 +259,6 @@ module.controller('homePageController', function($scope, $http, $location) {
 
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
-
 			});
 		};
 

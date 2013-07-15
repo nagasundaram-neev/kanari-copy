@@ -215,7 +215,7 @@
 	float: left;
 	margin-bottom: -1000px;
 	padding: 5% 0 1000px 2%;
-	width: 51%;
+	width: 50.9%;
 }
 
 .titleDiv {
@@ -349,7 +349,7 @@
 	float: left;
 	padding: 6% 0%;
 	text-shadow: none;
-	width: 46%;
+	width: 46.4%;
 	text-align: center;
 }
 .searchDiv {
@@ -511,7 +511,7 @@ body {
 	/*color: #664765 !important;*/
 }
 img, object {
-	max-width: 60%;
+	/*max-width: 60%;*/
 	/*max-width: 80%;*/
 }
 .logo_btm img {
