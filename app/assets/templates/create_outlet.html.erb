@@ -239,13 +239,14 @@
 						<p ng-show="valide_phone" class="errorMsg">
 							Invalid Contact Number
 						</p>
+						<p ng-show="error" class="errorMsg">
+							{{errormsg}}
+						</p>
 					</div>
 				</form>
 			</div>
 			<div class="clr"></div>
-
 		</div>
-
 		<div id ="permission" ng-show="permissionShow">
 			<div data-role="fieldcontain" class="manager_list rightPanel">
 				<h3 ng-show="manager_show">Selected manager is : <span class="full_name">{{manager}}</span></h3>
@@ -320,7 +321,6 @@
 							<div  class="input-help">
 								<h4>Invalid Email</h4>
 							</div>
-
 						</div>
 					</div>
 					<div class="control-group">
@@ -432,7 +432,10 @@
 							<lable>
 								Tablet Id<span class="star">*</span>
 							</lable>
-							<input type="text" placeholder="Tablet Id" ng-model="tabletId" required>
+							<input type="number" placeholder="Tablet Id" maxlength="6" ng-model="tabletId" required>
+							<div  class="input-help">
+								<h4>Id should be number ranging from 000001 to 999999</h4>
+							</div>
 						</div>
 					</div>
 					<div class="control-group">

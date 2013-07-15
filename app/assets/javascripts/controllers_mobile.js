@@ -419,6 +419,10 @@ module.controller('settingsController', function($scope, $http, $location) {
 			$location.url("/home");
 		};
 
+		// $scope.changePassword = function(){
+		// alert("change password");
+		// }
+
 		$scope.tansactionHistory = function() {
 			$location.url("/transactionHistory");
 		}
@@ -957,12 +961,18 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 			});
 		};
+
 		$scope.listPoints();
 
 		$scope.confirmRedeem = function() {
 			if (!$scope.amount) {
 				console.log("in if");
-				$scope.error = "Please enter amount for redemption";
+				$scope.error = "Please enter valid amount for redemption";
+				$scope.successMsg = false;
+				$scope.erromsg = true;
+			} else if ($scope.amount < 0) {
+				console.log("in else if");
+				$scope.error = "Please enter valid amount for redemption";
 				$scope.successMsg = false;
 				$scope.erromsg = true;
 			} else {
@@ -980,7 +990,7 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 					data : param
 				}).success(function(data, status) {
 					console.log("User Role " + data + " status " + status);
-					$scope.success = "You have successfully redeemed for "+$scope.amount+" points";
+					$scope.success = "You have successfully redeemed for " + $scope.amount + " points";
 					$scope.listPoints();
 					$scope.successMsg = true;
 					$scope.erromsg = false;

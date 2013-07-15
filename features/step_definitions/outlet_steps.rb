@@ -30,6 +30,12 @@ And /^the outlet's id is "([^"]*)"$/ do |id|
   @outlet.save
 end
 
+Given(/^the outlet doesn't have any feedback$/) do
+  @outlet.feedbacks = []
+  @outlet.save
+end
+
+
 And /^the outlet's cuisine types should be "([^"]*)"$/ do |cuisine_types|
   @outlet.cuisine_types.collect(&:name).should =~ cuisine_types.split(',')
 end

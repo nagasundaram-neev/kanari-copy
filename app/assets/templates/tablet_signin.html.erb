@@ -15,7 +15,13 @@
 			<input type="checkbox" name="chkrememberMe" id="checkbox-1" class="custom" ng-model="rememberMe" />
 			<label for="checkbox-1">Remember me</label>
 		</fieldset>
-		<button type="submit" class="signInBtn btn" ng-click="chkLogin()">Login</button>
+		<div ng-click="chkLogin()">
+			<button type="submit" class="signInBtn btn">
+				Login
+			</button>
+		</div>
 	</div>
-	<p ng-show="erromsg" class="errorMsg">{{error}}</p>
+	<p ng-show="erromsg" class="errorMsg">
+		{{error}}
+	</p>
 </div>

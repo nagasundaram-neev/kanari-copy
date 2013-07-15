@@ -1,21 +1,36 @@
 <div id="numericCode" align="center" ng-controller="numericCodeController" data-role="page">
 	<div ng:include="'<%= asset_path 'tablet_header.html' %>'"></div>
-	<div class="numericCodeContainer">
+	<div ng-show="codeGenerate" class="numericCodeContainer">
 		<h1 align="center" class="numericTxt"> Please enter bill amount </h1>
-		<div>
-			<input type="text" placeholder="Enter bill amount.." ng-model="billAmount">
+		<div class="loaderDiv clearfix">
+			<input type="number" class="billAmountTxtBox" maxlength="5" placeholder="Enter bill amount.." ng-model="billAmount">
+			<div ng-show="loader" class="loader"><img src="/assets/ajax-loader.gif"></div>
 		</div>
-		<button type="submit" class="signInBtn btn" ng-click="generateCode()">
-			Generate Code
-		</button>
-
-		<span ng-show="succmsg" class="succMsg">
-			{{success}}
-		</span>
-		<span ng-show="erromsg" class="errorMsg">
+		<div ng-click="generateCode()">
+			<button type="submit" class="signInBtn btn" >
+				Generate Code
+			</button>
+		</div>
+		<p ng-show="erromsg" class="errorMsg">
 			{{error}}
-		</span>
-
+		</p>
+	</div>
+	<div ng-show="codeGenerated" class="numericCodeContainer">
+		<h1 align="center" class="numericTxt"> The Numeric Code is </h1>
+		<div class="codeGenerated">
+			{{code}}
+		</div>
+		<div class="doneOterDiv">
+			<div>
+				Please give this code to your Customer
+			</div>
+			<div ng-click="done()">
+				<button type="button" class="signInBtn btn" >
+					Done
+				</button>
+			</div>
+			<div class="clr"></div>
+		</div>
 	</div>
 	<div class="dateTimeList">
 		<div class="dateTimeListhead clearfix">
