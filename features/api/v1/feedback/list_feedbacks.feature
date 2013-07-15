@@ -37,6 +37,7 @@ Feature: Lists Feedback
             "value_for_money": 1,
             "comment": "I really enjoyed the pizza's in the out area by the street",
             "points": 400,
+            "code": null,
             "updated_at": "2013-07-08 00:00:00",
             "promoter_score": 9
 		  },
@@ -50,6 +51,7 @@ Feature: Lists Feedback
             "value_for_money": -1,
             "comment": "I am dissapointed with the service",
             "points": 100,
+            "code": null,
             "updated_at": "2013-07-07 01:00:00",
             "promoter_score": 4
           }
@@ -57,7 +59,7 @@ Feature: Lists Feedback
       }
 	  """
 
-	Scenario: Staff successfully lists feedbacks from a given time
+	Scenario: Staff successfully lists completed feedbacks from a given time
       Given the following users exist
          |id        |first_name |email                          | password    | authentication_token  | role            |
          |101       |Donald     |staff.bangalore.1@subway.com   | password123 | donald_auth_token     | staff           |
@@ -94,6 +96,7 @@ Feature: Lists Feedback
             "value_for_money": 1,
             "comment": "I really enjoyed the pizza's in the out area by the street",
             "points": 400,
+            "code": null,
             "updated_at": "2013-07-08 00:00:00",
             "promoter_score": 9
 		  }
@@ -101,7 +104,7 @@ Feature: Lists Feedback
       }
 	  """
 
-	Scenario: Staff successfully lists feedbacks within a start and end time
+	Scenario: Staff successfully lists completed feedbacks within a start and end time
       Given the following users exist
          |id        |first_name |email                          | password    | authentication_token  | role            |
          |101       |Donald     |staff.bangalore.1@subway.com   | password123 | donald_auth_token     | staff           |
@@ -138,6 +141,7 @@ Feature: Lists Feedback
             "value_for_money": -1,
             "comment": "I am dissapointed with the service",
             "points": 100,
+            "code": null,
             "updated_at": "2013-07-07 01:00:00",
             "promoter_score": 4
 		  }

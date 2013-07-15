@@ -62,7 +62,7 @@ Feature: Approve Redemption
       Then the response status should be "422"
       And the JSON response should be:
       """
-      { "errors" : ["Requested redemption not found"] }
+      { "errors" : ["User has already redeemed reward points."] }
       """
 
     Scenario: Outlet doesn't have enough reward points

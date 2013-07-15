@@ -54,7 +54,7 @@ class Api::V1::RedemptionsController < ApplicationController
   def update
     redemption = Redemption.where(id: params[:id], approved_by: nil).first
     if redemption.nil?
-      render json: {errors: ["Requested redemption not found"]}, status: :unprocessable_entity and return
+      render json: {errors: ["User has already redeemed reward points."]}, status: :unprocessable_entity and return
     end
     outlet = redemption.outlet
     authorize! :approve_redemptions, outlet
