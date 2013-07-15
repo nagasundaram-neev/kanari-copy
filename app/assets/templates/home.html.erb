@@ -27,15 +27,7 @@
 							<span class="full_name">{{outlet.manager.first_name}} {{outlet.manager.last_name}}</span>
 						</div>
 						<div class="action">
-							<!-- <div class="outlet_action">
-								<b>Disable?</b>
-								<br/>
-								<input type="checkbox" ng-show="outlet.disabled" checked ng-click="disableOutlet($event,outlet.id)" />
-
-								<input type="checkbox" ng-hide="outlet.disabled" ng-click="disableOutlet($event,outlet.id)" />
-							</div> -->
-							<!-- <span class="checkbox_lable" ng-hide="outlet.disabled">Disable</span>
-							<span class="checkbox_lable" ng-show="outlet.disabled">Enable</span> -->
+						
 							<a href="#/create_outlet?outletId={{outlet.id}}" class="outlet_action actions" >
 								<%= image_tag 'icon_view_dashboard.png' %>
 								<br/>
@@ -55,27 +47,10 @@
 					</div>
 				</div>
 			</div>
-			<!-- <table ng-show="outlets.length" style="display: block">
-
-			<tr >
-			<th style="width:45%;text-align: left;font-size: 14px;"> Name Of Restaurant </th>
-			<th style="width:40%;text-align: left;font-size: 14px;"> Name Of Manager </th>
-			<th style="font-size: 14px;"> Disable </th>
-			</tr>
-			<tr ng-repeat="outlet in outlets">
-
-			<td ><a href="#/create_outlet?outletId={{outlet.id}}">{{outlet.name}}</a></td>
-			<td >{{outlet.manager.first_name}}</td>
-			<td>
-			<input type="checkbox" ng-show="outlet.disabled" checked ng-click="disableOutlet($event,outlet.id)" />
-			<input type="checkbox" ng-hide="outlet.disabled" ng-click="disableOutlet($event,outlet.id)" />
-			</td>
-			</tr>
-			</table> -->
-
+			
 		</div>
 
-		<div class="divRight" ng-include src ="'<%= asset_path 'rightSidePanel.html' %>'" ></div>
+		<!-- <div class="divRight" ng-include src ="'<%= asset_path 'rightSidePanel.html' %>'" ></div> -->
 		<div class="clr"></div>
 	</div>
 </div>
