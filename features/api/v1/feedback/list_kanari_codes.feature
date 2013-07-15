@@ -14,19 +14,19 @@ Feature: List Kanari Codes for pending feedbacks
           |staff.bangalore.1@subway.com   |
           |staff.bangalore.2@subway.com   |
         And the following feedbacks exist
-          |id  |outlet_id |user_id |points |code   | completed | updated_at            |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating |
-          |1   |10        |1000    |400    |12345  | nil       | "2013-07-08 00:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-		      |2   |10        |3000    |100    |nil    | true      | "2013-07-07 01:00:00" |1            |-1               |0                       |-1       |-1          |4               | 9                    |
-		      |3   |10        |4000    |200    |34567  | nil       | "2013-07-06 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-		      |4   |20        |1000    |200    |45678  | nil       | "2013-07-05 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-		      |5   |30        |2000    |200    |56789  | nil       | "2013-07-04 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
+          |id  |outlet_id |user_id |points |bill_amount |code   | completed | updated_at            |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating |
+          |1   |10        |1000    |400    |4000        |12345  | nil       | "2013-07-08 00:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
+		  |2   |10        |3000    |100    |1000        |nil    | true      | "2013-07-07 01:00:00" |1            |-1               |0                       |-1       |-1          |4               | 9                    |
+		  |3   |10        |4000    |200    |2000        |34567  | nil       | "2013-07-06 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
+		  |4   |20        |1000    |200    |2000        |45678  | nil       | "2013-07-05 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
+		  |5   |30        |2000    |200    |2000        |56789  | nil       | "2013-07-04 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
       When I authenticate as the user "donald_auth_token" with the password "random string"
       And I send a GET request to "/api/feedbacks" with the following:
       """
       type=pending
       """
-	    Then the response status should be "200"
-      And the JSON response should be:
+	  Then the response status should be "200"
+	  And the JSON response should be:
       """
       {
         "feedbacks": [
@@ -40,6 +40,7 @@ Feature: List Kanari Codes for pending feedbacks
             "value_for_money": 0,
             "comment": null,
             "points": 400,
+            "bill_amount": 4000,
             "code": "12345",
             "updated_at": "2013-07-08 00:00:00",
             "promoter_score": 0
@@ -54,6 +55,7 @@ Feature: List Kanari Codes for pending feedbacks
             "value_for_money": 0,
             "comment": null,
             "points": 200,
+            "bill_amount": 2000,
             "code": "34567",
             "updated_at": "2013-07-06 00:00:00",
             "promoter_score": 0
@@ -73,12 +75,12 @@ Feature: List Kanari Codes for pending feedbacks
           |staff.bangalore.1@subway.com   |
           |staff.bangalore.2@subway.com   |
         And the following feedbacks exist
-          |id  |outlet_id |user_id |points |code   | completed | updated_at            |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating |
-          |1   |10        |1000    |400    |12345  | nil       | "2013-07-08 00:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-		      |2   |10        |3000    |100    |nil    | true      | "2013-07-07 01:00:00" |1            |-1               |0                       |-1       |-1          |4               | 9                    |
-		      |3   |10        |4000    |200    |34567  | nil       | "2013-07-06 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-		      |4   |20        |1000    |200    |45678  | nil       | "2013-07-05 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-		      |5   |30        |2000    |200    |56789  | nil       | "2013-07-04 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
+          |id  |outlet_id |user_id |points |bill_amount |code   | completed | updated_at            |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating |
+		  |1   |10        |1000    |400    |4000        |12345  | nil       | "2013-07-08 00:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
+		  |2   |10        |3000    |100    |1000        |nil    | true      | "2013-07-07 01:00:00" |1            |-1               |0                       |-1       |-1          |4               | 9                    |
+		  |3   |10        |4000    |200    |2000        |34567  | nil       | "2013-07-06 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
+		  |4   |20        |1000    |200    |2000        |45678  | nil       | "2013-07-05 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
+		  |5   |30        |2000    |200    |2000        |56789  | nil       | "2013-07-04 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
       When I authenticate as the user "donald_auth_token" with the password "random string"
       And I send a GET request to "/api/feedbacks" with the following:
       """
@@ -99,6 +101,7 @@ Feature: List Kanari Codes for pending feedbacks
             "value_for_money": 0,
             "comment": null,
             "points": 400,
+            "bill_amount": 4000,
             "code": "12345",
             "updated_at": "2013-07-08 00:00:00",
             "promoter_score": 0
@@ -118,12 +121,12 @@ Feature: List Kanari Codes for pending feedbacks
           |staff.bangalore.1@subway.com   |
           |staff.bangalore.2@subway.com   |
         And the following feedbacks exist
-          |id  |outlet_id |user_id |points |code   | completed | updated_at            |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating |
-          |1   |10        |1000    |400    |12345  | nil       | "2013-07-08 00:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-		      |2   |10        |3000    |100    |nil    | true      | "2013-07-07 01:00:00" |1            |-1               |0                       |-1       |-1          |4               | 9                    |
-		      |3   |10        |4000    |200    |34567  | nil       | "2013-07-06 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-		      |4   |20        |1000    |200    |45678  | nil       | "2013-07-05 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-		      |5   |30        |2000    |200    |56789  | nil       | "2013-07-04 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
+          |id  |outlet_id |user_id |points |bill_amount |code   | completed | updated_at            |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating |
+		  |1   |10        |1000    |400    |4000        |12345  | nil       | "2013-07-08 00:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
+		  |2   |10        |3000    |100    |1000        |nil    | true      | "2013-07-07 01:00:00" |1            |-1               |0                       |-1       |-1          |4               | 9                    |
+		  |3   |10        |4000    |200    |2000        |34567  | nil       | "2013-07-06 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
+		  |4   |20        |1000    |200    |2000        |45678  | nil       | "2013-07-05 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
+		  |5   |30        |2000    |200    |2000        |56789  | nil       | "2013-07-04 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
       When I authenticate as the user "donald_auth_token" with the password "random string"
       And I send a GET request to "/api/feedbacks" with the following:
       """
@@ -144,6 +147,7 @@ Feature: List Kanari Codes for pending feedbacks
             "value_for_money": 0,
             "comment": null,
             "points": 200,
+            "bill_amount": 2000,
             "code": "34567",
             "updated_at": "2013-07-06 00:00:00",
             "promoter_score": 0
@@ -163,12 +167,12 @@ Feature: List Kanari Codes for pending feedbacks
           |staff.bangalore.1@subway.com   |
           |staff.bangalore.2@subway.com   |
         And the following feedbacks exist
-          |id  |outlet_id |user_id |points |code   | completed | updated_at            |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating |
-          |1   |10        |1000    |400    |12345  | nil       | "2013-07-08 00:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-          |2   |10        |3000    |100    |nil    | true      | "2013-07-07 01:00:00" |1            |-1               |0                       |-1       |-1          |4               | 9                    |
-          |3   |10        |4000    |200    |34567  | nil       | "2013-07-06 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-          |4   |20        |1000    |200    |45678  | nil       | "2013-07-05 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-          |5   |30        |2000    |200    |56789  | nil       | "2013-07-04 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
+          |id  |outlet_id |user_id |points |bill_amount |code   | completed | updated_at            |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating |
+          |1   |10        |1000    |400    |4000        |12345  | nil       | "2013-07-08 00:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
+          |2   |10        |3000    |100    |1000        |nil    | true      | "2013-07-07 01:00:00" |1            |-1               |0                       |-1       |-1          |4               | 9                    |
+          |3   |10        |4000    |200    |2000        |34567  | nil       | "2013-07-06 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
+          |4   |20        |1000    |200    |2000        |45678  | nil       | "2013-07-05 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
+          |5   |30        |2000    |200    |2000        |56789  | nil       | "2013-07-04 02:00:00" |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
       When I authenticate as the user "mike_auth_token" with the password "random string"
       And I send a GET request to "/api/feedbacks" with the following:
       """
