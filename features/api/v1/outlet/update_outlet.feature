@@ -34,6 +34,40 @@ Feature: Update Outlet
       And the outlet's latitude and longitude should be "12.97" and "77.61"
       And the outlet should be disabled
 
+    Scenario: Staff successfully update an outlet
+      Given the following users exist
+         |id        |first_name |email                          | password    | authentication_token  | role            |
+         |101       |Donald     |manager@chinapearl.com         | password123 | donald_auth_token     | manager         |
+      Given "Adam" is a user with email id "user@gmail.com" and password "password123"
+        And his role is "customer_admin"
+        And his authentication token is "auth_token_123"
+      Given a customer named "China Pearl" exists with id "100"
+        And the customer with id "100" has an outlet named "China Pearl - Bangalore" with manager "manager@chinapearl.com"
+        And the outlet's id is "20"
+        And the outlet's email is "outlet@outlet.com"
+        And he is the admin for customer "China Pearl"
+      When I authenticate as the user "donald_auth_token" with the password "random string"
+      And I send a PUT request to "/api/outlets/20" with the following:
+      """
+      {
+        "outlet" : {
+          "name" : "China Pearl - Bengaluru",
+      "disabled" : true,
+       "latitude": 12.97,
+      "longitude": "77.61"
+        }
+      }
+      """
+      Then the response status should be "200"
+      And the JSON response should be:
+      """
+      null
+      """
+      And the outlet "China Pearl - Bengaluru" should be present under customer with id "100"
+      And the outlet's email should still be "outlet@outlet.com"
+      And the outlet's latitude and longitude should be "12.97" and "77.61"
+      And the outlet should be disabled
+
     Scenario: Update manager
       Given the following users exist
         |first_name |email                          | password    | authentication_token  | role            |id |
@@ -147,7 +181,7 @@ Feature: Update Outlet
       {"errors" : ["Insufficient privileges"]}
       """
 
-    Scenario Outline: User's role is not customer_admin
+    Scenario Outline: User's role is not customer_admin or manager
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"
         And his role is "<role>"
         And his authentication token is "auth_token_123"
@@ -173,7 +207,6 @@ Feature: Update Outlet
       Examples:
       |role           |
       |kanari_admin   |
-      |manager        |
       |staff          |
       |user           |
 
