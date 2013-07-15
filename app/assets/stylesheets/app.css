@@ -433,7 +433,7 @@ div.create_rest {
 }
 #createOutlet select {
 	width: 125px;
-	 text-transform: capitalize
+	 text-transform: capitalize;
 }
 
 #createOutlet .timeSetting {
