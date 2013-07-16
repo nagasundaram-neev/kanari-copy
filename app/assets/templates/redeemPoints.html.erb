@@ -29,8 +29,9 @@
 			</div>
 
 			<span ng-show="successMsg" class="succMsg">{{success}}</span>
-			<span class="errorMsg" ng-show="erromsg">{{error}}</span>
+			<span class="errorMsg" ng-show="erromsg" style="display: block">{{error}}</span>
 		</div>
+		<div class="clr"></div>
 		<div class="footerDiv">
 			<div class="prev" ng-click="previous()">
 				<%= image_tag 'y_arrow_left.png' %>

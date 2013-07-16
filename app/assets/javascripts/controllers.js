@@ -477,7 +477,6 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 			});
 
 			$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
-
 		};
 	} else {
 		$location.url("/login");

@@ -15,6 +15,10 @@
 	font-family: "kanariFont", sans-serif !important;
 }
 
+.ui-body-c,.ui-body-b {
+background:  transparent;
+}
+
 /*.Roboto-normal-100 {
  font-family: 'Roboto' !important;
  font-style: normal;
@@ -493,8 +497,16 @@
 	border-right: 3px solid #FFFFFF;
 	border-top: 3px solid #FFFFFF;
 	float: left;
-	padding: 5% 0;
+	padding: 5.3% 0;
 	width: 30%;
+}
+
+.pointTxt{
+	font-size: 122%;
+    letter-spacing: 7px;	
+}
+.fb_image1 img{
+
 }
 
 .nextBackColr {
@@ -502,7 +514,7 @@
 	border-right: 3px solid #FFFFFF;
 	border-top: 3px solid #FFFFFF;
 	float: left;
-	padding: 7.2% 0;
+	padding: 7.9% 0;
 	width: 30%;
 }
 
@@ -602,10 +614,13 @@ img, object {
 .footerDiv {
 	bottom: 0;
     margin: 5% 0 0%;
-    position: absolute;
+    /*position: absolute;*/
     text-shadow: none;
     width: 100%;
 }
+/*#showRestaurant .footerDiv{
+	position:relative;
+}*/
 #transaction_history .footerDiv {
 	margin: 5% 0 0;
 }
@@ -1287,7 +1302,7 @@ img, object {
 	color: #593F5A;
 }
 .keypad {
-	margin: 2% 0 0 3%;
+	margin: 2% 0 3% 3%;
 	width: 93%;
 	text-align: center;
 	text-shadow: none;
@@ -1584,7 +1599,7 @@ img, object {
 	font-size: 90%;
 }
 .outlet_serves img {
-	float: right;
+	/*float: right;*/
 }
 .outlet_title {
 	border-right: 1px solid #FFFFFF;
@@ -1604,6 +1619,7 @@ img, object {
 }
 .img_outlet {
 	display: inline-block;
+	padding: 2.5% 0 0;
 	text-align: center;
 	width: 22%;
 }
