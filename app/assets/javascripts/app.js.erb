@@ -42,6 +42,7 @@ module.directive('map', function($http) {
 			var geocoder = new google.maps.Geocoder();
 			var myOptions = {
 			zoom :9,
+			minZoom: 6,
 			center : new google.maps.LatLng(25.18971, 55.17745),
 			mapTypeId : google.maps.MapTypeId.ROADMAP
 			};

@@ -341,13 +341,13 @@ module.controller('resetPassCtrl', function($rootScope, $scope, $routeParams, $h
 module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 	if (getCookie('authToken')) {
 		$rootScope.header = "Outlets | Kanari";
-		//getRefresh($scope);
 		$('.welcome').show();
 		$('.navBarCls').show();
 		$('#dasboard').hide();
 		$('#outlet').show();
 		$('#account').show();
-		//alert($scope.userName);
+		$('.navBarCls ul li').removeClass('active');
+		$('#outlet').addClass('active');
 		$scope.auth_token = getCookie('authToken');
 		$scope.userRole = getCookie('userRole');
 		$scope.outlets = []
