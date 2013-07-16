@@ -14,11 +14,13 @@ Feature: Approve Redemption
           |staff.bangalore.1@subway.com   |
       Given "Kenny Bross" is a user with email id "simpleuser@gmail.com" and password "password123" and user id "1000"
         And his role is "user"
+        And he has "200" points
         And his authentication token is "auth_token_123"
         And the following redemptions exist
           |id           |outlet_id    |   user_id       |   points   | approved |
           |1            |10           |   1000          |   100      |   false  |
-          |2            |10           |   2000          |   300      |   false  |
+          |2            |10           |   1000          |   100      |   false  |
+          |3            |10           |   2000          |   300      |   false  |
       When I authenticate as the user "donald_auth_token" with the password "random string"
       And I send a PUT request to "/api/redemptions/1" with the following:
       """
@@ -35,6 +37,7 @@ Feature: Approve Redemption
       """
       And the outlet's rewards pool should have "900" points
       And the user should have "100" redeemed points
+      And the user should have "100" points
       And the staff "staff.bangalore.1@subway.com" should have approved the redemption with id "1"
 
     Scenario: User has already redeemed reward points
@@ -59,10 +62,43 @@ Feature: Approve Redemption
         }
       }
       """
+      Then the response status should be "404"
+      And the JSON response should be:
+      """
+      { "errors" : ["Either user has already redeemed reward points or the request for redemption is not found."] }
+      """
+
+    Scenario: User doesn't have enough points
+      Given the following users exist
+         |id        |first_name |email                          | password    | authentication_token  | role            |
+         |101       |Donald     |staff.bangalore.1@subway.com   | password123 | donald_auth_token     | staff           |
+      Given a customer named "Subway" exists with id "100"
+        And the customer with id "100" has an outlet named "Subway - Bangalore" with id "10"
+        And the outlet has "1000" points in its rewards pool
+        And outlet "Subway - Bangalore" has staffs
+          |staff.bangalore.1@subway.com   |
+      Given "Kenny Bross" is a user with email id "simpleuser@gmail.com" and password "password123" and user id "1000"
+        And his role is "user"
+        And he has "100" points
+        And his authentication token is "auth_token_123"
+        And the following redemptions exist
+          |id           |outlet_id    |   user_id       |   points   | approved |
+          |1            |10           |   1000          |   150      |   false  |
+          |2            |10           |   1000          |   100      |   false  |
+          |3            |10           |   2000          |   300      |   false  |
+      When I authenticate as the user "donald_auth_token" with the password "random string"
+      And I send a PUT request to "/api/redemptions/1" with the following:
+      """
+      {
+        "redemption" : {
+          "approve" : true
+        }
+      }
+      """
       Then the response status should be "422"
       And the JSON response should be:
       """
-      { "errors" : ["User has already redeemed reward points."] }
+      { "errors" : ["User doesn't have enough points."] }
       """
 
     Scenario: Outlet doesn't have enough reward points
@@ -91,24 +127,6 @@ Feature: Approve Redemption
       And the JSON response should be:
       """
       { "errors" : ["Outlet doesn't have enough rewards points."] }
-      """
-
-  Scenario: User is not authenticated
-      Given "Adam" is a user with email id "user@gmail.com" and password "password123"
-        And his authentication token is "auth_token_123"
-      When I authenticate as the user "auth_token_1234" with the password "random string"
-      And I send a PUT request to "/api/redemptions/1" with the following:
-      """
-      {
-        "redemption" : {
-          "approve" : true
-        }
-      }
-      """
-      Then the response status should be "401"
-      And the JSON response should be:
-      """
-      {"errors" : ["Invalid login credentials"]}
       """
 
     Scenario: User is not authorized, Staff of one outlet tries to redeem for another outlet
@@ -173,5 +191,23 @@ Feature: Approve Redemption
       And the JSON response should be:
       """
       {"errors": ["Insufficient privileges"]}
+      """
+
+   Scenario: User is not authenticated
+      Given "Adam" is a user with email id "user@gmail.com" and password "password123"
+        And his authentication token is "auth_token_123"
+      When I authenticate as the user "auth_token_1234" with the password "random string"
+      And I send a PUT request to "/api/redemptions/1" with the following:
+      """
+      {
+        "redemption" : {
+          "approve" : true
+        }
+      }
+      """
+      Then the response status should be "401"
+      And the JSON response should be:
+      """
+      {"errors" : ["Invalid login credentials"]}
       """
 

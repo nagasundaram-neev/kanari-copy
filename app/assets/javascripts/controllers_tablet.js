@@ -333,20 +333,20 @@ module.controller('insightsController', function($scope, $http, $location) {
 				$scope.ambienceLike = data.feedback_insights.ambience.like;
 				$scope.ambienceDisLike = data.feedback_insights.ambience.dislike;
 				$scope.ambienceDailyChange = data.feedback_insights.ambience.change;
-				
-				if($scope.ambienceDailyChange > 0){
+
+				if ($scope.ambienceDailyChange > 0) {
 					$scope.ambienceFlag = 1;
-				}else{
+				} else {
 					$scope.ambienceFlag = 0;
 				}
 
 				$scope.valueLike = data.feedback_insights.value_for_money.like;
 				$scope.valueDisLike = data.feedback_insights.value_for_money.dislike;
 				$scope.valueDailyChange = data.feedback_insights.value_for_money.change;
-				
-				if($scope.valueDailyChange > 0){
+
+				if ($scope.valueDailyChange > 0) {
 					$scope.valueFlag = 1;
-				}else{
+				} else {
 					$scope.valueFlag = 1;
 				}
 
@@ -439,6 +439,8 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 		$scope.billAmount = "";
 		$scope.active4 = true;
 		$scope.erromsg = false;
+		$scope.listCodes = [];
+
 		$scope.generateCode = function(createKanariCode) {
 			if (!$scope.billAmount) {
 				$scope.error = "Please enter valid bill amount";
@@ -474,6 +476,34 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 			}
 		};
 
+		$scope.listGeneratedCodes = function() {
+			var param = {
+				"type" : "pending",
+				"auth_token" : getCookie('authToken')
+			}
+
+			$http({
+				method : 'get',
+				url : '/api/feedbacks',
+				params : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				$scope.listCodes = data.feedbacks;
+				//console.log("codes"+$scope.listCodes);
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+			});
+
+		};
+
+		$scope.listGeneratedCodes();
+
+		$scope.parseDate = function(jsonDate) {
+			$scope.v = {
+				DDt : Date.parse(jsonDate)
+			}
+		};
+
 		$scope.done = function() {
 			//console.log("in done btn pressed");
 			$scope.codeGenerate = true;
@@ -482,6 +512,7 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 			$scope.billAmount = "";
 			//$scope.active4 = true;
 			$scope.erromsg = false;
+			$scope.listGeneratedCodes();
 		};
 	} else {
 		$location.url("/signin");
