@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   has_one :customers_user
   has_one :employed_customer, source: 'customer', through: :customers_user # For all users except mobile users
 
+  scope :staff, -> { where(role:'staff')}
+
   def full_name
     return [first_name, last_name].join(' ').strip
   end
