@@ -70,7 +70,7 @@ Feature: List Kanari Codes for pending feedbacks
          |101       |Donald     |staff.bangalore.1@subway.com   | password123 | donald_auth_token     | staff           |
       Given a customer named "Subway" exists with id "100" with admin "admin@subway.com"
 	    And the customer with id "100" has an outlet named "Subway - Bangalore" with id "10" with manager "manager@subway.com"
-        And outlet "Subway - Bangalore" was created before "10" days
+		And outlet "Subway - Bangalore" was created on "2013-01-01 00:00:00"
         And outlet "Subway - Bangalore" has staffs
           |staff.bangalore.1@subway.com   |
           |staff.bangalore.2@subway.com   |
@@ -116,7 +116,7 @@ Feature: List Kanari Codes for pending feedbacks
          |101       |Donald     |staff.bangalore.1@subway.com   | password123 | donald_auth_token     | staff           |
       Given a customer named "Subway" exists with id "100" with admin "admin@subway.com"
 	    And the customer with id "100" has an outlet named "Subway - Bangalore" with id "10" with manager "manager@subway.com"
-        And outlet "Subway - Bangalore" was created before "10" days
+		And outlet "Subway - Bangalore" was created on "2013-01-01 00:00:00"
         And outlet "Subway - Bangalore" has staffs
           |staff.bangalore.1@subway.com   |
           |staff.bangalore.2@subway.com   |
@@ -162,7 +162,7 @@ Feature: List Kanari Codes for pending feedbacks
          |3000      |Mike       |simpleuser@gmail.com           | password123 | mike_auth_token       | user            |
       Given a customer named "Subway" exists with id "100" with admin "admin@subway.com"
 	    And the customer with id "100" has an outlet named "Subway - Bangalore" with id "10" with manager "manager@subway.com"
-        And outlet "Subway - Bangalore" was created before "10" days
+		And outlet "Subway - Bangalore" was created on "2013-01-01 00:00:00"
         And outlet "Subway - Bangalore" has staffs
           |staff.bangalore.1@subway.com   |
           |staff.bangalore.2@subway.com   |
