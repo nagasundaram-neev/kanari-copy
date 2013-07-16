@@ -132,7 +132,10 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 	//$scope.userName = "";
 	//getRefresh($scope);
 	//$scope.userName = getCookie('userName');
-
+	$(".content").css("min-height", function() {
+		return ($('.content')[0].scrollHeight)-38;
+	});
+	
 	if (getCookie('userRole') == "kanari_admin") {
 		$scope.userName = getCookie('userRole');
 	} else if (getCookie('userRole') == "customer_admin") {
@@ -163,7 +166,7 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 			$location.url("/createInvitation");
 		} else if (getCookie('userRole') == "customer_admin") {
 			$location.url("/outlets");
-		}else if (getCookie('userRole') == "manager") {
+		} else if (getCookie('userRole') == "manager") {
 			$location.url("/outlets");
 		}
 	}
@@ -237,7 +240,7 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 					$location.url("/outlets");
 				} else if (getCookie('userRole') == "manager" && !data.registration_complete) {
 					$location.url("/outlets");
-				}  else if (getCookie('userRole') == "manager" && data.registration_complete) {
+				} else if (getCookie('userRole') == "manager" && data.registration_complete) {
 					$location.url("/outlets");
 				}
 
@@ -351,11 +354,10 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 		$scope.auth_token = getCookie('authToken');
 		$scope.userRole = getCookie('userRole');
 		$scope.outlets = []
-		if (getCookie('userRole') == "customer_admin"){
+		if (getCookie('userRole') == "customer_admin") {
 			$scope.userAction = true;
-		}
-		else{
-				$('#account').hide();
+		} else {
+			$('#account').hide();
 		}
 		var param = {
 			"auth_token" : getCookie('authToken')
@@ -561,15 +563,13 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.checkedOutletTypes = [];
 		$scope.checked_CuisineTypes = [];
 		$scope.checked_OutletTypes = [];
-		
-		
-		if (getCookie('userRole') == "customer_admin"){
+
+		if (getCookie('userRole') == "customer_admin") {
 			$scope.userAction = true;
+		} else {
+			$('#account').hide();
 		}
-		else{
-				$('#account').hide();
-		}
-		
+
 		$scope.getOutletTypes = function() {
 
 			var param = {
@@ -746,7 +746,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					setCookie('latitude', data.outlet.latitude, 0.29);
 					setCookie('logitude', data.outlet.longitude, 0.29);
 					if (data.outlet.manager) {
-						$scope.manager = data.outlet.manager.first_name +' '+data.outlet.manager.last_name;
+						$scope.manager = data.outlet.manager.first_name + ' ' + data.outlet.manager.last_name;
 						$scope.manager_show = true;
 					} else {
 						$scope.manager_show = false;
@@ -1112,7 +1112,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
 					$scope.errorMsg = data.errors[0];
-					if($scope.errorMsg == "Email has already been taken"){
+					if ($scope.errorMsg == "Email has already been taken") {
 						$scope.errorMsg = "Id has already been taken";
 					}
 					$scope.errorTabletId = true;
@@ -1257,7 +1257,7 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 		$scope.acceptInvitation2 = function(acceptInv2) {
 			if ($scope.acceptInv2.$valid && $(".phoneno_1").val()) {
 				$scope.valide_phone = false;
-				console.log("city"+$scope.registered_address_city+"country "+$scope.registered_address_country);
+				console.log("city" + $scope.registered_address_city + "country " + $scope.registered_address_country);
 				var param = {
 					"customer" : {
 						"name" : $scope.name,
@@ -1323,11 +1323,11 @@ module.controller('takeTourCtrl', function($rootScope, $scope, $routeParams, $ht
 		$scope.register = false;
 		$scope.srchRestaurant = false;
 		$scope.deals = false;
-		
-		if (getCookie('userRole') == "manager"){
+
+		if (getCookie('userRole') == "manager") {
 			$('#account').hide();
 		}
-		
+
 		$scope.changeTab = function(currentTab) {
 			//alert('in');
 			$location.url("/take_tour");
@@ -1560,7 +1560,7 @@ module.controller('createKanariCodeCtrl', function($scope, $routeParams, $route,
 
 			}).error(function(data, status) {
 				console.log("data in errorr" + data + " status " + status);
-				
+
 			});
 		}
 	};
