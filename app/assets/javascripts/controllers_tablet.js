@@ -219,7 +219,7 @@ module.controller('signInController', function($scope, $http, $location) {
 			}
 			$scope.erromsg = false;
 			if (getCookie('userRole') == "manager" && data.registration_complete) {
-				$location.url("/feedback");
+				$location.url("/login");
 			} else if (getCookie('userRole') == "staff" && data.registration_complete) {
 				$location.url("/feedback");
 			}

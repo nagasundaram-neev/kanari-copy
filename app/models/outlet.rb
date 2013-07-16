@@ -30,7 +30,11 @@ class Outlet < ActiveRecord::Base
   def get_feedbacks params
     start_time = normalize_date(params[:start_time]) || self.created_at
     end_time   = normalize_date(params[:end_time]) || Time.zone.now
-    self.feedbacks.completed.where({updated_at: start_time..end_time}).order("updated_at desc")
+    if params[:type] && params[:type] == "pending"
+      get_pending_feedbacks(start_time, end_time)
+    else
+      get_completed_feedbacks(start_time, end_time)
+    end
   end
 
   def insights params={}
@@ -108,5 +112,12 @@ class Outlet < ActiveRecord::Base
       {:like => promoters_today.to_i, :dislike => passives_today.to_i, :neutral => neutrals_today.to_i, :change => (net_promoters_today - net_promoters_yesterday).to_i}
     end
 
+    def get_completed_feedbacks start_time, end_time
+      self.feedbacks.completed.where({updated_at: start_time..end_time}).order("updated_at desc")
+    end
+    
+    def get_pending_feedbacks start_time, end_time
+      self.feedbacks.pending.where({updated_at: start_time..end_time}).order("updated_at desc")
+    end
 end
 

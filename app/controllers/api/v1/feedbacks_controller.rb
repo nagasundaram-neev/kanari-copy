@@ -19,36 +19,6 @@ class Api::V1::FeedbacksController < ApplicationController
     render json: @feedback_insights.to_json
   end
 
-  # GET /feedbacks/1
-  # GET /feedbacks/1.json
-  def show
-  end
-
-  # GET /feedbacks/new
-  def new
-    @feedback = Feedback.new
-  end
-
-  # GET /feedbacks/1/edit
-  def edit
-  end
-
-  # POST /feedbacks
-  # POST /feedbacks.json
-  def create
-    @feedback = Feedback.new(feedback_params)
-
-    respond_to do |format|
-      if @feedback.save
-        format.html { redirect_to @feedback, notice: 'Feedback was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @feedback }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @feedback.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # PATCH/PUT /feedbacks/1
   # PATCH/PUT /feedbacks/1.json
   def update

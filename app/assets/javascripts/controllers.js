@@ -246,7 +246,6 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 				$scope.erromsg = true;
 				$scope.error = data.errors[0];
 			});
-
 		};
 
 		$scope.getLogin();
@@ -1259,18 +1258,23 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 		$scope.acceptInvitation2 = function(acceptInv2) {
 			if ($scope.acceptInv2.$valid && $(".phoneno_1").val()) {
 				$scope.valide_phone = false;
+				console.log("city"+$scope.registered_address_city+"country "+$scope.registered_address_country);
 				var param = {
 					"customer" : {
 						"name" : $scope.name,
 						"phone_number" : $(".phoneno_1").val(),
 						"registered_address_line_1" : $scope.registered_address_line_1,
 						"registered_address_line_2" : $scope.registered_address_line_2,
-						"registered_address_city" : $scope.registered_address_city,
-						"registered_address_country" : $scope.registered_address_country,
+						// "registered_address_city" : $scope.registered_address_city,
+						// "registered_address_country" : $scope.registered_address_country,
+						"registered_address_city" : "Dubai",
+						"registered_address_country" : "UAE",
 						"mailing_address_line_1" : $scope.mailing_address_line_1,
 						"mailing_address_line_2" : $scope.mailing_address_line_2,
-						"mailing_address_city" : $scope.mailing_address_city,
-						"mailing_address_country" : $scope.mailing_address_country,
+						// "mailing_address_city" : $scope.mailing_address_city,
+						// "mailing_address_country" : $scope.mailing_address_country,
+						"mailing_address_city" : "Dubai",
+						"mailing_address_country" : "UAE",
 						"email" : $scope.email
 					},
 					"auth_token" : $scope.auth_token
@@ -1388,8 +1392,10 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 			$(".phoneno_2").val(data.customer.phone_number);
 			$scope.add1 = data.customer.registered_address_line_1;
 			$scope.add2 = data.customer.registered_address_line_2;
-			$scope.city = data.customer.mailing_address_city;
-			$scope.country = data.customer.mailing_address_country;
+			// $scope.city = data.customer.mailing_address_city;
+			// $scope.country = data.customer.mailing_address_country;
+			$scope.city = "Dubai";
+			$scope.country = "UAE";
 		}).error(function(data, status) {
 			console.log("data in error" + data + " status " + status);
 
@@ -1404,8 +1410,10 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 						"email" : $scope.email,
 						"registered_address_line_1" : $scope.add1,
 						"registered_address_line_2" : $scope.add2,
-						"mailing_address_city" : $scope.city,
-						"mailing_address_country" : $scope.country,
+						// "registered_address_city" : $scope.city,
+						// "registered_address_country" : $scope.country,
+						"registered_address_city" : "Dubai",
+						"registered_address_country" : "UAE",
 						"phone_number" : $(".phoneno_2").val()
 					},
 					"auth_token" : getCookie('authToken')
