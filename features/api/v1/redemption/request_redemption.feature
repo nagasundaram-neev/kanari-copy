@@ -27,7 +27,7 @@ Feature: Request Redemption
       null
       """
       And the outlet's rewards pool should have "1000" points
-      And the user should have "10" points
+      And the user should have "100" points
 
     Scenario: User doesn't have enough points
       Given a customer named "Subway" exists with id "100"
@@ -145,7 +145,7 @@ Feature: Request Redemption
       null
       """
       And the outlet's rewards pool should have "600" points
-      And the user should have "0" points
+      And the user should have "200" points
 
 	Scenario: Invalid Outlet
       Given a customer named "Subway" exists with id "100"
@@ -165,10 +165,10 @@ Feature: Request Redemption
         }
       }
       """
-      Then the response status should be "422"
+      Then the response status should be "404"
       And the JSON response should be:
       """
-      {"errors" : ["Outlet is not available"]}
+      {"errors" : ["Outlet not found."]}
       """
       And the user should have "200" points
 
