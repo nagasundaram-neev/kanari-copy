@@ -1,7 +1,14 @@
 class Api::V1::StaffsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_outlet, only: [:index]
 
   respond_to :json
+
+  def index
+    authorize! :list_staff, @outlet
+    @staffs = @outlet.staffs
+    render json: @staffs
+  end
 
   def create
     outlet = Outlet.find(params[:user][:outlet_id])
@@ -19,6 +26,20 @@ class Api::V1::StaffsController < ApplicationController
         user.errors.messages[:username] = user.errors.messages.delete(:email)
       end
       render json: {errors: user.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_outlet
+    if params[:outlet_id].present?
+      @outlet = Outlet.where(id: params[:outlet_id].strip).first
+    else
+      @outlet = current_user.outlets.first
+    end
+    if @outlet.nil?
+      render json: {errors: ["Outlet not found"]}, status: :unprocessable_entity and return
     end
   end
 
