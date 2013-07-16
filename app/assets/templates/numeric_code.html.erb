@@ -44,26 +44,16 @@
 				Code
 			</div>
 		</div>
-		<div class="dateTimeListRow clearfix">
+		<div ng-repeat="feedbacks in listCodes" class="dateTimeListRow clearfix">
 			<div class="col1">
-				25/06/2013
+				{{v.DDt | date:'medium'}} {{parseDate(feedbacks.updated_at)}}
+				<!-- {{feedbacks.updated_at | truncate}} --> 
 			</div>
 			<div class="col1">
-				350
+				{{feedbacks.bill_amount}}
 			</div>
 			<div class="col2 colBorderRight">
-				14364
-			</div>
-		</div>
-		<div class="dateTimeListRow clearfix">
-			<div class="col1">
-				25/06/2013
-			</div>
-			<div class="col1">
-				350
-			</div>
-			<div class="col2 colBorderRight">
-				14364
+				{{feedbacks.code}}
 			</div>
 		</div>
 	</div>

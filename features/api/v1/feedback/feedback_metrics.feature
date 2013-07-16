@@ -9,7 +9,7 @@ Feature: Metrics for Feedback
          |101       |Donald     |staff.bangalore.1@subway.com   | password123 | donald_auth_token     | staff           |
       Given a customer named "Subway" exists with id "100" with admin "admin@subway.com"
 	    And the customer with id "100" has an outlet named "Subway - Bangalore" with id "10" with manager "manager@subway.com"
-        And outlet "Subway - Bangalore" was created before "10" days
+		And outlet "Subway - Bangalore" was created on "2013-01-01 00:00:00"
         And the outlet has "1000" points in its rewards pool
         And outlet "Subway - Bangalore" has staffs
           |staff.bangalore.1@subway.com   |
@@ -106,7 +106,7 @@ Feature: Metrics for Feedback
          |101       |Donald     |staff.bangalore.1@subway.com   | password123 | donald_auth_token     | staff           |
       Given a customer named "Subway" exists with id "100" with admin "admin@subway.com"
 	    And the customer with id "100" has an outlet named "Subway - Bangalore" with id "10" with manager "manager@subway.com"
-        And outlet "Subway - Bangalore" was created before "10" days
+		And outlet "Subway - Bangalore" was created on "2013-01-01 00:00:00"
         And the outlet has "1000" points in its rewards pool
         And outlet "Subway - Bangalore" has staffs
           |staff.bangalore.1@subway.com   |
@@ -205,7 +205,7 @@ Feature: Metrics for Feedback
          |101       |Donald     |staff.bangalore.1@subway.com   | password123 | donald_auth_token     | staff           |
       Given a customer named "Subway" exists with id "100" with admin "admin@subway.com"
 	    And the customer with id "100" has an outlet named "Subway - Bangalore" with id "10" with manager "manager@subway.com"
-        And outlet "Subway - Bangalore" was created before "10" days
+		And outlet "Subway - Bangalore" was created on "2013-01-01 00:00:00"
         And outlet "Subway - Bangalore" has staffs
           |staff.bangalore.1@subway.com   |
           |staff.bangalore.2@subway.com   |
@@ -273,14 +273,14 @@ Feature: Metrics for Feedback
          |102       |Stephen    |staff.bangalore.1@Taj.com      | password123 | stephen_auth_token    | staff           |
       Given a customer named "Subway" exists with id "100" with admin "admin@subway.com"
 	    And the customer with id "100" has an outlet named "Subway - Bangalore" with id "10" with manager "manager@subway.com"
-        And outlet "Subway - Bangalore" was created before "10" days
+		And outlet "Subway - Bangalore" was created on "2013-01-01 00:00:00"
         And the outlet has "1000" points in its rewards pool
         And outlet "Subway - Bangalore" has staffs
           |staff.bangalore.1@subway.com   |
           |staff.bangalore.2@subway.com   |
       Given a customer named "Taj" exists with id "200" with admin "admin@subway.com"
 	    And the customer with id "200" has an outlet named "Taj - Bangalore" with id "20" with manager "manager@subway.com"
-        And outlet "Taj - Bangalore" was created before "2" days
+		And outlet "Taj - Bangalore" was created on "2013-01-01 00:00:00"
         And the outlet has "1000" points in its rewards pool
         And outlet "Taj - Bangalore" has staffs
           |staff.bangalore.1@Taj.com   |
@@ -304,7 +304,7 @@ Feature: Metrics for Feedback
          |103       |Alice      |normaluser@gmail.com           | password123 | alice_auth_token      | user            |
       Given a customer named "Subway" exists with id "100" with admin "admin@subway.com"
 	    And the customer with id "100" has an outlet named "Subway - Bangalore" with id "10" with manager "manager@subway.com"
-        And outlet "Subway - Bangalore" was created before "10" days
+		And outlet "Subway - Bangalore" was created on "2013-01-01 00:00:00"
         And the outlet has "1000" points in its rewards pool
         And outlet "Subway - Bangalore" has staffs
           |staff.bangalore.1@subway.com   |
