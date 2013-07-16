@@ -67,6 +67,12 @@ Given /^outlet "(.*?)" was created before "(.*?)" days$/ do |outlet_name, create
   outlet.save!
 end
 
+Given /^outlet "(.*?)" was created on "(.*?)"$/ do |outlet_name, created_at|
+  outlet = Outlet.where(name: outlet_name).first
+  outlet.created_at = created_at
+  outlet.save!
+end
+
 And /^the outlet's rewards pool should have "([^"]*)" points$/ do |points|
   @outlet.reload.rewards_pool.should == points.to_i
 end
