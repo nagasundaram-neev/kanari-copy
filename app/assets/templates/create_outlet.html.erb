@@ -417,35 +417,18 @@
 					<div class="dateTimeList">
 						<div class="dateTimeListhead clearfix">
 							<div class="col1 colBorderTop">
-								Date 
+								Sr. No. 
 							</div>
-							<div class="col1 colBorderTop">
+							<div class="col1 colBorderTop colBorderRight">
 								Tablet Id
 							</div>
-							<div class="col2 colBorderTop colBorderRight">
-								Password
-							</div>
 						</div>
-						<div class="dateTimeListRow clearfix">
+						<div ng-repeat="listTabs in listTabIds" class="dateTimeListRow clearfix">
 							<div class="col1">
-								25/06/2013
+								{{$index+1}}
 							</div>
-							<div class="col1">
-								14364
-							</div>
-							<div class="col2 colBorderRight">
-								kanari123
-							</div>
-						</div>
-						<div class="dateTimeListRow clearfix">
-							<div class="col1">
-								25/06/2013
-							</div>
-							<div class="col1">
-								14364
-							</div>
-							<div class="col2 colBorderRight">
-								kanari123
+							<div class="col1 colBorderRight">
+								{{listTabs.tablet_id}}
 							</div>
 						</div>
 					</div>
