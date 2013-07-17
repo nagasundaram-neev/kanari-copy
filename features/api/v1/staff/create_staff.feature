@@ -28,8 +28,9 @@ Feature: Create Staff
       Then the contents of %{STAFF_ID} should be the last staff's id
       Given I keep the JSON response at "tablet_id" as "TABLET_ID"
       Then the contents of %{TABLET_ID} should be the last created tablet id
+      Then the contents of %{TABLET_ID} should be a 6 digit number
 	
-	Scenario: Manager Successfully create a staff
+    Scenario: Manager Successfully create a staff
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"
         And his role is "manager"
         And his authentication token is "auth_token_123"
@@ -53,6 +54,7 @@ Feature: Create Staff
       Then the contents of %{STAFF_ID} should be the last staff's id
       Given I keep the JSON response at "tablet_id" as "TABLET_ID"
       Then the contents of %{TABLET_ID} should be the last created tablet id
+      Then the contents of %{TABLET_ID} should be a 6 digit number
 
     Scenario: Outlet is not managed by the manager
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"

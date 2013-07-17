@@ -14,3 +14,9 @@ When "the contents of $tablet_id should be the last created tablet id" do |table
   tablet_id = JSON.parse("[#{JsonSpec.remember(tablet_id)}]")[0]
   User.staff.last.email.split("@").first.to_s.should == tablet_id.to_s
 end
+
+When "the contents of $tablet_id should be a 6 digit number" do |tablet_id|
+  tablet_id = JSON.parse("[#{JsonSpec.remember(tablet_id)}]")[0]
+  tablet_id.length.should == 6
+  tablet_id.match(/^\d\d\d\d\d\d$/).should_not be_nil
+end
