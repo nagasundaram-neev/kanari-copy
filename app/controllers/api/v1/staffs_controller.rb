@@ -53,7 +53,17 @@ class Api::V1::StaffsController < ApplicationController
   end
 
   def get_next_tablet_id
-    latest = User.staff.pluck('email').collect{|staff| staff.split('@').first.to_i}.max
-    latest.blank? ? "000001" : (latest + 1).to_s
+    last_staff = User.staff.last
+    if last_staff.blank?
+      "000001"
+    else
+      last_tablet_id = User.staff.last.email.split('@').first.to_i
+      next_tablet_id = last_tablet_id + 1
+      if(next_tablet_id.to_s.length == 6)
+        next_tablet_id.to_s
+      else
+        (6 - next_tablet_id.to_s.length) * "0" + next_tablet_id.to_s
+      end
+    end
   end
 end
