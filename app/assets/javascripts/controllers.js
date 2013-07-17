@@ -563,7 +563,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.checkedOutletTypes = [];
 		$scope.checked_CuisineTypes = [];
 		$scope.checked_OutletTypes = [];
-		$scope.listTabletIds = [];
+		$scope.listTabIds = [];
 
 		if (getCookie('userRole') == "customer_admin") {
 			$scope.userAction = true;
@@ -1085,6 +1085,24 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$scope.successTabletId = false;
 			$scope.errorTabletId = false;
 		};
+		
+		$scope.listTabletIds = function() {
+			console.log("in tablet id lists");
+			var param = {
+				"auth_token" : getCookie('authToken')
+			}
+			$http({
+				method : 'get',
+				url : '/api/staffs',
+				params : param,
+			}).success(function(data, status) {
+				console.log("data in success " + data + " status " + status);
+				$scope.listTabIds = data.staffs;
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+			});
+		};
+		$scope.listTabletIds();
 
 		$scope.create_tabletId = function(createTabletId) {
 			if ($scope.createTabletId.$valid) {
@@ -1097,6 +1115,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					},
 					"auth_token" : getCookie('authToken')
 				}
+				
+				console.log("outlet id "+$routeParams.outletId);
 
 				$http({
 					method : 'post',
@@ -1122,23 +1142,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			}
 		};
 
-		$scope.listTabletIds = function() {
-			console.log("in tablet id lists");
-			var param = {
-				"auth_token" : getCookie('authToken')
-			}
-			$http({
-				method : 'get',
-				url : '/api/staffs',
-				params : param,
-			}).success(function(data, status) {
-				console.log("data in success " + data + " status " + status);
-				$scope.listTabletIds = data.staffs;
-			}).error(function(data, status) {
-				console.log("data in error" + data + " status " + status);
-			});
-		};
-		$scope.listTabletIds();
 		// $scope.update = function() {
 		// $("#formid").addClass("row form-horizontal");
 		// $("#formid input").addClass("ng-dirty ng-invalid");
@@ -1190,6 +1193,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 						'opacity' : '0'
 					});
 					$('.tabletId').hide();
+					$scope.listTabletIds();
 					$scope.profileShow = false;
 					$scope.locationShow = false;
 					$scope.permissionShow = false;

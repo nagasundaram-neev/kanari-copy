@@ -227,7 +227,7 @@ module.controller('signInController', function($scope, $http, $location) {
 		}).error(function(data, status) {
 			//console.log($scope.password)
 			console.log("data " + $scope.email + " status " + status);
-			$scope.error = "Invalid Email or Password";
+			$scope.error = "Invalid Id or Password";
 			$scope.erromsg = true;
 		});
 	};

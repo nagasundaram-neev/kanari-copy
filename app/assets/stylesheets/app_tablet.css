@@ -530,6 +530,7 @@ input.ui-input-text, textarea.ui-input-text {
 .dateTimeList .col1, .dateTimeList .col2 {
 	padding: 2%;
 	float: left;
+	height: 18px;
 	border: 1px solid #ccc;
 	border-right: 0;
 	border-top: 0;
