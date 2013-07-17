@@ -133,9 +133,9 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 	//getRefresh($scope);
 	//$scope.userName = getCookie('userName');
 	$(".content").css("min-height", function() {
-		return ($('.content')[0].scrollHeight)-38;
+		return ($('.content')[0].scrollHeight) - 38;
 	});
-	
+
 	if (getCookie('userRole') == "kanari_admin") {
 		$scope.userName = getCookie('userRole');
 	} else if (getCookie('userRole') == "customer_admin") {
@@ -563,6 +563,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.checkedOutletTypes = [];
 		$scope.checked_CuisineTypes = [];
 		$scope.checked_OutletTypes = [];
+		$scope.listTabletIds = [];
 
 		if (getCookie('userRole') == "customer_admin") {
 			$scope.userAction = true;
@@ -1090,7 +1091,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				//alert("in submit");
 				var param = {
 					"user" : {
-						"email" : $scope.tabletId + "@kanari.co",
 						"password" : $scope.tabletId_password,
 						"password_confirmation" : $scope.tabletId_confirm_password,
 						"outlet_id" : $routeParams.outletId
@@ -1104,6 +1104,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					data : param,
 				}).success(function(data, status) {
 					console.log("data in success " + data + " status " + status);
+					$scope.listTabletIds();
 					$scope.errorTabletId = false;
 					//$scope.manager_id = data.manager.id;
 					$scope.successTabletId = true;
@@ -1118,10 +1119,26 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.errorTabletId = true;
 					$scope.successTabletId = false;
 				});
-
 			}
-
 		};
+
+		$scope.listTabletIds = function() {
+			console.log("in tablet id lists");
+			var param = {
+				"auth_token" : getCookie('authToken')
+			}
+			$http({
+				method : 'get',
+				url : '/api/staffs',
+				params : param,
+			}).success(function(data, status) {
+				console.log("data in success " + data + " status " + status);
+				$scope.listTabletIds = data.staffs;
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+			});
+		};
+		$scope.listTabletIds();
 		// $scope.update = function() {
 		// $("#formid").addClass("row form-horizontal");
 		// $("#formid input").addClass("ng-dirty ng-invalid");

@@ -14,7 +14,6 @@ Feature: Create Staff
       """
       {
         "user" : {
-          "email" : "staff1@gmail.com",
           "password" : "password123",
           "password_confirmation" : "password123",
           "outlet_id": 10
@@ -22,11 +21,16 @@ Feature: Create Staff
       }
       """
       Then the response status should be "201"
-      And the JSON response should have "staff_id"
+      And the JSON response should be a hash
+      And the JSON response should have 2 keys
       And a staff should be created for outlet "10" and customer "100"
-      And a new user with email "staff1@gmail.com" should be created
+      Given I keep the JSON response at "staff_id" as "STAFF_ID"
+      Then the contents of %{STAFF_ID} should be the last staff's id
+      Given I keep the JSON response at "tablet_id" as "TABLET_ID"
+      Then the contents of %{TABLET_ID} should be the last created tablet id
+      Then the contents of %{TABLET_ID} should be a 6 digit number
 	
-	Scenario: Manager Successfully create a staff
+    Scenario: Manager Successfully create a staff
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"
         And his role is "manager"
         And his authentication token is "auth_token_123"
@@ -37,7 +41,6 @@ Feature: Create Staff
       """
       {
         "user" : {
-          "email" : "staff1@gmail.com",
           "password" : "password123",
           "password_confirmation" : "password123",
           "outlet_id": 10
@@ -47,43 +50,11 @@ Feature: Create Staff
       Then the response status should be "201"
       And the JSON response should have "staff_id"
       And a staff should be created for outlet "10" and customer "100"
-      And a new user with email "staff1@gmail.com" should be created
-
-    Scenario: Username already taken
-      Given "Adam" is a user with email id "user@gmail.com" and password "password123"
-        And his role is "manager"
-        And his authentication token is "auth_token_123"
-      Given a customer named "Subway" exists with id "100" with admin "user@gmail.com"
-        And the customer with id "100" has an outlet named "Subway - Bangalore" with id "10" with manager "user@gmail.com"
-      When I authenticate as the user "auth_token_123" with the password "random string"
-      And I send a POST request to "/api/staffs" with the following:
-      """
-      {
-        "user" : {
-          "username" : "staff1",
-          "password" : "password123",
-          "password_confirmation" : "password123",
-          "outlet_id": 10
-        }
-      }
-      """
-      Then the response status should be "201"
-      And I send a POST request to "/api/staffs" with the following:
-      """
-      {
-        "user" : {
-          "username" : "staff1",
-          "password" : "password123",
-          "password_confirmation" : "password123",
-          "outlet_id": 10
-        }
-      }
-      """
-      Then the response status should be "422"
-      And the JSON response should be:
-      """
-      {"errors" : ["Username has already been taken"]}
-      """
+      Given I keep the JSON response at "staff_id" as "STAFF_ID"
+      Then the contents of %{STAFF_ID} should be the last staff's id
+      Given I keep the JSON response at "tablet_id" as "TABLET_ID"
+      Then the contents of %{TABLET_ID} should be the last created tablet id
+      Then the contents of %{TABLET_ID} should be a 6 digit number
 
     Scenario: Outlet is not managed by the manager
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"
@@ -97,7 +68,6 @@ Feature: Create Staff
       """
       {
         "user" : {
-          "username" : "staff1",
           "password" : "password123",
           "password_confirmation" : "password123",
           "outlet_id": 11
@@ -120,7 +90,6 @@ Feature: Create Staff
       """
       {
         "user" : {
-          "username" : "staff1",
           "password" : "password123",
           "password_confirmation" : "password123",
           "outlet_id": 11
@@ -144,7 +113,6 @@ Feature: Create Staff
       """
       {
         "user" : {
-          "username" : "staff1",
           "password" : "password123",
           "password_confirmation" : "password123",
           "outlet_id": 10

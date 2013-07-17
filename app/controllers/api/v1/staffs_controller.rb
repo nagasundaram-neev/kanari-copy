@@ -11,16 +11,25 @@ class Api::V1::StaffsController < ApplicationController
   end
 
   def create
-    outlet = Outlet.find(params[:user][:outlet_id])
-    authorize! :create_staff, outlet
-    username = params[:user][:username]
-    email = params[:user][:email].nil? ? "#{username}@kanari.co" : params[:user][:email]
+    if params[:user][:outlet_id].present?
+      @outlet = Outlet.where(id: params[:user][:outlet_id].to_s.strip).first
+    else
+      @outlet = current_user.outlets.first
+    end
+    if @outlet.nil?
+      render json: {errors: ["Outlet not found"]}, status: :not_found and return
+    end
+    authorize! :create_staff, @outlet
+    username = get_next_tablet_id
+    #email = params[:user][:email].nil? ? "#{username}@kanari.co" : params[:user][:email]
+    email = "#{username}@kanari.co"
     user = User.new(email: email, password: params[:user][:password], password_confirmation: params[:user][:password_confirmation])
     user.role = "staff"
     if user.save
-      user.employed_outlet = outlet
+      user.employed_outlet = @outlet
       user.employed_customer = current_user.customer
-      render json: { staff_id: user.id }, status: :created
+      tablet_id = user.email.split('@')[0]
+      render json: { staff_id: user.id, tablet_id: tablet_id }, status: :created
     else
       if user.errors.messages.has_key?(:email) && !params[:user][:username].nil?
         user.errors.messages[:username] = user.errors.messages.delete(:email)
@@ -39,8 +48,22 @@ class Api::V1::StaffsController < ApplicationController
       @outlet = current_user.outlets.first
     end
     if @outlet.nil?
-      render json: {errors: ["Outlet not found"]}, status: :unprocessable_entity and return
+      render json: {errors: ["Outlet not found"]}, status: :not_found and return
     end
   end
 
+  def get_next_tablet_id
+    last_staff = User.staff.last
+    if last_staff.blank?
+      "000001"
+    else
+      last_tablet_id = User.staff.last.email.split('@').first.to_i
+      next_tablet_id = last_tablet_id + 1
+      if(next_tablet_id.to_s.length == 6)
+        next_tablet_id.to_s
+      else
+        ( "0" * (6 - next_tablet_id.to_s.length) ) + next_tablet_id.to_s
+      end
+    end
+  end
 end
