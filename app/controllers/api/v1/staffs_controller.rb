@@ -62,7 +62,7 @@ class Api::V1::StaffsController < ApplicationController
       if(next_tablet_id.to_s.length == 6)
         next_tablet_id.to_s
       else
-        (6 - next_tablet_id.to_s.length) * "0" + next_tablet_id.to_s
+        ( "0" * (6 - next_tablet_id.to_s.length) ) + next_tablet_id.to_s
       end
     end
   end
