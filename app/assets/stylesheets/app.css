@@ -479,6 +479,8 @@ div.create_rest {
 	width: 70%;
 	margin-top: 20px;
 	margin-left: 2%;
+	/*margin-bottom: -1000px;
+	padding-bottom: 1000px;*/
 }
 .leftPanel ul {
 	margin: 0;
@@ -679,7 +681,8 @@ a.changePassword:hover {
 	text-decoration: none;
 }
 #location {
-	opacity: 0
+	opacity: 0;
+	/*display: none;*/
 }
 
 /***Add Outlet And CuisineType***/

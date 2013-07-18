@@ -1,4 +1,4 @@
-<div data-role="page" style="height: 575px;" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
+<div data-role="page" style="height: 585px;" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
 	<style>
 		input[type="image"], input[type="checkbox"], input[type="radio"] {
 			margin: 0;
@@ -230,7 +230,7 @@
 						</div>
 						<div ng-show="successoutlet" class="successMsg">
 							<div class="create_rest" ng-show="action">
-								Your outlet get added successfully
+								Your outlet has been created successfully.
 							</div>
 							<div class="create_rest" ng-hide="action">
 								Your outlet has been updated successfully.
@@ -416,20 +416,26 @@
 				<div class="listIds">
 					<div class="dateTimeList">
 						<div class="dateTimeListhead clearfix">
-							<div class="col1 colBorderTop">
+							<!-- <div class="col1 colBorderTop">
 								Sr. No. 
-							</div>
+							</div> -->
 							<div class="col1 colBorderTop colBorderRight">
 								Tablet Id
 							</div>
+							<!-- <div class="col1 colBorderTop">
+								Password 
+							</div> -->
 						</div>
 						<div ng-repeat="listTabs in listTabIds" class="dateTimeListRow clearfix">
-							<div class="col1">
+							<!-- <div class="col1">
 								{{$index+1}}
-							</div>
+							</div> -->
 							<div class="col1 colBorderRight">
 								{{listTabs.tablet_id}}
 							</div>
+							<!-- <div class="col1 colBorderRight">
+								kanari123
+							</div> -->
 						</div>
 					</div>
 				</div>
@@ -500,7 +506,7 @@
 							</p>
 							<p ng-hide="error" ></p>
 							<p ng-show="successTabletId" class="successMsg">
-								Tablet Id created successfully.
+								Tablet Id has been created successfully.
 							</p>
 							<p ng-hide="success" ></p>
 						</div>
