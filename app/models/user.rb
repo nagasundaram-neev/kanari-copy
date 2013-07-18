@@ -65,4 +65,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  def add_points_to_available_points points
+    self.with_lock do
+      self.points_available = self.points_available.to_i + points
+      self.save
+    end
+  end
+
 end

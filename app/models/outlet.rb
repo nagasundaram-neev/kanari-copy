@@ -69,6 +69,12 @@ class Outlet < ActiveRecord::Base
     return {:feedback_insights => feedback_metrics}
   end
 
+  def add_points_to_rewards_poll points
+    self.with_lock do
+      self.rewards_pool = self.rewards_pool.to_i + points
+      self.save
+    end
+  end
 
   private
 
@@ -115,7 +121,7 @@ class Outlet < ActiveRecord::Base
     def get_completed_feedbacks start_time, end_time
       self.feedbacks.completed.where({updated_at: start_time..end_time}).order("updated_at desc")
     end
-    
+
     def get_pending_feedbacks start_time, end_time
       self.feedbacks.pending.where({updated_at: start_time..end_time}).order("updated_at desc")
     end
