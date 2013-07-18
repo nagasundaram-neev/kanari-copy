@@ -200,8 +200,7 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 		} else {
 			setCookie('rememberme', 'no', 0.29);
 		}
-
-	}
+	};
 	$scope.chkLogin = function(login) {
 		if ($scope.login.$valid) {
 			$('.welcome').hide();
