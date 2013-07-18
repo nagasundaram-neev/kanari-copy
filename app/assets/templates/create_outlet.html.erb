@@ -10,7 +10,6 @@
 			padding: 0 0 4px 0;
 		}
 		#map_canvas {
-			/*width:100%;*/
 			height: 400px;
 			width: 750px;
 			border: 1px solid #333335;
@@ -280,7 +279,7 @@
 								<input type="button" class="btn_cls" ng-click="add_new_manager()" data-inline="true" value="Add a new manager" />
 								<br/>
 								<p ng-show="successmgr" class="successMsg">
-									Manager updated successfully.
+									Manager has been updated successfully.
 								</p>
 								<p ng-hide="successmgr" ></p>
 							</div>
@@ -392,7 +391,7 @@
 							</p>
 							<p ng-hide="error" ></p>
 							<p ng-show="success1" class="successMsg">
-								Manager added successfully.
+								Manager has been added successfully.
 							</p>
 							<p ng-hide="success" ></p>
 							<p ng-show="valide_phone" class="errorMsg">
@@ -417,24 +416,24 @@
 					<div class="dateTimeList">
 						<div class="dateTimeListhead clearfix">
 							<!-- <div class="col1 colBorderTop">
-								Sr. No. 
+							Sr. No.
 							</div> -->
 							<div class="col1 colBorderTop colBorderRight">
 								Tablet Id
 							</div>
 							<!-- <div class="col1 colBorderTop">
-								Password 
+							Password
 							</div> -->
 						</div>
 						<div ng-repeat="listTabs in listTabIds" class="dateTimeListRow clearfix">
 							<!-- <div class="col1">
-								{{$index+1}}
+							{{$index+1}}
 							</div> -->
 							<div class="col1 colBorderRight">
 								{{listTabs.tablet_id}}
 							</div>
 							<!-- <div class="col1 colBorderRight">
-								kanari123
+							kanari123
 							</div> -->
 						</div>
 					</div>
@@ -516,28 +515,31 @@
 		</div>
 		<div id ="location" >
 			<div ng-app="kanari" class="location_map">
-				<span class="location_select"> Please select your location </span>
-				<div ng-controller="MapCtrl" ng-controller="MapCtrl">
-					<map id="map_canvas"></map>
-					<div style="margin: 10px 20px;">
-						<div class="addMarker">
-							<button ng-click="addMark()" type="submit" class="enabel_Btn btn">
-								Save
-							</button>
-							<button disabled class="disable_Btn btn">
-								Save
-							</button>
+				<div id="viewmap">
+					<span class="location_select"> Please select your location </span>
+					<div ng-controller="MapCtrl" ng-controller="MapCtrl">
+						<map id="map_canvas"></map>
+						<div style="margin: 10px 20px;">
+							<div class="addMarker">
+								<button ng-click="addMark()" type="submit" class="enabel_Btn btn">
+									Save
+								</button>
+								<button disabled class="disable_Btn btn">
+									Save
+								</button>
+							</div>
+							<div class="updateMarker">
+								<button ng-click="addMark()" type="submit" class="btn">
+									Save
+								</button>
+							</div>
+							<p ng-show="successLocation" class="successMsg">
+								Your location has been updated successfully.
+							</p>
 						</div>
-						<div class="updateMarker">
-							<button ng-click="addMark()" type="submit" class="btn">
-								Save
-							</button>
-						</div>
-						<p ng-show="successLocation" class="successMsg">
-							Your location has been updated successfully.
-						</p>
 					</div>
 				</div>
+				<div id="hidemap"></div>
 			</div>
 		</div>
 	</div>
