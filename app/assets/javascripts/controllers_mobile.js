@@ -159,7 +159,7 @@ module.controller('loginController', function($scope, $http, $location) {
 				setCookie('userRole', data.user_role, 0.29);
 				setCookie('authToken', data.auth_token, 0.29);
 				setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
-				setCookie('signInCount', data.sign_in_count);
+				setCookie('signInCount', data.sign_in_count, 0.29);
 			}
 			$location.url("/home");
 		}).error(function(data, status) {
@@ -269,6 +269,7 @@ module.controller('homeController', function($scope, $http, $location) {
 	$scope.points = "";
 	console.log("sign in Count" + getCookie("signInCount"));
 	if (getCookie("authToken")) {
+		//alert("token "+getCookie("authToken"));
 		if (getCookie("signInCount") == 1) {
 			console.log("sign in Count if " + signInCount);
 			var param = {
@@ -283,16 +284,17 @@ module.controller('homeController', function($scope, $http, $location) {
 				console.log("User Role " + data + " status " + status);
 				//var date = new Date();
 				$scope.points = data.points;
+				//alert("points"+$scope.points);
 				signInCount = 0;
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
-
 			});
 
 		} else {
 			console.log("sign in Count else " + getCookie("signInCount"));
 			var param = {
-				"auth_token" : getCookie('authToken')
+				"auth_token" : getCookie('authToken'),
+				"password" : "X"
 			}
 
 			$http({
@@ -303,12 +305,13 @@ module.controller('homeController', function($scope, $http, $location) {
 				console.log("User Role " + data + " status " + status);
 				//var date = new Date();
 				$scope.points = data.user.points_available;
+				//alert("points"+$scope.points);
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 
 			});
 		}
-
+		//alert("points"+$scope.points);
 		//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
 		$scope.userName = getCookie('userName');
 		$scope.role = getCookie('userRole');
@@ -409,6 +412,54 @@ module.controller('signedUpController', function($scope, $http, $location) {
 		$location.url("/login");
 	}
 });
+module.controller('changePasswordController', function($scope, $http, $location) {
+
+	$scope.back = function() {
+		$location.url("/settings");
+	};
+
+	$scope.changePassword = function() {
+		if (!$scope.newPassword || !$scope.confirmPassword) {
+			$scope.error = "Password fields can't be blank";
+			$scope.errorMsg = true;
+			$scope.succMsg = false;
+		} else {
+			var param = {
+				"user" : {
+					"password" : $scope.newPassword,
+					"password_confirmation" : $scope.confirmPassword,
+					"current_password" : $scope.currentPassword
+				},
+				"auth_token" : getCookie('authToken')
+			}
+
+			$http({
+				method : 'put',
+				url : '/api/users',
+				data : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				deleteCookie('authToken');
+				setCookie('authToken', data.auth_token, 0.29);
+				$scope.errorMsg = false;
+				$scope.succMsg = true;
+				$scope.currentPassword = "";
+				$scope.confirmPassword = "";
+				$scope.newPassword = "";
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status);
+				$scope.error = data.errors[0];
+				$scope.errorMsg = true;
+				$scope.succMsg = false;
+				$scope.currentPassword = "";
+				$scope.confirmPassword = "";
+				$scope.newPassword = "";
+			});
+
+		}
+	};
+
+});
 
 module.controller('settingsController', function($scope, $http, $location) {
 	if (getCookie('authToken')) {
@@ -419,9 +470,9 @@ module.controller('settingsController', function($scope, $http, $location) {
 			$location.url("/home");
 		};
 
-		// $scope.changePassword = function(){
-		// alert("change password");
-		// }
+		$scope.changePassword = function() {
+			$location.url("/changePassword");
+		};
 
 		$scope.tansactionHistory = function() {
 			$location.url("/transactionHistory");

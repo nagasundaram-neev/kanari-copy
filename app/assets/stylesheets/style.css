@@ -523,7 +523,7 @@ body {
 	/*color: #664765 !important;*/
 }
 img, object {
-	/*max-width: 60%;*/
+	/*max-width: 35%;*/
 	/*max-width: 80%;*/
 }
 .logo_btm img {
@@ -757,6 +757,7 @@ img, object {
 .number {
 	color: #593F5A;
 	font-size: 5em;
+	font-weight: bold;
 	margin-bottom: -3px;
 }
 
@@ -946,7 +947,7 @@ img, object {
 	font-size: 114%;
 }
 .profileTextBottom {
-	padding-top: 0.7% !important;
+	padding: 2.7% !important;
 }
 #settings .ui-btn-inline {
 	clear: both;
@@ -1096,7 +1097,7 @@ img, object {
 	background-color: #664765;
 	display: inline-block;
 	padding: 1.5% 2%;
-	width: 16%;
+	width: 12%;
 }
 .settingDiv .border {
 	margin: 5% 3%
@@ -1243,7 +1244,14 @@ img, object {
 }
 .settingDiv .ui-corner-all, .settingDiv .ui-btn-corner-all {
 	border-radius: 0;
+	 border: medium none;
 }
+.settingDiv .ui-slider-switch .ui-btn.ui-slider-handle {
+    margin: 2px 0 0 -14px;
+}
+.settingDiv .ui-slider-label-a{
+	margin-left: -5px;
+} 
 .dateDiv .ui-corner-all, .dateDiv .ui-btn-corner-all {
 	border-radius: 0 !important;
 }
@@ -1342,6 +1350,8 @@ img, object {
 .chkbox {
 
 }
+/*[data-role=page]{height: 100% !important; position:relative !important;}
+[data-role=footer]{bottom:0; position:relative !important; top: auto !important; width:100%;} */
 #login .ui-content {
 	/*margin: 1% 5%;*/
 	margin: 1% 12%;
@@ -1385,7 +1395,7 @@ img, object {
 	border: 0;
 }
 .loginDiv div.ui-input-text {
-	margin: 0.4em;
+	margin: 0.4em 0 0;
 }
 
 .signUpDiv div.ui-input-text {
@@ -1394,6 +1404,7 @@ img, object {
 
 .settingDiv div.ui-input-text {
 	/*margin: 0.5em;*/
+	 padding: 1%;
 }
 
 .errorMsg {

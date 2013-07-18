@@ -21,15 +21,15 @@
 			<div class="ui-input-text ui-body-a">
 				<input data-theme="a" data-inline="true" type="email" name="txtPassword" ng-model="email" class="passwordTxt" placeholder="Email" readonly/>
 			</div>
-			<div class="ui-input-text ui-body-a"> <!-- ng-click="changePassword()" -->
-				<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="currentPassword" class="passwordTxt" placeholder="Current Password"/>
+			<div class="ui-input-text ui-body-a" ng-click="changePassword()"> 
+				<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="currentPassword" class="passwordTxt" placeholder="Change Password"/>
 			</div>
-			<div class="ui-input-text ui-body-a">
+			<!-- <div class="ui-input-text ui-body-a">
 				<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="newPassword" class="passwordTxt" placeholder="New Password"/>
 			</div>
 			<div class="ui-input-text ui-body-a">
 				<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="confirmPassword" class="passwordTxt" placeholder="Confirm Password"/>
-			</div>
+			</div> -->
 			<div class="ui-input-text ui-body-a">
 				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="location" class="passwordTxt" placeholder="Location"/>
 			</div>
@@ -87,7 +87,9 @@
 				<a href="#"><%= image_tag 'ic_twitter_yellow.png' %></a>
 				<a href="#"><%= image_tag 'ic_gplus_yellow.png' %></a>
 			</div>
-			<div class="border"></div>
+			<div data-role="fieldcontain" class="profileTextBottom" align="center">
+				<h2>HISTORY</h2>
+			</div>
 			<div id="transactionHistory" ng-click="tansactionHistory()">
 				<span>View Kanari History</span>
 				<a href="#"><%= image_tag 'ic_calender_yellow.png' %></a>
