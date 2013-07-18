@@ -26,3 +26,8 @@ OutletType.create([
   { name: "Indian" },
   { name: "Steakhouse" }
 ])
+
+GlobalSetting.create({
+  setting_name: "feedback_expiry_time",
+  setting_value: 120
+})

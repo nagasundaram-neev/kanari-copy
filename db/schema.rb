@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130715115747) do
+ActiveRecord::Schema.define(version: 20130718094057) do
 
   create_table "cuisine_types", force: true do |t|
     t.string   "name"
@@ -69,6 +69,11 @@ ActiveRecord::Schema.define(version: 20130715115747) do
   add_index "feedbacks", ["code"], name: "index_feedbacks_on_code", using: :btree
   add_index "feedbacks", ["outlet_id"], name: "index_feedbacks_on_outlet_id", using: :btree
   add_index "feedbacks", ["user_id"], name: "index_feedbacks_on_user_id", using: :btree
+
+  create_table "global_settings", force: true do |t|
+    t.string "setting_name"
+    t.string "setting_value"
+  end
 
   create_table "outlet_types", force: true do |t|
     t.string   "name"

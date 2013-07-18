@@ -1151,9 +1151,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.changeTab = function(currentTab) {
 			if ($scope.updateMode) {
 				if (currentTab == "profileShow") {
-					$('#location').css({
-						'opacity' : '0'
-					});
+					 $('#viewmap').hide();
+					 $('#hidemap').show();
 					$scope.profileShow = true;
 					$scope.locationShow = false;
 					$scope.TabletIdShow = false;
@@ -1161,36 +1160,36 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.successMsg = false;
 					$scope.ReportShow = false;
 				} else if (currentTab == "locationShow") {
-					$('#location').css({
-						'opacity' : '1'
-					});
+					
+					 $('#viewmap').show();
+					 $('#hidemap').hide();
+					 $scope.$broadcast('clickMessageFromParent', {
+						data : "SOME msg to the child"
+					})
 					$scope.profileShow = false;
 					$scope.locationShow = true;
 					$scope.TabletIdShow = false;
 					$scope.permissionShow = false;
 					$scope.ReportShow = false;
 				} else if (currentTab == "permissionShow") {
-					$('#location').css({
-						'opacity' : '0'
-					});
+					$('#viewmap').hide();
+					 $('#hidemap').show();
 					$scope.profileShow = false;
 					$scope.locationShow = false;
 					$scope.TabletIdShow = false;
 					$scope.permissionShow = true;
 					$scope.ReportShow = false;
 				} else if (currentTab == "ReportShow") {
-					$('#location').css({
-						'opacity' : '0'
-					});
+					$('#viewmap').hide();
+					 $('#hidemap').show();
 					$scope.profileShow = false;
 					$scope.locationShow = false;
 					$scope.permissionShow = false;
 					$scope.TabletIdShow = false;
 					$scope.ReportShow = true;
 				} else if (currentTab == "TabletIdShow") {
-					$('#location').css({
-						'opacity' : '0'
-					});
+					$('#viewmap').hide();
+					 $('#hidemap').show();
 					$('.tabletId').hide();
 					$scope.listTabletIds();
 					$scope.profileShow = false;

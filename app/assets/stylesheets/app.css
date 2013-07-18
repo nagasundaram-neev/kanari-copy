@@ -229,8 +229,8 @@ body {
 .divLeft {
 	float: left !important;
 	padding: 0 10%;
-	margin-left:0 !important;
-    width: 80% !important;
+	margin-left: 0 !important;
+	width: 80% !important;
 }
 span.full_name {
 	font-size: 13px;
@@ -435,7 +435,7 @@ div.create_rest {
 }
 #createOutlet select {
 	width: 125px;
-	 text-transform: capitalize;
+	text-transform: capitalize;
 }
 
 #createOutlet .timeSetting {
@@ -450,15 +450,14 @@ div.create_rest {
 	color: green;
 	margin-top: 10px;
 	font-size: 14px;
-	margin: 1% -18%; 
-} 
+	margin: 1% -18%;
+}
 .successMsg {
 	color: green;
 	margin-top: 10px;
 	text-align: left;
 	font-size: 14px;
-	
-} 
+}
 .createOutletDiv h1 {
 	width: 401px;
 	float: left;
@@ -479,6 +478,8 @@ div.create_rest {
 	width: 70%;
 	margin-top: 20px;
 	margin-left: 2%;
+	/*margin-bottom: -1000px;
+	 padding-bottom: 1000px;*/
 }
 .leftPanel ul {
 	margin: 0;
@@ -679,7 +680,16 @@ a.changePassword:hover {
 	text-decoration: none;
 }
 #location {
-	opacity: 0
+
+}
+#viewmap {
+	width: 750px;
+	display: none;
+}
+#hidemap {
+	position: relative;
+	width: 750px;
+	display: block;
 }
 
 /***Add Outlet And CuisineType***/
@@ -835,7 +845,6 @@ input {
 .innerDiv form {
 	margin: 10px 0 !important
 }
-
 
 /* Tablet Id table css */
 .dateTimeList {
