@@ -542,6 +542,15 @@ img, object {
 	border-radius: 0px;
 }
 
+.logBtn .ui-btn-inner{
+	padding: 0.4em 20px;
+	border:none;
+}
+
+#login .ui-shadow{
+	box-shadow: none;
+}
+
 #feedback .backColr {
 	background-color: #E5E6E8;
 	border-right: 3px solid #FFFFFF;
@@ -710,6 +719,10 @@ img, object {
 .border {
 	border: 1px solid #664765;
 	margin: 3% 3.5%;
+}
+
+#login .border{
+	margin: 3% 0;
 }
 
 .secondRow {
@@ -1679,8 +1692,8 @@ img, object {
 .fblogin {
 	background-color: #6E4D6C;
 	color: #FFFFFF;
-	margin: 0 1%;
-	padding: 0.1em 0;
+	/*margin: 0 1%;*/
+	 padding-bottom: 0.5%;
 }
 
 .fblogin img {
