@@ -540,12 +540,19 @@ img, object {
 }
 #login .ui-btn-corner-all {
 	border-radius: 0px;
+	border: none !important;
 }
 
 .logBtn .ui-btn-inner{
-	padding: 0.4em 20px;
-	border:none;
+	padding: 0.4em 20px !important;
+	border:none !important;
 }
+
+.signBtn .ui-btn-inner{
+	padding: 0.4em 20px;
+	border:none !important;
+}
+
 
 #login .ui-shadow{
 	box-shadow: none;
@@ -721,7 +728,7 @@ img, object {
 	margin: 3% 3.5%;
 }
 
-#login .border{
+#login .border, #signUp .border {
 	margin: 3% 0;
 }
 
