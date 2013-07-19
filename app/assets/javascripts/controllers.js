@@ -1159,8 +1159,10 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.permissionShow = false;
 					$scope.successMsg = false;
 					$scope.ReportShow = false;
+					$(".customErr").css("display","none");
+					$('#formid')[0].reset();
+					//$(".input-help").css("display","none");
 				} else if (currentTab == "locationShow") {
-					
 					 $('#viewmap').show();
 					 $('#hidemap').hide();
 					 $scope.$broadcast('clickMessageFromParent', {
@@ -1171,6 +1173,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.TabletIdShow = false;
 					$scope.permissionShow = false;
 					$scope.ReportShow = false;
+					$(".customErr").css("display","none");
+					//$(".input-help").css("display","none");
 				} else if (currentTab == "permissionShow") {
 					$('#viewmap').hide();
 					 $('#hidemap').show();
@@ -1179,6 +1183,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.TabletIdShow = false;
 					$scope.permissionShow = true;
 					$scope.ReportShow = false;
+					$(".customErr").css("display","none");
+					//$(".input-help").css("display","none");
 				} else if (currentTab == "ReportShow") {
 					$('#viewmap').hide();
 					 $('#hidemap').show();
@@ -1187,6 +1193,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.permissionShow = false;
 					$scope.TabletIdShow = false;
 					$scope.ReportShow = true;
+					$(".customErr").css("display","none");
+					//$(".input-help").css("display","none");
 				} else if (currentTab == "TabletIdShow") {
 					$('#viewmap').hide();
 					 $('#hidemap').show();
@@ -1197,6 +1205,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.permissionShow = false;
 					$scope.ReportShow = false;
 					$scope.TabletIdShow = true;
+					$(".customErr").css("display","none");
+					//$(".input-help").css("display","none");
 				}
 			}
 		}
