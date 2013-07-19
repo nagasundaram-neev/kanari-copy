@@ -23,10 +23,13 @@ class Api::V1::FeedbacksController < ApplicationController
   # PATCH/PUT /feedbacks/1.json
   def update
     current_user = warden.authenticate(scope: :user)
+    render json: {errors: ["Feedback not found."]}, status: :not_found and return if @feedback.nil?
+    expiry_time = GlobalSetting.where(setting_name: 'feedback_expiry_time').first.setting_value.to_i
+
+    render json: {errors: ["Sorry, time for giving feedback has been expired! You were supposed to give feedback within #{expiry_time} minutes"]}, status: :unprocessable_entity and return if((Time.zone.now - @feedback.created_at ) > expiry_time.minutes)
     if current_user.nil?
       if @feedback.update(feedback_params)
-        @feedback.code = nil
-        @feedback.completed = true 
+        @feedback.code = nil; @feedback.completed = true
         @feedback.save
         render json: {points: @feedback.points}, status: :ok
       else
@@ -37,19 +40,13 @@ class Api::V1::FeedbacksController < ApplicationController
         authorize! :create, Feedback
         points = @feedback.points
         outlet = @feedback.outlet
-        outlet.with_lock do
-          outlet.rewards_pool = outlet.rewards_pool + points
-          @feedback.rewards_pool_after_feedback = outlet.rewards_pool
-          outlet.save
-        end
-        current_user.with_lock do
-          current_user.points_available += points
-          @feedback.user_points_after_feedback += current_user.points_available
-          current_user.save
-        end
+        outlet.add_points_to_rewards_poll(points)
+        current_user.add_points_to_available_points(points)
+        @feedback.rewards_pool_after_feedback = outlet.rewards_pool
+        @feedback.user_points_after_feedback  = current_user.points_available
         @feedback.user = current_user
         @feedback.code = nil
-        @feedback.completed = true 
+        @feedback.completed = true
         if @feedback.update(feedback_params)
           render json: {points: @feedback.points}, status: :ok
         else
@@ -72,7 +69,7 @@ class Api::V1::FeedbacksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_feedback
-      @feedback = Feedback.find(params[:id])
+      @feedback = Feedback.where(id: params[:id]).first
     end
 
     # Use callbacks to share common setup or constraints between actions.

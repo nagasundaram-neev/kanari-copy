@@ -28,7 +28,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 	</style>
 	<div data-role="content">
 		<div class="username">
-			<div class="home" ng-click="home()"></div>
+			<!-- <div class="home" ng-click="home()"></div> -->
 			<div class="signUp">
 				LEAVE FEEDBACK
 			</div>
@@ -48,33 +48,33 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 		<div class="keypad" ng-show="optionKeypad">
 			<div class="menDiv">
 				<div class="backColr" id="feed_0" ng-click="select_feedback_category('0')">
-					<%= image_tag 'b_food_1.png' %>
+					<%= image_tag 'b_food_3.png' %>
 					<span class="feedbackStep2Txt">FOOD</span>
 				</div>
 				<div class="backColr" id="feed_1" ng-click="select_feedback_category('1')">
-					<%= image_tag 'b_friendlines_1.png' %>
+					<%= image_tag 'b_friendlines_3.png' %>
 					<span class="feedbackStep2Txt">FRIENDLINESS</span>
 				</div>
 				<div class="clr"></div>
 			</div>
 			<div class="menDiv">
 				<div class="backColr" id="feed_2" ng-click="select_feedback_category('2')">
-					<%= image_tag 'b_speed_1.png' %>
+					<%= image_tag 'b_speed_3.png' %>
 					<span class="feedbackStep2Txt">SPEED</span>
 				</div>
 				<div class="backColr" id="feed_3" ng-click="select_feedback_category('3')">
-					<%= image_tag 'b_ambiance_1.png' %>
+					<%= image_tag 'b_ambiance_3.png' %>
 					<span class="feedbackStep2Txt">AMBIANCE</span>
 				</div>
 				<div class="clr"></div>
 			</div>
 			<div class="menDiv">
 				<div class="backColr" id="feed_4" ng-click="select_feedback_category('4')">
-					<%= image_tag 'b_cleanliness_1.png' %>
+					<%= image_tag 'b_cleanliness_3.png' %>
 					<span class="feedbackStep2Txt">CLEANLINESS</span>
 				</div>
 				<div class="backColr" id="feed_5" ng-click="select_feedback_category('5')">
-					<%= image_tag 'b_value_1.png' %>
+					<%= image_tag 'b_value_3.png' %>
 					<span class="feedbackStep2Txt">VALUE FOR MONEY</span>
 				</div>
 				<div class="clr"></div>
@@ -108,7 +108,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			</div>
 		</div>
 		<div class="footerDiv">
-			<div class="prev" ng-click="previous()">
+			<div class="prev" ng-click="previous()" ng-show="prev">
 				<%= image_tag 'y_arrow_left.png' %>
 				<div class="prevTxt" >
 					PREVIOUS

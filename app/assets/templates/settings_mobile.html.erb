@@ -21,14 +21,17 @@
 			<div class="ui-input-text ui-body-a">
 				<input data-theme="a" data-inline="true" type="email" name="txtPassword" ng-model="email" class="passwordTxt" placeholder="Email" readonly/>
 			</div>
-			<div class="ui-input-text ui-body-a" ng-click="changePassword()"> 
-				<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="currentPassword" class="passwordTxt" placeholder="Change Password"/>
-			</div>
-			<!-- <div class="ui-input-text ui-body-a">
-				<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="newPassword" class="passwordTxt" placeholder="New Password"/>
+			<div class="ui-input-text ui-body-a" ng-click="changePassword()">
+				<input data-theme="a" data-inline="true" type="password" name="txtPassword" class="passwordTxt" placeholder="Change Password"/>
 			</div>
 			<div class="ui-input-text ui-body-a">
-				<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="confirmPassword" class="passwordTxt" placeholder="Confirm Password"/>
+				<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="currentPassword" class="passwordTxt" placeholder="Current Password"/>
+			</div>
+			<!-- <div class="ui-input-text ui-body-a">
+			<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="newPassword" class="passwordTxt" placeholder="New Password"/>
+			</div>
+			<div class="ui-input-text ui-body-a">
+			<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="confirmPassword" class="passwordTxt" placeholder="Confirm Password"/>
 			</div> -->
 			<div class="ui-input-text ui-body-a">
 				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="location" class="passwordTxt" placeholder="Location"/>
@@ -88,15 +91,18 @@
 				<a href="#"><%= image_tag 'ic_gplus_yellow.png' %></a>
 			</div>
 			<div data-role="fieldcontain" class="profileTextBottom" align="center">
-				<h2>HISTORY</h2>
+				<h2>MY HISTORY</h2>
 			</div>
 			<div id="transactionHistory" ng-click="tansactionHistory()">
 				<span>View Kanari History</span>
 				<a href="#"><%= image_tag 'ic_calender_yellow.png' %></a>
 				<div class="clr"></div>
 			</div>
-			<input type="button" class="signBtn" ng-click="saveProfile()" data-inline="true" value="Save"/>
-			
+
 		</div>
+	</div>
+	<div class="clr"></div>
+	<div class="settingDiv footerDiv" style=" position: relative; margin: 0;">
+		<input type="button" class="signBtn" ng-click="saveProfile()" data-inline="true" value="Save"/>
 	</div>
 </div>

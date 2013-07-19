@@ -24,29 +24,20 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			</div>
 			<div class="menDiv">
 				<div class="backColr">
-					<div class="count">
-						{{digit1}}
-					</div>
+					{{digit1}}
+					
 				</div>
 				<div class="backColr">
-					<div class="count">
 						{{digit2}}
-					</div>
 				</div>
 				<div class="backColr">
-					<div class="count">
 						{{digit3}}
-					</div>
 				</div>
 				<div class="backColr">
-					<div class="count">
 						{{digit4}}
-					</div>
 				</div>
 				<div class="backColr" style="border-right:0">
-					<div class="count">
 						{{digit5}}
-					</div>
 				</div>
 				<div class="clr"></div>
 			</div>
@@ -54,55 +45,37 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 		<div class="keypad">
 			<div class="secondRow">
 				<div class="backColr" ng-click="enterValues('1')">
-					<div class="count">
 						1
-					</div>
 				</div>
 				<div class="backColr" ng-click="enterValues('2')">
-					<div class="count">
 						2
-					</div>
 				</div>
 				<div class="backColr" ng-click="enterValues('3')">
-					<div class="count">
 						3
-					</div>
 				</div>
 				<div class="clr"></div>
 			</div>
 			<div class="secondRow">
 				<div class="backColr" ng-click="enterValues('4')">
-					<div class="count" >
 						4
-					</div>
 				</div>
 				<div class="backColr" ng-click="enterValues('5')">
-					<div class="count">
 						5
-					</div>
 				</div>
 				<div class="backColr" ng-click="enterValues('6')">
-					<div class="count">
 						6
-					</div>
 				</div>
 				<div class="clr"></div>
 			</div>
 			<div class="secondRow">
 				<div class="backColr" ng-click="enterValues('7')">
-					<div class="count">
 						7
-					</div>
 				</div>
 				<div class="backColr" ng-click="enterValues('8')">
-					<div class="count">
 						8
-					</div>
 				</div>
 				<div class="backColr" ng-click="enterValues('9')">
-					<div class="count">
 						9
-					</div>
 				</div>
 				<div class="clr"></div>
 			</div>
@@ -112,13 +85,11 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 						C
 					</div>
 				</div>
-				<div class="backColr" style=" padding: 4.6% 0;">
-					<div class="count" ng-click="enterValues('0')" >
+				<div class="backColr" style=" padding:  0;" ng-click="enterValues('0')">
 						0
-					</div>
 				</div>
 				<div class="nextBackColr" ng-click="next()">
-					<div class="next">
+					<div class="nxtTxt">
 						NEXT
 					</div>
 					<%= image_tag 'p_arrow_right.png' %>

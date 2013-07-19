@@ -5,7 +5,22 @@ When "the contents of $code should be a 5 digit number" do |code|
 end
 
 Given(/^A feedback exists with the following attributes:$/) do |table|
-  Feedback.create!(table.rows_hash)
+  @feedback = Feedback.create!(table.rows_hash)
+end
+
+Given(/^the time limit for giving feedback is "([^"]*)" minutes$/) do |time_limit|
+  setting = GlobalSetting.where(setting_name: "feedback_expiry_time").first
+  if setting.nil?
+    GlobalSetting.create(setting_name: "feedback_expiry_time", setting_value: time_limit)
+  else
+    setting.update_attributes(setting_value: time_limit)
+  end
+end
+
+Given(/^the time for giving feedback has been expired$/) do
+  setting = GlobalSetting.where(setting_name: "feedback_expiry_time").first
+  @feedback.created_at = Time.zone.now - (setting.setting_value.to_i + 5).minutes
+  @feedback.save
 end
 
 Given "the following feedbacks exist" do |hashes|
@@ -39,6 +54,18 @@ end
 
 Then(/^the feedback with id "(.*?)" should be completed$/)do |feedback_id|
   Feedback.find(feedback_id).completed.should == true
+end
+
+Then(/^the feedback with id "(.*?)" should have kanari code$/)do |feedback_id|
+  Feedback.find(feedback_id).code.should_not == nil
+end
+
+Then(/^the feedback with id "(.*?)" should not be completed$/)do |feedback_id|
+  Feedback.find(feedback_id).completed.should_not == true
+end
+
+Given(/^there exists no feedback with id "(.*?)"$/) do |feedback_id|
+  Feedback.delete(feedback_id)
 end
 
 Given(/^the following feedbacks exist for "(.*?)"$/) do |date, hashes|
