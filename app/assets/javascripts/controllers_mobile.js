@@ -286,6 +286,7 @@ module.controller('homeController', function($scope, $http, $location) {
 				signInCount = 0;
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+				$scope.points = "0";
 			});
 
 		} else {
