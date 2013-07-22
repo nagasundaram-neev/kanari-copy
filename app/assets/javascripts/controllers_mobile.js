@@ -450,9 +450,6 @@ module.controller('changePasswordController', function($scope, $http, $location)
 				$scope.error = data.errors[0];
 				$scope.errorMsg = true;
 				$scope.succMsg = false;
-				$scope.currentPassword = "";
-				$scope.confirmPassword = "";
-				$scope.newPassword = "";
 			});
 
 		}

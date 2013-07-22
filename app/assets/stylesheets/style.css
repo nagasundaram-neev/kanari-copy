@@ -103,7 +103,8 @@
 	margin: 5% 0 0;
 }
 #home .imgDiv {
-	margin: 0 10%;
+	/*margin: 0 10%;*/
+	margin: 0 16%;
 }
 
 .searchDiv .ui-corner-all {
@@ -1013,6 +1014,7 @@ img, object {
 	text-transform: uppercase;
 	text-shadow: none;
 	color: #664765;
+	font-weight:bold;	
 	margin-top: 1%
 }
 .genderBtn {
@@ -1570,7 +1572,7 @@ img, object {
 	/*font-size: 2em;
 	 font-family: KanariLightFont;
 	 font-weight: 600;*/
-	font: 600 95% KanariLightFont;
+	/*font: 600 95% KanariLightFont;*/
 }
 .loginBtn, .signBtn {
 	width: 100% !important;
