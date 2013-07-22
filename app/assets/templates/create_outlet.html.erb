@@ -129,12 +129,12 @@
 							<select ng-show="form_outlet2" ng-model='formoutlet2' ng-change="selectOutlet2()"  ng-options='outletType.id as outletType.name for outletType in outletTypes'>
 								<option value="">Select Outlet</option>
 							</select>
-							<select ng-show="form_outlet3" ng-model='formoutlet3' ng-change="selectOutlet3()"  ng-options='outletType.id as outletType.name for outletType in outletTypes'>
+							<select id="select3" ng-show="form_outlet3" ng-model='formoutlet3' ng-change="selectOutlet3()"  ng-options='outletType.id as outletType.name for outletType in outletTypes'>
 								<option value="">Select Outlet</option>
 							</select>
 							<br>
 							<span class="customErr input-help" ng-show="outletError">Please select different outlet type.</span>
-							<span class="customErr input-help" ng-show="outletError1">Please select primary outlet type.</span>
+							<span class="customErrCls customErr input-help" ng-show="outletError1">Please select primary outlet type.</span>
 							<span class="customErr input-help" ng-show="outletError2">Please select primary & secondary outlet type.</span>
 
 						</div>
@@ -150,12 +150,12 @@
 							<select ng-show="form_cuisine2" ng-model='formcuisine2' ng-change="selectCuisine2()"  ng-options='cuisineType.id as cuisineType.name for cuisineType in cuisineTypes'>
 								<option value="">Select Cuisine</option>
 							</select>
-							<select ng-show="form_cuisine3" ng-model='formcuisine3' ng-change="selectCuisine3()"  ng-options='cuisineType.id as cuisineType.name for cuisineType in cuisineTypes'>
+							<select id="selectC3" ng-show="form_cuisine3" ng-model='formcuisine3' ng-change="selectCuisine3()"  ng-options='cuisineType.id as cuisineType.name for cuisineType in cuisineTypes'>
 								<option value="">Select Cuisine</option>
 							</select>
 							<br/>
 							<span class="customErr input-help" ng-show="cuisineError">Please select different cuisine type.</span>
-							<span class="customErr input-help" ng-show="cuisineError1">Please select primary cuisine type.</span>
+							<span class="customErrCls1 customErr input-help" ng-show="cuisineError1">Please select primary cuisine type.</span>
 							<span class="customErr input-help" ng-show="cuisineError2">Please select primary & secondary cuisine type.</span>
 
 						</div>
