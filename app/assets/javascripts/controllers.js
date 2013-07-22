@@ -1070,6 +1070,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				});
 			} else {
 				$scope.valide_phone = true;
+				$scope.success1 = false;
 			}
 		};
 
@@ -1104,8 +1105,12 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.listTabletIds();
 
 		$scope.create_tabletId = function(createTabletId) {
-			if ($scope.createTabletId.$valid) {
+			if ($scope.createTabletId.$valid && $("#txt").val()) {
 				//alert("in submit");
+				$('#tabBtn').addClass("tabletBtn1");
+				 
+				$('.tabletBtn1').show();
+				$('.tabletBtn2').hide();
 				var param = {
 					"user" : {
 						"password" : $scope.tabletId_password,
@@ -1125,10 +1130,10 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					console.log("data in success " + data + " status " + status);
 					$scope.listTabletIds();
 					$scope.errorTabletId = false;
-					//$scope.manager_id = data.manager.id;
 					$scope.successTabletId = true;
-					//$scope.getManagerList();
 					$('#tabletIdForm')[0].reset();
+					$("#txt").val("");
+					
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
 					$scope.errorMsg = data.errors[0];

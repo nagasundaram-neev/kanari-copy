@@ -36,7 +36,7 @@ module.directive('map', function($http) {
 		controller : function($scope) {
 
 		},
-		link : function(scope, element, attrs) {
+		link : function(scope, element, attrs) {					            
 			scope.$on('clickMessageFromParent',  function (scopeDetails, msgFromParent) {
 			var queryStringId = getUrlVars()["outletId"];
 			var geocoder = new google.maps.Geocoder();
@@ -157,6 +157,20 @@ module.directive('showtab',
                     e.preventDefault();
                     $(element).tab('show');
                 });
+            }
+        };
+    });
+
+module.directive('ngModelOnblur',
+    function () {
+        return {
+            link: function (scope, element, attrs) {
+                 element.bind('blur', function() {
+                scope.$apply(function() {
+                $('#tabBtn').removeClass("tabletBtn1");
+               $('#tabBtn').removeAttr("style");
+                });         
+            });
             }
         };
     });
