@@ -1146,13 +1146,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			}
 		};
 
-		// $scope.update = function() {
-		// $("#formid").addClass("row form-horizontal");
-		// $("#formid input").addClass("ng-dirty ng-invalid");
-		// $("#formid .input-help").show();
-		// //$("#formid input").removeClass(".ng-dirty.ng-invalid");
-		// }
-
 		$scope.changeTab = function(currentTab) {
 			if ($scope.updateMode) {
 				if (currentTab == "profileShow") {

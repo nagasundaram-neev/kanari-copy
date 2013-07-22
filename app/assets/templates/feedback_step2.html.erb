@@ -101,10 +101,15 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				<div class="msg">
 					What advice would you leave for the manager?
 				</div>
-				 <textarea name="advice" type="text" ng-model="comment" placeholder="....."></textarea>
+				<textarea name="advice" type="text" ng-model="comment" placeholder="....."></textarea>
 				<!-- <div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
-					<input data-theme="a" data-inline="true" type="text" ng-model="comment" placeholder="...."/>
+				<input data-theme="a" data-inline="true" type="text" ng-model="comment" placeholder="...."/>
 				</div> -->
+				<p class="errorMsg" ng-show="erromsg">
+					{{error}} <br />
+					Have another code <a ng-click="goBack()">Click here</a>
+				</p>
+				<div class="clr"></div>
 			</div>
 		</div>
 		<div class="footerDiv">

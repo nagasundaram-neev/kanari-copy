@@ -1,6 +1,8 @@
 <div data-role="page" data-theme="b" id="acceptInvitationStep2" ng-controller="acceptInvitation2Ctrl" class="main_content span12">
 	<style>
-		.input-help{ left: 483px;}
+		.input-help {
+			left: 483px;
+		}
 	</style>
 	<div class="loginDiv innerDiv" data-role="content" style=" width: 45%;">
 		<h1>Create Profile</h1>
@@ -17,6 +19,9 @@
 						</lable>
 						<div class="controls">
 							<input data-theme="a" data-inline="true" type="text" name="name" ng-model="name" placeholder="Bussiness name" required/>
+							<div class="input-help">
+								<h4>Please provide business name</h4>
+							</div>
 							<div class="clr"></div>
 						</div>
 					</div>
@@ -36,6 +41,9 @@
 						</lable>
 						<div class="controls">
 							<input data-theme="a" data-inline="true" type="text" name="registered_address_line_1" ng-model="registered_address_line_1" value="" placeholder="Registered Address Line 1" required/>
+							<div class="input-help">
+								<h4>Please provide address1</h4>
+							</div>
 							<div class="clr"></div>
 						</div>
 					</div>
@@ -45,6 +53,9 @@
 						</lable>
 						<div class="controls">
 							<input data-theme="a" data-inline="true" type="text" name="registered_address_line_2" ng-model="registered_address_line_2" value="" placeholder="Registered Address Line 2" />
+							<div class="input-help">
+								<h4>Please provide address2</h4>
+							</div>
 							<div class="clr"></div>
 						</div>
 					</div>
@@ -72,6 +83,9 @@
 						</lable>
 						<div class="controls">
 							<input data-theme="a" data-inline="true" type="text" name="mailing_address_line_1" ng-model="mailing_address_line_1" value="" placeholder="Mailing Address Line 1" required/>
+							<div class="input-help">
+								<h4>Please provide maling address1</h4>
+							</div>
 							<div class="clr"></div>
 						</div>
 					</div>
@@ -81,6 +95,9 @@
 						</lable>
 						<div class="controls">
 							<input data-theme="a" data-inline="true" type="text" name="mailing_address_line_2" ng-model="mailing_address_line_2" value="" placeholder="Mailing Address Line 2" />
+							<div class="input-help">
+								<h4>Please provide maling address2</h4>
+							</div>
 							<div class="clr"></div>
 						</div>
 					</div>
@@ -137,7 +154,9 @@
 							Click here for <a href="#/login">login.</a>
 						</p>
 						<p ng-hide="success"></p>
-						<p ng-show="valide_phone" class="errorMsg">Invalid Phone Number</p
+						<p ng-show="valide_phone" class="errorMsg">
+							Invalid Phone Number
+						</p
 					</div>
 				</div>
 			</form>
@@ -145,7 +164,7 @@
 	</div>
 </div>
 <script>
-$(document).ready(function() {
+	$(document).ready(function() {
 		$(".setTelephone").mask("(+999)-9?9-9999999");
 		$(".setTelephone").on("blur", function() {
 			var last = $(this).val().substr($(this).val().lastIndexOf("-") + 1);
