@@ -85,8 +85,10 @@
 							<lable>
 								Restaurant Name<span class="star">*</span>
 							</lable>
-
 							<input data-theme="a" data-inline="true" placeholder="Restaurant Name" type="text" name="restaurant_name" ng-model="restaurant_name" class="passwordTxt" required />
+							<div class="input-help">
+								<h4>Please enter a restaurant name</h4>
+							</div>
 						</div>
 					</div>
 					<div class="control-group">
@@ -95,6 +97,9 @@
 								Restaurant Location<span class="star">*</span>
 							</lable>
 							<input data-theme="a" data-inline="true" placeholder="Restaurant Location" type="text" name="restaurant_location"  ng-model="restaurant_location" class="passwordTxt" required />
+							<div class="input-help">
+								<h4>Please enter a restaurant location</h4>
+							</div>
 						</div>
 					</div>
 					<div class="control-group">
@@ -278,7 +283,7 @@
 								<br />
 								<input type="button" class="btn_cls" ng-click="add_new_manager()" data-inline="true" value="Add a new manager" />
 								<br/>
-								<p ng-show="successmgr" class="successMsg">
+								<p ng-show="successmgr" class="successMsgMnger">
 									Manager has been updated successfully.
 								</p>
 								<p ng-hide="successmgr" ></p>
@@ -300,7 +305,10 @@
 							<lable>
 								First Name<span class="star">*</span>
 							</lable>
-							<input type="text" ng-change="update()" placeholder="First Name" ng-model="first_name" required>
+							<input type="text"  placeholder="First Name" ng-model="first_name" required>
+							<div class="input-help">
+								<h4>Please enter first name</h4>
+							</div>
 						</div>
 					</div>
 					<div class="control-group">
@@ -309,6 +317,9 @@
 								Last Name<span class="star">*</span>
 							</lable>
 							<input type="text" placeholder="Last Name" ng-model="last_name" required>
+							<div class="input-help">
+								<h4>Please enter last name</h4>
+							</div>
 						</div>
 					</div>
 					<div class="control-group">

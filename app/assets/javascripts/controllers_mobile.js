@@ -676,6 +676,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 	$scope.recomendation = false;
 	$scope.recomendationBar = false;
 	$scope.counts = [];
+	$scope.erromsg = false;
 	$scope.willRecommend = "";
 	$scope.feedBackArray = [0, 0, 0, 0, 0, 0];
 	$scope.feedBackSize = 6;
@@ -791,6 +792,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			$scope.nextFlag = -1;
 			$(".nxt").css("width", "49.5%");
 			$(".nxtTxt").html("SUBMIT");
+			$scope.erromsg = false;
 			$(".nxt img").hide();
 			console.log("feedback " + $scope.feedBackArray);
 		} else if ($scope.nextFlag == -1) {
@@ -816,6 +818,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			}).success(function(data, status) {
 				console.log("User Role " + data + " status " + status);
 				pointsEarned = data.points;
+				$scope.erromsg = false;
 				if (getCookie('authToken')) {
 					$location.url("/feedbackSubmitSuccess");
 				} else {
@@ -824,9 +827,16 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 				}
 
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status);
+				console.log("data in error" + data + " status " + status);
+				$scope.error = data.errors[0];				
+				$scope.erromsg = true;
 			});
 		}
+	};
+	
+	$scope.goBack = function(){
+		deleteCookie('feedbackId');
+		$location.url("/feedback");
 	};
 
 	$scope.previous = function() {
