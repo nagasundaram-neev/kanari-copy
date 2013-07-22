@@ -241,12 +241,20 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 					$location.url("/outlets");
 				} else if (getCookie('userRole') == "manager" && data.registration_complete) {
 					$location.url("/outlets");
+				} else if (getCookie("userRole") == "user") {
+					$scope.error = "You are not authenticated to use this app";
+					$scope.erromsg = true;
 				}
 
 			}).error(function(data, status) {
 				console.log("data error" + data + " status " + status);
-				$scope.erromsg = true;
-				$scope.error = data.errors[0];
+				if (getCookie("userRole") == "user") {
+					$scope.error = "You are not authenticated to use this app";
+					$scope.erromsg = true;
+				} else {
+					$scope.error = "Invalid Email or Password";
+					$scope.erromsg = true;
+				}
 			});
 		};
 
@@ -1085,7 +1093,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$scope.successTabletId = false;
 			$scope.errorTabletId = false;
 		};
-		
+
 		$scope.listTabletIds = function() {
 			console.log("in tablet id lists");
 			var param = {
@@ -1108,7 +1116,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			if ($scope.createTabletId.$valid && $("#txt").val()) {
 				//alert("in submit");
 				$('#tabBtn').addClass("tabletBtn1");
-				 
+
 				$('.tabletBtn1').show();
 				$('.tabletBtn2').hide();
 				var param = {
@@ -1119,8 +1127,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					},
 					"auth_token" : getCookie('authToken')
 				}
-				
-				console.log("outlet id "+$routeParams.outletId);
+
+				console.log("outlet id " + $routeParams.outletId);
 
 				$http({
 					method : 'post',
@@ -1133,7 +1141,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.successTabletId = true;
 					$('#tabletIdForm')[0].reset();
 					$("#txt").val("");
-					
+
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
 					$scope.errorMsg = data.errors[0];
@@ -1149,21 +1157,21 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.changeTab = function(currentTab) {
 			if ($scope.updateMode) {
 				if (currentTab == "profileShow") {
-					 $('#viewmap').hide();
-					 $('#hidemap').show();
+					$('#viewmap').hide();
+					$('#hidemap').show();
 					$scope.profileShow = true;
 					$scope.locationShow = false;
 					$scope.TabletIdShow = false;
 					$scope.permissionShow = false;
 					$scope.successMsg = false;
 					$scope.ReportShow = false;
-					$(".customErr").css("display","none");
+					$(".customErr").css("display", "none");
 					$('#formid')[0].reset();
 					//$(".input-help").css("display","none");
 				} else if (currentTab == "locationShow") {
-					 $('#viewmap').show();
-					 $('#hidemap').hide();
-					 $scope.$broadcast('clickMessageFromParent', {
+					$('#viewmap').show();
+					$('#hidemap').hide();
+					$scope.$broadcast('clickMessageFromParent', {
 						data : "SOME msg to the child"
 					})
 					$scope.profileShow = false;
@@ -1171,31 +1179,31 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.TabletIdShow = false;
 					$scope.permissionShow = false;
 					$scope.ReportShow = false;
-					$(".customErr").css("display","none");
+					$(".customErr").css("display", "none");
 					//$(".input-help").css("display","none");
 				} else if (currentTab == "permissionShow") {
 					$('#viewmap').hide();
-					 $('#hidemap').show();
+					$('#hidemap').show();
 					$scope.profileShow = false;
 					$scope.locationShow = false;
 					$scope.TabletIdShow = false;
 					$scope.permissionShow = true;
 					$scope.ReportShow = false;
-					$(".customErr").css("display","none");
+					$(".customErr").css("display", "none");
 					//$(".input-help").css("display","none");
 				} else if (currentTab == "ReportShow") {
 					$('#viewmap').hide();
-					 $('#hidemap').show();
+					$('#hidemap').show();
 					$scope.profileShow = false;
 					$scope.locationShow = false;
 					$scope.permissionShow = false;
 					$scope.TabletIdShow = false;
 					$scope.ReportShow = true;
-					$(".customErr").css("display","none");
+					$(".customErr").css("display", "none");
 					//$(".input-help").css("display","none");
 				} else if (currentTab == "TabletIdShow") {
 					$('#viewmap').hide();
-					 $('#hidemap').show();
+					$('#hidemap').show();
 					$('.tabletId').hide();
 					$scope.listTabletIds();
 					$scope.profileShow = false;
@@ -1203,7 +1211,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.permissionShow = false;
 					$scope.ReportShow = false;
 					$scope.TabletIdShow = true;
-					$(".customErr").css("display","none");
+					$(".customErr").css("display", "none");
 					//$(".input-help").css("display","none");
 				}
 			}
