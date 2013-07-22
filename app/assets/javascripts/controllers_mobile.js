@@ -161,12 +161,22 @@ module.controller('loginController', function($scope, $http, $location) {
 				setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
 				setCookie('signInCount', data.sign_in_count, 0.29);
 			}
-			$location.url("/home");
+			if (getCookie('userRole') == "user") {
+				$location.url("/home");
+			} else if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff" || getCookie('userRole') == "manager") {
+				$scope.error = "You are not authenticated to use this app";
+				$scope.erromsg = true;
+			}
 		}).error(function(data, status) {
 			console.log($scope.password)
 			console.log("data " + $scope.email + " status " + status);
-			$scope.error = "Invalid Email or Password";
-			$scope.erromsg = true;
+			if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff") {
+				$scope.error = "You are not authenticated to use this app";
+				$scope.erromsg = true;
+			} else {
+				$scope.error = "Invalid Email or Password";
+				$scope.erromsg = true;
+			}
 		});
 	};
 	$scope.forgotPassword = function() {
@@ -450,9 +460,6 @@ module.controller('changePasswordController', function($scope, $http, $location)
 				$scope.error = data.errors[0];
 				$scope.errorMsg = true;
 				$scope.succMsg = false;
-				$scope.currentPassword = "";
-				$scope.confirmPassword = "";
-				$scope.newPassword = "";
 			});
 
 		}
@@ -679,6 +686,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 	$scope.recomendation = false;
 	$scope.recomendationBar = false;
 	$scope.counts = [];
+	$scope.erromsg = false;
 	$scope.willRecommend = "";
 	$scope.feedBackArray = [0, 0, 0, 0, 0, 0];
 	$scope.feedBackSize = 6;
@@ -766,7 +774,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_2.png');
 					$("#feed_" + i).css("background-color", "#CCCCCC");
 					$("#feed_" + i + " span").css("color", "#664765");
-				}else if ($scope.feedBackArray[i] == -1) {
+				} else if ($scope.feedBackArray[i] == -1) {
 					$scope.feedBackArray[i] = -1;
 					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_2.png');
 					$("#feed_" + i).css("background-color", "#664765");
@@ -794,6 +802,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			$scope.nextFlag = -1;
 			$(".nxt").css("width", "49.5%");
 			$(".nxtTxt").html("SUBMIT");
+			$scope.erromsg = false;
 			$(".nxt img").hide();
 			console.log("feedback " + $scope.feedBackArray);
 		} else if ($scope.nextFlag == -1) {
@@ -819,6 +828,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			}).success(function(data, status) {
 				console.log("User Role " + data + " status " + status);
 				pointsEarned = data.points;
+				$scope.erromsg = false;
 				if (getCookie('authToken')) {
 					$location.url("/feedbackSubmitSuccess");
 				} else {
@@ -827,9 +837,16 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 				}
 
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status);
+				console.log("data in error" + data + " status " + status);
+				$scope.error = data.errors[0];
+				$scope.erromsg = true;
 			});
 		}
+	};
+
+	$scope.goBack = function() {
+		deleteCookie('feedbackId');
+		$location.url("/feedback");
 	};
 
 	$scope.previous = function() {
@@ -846,7 +863,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_4.png');
 					$("#feed_" + i).css("background-color", "#CCCCCC");
 					$("#feed_" + i + " span").css("color", "#664765");
-				} else if ($scope.feedBackArray[i] == 1) {	
+				} else if ($scope.feedBackArray[i] == 1) {
 					$scope.feedBackArray[i] = 1;
 					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_4.png');
 					$("#feed_" + i).css("background-color", "#664765");
@@ -875,7 +892,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			$(".nxt").css("width", "49.5%");
 			$(".nxtTxt").html("NEXT");
 			$(".nxt img").show();
-		} 
+		}
 
 	};
 });

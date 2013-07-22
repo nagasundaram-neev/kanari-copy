@@ -38,12 +38,12 @@ class Outlet < ActiveRecord::Base
   end
 
   def insights params={}
-    today     = normalize_date(params[:date]) || Date.today
+    today     = normalize_date(params[:date]) || Time.zone.now.to_date
     yesterday = today - 1.day
     tomorrow  = today + 1.day
 
-    feedbacks_till_today     = self.feedbacks.completed.where("updated_at <= ?", tomorrow).limit(NPS_LIMIT)
-    feedbacks_till_yesterday = self.feedbacks.completed.where("updated_at <= ?", yesterday).limit(NPS_LIMIT)
+    feedbacks_till_today     = self.feedbacks.completed.where("updated_at < ?", tomorrow).limit(NPS_LIMIT)
+    feedbacks_till_yesterday = self.feedbacks.completed.where("updated_at < ?", today).limit(NPS_LIMIT)
     feedbacks_today          = feedbacks_till_today.select{|f| (f.updated_at.to_date == today)}
     feedbacks_yesterday      = feedbacks_till_today.select{|f| (f.updated_at.to_date == yesterday)}
 

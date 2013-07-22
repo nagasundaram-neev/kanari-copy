@@ -241,12 +241,20 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 					$location.url("/outlets");
 				} else if (getCookie('userRole') == "manager" && data.registration_complete) {
 					$location.url("/outlets");
+				} else if (getCookie("userRole") == "user") {
+					$scope.error = "You are not authenticated to use this app";
+					$scope.erromsg = true;
 				}
 
 			}).error(function(data, status) {
 				console.log("data error" + data + " status " + status);
-				$scope.erromsg = true;
-				$scope.error = data.errors[0];
+				if (getCookie("userRole") == "user") {
+					$scope.error = "You are not authenticated to use this app";
+					$scope.erromsg = true;
+				} else {
+					$scope.error = "Invalid Email or Password";
+					$scope.erromsg = true;
+				}
 			});
 		};
 
@@ -1168,13 +1176,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				});
 			}
 		};
-
-		// $scope.update = function() {
-		// $("#formid").addClass("row form-horizontal");
-		// $("#formid input").addClass("ng-dirty ng-invalid");
-		// $("#formid .input-help").show();
-		// //$("#formid input").removeClass(".ng-dirty.ng-invalid");
-		// }
 
 		$scope.changeTab = function(currentTab) {
 			if ($scope.updateMode) {
