@@ -1,4 +1,4 @@
-<div data-role="page" style="height: 585px;" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
+<div data-role="page" style="min-height: 585px;" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
 	<style>
 		input[type="image"], input[type="checkbox"], input[type="radio"] {
 			margin: 0;
@@ -452,7 +452,7 @@
 							<lable>
 								Password<span class="star">*</span>
 							</lable>
-							<input type="password" placeholder="Password" password-validate ng-model="tabletId_password" required>
+							<input type="password" id="txt" placeholder="Password" password-validate ng-model="tabletId_password" required>
 							<div class="input-help">
 								<h4>Password must meet the following requirements:</h4>
 								<ul>
@@ -493,7 +493,7 @@
 					</div>
 					<div class="control-group" style="margin: 10px 0 0 145px;">
 						<div class="controls">
-							<button type="submit" class="btn">
+							<button type="submit"  class="btn">
 								Create Tablet Id
 							</button>
 							<button class="btn" disabled>
