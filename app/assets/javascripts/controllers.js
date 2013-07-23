@@ -1174,6 +1174,24 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				});
 			}
 		};
+		
+		$scope.DeleteStaff = function(staffId) {
+			//alert(managerId);
+			var param = {
+				"auth_token" : getCookie('authToken')
+			};
+			$http({
+				method : 'delete',
+				url : '/api/staffs/' + staffId,
+				params : param,
+			}).success(function(data, status) {
+				console.log("Data in success " + data + " status " + status);
+				$scope.staff_deleted = "Tablet has been deleted successfully"
+				$scope.listTabletIds();
+			}).error(function(data, status) {
+				console.log("data in error " + data + " status " + status);
+			});
+		};
 
 		/**Start Outlet Manager Functionality**/
 		if($location.path() == "/outlet_manager")
