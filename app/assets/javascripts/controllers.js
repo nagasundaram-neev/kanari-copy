@@ -826,13 +826,12 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.outletError2 = false;
 				}
 			} else {
-				if( $('#select3').is(':visible') ) {
+				if ($('#select3').is(':visible')) {
 					$scope.outletError1 = true;
-					$('.customErrCls').css('left','555px');
-				}
-				else{
+					$('.customErrCls').css('left', '555px');
+				} else {
 					$scope.outletError1 = true;
-					$('.customErrCls').css('left','430px');
+					$('.customErrCls').css('left', '430px');
 				}
 			}
 
@@ -844,16 +843,16 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.outletError = true;
 					$scope.checkedOutletTypes.splice(1, 1);
 					$scope.formoutlet2 = 0;
-					$('.customErrCls').css('left','555px');
+					$('.customErrCls').css('left', '555px');
 
 				} else {
 					$scope.outletError = false;
 					$scope.checkedOutletTypes[1] = $scope.formoutlet2;
 					$scope.outletError2 = false;
-					$('.customErrCls').css('left','555px');
+					$('.customErrCls').css('left', '555px');
 				}
 			} else {
-				$('.customErrCls').css('left','555px');
+				$('.customErrCls').css('left', '555px');
 				$scope.outletError2 = true;
 				$scope.checkedOutletTypes.splice(1, 1);
 				if ($scope.formoutlet1) {
@@ -899,14 +898,13 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.cuisineError1 = false;
 					$scope.checkedCuisineTypes[0] = $scope.formcuisine1;
 				}
-			}else {
-				if( $('#selectC3').is(':visible') ) {
+			} else {
+				if ($('#selectC3').is(':visible')) {
 					$scope.cuisineError1 = true;
-					$('.customErrCls1').css('left','555px');
-				}
-				else{
+					$('.customErrCls1').css('left', '555px');
+				} else {
 					$scope.cuisineError1 = true;
-					$('.customErrCls1').css('left','430px');
+					$('.customErrCls1').css('left', '430px');
 				}
 			}
 		}
@@ -924,8 +922,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.cuisineError2 = false;
 				}
 			} else {
-					$('.customErrCls1').css('left','555px');
-					$scope.cuisineError2 = true;
+				$('.customErrCls1').css('left', '555px');
+				$scope.cuisineError2 = true;
 				if ($scope.formcuisine1) {
 					$scope.checkedCuisineTypes.splice(1, 1);
 				} else {
@@ -1176,6 +1174,16 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				});
 			}
 		};
+
+		/**Start Outlet Manager Functionality**/
+		if($location.path() == "/outlet_manager")
+		{
+			$rootScope.header = "Outlet Manager | Kanari";
+		}
+		$scope.DeleteManager = function(managerId) {
+			//alert(managerId);
+		}
+		/**End Outlet Manager Functionality**/
 
 		$scope.changeTab = function(currentTab) {
 			if ($scope.updateMode) {

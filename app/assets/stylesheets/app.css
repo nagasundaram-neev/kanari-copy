@@ -453,7 +453,7 @@ div.create_rest {
 	margin: 1% -18%;
 }
 
-.controls .successMsgMnger{
+.controls .successMsgMnger {
 	color: green;
 	margin-top: 10px;
 	font-size: 14px;
@@ -699,6 +699,12 @@ a.changePassword:hover {
 	width: 750px;
 	display: block;
 }
+.header_title span a {
+	color: #5A4166;
+}
+.header_title span a:hover {
+	text-decoration: none;
+}
 
 /***Add Outlet And CuisineType***/
 ul.outlet_cuisine_type {
@@ -884,3 +890,42 @@ input {
 .dateTimeList .colBorderRight {
 	border-right: 1px solid #ccc;
 }
+
+/**Outlet Manager**/
+.manager_listing {
+	float: left
+}
+.edit_manager {
+	border-left: 2px solid #CCCCCC;
+    float: right;
+    overflow: hidden;
+    padding-left: 22px;
+    width: 41%;
+}
+.manager_list_table {
+	border: 1px solid #ccc;
+	overflow: hidden;
+}
+.manager_list_Data {
+	border-top: 1px solid #ccc;
+	overflow: hidden;
+}
+.manager_list_table .heading{font-weight: bold;height: 28px;}
+.manager_list_table .heading, .manager_list_table .data {
+	border-right: 1px solid #ccc;
+	float: left;	
+	padding: 10px 10px 1000px 10px;
+	margin-bottom:-1000px;
+	text-align: center;
+	width: 115px;
+	word-wrap: break-word;
+}
+.border_right_none {
+	border-right: none !important;
+}
+.data_name{
+	display: block;
+    margin-bottom: 10px;
+}
+.manager_list_Data .data a{color: #5A4166;}
+#editManager{margin-left: 0;}
