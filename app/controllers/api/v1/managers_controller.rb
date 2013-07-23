@@ -28,9 +28,23 @@ class Api::V1::ManagersController < ApplicationController
     render json: managers, each_serializer: ManagerSerializer
   end
 
+  #DELELTE /managers/1
+  def destroy
+    manager = User.where(role: 'manager', id: params[:id]).first
+    render json: {errors: ["Manager record not found"]}, status: :not_found and return if manager.blank?
+    outlet = manager.managed_outlets.first
+    render json: {errors: ["Outlet not found"]}, status: :not_found and return if outlet.blank?
+    authorize! :delete_manager, outlet
+    if manager.destroy
+      render json: nil, status: :ok
+    else
+      render json: {errors: manager.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
   private
 
-    def create_manager_params
-      params.fetch(:user).permit([:email, :first_name, :last_name, :password, :password_confirmation, :phone_number])
-    end
+  def create_manager_params
+    params.fetch(:user).permit([:email, :first_name, :last_name, :password, :password_confirmation, :phone_number])
+  end
 end

@@ -154,7 +154,6 @@ Feature: Delete Staff
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"
         And his authentication token is "auth_token_123"
       When I authenticate as the user "auth_token_1234" with the password "random string"
-      When I authenticate as the user "auth_token_1234" with the password "random string"
       And I send a DELETE request to "/api/staffs/103"
       Then the response status should be "401"
       And the JSON response should be:
