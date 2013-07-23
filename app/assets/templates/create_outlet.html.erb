@@ -432,9 +432,9 @@
 							<div class="col1 colBorderTop colBorderRight">
 								Tablet Login
 							</div>
-							<!-- <div class="col1 colBorderTop">
-							Password
-							</div> -->
+							<div class="col1 colBorderTop colBorderRight">
+							Delete
+							</div>
 						</div>
 						<div ng-repeat="listTabs in listTabIds" class="dateTimeListRow clearfix">
 							<!-- <div class="col1">
@@ -443,12 +443,13 @@
 							<div class="col1 colBorderRight">
 								{{listTabs.tablet_id}}
 							</div>
-							<!-- <div class="col1 colBorderRight">
-							kanari123
-							</div> -->
+							<div class="col1 colBorderRight">
+							<a href="" ng-click="DeleteStaff(listTabs.id)">DELETE</a>
+							</div>
 						</div>
 					</div>
 				</div>
+				<p class="successMsg">{{staff_deleted}}</p>
 				<input type="button" class="btn_cls" ng-click="create_tablet_id()" data-inline="true" value="Add new tablet" />
 			</div>
 			<div data-role="fieldcontain" class="tabletId rightPanel">
