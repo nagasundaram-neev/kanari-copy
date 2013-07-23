@@ -38,6 +38,19 @@ class Api::V1::StaffsController < ApplicationController
     end
   end
 
+  def destroy
+    staff = User.where(role: 'staff', id: params[:id]).first
+    render json: {errors: ["Staff record not found"]}, status: :not_found and return if staff.blank?
+    outlet = staff.employed_outlet
+    render json: {errors: ["Outlet not found"]}, status: :not_found and return if outlet.blank?
+    authorize! :delete_staff, outlet
+    if staff.destroy
+      render json: nil, status: :ok
+    else
+      render json: {errors: staff.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
