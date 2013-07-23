@@ -12,17 +12,17 @@
 		</div>
 		<div align="center" class="titleDiv">
 			<div class="rest_name">
-				{{restaurant_name}}
+				<b>{{restaurant_name}}</b>
 				<span class="address">{{restaurant_address}}</span>
 			</div>
 			<div class="username rest_info">
-				<span class="img_outlet" style="width: 15%; padding: 1.5% 0 1.5% 0;"><%= image_tag 'ic_customer_care.png' %></span> {{contact_number}}
+				<span class="img_outlet" style="width: 11%; padding: 1% 0 1% 0;"><%= image_tag 'ic_customer_care.png' %></span> {{contact_number}}
 			</div>
 			<div class="username rest_info">
-				<span class="img_outlet" style="width: 15%; padding: 1.5% 0 1.5% 0;"><%= image_tag 'ic_at_white.png' %></span> {{email_address}}
+				<span class="img_outlet" style="width: 11%; padding: 1% 0 1% 0;"><%= image_tag 'ic_at_white.png' %></span> {{email_address}}
 			</div>
 			<div class="username rest_info" ng-click="locationMap()">
-				<span class="img_outlet" style="width: 15%; padding: 1.5% 0 1.5% 0;"><%= image_tag 'ic_location_white.png' %></span> Location map
+				<span class="img_outlet" style="width: 11%; padding: 1% 0 1% 0;"><%= image_tag 'ic_location_white.png' %></span> Location map
 			</div>
 			<div class="outlet_div rest_info">
 				<div class="outlet_title ">
@@ -43,7 +43,7 @@
 				<div class="clr"></div>
 			</div>
 			<div class="outlet_div rest_info">
-				<div class="outlet_title ">
+				<div class="outlet_title">
 					<span class="img_outlet"><%= image_tag 'ic_opening_hrs.png' %></span> <span class="title_outlet"> Opening hours</span>
 				</div>
 				<div class="outlet_info" style="padding: 1% 0;">
@@ -53,10 +53,10 @@
 			</div>
 
 			<div class="outlet_div rest_info ">
-				<div class="outlet_title">
+				<div class="outlet_work">
 					<span class="img_outlet"><%= image_tag 'ic_delivery.png' %></span> <span class="title_outlet"> Delivery</span>
 				</div>
-				<div class="outlet_info outlet_serves">
+				<div class="outlet_info outlet_serves imgCenter">
 					<img src="/assets/ic_ticks.png" ng-show="delivery" />
 					<img src="/assets/ic_ticks_grey.png" ng-hide="delivery"/>
 					<!-- <%= image_tag 'ic_ticks.png' %>
@@ -65,10 +65,10 @@
 				<div class="clr"></div>
 			</div>
 			<div class="outlet_div rest_info">
-				<div class="outlet_title">
+				<div class="outlet_work">
 					<span class="img_outlet"><%= image_tag 'ic_alcohol.png' %></span> <span class="title_outlet">Serves Alcohol</span>
 				</div>
-				<div class="outlet_info outlet_serves">
+				<div class="outlet_info outlet_serves imgCenter">
 					<img src="/assets/ic_ticks.png" ng-show="alcohol" />
 					<img src="/assets/ic_ticks_grey.png" ng-hide="alcohol"/>
 					<!-- <%= image_tag 'ic_ticks.png' %>
@@ -77,10 +77,10 @@
 				<div class="clr"></div>
 			</div>
 			<div class="outlet_div rest_info">
-				<div class="outlet_title ">
+				<div class="outlet_work ">
 					<span class="img_outlet"><%= image_tag 'ic_outdoor.png' %></span> <span class="title_outlet"> Outdoor seating</span>
 				</div>
-				<div class="outlet_info outlet_serves">
+				<div class="outlet_info outlet_serves imgCenter">
 					<img src="/assets/ic_ticks.png" ng-show="outDoor_seating" />
 					<img src="/assets/ic_ticks_grey.png" ng-hide="outDoor_seating"/>
 					<!-- <%= image_tag 'ic_ticks.png' %>
@@ -94,12 +94,12 @@
 			<div class="prev" ng-click="previous()">
 				<%= image_tag 'y_arrow_left.png' %>
 				<div class="prevTxt" >
-					PREVIOUS
+					BACK
 				</div>
 			</div>
 			<div class="nxtRest" ng-click="redeemUpto()">
 				<div class="nxtTxt" >
-					REDEEM UP TO<br/> AED 100
+					REDEEM UP TO AED 100
 				</div>
 				<div class="clr"></div>
 			</div>

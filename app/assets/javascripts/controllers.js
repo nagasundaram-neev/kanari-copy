@@ -257,7 +257,6 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 				}
 			});
 		};
-
 		$scope.getLogin();
 	};
 

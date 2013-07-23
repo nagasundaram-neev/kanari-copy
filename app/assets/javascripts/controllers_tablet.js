@@ -347,7 +347,7 @@ module.controller('insightsController', function($scope, $http, $location) {
 				if ($scope.valueDailyChange > 0) {
 					$scope.valueFlag = 1;
 				} else {
-					$scope.valueFlag = 1;
+					$scope.valueFlag = 0;
 				}
 
 				$scope.netScoreLike = data.feedback_insights.net_promoter_score.like;
