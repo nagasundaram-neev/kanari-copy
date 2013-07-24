@@ -59,6 +59,7 @@ class Ability
       can :list_staff, Outlet, customer: user.customer
       can :delete_staff, Outlet, customer: user.customer
       can :delete_manager, Outlet, customer: user.customer
+      can :update_manager, Outlet, customer: user.customer
     when 'manager'
       can :read, Outlet, manager_id: user.id
       can :manage, Outlet, manager_id: user.id

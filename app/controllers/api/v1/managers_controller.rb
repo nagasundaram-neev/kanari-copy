@@ -42,9 +42,29 @@ class Api::V1::ManagersController < ApplicationController
     end
   end
 
+  #PUT /managers/1
+  def update
+    manager = User.where(role: 'manager', id: params[:id]).first
+    render json: {errors: ["Manager record not found"]}, status: :not_found and return if manager.blank?
+    outlet = manager.managed_outlets.first
+    render json: {errors: ["Outlet not found"]}, status: :not_found and return if outlet.blank?
+    authorize! :update_manager, outlet
+    
+    if manager.update(update_manager_params)
+      render json: nil, status: :ok
+    else
+      render json: {errors: manager.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def create_manager_params
     params.fetch(:user).permit([:email, :first_name, :last_name, :password, :password_confirmation, :phone_number])
   end
+  
+  def update_manager_params
+    params.fetch(:manager).permit([:email, :first_name, :last_name, :password, :password_confirmation, :phone_number])
+  end
+
 end
