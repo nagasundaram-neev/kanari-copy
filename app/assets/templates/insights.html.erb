@@ -3,28 +3,27 @@
 	<div class="insight_graph">
 		<!-- <highchart id="chart1" series="chart.series" title="chart.title" options="chart.options"></highchart> -->
 		<div class="score_1">
-			<div class="net_score">
-				<span class="txt1">Net Promoter
-					<br/>
-					Score</span>
-				<span class="rate_minus" style="width: {{netScoreDisLike*4.5}}px">&nbsp;</span>
-				<span class="rateMValue rate_minus" ng-switch on="netScoreDisLike"><span ng-switch-when="0">{{netScoreDisLike}}%</span><span ng-switch-default>-{{netScoreDisLike}}%</span></span>
+			<div class="net_promo_score">
+				<span class="txt1">Net Promoter	Score</span>
+				<div class="netScore"> {{netScore}} </div>
+				<!-- <span class="rate_minus" style="width: {{netScoreDisLike*4.5}}px">&nbsp;</span>
+				<span class="rateMValue rate_minus" ng-switch on="netScoreDisLike"><span ng-switch-when="0">{{netScoreDisLike}}%</span><span ng-switch-default>-{{netScoreDisLike}}%</span></span> -->
 				<!-- <span class="rateMValue rate_minus">-{{netScoreDisLike}}%</span> -->
 			</div>
 			<div class="daily_change">
-				<span class="rate_plus" style="width: {{netScoreLike*4.5}}px">&nbsp;</span>
-				<span class="ratePValue rate_plus" ng-switch on="netScoreLike"><span ng-switch-when="0">{{netScoreLike}}%</span><span ng-switch-default>{{netScoreLike}}%</span></span>
+				<span class="net_rate_plus" style="width: {{netScore*4.5}}px">&nbsp;</span>
+				<!-- <span class="ratePValue rate_plus" ng-switch on="netScoreLike"><span ng-switch-when="0">{{netScoreLike}}%</span><span ng-switch-default>{{netScoreLike}}%</span></span> -->
 				<!-- <span class="ratePValue rate_plus">{{netScoreLike}}%</span> -->
-				<div ng-switch on="speedFlag">
-					<div class="daily_change_span" ng-switch-when="1">
-						<%= image_tag 'ic_yellow_arrow.png' %>
-						<span class="value1" ng-switch on="netScoreDailyChange"><span ng-switch-when="0">{{netScoreDailyChange}}%</span> <span ng-switch-default>+{{netScoreDailyChange}}%</span></span>
-						<!-- <span class="value1">+{{netScoreDailyChange}}%</span> -->
-					</div>
-					<div class="daily_change_span" ng-switch-when="0">
-						<%= image_tag 'ic_red_arrow.png' %>
-						<span class="value1">{{netScoreDailyChange}}%</span>
-					</div>
+				<div class="daily_change_score">
+					<span>Daily Change</span>
+					<div class="netScore">{{netScoreDailyChange}}%</div>
+					<!-- <div class="daily_change_span" ng-switch-when="1">
+					<%= image_tag 'ic_yellow_arrow.png' %>
+					<span class="value1" ng-switch on="netScoreDailyChange"><span ng-switch-when="0">{{netScoreDailyChange}}%</span> <span ng-switch-default>+{{netScoreDailyChange}}%</span></span>
+					</div> -->
+					<!-- <div class="daily_change_span" ng-switch-when="0">
+					<span class="value1">{{netScoreDailyChange}}%</span>
+					</div> -->
 				</div>
 			</div>
 		</div>
