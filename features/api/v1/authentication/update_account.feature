@@ -14,7 +14,6 @@ Feature: Update account
         "user" : {
           "first_name": "Kobe",
           "last_name": "Bryant",
-          "email": "kobe@gmail.com",
           "password": "kobe1234",
           "password_confirmation": "kobe1234",
           "date_of_birth": "06-05-1987",
@@ -33,13 +32,13 @@ Feature: Update account
       And a user should be created with the following
         |first_name|Kobe|
         |last_name|Bryant|
-        |email|kobe@gmail.com|
+        |email|user@gmail.com|
         |gender|Male|
         |date_of_birth|1987-05-06|
         |location|SF|
         |phone_number|+91234|
 
-    Scenario: Successfully updates user account: Updation of account details except Email and Password, should not require current password.
+    Scenario: Successfully updates user account: Updation of account details except Password, should not require current password.
       Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"
         And his role is "user"
         And his authentication token is "auth_token_123"
@@ -71,7 +70,7 @@ Feature: Update account
         |location|SF|
         |phone_number|+91234|
 
-   Scenario: Updation of email should require "current password".
+   Scenario: User should not be able to update his email.
       Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"
         And his role is "user"
         And his authentication token is "auth_token_123"
@@ -80,57 +79,22 @@ Feature: Update account
       """
       {
         "user" : {
-          "first_name": "Kobe",
-          "last_name": "Bryant",
-          "email": "modifiedemail@gmail.com",
-          "date_of_birth": "06-05-1987",
-          "gender": "Male",
-          "location": "SF",
-          "phone_number": "+91234"
+          "email": "modifiedemail@gmail.com"
         }
       }
       """
       Then the response status should be "422"
       And the JSON response should be:
       """
-      {"errors" : ["Current password can't be blank"]}
+      {"errors": ["You can't update your email"]}
       """
+      And there should not be any user with email "modifiedemail@gmail.com"
+      And a user should be present with the following
+        |first_name|Adam|
+        |last_name|Smith|
+        |email|user@gmail.com|
 
-   Scenario: Successfully updates user email: Updation of email should require "current password".
-      Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"
-        And his role is "user"
-        And his authentication token is "auth_token_123"
-      When I authenticate as the user "auth_token_123" with the password "random string"
-      When I send a PUT request to "/api/users" with the following:
-      """
-      {
-        "user" : {
-          "first_name": "Kobe",
-          "last_name": "Bryant",
-          "email": "modifiedemail@gmail.com",
-          "date_of_birth": "06-05-1987",
-          "gender": "Male",
-          "location": "SF",
-          "phone_number": "+91234",
-          "current_password": "password123"
-        }
-      }
-      """
-      Then the response status should be "200"
-      And the JSON response should have "auth_token"
-      And the JSON response at "auth_token" should be a string
-      And the JSON response at "user_role" should be "user"
-      And the JSON response at "registration_complete" should be true
-      And a user should be created with the following
-        |first_name|Kobe|
-        |last_name|Bryant|
-        |email|modifiedemail@gmail.com|
-        |gender|Male|
-        |date_of_birth|1987-05-06|
-        |location|SF|
-        |phone_number|+91234|
-
-	Scenario: Change Password : Updation of password should require password_confirmation and current password.
+   Scenario: Change Password : Updation of password should require password_confirmation and current password.
       Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"
         And his role is "user"
         And his authentication token is "auth_token_123"
@@ -193,7 +157,6 @@ Feature: Update account
         "user" : {
           "first_name": "Kobe",
           "last_name": "Bryant",
-          "email": "kobe@gmail.com",
           "password": "kobe1234",
           "password_confirmation": "kobe12345",
           "date_of_birth": "06-05-1987",
@@ -220,7 +183,6 @@ Feature: Update account
         "user" : {
           "first_name": "Kobe",
           "last_name": "Bryant",
-          "email": "kobe@gmail.com",
           "password": "kobe1234",
           "password_confirmation": "kobe1234",
           "date_of_birth": "06-05-1987",
@@ -236,34 +198,6 @@ Feature: Update account
       {"errors" : ["Current password is invalid"]}
       """
 
-    Scenario: Email is already taken
-      Given "User" is a user with email id "user@gmail.com" and password "password123"
-      Given "Adam Smith" is a user with email id "adam@gmail.com" and password "password123"
-        And his role is "user"
-        And his authentication token is "auth_token_123"
-      When I authenticate as the user "auth_token_123" with the password "random string"
-      When I send a PUT request to "/api/users" with the following:
-      """
-      {
-        "user" : {
-          "first_name": "Kobe",
-          "last_name": "Bryant",
-          "email": "user@gmail.com",
-          "password": "kobe1234",
-          "password_confirmation": "kobe1234",
-          "date_of_birth": "06-05-1987",
-          "gender": "Male",
-          "location": "SF",
-          "current_password": "password123"
-        }
-      }
-      """
-      Then the response status should be "422"
-      And the JSON response should be:
-      """
-      {"errors" : ["Email has already been taken"]}
-      """
-
     Scenario: Attempt to change role by sending it in the params
       Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"
         And his role is "user"
@@ -275,7 +209,6 @@ Feature: Update account
         "user" : {
           "first_name": "Kobe",
           "last_name": "Bryant",
-          "email": "kobe@gmail.com",
           "password": "kobe1234",
           "password_confirmation": "kobe1234",
           "date_of_birth": "06-05-1987",

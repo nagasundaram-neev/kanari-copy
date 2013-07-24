@@ -120,6 +120,10 @@ When "he clicks on the password reset link" do
   visit_in_email(/reset_password_token/)
 end
 
+Then(/^a user should be present with the following$/) do |table|
+  User.where(table.rows_hash).present?.should be_true
+end
+
 Then(/^a user should be created with the following$/) do |table|
   User.where(table.rows_hash).present?.should be_true
 end
@@ -134,4 +138,8 @@ end
 
 And /^the user should have "([^"]*)" redeemed points$/ do |points|
   @user.reload.points_redeemed.should == points.to_i
+end
+
+Then(/^there should not be any user with email "(.*?)"$/) do |email|
+  User.where(email: email).first.should be_nil
 end
