@@ -22,25 +22,21 @@ class Api::V1::ManagersController < ApplicationController
     authorize! :read, User
     #TODO: Query to be optimized
     assigned_managers = current_user.customer.outlets.collect(&:manager) rescue []
-    unassigned_managers = User.includes(:employed_customer).where(customers: {id: current_user.customer.id}) rescue []
+    unassigned_managers = User.manager.includes(:employed_customer).where(customers: {id: current_user.customer.id}) rescue []
     managers = (assigned_managers + unassigned_managers).uniq
     managers.delete(nil)
     render json: managers, each_serializer: ManagerSerializer
   end
 
-  #DELELTE /managers/1
-  def destroy
+  #GET /manager/1
+  def show
     manager = User.where(role: 'manager', id: params[:id]).first
     render json: {errors: ["Manager record not found"]}, status: :not_found and return if manager.blank?
-    authorize! :destroy, manager 
+    authorize! :read, manager 
     if(manager.employed_customer != current_user.customer)
       render json: {errors: ["Insufficient privileges"]}, status: :forbidden and return
     end
-    if manager.destroy
-      render json: nil, status: :ok
-    else
-      render json: {errors: manager.errors.full_messages}, status: :unprocessable_entity
-    end
+    render json: manager, serializer: ManagerSerializer
   end
 
   #PUT /managers/1
@@ -58,6 +54,21 @@ class Api::V1::ManagersController < ApplicationController
     end
   end
 
+  #DELELTE /managers/1
+  def destroy
+    manager = User.where(role: 'manager', id: params[:id]).first
+    render json: {errors: ["Manager record not found"]}, status: :not_found and return if manager.blank?
+    authorize! :destroy, manager 
+    if(manager.employed_customer != current_user.customer)
+      render json: {errors: ["Insufficient privileges"]}, status: :forbidden and return
+    end
+    if manager.destroy
+      render json: nil, status: :ok
+    else
+      render json: {errors: manager.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+  
   private
 
   def create_manager_params

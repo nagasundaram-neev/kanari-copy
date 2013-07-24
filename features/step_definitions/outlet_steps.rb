@@ -64,8 +64,10 @@ end
 Given /^outlet "(.*?)" has staffs$/ do |outlet_name, table|
   # table is a Cucumber::Ast::Table
   staff_emails = table.raw.flatten
+  staffs = User.where(email: staff_emails)
   outlet = Outlet.where(name: outlet_name).first
-  outlet.staffs = User.where(email: staff_emails)
+  outlet.staffs = staffs
+  staffs.each {|staff| staff.employed_customer = outlet.customer; staff.save }
   outlet.save!
 end
 
