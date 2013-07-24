@@ -21,6 +21,9 @@
 						<label for="checkbox-1">Remember Me</label>
 					</fieldset>
 					<!-- <div class="dotSeparator">&nbsp;</div> -->
+					<div class="dot">
+						<%= image_tag 'dots.png' %>
+					</div>
 					<a data-role="none" class="forgotpass" ng-click="forgotPassword()">Forgot your password?</a>
 					<div class="clr"></div>
 				</div>
@@ -35,7 +38,10 @@
 				or
 			</div>
 			<div class="fblogin clr" ng-click="Facebook.login()">
-				<%= image_tag 'icon_f.png' %> <div>LOG IN WITH FACEBOOK</div>
+				<%= image_tag 'icon_f.png' %>
+				<div>
+					LOG IN WITH FACEBOOK
+				</div>
 			</div>
 		</div>
 		<div class="logo_btm">

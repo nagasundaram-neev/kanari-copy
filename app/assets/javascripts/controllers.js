@@ -1121,7 +1121,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			}
 			$http({
 				method : 'get',
-				url : '/api/staffs',
+				url : '	',
 				params : param,
 			}).success(function(data, status) {
 				console.log("data in success " + data + " status " + status);
