@@ -32,9 +32,10 @@ class Api::V1::ManagersController < ApplicationController
   def destroy
     manager = User.where(role: 'manager', id: params[:id]).first
     render json: {errors: ["Manager record not found"]}, status: :not_found and return if manager.blank?
-    outlet = manager.managed_outlets.first
-    render json: {errors: ["Outlet not found"]}, status: :not_found and return if outlet.blank?
-    authorize! :delete_manager, outlet
+    authorize! :destroy, manager 
+    if(manager.employed_customer != current_user.customer)
+      render json: {errors: ["Insufficient privileges"]}, status: :forbidden and return
+    end
     if manager.destroy
       render json: nil, status: :ok
     else
@@ -46,10 +47,10 @@ class Api::V1::ManagersController < ApplicationController
   def update
     manager = User.where(role: 'manager', id: params[:id]).first
     render json: {errors: ["Manager record not found"]}, status: :not_found and return if manager.blank?
-    outlet = manager.managed_outlets.first
-    render json: {errors: ["Outlet not found"]}, status: :not_found and return if outlet.blank?
-    authorize! :update_manager, outlet
-    
+    authorize! :update, manager 
+    if(manager.employed_customer != current_user.customer)
+      render json: {errors: ["Insufficient privileges"]}, status: :forbidden and return
+    end
     if manager.update(update_manager_params)
       render json: nil, status: :ok
     else
