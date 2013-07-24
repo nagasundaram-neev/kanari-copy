@@ -862,13 +862,14 @@ input {
 
 /* Tablet Id table css */
 .dateTimeList {
-	width: 100%;
-	padding: 5% 0 3%;
+	width: 330px;
+	margin: 5% 0 3%;
 }
 .dateTimeListhead {
 	color: #664766;
 	font-weight: bold;
 }
+.nicescroll-rails{display: none;}
 .dateTimeList .col1, .dateTimeList .col2 {
 	padding: 2%;
 	height: 18px;
@@ -900,7 +901,8 @@ input {
     float: right;
     overflow: hidden;
     padding-left: 22px;
-    width: 41%;
+    width: 38%;
+    display: none;
 }
 .manager_list_table {
 	border: 1px solid #ccc;
@@ -927,5 +929,6 @@ input {
 	display: block;
     margin-bottom: 10px;
 }
-.manager_list_Data .data a{color: #5A4166;}
+.manager_list_Data .data a{color: #5A4166;font-size: 13px;}
 #editManager{margin-left: 0;}
+

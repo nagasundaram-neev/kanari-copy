@@ -1,4 +1,5 @@
 <div data-role="page" style="min-height: 585px;" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
+
 	<style>
 		input[type="image"], input[type="checkbox"], input[type="radio"] {
 			margin: 0;
@@ -18,6 +19,11 @@
 		.createOutletDiv .input-help {
 			left: 392px;
 		}
+		/*#divexample1 {
+			height: 100px;
+			overflow: auto;
+		}*/
+		/*.nicescroll-rails{left: 625.05px !important;top: 233px !important;}*/
 	</style>
 	<div class="header_title">
 		<span class="manager_outlet">Manage Outlet</span>
@@ -423,8 +429,8 @@
 				<div class="change_manager">
 					Tablets
 				</div>
-				<div class="listIds">
-					<div class="dateTimeList">
+				<div class="listIds" >
+					<div class="dateTimeList" id="divexample1">
 						<div class="dateTimeListhead clearfix">
 							<!-- <div class="col1 colBorderTop">
 							Sr. No.
@@ -433,7 +439,7 @@
 								Tablet Login
 							</div>
 							<div class="col1 colBorderTop colBorderRight">
-							Delete
+								Delete
 							</div>
 						</div>
 						<div ng-repeat="listTabs in listTabIds" class="dateTimeListRow clearfix">
@@ -444,14 +450,17 @@
 								{{listTabs.tablet_id}}
 							</div>
 							<div class="col1 colBorderRight">
-							<a href="" ng-click="DeleteStaff(listTabs.id)">DELETE</a>
+								<a href="" ng-click="DeleteStaff(listTabs.id)">DELETE</a>
 							</div>
 						</div>
 					</div>
 				</div>
-				<p class="successMsg">{{staff_deleted}}</p>
+				<p class="successMsg">
+					{{staff_deleted}}
+				</p>
 				<input type="button" class="btn_cls" ng-click="create_tablet_id()" data-inline="true" value="Add new tablet" />
 			</div>
+
 			<div data-role="fieldcontain" class="tabletId rightPanel">
 				<h1>Add New Tablet</h1>
 				<span class="mandatoryFld">
@@ -506,7 +515,7 @@
 					<div class="control-group" style="margin: 10px 0 0 145px;">
 						<div class="controls">
 							<button type="submit"  class="btn">
-								Create Tablet Login	
+								Create Tablet Login
 							</button>
 							<button class="btn" disabled>
 								Create Tablet Login
@@ -572,5 +581,7 @@
 				$(this).val(first + '-' + lastfour);
 			}
 		});
+		// $("#divexample1").niceScroll();
+
 	}); 
 </script>

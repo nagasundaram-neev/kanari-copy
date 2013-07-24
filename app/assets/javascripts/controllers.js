@@ -1173,7 +1173,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				});
 			}
 		};
-		
+
 		$scope.DeleteStaff = function(staffId) {
 			//alert(managerId);
 			var param = {
@@ -1193,13 +1193,79 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		};
 
 		/**Start Outlet Manager Functionality**/
-		if($location.path() == "/outlet_manager")
-		{
+		if ($location.path() == "/outlet_manager") {
 			$rootScope.header = "Outlet Manager | Kanari";
 		}
 		$scope.DeleteManager = function(managerId) {
-			//alert(managerId);
-		}
+			var param = {
+				"auth_token" : getCookie('authToken')
+			};
+			$http({
+				method : 'delete',
+				url : '/api/managers/' + managerId,
+				params : param,
+			}).success(function(data, status) {
+				console.log("Data in success " + data + " status " + status);
+				$scope.manager_deleted = "Manager has been deleted successfully";
+				$scope.getManagerList();
+				$('#editManager')[0].reset();
+				$('.edit_manager').hide();
+
+			}).error(function(data, status) {
+				console.log("data in error " + data + " status " + status);
+			});
+		};
+
+		$scope.getManager = function(managerId) {
+			$scope.manager_deleted = "";
+			$scope.manager_updated = "";
+			var param = {
+				"auth_token" : $scope.auth_token
+			}
+			$http({
+				method : 'get',
+				url : '/api/managers/' + managerId,
+				params : param,
+			}).success(function(data, status) {
+				console.log("data in success " + data + " status " + status);
+				$('.edit_manager').show();
+				$scope.manager_ID = data.manager.id;
+				$scope.first_name = data.manager.first_name;
+				$scope.last_name = data.manager.last_name;
+				$scope.email_address_manager = data.manager.email;
+				$(".phoneno_2").val(data.manager.phone_number);
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+			});
+		};
+
+		$scope.updateManager = function(editManager) {
+			if ($scope.editManager.$valid && $(".phoneno_2").val()) {
+				
+				$scope.valide_phone = false;
+				var param = {
+					"manager" : {
+						"phone_number" : $(".phoneno_2").val()
+					},
+					"auth_token" : $scope.auth_token
+				}
+				$http({
+					method : 'put',
+					url : '/api/managers/' + $scope.manager_ID,
+					data : param,
+				}).success(function(data, status) {
+					console.log("data in success " + data + " status " + status);
+					$scope.manager_updated = "Manager has been updated successfully";
+					$scope.getManagerList();
+				}).error(function(data, status) {
+					console.log("data in error" + data + " status " + status);
+				});
+			} else {
+				console.log("here");
+				$scope.manager_updated = "";
+				$scope.valide_phone = true;
+			}
+		};
 		/**End Outlet Manager Functionality**/
 
 		$scope.changeTab = function(currentTab) {
@@ -1484,7 +1550,7 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 		});
 
 		$scope.view_account = function(viewAcc) {
-			if ($scope.viewAcc.$valid && $(".phoneno_1").val() && $(".phoneno_2").val()) {
+			if ($scope.viewAcc.$valid  && $(".phoneno_2").val()) {
 				$scope.valide_phone = false;
 				var param = {
 					"customer" : {
