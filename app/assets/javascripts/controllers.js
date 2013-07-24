@@ -1245,6 +1245,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				$scope.valide_phone = false;
 				var param = {
 					"manager" : {
+						"first_name" : $scope.first_name,
+						"last_name" : $scope.last_name,
 						"phone_number" : $(".phoneno_2").val()
 					},
 					"auth_token" : $scope.auth_token
