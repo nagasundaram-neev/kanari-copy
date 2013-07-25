@@ -171,7 +171,7 @@
 	margin-bottom: -1000px;
 	padding: 5% 6% 1000px 4%;
 	text-shadow: none;
-	width: 36.5%;
+	width: 36.4%;
 }
 .restAddr {
 	padding-bottom: 5%;
@@ -258,7 +258,7 @@ text-align:left;
 	float: left;
 	margin-bottom: -1000px;
 	padding: 5% 0 1000px 2%;
-	width: 50.9%;
+	width: 51%;
 }
 
 .titleDiv {
@@ -1734,7 +1734,7 @@ img, object {
 	border-right: 1px solid #FFFFFF;
 	float: left;
 	margin: 0 !important;
-	min-height: 40px;
+	min-height: 49px;
 	width: 49%;
 	text-shadow: none;
 }

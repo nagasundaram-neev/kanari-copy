@@ -314,6 +314,17 @@ module.controller('homeController', function($scope, $http, $location) {
 				console.log("User Role " + data + " status " + status);
 				//var date = new Date();
 				$scope.points = data.user.points_available;
+				$scope.userName = data.user.first_name+" "+data.user.last_name;
+				if(data.user.points_redeemed == null){
+					$scope.aedSaved = 0;	
+				}else{
+					$scope.aedSaved = data.user.points_redeemed;
+				}
+				if(data.user.redeems_count == null){
+					$scope.redeems = 0;					
+				}else{
+					$scope.redeems = data.user.redeems_count;	
+				}
 				//alert("points"+$scope.points);
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
@@ -322,7 +333,7 @@ module.controller('homeController', function($scope, $http, $location) {
 		}
 		//alert("points"+$scope.points);
 		//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
-		$scope.userName = getCookie('userName');
+		// $scope.userName = getCookie('userName');
 		$scope.role = getCookie('userRole');
 		//document.body.style.background = #FFFFFF;
 
@@ -539,19 +550,19 @@ module.controller('settingsController', function($scope, $http, $location) {
 			if (!$scope.date && !$scope.month && !$scope.year) {
 				$scope.error = "Enter the date of birth";
 				$scope.errorMsg = true;
+				$scope.succMsg = false;
 			} else if (!isDate(date)) {
-				$scope.error = "Enter valid Date of birth";
+				$scope.error = "Enter valid date of birth";
 				$scope.errorMsg = true;
+				$scope.succMsg = false;
 			} else {
 				var param = {
 					"user" : {
 						"first_name" : $scope.firstName,
 						"last_name" : $scope.lastName,
-						"email" : $scope.email,
 						"date_of_birth" : $scope.date + "-" + $scope.month + "-" + $scope.year,
 						"gender" : $scope.gender,
 						"location" : $scope.location,
-						"current_password" : $scope.currentPassword
 					},
 					"auth_token" : getCookie('authToken')
 				}
@@ -566,9 +577,6 @@ module.controller('settingsController', function($scope, $http, $location) {
 					setCookie('authToken', data.auth_token, 0.29);
 					$scope.errorMsg = false;
 					$scope.succMsg = true;
-					$scope.currentPassword = "";
-					$scope.confirmPassword = "";
-					$scope.newPassword = "";
 				}).error(function(data, status) {
 					console.log("data " + data + " status " + status);
 					$scope.error = data.errors[0];
@@ -910,9 +918,10 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 	}
 });
 
+
 module.controller('restaurantListController', function($scope, $http, $location) {
 	if (getCookie('authToken')) {
-
+		// $("#listRestaurant").niceScroll({cursorcolor:"#00F"});
 		$scope.outlets = [];
 
 		$scope.home = function() {
@@ -1298,7 +1307,7 @@ window.fbAsyncInit = function() {
 };
 
 function moveToNext(field, nextFieldID) {
-	
+
 	if (field.value.length >= field.maxLength) {
 		console.log("id " + nextFieldID);
 		document.getElementById(nextFieldID).focus();
