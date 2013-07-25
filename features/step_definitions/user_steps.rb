@@ -31,6 +31,21 @@ And /^he has "([^"]*)" points$/ do |points|
   @user.save!
 end
 
+And /^he is redeeming points for the first time$/ do
+  @user.redeems_count = nil
+  @user.save!
+end
+
+And /^the user should have "([^"]*)" redeem count$/ do |redeem_count|
+  @user.redeems_count.to_i.should == redeem_count.to_i
+end
+
+And(/^till now he has redeemed "(.*?)" points in "(.*?)" different redemptions$/) do |points_redeemed, redeems_count|
+  @user.points_redeemed = points_redeemed
+  @user.redeems_count = redeems_count.to_i 
+  @user.save!
+end
+
 And /^the auth_token should be different from "([^"]*)"$/ do |auth_token|
   @user.reload
   @user.authentication_token.should_not == auth_token

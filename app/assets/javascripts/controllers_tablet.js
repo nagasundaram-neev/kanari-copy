@@ -446,6 +446,11 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 				$scope.error = "Please enter valid bill amount";
 				$scope.succmsg = false;
 				$scope.erromsg = true;
+			}else if ($scope.billAmount < 0) {
+				console.log("in else if");
+				$scope.error = "Please enter valid bill amount";
+				$scope.succmsg = false;
+				$scope.erromsg = true;
 			} else {
 				console.log("amount " + $scope.billAmount)
 				$scope.loader = true;

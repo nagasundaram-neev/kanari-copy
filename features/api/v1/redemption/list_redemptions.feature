@@ -50,6 +50,7 @@ Feature: List Redemptions
               "last_name": null,
               "location": null,
               "phone_number": null,
+              "redeems_count": null,
               "points_available": 0,
               "points_redeemed": null
             }
@@ -67,6 +68,7 @@ Feature: List Redemptions
               "last_name": null,
               "location": null,
               "phone_number": null,
+              "redeems_count": null,
               "points_available": 0,
               "points_redeemed": null
             }
@@ -123,6 +125,7 @@ Feature: List Redemptions
               "location": null,
               "phone_number": null,
               "points_available": 0,
+              "redeems_count": null,
               "points_redeemed": null
             }
           },
@@ -140,6 +143,7 @@ Feature: List Redemptions
               "location": null,
               "phone_number": null,
               "points_available": 0,
+              "redeems_count": null,
               "points_redeemed": null
             }
           }
@@ -197,6 +201,7 @@ Feature: List Redemptions
               "location": null,
               "phone_number": null,
               "points_available": 0,
+              "redeems_count": null,
               "points_redeemed": null
             }
           },
@@ -214,6 +219,7 @@ Feature: List Redemptions
               "location": null,
               "phone_number": null,
               "points_available": 0,
+              "redeems_count": null,
               "points_redeemed": null
             }
           }
