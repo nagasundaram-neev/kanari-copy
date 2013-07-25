@@ -17,6 +17,7 @@ Feature: Show User account
         |location|SF|
         |gender|Male|
         |date_of_birth|1987-05-06|
+        |phone_number|1234567890|
       When I authenticate as the user "user_auth_token" with the password "random string"
       And I send a GET request to "/api/users"
       Then the response status should be "200"
@@ -31,6 +32,7 @@ Feature: Show User account
            "gender": "Male",
            "last_name": "Bryant",
            "location": "SF",
+           "phone_number": "1234567890",
            "points_available": 100,
            "points_redeemed": 50
          }
