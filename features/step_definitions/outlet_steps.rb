@@ -5,12 +5,20 @@ end
 
 And /^the customer with id "([^"]*)" has an outlet named "([^"]*)" with manager "([^"]*)"$/  do |customer_id, outlet_name, manager_email|
   manager = User.where(email: manager_email).first
+  if manager.present?
+    manager.employed_customer = Customer.where(id: customer_id).first
+    manager.save
+  end
   @outlet = Outlet.create!(name: outlet_name, customer_id: customer_id, manager: manager)
   @outlet.disabled.should be_false
 end
 
 And /^the customer with id "([^"]*)" has an outlet named "([^"]*)" with id "([^"]*)" with manager "([^"]*)"$/  do |customer_id, outlet_name, outlet_id, manager_email|
   manager = User.where(email: manager_email).first
+  if manager.present?
+    manager.employed_customer = Customer.where(id: customer_id).first
+    manager.save
+  end
   @outlet = Outlet.create!(id: outlet_id, name: outlet_name, customer_id: customer_id, manager: manager)
   @outlet.disabled.should be_false
 end
@@ -56,8 +64,10 @@ end
 Given /^outlet "(.*?)" has staffs$/ do |outlet_name, table|
   # table is a Cucumber::Ast::Table
   staff_emails = table.raw.flatten
+  staffs = User.where(email: staff_emails)
   outlet = Outlet.where(name: outlet_name).first
-  outlet.staffs = User.where(email: staff_emails)
+  outlet.staffs = staffs
+  staffs.each {|staff| staff.employed_customer = outlet.customer; staff.save }
   outlet.save!
 end
 

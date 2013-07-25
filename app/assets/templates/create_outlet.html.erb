@@ -1,4 +1,5 @@
 <div data-role="page" style="min-height: 585px;" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
+
 	<style>
 		input[type="image"], input[type="checkbox"], input[type="radio"] {
 			margin: 0;
@@ -18,6 +19,11 @@
 		.createOutletDiv .input-help {
 			left: 392px;
 		}
+		/*#divexample1 {
+			height: 100px;
+			overflow: auto;
+		}*/
+		/*.nicescroll-rails{left: 625.05px !important;top: 233px !important;}*/
 	</style>
 	<div class="header_title">
 		<span class="manager_outlet">Manage Outlet</span>
@@ -419,39 +425,48 @@
 			This is reports based div only
 		</div>
 		<div id ="tabletIds" ng-show="TabletIdShow" style="height: 267px;">
-			<div data-role="fieldcontain" class="manager_list rightPanel">
+			<div data-role="fieldcontain" class="manager_list rightPanel" style="width: 29%;">
 				<div class="change_manager">
 					Tablets
 				</div>
-				<div class="listIds">
-					<div class="dateTimeList">
+				<div class="listIds" >
+					<div class="dateTimeList" id="divexample1">
 						<div class="dateTimeListhead clearfix">
 							<!-- <div class="col1 colBorderTop">
 							Sr. No.
 							</div> -->
-							<div class="col1 colBorderTop colBorderRight">
+							<div class="col1 colBorderTop">
 								Tablet Login
 							</div>
-							<div class="col1 colBorderTop colBorderRight">
-							Delete
+							<div class="col1 colBorderTop">
+								Delete
+							</div>
+							<div class="col1 colBorderTop colBorderRight" style="width: 26%;">
+								Update Password
 							</div>
 						</div>
 						<div ng-repeat="listTabs in listTabIds" class="dateTimeListRow clearfix">
 							<!-- <div class="col1">
 							{{$index+1}}
 							</div> -->
-							<div class="col1 colBorderRight">
+							<div class="col1">
 								{{listTabs.tablet_id}}
 							</div>
-							<div class="col1 colBorderRight">
-							<a href="" ng-click="DeleteStaff(listTabs.id)">DELETE</a>
+							<div class="col1">
+								<a href="" ng-click="DeleteStaff(listTabs.id)">DELETE</a>
+							</div>
+							<div class="col1 colBorderRight" style="width: 26%;">
+								<a href="" ng-click="change_tablet_pass(listTabs.id)">UPDATE PASSWORD</a>
 							</div>
 						</div>
 					</div>
 				</div>
-				<p class="successMsg">{{staff_deleted}}</p>
+				<p class="successMsg">
+					{{staff_deleted}}
+				</p>
 				<input type="button" class="btn_cls" ng-click="create_tablet_id()" data-inline="true" value="Add new tablet" />
 			</div>
+
 			<div data-role="fieldcontain" class="tabletId rightPanel">
 				<h1>Add New Tablet</h1>
 				<span class="mandatoryFld">
@@ -506,7 +521,7 @@
 					<div class="control-group" style="margin: 10px 0 0 145px;">
 						<div class="controls">
 							<button type="submit"  class="btn">
-								Create Tablet Login	
+								Create Tablet Login
 							</button>
 							<button class="btn" disabled>
 								Create Tablet Login
@@ -523,6 +538,104 @@
 						</div>
 					</div>
 				</form>
+			</div>
+			<div data-role="fieldcontain" class="changePass_tablet rightPanel">
+				<h1>Change Password</h1>
+				<span class="mandatoryFld">
+					<div class="startMsg">
+						*
+					</div> Indicates mandatory fields</span>
+				<form id="passwordChange" ng-app="form-example" class="row form-horizontal" name="changePass" ng-submit="Change_password(changePass)" novalidate>
+			<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 42%;">
+					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
+						<div class="control-group">
+						<div class="controls">
+							<lable >
+								Current	Password<span class="star">*</span>
+							</lable>
+							<input id="txtP" ng-model="old_password" class="immediate-help" password-validate required type="password" id="old_password" placeholder="Password">
+							<div class="input-help">
+								<h4>Password must meet the following requirements:</h4>
+								<ul>
+									<li ng-class="pwdHasLetter">
+										At least <strong>one letter</strong>
+									</li>
+									<li ng-class="pwdHasNumber">
+										At least <strong>one number</strong>
+									</li>
+									<li ng-class="pwdValidLength">
+										At least <strong>8 characters long</strong>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable >
+								New Password<span class="star">*</span>
+							</lable>
+							<input ng-model="password" class="immediate-help" password-validate required type="password" id="inputPassword" placeholder="New Password">
+							<div class="input-help">
+								<h4>Password must meet the following requirements:</h4>
+								<ul>
+									<li ng-class="pwdHasLetter">
+										At least <strong>one letter</strong>
+									</li>
+									<li ng-class="pwdHasNumber">
+										At least <strong>one number</strong>
+									</li>
+									<li ng-class="pwdValidLength">
+										At least <strong>8 characters long</strong>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable >
+								Confirm Password<span class="star">*</span>
+							</lable>
+							<input ng-model="password_confirmation" class="immediate-help" password-validate required type="password"  id="inputConfPassword" placeholder="Confirm Password">
+							<div class="input-help">
+								<h4>Password must meet the following requirements:</h4>
+								<ul>
+									<li ng-class="pwdHasLetter">
+										At least <strong>one letter</strong>
+									</li>
+									<li ng-class="pwdHasNumber">
+										At least <strong>one number</strong>
+									</li>
+									<li ng-class="pwdValidLength">
+										At least <strong>8 characters long</strong>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+						<div style="margin: 10px 0 0 145px;" >
+						<!-- <input type="button" class="loginBtn" ng-click="acceptInvitation()" data-inline="true" value="Save" /> -->
+						<div class="controls">
+						<button type="submit" class="btn">
+							Save
+						</button>
+						<button class="btn" disabled>
+							Save
+						</button>
+						<a href="" class=" cancelBtn submitBtn btn btn-primary btn-large"  ng-click="close_change_tablet_pass()"> cancel </a>
+						</div>
+						<p class="errorMsg" >
+							{{errorMsg}}
+						</p>
+						<p class="successMsg" >
+							{{password_changed}}
+						</p>
+						</div>
+						
+					</div>
+				</div>
+			</form>
 			</div>
 		</div>
 		<div id ="location" >
@@ -572,5 +685,7 @@
 				$(this).val(first + '-' + lastfour);
 			}
 		});
+		// $("#divexample1").niceScroll();
+
 	}); 
 </script>

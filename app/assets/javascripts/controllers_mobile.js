@@ -1297,6 +1297,14 @@ window.fbAsyncInit = function() {
 	});
 };
 
+function moveToNext(field, nextFieldID) {
+	
+	if (field.value.length >= field.maxLength) {
+		console.log("id " + nextFieldID);
+		document.getElementById(nextFieldID).focus();
+	}
+}
+
 // Load the SDK Asynchronously
 ( function(d) {
 		var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];

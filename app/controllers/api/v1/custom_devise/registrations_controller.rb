@@ -35,10 +35,21 @@ module Api
         # We need to use a copy of the resource because we don't want to change
         # the current user in place.
         def update
+          if params[:user][:email].present?
+            render json: {errors: ["You can't update your email"]}, status: :unprocessable_entity and return
+          end
           self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
           prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
           resource.reset_authentication_token
-          if resource.update_with_password(account_update_params)
+
+          updated = if needs_password?(resource, params)
+            resource.update_with_password(account_update_params)
+          else
+            params[:user].delete(:current_password)
+            resource.update_without_password(account_update_params)
+          end
+
+          if updated
             sign_in resource_name, resource, :bypass => true
             render json: {
               auth_token: resource.authentication_token,
@@ -49,6 +60,7 @@ module Api
             clean_up_passwords resource
             render json: {errors: resource.errors.full_messages}, status: :unprocessable_entity
           end
+
         end
 
         # DELETE /resource
@@ -57,13 +69,19 @@ module Api
           Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
           render json: nil, status: 200
         end
+
         private
+
           def sign_up_params
             params.fetch(:user).permit([:password, :password_confirmation, :email, :first_name, :last_name, :phone_number])
           end
 
           def account_update_params
-            params.fetch(:user).permit([:password, :password_confirmation, :email, :first_name, :last_name, :current_password, :date_of_birth, :gender, :location, :phone_number])
+            params.fetch(:user).permit([:password, :password_confirmation, :first_name, :last_name, :current_password, :date_of_birth, :gender, :location, :phone_number])
+          end
+
+          def needs_password?(user, params)
+            params[:user][:password].present?
           end
       end
     end

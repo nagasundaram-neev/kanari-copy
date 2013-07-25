@@ -4,6 +4,11 @@ Feature: List Managers
       Given I send and accept JSON
 
     Scenario: Successfully list all managers
+      Given the following users exist
+         |id        |first_name |email                          | password    | authentication_token  | role            |
+         |1000      |Edward     |staff.bangalore.1@cp.com       | password123 | edward_auth_token     | staff           |
+         |1001      |Julian     |staff.bangalore.2@cp.com       | password123 | julian_auth_token     | staff           |
+         |1002      |Eric       |staff.bangalore.1@subway.com   | password123 | eric_auth_token       | staff           |
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"
         And his authentication token is "auth_token_123"
         And his role is "customer_admin"
@@ -11,6 +16,9 @@ Feature: List Managers
         And the customer with id "100" has an outlet named "China Pearl - Bangalore"
         And the customer with id "100" has an outlet named "China Pearl - Pune"
         And the customer with id "100" has an outlet named "China Pearl - Kolkata"
+        And outlet "China Pearl - Bangalore" has staffs
+          |staff.bangalore.1@cp.com   |
+          |staff.bangalore.2@cp.com   |
       And a customer named "Mast Kalandar" exists with id "101"
         And the customer with id "101" has an outlet named "Mast Kalandar - Bangalore"
         And the customer with id "101" has an outlet named "Mast Kalandar - Pune"

@@ -364,12 +364,6 @@ input.ui-input-text, textarea.ui-input-text {
 	border: 1px solid #C3C3C3;
 }
 .net_score {
-	/*float: left;
-	 border-right: 1px solid #664766;
-	 text-align: left;
-	 width: 49%;
-	 padding: 1% 0;
-	 height: 45px;*/
 	border-right: 1px solid #664766;
 	float: left;
 	height: 45px;
@@ -379,11 +373,30 @@ input.ui-input-text, textarea.ui-input-text {
 	text-align: left;
 	width: 49%;
 }
+.daily_change_score {
+	float: right;
+    padding-top: 1%;
+    text-align: right;
+    width: 21%;
+}
+.net_promo_score {
+	border-right: 1px solid #664766;
+	float: left;
+	height: 69px;
+	padding: 0.5% 0;
+	text-align: left;
+	width: 49%;
+}
+
 .daily_change {
 	float: left;
 	text-align: right;
 	width: 50%;
 	/*padding: 1% 0;*/
+}
+.netScore {
+	color: #664766;
+	font-size: 290%;
 }
 .txt1 {
 	font-size: 100%;
@@ -397,6 +410,11 @@ input.ui-input-text, textarea.ui-input-text {
 	background: none repeat scroll 0 0 #FEC03B;
 	float: left;
 	margin-top: 2%;
+}
+.net_rate_plus{
+	background: none repeat scroll 0 0 #FEC03B;
+	float: left;
+	margin-top: 5%;
 }
 .ratePValue {
 	background: none repeat scroll 0 0 transparent;

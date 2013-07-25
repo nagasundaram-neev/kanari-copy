@@ -283,7 +283,7 @@ module.controller('insightsController', function($scope, $http, $location) {
 				"auth_token" : getCookie('authToken'),
 				"password" : "X"
 			}
-
+ 
 			$http({
 				method : 'get',
 				url : '/api/feedbacks/metrics',
@@ -347,11 +347,11 @@ module.controller('insightsController', function($scope, $http, $location) {
 				if ($scope.valueDailyChange > 0) {
 					$scope.valueFlag = 1;
 				} else {
-					$scope.valueFlag = 1;
+					$scope.valueFlag = 0;
 				}
 
-				$scope.netScoreLike = data.feedback_insights.net_promoter_score.like;
-				$scope.netScoreDisLike = data.feedback_insights.net_promoter_score.dislike;
+				$scope.netScore = data.feedback_insights.net_promoter_score.like - data.feedback_insights.net_promoter_score.dislike;
+				//$scope.netScoreDisLike = data.feedback_insights.net_promoter_score.dislike;
 				$scope.netScoreDailyChange = data.feedback_insights.net_promoter_score.change;
 
 				if ($scope.netScoreDailyChange > 0) {
@@ -493,16 +493,16 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 			});
-
 		};
 
 		$scope.listGeneratedCodes();
 
 		$scope.parseDate = function(jsonDate) {
-			$scope.v = {
-				DDt : Date.parse(jsonDate)
-			}
-		};
+				console.log("date " + jsonDate + " parsed date " + new Date(Date.parse(jsonDate)));
+				$scope.v = {
+					DDt : Date.parse(jsonDate)
+				}
+			};
 
 		$scope.done = function() {
 			//console.log("in done btn pressed");

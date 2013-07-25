@@ -1,4 +1,4 @@
-<div data-role="page" class="main_content span12" data-theme="b" id="outletManager" ng-controller="createOutletCtrl">
+<div data-role="page" class="main_content span12" data-theme="b" id="outletManagerAccount" ng-controller="outletManagerCtrl">
 	<style>
 		.input-help {
 			left: 225px;
@@ -20,56 +20,14 @@
 		<span style="padding: 10px 20px;">Permission </span>
 		<span class="blank_span"><img src="assets/div_line_yellow.jpg" /></span>
 	</div>
-	<div id="outletManager" class="viewAccPage" >
-		<div class="manager_listing" id="divexample1">
-			<div class="manager_list_table" >
-				<div class="manager_list_header">
-					<div class="heading" style="width:90px">
-						First Name
-					</div>
-					<div class="heading" style="width:80px">
-						Last Name
-					</div>
-					<div class="heading">
-						Phone Number
-					</div>
-					<div class="heading" style="width:140px;">
-						Email Address
-					</div>
-					<div class="border_right_none heading" style="width:50px">
-						DELETE
-					</div>
-				</div>
-				<div class="clr"></div>
-				<div ng-repeat="manager in managerList" class="manager_list_Data">
-					<div class="data" ng-minlength="8" style="width:90px">
-						<span class="data_name"> <a href="" ng-click="getManager(manager.id)">{{manager.first_name}} </span></a>
-					</div>
-					<div class="data" style="width:80px">
-						{{manager.last_name}}
-					</div>
-					<div class="data">
-						{{manager.phone_number}}
-					</div>
-					<div class="data" style="width:140px;">
-						{{manager.email}}
-					</div>
-					<div class="border_right_none data" style="width:50px">
-						<a href="" ng-click="DeleteManager(manager.id)">DELETE</a>
-					</div>
-				</div>
-			</div>
-			<p class="successMsg">
-				{{manager_deleted}}
-			</p>
-		</div>
-		<div class="edit_manager">
+	<div id="outletManager" class="viewAccPage" >		
+		<div class="manager_account edit_manager" >
 			<h1>Update a manager</h1>
-			<span class="mandatoryFld">
+			<span class="mandatoryFld" style="margin-bottom: 10px;display: block">
 				<div class="startMsg">
 					*
-				</div> Indicates mandatory fields</span>
-			<form id="editManager" ng-app="form-example" class="row form-horizontal" name="editManager" ng-submit="updateManager(editManager)" novalidate>
+				</div> Indicates mandatory fields<br/></span>
+			<form id="editManager" ng-app="form-example" class="row form-horizontal" name="editManager" ng-submit="update_Manager(updateManager)" novalidate>
 				<div class="control-group">
 					<div class="controls">
 						<lable>

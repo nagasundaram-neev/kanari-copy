@@ -24,7 +24,7 @@
 			<div class="clr"></div>
 		</div>
 		<div>
-			<div ng-repeat="outlet in outlets" class="nameDiv" ng-click="showRestaurant(outlet.id)">
+			<div ng-repeat="outlet in outlets | filter:search" class="nameDiv" ng-click="showRestaurant(outlet.id)">
 				<div class="parentDivName">
 					<div class="restName">
 						{{outlet.name}}
