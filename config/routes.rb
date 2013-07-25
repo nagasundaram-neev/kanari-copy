@@ -17,7 +17,7 @@ Kanari::Application.routes.draw do
       resources :outlets
       resources :payment_invoices, only: [:index]
       resources :managers, only: [:show, :create, :index, :destroy, :update]
-      resources :staffs, only: [:create, :index, :destroy]
+      resources :staffs, only: [:create, :index, :destroy, :update]
       resources :cuisine_types, only: [:index, :show, :create, :update, :destroy]
       resources :outlet_types, only: [:index, :show, :create, :update, :destroy]
       resources :kanari_codes, only: [:show, :create]
