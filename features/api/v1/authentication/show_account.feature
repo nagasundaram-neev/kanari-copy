@@ -14,6 +14,7 @@ Feature: Show User account
         |role|user|
         |points_available|100|
         |points_redeemed|50|
+        |redeems_count|1|
         |location|SF|
         |gender|Male|
         |date_of_birth|1987-05-06|
@@ -34,6 +35,7 @@ Feature: Show User account
            "location": "SF",
            "phone_number": "1234567890",
            "points_available": 100,
+           "redeems_count": 1,
            "points_redeemed": 50
          }
        }

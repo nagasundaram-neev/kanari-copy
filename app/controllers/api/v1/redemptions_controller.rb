@@ -61,13 +61,14 @@ class Api::V1::RedemptionsController < ApplicationController
       render json: {errors: ["User doesn't have enough points."]}, status: :unprocessable_entity and return if(user.points_available < points)
       Redemption.transaction do 
         outlet.with_lock do
-          outlet.rewards_pool = outlet.rewards_pool.to_i - points
+          outlet.rewards_pool    = outlet.rewards_pool.to_i - points
           outlet.points_redeemed = outlet.points_redeemed.to_i + points
           outlet.save
         end
         user.with_lock do
           user.points_available = user.points_available.to_i - points
-          user.points_redeemed = user.points_redeemed.to_i + points
+          user.points_redeemed  = user.points_redeemed.to_i + points
+          user.redeems_count     = user.redeems_count.to_i + 1
           user.save
         end
         redemption_parameters = { approved_by: current_user.id, rewards_pool_after_redemption: outlet.rewards_pool,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130718094057) do
+ActiveRecord::Schema.define(version: 20130725070745) do
 
   create_table "cuisine_types", force: true do |t|
     t.string   "name"
@@ -200,6 +200,7 @@ ActiveRecord::Schema.define(version: 20130718094057) do
     t.date     "date_of_birth"
     t.string   "gender"
     t.string   "location"
+    t.integer  "redeems_count"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
