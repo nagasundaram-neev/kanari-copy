@@ -36,6 +36,8 @@ class Api::V1::RedemptionsController < ApplicationController
       render json: {errors: ["Points not available"]}, status: :unprocessable_entity and return
     end
     if redemption.save
+      current_user.last_activity_at = Time.zone.now
+      current_user.save!
       render json: nil, status: :created
     else
       render json: {errors: redemption.errors.full_messages}, status: :unprocessable_entity
@@ -68,7 +70,7 @@ class Api::V1::RedemptionsController < ApplicationController
         user.with_lock do
           user.points_available = user.points_available.to_i - points
           user.points_redeemed  = user.points_redeemed.to_i + points
-          user.redeems_count     = user.redeems_count.to_i + 1
+          user.redeems_count    = user.redeems_count.to_i + 1
           user.save
         end
         redemption_parameters = { approved_by: current_user.id, rewards_pool_after_redemption: outlet.rewards_pool,
@@ -101,8 +103,8 @@ class Api::V1::RedemptionsController < ApplicationController
 
   private
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def redemption_params
-      params.require(:redemption).permit(:outlet_id, :points)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def redemption_params
+    params.require(:redemption).permit(:outlet_id, :points)
+  end
 end

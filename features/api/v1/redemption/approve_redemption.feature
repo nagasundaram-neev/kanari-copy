@@ -16,6 +16,7 @@ Feature: Approve Redemption
         And his role is "user"
         And he has "200" points
         And he is redeeming points for the first time
+        And his last activity was on "2013-01-01 01:00:00"
         And his authentication token is "auth_token_123"
         And the following redemptions exist
           |id           |outlet_id    |   user_id       |   points   | approved |
@@ -41,6 +42,7 @@ Feature: Approve Redemption
       And the user should have "100" points
       And the user should have "1" redeem count
       And the staff "staff.bangalore.1@subway.com" should have approved the redemption with id "1"
+      And the user's last activity should be on "2013-01-01"
 
   Scenario: Successfully approves redemption: User's redeems count and redeemed points should increase
       Given the following users exist

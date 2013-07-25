@@ -66,9 +66,11 @@ class User < ActiveRecord::Base
     end
   end
 
-  def add_points_to_available_points points
+  def update_points_and_feedbacks_count(points)
     self.with_lock do
       self.points_available = self.points_available.to_i + points
+      self.feedbacks_count = self.feedbacks_count.to_i + 1
+      self.last_activity_at = Time.zone.now
       self.save
     end
   end
