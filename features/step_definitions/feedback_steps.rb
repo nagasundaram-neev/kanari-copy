@@ -8,6 +8,10 @@ Given(/^A feedback exists with the following attributes:$/) do |table|
   @feedback = Feedback.create!(table.rows_hash)
 end
 
+And /^a new feedback entry should be created with (\d+) points$/ do |points|
+  Feedback.last.points.should == points.to_i
+end
+
 Given(/^the time limit for giving feedback is "([^"]*)" minutes$/) do |time_limit|
   setting = GlobalSetting.where(setting_name: "feedback_expiry_time").first
   if setting.nil?
