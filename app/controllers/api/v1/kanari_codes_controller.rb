@@ -38,7 +38,7 @@ class Api::V1::KanariCodesController < ApplicationController
   private
 
     def rounded_ten_percentage_of(value)
-      (value * 0.1).round
+      (value * 0.1).floor
     end
 
     def random_five_digit_number
