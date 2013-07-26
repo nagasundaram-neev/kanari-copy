@@ -1244,11 +1244,13 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			}).success(function(data, status) {
 				console.log("Data in success " + data + " status " + status);
 				$('#passwordChange')[0].reset();
+				$scope.errorMsg = "";
 				$("#txtP").val("");
 				$scope.password_changed = "Password changed successfully"
 				$scope.listTabletIds();
 			}).error(function(data, status) {
 				// $('#passwordChange')[0].reset();
+				$scope.password_changed = "";
 				$scope.errorMsg = data.errors[0];
 				console.log("data in error " + data + " status " + status);
 			});
