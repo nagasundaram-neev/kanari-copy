@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130725123124) do
+ActiveRecord::Schema.define(version: 20130726065148) do
 
   create_table "cuisine_types", force: true do |t|
     t.string   "name"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20130725123124) do
     t.integer  "cleanliness"
     t.integer  "value_for_money"
     t.text     "comment"
-    t.boolean  "completed"
+    t.boolean  "completed",                   default: false
     t.integer  "points"
     t.integer  "rewards_pool_after_feedback", default: 0
     t.integer  "user_points_after_feedback",  default: 0
