@@ -1121,6 +1121,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 
 		$scope.create_tablet_id = function() {
 			$scope.password_changed = "";
+			$scope.staff_deleted = "";
 			$scope.errorMsg = "";
 			$('.tabletId').show();
 			$('.changePass_tablet').hide();
@@ -1335,6 +1336,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		/**End Outlet Manager Functionality**/
 
 		$scope.changeTab = function(currentTab) {
+				$scope.staff_deleted = "";
 			if ($scope.updateMode) {
 				if (currentTab == "profileShow") {
 					$('#viewmap').hide();
