@@ -178,7 +178,7 @@ body {
 	color: #C64957;
 	margin-top: 10px;
 	text-align: left;
-	font-size: 14px;
+	font-size: 13px;
 }
 .submitBtn {
 	background: none repeat scroll 0 0 #F5BA44 !important;
@@ -449,7 +449,7 @@ div.create_rest {
 .controls .successMsg {
 	color: green;
 	margin-top: 10px;
-	font-size: 14px;
+	font-size: 13px;
 	/*margin: 1% -18%;*/
 }
 .header_title span.outletM{
@@ -469,7 +469,7 @@ div.create_rest {
 	color: green;
 	margin-top: 10px;
 	text-align: left;
-	font-size: 14px;
+	font-size: 13px;
 }
 .createOutletDiv h1 {
 	width: 401px;
@@ -535,7 +535,7 @@ div.create_rest {
 	font-size: 15px;
 }
 .add_manager {
-	width: 35%;
+	width: 38%;
 	display: none;
 	margin-left: 20px;
 	padding-left: 20px;
@@ -544,7 +544,7 @@ div.create_rest {
 }
 
 .tabletId {
-	width: 35%;
+	width: 38%;
 	display: none;
 	margin-left: 20px;
 	padding-left: 15px;
@@ -552,7 +552,7 @@ div.create_rest {
 	border-left: 2px solid #CCCCCC;
 }
 .changePass_tablet {
-	width: 35%;
+	width: 38%;
 	display: none;
 	margin-left: 20px;
 	padding-left: 15px;
