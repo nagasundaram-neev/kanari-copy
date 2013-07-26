@@ -13,11 +13,13 @@
 		/*.nicescroll-rails{left: 726px !important;}*/
 	</style>
 	<div class="header_title">
-		<span class="manager_outlet">Manage Outlets</span>
+		<span class="manager_outlet">Manage Account</span>
 		<span class="arrow-right blank_span">&nbsp;</span>
-		<span style="padding: 10px 20px;">Update Restaurant Outlet </span>
+		<span style="padding: 10px 20px;">Outlet Managers</span>
 		<span class="blank_span"><img src="assets/div_line_yellow.jpg" /></span>
-		<span style="padding: 10px 20px;">Permission </span>
+		<span style="padding: 10px 20px;">Account Details </span>
+		<span class="blank_span"><img src="assets/div_line_yellow.jpg" /></span>
+		<span style="padding: 10px 20px;">Payment History </span>
 		<span class="blank_span"><img src="assets/div_line_yellow.jpg" /></span>
 	</div>
 	<div id="outletManager" class="viewAccPage" >		
@@ -122,9 +124,9 @@
 						<button class="btn" disabled>
 							Update Manager
 						</button>
-						<button  ng-click="DeleteManager(manager_ID)" class="cancelBtn submitBtn btn btn-primary btn-large"  >
-							Delete
-						</button>
+						<button  ng-click="goback()" class="cancelBtn submitBtn btn btn-primary btn-large"  >
+						Cancel
+					</button>
 						<p ng-show="error" class="errorMsg">
 							{{errorMsg}}
 						</p>
