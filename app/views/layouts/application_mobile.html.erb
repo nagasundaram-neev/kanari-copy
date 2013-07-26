@@ -8,7 +8,7 @@
 
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 		<%= javascript_include_tag "jquery-mobile-angular-adapter-standalone-1.2.0.js" %>
-		<!-- <%= javascript_include_tag "jquery.js" %> -->
+		 <%= javascript_include_tag "jquery.js" %> 
 		<%= javascript_include_tag "jquery.nicescroll.min.js" %>
 		<%= javascript_include_tag "jquery.nicescroll.plus.js" %>
 		<%= javascript_include_tag "angular-google-maps.js" %>
@@ -25,15 +25,6 @@
 		<div id="splash" data-role="page" ng-controller="commonCtrl">
 			<div data-role="content"></div>
 		</div>
+		<div id="fb-root"></div>
 	</body>
-	<script>
-		$(document).ready(function() {
-			console.log("in ready");
-			//$("#divexample1").niceScroll();
-			$("#divexample1").mouseover(function() {
-				$("#divexample1").getNiceScroll().resize();
-			});
-
-		});
-	</script>
 </html>
