@@ -37,12 +37,12 @@ background-image: url(<%= asset_path 'ic_calender_yellow.png' %>
 				<div class="clr"></div>
 			</div>
 			<div class="menDiv">
-				<div class="backColr">
-					<div class="count">
-						10
+				<div class="backColrFeedSub">
+					<div class="count" style="padding:19.2% 0 0 0">
+						{{feedbackSubmissions}}
 					</div>
-					<div class="descript">
-						Tips left
+					<div class="descript descriptFeed">
+						Feedback Submissions
 					</div>
 				</div>
 				<div class="backColr">
@@ -88,7 +88,7 @@ background-image: url(<%= asset_path 'ic_calender_yellow.png' %>
 					RECENT ACTIVITY
 				</div>
 				<div class="actDate">
-					05.03.2013
+					{{recentActivity | date:'dd/MM/yyyy'}}
 				</div>
 				<div class="clr"></div>
 			</div>
