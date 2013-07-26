@@ -1325,7 +1325,7 @@ function moveToNext(field, nextFieldID) {
 
 window.fbAsyncInit = function() {
 	FB.init({
-		appId : '495192030556627'
+		appId : '507524349327671'
 	});
 };
 
