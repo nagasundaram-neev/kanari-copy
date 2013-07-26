@@ -1248,7 +1248,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				$scope.password_changed = "Password changed successfully"
 				$scope.listTabletIds();
 			}).error(function(data, status) {
-				$('#passwordChange')[0].reset();
+				// $('#passwordChange')[0].reset();
 				$scope.errorMsg = data.errors[0];
 				console.log("data in error " + data + " status " + status);
 			});
