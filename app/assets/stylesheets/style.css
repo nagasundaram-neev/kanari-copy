@@ -522,13 +522,25 @@ text-align:left;
 	text-shadow: none;
 	width: 74%;
 }
+.descriptFeed{
+	padding-bottom: 12%;
+    padding-top: 2%;
+	line-height: 100%;
+}
 .backColr {
 	background-color: #E5E6E8;
-	padding: 5% 0;
+	padding: 6.5% 0;
 	float: left;
 	width: 32.7%;
 	border-right: 3px solid #FFFFFF;
 }
+.backColrFeedSub{
+	background-color: #E5E6E8;
+	float: left;
+	width: 32.7%;
+	border-right: 3px solid #FFFFFF;
+}
+
 .clear {
 	color: #FEBF3B;
 	font-size: 2em;
@@ -650,7 +662,7 @@ img, object {
 }
 .prev img, .nxt img {
 	vertical-align: top;
-	margin-top: 1%;
+	margin-top: 0.5%;
 }
 .prevTxt {
 	color: #FDBE3A;

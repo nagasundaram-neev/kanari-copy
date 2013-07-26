@@ -1,6 +1,6 @@
 class Api::V1::FeedbacksController < ApplicationController
   before_action :authenticate_user!, only: [:index, :metrics]
-  before_action :set_feedback, only: [:show, :edit, :update, :destroy]
+  before_action :set_feedback, only: [:show, :edit, :destroy]
   before_action :set_outlet, only: [:index, :metrics]
 
   respond_to :json
@@ -23,10 +23,11 @@ class Api::V1::FeedbacksController < ApplicationController
   # PATCH/PUT /feedbacks/1.json
   def update
     current_user = warden.authenticate(scope: :user)
+    @feedback = Feedback.where(id: params[:id], completed: false).first
     render json: {errors: ["Feedback not found."]}, status: :not_found and return if @feedback.nil?
     expiry_time = GlobalSetting.where(setting_name: 'feedback_expiry_time').first.setting_value.to_i
 
-    render json: {errors: ["Sorry, time for giving feedback has been expired! You were supposed to give feedback within #{expiry_time} minutes"]}, status: :unprocessable_entity and return if((Time.zone.now - @feedback.created_at ) > expiry_time.minutes)
+    render json: {errors: ["Code expired"]}, status: :unprocessable_entity and return if((Time.zone.now - @feedback.created_at ) > expiry_time.minutes)
     if current_user.nil?
       if @feedback.update(feedback_params)
         @feedback.code = nil; @feedback.completed = true
