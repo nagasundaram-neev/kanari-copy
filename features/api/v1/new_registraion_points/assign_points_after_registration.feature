@@ -12,6 +12,7 @@ Feature: Assign points after user registration
         |code     |12345  |
         |points   |120    |
         |outlet_id|20     |
+        |completed|true   |
       When I send a PUT request to "/api/feedbacks/10" with the following:
       """
       {
@@ -68,6 +69,7 @@ Feature: Assign points after user registration
         |code     |12345  |
         |points   |120    |
         |outlet_id|20     |
+        |completed|true   |
       When I send a PUT request to "/api/feedbacks/10" with the following:
       """
       {
