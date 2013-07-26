@@ -23,3 +23,11 @@ Given(/^an unassigned manager exists with the following attributes for customer 
   user.save
 end
 
+Then(/^the manager with id "(.*?)" should be updated with the following$/) do |id, table|
+  user = User.where(id: id).first
+  user.should_not be_nil
+  user.role.should == 'manager'
+  table.rows_hash.each do |k,v|
+    user.send(k).should == v
+  end
+end

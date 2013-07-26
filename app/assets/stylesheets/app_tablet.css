@@ -1,4 +1,9 @@
 /***Reset css ***/
+@font-face
+{
+font-family: myFirstFont;
+src: url('segoeuil_0.ttf'); /* IE9 */
+} 
 * {
 	margin: 0;
 	padding: 0;
@@ -10,7 +15,7 @@ html {
 body {
 	margin: 0;
 	padding: 0;
-	font: 12px 'Open Sans', sans-serif !important;
+	font-family: myFirstFont;
 	/*font-family: 'Open Sans', sans-serif !important;*/
 }
 img {
@@ -63,6 +68,8 @@ p {
 /* jquery mobile modified global classes starts here*/
 .ui-body-c, .ui-overlay-c {
 	text-shadow: none;
+	font-family: myFirstFont;
+	/*font-family: 'Roboto', sans-serif !important;*/
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #fff /*{c-body-background-start}*/), to( #fff /*{c-body-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #fff /*{c-body-background-start}*/, #fff /*{c-body-background-end}*/); /* Chrome 10+, Saf5.1+ */
 	background-image: -moz-linear-gradient( #fff /*{c-body-background-start}*/, #fff /*{c-body-background-end}*/); /* FF3.6 */
@@ -163,17 +170,17 @@ input.ui-input-text, textarea.ui-input-text {
 /* close commented backslash hack */
 
 /* Body css starts here */
-@font-face {
+/*@font-face {
 	font-family: kanariFont;
 	src: url('Roboto-Regular.ttf');
 }
 @font-face {
 	font-family: kanariLightFont;
 	src: url('Roboto-Light.ttf');
-}
+}*/
 
 .ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button {
-	font: 16px "kanariLightFont", sans-serif;
+	font: 16px;
 }
 /* Body css ends here */
 
@@ -355,6 +362,9 @@ input.ui-input-text, textarea.ui-input-text {
 	padding-top: 3%;
 	width: 21%;
 }
+.daily_change_span img{
+	padding:6% 0;
+}
 .score_1 {
 	background: none repeat scroll 0 0 #E6E7E9;
 	border-radius: 5px 5px 5px 5px;
@@ -364,12 +374,6 @@ input.ui-input-text, textarea.ui-input-text {
 	border: 1px solid #C3C3C3;
 }
 .net_score {
-	/*float: left;
-	 border-right: 1px solid #664766;
-	 text-align: left;
-	 width: 49%;
-	 padding: 1% 0;
-	 height: 45px;*/
 	border-right: 1px solid #664766;
 	float: left;
 	height: 45px;
@@ -379,15 +383,36 @@ input.ui-input-text, textarea.ui-input-text {
 	text-align: left;
 	width: 49%;
 }
+.daily_change_score {
+	float: right;
+    padding-top: 1%;
+    text-align: right;
+    width: 21%;
+}
+.net_promo_score {
+	border-right: 1px solid #664766;
+    float: left;
+    height: 69px;
+    padding: 0.5% 0;
+    text-align: left;
+    width: 49%;
+}
+
 .daily_change {
 	float: left;
 	text-align: right;
 	width: 50%;
 	/*padding: 1% 0;*/
 }
+.netScore {
+	color: #664766;
+    display: block;
+    font-size: 250%;
+}
 .txt1 {
 	font-size: 100%;
 	color: #000000;
+	
 }
 .value1 {
 	font-size: 140%;
@@ -397,6 +422,11 @@ input.ui-input-text, textarea.ui-input-text {
 	background: none repeat scroll 0 0 #FEC03B;
 	float: left;
 	margin-top: 2%;
+}
+.net_rate_plus{
+	background: none repeat scroll 0 0 #FEC03B;
+	float: left;
+	margin-top: 5%;
 }
 .ratePValue {
 	background: none repeat scroll 0 0 transparent;

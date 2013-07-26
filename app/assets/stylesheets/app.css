@@ -450,8 +450,16 @@ div.create_rest {
 	color: green;
 	margin-top: 10px;
 	font-size: 14px;
-	margin: 1% -18%;
+	/*margin: 1% -18%;*/
 }
+
+.controls .successMsgMnger {
+	color: green;
+	margin-top: 10px;
+	font-size: 14px;
+	margin: 7% -40%;
+}
+
 .successMsg {
 	color: green;
 	margin-top: 10px;
@@ -534,7 +542,15 @@ div.create_rest {
 	width: 35%;
 	display: none;
 	margin-left: 20px;
-	padding-left: 20px;
+	padding-left: 15px;
+	margin-top: 20px;
+	border-left: 2px solid #CCCCCC;
+}
+.changePass_tablet {
+	width: 35%;
+	display: none;
+	margin-left: 20px;
+	padding-left: 15px;
 	margin-top: 20px;
 	border-left: 2px solid #CCCCCC;
 }
@@ -690,6 +706,12 @@ a.changePassword:hover {
 	position: relative;
 	width: 750px;
 	display: block;
+}
+.header_title span a {
+	color: #5A4166;
+}
+.header_title span a:hover {
+	text-decoration: none;
 }
 
 /***Add Outlet And CuisineType***/
@@ -848,15 +870,21 @@ input {
 
 /* Tablet Id table css */
 .dateTimeList {
-	width: 100%;
-	padding: 5% 0 3%;
+	width: 510px;
+	margin: 5% 0 3%;
 }
 .dateTimeListhead {
 	color: #664766;
 	font-weight: bold;
 }
+#divexample1 a {
+	color: #664766;
+}
+.nicescroll-rails {
+	display: none;
+}
 .dateTimeList .col1, .dateTimeList .col2 {
-	padding: 2%;
+	padding: 2% 0;
 	height: 18px;
 	float: left;
 	border: 1px solid #ccc;
@@ -864,8 +892,8 @@ input {
 	border-top: 0;
 }
 .dateTimeList .col1 {
-	width: 29%;
-	text-align: left;
+	width: 19%;
+	text-align: center;
 }
 .dateTimeList .col2 {
 	width: 21%;
@@ -875,4 +903,59 @@ input {
 }
 .dateTimeList .colBorderRight {
 	border-right: 1px solid #ccc;
+}
+
+/**Outlet Manager**/
+.manager_listing {
+	float: left
+}
+.edit_manager {
+	border-left: 2px solid #CCCCCC;
+	float: right;
+	overflow: hidden;
+	padding-left: 22px;
+	width: 38%;
+	display: none;
+}
+.manager_list_table {
+	border: 1px solid #ccc;
+	overflow: hidden;
+}
+.manager_list_Data {
+	border-top: 1px solid #ccc;
+	overflow: hidden;
+}
+.manager_list_table .heading {
+	font-weight: bold;
+	height: 28px;
+}
+.manager_list_table .heading, .manager_list_table .data {
+	border-right: 1px solid #ccc;
+	float: left;
+	padding: 10px 10px 1000px 10px;
+	margin-bottom: -1000px;
+	text-align: center;
+	width: 115px;
+	word-wrap: break-word;
+}
+.border_right_none {
+	border-right: none !important;
+}
+.data_name {
+	display: block;
+	margin-bottom: 10px;
+}
+.manager_list_Data .data a {
+	color: #5A4166;
+	font-size: 13px;
+}
+#editManager {
+	margin-left: 0;
+}
+
+/**Manager Account Edit***/
+.manager_account {
+	display: block;
+	float: left;
+	border-left: none;
 }

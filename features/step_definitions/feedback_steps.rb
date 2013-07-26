@@ -88,10 +88,10 @@ Given(/^the following feedbacks exist for today$/) do |hashes|
   today = Time.zone.now.beginning_of_day
   feedback_hashes.each do |feedback_hash|
     feedback_hash.delete("updated_at")
-    feedback_hash[:updated_at] = today
+    feedback_hash[:updated_at] = today + 1.hours
     Feedback.create!(feedback_hash)
   end
-  Feedback.where(updated_at: today).count.should == feedback_hashes.size
+  Feedback.where(updated_at: (today + 1.hours)).count.should == feedback_hashes.size
 end
 
 Given(/^the following feedbacks exist for yesterday$/) do |hashes|
@@ -99,8 +99,8 @@ Given(/^the following feedbacks exist for yesterday$/) do |hashes|
   yesterday = Time.zone.now.beginning_of_day - 1.day
   feedback_hashes.each do |feedback_hash|
     feedback_hash.delete("updated_at")
-    feedback_hash[:updated_at] = yesterday
+    feedback_hash[:updated_at] = yesterday + 1.hours
     Feedback.create!(feedback_hash)
   end
-  Feedback.where(updated_at: yesterday).count.should == feedback_hashes.size
+  Feedback.where(updated_at: (yesterday + 1.hours)).count.should == feedback_hashes.size
 end

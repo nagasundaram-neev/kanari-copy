@@ -52,16 +52,22 @@ class Ability
       can :manage, Outlet, customer: user.customer
       can :create, Outlet
       can :create, User, role: 'manager'
+      can :update, User, role: 'manager'
+      can :update, User, role: 'staff'
+      can :destroy, User, role: 'manager'
       can :read, User, role: 'manager'
       can :generate_code, Outlet, customer: user.customer
       can :read_feedbacks, Outlet, customer: user.customer
       can :create_staff, Outlet, customer: user.customer
       can :list_staff, Outlet, customer: user.customer
+      can :delete_staff, Outlet, customer: user.customer
     when 'manager'
       can :read, Outlet, manager_id: user.id
       can :manage, Outlet, manager_id: user.id
       can :create_staff, Outlet, manager_id: user.id
       can :list_staff, Outlet, manager_id: user.id
+      can :delete_staff, Outlet, manager_id: user.id
+      can :update, User, role: 'staff'
       can :read_feedbacks, Outlet, manager_id: user.id
       can :read_pending_redemptions, Outlet, manager_id: user.id
       can :approve_redemptions, Outlet, manager_id: user.id

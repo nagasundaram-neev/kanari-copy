@@ -1,4 +1,10 @@
 <div data-role="page" data-theme="b" id="restaurantList" ng-controller="restaurantListController">
+	<style>
+		#divexample1 {
+			height: 380px;
+			overflow-y: auto;
+		}
+	</style>
 	<div data-role="content">
 		<div class="username">
 			<div class="home" ng-click="home()"></div>
@@ -23,8 +29,8 @@
 			</div>
 			<div class="clr"></div>
 		</div>
-		<div>
-			<div ng-repeat="outlet in outlets" class="nameDiv" ng-click="showRestaurant(outlet.id)">
+		<div id="divexample1" >
+			<div ng-repeat="outlet in outlets | filter:search" class="nameDiv" ng-click="showRestaurant(outlet.id)">
 				<div class="parentDivName">
 					<div class="restName">
 						{{outlet.name}}
@@ -47,8 +53,8 @@
 				</div>
 				<div class="clr"></div>
 			</div>
-
 			<div class="clr"></div>
 		</div>
 	</div>
 </div>
+

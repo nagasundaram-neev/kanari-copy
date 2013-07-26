@@ -16,6 +16,8 @@ Feature: Update feedback
         And his role is "user"
         And his authentication token is "auth_token_123"
         And he has "100" points
+        And he is giving feedback for the first time
+        And his last activity was on "2013-01-01 01:00:00"
       When I authenticate as the user "auth_token_123" with the password "random string"
       When I send a PUT request to "/api/feedbacks/10" with the following:
       """
@@ -35,6 +37,8 @@ Feature: Update feedback
       And the feedback with id "10" should belong to user with id "130"
       And the feedback with id "10" should have no kanari code
       And the feedback with id "10" should be completed 
+      And the user should have "1" feedback count
+      And the user's last activity should be today
 
     Scenario: Successfully update feedback when user is not authenticated
       Given a customer named "Subway" exists with id "100"

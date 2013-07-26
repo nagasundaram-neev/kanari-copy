@@ -37,6 +37,34 @@ class Api::V1::StaffsController < ApplicationController
       render json: {errors: user.errors.full_messages}, status: :unprocessable_entity
     end
   end
+  
+  #PUT /staffs/1
+  def update
+    staff = User.staff.where(id: params[:id]).first
+    render json: {errors: ["Staff record not found"]}, status: :not_found and return if staff.blank?
+    authorize! :update, staff 
+    if(staff.employed_customer != current_user.customer)
+      render json: {errors: ["Insufficient privileges"]}, status: :forbidden and return
+    end
+    if staff.update_with_password(update_staff_params)
+      render json: nil, status: :ok
+    else
+      render json: {errors: staff.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    staff = User.where(role: 'staff', id: params[:id]).first
+    render json: {errors: ["Staff record not found"]}, status: :not_found and return if staff.blank?
+    outlet = staff.employed_outlet
+    render json: {errors: ["Outlet not found"]}, status: :not_found and return if outlet.blank?
+    authorize! :delete_staff, outlet
+    if staff.destroy
+      render json: nil, status: :ok
+    else
+      render json: {errors: staff.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
 
   private
 
@@ -65,5 +93,9 @@ class Api::V1::StaffsController < ApplicationController
         ( "0" * (6 - next_tablet_id.to_s.length) ) + next_tablet_id.to_s
       end
     end
+  end
+
+  def update_staff_params
+    params.fetch(:staff).permit([:password, :password_confirmation, :current_password])
   end
 end

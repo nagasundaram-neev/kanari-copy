@@ -49,6 +49,10 @@ Feature: List Redemptions
               "gender": null,
               "last_name": null,
               "location": null,
+              "phone_number": null,
+              "redeems_count": null,
+              "feedbacks_count": null,
+              "last_activity_at": null,
               "points_available": 0,
               "points_redeemed": null
             }
@@ -65,6 +69,10 @@ Feature: List Redemptions
               "gender": null,
               "last_name": null,
               "location": null,
+              "phone_number": null,
+              "redeems_count": null,
+              "feedbacks_count": null,
+              "last_activity_at": null,
               "points_available": 0,
               "points_redeemed": null
             }
@@ -119,7 +127,11 @@ Feature: List Redemptions
               "gender": null,
               "last_name": null,
               "location": null,
+              "phone_number": null,
               "points_available": 0,
+              "redeems_count": null,
+              "feedbacks_count": null,
+              "last_activity_at": null,
               "points_redeemed": null
             }
           },
@@ -135,7 +147,11 @@ Feature: List Redemptions
               "gender": null,
               "last_name": null,
               "location": null,
+              "phone_number": null,
               "points_available": 0,
+              "redeems_count": null,
+              "feedbacks_count": null,
+              "last_activity_at": null,
               "points_redeemed": null
             }
           }
@@ -191,7 +207,11 @@ Feature: List Redemptions
               "gender": null,
               "last_name": null,
               "location": null,
+              "phone_number": null,
               "points_available": 0,
+              "redeems_count": null,
+              "feedbacks_count": null,
+              "last_activity_at": null,
               "points_redeemed": null
             }
           },
@@ -207,7 +227,11 @@ Feature: List Redemptions
               "gender": null,
               "last_name": null,
               "location": null,
+              "phone_number": null,
               "points_available": 0,
+              "feedbacks_count": null,
+              "last_activity_at": null,
+              "redeems_count": null,
               "points_redeemed": null
             }
           }

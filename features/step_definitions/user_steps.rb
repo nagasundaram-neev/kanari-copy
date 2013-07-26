@@ -31,6 +31,44 @@ And /^he has "([^"]*)" points$/ do |points|
   @user.save!
 end
 
+Given(/^his last activity was on "(.*?)"$/) do |last_activity_date|
+  @user.last_activity_at = Time.zone.parse(last_activity_date)
+  @user.save!
+end
+
+Then(/^the user's last activity should be today$/) do
+  @user.last_activity_at.should_not be_nil
+  @user.last_activity_at.to_date.should == Time.zone.now.to_date
+end
+
+Then(/^the user's last activity should be on "(.*?)"$/) do |last_activity_date|
+  @user.last_activity_at.to_date.should == Time.zone.parse(last_activity_date).to_date
+end
+
+And /^he is giving feedback for the first time$/ do
+  @user.feedbacks_count = nil
+  @user.save!
+end
+
+And /^the user should have "([^"]*)" feedback count$/ do |feedback_count|
+  @user.feedbacks_count.to_i.should == feedback_count.to_i
+end
+
+And /^he is redeeming points for the first time$/ do
+  @user.redeems_count = nil
+  @user.save!
+end
+
+And /^the user should have "([^"]*)" redeem count$/ do |redeem_count|
+  @user.redeems_count.to_i.should == redeem_count.to_i
+end
+
+And(/^till now he has redeemed "(.*?)" points in "(.*?)" different redemptions$/) do |points_redeemed, redeems_count|
+  @user.points_redeemed = points_redeemed
+  @user.redeems_count = redeems_count.to_i
+  @user.save!
+end
+
 And /^the auth_token should be different from "([^"]*)"$/ do |auth_token|
   @user.reload
   @user.authentication_token.should_not == auth_token
@@ -120,6 +158,10 @@ When "he clicks on the password reset link" do
   visit_in_email(/reset_password_token/)
 end
 
+Then(/^a user should be present with the following$/) do |table|
+  User.where(table.rows_hash).present?.should be_true
+end
+
 Then(/^a user should be created with the following$/) do |table|
   User.where(table.rows_hash).present?.should be_true
 end
@@ -134,4 +176,8 @@ end
 
 And /^the user should have "([^"]*)" redeemed points$/ do |points|
   @user.reload.points_redeemed.should == points.to_i
+end
+
+Then(/^there should not be any user with email "(.*?)"$/) do |email|
+  User.where(email: email).first.should be_nil
 end

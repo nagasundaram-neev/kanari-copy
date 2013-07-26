@@ -173,6 +173,16 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 	$scope.getActive = function(section) {
 		$location.url("/" + section);
 	}
+	if (getCookie('userRole') == "manager") {
+
+		$('#account').hide();
+		$scope.accountm = true;
+		$('#accountm').show();
+	}
+	else{
+		$scope.accountm = false;
+		$('#accountm').hide();
+	}
 });
 
 module.controller('Login', function($rootScope, $scope, $http, $location) {
@@ -241,15 +251,22 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 					$location.url("/outlets");
 				} else if (getCookie('userRole') == "manager" && data.registration_complete) {
 					$location.url("/outlets");
+				} else if (getCookie("userRole") == "user") {
+					$scope.error = "You are not authenticated to use this app";
+					$scope.erromsg = true;
 				}
 
 			}).error(function(data, status) {
 				console.log("data error" + data + " status " + status);
-				$scope.erromsg = true;
-				$scope.error = data.errors[0];
+				if (getCookie("userRole") == "user") {
+					$scope.error = "You are not authenticated to use this app";
+					$scope.erromsg = true;
+				} else {
+					$scope.error = "Invalid Email or Password";
+					$scope.erromsg = true;
+				}
 			});
 		};
-
 		$scope.getLogin();
 	};
 
@@ -355,8 +372,12 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 		$scope.outlets = []
 		if (getCookie('userRole') == "customer_admin") {
 			$scope.userAction = true;
+			$scope.accountm = false;
+			$('#accountm').hide();
 		} else {
 			$('#account').hide();
+			$scope.accountm = true;
+			$('#accountm').show();
 		}
 		var param = {
 			"auth_token" : getCookie('authToken')
@@ -802,7 +823,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 
 		$scope.selectOutlet1 = function() {
 			$scope.form_outlet2 = true;
-			console.log($scope.formoutlet1);
+			console.log($scope.formoutlet3);
 			if ($scope.formoutlet1) {
 				if ($scope.formoutlet1 == $scope.formoutlet2 || $scope.formoutlet1 == $scope.formoutlet3) {
 					$scope.outletError1 = false;
@@ -817,6 +838,14 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.outletError1 = false;
 					$scope.outletError2 = false;
 				}
+			} else {
+				if ($('#select3').is(':visible')) {
+					$scope.outletError1 = true;
+					$('.customErrCls').css('left', '555px');
+				} else {
+					$scope.outletError1 = true;
+					$('.customErrCls').css('left', '430px');
+				}
 			}
 
 		}
@@ -827,14 +856,17 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.outletError = true;
 					$scope.checkedOutletTypes.splice(1, 1);
 					$scope.formoutlet2 = 0;
+					$('.customErrCls').css('left', '555px');
 
 				} else {
 					$scope.outletError = false;
 					$scope.checkedOutletTypes[1] = $scope.formoutlet2;
 					$scope.outletError2 = false;
+					$('.customErrCls').css('left', '555px');
 				}
 			} else {
-				//$scope.checkedCuisineTypes.splice( $.inArray(1,$scope.checkedCuisineTypes) ,1 );
+				$('.customErrCls').css('left', '555px');
+				$scope.outletError2 = true;
 				$scope.checkedOutletTypes.splice(1, 1);
 				if ($scope.formoutlet1) {
 				} else {
@@ -879,6 +911,14 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.cuisineError1 = false;
 					$scope.checkedCuisineTypes[0] = $scope.formcuisine1;
 				}
+			} else {
+				if ($('#selectC3').is(':visible')) {
+					$scope.cuisineError1 = true;
+					$('.customErrCls1').css('left', '555px');
+				} else {
+					$scope.cuisineError1 = true;
+					$('.customErrCls1').css('left', '430px');
+				}
 			}
 		}
 		$scope.selectCuisine2 = function() {
@@ -895,6 +935,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.cuisineError2 = false;
 				}
 			} else {
+				$('.customErrCls1').css('left', '555px');
+				$scope.cuisineError2 = true;
 				if ($scope.formcuisine1) {
 					$scope.checkedCuisineTypes.splice(1, 1);
 				} else {
@@ -1065,6 +1107,9 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
 					$scope.errorMsg = data.errors[0];
+					if ($scope.errorMsg == "Email has already been taken") {
+						$scope.errorMsg = "This email address is already being used by a manager.";
+					}
 					$scope.error = true;
 					$scope.success1 = false;
 				});
@@ -1075,7 +1120,10 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		};
 
 		$scope.create_tablet_id = function() {
+			$scope.password_changed = "";
+			$scope.errorMsg = "";
 			$('.tabletId').show();
+			$('.changePass_tablet').hide();
 			$scope.successTabletId = false;
 			$scope.errorTabletId = false;
 		};
@@ -1085,9 +1133,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$scope.successTabletId = false;
 			$scope.errorTabletId = false;
 		};
-		
+
 		$scope.listTabletIds = function() {
-			console.log("in tablet id lists");
 			var param = {
 				"auth_token" : getCookie('authToken')
 			}
@@ -1108,7 +1155,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			if ($scope.createTabletId.$valid && $("#txt").val()) {
 				//alert("in submit");
 				$('#tabBtn').addClass("tabletBtn1");
-				 
+
 				$('.tabletBtn1').show();
 				$('.tabletBtn2').hide();
 				var param = {
@@ -1119,8 +1166,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					},
 					"auth_token" : getCookie('authToken')
 				}
-				
-				console.log("outlet id "+$routeParams.outletId);
+
+				console.log("outlet id " + $routeParams.outletId);
 
 				$http({
 					method : 'post',
@@ -1133,44 +1180,178 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.successTabletId = true;
 					$('#tabletIdForm')[0].reset();
 					$("#txt").val("");
-					
+
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
+					$('#tabletIdForm')[0].reset();
 					$scope.errorMsg = data.errors[0];
-					if ($scope.errorMsg == "Email has already been taken") {
-						$scope.errorMsg = "Id has already been taken";
-					}
+					
 					$scope.errorTabletId = true;
 					$scope.successTabletId = false;
 				});
 			}
 		};
 
-		// $scope.update = function() {
-		// $("#formid").addClass("row form-horizontal");
-		// $("#formid input").addClass("ng-dirty ng-invalid");
-		// $("#formid .input-help").show();
-		// //$("#formid input").removeClass(".ng-dirty.ng-invalid");
-		// }
+		$scope.DeleteStaff = function(staffId) {
+			//alert(managerId);
+			var param = {
+				"auth_token" : getCookie('authToken')
+			};
+			$http({
+				method : 'delete',
+				url : '/api/staffs/' + staffId,
+				params : param,
+			}).success(function(data, status) {
+				console.log("Data in success " + data + " status " + status);
+				$scope.staff_deleted = "Tablet has been deleted successfully"
+				$scope.listTabletIds();
+			}).error(function(data, status) {
+				console.log("data in error " + data + " status " + status);
+			});
+		};
+		
+		$scope.change_tablet_pass = function(tabletId) {
+			$scope.tabletId = tabletId;
+			$scope.successTabletId = false;
+			$scope.errorTabletId = false;
+			$scope.errorMsg ="";
+			$('.tabletId').hide();
+			$('.changePass_tablet').show();
+			$scope.successTabletId = false;
+			$scope.errorTabletId = false;
+		};
+		$scope.close_change_tablet_pass = function() {
+			$('.changePass_tablet').hide();
+			$('#passwordChange')[0].reset();
+			$scope.successTabletId = false;
+			$scope.errorTabletId = false;
+		};
+		
+		$scope.Change_password = function(changePass) {
+			if ($scope.changePass.$valid && $("#txtP").val()) {
+			var param = {
+				"staff" : {
+					    "password": $scope.password,
+					    "password_confirmation": $scope.password_confirmation,
+					    "current_password": $scope.old_password
+					 },
+					"auth_token" : getCookie('authToken')
+			};
+			$http({
+				method : 'PUT',
+				url : '/api/staffs/' + $scope.tabletId,
+				data : param,
+			}).success(function(data, status) {
+				console.log("Data in success " + data + " status " + status);
+				$('#passwordChange')[0].reset();
+				$scope.errorMsg = "";
+				$("#txtP").val("");
+				$scope.password_changed = "Password changed successfully"
+				$scope.listTabletIds();
+			}).error(function(data, status) {
+				// $('#passwordChange')[0].reset();
+				$scope.password_changed = "";
+				$scope.errorMsg = data.errors[0];
+				console.log("data in error " + data + " status " + status);
+			});
+			}
+		};
+
+		/**Start Outlet Manager Functionality**/
+		if ($location.path() == "/outlet_manager") {
+			$rootScope.header = "Outlet Manager | Kanari";
+		}
+		$scope.DeleteManager = function(managerId) {
+			var param = {
+				"auth_token" : getCookie('authToken')
+			};
+			$http({
+				method : 'delete',
+				url : '/api/managers/' + managerId,
+				params : param,
+			}).success(function(data, status) {
+				console.log("Data in success " + data + " status " + status);
+				$scope.manager_deleted = "Manager has been deleted successfully";
+				$scope.getManagerList();
+				$('#editManager')[0].reset();
+				$('.edit_manager').hide();
+
+			}).error(function(data, status) {
+				console.log("data in error " + data + " status " + status);
+			});
+		};
+
+		$scope.getManager = function(managerId) {
+			$scope.manager_deleted = "";
+			$scope.manager_updated = "";
+			var param = {
+				"auth_token" : $scope.auth_token
+			}
+			$http({
+				method : 'get',
+				url : '/api/managers/' + managerId,
+				params : param,
+			}).success(function(data, status) {
+				console.log("data in success " + data + " status " + status);
+				$('.edit_manager').show();
+				$scope.manager_ID = data.manager.id;
+				$scope.first_name = data.manager.first_name;
+				$scope.last_name = data.manager.last_name;
+				$scope.email_address_manager = data.manager.email;
+				$(".phoneno_2").val(data.manager.phone_number);
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+			});
+		};
+
+		$scope.updateManager = function(editManager) {
+			if ($scope.editManager.$valid && $(".phoneno_2").val()) {
+				$scope.valide_phone = false;
+				var param = {
+					"manager" : {
+						"first_name" : $scope.first_name,
+						"last_name" : $scope.last_name,
+						"phone_number" : $(".phoneno_2").val()
+					},
+					"auth_token" : $scope.auth_token
+				}
+				$http({
+					method : 'put',
+					url : '/api/managers/' + $scope.manager_ID,
+					data : param,
+				}).success(function(data, status) {
+					console.log("data in success " + data + " status " + status);
+					$scope.manager_updated = "Manager has been updated successfully";
+					$scope.getManagerList();
+				}).error(function(data, status) {
+					console.log("data in error" + data + " status " + status);
+				});
+			} else {
+				console.log("here");
+				$scope.manager_updated = "";
+				$scope.valide_phone = true;
+			}
+		};
+		/**End Outlet Manager Functionality**/
 
 		$scope.changeTab = function(currentTab) {
 			if ($scope.updateMode) {
 				if (currentTab == "profileShow") {
-					 $('#viewmap').hide();
-					 $('#hidemap').show();
+					$('#viewmap').hide();
+					$('#hidemap').show();
 					$scope.profileShow = true;
 					$scope.locationShow = false;
 					$scope.TabletIdShow = false;
 					$scope.permissionShow = false;
 					$scope.successMsg = false;
 					$scope.ReportShow = false;
-					$(".customErr").css("display","none");
+					$(".customErr").css("display", "none");
 					$('#formid')[0].reset();
 					//$(".input-help").css("display","none");
 				} else if (currentTab == "locationShow") {
-					 $('#viewmap').show();
-					 $('#hidemap').hide();
-					 $scope.$broadcast('clickMessageFromParent', {
+					$('#viewmap').show();
+					$('#hidemap').hide();
+					$scope.$broadcast('clickMessageFromParent', {
 						data : "SOME msg to the child"
 					})
 					$scope.profileShow = false;
@@ -1178,31 +1359,31 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.TabletIdShow = false;
 					$scope.permissionShow = false;
 					$scope.ReportShow = false;
-					$(".customErr").css("display","none");
+					$(".customErr").css("display", "none");
 					//$(".input-help").css("display","none");
 				} else if (currentTab == "permissionShow") {
 					$('#viewmap').hide();
-					 $('#hidemap').show();
+					$('#hidemap').show();
 					$scope.profileShow = false;
 					$scope.locationShow = false;
 					$scope.TabletIdShow = false;
 					$scope.permissionShow = true;
 					$scope.ReportShow = false;
-					$(".customErr").css("display","none");
+					$(".customErr").css("display", "none");
 					//$(".input-help").css("display","none");
 				} else if (currentTab == "ReportShow") {
 					$('#viewmap').hide();
-					 $('#hidemap').show();
+					$('#hidemap').show();
 					$scope.profileShow = false;
 					$scope.locationShow = false;
 					$scope.permissionShow = false;
 					$scope.TabletIdShow = false;
 					$scope.ReportShow = true;
-					$(".customErr").css("display","none");
+					$(".customErr").css("display", "none");
 					//$(".input-help").css("display","none");
 				} else if (currentTab == "TabletIdShow") {
 					$('#viewmap').hide();
-					 $('#hidemap').show();
+					$('#hidemap').show();
 					$('.tabletId').hide();
 					$scope.listTabletIds();
 					$scope.profileShow = false;
@@ -1210,13 +1391,77 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$scope.permissionShow = false;
 					$scope.ReportShow = false;
 					$scope.TabletIdShow = true;
-					$(".customErr").css("display","none");
+					$(".customErr").css("display", "none");
 					//$(".input-help").css("display","none");
 				}
 			}
 		}
 	} else {
 		$location.url("/login");
+	}
+});
+
+module.controller('outletManagerCtrl', function($rootScope, $scope, $routeParams, $http, $location) {
+	if (getCookie('authToken')) {
+		$('.welcome').show();
+		$('.navBarCls').show();
+		$('#dasboard').hide();
+		$('#accountm').show();
+		$('.navBarCls ul li').removeClass('active');
+		$('#accountm').addClass('active');
+		$rootScope.header = "Outlet Manager | Kanari";
+
+		var manager_id = getCookie('userId');
+
+		var param = {
+			"auth_token" : getCookie('authToken')
+		}
+		$http({
+			method : 'get',
+			url : 'api/users',
+			params : param,
+		}).success(function(data, status) {
+			console.log("data in success " + data + " status " + status);
+			$('.edit_manager').show();
+			$scope.manager_ID = data.user.id;
+			$scope.first_name = data.user.first_name;
+			$scope.last_name = data.user.last_name;
+			$scope.email_address_manager = data.user.email;
+			$(".phoneno_2").val(data.user.phone_number);
+		}).error(function(data, status) {
+			console.log("data in error" + data + " status " + status);
+		});
+		
+		
+		$scope.update_Manager = function(updateManager) {
+			if ($scope.editManager.$valid && $(".phoneno_2").val()) {
+
+				$scope.valide_phone = false;
+				var param = {
+					"user" : {
+						"first_name" : $scope.first_name,
+						"last_name" : $scope.last_name,
+						"phone_number" : $(".phoneno_2").val()
+					},
+					"auth_token" : getCookie('authToken')
+				}
+				$http({
+					method : 'put',
+					url : '/api/users/',
+					data : param,
+				}).success(function(data, status) {
+					console.log("data in success " + data + " status " + status);
+					setCookie('authToken', data.auth_token, 1);
+					$scope.manager_updated = "Manager has been updated successfully";
+				}).error(function(data, status) {
+					console.log("data in error" + data + " status " + status);
+				});
+			} else {
+				console.log("here");
+				$scope.manager_updated = "";
+				$scope.valide_phone = true;
+			}
+		};
 	}
 });
 
@@ -1360,6 +1605,7 @@ module.controller('takeTourCtrl', function($rootScope, $scope, $routeParams, $ht
 
 		if (getCookie('userRole') == "manager") {
 			$('#account').hide();
+			$scope.accountm = true;
 		}
 
 		$scope.changeTab = function(currentTab) {
@@ -1435,7 +1681,7 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 		});
 
 		$scope.view_account = function(viewAcc) {
-			if ($scope.viewAcc.$valid && $(".phoneno_1").val() && $(".phoneno_2").val()) {
+			if ($scope.viewAcc.$valid && $(".phoneno_2").val()) {
 				$scope.valide_phone = false;
 				var param = {
 					"customer" : {

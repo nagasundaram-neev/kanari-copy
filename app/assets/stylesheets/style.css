@@ -3,13 +3,13 @@
 /* Give basic styles to the body and the navigation */
 
 /*@font-face {
-	font-family: kanariFont;
-	src: url('Roboto-Regular.ttf');
-}
-@font-face {
-	font-family: kanariLightFont;
-	src: url('Roboto-Light.ttf');
-}*/
+ font-family: kanariFont;
+ src: url('Roboto-Regular.ttf');
+ }
+ @font-face {
+ font-family: kanariLightFont;
+ src: url('Roboto-Light.ttf');
+ }*/
 
 .ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button {
 	/*font-family: "kanariFont", sans-serif !important;*/
@@ -86,6 +86,11 @@
 	background: #664765;
 }
 
+.dot{
+	float:left;
+	padding:1.5% 0;
+}
+
 .ui-content {
 	/*padding: 0 1.5%;*/
 	padding: 0;
@@ -103,7 +108,8 @@
 	margin: 5% 0 0;
 }
 #home .imgDiv {
-	margin: 0 10%;
+	/*margin: 0 10%;*/
+	margin: 0 20%;
 }
 
 .searchDiv .ui-corner-all {
@@ -165,7 +171,7 @@
 	margin-bottom: -1000px;
 	padding: 5% 6% 1000px 4%;
 	text-shadow: none;
-	width: 36.5%;
+	width: 36.4%;
 }
 .restAddr {
 	padding-bottom: 5%;
@@ -186,17 +192,43 @@
 	float: left;
 	font-size: 0.7em;
 	text-shadow: none;
-	width: 33%;
 }
+.dateTitle {
+	padding: 1.6% 0;
+	width: 25%;
+}
+.dateContent{
+	padding: 1.6% 0;
+	width: 25%;
+}
+
+.restaurantTitle {
+	width: 45%;
+}
+
+.restaurantText{
+	width: 45%;
+}
+
+.pointsTitle {
+	padding: 0.9% 0;
+	width: 29.3%;
+}
+
 .headTitleLast {
 	border-right: 0 none;
-	width: 33.3%;
 }
 .headTitle span, .contentText span, .headTitleLast span {
 	display: block;
-	padding: 16% 0 16% 7%;
-	text-align: left;
+	padding: 16% 0;
+	text-align: center;
 }
+
+.restaurantTitle span {
+	display: block;
+    padding: 12% 0 13% 7%;
+}
+
 .contentText span {
 	padding: 12% 0 12% 7%;
 }
@@ -210,11 +242,15 @@
 	font-size: 0.8em;
 	text-align: left;
 	text-shadow: none;
-	width: 32.9%;
+	/*width: 32.9%;*/
+}
+
+.dateContent span{
+text-align:left;
 }
 
 .recommendationDiv {
-	 margin: 7% 5%;
+	margin: 7% 5%;
 }
 
 .parentDivName {
@@ -222,7 +258,7 @@
 	float: left;
 	margin-bottom: -1000px;
 	padding: 5% 0 1000px 2%;
-	width: 50.9%;
+	width: 51%;
 }
 
 .titleDiv {
@@ -286,11 +322,13 @@
 
 .backColorYellow {
 	background-color: #F8BE40;
-	 margin: 8% 1%;
-    padding: 4% 5%;
-    width: 21%;
+	margin: 8% 1%;
+	padding: 4% 5%;
+	width: 21%;
 }
-.backColorYellow img{vertical-align:middle;}
+.backColorYellow img {
+	vertical-align: middle;
+}
 .shareIconsDiv {
 	margin: 5% 0;
 }
@@ -437,11 +475,11 @@
 	font-size: 0.8em;
 	margin: 0 auto;
 	padding: 0.6em 0 0;
-	width: 117px;
+	width: 127px;
 }
 .yellowBack {
 	float: left;
-	padding: 2% 0;
+	padding: 3.5% 0;
 	width: 49.1%;
 	background-color: #F8BE40;
 	border-right: 2px solid #FFFFFF;
@@ -534,8 +572,17 @@ img, object {
 }
 .logo_btm img {
 	float: left;
-	margin: 24% 0 0 18%;
+	margin: 11% 0 0 18%;
 	max-height: 90%;
+	bottom:0;
+	max-width: 23%;
+}
+
+#login .logo_btm img {
+	float: left;
+	margin: 17% 0 0 18%;
+	max-height: 90%;
+	bottom:0;
 	max-width: 23%;
 }
 #login .ui-btn-corner-all {
@@ -543,18 +590,17 @@ img, object {
 	border: none !important;
 }
 
-.logBtn .ui-btn-inner{
+.logBtn .ui-btn-inner {
 	padding: 0.4em 20px !important;
-	border:none !important;
+	border: none !important;
 }
 
-.signBtn .ui-btn-inner{
+.signBtn .ui-btn-inner {
 	padding: 0.4em 20px;
-	border:none !important;
+	border: none !important;
 }
 
-
-#login .ui-shadow{
+#login .ui-shadow {
 	box-shadow: none;
 }
 
@@ -562,9 +608,9 @@ img, object {
 	background-color: #E5E6E8;
 	border-right: 3px solid #FFFFFF;
 	float: left;
-	 height: 75px;
-	 font-size: 375%;
-    padding: 0;
+	height: 75px;
+	font-size: 375%;
+	padding: 0;
 	width: 19.2%;
 }
 
@@ -604,6 +650,7 @@ img, object {
 }
 .prev img, .nxt img {
 	vertical-align: top;
+	margin-top: 1%;
 }
 .prevTxt {
 	color: #FDBE3A;
@@ -773,7 +820,7 @@ img, object {
 	padding: 2% 0 0 8%;
 }
 
-.nextBackColr img{
+.nextBackColr img {
 	vertical-align: middle;
 }
 
@@ -818,9 +865,9 @@ img, object {
 	font-size: 0.8em;
 	color: #66475E;
 	float: right;
-	padding-top: 2.7%;
-	width: 50%;
-	text-align: right;
+	padding-top: 3%;
+	width: 53%;
+	/*text-align: right;*/
 }
 
 .userClick {
@@ -839,7 +886,7 @@ img, object {
 	margin-top: 15%;
 }
 .logo img {
-	width:72%;
+	width: 72%;
 }
 .socialBtn {
 	color: #664765 !important;
@@ -903,6 +950,7 @@ img, object {
 	margin: 1% 5% 0 !important;
 	padding: 0;
 }
+
 #signedUp .ui-content {
 	padding: 0 !important;
 }
@@ -924,14 +972,14 @@ img, object {
 }
 .dateLabel {
 	float: left;
-	font-size: 18px;
+	font-size: 16px;
 	margin: 0.9% 0 0;
-	font-family: bold 16px KanariLightFont !important;
+	font-family: bold 16px;
 }
 .date {
 	float: left;
 	width: 49%;
-	margin-left: 13%;
+	margin-left: 24.7%;
 }
 .dateInner {
 	float: left;
@@ -1013,6 +1061,7 @@ img, object {
 	text-transform: uppercase;
 	text-shadow: none;
 	color: #664765;
+	font-weight: bold;
 	margin-top: 1%
 }
 .genderBtn {
@@ -1029,6 +1078,9 @@ img, object {
 	background: -ms-linear-gradient( #593F5A,#593F5A ) repeat scroll 0 0 #593F5A;
 	background: -o-linear-gradient( #593F5A,#593F5A ) repeat scroll 0 0 #593F5A;
 	background: linear-gradient( #593F5A,#593F5A ) repeat scroll 0 0 #593F5A;
+	color:#F5C03F;
+	font-weight: normal;
+	text-shadow: none;
 }
 }
 .genderBtn .ui-corner-all, .genderBtn .ui-btn-corner-all {
@@ -1072,6 +1124,9 @@ img, object {
 	background-image: -ms-linear-gradient( #593F5A,#593F5A );
 	background-image: -o-linear-gradient( #593F5A,#593F5A );
 	background-image: linear-gradient( #593F5A,#593F5A );
+	color:#F5C03F;
+	font-weight: normal;
+	text-shadow: none;
 }
 .genderBtn .ui-field-contain, .ui-mobile fieldset.ui-field-contain {
 	margin: none !important;
@@ -1114,7 +1169,7 @@ img, object {
 #transactionHistory {
 	background-color: #664765;
 	color: #F9C040;
-	font: 104% KanariLightFont;
+	font: 104%;
 	padding: 0.5em 0;
 }
 .notificationCheckboxTwitter, .notificationCheckboxFb {
@@ -1149,7 +1204,7 @@ img, object {
 	padding: 1.5% 2%;
 	width: 12%;
 }
-.inviteFriends a img{
+.inviteFriends a img {
 	vertical-align: middle;
 }
 .settingDiv .border {
@@ -1158,7 +1213,7 @@ img, object {
 #transactionHistory {
 	background-color: #664765;
 	color: #F9C040;
-	font: 104% KanariFont;
+	font: 104%;
 	padding: 0;
 	text-align: center;
 	text-shadow: none;
@@ -1172,7 +1227,7 @@ img, object {
 
 #transactionHistory span {
 	float: left;
-	margin: 3.6% 0 0 3%;
+	margin: 3% 0 0 3%;
 }
 #transactionHistory a {
 	float: right;
@@ -1191,7 +1246,7 @@ img, object {
 
 .signUp {
 	text-align: center;
-	margin: 4% 0 0;
+	margin: 3% 0 0;
 	font-size: 20px;
 }
 #signedUp .signUp {
@@ -1250,14 +1305,14 @@ img, object {
 }
 .settingDiv input::-moz-placeholder, textarea::-moz-placeholder {
 	color: #664765;
-	font-family: KanariLightFont !important;
+	/*font-family: KanariLightFont !important;*/
 	/*font-weight:bold;*/
 	text-shadow: none;
 }
 
 .adviceDiv input::-moz-placeholder, textarea::-moz-placeholder {
 	color: #664765;
-	font-family: KanariLightFont !important;
+	/*font-family: KanariLightFont !important;*/
 	/*font-weight:bold;*/
 	text-shadow: none;
 }
@@ -1269,7 +1324,7 @@ img, object {
 
 .adviceDiv textarea.ui-input-text {
 	height: 130px;
-	text-align: center;
+	/*text-align: center;*/
 	background: none repeat scroll 0 0 #E5E6E8;
 	resize: none;
 	border: 1px solid #c6c7c8;
@@ -1378,11 +1433,11 @@ img, object {
 	float: left;
 	height: auto;
 	font-size: 375%;
-    padding: 1% 0;
+	padding: 1% 0;
 	width: 30%;
 }
 .enter_code {
-	 margin: 7% 3%;
+	margin: 7% 3%;
 }
 .loginDiv {
 	/*border: 1px solid #D9A432 !important;*/
@@ -1404,13 +1459,15 @@ img, object {
 	/*margin: 1% 0;*/
 }
 .chkbox {
-
+	width:42% !important;
 }
 /*[data-role=page]{height: 100% !important; position:relative !important;}
  [data-role=footer]{bottom:0; position:relative !important; top: auto !important; width:100%;} */
 #login .ui-content {
 	/*margin: 1% 5%;*/
-	margin: 1% 12%;
+	/*margin: 1% 12%;
+	padding: 0;*/
+	margin: 1% 5% 0 !important;
 	padding: 0;
 }
 #forgotpass .ui-content {
@@ -1420,6 +1477,7 @@ img, object {
 }
 .rememberMe .ui-checkbox .ui-btn-icon-left .ui-btn-inner, .ui-radio .ui-btn-icon-left .ui-btn-inner {
 	padding-top: 0;
+	 padding-right: 0;
 	padding-left: 25px;
 }
 
@@ -1570,7 +1628,7 @@ img, object {
 	/*font-size: 2em;
 	 font-family: KanariLightFont;
 	 font-weight: 600;*/
-	font: 600 95% KanariLightFont;
+	/*font: 600 95% KanariLightFont;*/
 }
 .loginBtn, .signBtn {
 	width: 100% !important;
@@ -1604,7 +1662,7 @@ img, object {
 	color: #FFFFFF !important;
 	display: block;
 	margin: 8px 0 0 2%;
-	 font-weight: normal;
+	font-weight: normal;
 	/*width: 168px;*/
 }
 .role {
@@ -1615,7 +1673,7 @@ img, object {
 }
 .or {
 	color: #664765;
-	font: 600 95% KanariLightFont;
+	font: 600 95% ;
 	margin: 3% 0;
 }
 .dotSeparator {
@@ -1647,15 +1705,18 @@ img, object {
 /**Restaurant Info**/
 .rest_name {
 	font-size: 1.5em;
-	margin: 4% 0;
+	margin: 2% 0;
 }
 #showRestaurant .rest_info img {
 	vertical-align: middle;
 }
 #showRestaurant .rest_info {
-	margin: 0.4% 0;
+	margin: 0.3% 0;
 	text-align: left;
 	padding: 0 3%;
+}
+.imgCenter{
+	text-align: right;
 }
 .outlet_div {
 	background: #CCCCCC;
@@ -1673,14 +1734,21 @@ img, object {
 	border-right: 1px solid #FFFFFF;
 	float: left;
 	margin: 0 !important;
-	min-height: 48px;
-	width: 60%;
+	min-height: 49px;
+	width: 49%;
+	text-shadow: none;
+}
+.outlet_work{
+	float: left;
+	margin: 0 !important;
+	min-height: 40px;
+	width: 49%;
 	text-shadow: none;
 }
 .outlet_info {
 	float: right;
 	text-shadow: none;
-	width: 39%;
+	width: 49%;
 }
 .title_outlet {
 	display: inline-block;
@@ -1689,7 +1757,7 @@ img, object {
 	display: inline-block;
 	padding: 2.5% 0 0;
 	text-align: center;
-	width: 22%;
+	width: 21%;
 }
 .rest_name span {
 	display: block;
@@ -1700,7 +1768,7 @@ img, object {
 	background-color: #6E4D6C;
 	color: #FFFFFF;
 	/*margin: 0 1%;*/
-	 padding-bottom: 0.5%;
+	padding-bottom: 0.5%;
 }
 
 .fblogin img {

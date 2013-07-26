@@ -161,12 +161,22 @@ module.controller('loginController', function($scope, $http, $location) {
 				setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
 				setCookie('signInCount', data.sign_in_count, 0.29);
 			}
-			$location.url("/home");
+			if (getCookie('userRole') == "user") {
+				$location.url("/home");
+			} else if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff" || getCookie('userRole') == "manager") {
+				$scope.error = "You are not authenticated to use this app";
+				$scope.erromsg = true;
+			}
 		}).error(function(data, status) {
 			console.log($scope.password)
 			console.log("data " + $scope.email + " status " + status);
-			$scope.error = "Invalid Email or Password";
-			$scope.erromsg = true;
+			if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff") {
+				$scope.error = "You are not authenticated to use this app";
+				$scope.erromsg = true;
+			} else {
+				$scope.error = "Invalid Email or Password";
+				$scope.erromsg = true;
+			}
 		});
 	};
 	$scope.forgotPassword = function() {
@@ -304,6 +314,17 @@ module.controller('homeController', function($scope, $http, $location) {
 				console.log("User Role " + data + " status " + status);
 				//var date = new Date();
 				$scope.points = data.user.points_available;
+				$scope.userName = data.user.first_name+" "+data.user.last_name;
+				if(data.user.points_redeemed == null){
+					$scope.aedSaved = 0;	
+				}else{
+					$scope.aedSaved = data.user.points_redeemed;
+				}
+				if(data.user.redeems_count == null){
+					$scope.redeems = 0;					
+				}else{
+					$scope.redeems = data.user.redeems_count;	
+				}
 				//alert("points"+$scope.points);
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
@@ -312,7 +333,7 @@ module.controller('homeController', function($scope, $http, $location) {
 		}
 		//alert("points"+$scope.points);
 		//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
-		$scope.userName = getCookie('userName');
+		// $scope.userName = getCookie('userName');
 		$scope.role = getCookie('userRole');
 		//document.body.style.background = #FFFFFF;
 
@@ -450,9 +471,6 @@ module.controller('changePasswordController', function($scope, $http, $location)
 				$scope.error = data.errors[0];
 				$scope.errorMsg = true;
 				$scope.succMsg = false;
-				$scope.currentPassword = "";
-				$scope.confirmPassword = "";
-				$scope.newPassword = "";
 			});
 
 		}
@@ -532,19 +550,19 @@ module.controller('settingsController', function($scope, $http, $location) {
 			if (!$scope.date && !$scope.month && !$scope.year) {
 				$scope.error = "Enter the date of birth";
 				$scope.errorMsg = true;
+				$scope.succMsg = false;
 			} else if (!isDate(date)) {
-				$scope.error = "Enter valid Date of birth";
+				$scope.error = "Enter valid date of birth";
 				$scope.errorMsg = true;
+				$scope.succMsg = false;
 			} else {
 				var param = {
 					"user" : {
 						"first_name" : $scope.firstName,
 						"last_name" : $scope.lastName,
-						"email" : $scope.email,
 						"date_of_birth" : $scope.date + "-" + $scope.month + "-" + $scope.year,
 						"gender" : $scope.gender,
 						"location" : $scope.location,
-						"current_password" : $scope.currentPassword
 					},
 					"auth_token" : getCookie('authToken')
 				}
@@ -559,9 +577,6 @@ module.controller('settingsController', function($scope, $http, $location) {
 					setCookie('authToken', data.auth_token, 0.29);
 					$scope.errorMsg = false;
 					$scope.succMsg = true;
-					$scope.currentPassword = "";
-					$scope.confirmPassword = "";
-					$scope.newPassword = "";
 				}).error(function(data, status) {
 					console.log("data " + data + " status " + status);
 					$scope.error = data.errors[0];
@@ -670,6 +685,11 @@ module.controller('feedbackController', function($scope, $http, $location) {
 });
 
 module.controller('feedback_step2Controller', function($scope, $http, $location) {
+	if(getCookie("feedbackId")){
+		
+	}else{
+		$location.url("/feedback")
+	}
 	$scope.nextFlag = 0;
 	$scope.prevFlag = 0;
 	$scope.like = true;
@@ -679,6 +699,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 	$scope.recomendation = false;
 	$scope.recomendationBar = false;
 	$scope.counts = [];
+	$scope.erromsg = false;
 	$scope.willRecommend = "";
 	$scope.feedBackArray = [0, 0, 0, 0, 0, 0];
 	$scope.feedBackSize = 6;
@@ -766,7 +787,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_2.png');
 					$("#feed_" + i).css("background-color", "#CCCCCC");
 					$("#feed_" + i + " span").css("color", "#664765");
-				}else if ($scope.feedBackArray[i] == -1) {
+				} else if ($scope.feedBackArray[i] == -1) {
 					$scope.feedBackArray[i] = -1;
 					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_2.png');
 					$("#feed_" + i).css("background-color", "#664765");
@@ -794,6 +815,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			$scope.nextFlag = -1;
 			$(".nxt").css("width", "49.5%");
 			$(".nxtTxt").html("SUBMIT");
+			$scope.erromsg = false;
 			$(".nxt img").hide();
 			console.log("feedback " + $scope.feedBackArray);
 		} else if ($scope.nextFlag == -1) {
@@ -819,6 +841,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			}).success(function(data, status) {
 				console.log("User Role " + data + " status " + status);
 				pointsEarned = data.points;
+				$scope.erromsg = false;
 				if (getCookie('authToken')) {
 					$location.url("/feedbackSubmitSuccess");
 				} else {
@@ -827,9 +850,16 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 				}
 
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status);
+				console.log("data in error" + data + " status " + status);
+				$scope.error = data.errors[0];
+				$scope.erromsg = true;
 			});
 		}
+	};
+
+	$scope.goBack = function() {
+		deleteCookie('feedbackId');
+		$location.url("/feedback");
 	};
 
 	$scope.previous = function() {
@@ -846,7 +876,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_4.png');
 					$("#feed_" + i).css("background-color", "#CCCCCC");
 					$("#feed_" + i + " span").css("color", "#664765");
-				} else if ($scope.feedBackArray[i] == 1) {	
+				} else if ($scope.feedBackArray[i] == 1) {
 					$scope.feedBackArray[i] = 1;
 					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_4.png');
 					$("#feed_" + i).css("background-color", "#664765");
@@ -875,7 +905,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			$(".nxt").css("width", "49.5%");
 			$(".nxtTxt").html("NEXT");
 			$(".nxt img").show();
-		} 
+		}
 
 	};
 });
@@ -893,9 +923,10 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 	}
 });
 
+
 module.controller('restaurantListController', function($scope, $http, $location) {
 	if (getCookie('authToken')) {
-
+		// $("#listRestaurant").niceScroll({cursorcolor:"#00F"});
 		$scope.outlets = [];
 
 		$scope.home = function() {
@@ -1279,6 +1310,14 @@ window.fbAsyncInit = function() {
 		appId : '229509360519289'
 	});
 };
+
+function moveToNext(field, nextFieldID) {
+
+	if (field.value.length >= field.maxLength) {
+		console.log("id " + nextFieldID);
+		document.getElementById(nextFieldID).focus();
+	}
+}
 
 // Load the SDK Asynchronously
 ( function(d) {
