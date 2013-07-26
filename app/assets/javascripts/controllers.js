@@ -178,8 +178,7 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 		$('#account').hide();
 		$scope.accountm = true;
 		$('#accountm').show();
-	}
-	else{
+	} else {
 		$scope.accountm = false;
 		$('#accountm').hide();
 	}
@@ -1071,53 +1070,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			}
 
 		};
-		$scope.add_new_manager = function() {
-			$('.add_manager').show();
-		}
-		$scope.close_manager = function() {
-			$('.add_manager').hide();
-		}
-		$scope.master = {};
-		$scope.create_manager = function(createManager) {
-			if ($scope.createManager.$valid && $(".phoneno_2").val()) {
-				$scope.valide_phone = false;
-				var param = {
-					"user" : {
-						"email" : $scope.email_address_manager,
-						"first_name" : $scope.first_name,
-						"last_name" : $scope.last_name,
-						"phone_number" : $(".phoneno_2").val(),
-						"password" : $scope.password,
-						"password_confirmation" : $scope.confirmpassword
-					},
-					"auth_token" : getCookie('authToken')
-				}
-
-				$http({
-					method : 'post',
-					url : '/api/managers',
-					data : param,
-				}).success(function(data, status) {
-					console.log("data in success " + data + " status " + status);
-					$scope.error = false;
-					$scope.manager_id = data.manager.id;
-					$scope.success1 = true;
-					$scope.getManagerList();
-					$('#formid')[0].reset();
-				}).error(function(data, status) {
-					console.log("data in error" + data + " status " + status);
-					$scope.errorMsg = data.errors[0];
-					if ($scope.errorMsg == "Email has already been taken") {
-						$scope.errorMsg = "This email address is already being used by a manager.";
-					}
-					$scope.error = true;
-					$scope.success1 = false;
-				});
-			} else {
-				$scope.valide_phone = true;
-				$scope.success1 = false;
-			}
-		};
 
 		$scope.create_tablet_id = function() {
 			$scope.password_changed = "";
@@ -1137,7 +1089,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 
 		$scope.listTabletIds = function() {
 			var param = {
-				"auth_token" : getCookie('authToken')
+				"auth_token" : getCookie('authToken'),
+				"outlet_id":$routeParams.outletId
 			}
 			$http({
 				method : 'get',
@@ -1186,7 +1139,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					console.log("data in error" + data + " status " + status);
 					$('#tabletIdForm')[0].reset();
 					$scope.errorMsg = data.errors[0];
-					
+
 					$scope.errorTabletId = true;
 					$scope.successTabletId = false;
 				});
@@ -1210,12 +1163,12 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				console.log("data in error " + data + " status " + status);
 			});
 		};
-		
+
 		$scope.change_tablet_pass = function(tabletId) {
 			$scope.tabletId = tabletId;
 			$scope.successTabletId = false;
 			$scope.errorTabletId = false;
-			$scope.errorMsg ="";
+			$scope.errorMsg = "";
 			$('.tabletId').hide();
 			$('.changePass_tablet').show();
 			$scope.successTabletId = false;
@@ -1227,34 +1180,34 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$scope.successTabletId = false;
 			$scope.errorTabletId = false;
 		};
-		
+
 		$scope.Change_password = function(changePass) {
 			if ($scope.changePass.$valid && $("#txtP").val()) {
-			var param = {
-				"staff" : {
-					    "password": $scope.password,
-					    "password_confirmation": $scope.password_confirmation,
-					    "current_password": $scope.old_password
-					 },
+				var param = {
+					"staff" : {
+						"password" : $scope.password,
+						"password_confirmation" : $scope.password_confirmation,
+						"current_password" : $scope.old_password
+					},
 					"auth_token" : getCookie('authToken')
-			};
-			$http({
-				method : 'PUT',
-				url : '/api/staffs/' + $scope.tabletId,
-				data : param,
-			}).success(function(data, status) {
-				console.log("Data in success " + data + " status " + status);
-				$('#passwordChange')[0].reset();
-				$scope.errorMsg = "";
-				$("#txtP").val("");
-				$scope.password_changed = "Password has been changed successfully."
-				$scope.listTabletIds();
-			}).error(function(data, status) {
-				// $('#passwordChange')[0].reset();
-				$scope.password_changed = "";
-				$scope.errorMsg = data.errors[0];
-				console.log("data in error " + data + " status " + status);
-			});
+				};
+				$http({
+					method : 'PUT',
+					url : '/api/staffs/' + $scope.tabletId,
+					data : param,
+				}).success(function(data, status) {
+					console.log("Data in success " + data + " status " + status);
+					$('#passwordChange')[0].reset();
+					$scope.errorMsg = "";
+					$("#txtP").val("");
+					$scope.password_changed = "Password has been changed successfully."
+					$scope.listTabletIds();
+				}).error(function(data, status) {
+					// $('#passwordChange')[0].reset();
+					$scope.password_changed = "";
+					$scope.errorMsg = data.errors[0];
+					console.log("data in error " + data + " status " + status);
+				});
 			}
 		};
 
@@ -1262,6 +1215,57 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		if ($location.path() == "/outlet_manager") {
 			$rootScope.header = "Outlet Manager | Kanari";
 		}
+
+		$scope.add_new_manager = function() {
+			$('.add_manager').show();
+			$('.edit_manager').hide();
+			$scope.manager_deleted = "";
+		}
+		$scope.close_manager = function() {
+			$('.add_manager').hide();
+		}
+		$scope.master = {};
+		$scope.create_manager = function(createManager) {
+			if ($scope.createManager.$valid && $(".phoneno_1").val()) {
+				$scope.valide_phone = false;
+				var param = {
+					"user" : {
+						"email" : $scope.email_address_manager1,
+						"first_name" : $scope.first_name1,
+						"last_name" : $scope.last_name1,
+						"phone_number" : $(".phoneno_1").val(),
+						"password" : $scope.password,
+						"password_confirmation" : $scope.confirmpassword
+					},
+					"auth_token" : getCookie('authToken')
+				}
+
+				$http({
+					method : 'post',
+					url : '/api/managers',
+					data : param,
+				}).success(function(data, status) {
+					console.log("data in success " + data + " status " + status);
+					$scope.error = false;
+					$scope.manager_id = data.manager.id;
+					$scope.success1 = true;
+					$scope.getManagerList();
+					$('#formid')[0].reset();
+				}).error(function(data, status) {
+					console.log("data in error" + data + " status " + status);
+					$scope.errorMsg = data.errors[0];
+					if ($scope.errorMsg == "Email has already been taken") {
+						$scope.errorMsg = "This email address is already being used by a manager.";
+					}
+					$scope.error = true;
+					$scope.success1 = false;
+				});
+			} else {
+				$scope.valide_phone = true;
+				$scope.success1 = false;
+			}
+		};
+
 		$scope.DeleteManager = function(managerId) {
 			var param = {
 				"auth_token" : getCookie('authToken')
@@ -1283,6 +1287,12 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		};
 
 		$scope.getManager = function(managerId) {
+			$('.add_manager').hide();
+			$('.edit_manager').show();
+			$('#formid')[0].reset();
+			$scope.valide_phone = false;
+			$scope.errorMsg = "";
+			$scope.success1 = false;
 			$scope.manager_deleted = "";
 			$scope.manager_updated = "";
 			var param = {
@@ -1336,7 +1346,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		/**End Outlet Manager Functionality**/
 
 		$scope.changeTab = function(currentTab) {
-				$scope.staff_deleted = "";
+			$scope.staff_deleted = "";
 			if ($scope.updateMode) {
 				if (currentTab == "profileShow") {
 					$('#viewmap').hide();
@@ -1433,8 +1443,7 @@ module.controller('outletManagerCtrl', function($rootScope, $scope, $routeParams
 		}).error(function(data, status) {
 			console.log("data in error" + data + " status " + status);
 		});
-		
-		
+
 		$scope.update_Manager = function(updateManager) {
 			if ($scope.editManager.$valid && $(".phoneno_2").val()) {
 
@@ -1464,7 +1473,7 @@ module.controller('outletManagerCtrl', function($rootScope, $scope, $routeParams
 				$scope.valide_phone = true;
 			}
 		};
-		
+
 		$scope.goback = function() {
 			$location.url("/outlets");
 		}
