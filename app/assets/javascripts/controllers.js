@@ -1089,7 +1089,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 
 		$scope.listTabletIds = function() {
 			var param = {
-				"auth_token" : getCookie('authToken')
+				"auth_token" : getCookie('authToken'),
+				"outlet_id":$routeParams.outletId
 			}
 			$http({
 				method : 'get',
