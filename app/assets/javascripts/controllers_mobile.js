@@ -325,12 +325,12 @@ module.controller('homeController', function($scope, $http, $location) {
 				} else {
 					$scope.redeems = data.user.redeems_count;
 				}
-				if(data.user.feedbacks_count == null){
+				if (data.user.feedbacks_count == null) {
 					$scope.feedbackSubmissions = 0;
-				}else{
-					$scope.feedbackSubmissions = data.user.feedbacks_count; 	
+				} else {
+					$scope.feedbackSubmissions = data.user.feedbacks_count;
 				}
-					$scope.recentActivity = data.user.last_activity_at;
+				$scope.recentActivity = data.user.last_activity_at;
 				//alert("points"+$scope.points);
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
@@ -852,11 +852,15 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 						$location.url("/signUp");
 						deleteCookie('feedbackId');
 					}
-
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
-					$scope.error = data.errors[0];
-					$scope.erromsg = true;
+					if (status == 404) {
+						$scope.error = "Code expired"
+						$scope.erromsg = true;
+					} else {
+						$scope.error = data.errors[0];
+						$scope.erromsg = true;
+					}
 					deleteCookie('feedbackId');
 				});
 			}
@@ -1312,19 +1316,19 @@ module.factory('Facebook', function($http, $location) {
 
 });
 
-window.fbAsyncInit = function() {
-	FB.init({
-		appId : '229509360519289'
-	});
-};
-
 function moveToNext(field, nextFieldID) {
-
 	if (field.value.length >= field.maxLength) {
 		console.log("id " + nextFieldID);
 		document.getElementById(nextFieldID).focus();
 	}
 }
+
+window.fbAsyncInit = function() {
+	FB.init({
+		appId : '495192030556627'
+	});
+};
+
 
 // Load the SDK Asynchronously
 ( function(d) {
@@ -1338,3 +1342,5 @@ function moveToNext(field, nextFieldID) {
 		js.src = "//connect.facebook.net/en_US/all.js";
 		ref.parentNode.insertBefore(js, ref);
 	}(document));
+	
+	
