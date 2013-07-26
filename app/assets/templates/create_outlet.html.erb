@@ -442,7 +442,7 @@
 								Delete
 							</div>
 							<div class="col1 colBorderTop colBorderRight" style="width: 26%;">
-								Update Password
+								Reset Password
 							</div>
 						</div>
 						<div ng-repeat="listTabs in listTabIds" class="dateTimeListRow clearfix">
@@ -456,7 +456,7 @@
 								<a href="" ng-click="DeleteStaff(listTabs.id)">DELETE</a>
 							</div>
 							<div class="col1 colBorderRight" style="width: 26%;">
-								<a href="" ng-click="change_tablet_pass(listTabs.id)">UPDATE PASSWORD</a>
+								<a href="" ng-click="change_tablet_pass(listTabs.id)">RESET PASSWORD</a>
 							</div>
 						</div>
 					</div>
@@ -532,7 +532,7 @@
 							</p>
 							<p ng-hide="error" ></p>
 							<p ng-show="successTabletId" class="successMsg">
-								Tablet Id has been created successfully.
+								Tablet has been created successfully.
 							</p>
 							<p ng-hide="success" ></p>
 						</div>
@@ -540,7 +540,7 @@
 				</form>
 			</div>
 			<div data-role="fieldcontain" class="changePass_tablet rightPanel">
-				<h1>Change Password</h1>
+				<h1>Reset Password</h1>
 				<span class="mandatoryFld">
 					<div class="startMsg">
 						*

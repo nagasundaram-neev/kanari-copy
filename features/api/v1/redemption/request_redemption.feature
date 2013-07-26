@@ -11,6 +11,7 @@ Feature: Request Redemption
         And his role is "user"
         And his authentication token is "auth_token_123"
         And he has "100" points
+        And his last activity was on "2013-01-01 01:00:00"
       When I authenticate as the user "auth_token_123" with the password "random string"
       When I send a POST request to "/api/redemptions" with the following:
       """
@@ -28,6 +29,7 @@ Feature: Request Redemption
       """
       And the outlet's rewards pool should have "1000" points
       And the user should have "100" points
+      And the user's last activity should be today
 
     Scenario: User doesn't have enough points
       Given a customer named "Subway" exists with id "100"

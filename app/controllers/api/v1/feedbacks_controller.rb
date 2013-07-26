@@ -41,7 +41,7 @@ class Api::V1::FeedbacksController < ApplicationController
         points = @feedback.points
         outlet = @feedback.outlet
         outlet.add_points_to_rewards_poll(points)
-        current_user.add_points_to_available_points(points)
+        current_user.update_points_and_feedbacks_count(points)
         @feedback.rewards_pool_after_feedback = outlet.rewards_pool
         @feedback.user_points_after_feedback  = current_user.points_available
         @feedback.user = current_user

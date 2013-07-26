@@ -685,6 +685,11 @@ module.controller('feedbackController', function($scope, $http, $location) {
 });
 
 module.controller('feedback_step2Controller', function($scope, $http, $location) {
+	if(getCookie("feedbackId")){
+		
+	}else{
+		$location.url("/feedback")
+	}
 	$scope.nextFlag = 0;
 	$scope.prevFlag = 0;
 	$scope.like = true;
