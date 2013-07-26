@@ -1462,6 +1462,10 @@ module.controller('outletManagerCtrl', function($rootScope, $scope, $routeParams
 				$scope.valide_phone = true;
 			}
 		};
+		
+		$scope.goback = function() {
+			$location.url("/outlets");
+		}
 	}
 });
 
