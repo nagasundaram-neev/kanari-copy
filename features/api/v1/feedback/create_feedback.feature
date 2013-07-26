@@ -12,6 +12,7 @@ Feature: Create Feedback
         |code     |12345  |
         |points   |120    |
         |outlet_id|20      |
+        |completed|false      |
         And the time limit for giving feedback is "120" minutes
       Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"
         And his role is "user"
@@ -123,7 +124,7 @@ Feature: Create Feedback
       Then the response status should be "422"
       And the JSON response should be:
       """
-      { "errors" : ["Sorry, time for giving feedback has been expired! You were supposed to give feedback within 120 minutes"] }
+      { "errors" : ["Code expired"] }
       """
       And the outlet's rewards pool should have "1000" points
       And the user should have "100" points
