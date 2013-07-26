@@ -452,7 +452,12 @@ div.create_rest {
 	font-size: 14px;
 	/*margin: 1% -18%;*/
 }
-
+.header_title span.outletM{
+	border-bottom: 3px solid #5A4166;
+    display: block;
+    text-shadow: 0 0 #5A4166;
+    padding: 0 0 7px;
+}
 .controls .successMsgMnger {
 	color: green;
 	margin-top: 10px;
