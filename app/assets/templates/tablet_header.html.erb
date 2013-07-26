@@ -28,18 +28,17 @@
 			<a href="#" class="logOut" ng-click="showPopup()" data-role="button"><%= image_tag 'ic_logout.png' %></a>
 		</div>
 	</div>
-</div>
-<div ng-show="popup" class="popup clearfix">
-	<h4>Are you sure you want to log out?</h4>
-	<div class="btn floatLeft">
-		<button ng-click="logout()">
-			Yes
-		</button>
+	<div ng-show="popup" class="popup clearfix">
+		<h4>Are you sure you want to log out?</h4>
+		<div class="btn floatLeft">
+			<button ng-click="logout()">
+				Yes
+			</button>
+		</div>
+		<div class="btn floatLeft">
+			<button ng-click="cancel()">
+				No
+			</button>
+		</div>
 	</div>
-	<div class="btn floatLeft">
-		<button ng-click="cancel()">
-			No
-		</button>
-	</div>
 </div>
-
