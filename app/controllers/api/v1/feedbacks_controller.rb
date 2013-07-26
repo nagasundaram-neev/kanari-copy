@@ -23,7 +23,7 @@ class Api::V1::FeedbacksController < ApplicationController
   # PATCH/PUT /feedbacks/1.json
   def update
     current_user = warden.authenticate(scope: :user)
-    @feedback = Feedback.where(id: params[:id], completed: false).first
+    set_feedback_for_update
     render json: {errors: ["Feedback not found."]}, status: :not_found and return if @feedback.nil?
     expiry_time = GlobalSetting.where(setting_name: 'feedback_expiry_time').first.setting_value.to_i
 
@@ -71,6 +71,22 @@ class Api::V1::FeedbacksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_feedback
       @feedback = Feedback.where(id: params[:id]).first
+    end
+
+    def set_feedback_for_update
+      if params[:feedback][:user_id].nil?
+        set_incomplete_feedback
+      else
+        set_completed_feedback
+      end
+    end
+
+    def set_completed_feedback
+      @feedback = Feedback.where(id: params[:id], completed: true).first
+    end
+
+    def set_incomplete_feedback
+      @feedback = Feedback.where(id: params[:id], completed: false).first
     end
 
     # Use callbacks to share common setup or constraints between actions.
