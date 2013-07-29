@@ -18,7 +18,10 @@ Feature: List Tablets
           |123456@kanari.co   |
           |654321@kanari.co   |
       When I authenticate as the user "george_auth_token" with the password "random string"
-      And I send a GET request to "/api/staffs"
+      And I send a GET request to "/api/staffs" with the following:
+      """
+      outlet_id=10
+      """
       Then the response status should be "200"
       And the JSON response should be:
       """
