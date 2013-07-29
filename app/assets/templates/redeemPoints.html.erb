@@ -20,30 +20,34 @@
 			</div>
 			<div class="line"></div>
 		</div>
-		<div class="instructionDiv" align="center">
+		<div class="instructionDiv" align="center" style="min-height: 166px;">
 			<div class="instruction">
 				Fill the amount you want to redeem at the selected restaurant
 			</div>
 			<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
 				<input data-theme="a" data-inline="true" type="number" maxlength="5" name="txtPassword" ng-model="amount" class="passwordTxt" placeholder="Amount"/>
 			</div>
-			<p ng-show="successMsg" class="succMsg">{{success}}</p>
-			<p class="errorMsg" ng-show="erromsg" style="display: block">{{error}}</p>
+			<p ng-show="successMsg" class="succMsg">
+				{{success}}
+			</p>
+			<p class="errorMsg" ng-show="erromsg" style="display: block">
+				{{error}}
+			</p>
 		</div>
 		<div class="clr"></div>
-		<div class="footerDiv">
-			<div class="prev" ng-click="previous()">
-				<%= image_tag 'y_arrow_left.png' %>
-				<div class="prevTxt">
-					BACK
-				</div>
+	</div>
+	<div class="footerDiv">
+		<div class="prev" ng-click="previous()">
+			<%= image_tag 'y_arrow_left.png' %>
+			<div class="prevTxt">
+				BACK
 			</div>
-			<div class="nxt" ng-click="confirmRedeem()" style="padding: 0.78em 0;">
-				<div class="nxtTxt" >
-					REDEEM POINTS
-				</div>
-				<div class="clr"></div>
+		</div>
+		<div class="nxt" ng-click="confirmRedeem()" style="padding: 0.78em 0;">
+			<div class="nxtTxt" >
+				REDEEM POINTS
 			</div>
+			<div class="clr"></div>
 		</div>
 	</div>
 </div>

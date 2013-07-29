@@ -42,6 +42,9 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				<div class="clr"></div>
 			</div>
 		</div>
+		<p ng-show="error" class="errorMsg">
+			{{errorMsg}}
+		</p>
 		<div class="keypad">
 			<div class="secondRow">
 				<div class="backColr" ng-click="enterValues('1')">
@@ -98,8 +101,4 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				<div class="clr"></div>
 			</div>
 		</div>
-		<p ng-show="error" class="errorMsg">
-			{{errorMsg}}
-		</p>
-
 	</div>

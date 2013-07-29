@@ -648,6 +648,7 @@ module.controller('feedbackController', function($scope, $http, $location) {
 		$scope.digit3 = "";
 		$scope.digit4 = "";
 		$scope.digit5 = "";
+		$scope.error = false;
 	};
 
 	$scope.enterValues = function(val) {
@@ -822,47 +823,102 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 				console.log("feedback " + $scope.feedBackArray);
 			} else if ($scope.nextFlag == -1) {
 				console.log("submitting feedback");
-				var param = {
-					"feedback" : {
-						"food_quality" : parseInt($scope.feedBackArray[0]),
-						"speed_of_service" : parseInt($scope.feedBackArray[2]),
-						"friendliness_of_service" : parseInt($scope.feedBackArray[1]),
-						"ambience" : parseInt($scope.feedBackArray[3]),
-						"cleanliness" : parseInt($scope.feedBackArray[4]),
-						"value_for_money" : parseInt($scope.feedBackArray[5]),
-						"comment" : $scope.comment,
-						"recommendation_rating" : $scope.willRecommend
-					},
-					"auth_token" : getCookie('authToken')
-				}
+				if (!$scope.comment) {
+					$scope.error = "Please provide advice for manager";
+					$scope.erromsg = true;
+				} else if (!$scope.willRecommend) {
+					if ($scope.willRecommend == '0') {
+						console.log("in hio ");
+						var param = {
+							"feedback" : {
+								"food_quality" : parseInt($scope.feedBackArray[0]),
+								"speed_of_service" : parseInt($scope.feedBackArray[2]),
+								"friendliness_of_service" : parseInt($scope.feedBackArray[1]),
+								"ambience" : parseInt($scope.feedBackArray[3]),
+								"cleanliness" : parseInt($scope.feedBackArray[4]),
+								"value_for_money" : parseInt($scope.feedBackArray[5]),
+								"comment" : $scope.comment,
+								"recommendation_rating" : $scope.willRecommend
+							},
+							"auth_token" : getCookie('authToken')
+						}
 
-				$http({
-					method : 'put',
-					url : '/api/feedbacks/' + getCookie('feedbackId'),
-					data : param
-				}).success(function(data, status) {
-					console.log("User Role " + data + " status " + status);
-					pointsEarned = data.points;
-					$scope.erromsg = false;
-					if (getCookie('authToken')) {
-						$location.url("/feedbackSubmitSuccess");
-						deleteCookie('feedbackId');
+						$http({
+							method : 'put',
+							url : '/api/feedbacks/' + getCookie('feedbackId'),
+							data : param
+						}).success(function(data, status) {
+							console.log("User Role " + data + " status " + status);
+							pointsEarned = data.points;
+							$scope.erromsg = false;
+							if (getCookie('authToken')) {
+								$location.url("/feedbackSubmitSuccess");
+								deleteCookie('feedbackId');
+							} else {
+								feedbackFlag = 1;
+								$location.url("/signUp");
+								deleteCookie('feedbackId');
+							}
+						}).error(function(data, status) {
+							console.log("data in error" + data + " status " + status);
+							if (status == 404) {
+								$scope.error = "Code expired"
+								$scope.erromsg1 = true;
+							} else {
+								$scope.error = data.errors[0];
+								$scope.erromsg1 = true;
+							}
+							deleteCookie('feedbackId');
+						});
+
 					} else {
-						feedbackFlag = 1;
-						$location.url("/signUp");
+						console.log("recommend" + $scope.willRecommend);
+						$scope.error = "Please recommend this place to your friend or colleague";
+						$scope.erromsg = true;
+					}
+				} else {
+					var param = {
+						"feedback" : {
+							"food_quality" : parseInt($scope.feedBackArray[0]),
+							"speed_of_service" : parseInt($scope.feedBackArray[2]),
+							"friendliness_of_service" : parseInt($scope.feedBackArray[1]),
+							"ambience" : parseInt($scope.feedBackArray[3]),
+							"cleanliness" : parseInt($scope.feedBackArray[4]),
+							"value_for_money" : parseInt($scope.feedBackArray[5]),
+							"comment" : $scope.comment,
+							"recommendation_rating" : $scope.willRecommend
+						},
+						"auth_token" : getCookie('authToken')
+					}
+
+					$http({
+						method : 'put',
+						url : '/api/feedbacks/' + getCookie('feedbackId'),
+						data : param
+					}).success(function(data, status) {
+						console.log("User Role " + data + " status " + status);
+						pointsEarned = data.points;
+						$scope.erromsg = false;
+						if (getCookie('authToken')) {
+							$location.url("/feedbackSubmitSuccess");
+							deleteCookie('feedbackId');
+						} else {
+							feedbackFlag = 1;
+							$location.url("/signUp");
+							deleteCookie('feedbackId');
+						}
+					}).error(function(data, status) {
+						console.log("data in error" + data + " status " + status);
+						if (status == 404) {
+							$scope.error = "Code expired"
+							$scope.erromsg1 = true;
+						} else {
+							$scope.error = data.errors[0];
+							$scope.erromsg1 = true;
+						}
 						deleteCookie('feedbackId');
-					}
-				}).error(function(data, status) {
-					console.log("data in error" + data + " status " + status);
-					if (status == 404) {
-						$scope.error = "Code expired"
-						$scope.erromsg = true;
-					} else {
-						$scope.error = data.errors[0];
-						$scope.erromsg = true;
-					}
-					deleteCookie('feedbackId');
-				});
+					});
+				}
 			}
 		};
 
@@ -917,7 +973,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			}
 		};
 	} else {
-		$location.url("/feedback")
+		$location.url("/home");
 	}
 
 });
@@ -971,7 +1027,8 @@ module.controller('restaurantListController', function($scope, $http, $location)
 
 		$scope.showRestaurant = function(outletId) {
 			console.log(outletId);
-			$location.url("/showRestaurant?outletId=" + outletId);
+			$location.url("/confirmRedeem?outletId=" + outletId);
+			// $location.url("/showRestaurant?outletId=" + outletId);
 		};
 
 	} else {
@@ -1012,7 +1069,6 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 			$scope.longitude = data.outlet.longitude;
 		}).error(function(data, status) {
 			console.log("data in error" + data + " status " + status);
-
 		});
 
 		$scope.home = function() {
@@ -1044,8 +1100,10 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 		$scope.erromsg = false;
 
 		$scope.previous = function() {
-			$location.url("/showRestaurant?outletId=" + $routeParams.outletId);
+			// $location.url("/showRestaurant?outletId=" + $routeParams.outletId);
+			$location.url("/redeemPoints");
 		};
+
 		$scope.home = function() {
 			$location.url("/home");
 		};
@@ -1329,7 +1387,6 @@ window.fbAsyncInit = function() {
 	});
 };
 
-
 // Load the SDK Asynchronously
 ( function(d) {
 		var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
@@ -1342,5 +1399,4 @@ window.fbAsyncInit = function() {
 		js.src = "//connect.facebook.net/en_US/all.js";
 		ref.parentNode.insertBefore(js, ref);
 	}(document));
-	
-	
+
