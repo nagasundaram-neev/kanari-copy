@@ -62,7 +62,7 @@ Feature: Create Outlet
           "longitude": 60.6,
           "manager": {
             "email": "bob@gmail.com",
-            "first_name": null,
+            "first_name": "Bob",
             "last_name": null,
             "phone_number": null
           },

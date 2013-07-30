@@ -12,8 +12,9 @@ Given "the following users exist" do |user_data|
   User.count.should == user_hashes.size
 end
 
-Given /^".*" is a user with email id "([^"]*)" and password "([^"]*)" and user id "([^"]*)"$/ do |email, password, user_id|
-  @user = User.create(id: user_id, email: email, password: password, password_confirmation: password)
+Given /^"([^"]*)" is a user with email id "([^"]*)" and password "([^"]*)" and user id "([^"]*)"$/ do |full_name, email, password, user_id|
+  first_name, last_name = full_name.split
+  @user = User.create(id: user_id, email: email, password: password, password_confirmation: password, first_name: first_name, last_name: last_name )
 end
 
 And /^his authentication token is "([^"]*)"$/ do |auth_token|
