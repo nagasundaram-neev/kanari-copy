@@ -1030,11 +1030,11 @@ module.controller('restaurantListController', function($scope, $http, $location)
 			$location.url("/confirmRedeem?outletId=" + outletId);
 			// $location.url("/showRestaurant?outletId=" + outletId);
 		};
-		
-		$scope.showRestaurant = function(outletId){
-			 $location.url("/showRestaurant?outletId=" + outletId);
+
+		$scope.showRestaurant = function(outletId) {
+			$location.url("/showRestaurant?outletId=" + outletId);
 		};
-		
+
 	} else {
 		$location.url("/login");
 	}
