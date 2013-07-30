@@ -111,7 +111,7 @@ module Api
                   existing_resource.social_network_accounts << SocialNetworkAccount.new(provider: params[:oauth_provider], access_token: params[:access_token])
                   #User exists but a new oauth provider is linked
                 end
-                resource = existing_resource
+                self.resource = existing_resource
                 return true
               else
                 resource.social_network_accounts << SocialNetworkAccount.new(provider: params[:oauth_provider], access_token: params[:access_token])

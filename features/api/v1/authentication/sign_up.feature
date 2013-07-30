@@ -23,6 +23,8 @@ Feature: Sign Up
       And the JSON response at "first_name" should be "Kobe"
       And the JSON response at "last_name" should be "Bryant"
       And the JSON response at "registration_complete" should be true
+      Given I keep the JSON response at "auth_token" as "AUTH_TOKEN"
+      Then the user with email "kobe@gmail.com" should have "%{AUTH_TOKEN}" as his authentication_token
       And a user should be created with the following
         |first_name|Kobe|
         |last_name|Bryant|
@@ -48,6 +50,8 @@ Feature: Sign Up
       And the JSON response at "first_name" should be "Kobe"
       And the JSON response at "last_name" should be "Bryant"
       And the JSON response at "registration_complete" should be true
+      Given I keep the JSON response at "auth_token" as "AUTH_TOKEN"
+      Then the user with email "kobe@gmail.com" should have "%{AUTH_TOKEN}" as his authentication_token
       And a user should be created with the following
         |first_name|Kobe|
         |last_name|Bryant|
@@ -58,6 +62,7 @@ Feature: Sign Up
 
     Scenario: Successful sign up with oauth provider when user exists
       Given "Kobe Bryant" is a user with email id "kobe@gmail.com" and password "password123"
+        And his role is "user"
       When I send a POST request to "/api/users" with the following:
       """
       {
@@ -77,6 +82,8 @@ Feature: Sign Up
       And the JSON response at "first_name" should be "Kobe"
       And the JSON response at "last_name" should be "Bryant"
       And the JSON response at "registration_complete" should be true
+      Given I keep the JSON response at "auth_token" as "AUTH_TOKEN"
+      Then the user with email "kobe@gmail.com" should have "%{AUTH_TOKEN}" as his authentication_token
       And a user should be created with the following
         |first_name|Kobe|
         |last_name|Bryant|
@@ -88,6 +95,7 @@ Feature: Sign Up
     Scenario: Oauth provider exists for the user
       Given "Kobe Bryant" is a user with email id "kobe@gmail.com" and password "password123"
         And his authentication token is "auth_token_123"
+        And his role is "user"
       When I send a POST request to "/api/users" with the following:
       """
       {
@@ -120,6 +128,8 @@ Feature: Sign Up
       And the JSON response at "first_name" should be "Kobe"
       And the JSON response at "last_name" should be "Bryant"
       And the JSON response at "registration_complete" should be true
+      Given I keep the JSON response at "auth_token" as "AUTH_TOKEN"
+      Then the user with email "kobe@gmail.com" should have "%{AUTH_TOKEN}" as his authentication_token
 
     Scenario: Passwords do not match
       When I send a POST request to "/api/users" with the following:
