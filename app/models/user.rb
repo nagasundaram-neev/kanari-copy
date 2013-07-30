@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   has_many :feedbacks, inverse_of: :user
   has_many :redemptions, inverse_of: :user
+  has_many :social_network_accounts, inverse_of: :user
   has_many :managed_outlets, class_name: 'Outlet', foreign_key: 'manager_id'
   has_one :outlets_staff, foreign_key: 'staff_id' # For restaurant staff only
   has_one :employed_outlet, source: 'outlet', through: :outlets_staff, foreign_key: 'staff_id' # For restaurant staff only

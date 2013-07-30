@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe User do
   it { should have_many(:feedbacks) }
+  it { should have_many(:social_network_accounts) }
   it { should have_many(:redemptions) }
   it { should have_many(:managed_outlets) }
   it { should have_one(:outlets_staff) }
