@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130726065148) do
+ActiveRecord::Schema.define(version: 20130729082041) do
+
+  create_table "code_generation_logs", force: true do |t|
+    t.integer  "outlet_id"
+    t.string   "outlet_name"
+    t.integer  "customer_id"
+    t.integer  "generated_by"
+    t.integer  "feedback_id"
+    t.string   "code"
+    t.integer  "bill_size"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "cuisine_types", force: true do |t|
     t.string   "name"
@@ -43,6 +56,25 @@ ActiveRecord::Schema.define(version: 20130726065148) do
 
   add_index "customers_users", ["customer_id"], name: "index_customers_users_on_customer_id", using: :btree
   add_index "customers_users", ["user_id"], name: "index_customers_users_on_user_id", using: :btree
+
+  create_table "feedback_logs", force: true do |t|
+    t.integer  "user_id"
+    t.string   "user_first_name"
+    t.string   "user_last_name"
+    t.string   "user_email"
+    t.integer  "outlet_id"
+    t.string   "outlet_name"
+    t.integer  "customer_id"
+    t.integer  "feedback_id"
+    t.string   "code"
+    t.integer  "points"
+    t.integer  "outlet_points_before"
+    t.integer  "outlet_points_after"
+    t.integer  "user_points_before"
+    t.integer  "user_points_after"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "feedbacks", force: true do |t|
     t.string   "code"
@@ -140,6 +172,24 @@ ActiveRecord::Schema.define(version: 20130726065148) do
   end
 
   add_index "payment_invoices", ["customer_id"], name: "index_payment_invoices_on_customer_id", using: :btree
+
+  create_table "redemption_logs", force: true do |t|
+    t.integer  "user_id"
+    t.string   "user_first_name"
+    t.string   "user_last_name"
+    t.string   "user_email"
+    t.integer  "outlet_id"
+    t.string   "outlet_name"
+    t.integer  "customer_id"
+    t.integer  "tablet_id"
+    t.integer  "points"
+    t.integer  "outlet_points_before"
+    t.integer  "outlet_points_after"
+    t.integer  "user_points_before"
+    t.integer  "user_points_after"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "redemptions", force: true do |t|
     t.integer  "user_id"
