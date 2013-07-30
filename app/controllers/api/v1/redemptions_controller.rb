@@ -48,34 +48,28 @@ class Api::V1::RedemptionsController < ApplicationController
   # PATCH/PUT /redemptions/1.json
   def update
     redemption = Redemption.where(id: params[:id], approved_by: nil).first
-    if redemption.nil?
-      render json: {errors: ["Either user has already redeemed reward points or the request for redemption is not found."]}, 
-                    status: :not_found and return
-    end
+    render json: {errors: ["Redemption request not found"]}, status: :not_found and return if redemption.nil?
     outlet = redemption.outlet
     authorize! :approve_redemptions, outlet
     user = redemption.user
     points = redemption.points
 
-    if params[:redemption][:approve]
+    if params[:redemption][:approve] && params[:redemption][:approve] == true
     # Approve redemption
       render json: {errors: ["Outlet doesn't have enough rewards points."]}, status: :unprocessable_entity and return if(outlet.rewards_pool < points)
       render json: {errors: ["User doesn't have enough points."]}, status: :unprocessable_entity and return if(user.points_available < points)
-      Redemption.transaction do 
-        outlet.with_lock do
-          outlet.rewards_pool    = outlet.rewards_pool.to_i - points
-          outlet.points_redeemed = outlet.points_redeemed.to_i + points
-          outlet.save
-        end
-        user.with_lock do
-          user.points_available = user.points_available.to_i - points
-          user.points_redeemed  = user.points_redeemed.to_i + points
-          user.redeems_count    = user.redeems_count.to_i + 1
-          user.save
-        end
+      Redemption.transaction do
+        outlet_points_before = outlet.rewards_pool
+        user_points_before =   user.points_available
+        outlet.update_rewards_and_redeem_points(points)
+        user.update_points_and_redeems_count(points)
         redemption_parameters = { approved_by: current_user.id, rewards_pool_after_redemption: outlet.rewards_pool,
                                   user_points_after_redemption: user.points_available }
         if redemption.update(redemption_parameters)
+          RedemptionLog.create({customer_id: outlet.customer_id, outlet_id: outlet.id, outlet_name: outlet.name,
+            tablet_id: current_user.tablet_id, user_id: user.id, user_first_name: user.first_name, user_last_name: user.last_name,
+            user_email: user.email, points: points, outlet_points_before: outlet_points_before, outlet_points_after: outlet.rewards_pool,
+            user_points_before: user_points_before, user_points_after: user.points_available })
           render json: nil, status: :ok
         else
           render json: redemption.errors, status: :unprocessable_entity

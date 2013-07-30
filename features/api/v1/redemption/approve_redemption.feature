@@ -108,7 +108,7 @@ Feature: Approve Redemption
       Then the response status should be "404"
       And the JSON response should be:
       """
-      { "errors" : ["Either user has already redeemed reward points or the request for redemption is not found."] }
+      { "errors" : ["Redemption request not found"] }
       """
 
     Scenario: User doesn't have enough points
