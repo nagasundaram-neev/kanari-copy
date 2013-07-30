@@ -30,7 +30,7 @@ class Api::V1::FeedbacksController < ApplicationController
     render json: {errors: ["Code expired"]}, status: :unprocessable_entity and return if((Time.zone.now - @feedback.created_at ) > expiry_time.minutes)
     if current_user.nil?
       if @feedback.update(feedback_params)
-        @feedback.code = nil; @feedback.completed = true
+        @feedback.completed = true
         @feedback.save
         render json: {points: @feedback.points}, status: :ok
       else
@@ -41,6 +41,9 @@ class Api::V1::FeedbacksController < ApplicationController
         authorize! :create, Feedback
         points = @feedback.points
         outlet = @feedback.outlet
+        outlet_points_before = outlet.rewards_pool
+        user_points_before = current_user.points_available
+        code_before = @feedback.code
         outlet.add_points_to_rewards_poll(points)
         current_user.update_points_and_feedbacks_count(points)
         @feedback.rewards_pool_after_feedback = outlet.rewards_pool
@@ -49,6 +52,10 @@ class Api::V1::FeedbacksController < ApplicationController
         @feedback.code = nil
         @feedback.completed = true
         if @feedback.update(feedback_params)
+          FeedbackLog.create({customer_id: outlet.customer_id, outlet_id: outlet.id, outlet_name: outlet.name, feedback_id: @feedback.id,
+           user_id: current_user.id, user_first_name: current_user.first_name, user_last_name: current_user.last_name, user_email: current_user.email,
+           code: code_before, points: @feedback.points, outlet_points_before: outlet_points_before, outlet_points_after: outlet.rewards_pool,
+           user_points_before: user_points_before, user_points_after: current_user.points_available })
           render json: {points: @feedback.points}, status: :ok
         else
           render json: {errors: @feedback.errors.full_messages}, status: :unprocessable_entity

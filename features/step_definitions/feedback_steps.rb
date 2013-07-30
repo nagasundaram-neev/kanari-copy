@@ -64,6 +64,12 @@ Then(/^the feedback with id "(.*?)" should have kanari code$/)do |feedback_id|
   Feedback.find(feedback_id).code.should_not == nil
 end
 
+Then(/^the feedback with id "(.*?)" should have the kanari code as "(.*?)"$/)do |feedback_id, code|
+  feedback = Feedback.find(feedback_id)
+  feedback.code.should_not be_nil
+  feedback.code.should == code
+end
+
 Then(/^the feedback with id "(.*?)" should not be completed$/)do |feedback_id|
   Feedback.find(feedback_id).completed.should_not == true
 end

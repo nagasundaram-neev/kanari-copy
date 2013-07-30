@@ -50,6 +50,8 @@ Feature: Create Feedback
       |value_for_money|1|
       |comment|Affordable place for a casual dinner|
       |recommendation_rating|4|
+      |completed|true|
+      |code|nil|
 
     Scenario: User tries to submit feedback twice
       Given a customer named "Subway" exists with id "100"
@@ -98,6 +100,8 @@ Feature: Create Feedback
       |value_for_money|1|
       |comment|Affordable place for a casual dinner|
       |recommendation_rating|4|
+      |completed|true|
+      |code|nil|
       When I send a PUT request to "/api/feedbacks/10" with the following:
       """
       {
@@ -129,6 +133,8 @@ Feature: Create Feedback
       |value_for_money|1|
       |comment|Affordable place for a casual dinner|
       |recommendation_rating|4|
+      |completed|true|
+      |code|nil|
 
     Scenario: User not authenticated
       Given a customer named "Subway" exists with id "100"
@@ -169,6 +175,8 @@ Feature: Create Feedback
       |value_for_money|1|
       |comment|Affordable place for a casual dinner|
       |recommendation_rating||
+      |completed|true|
+      |code|12345|
 
     Scenario: Time for leaving feedback has been expired
       Given a customer named "Subway" exists with id "100"

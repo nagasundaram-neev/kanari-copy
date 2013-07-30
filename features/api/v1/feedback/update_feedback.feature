@@ -66,5 +66,5 @@ Feature: Update feedback
       """
       And the outlet's rewards pool should have "1000" points
       And the feedback with id "10" should belong to user with id "nil"
-      And the feedback with id "10" should have no kanari code
-      And the feedback with id "10" should be completed 
+      And the feedback with id "10" should have the kanari code as "12345"
+      And the feedback with id "10" should be completed
