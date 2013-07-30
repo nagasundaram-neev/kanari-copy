@@ -69,9 +69,17 @@ class Outlet < ActiveRecord::Base
     return {:feedback_insights => feedback_metrics}
   end
 
-  def add_points_to_rewards_poll points
+  def add_points_to_rewards_pool(points)
     self.with_lock do
       self.rewards_pool = self.rewards_pool.to_i + points
+      self.save
+    end
+  end
+
+  def update_rewards_and_redeem_points(points)
+    self.with_lock do
+      self.rewards_pool    = self.rewards_pool.to_i - points
+      self.points_redeemed = self.points_redeemed.to_i + points
       self.save
     end
   end

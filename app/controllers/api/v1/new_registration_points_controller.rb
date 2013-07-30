@@ -13,7 +13,7 @@ class Api::V1::NewRegistrationPointsController < ApplicationController
       outlet_points_before = outlet.rewards_pool
       user_points_before = current_user.points_available
       code_before = feedback.code
-      outlet.add_points_to_rewards_poll(points)
+      outlet.add_points_to_rewards_pool(points)
       current_user.update_points_and_feedbacks_count(points)
       feedback.user = current_user
       feedback.rewards_pool_after_feedback = outlet.rewards_pool
