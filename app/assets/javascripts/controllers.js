@@ -1186,8 +1186,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				var param = {
 					"staff" : {
 						"password" : $scope.password,
-						"password_confirmation" : $scope.password_confirmation,
-						"current_password" : $scope.old_password
+						"password_confirmation" : $scope.password_confirmation
 					},
 					"auth_token" : getCookie('authToken')
 				};
@@ -1214,6 +1213,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		/**Start Outlet Manager Functionality**/
 		if ($location.path() == "/outlet_manager") {
 			$rootScope.header = "Outlet Manager | Kanari";
+			$('.navBarCls ul li').removeClass('active');
+			$('#account').addClass('active');
 		}
 
 		$scope.add_new_manager = function() {

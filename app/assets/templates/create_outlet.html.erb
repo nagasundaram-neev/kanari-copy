@@ -74,7 +74,7 @@
 				<!-- <h1 ng-show="action">Create Restaurant Outlet</h1>
 				<h1 ng-hide="action">Update Restaurant Outlet</h1> -->
 
-				<span class="mandatoryFld" 	>
+				<span class="mandatoryFld" 	style="float: left;">
 					<div class="startMsg">
 						*
 					</div> Indicates mandatory fields</span>
@@ -434,10 +434,10 @@
 							<!-- <div class="col1 colBorderTop">
 							Sr. No.
 							</div> -->
-							<div class="col1 colBorderTop">
+							<div class="col1 colBorderTop" >
 								Tablet Login
 							</div>
-							<div class="col1 colBorderTop">
+							<div class="col1 colBorderTop" style="width:18%">
 								Delete
 							</div>
 							<div class="col1 colBorderTop colBorderRight" style="width: 26%;">
@@ -451,7 +451,7 @@
 							<div class="col1">
 								{{listTabs.tablet_id}}
 							</div>
-							<div class="col1">
+							<div class="col1" style="width:18%">
 								<a href="" ng-click="DeleteStaff(listTabs.id)">DELETE</a>
 							</div>
 							<div class="col1 colBorderRight" style="width: 26%;">
@@ -547,7 +547,7 @@
 				<form id="passwordChange" ng-app="form-example" class="row form-horizontal" name="changePass" ng-submit="Change_password(changePass)" novalidate>
 			<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 42%;">
 					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
-						<div class="control-group">
+						<!-- <div class="control-group">
 						<div class="controls">
 							<lable >
 								Current	Password<span class="star">*</span>
@@ -568,13 +568,13 @@
 								</ul>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<div class="control-group">
 						<div class="controls">
 							<lable >
 								New Password<span class="star">*</span>
 							</lable>
-							<input ng-model="password" class="immediate-help" password-validate required type="password" id="inputPassword" placeholder="New Password">
+							<input id="txtP" ng-model="password" class="immediate-help" password-validate required type="password" id="inputPassword" placeholder="New Password">
 							<div class="input-help">
 								<h4>Password must meet the following requirements:</h4>
 								<ul>
