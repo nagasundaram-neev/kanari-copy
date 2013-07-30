@@ -106,11 +106,13 @@ module Api
                 if existing_oauth_provider = SocialNetworkAccount.where(provider: params[:oauth_provider]).first
                   existing_oauth_provider.access_token = params[:access_token]
                   existing_oauth_provider.save
-                  return true #User exists and oauth provider has been linked with already
+                  #User exists and oauth provider has been linked with already
                 else
                   existing_resource.social_network_accounts << SocialNetworkAccount.new(provider: params[:oauth_provider], access_token: params[:access_token])
-                  return true #User exists but a new oauth provider is linked
+                  #User exists but a new oauth provider is linked
                 end
+                resource = existing_resource
+                return true
               else
                 resource.social_network_accounts << SocialNetworkAccount.new(provider: params[:oauth_provider], access_token: params[:access_token])
                 set_random_password
