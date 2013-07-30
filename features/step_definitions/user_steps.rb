@@ -167,6 +167,13 @@ Then(/^a user should be created with the following$/) do |table|
   User.where(table.rows_hash).present?.should be_true
 end
 
+And /^the user with email "([^"]*)" should have the following social network accounts$/ do |email, table|
+  user = User.where(email: email).first
+  table.hashes.each do |hash|
+    user.social_network_accounts.where(hash).size.should == 1
+  end
+end
+
 Given "the following user exists" do |table|
   User.create!(table.rows_hash)
 end

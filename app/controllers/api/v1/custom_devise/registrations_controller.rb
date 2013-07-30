@@ -14,13 +14,17 @@ module Api
           resource.role = 'user'
           resource.reset_authentication_token
 
-          if resource.save
+          if successful_signup?(resource)
             if resource.active_for_authentication?
               sign_up(resource_name, resource)
               render json: {
                 auth_token: resource.authentication_token,
+                first_name: resource.first_name,
+                last_name: resource.last_name,
                 user_role: resource.role,
-                registration_complete: resource.registration_complete?
+                sign_in_count: resource.sign_in_count,
+                registration_complete: resource.registration_complete?,
+                customer_id: (resource.customer.nil? ? nil : resource.customer.id)
               }, status: :created
             else
               render json: {errors: [resource.inactive_message]}, status: :created
@@ -82,6 +86,39 @@ module Api
 
           def needs_password?(user, params)
             params[:user][:password].present?
+          end
+
+          def set_random_password
+            random_password = Devise.friendly_token[0,20]
+            resource.password = resource.password_confirmation = random_password
+          end
+
+          def oauth_signup?
+            params[:oauth_provider].present?
+          end
+
+          def successful_signup?(resource)
+            if oauth_signup?
+              existing_resource = resource_class.where(email: resource.email).first
+              if existing_resource.present?
+                existing_resource.reset_authentication_token
+                existing_resource.save
+                if existing_oauth_provider = SocialNetworkAccount.where(provider: params[:oauth_provider]).first
+                  existing_oauth_provider.access_token = params[:access_token]
+                  existing_oauth_provider.save
+                  return true #User exists and oauth provider has been linked with already
+                else
+                  existing_resource.social_network_accounts << SocialNetworkAccount.new(provider: params[:oauth_provider], access_token: params[:access_token])
+                  return true #User exists but a new oauth provider is linked
+                end
+              else
+                resource.social_network_accounts << SocialNetworkAccount.new(provider: params[:oauth_provider], access_token: params[:access_token])
+                set_random_password
+                return resource.save #User is created and oauth provider is added
+              end
+            else
+              return resource.save #Has nothing to do with oauth
+            end
           end
       end
     end
