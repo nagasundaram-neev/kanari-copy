@@ -12,20 +12,20 @@
 			<h2>My Profile</h2>
 		</div>
 		<div data-role="fieldcontain" class="settingDiv" align="center">
-			<div class="ui-input-text ui-body-a">
+			<div class="ui-input-text ui-body-a padd">
 				<input data-theme="a" data-inline="true" type="text" name="txtUsername" ng-model="firstName" placeholder="First Name"/>
 			</div>
-			<div class="ui-input-text ui-body-a">
+			<div class="ui-input-text ui-body-a padd">
 				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="lastName" class="passwordTxt" placeholder="Last Name"/>
 			</div>
-			<div class="ui-input-text ui-body-a">
+			<div class="ui-input-text ui-body-a padd">
 				<input data-theme="a" data-inline="true" type="email" name="txtPassword" ng-model="email" class="passwordTxt" placeholder="Email" readonly/>
 			</div>
-			<div class="ui-input-text ui-body-a" ng-click="changePassword()">
+			<div class="ui-input-text ui-body-a padd" ng-click="changePassword()">
 				<input data-theme="a" data-inline="true" type="password" name="txtPassword" class="passwordTxt" placeholder="Change Password"/>
 			</div>
 			<!-- <div class="ui-input-text ui-body-a">
-				<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="currentPassword" class="passwordTxt" placeholder="Current Password"/>
+			<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="currentPassword" class="passwordTxt" placeholder="Current Password"/>
 			</div> -->
 			<!-- <div class="ui-input-text ui-body-a">
 			<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="newPassword" class="passwordTxt" placeholder="New Password"/>
@@ -33,7 +33,7 @@
 			<div class="ui-input-text ui-body-a">
 			<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="confirmPassword" class="passwordTxt" placeholder="Confirm Password"/>
 			</div> -->
-			<div class="ui-input-text ui-body-a">
+			<div class="ui-input-text ui-body-a padd">
 				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="location" class="passwordTxt" placeholder="Location"/>
 			</div>
 			<div data-role="fieldcontain" class="genderBtn ui-input-text ui-body-a">
@@ -59,14 +59,14 @@
 			<p class="succMsg" ng-show="succMsg">
 				Profile updated successfully!!!
 			</p>
-			<div data-role="fieldcontain" class="profileTextBottom" align="center">
-				<h2>Notifications</h2>
+			<!-- <div data-role="fieldcontain" class="profileTextBottom" align="center">
+			<h2>Notifications</h2>
 			</div>
 			<div class="ui-input-text ui-body-a notificationCheckbox">
-				<label>@</label>
-				<%= image_tag 'ic_ticks.png' %>
-				<div class="clr"></div>
-			</div>
+			<label>@</label>
+			<%= image_tag 'ic_ticks.png' %>
+			<div class="clr"></div>
+			</div> -->
 			<div data-role="fieldcontain" class="profileTextBottom" align="center">
 				<h2>Social</h2>
 			</div>
@@ -98,11 +98,10 @@
 				<a href="#"><%= image_tag 'ic_calender_yellow.png' %></a>
 				<div class="clr"></div>
 			</div>
-
 		</div>
 	</div>
 	<div class="clr"></div>
-	<div class="settingDiv footerDiv" style=" position: relative; margin: 0;">
+	<div class="saveDiv footerDiv" style=" position: relative; margin: 0;">
 		<input type="button" class="signBtn" ng-click="saveProfile()" data-inline="true" value="Save"/>
 	</div>
 </div>

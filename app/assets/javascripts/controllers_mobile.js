@@ -1025,12 +1025,16 @@ module.controller('restaurantListController', function($scope, $http, $location)
 		};
 		$scope.getRestaurantList();
 
-		$scope.showRestaurant = function(outletId) {
-			console.log(outletId);
+		$scope.redeemPoint = function(outletId) {
+			//console.log(outletId);
 			$location.url("/confirmRedeem?outletId=" + outletId);
 			// $location.url("/showRestaurant?outletId=" + outletId);
 		};
-
+		
+		$scope.showRestaurant = function(outletId){
+			 $location.url("/showRestaurant?outletId=" + outletId);
+		};
+		
 	} else {
 		$location.url("/login");
 	}

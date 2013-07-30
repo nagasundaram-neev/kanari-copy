@@ -30,8 +30,8 @@
 			<div class="clr"></div>
 		</div>
 		<div id="divexample1" >
-			<div ng-repeat="outlet in outlets | filter:search" class="nameDiv" ng-click="showRestaurant(outlet.id)">
-				<div class="parentDivName">
+			<div ng-repeat="outlet in outlets | filter:search" class="nameDiv">
+				<div class="parentDivName" ng-click="showRestaurant(outlet.id)">
 					<div class="restName">
 						{{outlet.name}}
 					</div>
@@ -39,7 +39,7 @@
 						{{outlet.address | truncate}}
 					</div>
 				</div>
-				<div class="pointsDiv">
+				<div class="pointsDiv" ng-click="redeemPoint(outlet.id)">
 					<div class="aedTxt">
 						<div>
 							AED

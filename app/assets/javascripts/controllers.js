@@ -1226,14 +1226,14 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		}
 		$scope.master = {};
 		$scope.create_manager = function(createManager) {
-			if ($scope.createManager.$valid && $(".phoneno_1").val()) {
+			if ($scope.createManager.$valid && $(".phoneno_3").val()) {
 				$scope.valide_phone = false;
 				var param = {
 					"user" : {
 						"email" : $scope.email_address_manager1,
 						"first_name" : $scope.first_name1,
 						"last_name" : $scope.last_name1,
-						"phone_number" : $(".phoneno_1").val(),
+						"phone_number" : $(".phoneno_3").val(),
 						"password" : $scope.password,
 						"password_confirmation" : $scope.confirmpassword
 					},

@@ -464,6 +464,7 @@ div.create_rest {
 	color: green;
 	margin-top: 10px;
 	font-size: 13px;
+	margin-left: -45px;
 	/*margin: 7% -40%;*/
 }
 
@@ -531,7 +532,7 @@ div.create_rest {
 	font-weight: normal;
 }
 .manager_list {
-	width: 35%
+	width: 29%;
 }
 .manager_list h3 {
 	font-size: 15px;
