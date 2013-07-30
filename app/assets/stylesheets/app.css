@@ -903,7 +903,7 @@ input {
 	border-top: 0;
 }
 .dateTimeList .col1 {
-	width: 19%;
+	width: 20%;
 	text-align: center;
 }
 .dateTimeList .col2 {
@@ -946,7 +946,7 @@ input {
 	padding: 10px 10px 1000px 10px;
 	margin-bottom: -1000px;
 	text-align: center;
-	width: 115px;
+	width: 116px;
 	word-wrap: break-word;
 }
 .border_right_none {

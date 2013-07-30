@@ -76,4 +76,16 @@ class User < ActiveRecord::Base
     end
   end
 
+  def update_points_and_redeems_count(points)
+    self.with_lock do
+      self.points_available = self.points_available.to_i - points
+      self.points_redeemed  = self.points_redeemed.to_i + points
+      self.redeems_count    = self.redeems_count.to_i + 1
+      self.save
+    end
+  end
+
+  def tablet_id
+    self.role == 'staff' ? self.email.split('@').first : nil
+  end
 end
