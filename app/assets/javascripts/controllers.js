@@ -1213,6 +1213,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		/**Start Outlet Manager Functionality**/
 		if ($location.path() == "/outlet_manager") {
 			$rootScope.header = "Outlet Manager | Kanari";
+			$('.navBarCls ul li').removeClass('active');
+			$('#account').addClass('active');
 		}
 
 		$scope.add_new_manager = function() {
