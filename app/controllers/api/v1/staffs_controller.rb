@@ -46,7 +46,7 @@ class Api::V1::StaffsController < ApplicationController
     if(staff.employed_customer != current_user.customer)
       render json: {errors: ["Insufficient privileges"]}, status: :forbidden and return
     end
-    if staff.update_with_password(update_staff_params)
+    if staff.update(update_staff_params)
       render json: nil, status: :ok
     else
       render json: {errors: staff.errors.full_messages}, status: :unprocessable_entity
