@@ -13,7 +13,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 	<div data-role="content">
 		<div class="username">
 			<div class="home" ng-click="home()"></div>
-			<div class="signUp">
+			<div class="signUp" style="margin: 3% 10% 0 0;">
 				LEAVE FEEDBACK
 			</div>
 			<div class="clr"></div>
@@ -25,19 +25,19 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			<div class="menDiv">
 				<div class="backColr">
 					{{digit1}}
-					
+
 				</div>
 				<div class="backColr">
-						{{digit2}}
+					{{digit2}}
 				</div>
 				<div class="backColr">
-						{{digit3}}
+					{{digit3}}
 				</div>
 				<div class="backColr">
-						{{digit4}}
+					{{digit4}}
 				</div>
 				<div class="backColr" style="border-right:0">
-						{{digit5}}
+					{{digit5}}
 				</div>
 				<div class="clr"></div>
 			</div>
@@ -48,54 +48,56 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 		<div class="keypad">
 			<div class="secondRow">
 				<div class="backColr" ng-click="enterValues('1')">
-						1
+					1
 				</div>
 				<div class="backColr" ng-click="enterValues('2')">
-						2
+					2
 				</div>
 				<div class="backColr" ng-click="enterValues('3')">
-						3
+					3
 				</div>
 				<div class="clr"></div>
 			</div>
 			<div class="secondRow">
 				<div class="backColr" ng-click="enterValues('4')">
-						4
+					4
 				</div>
 				<div class="backColr" ng-click="enterValues('5')">
-						5
+					5
 				</div>
 				<div class="backColr" ng-click="enterValues('6')">
-						6
+					6
 				</div>
 				<div class="clr"></div>
 			</div>
 			<div class="secondRow">
 				<div class="backColr" ng-click="enterValues('7')">
-						7
+					7
 				</div>
 				<div class="backColr" ng-click="enterValues('8')">
-						8
+					8
 				</div>
 				<div class="backColr" ng-click="enterValues('9')">
-						9
+					9
 				</div>
 				<div class="clr"></div>
 			</div>
 			<div class="secondRow">
 				<div class="clearBackColr" ng-click="clear()">
-					<div class="clear">
-						C
-					</div>
+
+					C
+
 				</div>
 				<div class="backColr" style=" padding:  0;" ng-click="enterValues('0')">
-						0
+					0
 				</div>
 				<div class="nextBackColr" ng-click="next()">
-					<div class="nxtTxt">
-						NEXT
+					<div style="margin: 32% 0;">
+						<div class="nxtTxt">
+							NEXT
+						</div>
+						<%= image_tag 'p_arrow_right.png' %>
 					</div>
-					<%= image_tag 'p_arrow_right.png' %>
 					<!-- <div class="nextArrow"></div> -->
 				</div>
 				<div class="clr"></div>
