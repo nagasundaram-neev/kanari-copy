@@ -731,6 +731,10 @@ img, object {
 	vertical-align: top;
 	margin-top: 0.6%;
 }
+.transactionHistory{
+	height: 385px;
+    overflow-y: auto;
+}
 .prevTxt {
 	color: #FDBE3A;
 	display: inline;
