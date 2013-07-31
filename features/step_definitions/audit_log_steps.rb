@@ -21,3 +21,12 @@ And "the code in the log table should be $code" do |code|
   code = JSON.parse("[#{JsonSpec.remember(code)}]")[0]
   @log_entry.code.should == code
 end
+
+And(/^the following transactions exist in "(.*?)" table/) do |log_table, log_data|
+  log_table = eval(log_table.split(/\s/).join)
+  log_hashes = log_data.hashes
+  log_hashes.each do |log_hash|
+    log_table.create!(log_hash)
+  end
+  log_table.count.should == log_hashes.size
+end
