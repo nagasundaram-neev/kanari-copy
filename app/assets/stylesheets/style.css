@@ -26,6 +26,10 @@
  font-weight: 100;
  }*/
 
+/*[data-role=page]{height: 100% !important; position:relative !important;}
+[data-role=footer]{bottom:0; position:absolute !important; top: auto !important;background: none repeat scroll 0 0 transparent;
+    border: medium none; } 
+    */
 .genderBtn input::-webkit-input-placeholder {
 	color: #F5C03F !important
 }
@@ -1446,6 +1450,11 @@ img, object {
 	color: #F5C03F;
 	font-weight: bold;
 	text-shadow: none;
+}
+
+#feedback_step2 .ui-content .ui-input-text {
+    height : 200px !important;
+    
 }
 
 .signUpDiv .ui-body-a, .ui-overlay-a {
