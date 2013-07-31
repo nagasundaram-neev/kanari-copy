@@ -1211,6 +1211,24 @@ module.controller('transactionHistoryController', function($scope, $http, $locat
 		$scope.previous = function() {
 			$location.url("/settings");
 		};
+		
+		var param = {
+				"auth_token" : getCookie('authToken'),
+				"password" : 'X'
+			}
+
+			$http({
+				method : 'get',
+				url : '/api/activities',
+				params : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				$scope.transactionHList = data.activities;
+				$scope.points = data.user.points_available;
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+			});
+			
 	} else {
 		$location.url("/login");
 	}
