@@ -277,7 +277,7 @@ module.controller('homeController', function($scope, $http, $location) {
 	$scope.points = "";
 	console.log("sign in Count" + getCookie("signInCount"));
 	if (getCookie("authToken")) {
-		console.log("in home ctrl "+getCookie("authToken"));
+		console.log("in home ctrl " + getCookie("authToken"));
 		$scope.getUserData = function() {
 			var param = {
 				"auth_token" : getCookie('authToken'),
@@ -315,8 +315,8 @@ module.controller('homeController', function($scope, $http, $location) {
 
 			});
 		};
-		
-		if(getCookie("signInCount") == 0){
+
+		if (getCookie("signInCount") == 0) {
 			$scope.getUserData();
 		}
 
@@ -997,6 +997,20 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 		$scope.home = function() {
 			$location.url("/home");
 		};
+
+		$scope.facebook = function() {
+			var body = 'Reading JS SDK documentation';
+			FB.api('/me/feed', 'post', {
+				message : body
+			}, function(response) {
+				if (!response || response.error) {
+					alert('Error occured');
+				} else {
+					alert('Post ID: ' + response.id);
+				}
+			});
+		};
+
 	} else {
 		$location.url("/login");
 	}
@@ -1197,6 +1211,24 @@ module.controller('transactionHistoryController', function($scope, $http, $locat
 		$scope.previous = function() {
 			$location.url("/settings");
 		};
+		
+		var param = {
+				"auth_token" : getCookie('authToken'),
+				"password" : 'X'
+			}
+
+			$http({
+				method : 'get',
+				url : '/api/activities',
+				params : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				$scope.transactionHList = data.activities;
+				$scope.points = data.user.points_available;
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+			});
+			
 	} else {
 		$location.url("/login");
 	}
@@ -1380,15 +1412,15 @@ module.factory('Facebook', function($http, $location) {
 							data : param,
 						}).success(function(data) {
 							if (data.registration_complete == true) {
-								console.log("in success"+data.first_name);
+								console.log("in success" + data.first_name);
 								setCookie('userRole', data.user_role, 7);
 								setCookie('authToken', data.auth_token, 7);
-								console.log("authToken"+getCookie('authToken'));
-								setCookie('signInCount',data.sign_in_count, 7);
+								console.log("authToken" + getCookie('authToken'));
+								setCookie('signInCount', data.sign_in_count, 7);
 								setCookie('userName', data.first_name + ' ' + data.last_name, 7);
 								$location.url('/home');
 							} else {
-								
+
 							}
 						});
 

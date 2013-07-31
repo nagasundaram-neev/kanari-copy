@@ -115,7 +115,7 @@
 }
 #home .imgDiv {
 	/*margin: 0 10%;*/
-	margin: 0 18%;
+	margin: 0 10%;
 }
 
 .searchDiv .ui-corner-all {
@@ -162,7 +162,7 @@
 }
 
 .nameDiv {
-	border-bottom: 2px solid #FFFFFF;
+	/*border-bottom: 1px solid #FFFFFF;*/
 	color: #664765;
 	float: left;
 	text-shadow: none;
@@ -174,12 +174,17 @@
 	color: #664765;
 	float: left;
 	margin-bottom: -1000px;
-	padding: 5% 6% 1000px 4%;
+	padding: 5.6% 6% 1000px 4%;
 	text-shadow: none;
-	width: 29.4%;
+	width: 29.8%;
 }
 .restAddr {
-	padding-bottom: 5%;
+	/*padding-bottom: 5%;*/
+	border-bottom: 1px solid #CCCCCC;
+    margin-left: -7px;
+    padding-bottom: 21px;
+    padding-left: 7px;
+    padding-top: 0px;
 }
 .aedTxt {
 	float: left;
@@ -261,11 +266,11 @@
 }
 
 .parentDivName {
-	border-right: 2px solid #FFFFFF;
+	/*border-right: 1px solid #FFFFFF;*/
 	float: left;
 	margin-bottom: -1000px;
 	padding: 5% 0 1000px 2%;
-	width: 58%;
+	width: 58.5%;
 }
 
 .titleDiv {
@@ -394,7 +399,7 @@
 }
 .restListTitleDivLeft {
 	background-color: #664765;
-	border-right: 2px solid #FFFFFF;
+	border-right: 1px solid #FFFFFF;
 	color: #FFFFFF;
 	float: left;
 	padding: 6% 0;
@@ -410,7 +415,8 @@
 	padding: 6% 0;
 	text-align: center;
 	text-shadow: none;
-	width: 39.4%;
+	/*width: 39.4%;*/
+	width: 39.7%;
 }
 .searchDiv {
 	/*	margin: 0 2%;*/
@@ -499,7 +505,7 @@
 }
 .yellowBack {
 	float: left;
-	padding: 2.5% 0;
+	padding: 8.5% 0;
 	width: 49.1%;
 	background-color: #F8BE40;
 	border-right: 2px solid #FFFFFF;
@@ -534,7 +540,7 @@
 	margin: 0 0 0 2%;
 }
 .whatLike {
-	margin: 6% 0;
+	margin: 5% 0;
 }
 .recentActDiv {
 	float: left;
@@ -724,6 +730,10 @@ img, object {
 #transaction_history .prev img, #transaction_history .nxt img {
 	vertical-align: top;
 	margin-top: 0.6%;
+}
+.transactionHistory{
+	height: 385px;
+    overflow-y: auto;
 }
 .prevTxt {
 	color: #FDBE3A;
@@ -926,7 +936,8 @@ img, object {
 	color: #593F5A;
 	font-size: 5em;
 	font-weight: bold;
-	margin-bottom: -3px;
+	margin-bottom: -18px;
+	
 }
 
 .points {
@@ -1020,8 +1031,8 @@ img, object {
 }
 
 /* Sign Up*/
-#signUp .ui-content {
-	margin: 1% 5% 0 !important;
+#signUp .ui-content, #forgotpass .ui-content {
+	margin: 5% 5% 0 !important;
 	padding: 0;
 }
 
@@ -1303,7 +1314,7 @@ img, object {
 	text-align: center;
 	text-shadow: none;
 	text-transform: uppercase;
-	width: 98%;
+	width: 100%;
 	margin: 0;
 }
 .proceedBtn .ui-btn-corner-all {
@@ -1587,7 +1598,7 @@ img, object {
 	/*margin: 1% 5%;*/
 	/*margin: 1% 12%;
 	 padding: 0;*/
-	margin: 1% 5% 0 !important;
+	margin: 5% 5% 0 !important;
 	padding: 0;
 }
 #forgotpass .ui-content {
@@ -1706,7 +1717,7 @@ img, object {
 	width: 100%;
 }
 #login .ui-btn-inline, input, #signUp .ui-btn-inline {
-	margin: 4% 0 3%;
+	margin: 8% 0 3%;
 	width: 100%;
 }
 #login .ui-btn-inline {
@@ -1714,7 +1725,8 @@ img, object {
 	min-height: 20px !important;
 }
 #forgotpass .ui-btn-left, #forgotpass .ui-btn-right, #forgotpass .ui-btn-inline, input {
-	width: 40%;
+	width: 49%;
+	margin:5% 0;
 }
 #signUp .nameContainer {
 	background-color: transparent !important;

@@ -42,6 +42,19 @@ class User < ActiveRecord::Base
     end
   end
 
+  # Lists all activities (redemption and feedback) by the user
+  def activities
+    activities = [];all_activities = []
+    all_activities << RedemptionLog.user_activities(self)
+    all_activities << FeedbackLog.user_activities(self)
+    sorted_activities = all_activities.flatten.compact.sort_by!{|activity| activity.updated_at }.reverse
+    sorted_activities.each do |activity|
+      activities << {points: activity.points, outlet_id: activity.outlet_id, outlet_name: activity.outlet_name,
+                     type: activity.class.name.gsub(/Log/i,''), updated_at: activity.updated_at}
+    end
+    activities
+  end
+
   def outlets
     case role
     when 'kanari_admin'
