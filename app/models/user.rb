@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
     sorted_activities = all_activities.flatten.compact.sort_by!{|activity| activity.updated_at }.reverse
     sorted_activities.each do |activity|
       activities << {points: activity.points, outlet_id: activity.outlet_id, outlet_name: activity.outlet_name,
-                     type: activity.class.name.gsub(/Log/i,''), updated_at: activity.updated_at.strftime("%Y-%m-%d %H:%M:%S")}
+                     type: activity.class.name.gsub(/Log/i,''), updated_at: activity.updated_at}
     end
     activities
   end
