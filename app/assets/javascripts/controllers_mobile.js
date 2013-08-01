@@ -1210,24 +1210,24 @@ module.controller('transactionHistoryController', function($scope, $http, $locat
 		$scope.previous = function() {
 			$location.url("/settings");
 		};
-		
-		var param = {
-				"auth_token" : getCookie('authToken'),
-				"password" : 'X'
-			}
 
-			$http({
-				method : 'get',
-				url : '/api/activities',
-				params : param
-			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
-				$scope.transactionHList = data.activities;
-				$scope.points = data.user.points_available;
-			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
-			});
-			
+		var param = {
+			"auth_token" : getCookie('authToken'),
+			"password" : 'X'
+		}
+
+		$http({
+			method : 'get',
+			url : '/api/activities',
+			params : param
+		}).success(function(data, status) {
+			console.log("User Role " + data + " status " + status);
+			$scope.transactionHList = data.activities;
+			$scope.points = data.user.points_available;
+		}).error(function(data, status) {
+			console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+		});
+
 	} else {
 		$location.url("/login");
 	}
@@ -1435,6 +1435,20 @@ module.factory('Facebook', function($http, $location) {
 		signUp : function() {
 			$('#loginForm').addClass('loginClosed');
 			$('#loginForm').replaceWith($('#registerFormContainer').html());
+		},
+
+		share : function() {
+			var body = 'Reading JS SDK documentation';
+			FB.api('/me/feed', 'post', {
+				message : body
+			}, function(response) {
+				console.log("response "+response.error[0]);
+				if (!response || response.error) {
+					alert('Error occured');
+				} else {
+					alert('Post ID: ' + response.id);
+				}
+			});
 		},
 	}
 
