@@ -73,7 +73,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 					<%= image_tag 'b_cleanliness_3.png' %>
 					<span class="feedbackStep2Txt">CLEANLINESS</span>
 				</div>
-				<div class="backColr" id="feed_5" ng-click="select_feedback_category('5')" style="padding: 1.7% 0;">
+				<div class="backColr" id="feed_5" ng-click="select_feedback_category('5')" style="">
 					<%= image_tag 'b_value_3.png' %>
 					<span class="feedbackStep2Txt">VALUE FOR<br/>MONEY</span>
 				</div>
@@ -115,7 +115,8 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				<div class="clr"></div>
 			</div>
 		</div>
-		<div class="footerDiv">
+		</div>
+		<div data-role="footer" class="footerDiv">
 			<div class="prev" ng-click="previous()" ng-show="prev">
 				<%= image_tag 'y_arrow_left.png' %>
 				<div class="prevTxt" >

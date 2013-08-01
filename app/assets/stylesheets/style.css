@@ -26,10 +26,16 @@
  font-weight: 100;
  }*/
 
-/*[data-role=page]{height: 100% !important; position:relative !important;}
-[data-role=footer]{bottom:0; position:absolute !important; top: auto !important;background: none repeat scroll 0 0 transparent;
-    border: medium none; } 
-    */
+/*[data-role=page]{height: 100% !important; position:relative !important;background: none repeat scroll 0 0 #F9C040 !important;}
+ [data-role=footer]{ bottom: 0px; width: 100%;  overflow: hidden;position: absolute !important; top: auto !important;background: none repeat scroll 0 0 #F9C040 !important;
+ border: medium none; } */
+[data-role=footer] {
+	border: medium none;
+	background: none repeat scroll 0 0 transparent;
+	bottom: 0;/*position: absolute;*/
+	width: 100%;
+	font-weight: normal !important;
+}
 .genderBtn input::-webkit-input-placeholder {
 	color: #F5C03F !important
 }
@@ -178,17 +184,17 @@
 	color: #664765;
 	float: left;
 	margin-bottom: -1000px;
-	padding: 5.6% 6% 1000px 4%;
+	padding: 5.6% 4% 1000px 4%;
 	text-shadow: none;
-	width: 29.8%;
+	width: 32%;
 }
 .restAddr {
 	/*padding-bottom: 5%;*/
 	border-bottom: 1px solid #CCCCCC;
-    margin-left: -7px;
-    padding-bottom: 21px;
-    padding-left: 7px;
-    padding-top: 0px;
+	margin-left: -7px;
+	padding-bottom: 23px;
+	padding-left: 7px;
+	padding-top: 0px;
 }
 .aedTxt {
 	float: left;
@@ -274,7 +280,7 @@
 	float: left;
 	margin-bottom: -1000px;
 	padding: 5% 0 1000px 2%;
-	width: 58.5%;
+	width: 58.3%;
 }
 
 .titleDiv {
@@ -383,7 +389,7 @@
 }
 .adviceDiv {
 	color: #664765;
-	min-height: 300px;
+	min-height: 318px;
 }
 
 .adviceDiv .ui-shadow-inset {
@@ -406,21 +412,21 @@
 	border-right: 1px solid #FFFFFF;
 	color: #FFFFFF;
 	float: left;
-	padding: 6% 0;
-	text-align: center;
+	padding: 6% 0 6% 2%;
+	text-align: left;
 	text-shadow: none;
-	width: 60%;
+	width: 58%;
 }
 
 .restListTitleDivRight {
 	background-color: #664765;
 	color: #FFFFFF;
 	float: left;
-	padding: 6% 0;
-	text-align: center;
+	padding: 6% 0 6% 4%;
+	text-align: left;
 	text-shadow: none;
 	/*width: 39.4%;*/
-	width: 39.7%;
+	width: 35.9%;
 }
 .searchDiv {
 	/*	margin: 0 2%;*/
@@ -656,7 +662,7 @@ img, object {
 
 #login .logo_btm img {
 	float: left;
-	margin: 29% 0 0 18%;
+	margin-left: 4.5%;
 	max-height: 90%;
 	bottom: 0;
 	max-width: 23%;
@@ -706,6 +712,7 @@ img, object {
 	border-right: 3px solid #FFFFFF;
 	border-top: 3px solid #FFFFFF;
 	float: left;
+	height: 100px;
 	/*height: 109px;*/
 	/*height: 100px;*/
 	padding: 4% 0;
@@ -728,16 +735,16 @@ img, object {
 }
 .prev img, .nxt img {
 	vertical-align: top;
-	margin-top: 1.5%;
+	margin-top: 0.3%;
 }
 
 #transaction_history .prev img, #transaction_history .nxt img {
 	vertical-align: top;
 	margin-top: 0.6%;
 }
-.transactionHistory{
+.transactionHistory {
 	height: 385px;
-    overflow-y: auto;
+	overflow-y: auto;
 }
 .prevTxt {
 	color: #FDBE3A;
@@ -786,8 +793,8 @@ img, object {
 .footerDiv {
 
 	bottom: 0;
-	margin: 5% 0 0%;
-	position: absolute;
+	margin: 0% 0 0%;
+	/*position: absolute;*/
 	text-shadow: none;
 	width: 100%;
 }
@@ -795,7 +802,7 @@ img, object {
  position:relative;
  }*/
 #transaction_history .footerDiv {
-	margin: 5% 0 0;
+	margin: 0% 0 0;
 }
 #transaction_history .prev {
 	padding: 0.74em 0;
@@ -941,7 +948,6 @@ img, object {
 	font-size: 5em;
 	font-weight: bold;
 	margin-bottom: -18px;
-	
 }
 
 .points {
@@ -1036,8 +1042,8 @@ img, object {
 
 /* Sign Up*/
 #signUp .ui-content, #forgotpass .ui-content {
-	margin: 5% 5% 0 !important;
-	padding: 0;
+	padding: 5% 5% 0 !important;
+	/*padding: 0;*/
 }
 
 #signedUp .ui-content {
@@ -1453,8 +1459,7 @@ img, object {
 }
 
 #feedback_step2 .ui-content .ui-input-text {
-    height : 200px !important;
-    
+	height: 200px !important;
 }
 
 .signUpDiv .ui-body-a, .ui-overlay-a {
@@ -1607,8 +1612,9 @@ img, object {
 	/*margin: 1% 5%;*/
 	/*margin: 1% 12%;
 	 padding: 0;*/
-	margin: 5% 5% 0 !important;
-	padding: 0;
+	padding: 5% 5% 0 !important;
+	/*padding: 0;*/
+	background: none repeat scroll 0 0 #F9C040 !important;
 }
 #forgotpass .ui-content {
 	overflow: hidden;
@@ -1651,6 +1657,7 @@ img, object {
 .loginDiv div.ui-input-text {
 	margin: 0.4em 0 0;
 	width: 100%;
+	padding: 0;
 }
 
 .signUpDiv div.ui-input-text {
@@ -1735,7 +1742,7 @@ img, object {
 }
 #forgotpass .ui-btn-left, #forgotpass .ui-btn-right, #forgotpass .ui-btn-inline, input {
 	width: 49%;
-	margin:5% 0;
+	margin: 5% 0;
 }
 #signUp .nameContainer {
 	background-color: transparent !important;
@@ -1946,6 +1953,7 @@ img, object {
 
 .loginDiv input.ui-input-text {
 	padding: 0.8em 0.6em !important;
+	  width: 94.5% !important;
 }
 
 .innrDiv {

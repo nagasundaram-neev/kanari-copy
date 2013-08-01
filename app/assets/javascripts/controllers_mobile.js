@@ -131,6 +131,7 @@ var feedbackFlag = 0;
 var signInCount = "";
 
 module.controller('loginController', function($scope, $http, $location) {
+	setFooter(1);
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
 	$scope.remember = false;
 	$scope.erromsg = false;
@@ -274,6 +275,7 @@ module.controller('resetPassController', function($scope, $http, $location, $rou
 });
 
 module.controller('homeController', function($scope, $http, $location) {
+	setFooter(0);
 	$scope.points = "";
 	console.log("sign in Count" + getCookie("signInCount"));
 	if (getCookie("authToken")) {
@@ -391,6 +393,7 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 });
 
 module.controller('signUpController', function($scope, $http, $location) {
+	setFooter(0);
 	$scope.confPassword = "";
 	console.log("flag" + feedbackFlag);
 	if (feedbackFlag == 1) {
@@ -498,6 +501,7 @@ module.controller('changePasswordController', function($scope, $http, $location)
 });
 
 module.controller('settingsController', function($scope, $http, $location) {
+	setFooter(0);
 	if (getCookie('authToken')) {
 		$scope.succMsg = false;
 		$scope.errorMsg = false;
@@ -647,6 +651,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 var pointsEarned = 0;
 
 module.controller('feedbackController', function($scope, $http, $location) {
+	setFooter(0);
 	$scope.digit1 = "";
 	$scope.digit2 = "";
 	$scope.digit3 = "";
@@ -708,6 +713,7 @@ module.controller('feedbackController', function($scope, $http, $location) {
 });
 
 module.controller('feedback_step2Controller', function($scope, $http, $location) {
+	setFooter(0);
 	if (getCookie("feedbackId")) {
 		$scope.nextFlag = 0;
 		$scope.prevFlag = 0;
@@ -989,6 +995,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 });
 
 module.controller('feedbackSubmitController', function($scope, $http, $routeParams, $location) {
+	setFooter(0);
 	if (getCookie('authToken')) {
 		//console.log("points " + pointsEarned);
 		$scope.points = pointsEarned;
@@ -1016,6 +1023,7 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 });
 
 module.controller('restaurantListController', function($scope, $http, $location) {
+	setFooter(0);
 	if (getCookie('authToken')) {
 		// $("#listRestaurant").niceScroll({cursorcolor:"#00F"});
 		$scope.outlets = [];
@@ -1065,6 +1073,7 @@ module.controller('restaurantListController', function($scope, $http, $location)
 });
 
 module.controller('showRestaurantController', function($scope, $http, $routeParams, $location) {
+	setFooter(0);
 	if (getCookie('authToken')) {
 		$.mobile.loading('show');
 		$scope.lattitude = "";
@@ -1122,6 +1131,7 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 });
 
 module.controller('redeemPointsController', function($scope, $http, $location, $routeParams) {
+	setFooter(0);
 	if (getCookie('authToken')) {
 
 		$scope.successMsg = false;
@@ -1202,6 +1212,7 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 });
 
 module.controller('transactionHistoryController', function($scope, $http, $location) {
+	setFooter(0);
 	if (getCookie('authToken')) {
 		$scope.home = function() {
 			$location.url("/home");
@@ -1210,30 +1221,31 @@ module.controller('transactionHistoryController', function($scope, $http, $locat
 		$scope.previous = function() {
 			$location.url("/settings");
 		};
-		
-		var param = {
-				"auth_token" : getCookie('authToken'),
-				"password" : 'X'
-			}
 
-			$http({
-				method : 'get',
-				url : '/api/activities',
-				params : param
-			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
-				$scope.transactionHList = data.activities;
-				$scope.points = data.user.points_available;
-			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
-			});
-			
+		var param = {
+			"auth_token" : getCookie('authToken'),
+			"password" : 'X'
+		}
+
+		$http({
+			method : 'get',
+			url : '/api/activities',
+			params : param
+		}).success(function(data, status) {
+			console.log("User Role " + data + " status " + status);
+			$scope.transactionHList = data.activities;
+			$scope.points = data.user.points_available;
+		}).error(function(data, status) {
+			console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+		});
+
 	} else {
 		$location.url("/login");
 	}
 });
 
 module.controller('locationMapController', function($scope, $http, $location, $routeParams) {
+	setFooter(0);
 	$.mobile.loading('show');
 	// $scope.MapCtrl = function() {
 	// console.log("lattitude " + $routeParams.lat + " longitude " + $routeParams.long);
@@ -1288,6 +1300,35 @@ module.controller('locationMapController', function($scope, $http, $location, $r
 
 });
 
+function setFooter(valueH){
+	//alert($(document).height());
+	// if ($(document).height() == "420px") {
+		// $(".ui-content").css("height", function() {
+			// return $(document).height();
+		// });
+	// }
+	// else{
+		// $(".ui-content").css("height", function() {
+			// return ($(document).height()-75);
+		// });
+	// }
+	
+	$(document).on("pageshow", ".ui-page", function () {
+    var $page  = $(this),
+        vSpace = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() + $page.children('.ui-content').height();
+
+    if (vSpace < $(window).height()) {
+    	//alert($(window).height());
+    	if(valueH == 1){
+        var vDiff = $(window).height() - $page.children('.ui-header').outerHeight() - $page.children('.ui-footer').outerHeight()-78;//minus thirty for margin
+       }
+       else{
+       	var vDiff = $(window).height() - $page.children('.ui-header').outerHeight() - $page.children('.ui-footer').outerHeight();//minus thirty for margin
+       }
+        $page.children('.ui-content').height(vDiff);
+    }
+});
+}
 function setCookie(name, value, days) {
 	//alert(value);
 	if (days) {
