@@ -312,7 +312,6 @@ module.controller('homeController', function($scope, $http, $location) {
 				//alert("points"+$scope.points);
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
-
 			});
 		};
 

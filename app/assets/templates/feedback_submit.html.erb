@@ -53,8 +53,15 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			</div>
 			<div id='parent' style='width: 100%;text-align:center;'>
 				<div id='child' style='overflow: hidden;width: 198px;margin: 0 auto;'>
+					<a href="#"
+					onclick="
+					window.open(
+					'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+					'facebook-share-dialog',
+					'width=626,height=436');
+					return false;">
 					<div ng-click="facebook()" class="backColorYellow" style="float: left"><img src="/assets/ic_fb_purple.png" />
-					</div>
+					</div></a>
 					<div ng-click="twitter()" class="backColorYellow" style="float: left"><img src="/assets/ic_twitter_purple.png" />
 					</div>
 					<div ng-click="google()" class="backColorYellow" style="float: left"><img src="/assets/ic_gplus_purple.png" />
@@ -63,16 +70,16 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			</div>
 			<div class="shareIconsDiv">
 				<!-- <div class="backColorYellow">
-					<div ng-click="facebook()" class="fb_image1"><img src="/assets/ic_fb_purple.png" />
-					</div>
+				<div ng-click="facebook()" class="fb_image1"><img src="/assets/ic_fb_purple.png" />
+				</div>
 				</div>
 				<div class="backColorYellow">
-					<div ng-click="twitter()" class="twit_image1"><img src="/assets/ic_twitter_purple.png" />
-					</div>
+				<div ng-click="twitter()" class="twit_image1"><img src="/assets/ic_twitter_purple.png" />
+				</div>
 				</div>
 				<div class="backColorYellow">
-					<div ng-click="google()" class="google_image1"><img src="/assets/ic_gplus_purple.png" />
-					</div>
+				<div ng-click="google()" class="google_image1"><img src="/assets/ic_gplus_purple.png" />
+				</div>
 				</div> -->
 				<div class="clr"></div>
 			</div>
