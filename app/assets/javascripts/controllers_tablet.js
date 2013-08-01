@@ -363,7 +363,7 @@ module.controller('insightsController', function($scope, $http, $location) {
 				$scope.points = data.feedback_insights.rewards_pool;
 
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+				console.log("data " + d	ata + " status " + status + " authToken" + getCookie('authToken'));
 
 			});
 		};

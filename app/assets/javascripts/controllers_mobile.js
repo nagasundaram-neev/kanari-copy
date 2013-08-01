@@ -312,6 +312,7 @@ module.controller('homeController', function($scope, $http, $location) {
 				//alert("points"+$scope.points);
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+				$location.url("/login");
 			});
 		};
 
@@ -1223,7 +1224,7 @@ module.controller('transactionHistoryController', function($scope, $http, $locat
 		}).success(function(data, status) {
 			console.log("User Role " + data + " status " + status);
 			$scope.transactionHList = data.activities;
-			$scope.points = data.user.points_available;
+			//$scope.points = data.user.points_available;
 		}).error(function(data, status) {
 			console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 		});
@@ -1438,17 +1439,27 @@ module.factory('Facebook', function($http, $location) {
 		},
 
 		share : function() {
-			var body = 'Reading JS SDK documentation';
-			FB.api('/me/feed', 'post', {
-				message : body
-			}, function(response) {
-				console.log("response "+response.error[0]);
-				if (!response || response.error) {
-					alert('Error occured');
+			FB.login(function(response) {
+				if (response.authResponse) {
+					var body = '';
+					FB.api('/me/feed', 'post', {
+						message : body
+					}, function(response) {
+						if (!response || response.error) {
+							//alert(response[0]);
+							//alert('Error occured');
+						} else {
+							//alert('Post ID: ' + response.id);
+						}
+					});
+
 				} else {
-					alert('Post ID: ' + response.id);
+					//alert('User is logged out');
 				}
+			}, {
+				scope : 'publish_stream'
 			});
+
 		},
 	}
 

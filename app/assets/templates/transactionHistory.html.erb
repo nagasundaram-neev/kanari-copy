@@ -32,7 +32,10 @@
 				<span>{{transactionHistory.outlet_name}}</span>
 			</div>
 			<div class="contentText pointsTitle">
-				<span><b>{{transactionHistory.points}}</b> redeemed</span>
+				<div class="point" ng-switch on="transactionHistory.type"> 
+					<span ng-switch-when="Feedback"><b>{{transactionHistory.points}}</b> earned</span>
+					<span ng-switch-when="Redemption"><b>{{transactionHistory.points}}</b> redeemed</span>
+				</div>
 			</div>
 			<div class="clr"></div>
 		</div>

@@ -213,8 +213,8 @@
 	width: 25%;
 }
 .dateContent {
-	padding: 4% 0 4% 2% !important;
-	width: 23%;
+	/*padding: 4% 0 4% 2% !important;*/
+	width: 25%;
 }
 
 .restaurantTitle {
@@ -230,22 +230,28 @@
 	width: 29.3%;
 }
 
+/*.pointsTitle span{
+	padding-left: 3% !important;
+    text-align: left !important;
+}*/
+
 .headTitleLast {
 	border-right: 0 none;
 }
 .headTitle span, .contentText span, .headTitleLast span {
 	display: block;
 	/*padding: 16% 0;*/
-	text-align: center;
+	text-align: left;
+	padding-left: 10px;
 }
 
 .restaurantTitle span {
 	display: block;
-	padding: 0;
 }
 
-.contentText span {
+.restaurantText span {
 	/*padding: 12% 0 12% 7%;*/
+	 font-size: 125%;
 }
 .historyDataContainer {
 	border-bottom: thin solid #eaeaea;
@@ -263,6 +269,7 @@
 
 .dateContent span {
 	text-align: left;
+	color: #999999;
 }
 
 .recommendationDiv {
@@ -949,6 +956,9 @@ img, object {
 	letter-spacing: 0.4em;
 }
 
+.headTitleLast span{
+
+}
 .forgotpass {
 	text-decoration: none;
 	font-size: 0.8em;
