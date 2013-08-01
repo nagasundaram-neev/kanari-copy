@@ -1477,6 +1477,20 @@ module.factory('Facebook', function($http, $location) {
 			$('#loginForm').addClass('loginClosed');
 			$('#loginForm').replaceWith($('#registerFormContainer').html());
 		},
+
+		share : function() {
+			var body = 'Reading JS SDK documentation';
+			FB.api('/me/feed', 'post', {
+				message : body
+			}, function(response) {
+				console.log("response "+response.error[0]);
+				if (!response || response.error) {
+					alert('Error occured');
+				} else {
+					alert('Post ID: ' + response.id);
+				}
+			});
+		},
 	}
 
 });
