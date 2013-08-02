@@ -179,15 +179,7 @@
 	width: 100%;
 	overflow: hidden;
 }
-.pointsDiv {
-	background-color: #FDBE3B;
-	color: #664765;
-	float: left;
-	margin-bottom: -1000px;
-	padding: 5.6% 4% 1000px 4%;
-	text-shadow: none;
-	width: 32%;
-}
+
 .restAddr {
 	/*padding-bottom: 5%;*/
 	border-bottom: 1px solid #CCCCCC;
@@ -270,6 +262,7 @@
 	text-align: left;
 	padding: 4% 0;
 	text-shadow: none;
+	
 	/*width: 32.9%;*/
 }
 
@@ -282,12 +275,24 @@
 	margin: 7% 5%;
 }
 
+.pointsDiv {
+	background-color: #FDBE3B;
+    border-bottom: 1px solid #FFFFFF;
+    color: #664765;
+    float: left;
+    height: 55px;
+    padding: 4% 4%;
+    text-shadow: none;
+    width: 32%;
+}
+
 .parentDivName {
-	/*border-right: 1px solid #FFFFFF;*/
-	float: left;
-	margin-bottom: -1000px;
-	padding: 5% 0 1000px 2%;
-	width: 58.3%;
+	 border-bottom: 1px solid #CCCCCC;
+    float: left;
+    height: 55px;
+    padding: 5% 0 3% 2%;
+    width: 58.3%;
+    word-wrap: break-word;
 }
 
 .titleDiv {
@@ -1758,7 +1763,7 @@ img, object {
 	background-color: transparent !important;
 	padding: 0 !important;
 	margin: 0 0 .2% !important;
-	width: 49.5% !important;
+	width: 48.5% !important;
 	float: left !important;
 }
 #signUp .nameContainer input {
