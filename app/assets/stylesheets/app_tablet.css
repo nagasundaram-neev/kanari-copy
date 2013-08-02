@@ -220,16 +220,15 @@ input.ui-input-text, textarea.ui-input-text {
 }
 #header_menu .headerDiv {
 	float: left;
-	/*margin: 0 0.13%;*/
-	width: 23%;
+	margin-right: 2px;
+    width: 22.8%;
 }
 /*#header_menu .ui-controlgroup-horizontal .ui-btn {
  width: 23.7%;
  }*/
 #header_menu .ui-btn-up-c {
 	background: none repeat scroll 0 0 #664766;
-	border: 1px solid #FFFFFF;
-	border-bottom: none;
+	border: none;
 	color: #FFFFFF;
 	font-weight: normal;
 	text-shadow: none;
@@ -247,8 +246,7 @@ input.ui-input-text, textarea.ui-input-text {
 }
 #header_menu .ui-btn-hover-c, #header_menu .ui-btn-active-c, #header_menu .uibtnactivec {
 	background: none repeat scroll 0 0 #FEC03B;
-	border: 1px solid #FFFFFF;
-	border-bottom: none;
+	border:none;
 	color: #FFFFFF;
 	font-weight: normal;
 	text-shadow: none;
