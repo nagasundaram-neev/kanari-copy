@@ -289,6 +289,9 @@ input.ui-input-text, textarea.ui-input-text {
 	z-index: 11;
 }
 
+.ui-controlgroup, fieldset.ui-controlgroup{
+	margin: 0;
+}
 .btn {
 	display: block;
 	padding: 1%;
@@ -583,7 +586,9 @@ input.ui-input-text, textarea.ui-input-text {
 
 /*Home Page CSS starts here*/
 .home_page_view {
-	width: 100%
+	width: 100%;
+	 height: 800px;
+    overflow-y: auto;
 }
 .feedback_step {
 	border: 1px solid #ccc;
