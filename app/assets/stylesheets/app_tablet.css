@@ -220,8 +220,8 @@ input.ui-input-text, textarea.ui-input-text {
 }
 #header_menu .headerDiv {
 	float: left;
-	margin-right: 2px;
-    width: 22.8%;
+	margin-right: 1px;
+    width: 22.9%;
 }
 /*#header_menu .ui-controlgroup-horizontal .ui-btn {
  width: 23.7%;
