@@ -11,7 +11,11 @@
 				<!-- <span class="rateMValue rate_minus">-{{netScoreDisLike}}%</span> -->
 			</div>
 			<div class="daily_change">
-				<span class="net_rate_plus" style="width: {{netScore*4.5}}px">&nbsp;</span>
+				<div ng-switch on="netScoreFlag">
+					<span ng-switch-when="0" class="net_rate_plus" style="width: {{netScore*4.5}}px">&nbsp;</span>
+					<span ng-switch-when="1" class="net_rate_plus_red" style="width: {{netScore*4.5}}px">&nbsp;</span>
+				</div>
+				<!-- <span class="net_rate_plus" style="width: {{netScore*4.5}}px">&nbsp;</span> -->
 				<!-- <span class="ratePValue rate_plus" ng-switch on="netScoreLike"><span ng-switch-when="0">{{netScoreLike}}%</span><span ng-switch-default>{{netScoreLike}}%</span></span> -->
 				<!-- <span class="ratePValue rate_plus">{{netScoreLike}}%</span> -->
 				<div class="daily_change_score">
@@ -59,11 +63,11 @@
 			</div>
 			<div class="score_div">
 				<div class="net_score" style="height: 58px;padding-top: 7px;">
-					<span class="txt1">Speed of
+					<span class="txt1" style="float: left; line-height: 20px;">Speed of
 						<br/>
 						Service</span>
-					<span class="rate_minus" style="width: {{speedDisLike*4.5}}px">&nbsp;</span>
-					<span class="rateMValue rate_minus" ng-switch on="speedDisLike"><span ng-switch-when="0">{{speedDisLike}}%</span><span ng-switch-default>-{{speedDisLike}}%</span></span>
+					<span class="rate_minus" style="width: {{speedDisLike*4.5}}px;margin-top: 12px;">&nbsp;</span>
+					<span class="rateMValue rate_minus" ng-switch on="speedDisLike" style="margin-top: 12px;"><span ng-switch-when="0">{{speedDisLike}}%</span><span ng-switch-default>-{{speedDisLike}}%</span></span>
 					<!-- <span class="rateMValue rate_minus">-{{speedDisLike}}%</span> -->
 				</div>
 				<div class="daily_change">
@@ -88,11 +92,11 @@
 			</div>
 			<div class="score_div">
 				<div class="net_score" style="height: 58px;padding-top: 7px;">
-					<span class="txt1">Friendliness
+					<span class="txt1" style="float: left; line-height: 20px;">Friendliness
 						<br/>
 						of Service</span>
-					<span class="rate_minus" style="width: {{friendlinessDisLike*4.5}}px">&nbsp;</span>
-					<span class="rateMValue rate_minus" ng-switch on="friendlinessDisLike"><span ng-switch-when="0">{{friendlinessDisLike}}%</span><span ng-switch-default>-{{friendlinessDisLike}}%</span></span>
+					<span class="rate_minus" style="width: {{friendlinessDisLike*4.5}}px;margin-top: 12px;">&nbsp;</span>
+					<span class="rateMValue rate_minus" ng-switch on="friendlinessDisLike" style="margin-top: 12px;"><span ng-switch-when="0">{{friendlinessDisLike}}%</span><span ng-switch-default>-{{friendlinessDisLike}}%</span></span>
 					<!-- <span class="rateMValue rate_minus">-{{friendlinessDisLike}}%</span> -->
 				</div>
 				<div class="daily_change">
@@ -199,7 +203,7 @@
 				</div>
 			</div>
 			<div class="score_final">
-				<div class="net_score">
+				<div class="net_score feedSub">
 					<span class="txt1">Feedback Submissions</span>
 					<br/>
 					<span class="value1">{{feedCount}}</span>

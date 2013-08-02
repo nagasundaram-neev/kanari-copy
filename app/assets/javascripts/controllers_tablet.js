@@ -244,6 +244,7 @@ module.controller('homePageController', function($scope, $http, $location) {
 		$scope.feedbackList = [];
 
 		$scope.listFeedbacks = function() {
+			$.mobile.loading('show');
 			var param = {
 				"auth_token" : getCookie('authToken'),
 				"password" : "X"
@@ -256,16 +257,23 @@ module.controller('homePageController', function($scope, $http, $location) {
 			}).success(function(data, status) {
 				console.log("User Role " + data + " status " + status);
 				$scope.feedbackList = data.feedbacks;
-
+				$.mobile.loading('hide');
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 			});
 		};
-
+		
 		$scope.listFeedbacks();
-		refreshIntervalId = window.setInterval(function() {
+		
+		$scope.refresh = function(){
+			//$.mobile.loading('show');
 			$scope.listFeedbacks();
-		}, 8000);
+			//$.mobile.loading('hide');
+		};
+		
+		// refreshIntervalId = window.setInterval(function() {
+			// $scope.listFeedbacks();
+		// }, 8000);
 
 	} else {
 		$location.url("/signin");
@@ -359,12 +367,18 @@ module.controller('insightsController', function($scope, $http, $location) {
 				} else if($scope.valueDailyChange < 0) {
 					$scope.valueFlag = 0;
 				}else{
-					$scope.valueFlag = 0;
+					$scope.valueFlag = -1;
 				}
 
 				$scope.netScore = data.feedback_insights.net_promoter_score.like - data.feedback_insights.net_promoter_score.dislike;
 				//$scope.netScoreDisLike = data.feedback_insights.net_promoter_score.dislike;
 				$scope.netScoreDailyChange = data.feedback_insights.net_promoter_score.change;
+
+				if($scope.netScore > 0){
+					$scope.netScoreFlag = 0;
+				}else{
+					$scope.netScoreFlag = 1;
+				}
 
 				if ($scope.netScoreDailyChange > 0) {
 					$scope.netflag = 1;
@@ -565,3 +579,10 @@ function getCookie(name) {
 function deleteCookie(name) {
 	setCookie(name, "", -1);
 }
+
+// $(document).ready(function() {
+	// alert("in");
+	// //$("#divexample1").niceScroll("#homePage",{cursorcolor:"#00F"});
+	 // $("#divexample1").niceScroll({touchbehavior:true});
+	// alert("out");
+// });

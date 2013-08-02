@@ -1,10 +1,15 @@
 <div id="homePage" align="center" ng-controller="homePageController" data-role="page">
+
 	<div ng:include="'<%= asset_path 'tablet_header.html' %>'"></div>
 	<h3 class="redemptionMsg" ng-show="!feedbackList.length">Currently you do not have any feedbacks to list</h3>
-	<div ng-show="feedbackList.length" class="home_page_view">
+	<div tabindex="5000" style="overflow-y: auto;" id="boxscroll" ng-show="feedbackList.length" class="home_page_view">
+		<div id="refresh" ng-click="refresh()">
+			<strong>Refresh feedbacks</strong>
+		</div>
+		<div class="clr"></div>
 		<div ng-repeat="feedbacks in feedbackList" class="feedback_step">
 			<div class="divPadding promo_code">
-				<span class="promo_txt">Promoter Score</span>
+				<span class="promo_txt">Promoter <br/>Score</span>
 				<br/>
 				<span class="promo_value">{{feedbacks.promoter_score}}</span>
 			</div>
@@ -16,7 +21,7 @@
 							<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
 							<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
 						</div>
-						
+
 						Food
 					</div>
 					<div class="def_icon">
@@ -56,7 +61,7 @@
 							<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
 							<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
 							<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
-						</div>	
+						</div>
 						Clean
 					</div>
 				</div>
@@ -64,14 +69,121 @@
 			<div class="divPadding promo_code_desc">
 				<span>{{feedbacks.comment}} <!-- The smokehouse BBQ chicken is the best sandwich that has ever been added to the
 					stole of satwiches. It has all the flavour of fattning sandwiches but
-					with the healthy side... --></span>
+					with the healthy side... --><!-- </span>
+					</div>
+					<div class="clr"></div>
+					<div class="update_time">
+					<span timeago-autoupdate="feedbacks.updated_at"></span>
+
+					</div>
+					</div>
+					</div>
+					<!-- <div ng-show="feedbackList.length" id="divexample1" class="home_page_view">
+					<div ng-repeat="feedbacks in feedbackList" class="feedback_step">
+					<div class="divPadding promo_code">
+					<span class="promo_txt">Promoter Score</span>
+					<br/>
+					<span class="promo_value">{{feedbacks.promoter_score}}</span>
+					</div>
+					<div class="divPadding promo_code_def">
+					<div style=" margin: 0 auto;width: 100%">
+					<div class="def_icon">
+					<div ng-switch on="feedbacks.food_quality">
+					<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
+					<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
+					<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
+					</div>
+
+					Food
+					</div>
+					<div class="def_icon">
+					<div ng-switch on="feedbacks.speed_of_service">
+					<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
+					<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
+					<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
+					</div>
+					Speed
+					</div>
+					<div class="def_icon">
+					<div ng-switch on="feedbacks.ambience">
+					<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
+					<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
+					<img ng-switch-when="0"	 src="/assets/ic_grey_round.png" />
+					</div>
+					Ambiance
+					</div>
+					<div class="def_icon">
+					<div ng-switch on="feedbacks.value_for_money">
+					<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
+					<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
+					<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
+					</div>
+					Value
+					</div>
+					<div class="def_icon">
+					<div ng-switch on="feedbacks.friendliness_of_service">
+					<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
+					<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
+					<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
+					</div>
+					Friendliness
+					</div>
+					<div class="def_icon">
+					<div ng-switch on="feedbacks.cleanliness">
+					<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
+					<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
+					<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
+					</div>
+					Clean
+					</div>
+					</div>
+					</div>
+					<div class="divPadding promo_code_desc">
+					<span>{{feedbacks.comment}} <!-- The smokehouse BBQ chicken is the best sandwich that has ever been added to the
+					stole of satwiches. It has all the flavour of fattning sandwiches but
+					with the healthy side... --><!-- </span>
+					</div>
+					<div class="clr"></div>
+					<div class="update_time">
+					<span timeago-autoupdate="feedbacks.updated_at"></span>
+
+					</div>
+					</div>
+					</div> -->
+					<style type="text/css">
+						#boxscroll {
+							height: 760px;
+							overflow: auto;
+						}
+					</style>
+					<script>
+						$(document).ready(function() {
+
+							//var nice = $("html").niceScroll();
+							// The document page (body)
+
+							// $("#div1").html($("#div1").html()+' '+nice.version);
+
+							$("#boxscroll").niceScroll({
+								touchbehavior : true
+							});
+							// First scrollable DIV
+
+							// Customizable cursor
+							// $("#boxscroll").niceScroll({touchbehavior:false,cursorcolor:"#00F",cursoropacitymax:0.7,cursorwidth:11,cursorborder:"1px solid #2848BE",cursorborderradius:"8px"}).cursor.css({"background-image":"url(img/mac6scroll.png)"}); // MAC like scrollbar
+
+							// $("#boxscroll2").niceScroll("#contentscroll2",{cursorcolor:"#F00",cursoropacitymax:0.7,boxzoom:true,touchbehavior:true});  // Second scrollable DIV
+							// $("#boxframe").niceScroll("#boxscroll3",{cursorcolor:"#0F0",cursoropacitymax:0.7,boxzoom:true,touchbehavior:true});  // This is an IFrame (iPad compatible)
+							//
+							// $("#boxscroll4").niceScroll("#boxscroll4 .wrapper",{boxzoom:true});  // hw acceleration enabled when using wrapper
+
+							/*
+							 $("input[type=range]").bind('mousedown touchstart', function (e) {
+							 e.stopPropagation();
+							 });
+							 */
+
+						});
+					</script>
 			</div>
-			<div class="clr"></div>
-			<div class="update_time">
-				<span timeago-autoupdate="feedbacks.updated_at"></span>
-				
-			</div>
-		</div>
-	</div>
-</div>
 

@@ -4,6 +4,11 @@
 font-family: myFirstFont;
 src: url('segoeuil_0.ttf'); /* IE9 */
 } 
+@font-face 
+{
+	font-family: number;
+	src: url('open-sans.light.ttf');	
+}
 * {
 	margin: 0;
 	padding: 0;
@@ -386,11 +391,16 @@ input.ui-input-text, textarea.ui-input-text {
 	text-align: left;
 	width: 49%;
 }
+
+.feedSub{
+	padding-top: 0;
+	width:49.5%;
+}
 .daily_change_score {
 	float: right;
     padding-top: 1%;
     text-align: right;
-    width: 21%;
+    width: 30%;
 }
 .net_promo_score {
 	border-right: 1px solid #664766;
@@ -409,6 +419,7 @@ input.ui-input-text, textarea.ui-input-text {
 }
 .netScore {
 	color: #664766;
+	font-family: number;
     display: block;
     font-size: 250%;
 }
@@ -419,12 +430,14 @@ input.ui-input-text, textarea.ui-input-text {
 }
 .value1 {
 	font-size: 140%;
+	font-family: number;
 	color: #664766;
 }
 .value2{
-	font-size: 140%;
 	color: #664766;
-	padding-left: 19%;
+    float: right;
+    font-family: number;
+    font-size: 140%;
 }
 .rate_plus {
 	background: none repeat scroll 0 0 #FEC03B;
@@ -433,6 +446,12 @@ input.ui-input-text, textarea.ui-input-text {
 }
 .net_rate_plus{
 	background: none repeat scroll 0 0 #FEC03B;
+	float: left;
+	margin-top: 5%;
+}
+
+.net_rate_plus_red{
+	background: none repeat scroll 0 0 #C84A58;
 	float: left;
 	margin-top: 5%;
 }
@@ -451,6 +470,7 @@ input.ui-input-text, textarea.ui-input-text {
 .rateMValue {
 	background: none repeat scroll 0 0 transparent;
 	color: #664766;
+	font-family: number;
 	font-weight: bold;
 	margin-left: 1%;
 }
@@ -596,26 +616,37 @@ input.ui-input-text, textarea.ui-input-text {
     overflow-y: auto;
 }
 .feedback_step {
-	border: 1px solid #ccc;
+	border: 1px solid #D6D6D6;
 	border-radius: 10px;
 	overflow: hidden;
 	padding: 1% 0;
-	margin: 0.4% 0;
+	margin: 0.4% 0.6%;
 	position: relative;
 }
 .feedback_step .divPadding {
 	/*padding: 0 0 1000px 0;
 	 margin-bottom: -1000px;*/
+	/*font-weight: bold !important;*/
+}
+#refresh{
+	background: none repeat scroll 0 0 #FEC03B;
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFFFF;
+    float: right;
+    margin-right: 14px;
+    padding: 0.3% 0.5%;
+    text-shadow: none;
 }
 .promo_code {
 	float: left;
 	width: 20%;
 	/*height: 135px;*/
+	padding: 1% 0;
 	color: #674665;
 }
 .promo_code_def {
 	float: left;
-	width: 30%;
+	width: 35%;
 	border-left: 1px solid #D6D6D6;
 	border-right: 1px solid #D6D6D6;
 }
@@ -624,7 +655,7 @@ input.ui-input-text, textarea.ui-input-text {
 	padding: 1% 2%;
 	position: relative;
 	text-align: justify;
-	width: 45%;
+	width: 40%;
 }
 .update_time {
 	bottom: 3%;
@@ -633,7 +664,7 @@ input.ui-input-text, textarea.ui-input-text {
 }
 .def_icon {
 	float: left;
-	margin: 3% 5%;
+	margin: 3% 2%;
 	text-align: center;
 	width: 70px;
 	/*margin: 5px 17px;
@@ -642,10 +673,12 @@ input.ui-input-text, textarea.ui-input-text {
 	color: #999999;
 }
 .promo_txt {
-	font-size: 166%;
+	font-size: 130%;
+    line-height: 10px;
 }
 .promo_value {
-	font-size: 200%;
+	font-size: 340%;
+	font-family: number;
 }
 /*Home Page CSS ends here*/
 
