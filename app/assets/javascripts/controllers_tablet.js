@@ -240,11 +240,13 @@ module.controller('signInController', function($scope, $http, $location) {
 
 module.controller('homePageController', function($scope, $http, $location) {
 	if (getCookie('authToken')) {
+		var overlayDiv = $("#overlaySuccess");
 		$scope.active1 = true;
 		$scope.feedbackList = [];
 
 		$scope.listFeedbacks = function() {
 			$.mobile.loading('show');
+			
 			var param = {
 				"auth_token" : getCookie('authToken'),
 				"password" : "X"
@@ -258,21 +260,32 @@ module.controller('homePageController', function($scope, $http, $location) {
 				console.log("User Role " + data + " status " + status);
 				$scope.feedbackList = data.feedbacks;
 				$.mobile.loading('hide');
+				overlayDiv.css({
+					'z-index' : '0',
+					'background-color' : 'transparent'
+				});
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+				$.mobile.loading('hide');
+				overlayDiv.css({
+					'z-index' : '0',
+					'background-color' : 'transparent'
+				});
 			});
 		};
-		
+
 		$scope.listFeedbacks();
-		
-		$scope.refresh = function(){
-			//$.mobile.loading('show');
+
+		$scope.refresh = function() {
+			overlayDiv.css({
+				'z-index' : '10',
+				'background-color' : '#000'
+			});
 			$scope.listFeedbacks();
-			//$.mobile.loading('hide');
 		};
-		
+
 		// refreshIntervalId = window.setInterval(function() {
-			// $scope.listFeedbacks();
+		// $scope.listFeedbacks();
 		// }, 8000);
 
 	} else {
@@ -291,7 +304,7 @@ module.controller('insightsController', function($scope, $http, $location) {
 				"auth_token" : getCookie('authToken'),
 				"password" : "X"
 			}
- 
+
 			$http({
 				method : 'get',
 				url : '/api/feedbacks/metrics',
@@ -304,9 +317,9 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 				if ($scope.foodDailyChange > 0) {
 					$scope.foodFlag = 1;
-				} else if($scope.foodDailyChange < 0) {
+				} else if ($scope.foodDailyChange < 0) {
 					$scope.foodFlag = 0;
-				}else{
+				} else {
 					$scope.foodFlag = -1;
 				}
 
@@ -316,9 +329,9 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 				if ($scope.speedDailyChange > 0) {
 					$scope.speedFlag = 1;
-				} else if($scope.speedDailyChange < 0) {
+				} else if ($scope.speedDailyChange < 0) {
 					$scope.speedFlag = 0;
-				}else{
+				} else {
 					$scope.speedFlag = -1;
 				}
 
@@ -328,9 +341,9 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 				if ($scope.friendlinessDailyChange > 0) {
 					$scope.friendlinessFlag = 1;
-				} else if($scope.friendlinessDailyChange < 0) {
+				} else if ($scope.friendlinessDailyChange < 0) {
 					$scope.friendlinessFlag = 0;
-				}else{
+				} else {
 					$scope.friendlinessFlag = -1;
 				}
 
@@ -340,9 +353,9 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 				if ($scope.cleanlinessDailyChange > 0) {
 					$scope.cleanlinessFlag = 1;
-				} else if($scope.cleanlinessDailyChange < 0) {
+				} else if ($scope.cleanlinessDailyChange < 0) {
 					$scope.cleanlinessFlag = 0;
-				}else{
+				} else {
 					$scope.cleanlinessFlag = -1;
 				}
 
@@ -352,9 +365,9 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 				if ($scope.ambienceDailyChange > 0) {
 					$scope.ambienceFlag = 1;
-				} else if($scope.ambienceDailyChange < 0) {
+				} else if ($scope.ambienceDailyChange < 0) {
 					$scope.ambienceFlag = 0;
-				}else{
+				} else {
 					$scope.ambienceFlag = -1;
 				}
 
@@ -364,9 +377,9 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 				if ($scope.valueDailyChange > 0) {
 					$scope.valueFlag = 1;
-				} else if($scope.valueDailyChange < 0) {
+				} else if ($scope.valueDailyChange < 0) {
 					$scope.valueFlag = 0;
-				}else{
+				} else {
 					$scope.valueFlag = -1;
 				}
 
@@ -374,9 +387,9 @@ module.controller('insightsController', function($scope, $http, $location) {
 				//$scope.netScoreDisLike = data.feedback_insights.net_promoter_score.dislike;
 				$scope.netScoreDailyChange = data.feedback_insights.net_promoter_score.change;
 
-				if($scope.netScore > 0){
+				if ($scope.netScore > 0) {
 					$scope.netScoreFlag = 0;
-				}else{
+				} else {
 					$scope.netScoreFlag = 1;
 				}
 
@@ -472,7 +485,7 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 				$scope.error = "Please enter valid bill amount";
 				$scope.succmsg = false;
 				$scope.erromsg = true;
-			}else if ($scope.billAmount < 0) {
+			} else if ($scope.billAmount < 0) {
 				console.log("in else if");
 				$scope.error = "Please enter valid bill amount";
 				$scope.succmsg = false;
@@ -529,11 +542,11 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 		$scope.listGeneratedCodes();
 
 		$scope.parseDate = function(jsonDate) {
-				console.log("date " + jsonDate + " parsed date " + new Date(Date.parse(jsonDate)));
-				$scope.v = {
-					DDt : Date.parse(jsonDate)
-				}
-			};
+			console.log("date " + jsonDate + " parsed date " + new Date(Date.parse(jsonDate)));
+			$scope.v = {
+				DDt : Date.parse(jsonDate)
+			}
+		};
 
 		$scope.done = function() {
 			//console.log("in done btn pressed");
@@ -581,8 +594,8 @@ function deleteCookie(name) {
 }
 
 // $(document).ready(function() {
-	// alert("in");
-	// //$("#divexample1").niceScroll("#homePage",{cursorcolor:"#00F"});
-	 // $("#divexample1").niceScroll({touchbehavior:true});
-	// alert("out");
+// alert("in");
+// //$("#divexample1").niceScroll("#homePage",{cursorcolor:"#00F"});
+// $("#divexample1").niceScroll({touchbehavior:true});
+// alert("out");
 // });

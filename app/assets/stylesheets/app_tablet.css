@@ -126,7 +126,7 @@ input.ui-input-text, textarea.ui-input-text {
 	background-color: #664765 !important;
 }
 .ui-icon {
-	background: #ffffff;
+	/*background: #ffffff;*/
 }
 .ui-checkbox input {
 	left: 10px;
@@ -139,6 +139,7 @@ input.ui-input-text, textarea.ui-input-text {
 	border: 0;
 	font-weight: normal;
 }
+.ui-loader-default{opacity:0.5;}
 /* jquery mobile modified global classes ends here */
 
 /* Common classes starts here*/
