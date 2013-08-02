@@ -418,6 +418,11 @@ input.ui-input-text, textarea.ui-input-text {
 	font-size: 140%;
 	color: #664766;
 }
+.value2{
+	font-size: 140%;
+	color: #664766;
+	padding-left: 19%;
+}
 .rate_plus {
 	background: none repeat scroll 0 0 #FEC03B;
 	float: left;

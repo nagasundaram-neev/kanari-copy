@@ -296,8 +296,10 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 				if ($scope.foodDailyChange > 0) {
 					$scope.foodFlag = 1;
-				} else {
+				} else if($scope.foodDailyChange < 0) {
 					$scope.foodFlag = 0;
+				}else{
+					$scope.foodFlag = -1;
 				}
 
 				$scope.speedLike = data.feedback_insights.speed_of_service.like;
@@ -306,8 +308,10 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 				if ($scope.speedDailyChange > 0) {
 					$scope.speedFlag = 1;
-				} else {
+				} else if($scope.speedDailyChange < 0) {
 					$scope.speedFlag = 0;
+				}else{
+					$scope.speedFlag = -1;
 				}
 
 				$scope.friendlinessLike = data.feedback_insights.friendliness_of_service.like;
@@ -316,8 +320,10 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 				if ($scope.friendlinessDailyChange > 0) {
 					$scope.friendlinessFlag = 1;
-				} else {
+				} else if($scope.friendlinessDailyChange < 0) {
 					$scope.friendlinessFlag = 0;
+				}else{
+					$scope.friendlinessFlag = -1;
 				}
 
 				$scope.cleanlinessLike = data.feedback_insights.cleanliness.like;
@@ -326,8 +332,10 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 				if ($scope.cleanlinessDailyChange > 0) {
 					$scope.cleanlinessFlag = 1;
-				} else {
+				} else if($scope.cleanlinessDailyChange < 0) {
 					$scope.cleanlinessFlag = 0;
+				}else{
+					$scope.cleanlinessFlag = -1;
 				}
 
 				$scope.ambienceLike = data.feedback_insights.ambience.like;
@@ -336,8 +344,10 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 				if ($scope.ambienceDailyChange > 0) {
 					$scope.ambienceFlag = 1;
-				} else {
+				} else if($scope.ambienceDailyChange < 0) {
 					$scope.ambienceFlag = 0;
+				}else{
+					$scope.ambienceFlag = -1;
 				}
 
 				$scope.valueLike = data.feedback_insights.value_for_money.like;
@@ -346,7 +356,9 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 				if ($scope.valueDailyChange > 0) {
 					$scope.valueFlag = 1;
-				} else {
+				} else if($scope.valueDailyChange < 0) {
+					$scope.valueFlag = 0;
+				}else{
 					$scope.valueFlag = 0;
 				}
 
@@ -363,7 +375,7 @@ module.controller('insightsController', function($scope, $http, $location) {
 				$scope.points = data.feedback_insights.rewards_pool;
 
 			}).error(function(data, status) {
-				console.log("data " + d	ata + " status " + status + " authToken" + getCookie('authToken'));
+				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 
 			});
 		};
