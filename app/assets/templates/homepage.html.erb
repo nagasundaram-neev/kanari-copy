@@ -1,7 +1,7 @@
 <div id="homePage" align="center" ng-controller="homePageController" data-role="page">
 
 	<div ng:include="'<%= asset_path 'tablet_header.html' %>'"></div>
-	<h3 class="redemptionMsg" ng-show="feed">Currently you do not have any feedbacks to list</h3>
+	<h3 class="redemptionMsg" ng-show="!feedbackList.length">Currently you do not have any feedbacks to list</h3>
 	<div tabindex="5000" style="overflow-y: auto;" id="boxscroll" ng-show="feedbackList.length" class="home_page_view">
 		<div id="refresh" ng-click="refresh()">
 			<strong>Refresh feedbacks</strong>
