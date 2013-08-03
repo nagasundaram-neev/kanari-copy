@@ -279,7 +279,7 @@ Feature: Metrics for Feedback
           |staff.bangalore.1@subway.com   |
           |staff.bangalore.2@subway.com   |
       Given a customer named "Taj" exists with id "200" with admin "admin@subway.com"
-	    And the customer with id "200" has an outlet named "Taj - Bangalore" with id "20" with manager "manager@subway.com"
+	    And the customer with id "200" has an outlet named "Taj - Bangalore" with id "20" with manager "manager@taj.com"
 		And outlet "Taj - Bangalore" was created on "2013-01-01 00:00:00"
         And the outlet has "1000" points in its rewards pool
         And outlet "Taj - Bangalore" has staffs
@@ -324,7 +324,7 @@ Feature: Metrics for Feedback
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"
         And his authentication token is "auth_token_123"
       When I authenticate as the user "auth_token_1234" with the password "random string"
-	  And I send a GET request to "/api/feedbacks" with the following:
+	  And I send a GET request to "/api/feedbacks/metrics" with the following:
 	  """
 	  start_time=2013-07-07 00:00:00&end_time=2013-07-07 11:59:59 PM
 	  """

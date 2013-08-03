@@ -58,6 +58,7 @@ class Ability
       can :read, User, role: 'manager'
       can :generate_code, Outlet, customer: user.customer
       can :read_feedbacks, Outlet, customer: user.customer
+      can :read_trends, Outlet, customer: user.customer
       can :create_staff, Outlet, customer: user.customer
       can :list_staff, Outlet, customer: user.customer
       can :delete_staff, Outlet, customer: user.customer
@@ -69,6 +70,7 @@ class Ability
       can :delete_staff, Outlet, manager_id: user.id
       can :update, User, role: 'staff'
       can :read_feedbacks, Outlet, manager_id: user.id
+      can :read_trends, Outlet, manager_id: user.id
       can :read_pending_redemptions, Outlet, manager_id: user.id
       can :approve_redemptions, Outlet, manager_id: user.id
       can :generate_code, Outlet, manager_id: user.id
