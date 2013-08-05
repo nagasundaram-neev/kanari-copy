@@ -74,7 +74,7 @@ module Api
         private
 
           def sign_up_params
-            params.fetch(:user).permit([:password, :password_confirmation, :email, :first_name, :last_name, :phone_number])
+            params.fetch(:user).permit([:password, :password_confirmation, :email, :first_name, :last_name, :phone_number, :gender, :date_of_birth])
           end
 
           def account_update_params

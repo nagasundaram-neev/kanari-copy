@@ -37,7 +37,9 @@ Feature: Sign Up
         "user" : {
           "first_name": "Kobe",
           "last_name": "Bryant",
-          "email": "kobe@gmail.com"
+          "email": "kobe@gmail.com",
+          "gender": "Male",
+          "date_of_birth": "1929-12-31"
         },
         "oauth_provider" : "facebook",
         "access_token" : "access_token_123"
@@ -56,6 +58,8 @@ Feature: Sign Up
         |first_name|Kobe|
         |last_name|Bryant|
         |email|kobe@gmail.com|
+        |gender|Male|
+        |date_of_birth|1929-12-31|
       And the user with email "kobe@gmail.com" should have the following social network accounts
         |provider|access_token|
         |facebook|access_token_123|
