@@ -1730,7 +1730,7 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 					"user" : {
 						"first_name" : $scope.first_name,
 						"last_name" : $scope.last_name,
-						"email" : $scope.email,
+						//"email" : $scope.email,
 						"phone_number" : $(".phoneno_1").val(),
 						//	"password": $scope.first_name,
 						//"password_confirmation": $scope.first_name,
