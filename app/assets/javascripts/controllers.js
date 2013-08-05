@@ -2084,6 +2084,18 @@ module.controller('outletCuisineTypeCtrl', function($scope, $rootScope, $routePa
 		}
 	}
 });
+
+module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location) {
+	if (getCookie('authToken')) {
+		$('.welcome').show();
+		$('.navBarCls').show();
+		$('.navBarCls ul li').removeClass('active');
+		$('#outlet').show();
+		$('#dasboard').hide();
+		$('#account').addClass('active');
+		$rootScope.header = "Payment History | Kanari";
+}
+});
 function setCookie(name, value, days) {
 	if (days) {
 		var date = new Date();
