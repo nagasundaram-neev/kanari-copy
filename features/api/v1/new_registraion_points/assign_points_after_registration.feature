@@ -13,6 +13,7 @@ Feature: Assign points after user registration
         |points   |120    |
         |outlet_id|20     |
         |completed|true   |
+        And the time limit for giving feedback is "120" minutes
       When I send a PUT request to "/api/feedbacks/10" with the following:
       """
       {
@@ -86,6 +87,7 @@ Feature: Assign points after user registration
         |points   |120    |
         |outlet_id|20     |
         |completed|true   |
+        And the time limit for giving feedback is "120" minutes
       When I send a PUT request to "/api/feedbacks/10" with the following:
       """
       {

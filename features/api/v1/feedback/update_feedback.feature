@@ -13,6 +13,7 @@ Feature: Update feedback
         |points   |120    |
         |outlet_id|20     |
         |completed|true   |
+        And the time limit for giving feedback is "120" minutes
       Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123" and user id "130"
         And his role is "user"
         And his authentication token is "auth_token_123"
@@ -51,6 +52,7 @@ Feature: Update feedback
         |points   |120    |
         |outlet_id|20     |
         |completed|true   |
+        And the time limit for giving feedback is "120" minutes
       When I send a PUT request to "/api/feedbacks/10" with the following:
       """
       {
