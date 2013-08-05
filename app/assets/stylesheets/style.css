@@ -1098,7 +1098,7 @@ img, object {
 }
 .dateInner {
 	float: left;
-	width: 30% !important;
+	width: 80% !important;
 	background: #664765 !important;
 	border-radius: none !important;
 	border-right: 2px solid #ffffff !important;
