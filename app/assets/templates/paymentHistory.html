@@ -1,0 +1,32 @@
+<div data-role="page" class="main_content span12" data-theme="b" id="paymentHistory" ng-controller="paymentHistoryCtrl">
+	<style>
+		.input-help {
+			left: 225px;
+		}
+		.controls .successMsg{
+			margin-bottom: 0;
+		}
+		.viewAccPage lable{
+			 width: 144px;
+		}
+		/*#divexample1 {
+		 height: 100px;
+		 overflow: auto;
+		 }*/
+		/*.nicescroll-rails{left: 726px !important;}*/
+	</style>
+	<div class="header_title">
+		<span class="manager_outlet">Manage Account</span>
+		<span class="arrow-right blank_span">&nbsp;</span>
+		<span ng-show="managerIn" style="padding: 10px 20px;"><a href="#/outlet_manager">Outlet Managers</a></span>
+		<span class="blank_span"><img src="assets/div_line_yellow.jpg" /></span>
+		<span ng-show="managerIn" style="padding: 10px 20px;"><a href="#/view_account">Account Details</a></span>
+		<span ng-hide="managerIn" style="padding: 10px 20px;"><a href="#/outlet_manager_account">Account Details</a></span>
+		<span class="blank_span"><img src="assets/div_line_yellow.jpg" /></span>
+		<span style="padding: 10px 20px;"><span class="outletM"><a href="#/payment_history">Payment History</a></span></span>
+		<span class="blank_span"><img src="assets/div_line_yellow.jpg" /></span>
+	</div>
+	<div id="payment_history" class="viewAccPage" style="margin:20px 0 20px 50px">
+		Payment History
+	</div>
+</div>

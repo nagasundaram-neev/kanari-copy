@@ -32,6 +32,7 @@ Kanari::Application.routes.draw do
       resources :new_registration_points, :only => [:create]
       get "/users/invitation/:invitation_token" => "invitations#show"
       get "/feedbacks/metrics" => "feedbacks#metrics"
+      get "/feedbacks/trends"  => "feedbacks#trends"
     end
   end
 

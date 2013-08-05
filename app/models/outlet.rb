@@ -22,7 +22,7 @@ class Outlet < ActiveRecord::Base
   def points_pending_redemption
     redemptions.where(approved_by: nil).sum(:points)
   end
-  
+
   def pending_redemptions
     redemptions.where({approved_by: nil})
   end
@@ -37,7 +37,25 @@ class Outlet < ActiveRecord::Base
     end
   end
 
-  def insights params={}
+  def trends(options={})
+    start_time = normalize_date(options[:start_time]) || self.created_at
+    end_time   = normalize_date(options[:end_time]) || Time.zone.now
+
+    start_time,end_time = end_time,start_time if start_time > end_time
+
+    feedbacks   = self.feedbacks.completed.includes(:user)
+    redemptions = self.redemptions.approved.includes(:user)
+    feedback_trends = {:statistics => {}, :detailed_statistics => {}}
+    feedback_trends[:statistics] = get_feedback_trends(start_time, end_time, feedbacks, redemptions)
+    ((start_time.to_date)..(end_time.to_date)).each do |day|
+      day_start = day.beginning_of_day; day_end = day.end_of_day
+      feedback_trends[:detailed_statistics][day.strftime("%Y-%m-%d")] = get_feedback_trends(day_start, day_end, feedbacks, redemptions)
+    end
+
+    return {:feedback_trends => feedback_trends}
+  end
+
+  def insights(params={})
     today     = normalize_date(params[:date]) || Time.zone.now.to_date
     yesterday = today - 1.day
     tomorrow  = today + 1.day
@@ -133,5 +151,87 @@ class Outlet < ActiveRecord::Base
     def get_pending_feedbacks start_time, end_time
       self.feedbacks.pending.where({updated_at: start_time..end_time}).order("updated_at desc")
     end
+
+    # Feedback Statistics
+    def get_feedback_trends(start_time, end_time, all_feedbacks, all_redemptions)
+      p "Get feedback trends for #{all_feedbacks.pluck('feedbacks.id,points,rewards_pool_after_feedback,user_id,completed,outlet_id')}"
+      p "Get feedback trends for #{all_redemptions.pluck('redemptions.id,points,rewards_pool_after_redemption,user_id,approved_by,outlet_id')}"
+      start_time,end_time = end_time,start_time if start_time > end_time
+      all_feedbacks = all_feedbacks.order('feedbacks.updated_at desc') unless all_feedbacks.blank?
+p "Start time #{start_time}"
+p "End time #{end_time}"
+      feedbacks_nps  = all_feedbacks.select {|f| f if (f.updated_at < end_time)}.first(NPS_LIMIT)
+      feedbacks      = all_feedbacks.select {|f| f if (f.updated_at > start_time && f.updated_at < end_time)}
+      redemptions    = all_redemptions.select {|f| f if (f.updated_at > start_time && f.updated_at < end_time)}
+      statistics     = {}
+      statistics[:net_promoter_score] = get_net_promoter_score_statistics(feedbacks_nps)
+      ["food_quality", "speed_of_service", "friendliness_of_service", "ambience", "cleanliness", "value_for_money"].each do |category|
+        statistics[category.to_sym] = get_field_statistics(feedbacks, category)
+      end
+      statistics[:usage]               = get_usage_statistics(feedbacks, redemptions)
+      statistics[:customers]           = get_cusomers_statistics(feedbacks)
+      statistics[:average_bill_amount] = get_average_bill_amount_statistics(feedbacks)
+      statistics
+    end
+
+    def get_field_statistics(feedbacks,type)
+      promoters = 0; passives = 0; neutrals = 0
+      unless feedbacks.blank?
+        promoters = feedbacks.select{|f| AppConfig[:liked]    == f.send(type) }.length
+        passives  = feedbacks.select{|f| AppConfig[:disliked] == f.send(type) }.length
+        neutrals  = feedbacks.length - ( promoters + passives )
+      end
+      {:like => promoters, :dislike => passives, :neutral => neutrals}
+    end
+    
+    def get_net_promoter_score_statistics(feedbacks)
+      promoters = 0; passives = 0; neutrals = 0
+      if feedbacks.present?
+        promoters = (feedbacks.select{|f| AppConfig[:promoters].include?f.recommendation_rating }.length.to_f / feedbacks.length) * 100
+        passives  = (feedbacks.select{|f| AppConfig[:detractors].include?f.recommendation_rating }.length.to_f / feedbacks.length)* 100
+        neutrals  = 100 - ( promoters + passives )
+      end
+      nps = {:like => promoters.to_i, :dislike => passives.to_i, :neutral => neutrals.to_i}
+    end
+
+    def get_average_bill_amount_statistics(feedbacks)
+      feedbacks.present? ? ( feedbacks.inject(0){|sum, f| sum + f.bill_amount.to_i}.to_f / feedbacks.length ).to_i : 0
+    end
+
+    def get_cusomers_statistics(feedbacks)
+      male_users = 0; female_users = 0; new_users = 0; returning_users = 0
+      time_of_visit = { "0" => 0, "1" => 0, "2" => 0, "3" => 0,  "4" => 0,  "5" => 0,  "6" => 0,
+                        "7" => 0, "8" => 0, "9" => 0, "10" => 0, "11" => 0, "12" => 0, "13" => 0,
+                        "14" => 0, "15" => 0, "16" => 0, "17" => 0, "18" => 0, "19" => 0, "20" => 0,
+                        "21" => 0, "22" => 0, "23" => 0 }
+      unless feedbacks.blank?
+        users = []
+        feedbacks.each {|f| users << f.user }
+        male_users      = users.select {|user| user if user.gender.to_s.downcase == 'male'}.length
+        female_users    = users.select {|user| user if user.gender.to_s.downcase == 'female'}.length
+        new_users       = users.select {|user| user if user.sign_in_count == 0 }.length
+        returning_users = users.select {|user| user if user.sign_in_count > 0 }.length
+        feedbacks_per_hour = feedbacks.group_by {|f| f.updated_at.strftime('%H')}
+        ("00".."23").each {|hr| time_of_visit["#{hr.to_i}"] = ( feedbacks_per_hour["#{hr}"] && feedbacks_per_hour["#{hr}"].length) || 0 }
+      end
+      customer = {:male => male_users, :female => female_users, :new => new_users, :returning => returning_users, :time_of_visit => time_of_visit} 
+   end
+
+    def get_usage_statistics(feedbacks=[],redemptions=[])
+      usage =  { :feedbacks_count => 0, :redemptions_count => 0, :discounts_claimed => 0, :points_issued => 0, :rewards_pool => 0 }
+      unless feedbacks.blank?
+        usage[:feedbacks_count] = feedbacks.length
+        usage[:points_issued]   = feedbacks.inject(0){|sum, f| sum + f.points.to_i} 
+      end 
+      unless redemptions.blank?
+        usage[:redemptions_count] = redemptions.length
+        usage[:discounts_claimed] = redemptions.inject(0){|sum, r| sum + r.points.to_i} 
+      end 
+      latest = (feedbacks | redemptions).compact.uniq.sort! {|i,j| i.updated_at <=> j.updated_at}.last
+      rewards_pool = latest ? latest.send("rewards_pool_after_#{latest.class.name.downcase}") : 0 
+      usage[:rewards_pool] = rewards_pool
+      usage 
+    end
+
 end
 

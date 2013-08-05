@@ -1730,7 +1730,7 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 					"user" : {
 						"first_name" : $scope.first_name,
 						"last_name" : $scope.last_name,
-						"email" : $scope.email,
+						//"email" : $scope.email,
 						"phone_number" : $(".phoneno_1").val(),
 						//	"password": $scope.first_name,
 						//"password_confirmation": $scope.first_name,
@@ -2083,6 +2083,25 @@ module.controller('outletCuisineTypeCtrl', function($scope, $rootScope, $routePa
 			});
 		}
 	}
+});
+
+module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location) {
+	if (getCookie('authToken')) {
+		$('.welcome').show();
+		$('.navBarCls').show();
+		$('.navBarCls ul li').removeClass('active');
+		$('#outlet').show();
+		$('#dasboard').hide();
+		if (getCookie('userRole') == "manager") {
+		$('#accountm').addClass('active');
+		$scope.managerIn = false;
+		}
+		else{
+		$scope.managerIn = true;
+		$('#account').addClass('active');
+		}
+		$rootScope.header = "Payment History | Kanari";
+}
 });
 function setCookie(name, value, days) {
 	if (days) {
