@@ -13,7 +13,7 @@
 			<div class="daily_change">
 				<div ng-switch on="netScoreFlag">
 					<span ng-switch-when="0" class="net_rate_plus" style="width: {{netScore*4.5}}px">&nbsp;</span>
-					<span ng-switch-when="1" class="net_rate_plus_red" style="width: {{netScore*4.5}}px">&nbsp;</span>
+					<span ng-switch-when="1" class="net_rate_plus_red" style="width: {{netScore*-4.5}}px">&nbsp;</span>
 				</div>
 				<!-- <span class="net_rate_plus" style="width: {{netScore*4.5}}px">&nbsp;</span> -->
 				<!-- <span class="ratePValue rate_plus" ng-switch on="netScoreLike"><span ng-switch-when="0">{{netScoreLike}}%</span><span ng-switch-default>{{netScoreLike}}%</span></span> -->
