@@ -70,7 +70,7 @@ Feature: Update account
         |location|SF|
         |phone_number|+91234|
 
-   Scenario: User should not be able to update his email.
+   Scenario: User should be able to update his email.
       Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"
         And his role is "user"
         And his authentication token is "auth_token_123"
@@ -79,20 +79,20 @@ Feature: Update account
       """
       {
         "user" : {
-          "email": "modifiedemail@gmail.com"
+          "email": "modifiedemail@gmail.com",
+          "current_password": "password123"
         }
       }
       """
-      Then the response status should be "422"
-      And the JSON response should be:
-      """
-      {"errors": ["You can't update your email"]}
-      """
-      And there should not be any user with email "modifiedemail@gmail.com"
-      And a user should be present with the following
+      Then the response status should be "200"
+      And the JSON response should have "auth_token"
+      And the JSON response at "auth_token" should be a string
+      And the JSON response at "user_role" should be "user"
+      And the JSON response at "registration_complete" should be true
+      And a user should be created with the following
         |first_name|Adam|
         |last_name|Smith|
-        |email|user@gmail.com|
+        |email|modifiedemail@gmail.com|
 
    Scenario: Change Password : Updation of password should require password_confirmation and current password.
       Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"
