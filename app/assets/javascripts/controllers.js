@@ -2092,14 +2092,7 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 		$('.navBarCls ul li').removeClass('active');
 		$('#outlet').show();
 		$('#dasboard').hide();
-		if (getCookie('userRole') == "manager") {
-		$('#accountm').addClass('active');
-		$scope.managerIn = false;
-		}
-		else{
-		$scope.managerIn = true;
 		$('#account').addClass('active');
-		}
 		$rootScope.header = "Payment History | Kanari";
 }
 });
