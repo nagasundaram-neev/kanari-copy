@@ -39,9 +39,6 @@ module Api
         # We need to use a copy of the resource because we don't want to change
         # the current user in place.
         def update
-          if params[:user][:email].present?
-            render json: {errors: ["You can't update your email"]}, status: :unprocessable_entity and return
-          end
           self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
           prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
           resource.reset_authentication_token
@@ -81,11 +78,11 @@ module Api
           end
 
           def account_update_params
-            params.fetch(:user).permit([:password, :password_confirmation, :first_name, :last_name, :current_password, :date_of_birth, :gender, :location, :phone_number])
+            params.fetch(:user).permit([:email, :password, :password_confirmation, :first_name, :last_name, :current_password, :date_of_birth, :gender, :location, :phone_number])
           end
 
           def needs_password?(user, params)
-            params[:user][:password].present?
+            (params[:user][:email].present? && (user.email != params[:user][:email])) || params[:user][:password].present?
           end
 
           def set_random_password
