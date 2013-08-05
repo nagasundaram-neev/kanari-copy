@@ -525,13 +525,16 @@ module.controller('settingsController', function($scope, $http, $location) {
 			theme : "ios",
 			mode : "scroller",
 			display : "bottom",
-			button3Text : 'Xtreme',
-			button3 : function() {
-				var inst = thisPicker.mobiscroll('getInst');
-				thisPicker.val('');
-				inst.cancel();
-			},
+			dateFormat: 'dd/mm/yy'
 		});
+
+		// $('#date').focus(function() {
+			// alert('Handler for .focus() called.'+$scope.date);
+			// if($scope.date){
+				// $("#date").scroller('setDate', $scope.date, true);
+			// }
+		// });
+
 		$scope.succMsg = false;
 		$scope.errorMsg = false;
 
@@ -1512,12 +1515,17 @@ module.factory('Facebook', function($http, $location) {
 				if (response.authResponse) {
 					console.log('Welcome!  Fetching your information.... ');
 					self.auth = response.authResponse;
+					//var date_of_birth = new Date(response.birthday);
 					FB.api('/me', function(response) {
+						var date_of_birth = new Date(response.birthday);
+						console.log("date of birth " + date_of_birth);
 						var param = {
 							"user" : {
 								"first_name" : response.first_name,
 								"last_name" : response.last_name,
 								"email" : response.email,
+								"gender" : response.gender,
+								"date_of_birth" : response.birthday
 							},
 							"oauth_provider" : "facebook",
 							"access_token" : self.auth.accessToken
@@ -1545,7 +1553,7 @@ module.factory('Facebook', function($http, $location) {
 					console.log('Facebook login failed', response);
 				}
 			}, {
-				scope : 'email'
+				scope : 'email,user_birthday'
 			});
 		},
 
@@ -1583,8 +1591,8 @@ module.factory('Facebook', function($http, $location) {
 
 window.fbAsyncInit = function() {
 	FB.init({
-		//appId : '507524349327671'
-		appId : '369424903187034'
+		appId : '507524349327671'
+		//appId : '369424903187034'
 	});
 };
 

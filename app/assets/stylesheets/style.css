@@ -664,15 +664,15 @@ img, object {
 	/*max-width: 35%;*/
 	/*max-width: 80%;*/
 }
-.logo_btm img {
+/*.logo_btm img {
 	float: left;
 	margin: 12% 0 0 18%;
 	max-height: 90%;
 	bottom: 0;
 	max-width: 23%;
-}
+}*/
 
-#login .logo_btm img {
+.logo_btm img {
 	float: left;
 	margin-left: 4.5%;
 	max-height: 90%;
@@ -1136,6 +1136,7 @@ img, object {
 #settings .dateDiv input::-moz-placeholder {/* Firefox 19+ */
 	color: #F5C03F !important;
 	text-align: center;
+	font-weight: normal;
 }
 
 #settings .dateDiv input:-ms-input-placeholder {
