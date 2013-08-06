@@ -213,7 +213,6 @@ module.controller('signInController', function($scope, $http, $location) {
 			return false;
 		}
 		var param = "{email:'" + $scope.email + "@kanari.co','password:'" + $scope.password + "'}";
-		alert(param);
 		$http({
 			method : 'post',
 			url : '/api/users/sign_in',
