@@ -77,6 +77,7 @@ Feature: Feedback Audit Log
         |points   |120    |
         |outlet_id|20     |
         |completed|false  |
+        And the time limit for giving feedback is "120" minutes
       When I send a PUT request to "/api/feedbacks/10" with the following:
       """
       {

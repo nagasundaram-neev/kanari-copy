@@ -135,62 +135,68 @@ module.controller('loginController', function($scope, $http, $location) {
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
 	$scope.remember = false;
 	$scope.erromsg = false;
-	$scope.email = ""
-	$scope.chkLogin = function() {
-		if ($scope.email == "" && $scope.password == "" && !$scope.email && !$scope.password) {
-			console.log("email is blank");
-			$scope.error = " Please enter Email and Password";
-			$scope.erromsg = true;
-			return false;
-		}
-		var param = "{email:'" + $scope.email + "','password:'" + $scope.password + "'}";
+	$scope.email = "";
+	if (getCookie("authToken")) {
+		$location.url("/home");
+	} else {
+		$scope.chkLogin = function() {
+			if ($scope.email == "" && $scope.password == "" && !$scope.email && !$scope.password) {
+				console.log("email is blank");
+				$scope.error = " Please enter Email and Password";
+				$scope.erromsg = true;
+				return false;
+			}
+			var param = "{email:'" + $scope.email + "','password:'" + $scope.password + "'}";
 
-		$http({
-			method : 'post',
-			url : '/api/users/sign_in',
-		}).success(function(data, status) {
-			auth_token = data.user_role;
-			console.log("User Role " + data.user_role + " status " + status);
-			if ($scope.remember) {
-				setCookie('userRole', data.user_role, 7);
-				setCookie('authToken', data.auth_token, 7);
-				setCookie('userName', data.first_name + ' ' + data.last_name, 7);
-				setCookie('signInCount', data.sign_in_count);
-			} else {
-				setCookie('userRole', data.user_role, 0.29);
-				setCookie('authToken', data.auth_token, 0.29);
-				setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
-				setCookie('signInCount', data.sign_in_count, 0.29);
-			}
-			if (getCookie('userRole') == "user") {
-				$location.url("/home");
-			} else if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff" || getCookie('userRole') == "manager") {
-				$scope.error = "You are not authenticated to use this app";
-				$scope.erromsg = true;
-			}
-		}).error(function(data, status) {
-			console.log($scope.password)
-			console.log("data " + $scope.email + " status " + status);
-			if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff") {
-				$scope.error = "You are not authenticated to use this app";
-				$scope.erromsg = true;
-			} else {
-				$scope.error = "Invalid Email or Password";
-				$scope.erromsg = true;
-			}
+			$http({
+				method : 'post',
+				url : '/api/users/sign_in',
+			}).success(function(data, status) {
+				auth_token = data.user_role;
+				console.log("User Role " + data.user_role + " status " + status);
+				if ($scope.remember) {
+					//alert("in");
+					setCookie('userRole', data.user_role, 7);
+					setCookie('authToken', data.auth_token, 7);
+					setCookie('userName', data.first_name + ' ' + data.last_name, 7);
+					setCookie('signInCount', data.sign_in_count);
+				} else {
+					setCookie('userRole', data.user_role, 0.29);
+					setCookie('authToken', data.auth_token, 0.29);
+					setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
+					setCookie('signInCount', data.sign_in_count, 0.29);
+				}
+				if (getCookie('userRole') == "user") {
+					$location.url("/home");
+				} else if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff" || getCookie('userRole') == "manager") {
+					$scope.error = "You are not authenticated to use this app";
+					$scope.erromsg = true;
+				}
+			}).error(function(data, status) {
+				console.log($scope.password)
+				console.log("data " + $scope.email + " status " + status);
+				if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff") {
+					$scope.error = "You are not authenticated to use this app";
+					$scope.erromsg = true;
+				} else {
+					$scope.error = "Invalid Email or Password";
+					$scope.erromsg = true;
+				}
+			});
+		};
+		$scope.forgotPassword = function() {
+			$location.url('/forgotPassword');
+		};
+
+		$scope.home = function() {
+			$location.url("/index");
+		};
+
+		$scope.$watch('email + password', function() {
+			$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
 		});
-	};
-	$scope.forgotPassword = function() {
-		$location.url('/forgotPassword');
-	};
 
-	$scope.home = function() {
-		$location.url("/index");
-	};
-
-	$scope.$watch('email + password', function() {
-		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
-	});
+	}
 
 	// $scope.$watch('email + password', function() {
 	// $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
@@ -520,18 +526,22 @@ module.controller('changePasswordController', function($scope, $http, $location)
 module.controller('settingsController', function($scope, $http, $location) {
 	setFooter(0);
 	if (getCookie('authToken')) {
-		var thisPicker = jQuery(this);
+		//var thisPicker = jQuery(this);
 		$('#date').scroller({
 			theme : "ios",
 			mode : "scroller",
 			display : "bottom",
-			button3Text : 'Xtreme',
-			button3 : function() {
-				var inst = thisPicker.mobiscroll('getInst');
-				thisPicker.val('');
-				inst.cancel();
-			},
+			dateFormat : 'dd/mm/yy'
 		});
+		//$('#date').scroller('setDate',$scope.date,true)
+
+		// $('#date').focus(function() {
+		// alert('Handler for .focus() called.'+$scope.date);
+		// if($scope.date){
+		// $("#date").scroller('setDate', $scope.date, true);
+		// }
+		// });
+
 		$scope.succMsg = false;
 		$scope.errorMsg = false;
 
@@ -1482,12 +1492,29 @@ function moveToNext(field, nextFieldID) {
 
 
 $(document).ready(function() {
-	// alert("okk ");
-	// $('#date').scroller({
-	// theme : "ios",
-	// mode : "scroller",
-	// display : "bottom"
-	// });
+	$('.backColr').live('touchstart', function(e) {
+			//$(this).removeClass('backColr');
+			$(this).addClass('backColr1');
+			//alert('alert');
+		});
+
+		$('.backColr').live('touchend', function(e) {
+			$(this).removeClass('backColr1');
+			$(this).addClass('backColr');
+			//alert('alert');
+		});
+		$('.clearBackColr').live('touchstart', function(e) {
+			//$(this).removeClass('backColr');
+			$(this).addClass('clearBackColr1');
+			//alert('alert');
+		});
+
+		$('.clearBackColr').live('touchend', function(e) {
+			$(this).removeClass('clearBackColr1');
+			$(this).addClass('clearBackColr');
+			//alert('alert');
+		});
+		
 });
 
 /*** Facebook Connect ***/
@@ -1512,12 +1539,17 @@ module.factory('Facebook', function($http, $location) {
 				if (response.authResponse) {
 					console.log('Welcome!  Fetching your information.... ');
 					self.auth = response.authResponse;
+					//var date_of_birth = new Date(response.birthday);
 					FB.api('/me', function(response) {
+						var date_of_birth = new Date(response.birthday);
+						console.log("date of birth " + date_of_birth);
 						var param = {
 							"user" : {
 								"first_name" : response.first_name,
 								"last_name" : response.last_name,
 								"email" : response.email,
+								"gender" : response.gender,
+								"date_of_birth" : response.birthday
 							},
 							"oauth_provider" : "facebook",
 							"access_token" : self.auth.accessToken
@@ -1545,7 +1577,7 @@ module.factory('Facebook', function($http, $location) {
 					console.log('Facebook login failed', response);
 				}
 			}, {
-				scope : 'email'
+				scope : 'email,user_birthday'
 			});
 		},
 

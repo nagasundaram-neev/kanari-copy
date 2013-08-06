@@ -229,9 +229,9 @@
 }
 
 /*.pointsTitle span{
-	padding-left: 3% !important;
-    text-align: left !important;
-}*/
+ padding-left: 3% !important;
+ text-align: left !important;
+ }*/
 
 .headTitleLast {
 	border-right: 0 none;
@@ -249,7 +249,7 @@
 
 .restaurantText span {
 	/*padding: 12% 0 12% 7%;*/
-	 font-size: 125%;
+	font-size: 125%;
 }
 .historyDataContainer {
 	border-bottom: thin solid #eaeaea;
@@ -262,7 +262,6 @@
 	text-align: left;
 	padding: 4% 0;
 	text-shadow: none;
-	
 	/*width: 32.9%;*/
 }
 
@@ -277,22 +276,22 @@
 
 .pointsDiv {
 	background-color: #FDBE3B;
-    border-bottom: 1px solid #FFFFFF;
-    color: #664765;
-    float: left;
-    height: 55px;
-    padding: 4% 4%;
-    text-shadow: none;
-    width: 32%;
+	border-bottom: 1px solid #FFFFFF;
+	color: #664765;
+	float: left;
+	height: 55px;
+	padding: 4% 4%;
+	text-shadow: none;
+	width: 32%;
 }
 
 .parentDivName {
-	 border-bottom: 1px solid #CCCCCC;
-    float: left;
-    height: 55px;
-    padding: 5% 0 3% 2%;
-    width: 58.3%;
-    word-wrap: break-word;
+	border-bottom: 1px solid #CCCCCC;
+	float: left;
+	height: 55px;
+	padding: 5% 0 3% 2%;
+	width: 58.3%;
+	word-wrap: break-word;
 }
 
 .titleDiv {
@@ -624,18 +623,66 @@
 	font-size: 2em;
 }
 
+#feedback .keypad .backColr {
+	background-color: #E5E6E8;
+	border-right: 3px solid #FFFFFF;
+	border-top: 3px solid #FFFFFF;
+	float: left;
+	/*height: auto;*/
+	height: 78px;
+	font-size: 375%;
+	-webkit-transition: opacity 0.5s ease-in-out;
+	-moz-transition: opacity 0.5s ease-in-out;
+	-ms-transition: opacity 0.5s ease-in-out;
+	-o-transition: opacity 0.5s ease-in-out;
+	transition: opacity 0.5s ease-in-out;
+	padding: 1% 0;
+	width: 30%;
+}
+
+#feedback .keypad .backColr1 {
+	background-color: #664765;
+	border-right: 3px solid #FFFFFF;
+	border-top: 3px solid #FFFFFF;
+	float: left;
+	/*height: auto;*/
+	height: 78px;
+	font-size: 375%;
+	opacity: 0.5;
+	padding: 1% 0;
+	width: 30%;
+	color: #ffffff;
+}
+
 .clearBackColr {
 	background-color: #664765;
 	border-right: 3px solid #FFFFFF;
 	border-top: 3px solid #FFFFFF;
 	float: left;
 	color: #FEBF3B;
+	-webkit-transition: opacity 0.5s ease-in-out;
+	-moz-transition: opacity 0.5s ease-in-out;
+	-ms-transition: opacity 0.5s ease-in-out;
+	-o-transition: opacity 0.5s ease-in-out;
+	transition: opacity 0.5s ease-in-out;
 	height: 78px;
 	font-size: 375%;
 	/*padding: 6% 0;*/
 	width: 30%;
 }
 
+.clearBackColr1 {
+	background-color: #664765;
+	border-right: 3px solid #FFFFFF;
+	border-top: 3px solid #FFFFFF;
+	float: left;
+	color: #FFFFFF;
+	height: 78px;
+	opacity: 0.5;
+	font-size: 375%;
+	/*padding: 6% 0;*/
+	width: 30%;
+}
 .pointTxt {
 	font-size: 122%;
 	letter-spacing: 7px;
@@ -664,15 +711,15 @@ img, object {
 	/*max-width: 35%;*/
 	/*max-width: 80%;*/
 }
-.logo_btm img {
-	float: left;
-	margin: 12% 0 0 18%;
-	max-height: 90%;
-	bottom: 0;
-	max-width: 23%;
-}
+/*.logo_btm img {
+ float: left;
+ margin: 12% 0 0 18%;
+ max-height: 90%;
+ bottom: 0;
+ max-width: 23%;
+ }*/
 
-#login .logo_btm img {
+.logo_btm img {
 	float: left;
 	margin-left: 4.5%;
 	max-height: 90%;
@@ -967,7 +1014,7 @@ img, object {
 	letter-spacing: 0.4em;
 }
 
-.headTitleLast span{
+.headTitleLast span {
 
 }
 .forgotpass {
@@ -1136,6 +1183,7 @@ img, object {
 #settings .dateDiv input::-moz-placeholder {/* Firefox 19+ */
 	color: #F5C03F !important;
 	text-align: center;
+	font-weight: normal;
 }
 
 #settings .dateDiv input:-ms-input-placeholder {
@@ -1583,17 +1631,6 @@ img, object {
 	height: 430px;
 }
 
-#feedback .keypad .backColr {
-	background-color: #E5E6E8;
-	border-right: 3px solid #FFFFFF;
-	border-top: 3px solid #FFFFFF;
-	float: left;
-	/*height: auto;*/
-	height: 78px;
-	font-size: 375%;
-	padding: 1% 0;
-	width: 30%;
-}
 .enter_code {
 	/*margin: 7% 3%;*/
 	margin: 4% 3%;
@@ -1968,7 +2005,7 @@ img, object {
 
 .loginDiv input.ui-input-text {
 	padding: 0.8em 0.6em !important;
-	  width: 94.5% !important;
+	width: 94.5% !important;
 }
 
 .innrDiv {
