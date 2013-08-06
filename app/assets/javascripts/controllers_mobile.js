@@ -1492,12 +1492,29 @@ function moveToNext(field, nextFieldID) {
 
 
 $(document).ready(function() {
-	// alert("okk ");
-	// $('#date').scroller({
-	// theme : "ios",
-	// mode : "scroller",
-	// display : "bottom"
-	// });
+	$('.backColr').live('touchstart', function(e) {
+			//$(this).removeClass('backColr');
+			$(this).addClass('backColr1');
+			//alert('alert');
+		});
+
+		$('.backColr').live('touchend', function(e) {
+			$(this).removeClass('backColr1');
+			$(this).addClass('backColr');
+			//alert('alert');
+		});
+		$('.clearBackColr').live('touchstart', function(e) {
+			//$(this).removeClass('backColr');
+			$(this).addClass('clearBackColr1');
+			//alert('alert');
+		});
+
+		$('.clearBackColr').live('touchend', function(e) {
+			$(this).removeClass('clearBackColr1');
+			$(this).addClass('clearBackColr');
+			//alert('alert');
+		});
+		
 });
 
 /*** Facebook Connect ***/
