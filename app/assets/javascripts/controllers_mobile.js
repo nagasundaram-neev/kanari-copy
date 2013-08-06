@@ -1592,8 +1592,8 @@ module.factory('Facebook', function($http, $location) {
 
 window.fbAsyncInit = function() {
 	FB.init({
-		//appId : '507524349327671'
-		appId : '369424903187034'
+		appId : '507524349327671'
+		//appId : '369424903187034'
 	});
 };
 

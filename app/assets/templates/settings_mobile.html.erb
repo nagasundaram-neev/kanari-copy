@@ -9,7 +9,7 @@
 			<div class="clr"></div>
 		</div>
 		<div data-role="fieldcontain" class="profileText" align="center">
-			<h2>My Profile</h2>
+			<h2>Account</h2>
 		</div>
 		<div data-role="fieldcontain" class="settingDiv" align="center">
 			<div class="ui-input-text ui-body-a padd">
@@ -33,15 +33,17 @@
 			<div class="ui-input-text ui-body-a">
 			<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="confirmPassword" class="passwordTxt" placeholder="Confirm Password"/>
 			</div> -->
+			<div data-role="fieldcontain" class="profileText" align="center">
+				<h2>Profile</h2>
+			</div>
 			<div class="ui-input-text ui-body-a padd">
 				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="location" class="passwordTxt" placeholder="Location"/>
 			</div>
 			<div data-role="fieldcontain" class="genderBtn ui-input-text ui-body-a">
 				<label for="toggleswitch1"> Gender </label>
-				<select name="toggleswitch1" id="toggleswitch1" data-theme="a" ng-model="gender" data-role="slider"
-				data-mini="true">
-					<option value="Male"> Male </option>
-					<option value="Female"> Female </option>
+				<select name="toggleswitch1" id="toggleswitch1" data-theme="a" ng-model="gender" data-role="slider" data-mini="true">
+					<option value="male"> Male </option>
+					<option value="female"> Female </option>
 				</select>
 				<div class="clr"></div>
 			</div>
@@ -54,12 +56,6 @@
 				</div>
 				<div class="clr"></div>
 			</div>
-			<p class="errorMsg" ng-show="errorMsg">
-				{{error}}
-			</p>
-			<p class="succMsg" ng-show="succMsg">
-				Profile updated successfully!!!
-			</p>
 			<!-- <div data-role="fieldcontain" class="profileTextBottom" align="center">
 			<h2>Notifications</h2>
 			</div>
@@ -68,31 +64,31 @@
 			<%= image_tag 'ic_ticks.png' %>
 			<div class="clr"></div>
 			</div> -->
-			<div data-role="fieldcontain" class="profileTextBottom" align="center">
-				<h2>Social</h2>
+			<!-- <div data-role="fieldcontain" class="profileTextBottom" align="center">
+			<h2>Social</h2>
 			</div>
 			<div class="ui-input-text ui-body-a notificationCheckboxFb">
-				<label><%= image_tag 'ic_fb_small_purple.png' %></label>
-				<%= image_tag 'ic_ticks_grey.png' %>
-				<div class="clr"></div>
+			<label><%= image_tag 'ic_fb_small_purple.png' %></label>
+			<%= image_tag 'ic_ticks_grey.png' %>
+			<div class="clr"></div>
 			</div>
 			<div class="ui-input-text ui-body-a notificationCheckboxTwitter">
-				<label><%= image_tag 'ic_twitter_small_purple.png' %></label>
-				<%= image_tag 'ic_ticks_grey.png' %>
-				<div class="clr"></div>
-			</div>
+			<label><%= image_tag 'ic_twitter_small_purple.png' %></label>
+			<%= image_tag 'ic_ticks_grey.png' %>
+			<div class="clr"></div>
+			</div> -->
 
 			<!-- <div data-role="fieldcontain" class="profileTextBottom" align="center">
-				<h2>Invite friends</h2>
+			<h2>Invite friends</h2>
 			</div>
 
 			<div class="ui-input-text ui-body-a inviteFriends">
-				<a href="#"><%= image_tag 'ic_fb_yellow.png' %></a>
-				<a href="#"><%= image_tag 'ic_twitter_yellow.png' %></a>
-				<a href="#"><%= image_tag 'ic_gplus_yellow.png' %></a>
+			<a href="#"><%= image_tag 'ic_fb_yellow.png' %></a>
+			<a href="#"><%= image_tag 'ic_twitter_yellow.png' %></a>
+			<a href="#"><%= image_tag 'ic_gplus_yellow.png' %></a>
 			</div> -->
 			<div data-role="fieldcontain" class="profileTextBottom" align="center">
-				<h2>MY HISTORY</h2>
+				<h2>HISTORY</h2>
 			</div>
 			<div id="transactionHistory" ng-click="tansactionHistory()">
 				<span>View Kanari History</span>
@@ -102,7 +98,13 @@
 		</div>
 	</div>
 	<div class="clr"></div>
-	<div class="saveDiv footerDiv" style=" position: relative; margin: 0;">
+	<div class="saveDiv footerDiv" style=" position: relative; margin: 0;text-align: center;">
+		<span class="errorMsg" ng-show="errorMsg">
+			{{error}}
+		</span>
+		<span class="succMsg" ng-show="succMsg">
+			Settings updated successfully.
+		</span>
 		<input type="button" class="signBtn" ng-click="saveProfile()" data-inline="true" value="Save"/>
 	</div>
 </div>
