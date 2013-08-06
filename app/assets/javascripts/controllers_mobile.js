@@ -520,13 +520,14 @@ module.controller('changePasswordController', function($scope, $http, $location)
 module.controller('settingsController', function($scope, $http, $location) {
 	setFooter(0);
 	if (getCookie('authToken')) {
-		var thisPicker = jQuery(this);
+		//var thisPicker = jQuery(this);
 		$('#date').scroller({
 			theme : "ios",
 			mode : "scroller",
 			display : "bottom",
 			dateFormat: 'dd/mm/yy'
 		});
+		//$('#date').scroller('setDate',$scope.date,true)
 
 		// $('#date').focus(function() {
 			// alert('Handler for .focus() called.'+$scope.date);
@@ -1591,8 +1592,8 @@ module.factory('Facebook', function($http, $location) {
 
 window.fbAsyncInit = function() {
 	FB.init({
-		appId : '507524349327671'
-		//appId : '369424903187034'
+		//appId : '507524349327671'
+		appId : '369424903187034'
 	});
 };
 
