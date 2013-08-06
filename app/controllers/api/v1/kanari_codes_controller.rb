@@ -9,7 +9,7 @@ class Api::V1::KanariCodesController < ApplicationController
     if feedback.nil?
       render json: {errors: ["Invalid code"]}, status: :unprocessable_entity
     else
-      render json: {feedback_id: feedback.id}, status: :ok
+      render json: {feedback_id: feedback.id, outlet_name: feedback.name}, status: :ok
     end
   end
 
