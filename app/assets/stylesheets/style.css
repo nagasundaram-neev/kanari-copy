@@ -636,6 +636,17 @@
 	width: 30%;
 }
 
+.clearBackColr:hover {
+	background-color: #664765;
+	border-right: 3px solid #FFFFFF;
+	border-top: 3px solid #FFFFFF;
+	float: left;
+	color: #FFFFFF;
+	height: 78px;
+	font-size: 375%;
+	/*padding: 6% 0;*/
+	width: 30%;
+}
 .pointTxt {
 	font-size: 122%;
 	letter-spacing: 7px;
@@ -1595,6 +1606,20 @@ img, object {
 	padding: 1% 0;
 	width: 30%;
 }
+
+#feedback .keypad .backColr:hover{
+	background-color: #664765;
+	border-right: 3px solid #FFFFFF;
+	border-top: 3px solid #FFFFFF;
+	float: left;
+	/*height: auto;*/
+	height: 78px;
+	font-size: 375%;
+	padding: 1% 0;
+	width: 30%;
+	color:#ffffff;
+}
+
 .enter_code {
 	/*margin: 7% 3%;*/
 	margin: 4% 3%;

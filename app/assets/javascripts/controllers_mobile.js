@@ -135,62 +135,68 @@ module.controller('loginController', function($scope, $http, $location) {
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
 	$scope.remember = false;
 	$scope.erromsg = false;
-	$scope.email = ""
-	$scope.chkLogin = function() {
-		if ($scope.email == "" && $scope.password == "" && !$scope.email && !$scope.password) {
-			console.log("email is blank");
-			$scope.error = " Please enter Email and Password";
-			$scope.erromsg = true;
-			return false;
-		}
-		var param = "{email:'" + $scope.email + "','password:'" + $scope.password + "'}";
+	$scope.email = "";
+	if (getCookie("authToken")) {
+		$location.url("/home");
+	} else {
+		$scope.chkLogin = function() {
+			if ($scope.email == "" && $scope.password == "" && !$scope.email && !$scope.password) {
+				console.log("email is blank");
+				$scope.error = " Please enter Email and Password";
+				$scope.erromsg = true;
+				return false;
+			}
+			var param = "{email:'" + $scope.email + "','password:'" + $scope.password + "'}";
 
-		$http({
-			method : 'post',
-			url : '/api/users/sign_in',
-		}).success(function(data, status) {
-			auth_token = data.user_role;
-			console.log("User Role " + data.user_role + " status " + status);
-			if ($scope.remember) {
-				setCookie('userRole', data.user_role, 7);
-				setCookie('authToken', data.auth_token, 7);
-				setCookie('userName', data.first_name + ' ' + data.last_name, 7);
-				setCookie('signInCount', data.sign_in_count);
-			} else {
-				setCookie('userRole', data.user_role, 0.29);
-				setCookie('authToken', data.auth_token, 0.29);
-				setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
-				setCookie('signInCount', data.sign_in_count, 0.29);
-			}
-			if (getCookie('userRole') == "user") {
-				$location.url("/home");
-			} else if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff" || getCookie('userRole') == "manager") {
-				$scope.error = "You are not authenticated to use this app";
-				$scope.erromsg = true;
-			}
-		}).error(function(data, status) {
-			console.log($scope.password)
-			console.log("data " + $scope.email + " status " + status);
-			if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff") {
-				$scope.error = "You are not authenticated to use this app";
-				$scope.erromsg = true;
-			} else {
-				$scope.error = "Invalid Email or Password";
-				$scope.erromsg = true;
-			}
+			$http({
+				method : 'post',
+				url : '/api/users/sign_in',
+			}).success(function(data, status) {
+				auth_token = data.user_role;
+				console.log("User Role " + data.user_role + " status " + status);
+				if ($scope.remember) {
+					//alert("in");
+					setCookie('userRole', data.user_role, 7);
+					setCookie('authToken', data.auth_token, 7);
+					setCookie('userName', data.first_name + ' ' + data.last_name, 7);
+					setCookie('signInCount', data.sign_in_count);
+				} else {
+					setCookie('userRole', data.user_role, 0.29);
+					setCookie('authToken', data.auth_token, 0.29);
+					setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
+					setCookie('signInCount', data.sign_in_count, 0.29);
+				}
+				if (getCookie('userRole') == "user") {
+					$location.url("/home");
+				} else if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff" || getCookie('userRole') == "manager") {
+					$scope.error = "You are not authenticated to use this app";
+					$scope.erromsg = true;
+				}
+			}).error(function(data, status) {
+				console.log($scope.password)
+				console.log("data " + $scope.email + " status " + status);
+				if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff") {
+					$scope.error = "You are not authenticated to use this app";
+					$scope.erromsg = true;
+				} else {
+					$scope.error = "Invalid Email or Password";
+					$scope.erromsg = true;
+				}
+			});
+		};
+		$scope.forgotPassword = function() {
+			$location.url('/forgotPassword');
+		};
+
+		$scope.home = function() {
+			$location.url("/index");
+		};
+
+		$scope.$watch('email + password', function() {
+			$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
 		});
-	};
-	$scope.forgotPassword = function() {
-		$location.url('/forgotPassword');
-	};
 
-	$scope.home = function() {
-		$location.url("/index");
-	};
-
-	$scope.$watch('email + password', function() {
-		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
-	});
+	}
 
 	// $scope.$watch('email + password', function() {
 	// $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
@@ -525,15 +531,15 @@ module.controller('settingsController', function($scope, $http, $location) {
 			theme : "ios",
 			mode : "scroller",
 			display : "bottom",
-			dateFormat: 'dd/mm/yy'
+			dateFormat : 'dd/mm/yy'
 		});
 		//$('#date').scroller('setDate',$scope.date,true)
 
 		// $('#date').focus(function() {
-			// alert('Handler for .focus() called.'+$scope.date);
-			// if($scope.date){
-				// $("#date").scroller('setDate', $scope.date, true);
-			// }
+		// alert('Handler for .focus() called.'+$scope.date);
+		// if($scope.date){
+		// $("#date").scroller('setDate', $scope.date, true);
+		// }
 		// });
 
 		$scope.succMsg = false;
@@ -1592,8 +1598,8 @@ module.factory('Facebook', function($http, $location) {
 
 window.fbAsyncInit = function() {
 	FB.init({
-		appId : '507524349327671'
-		//appId : '369424903187034'
+		//appId : '507524349327671'
+		appId : '369424903187034'
 	});
 };
 
