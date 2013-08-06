@@ -128,12 +128,16 @@ var refreshIntervalId;
 module.controller('headerCtrl', function($scope, $http, $location) {
 	var overlayDiv = $("#overlaySuccess");
 	$scope.popup = false;
-	$scope.clickf = function(getroot) {
-		$location.url('/' + getroot);
-	};
-
+	$(".headerDiv a").click(function() {
+		$(".headerDiv a").removeClass("ui_btn_active");
+		$(this).addClass("ui_btn_active");
+		$(".headerDiv span").hide();
+		$(this).children().show();
+	});
 	$scope.showPopup = function() {
-		$scope.popup = true;
+		$("#overlaySuccess").show();
+		$(".popup").show();
+		//$scope.popup = true;
 		overlayDiv.css({
 			'z-index' : '10',
 			'background-color' : '#000'
@@ -142,7 +146,9 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 	};
 
 	$scope.cancel = function() {
-		$scope.popup = false;
+		$("#overlaySuccess").hide();
+		$(".popup").hide();
+		//$scope.popup = false;
 		console.log("IN");
 		overlayDiv.css({
 			'z-index' : '0',
@@ -160,18 +166,22 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 			url : '/api/users/sign_out',
 			data : param
 		}).success(function(data, status) {
+			$(".userloggedIn").hide();
+
 			console.log("User Role " + data + " status " + status);
 			deleteCookie('authToken');
 			deleteCookie('userRole');
 			deleteCookie('userName');
 			deleteCookie('feedbackId');
 			deleteCookie("signInCount");
+			$(".popup").hide();
 			$location.url("/signin");
 			$scope.popup = false;
 			overlayDiv.css({
 				'z-index' : '0',
 				'background-color' : 'transparent'
 			});
+			
 		}).error(function(data, status) {
 			console.log("data " + data + " status " + status + "authToken" + getCookie('authToken'));
 		});
@@ -192,6 +202,9 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 
 module.controller('signInController', function($scope, $http, $location) {
 	clearInterval(refreshIntervalId);
+	$("#wrapper").removeClass("clsafterLogin");
+	$("#wrapper").addClass("clsforLogin");
+	$(".userloggedIn").hide();
 	$scope.chkLogin = function() {
 		if ($scope.email == "" && $scope.password == "" && !$scope.email && !$scope.password) {
 			console.log("email is blank");
@@ -200,7 +213,7 @@ module.controller('signInController', function($scope, $http, $location) {
 			return false;
 		}
 		var param = "{email:'" + $scope.email + "@kanari.co','password:'" + $scope.password + "'}";
-
+		alert(param);
 		$http({
 			method : 'post',
 			url : '/api/users/sign_in',
@@ -226,7 +239,7 @@ module.controller('signInController', function($scope, $http, $location) {
 
 		}).error(function(data, status) {
 			//console.log($scope.password)
-			console.log("data " + $scope.email + " status " + status);
+			console.log("data " + $scope.email + " status " + $scope.password);
 			$scope.error = "Invalid Id or Password";
 			$scope.erromsg = true;
 		});
@@ -239,14 +252,19 @@ module.controller('signInController', function($scope, $http, $location) {
 });
 
 module.controller('homePageController', function($scope, $http, $location) {
+	$(".userloggedIn").show();
+	$("#wrapper").removeClass("clsforLogin");
+	$("#wrapper").addClass("clsafterLogin");
+	$("#feedback").addClass("ui_btn_active");
+	$("#feedback span").show();
 	if (getCookie('authToken')) {
 		var overlayDiv = $("#overlaySuccess");
 		$scope.active1 = true;
 		$scope.feedbackList = [];
 
 		$scope.listFeedbacks = function() {
-			$.mobile.loading('show');
-			
+			//$.mobile.loading('show');
+
 			var param = {
 				"auth_token" : getCookie('authToken'),
 				"password" : "X"
@@ -259,14 +277,14 @@ module.controller('homePageController', function($scope, $http, $location) {
 			}).success(function(data, status) {
 				console.log("User Role " + data + " status " + status);
 				$scope.feedbackList = data.feedbacks;
-				$.mobile.loading('hide');
+				//$.mobile.loading('hide');
 				overlayDiv.css({
 					'z-index' : '0',
 					'background-color' : 'transparent'
 				});
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
-				$.mobile.loading('hide');
+				//$.mobile.loading('hide');
 				overlayDiv.css({
 					'z-index' : '0',
 					'background-color' : 'transparent'
@@ -283,10 +301,10 @@ module.controller('homePageController', function($scope, $http, $location) {
 			});
 			$scope.listFeedbacks();
 		};
-
-		// refreshIntervalId = window.setInterval(function() {
-		// $scope.listFeedbacks();
-		// }, 8000);
+		//document.addEventListener('DOMContentLoaded', function() {
+		//alert("in");
+		setTimeout(loaded, 1000);
+		//}, false);
 
 	} else {
 		$location.url("/signin");
@@ -295,7 +313,11 @@ module.controller('homePageController', function($scope, $http, $location) {
 });
 
 module.controller('insightsController', function($scope, $http, $location) {
-	clearInterval(refreshIntervalId);
+	$(".userloggedIn").show();
+	$("#wrapper").removeClass("clsforLogin");
+	$("#wrapper").addClass("clsafterLogin");
+	$("#insights").addClass("ui_btn_active");
+	$("#insights span").show();
 	if (getCookie('authToken')) {
 		$scope.active2 = true;
 
@@ -415,7 +437,11 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 });
 module.controller('redemeController', function($scope, $http, $location) {
-	clearInterval(refreshIntervalId);
+	$(".userloggedIn").show();
+	$("#wrapper").removeClass("clsforLogin");
+	$("#wrapper").addClass("clsafterLogin");	
+	$("#redemption").addClass("ui_btn_active");
+	$("#redemption span").show();
 	if (getCookie('authToken')) {
 		$scope.active3 = true;
 
@@ -470,7 +496,11 @@ module.controller('redemeController', function($scope, $http, $location) {
 
 });
 module.controller('numericCodeController', function($scope, $http, $location) {
-	clearInterval(refreshIntervalId);
+	$(".userloggedIn").show();
+	$("#wrapper").removeClass("clsforLogin");
+	$("#wrapper").addClass("clsafterLogin");	
+	$("#numeric_code").addClass("ui_btn_active");
+	$("#numeric_code span").show();
 	if (getCookie('authToken')) {
 		$scope.loader = false;
 		$scope.codeGenerate = true;
@@ -561,7 +591,6 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 	} else {
 		$location.url("/signin");
 	}
-
 });
 
 /* Cookie functions	*/
@@ -593,9 +622,11 @@ function deleteCookie(name) {
 	setCookie(name, "", -1);
 }
 
-// $(document).ready(function() {
-// alert("in");
-// //$("#divexample1").niceScroll("#homePage",{cursorcolor:"#00F"});
-// $("#divexample1").niceScroll({touchbehavior:true});
-// alert("out");
-// });
+var myScroll;
+function loaded() {
+	myScroll = new iScroll('wrapper');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+	setTimeout(loaded, 2000);
+}, false);

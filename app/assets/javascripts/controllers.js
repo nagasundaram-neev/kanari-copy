@@ -689,13 +689,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				var param = {
 					"outlet" : {
 						"manager_id" : managerId,
-						//"latitude" : pos_lat,
-						//"longitude" : pos_lng,
 						"cuisine_type_ids" : JSON.parse(getCookie('currentCuisineList')),
-						"outlet_type_ids" : JSON.parse(getCookie('currentOutletList')),
-						//"has_delivery" : getCookie('radiobtn1'),
-						//"serves_alcohol" : getCookie('radiobtn2'),
-						//"has_outdoor_seating" : getCookie('radiobtn3')
+						"outlet_type_ids" : JSON.parse(getCookie('currentOutletList')),						
 					},
 					"auth_token" : getCookie('authToken')
 				}

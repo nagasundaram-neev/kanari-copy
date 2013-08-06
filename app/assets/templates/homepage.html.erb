@@ -1,8 +1,6 @@
-<div id="homePage" align="center" ng-controller="homePageController" data-role="page">
-
-	<div ng:include="'<%= asset_path 'tablet_header.html' %>'"></div>
+<div id="scroller" align="center" ng-controller="homePageController" >
 	<h3 class="redemptionMsg" ng-show="!feedbackList.length">Currently you do not have any feedbacks to list</h3>
-	<div tabindex="5000" style="overflow-y: auto;" id="boxscroll" ng-show="feedbackList.length" class="home_page_view">
+	<div ng-show="feedbackList.length" class="home_page_view">
 		<div id="refresh" ng-click="refresh()">
 			<strong>Refresh feedbacks</strong>
 		</div>
@@ -141,7 +139,7 @@
 					<div class="divPadding promo_code_desc">
 					<span>{{feedbacks.comment}} <!-- The smokehouse BBQ chicken is the best sandwich that has ever been added to the
 					stole of satwiches. It has all the flavour of fattning sandwiches but
-					with the healthy side... --><!-- </span>
+					with the healthy side... --></span>
 					</div>
 					<div class="clr"></div>
 					<div class="update_time">
@@ -149,41 +147,7 @@
 
 					</div>
 					</div>
-					</div> -->
-					<style type="text/css">
-						#boxscroll {
-							height: 760px;
-							overflow: auto;
-						}
-					</style>
-					<script>
-						$(document).ready(function() {
-
-							//var nice = $("html").niceScroll();
-							// The document page (body)
-
-							// $("#div1").html($("#div1").html()+' '+nice.version);
-
-							$("#boxscroll").niceScroll({
-								touchbehavior : true
-							});
-							// First scrollable DIV
-
-							// Customizable cursor
-							// $("#boxscroll").niceScroll({touchbehavior:false,cursorcolor:"#00F",cursoropacitymax:0.7,cursorwidth:11,cursorborder:"1px solid #2848BE",cursorborderradius:"8px"}).cursor.css({"background-image":"url(img/mac6scroll.png)"}); // MAC like scrollbar
-
-							// $("#boxscroll2").niceScroll("#contentscroll2",{cursorcolor:"#F00",cursoropacitymax:0.7,boxzoom:true,touchbehavior:true});  // Second scrollable DIV
-							// $("#boxframe").niceScroll("#boxscroll3",{cursorcolor:"#0F0",cursoropacitymax:0.7,boxzoom:true,touchbehavior:true});  // This is an IFrame (iPad compatible)
-							//
-							// $("#boxscroll4").niceScroll("#boxscroll4 .wrapper",{boxzoom:true});  // hw acceleration enabled when using wrapper
-
-							/*
-							 $("input[type=range]").bind('mousedown touchstart', function (e) {
-							 e.stopPropagation();
-							 });
-							 */
-
-						});
-					</script>
+					</div>
+					
 			</div>
 
