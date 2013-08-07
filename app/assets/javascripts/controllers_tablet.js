@@ -490,6 +490,7 @@ module.controller('redemeController', function($scope, $http, $location) {
 			});
 
 		};
+		setTimeout(loaded, 1000);
 	} else {
 		$location.url("/signin")
 	}
@@ -588,6 +589,7 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 			$scope.erromsg = false;
 			$scope.listGeneratedCodes();
 		};
+		setTimeout(loaded, 2000);
 	} else {
 		$location.url("/signin");
 	}

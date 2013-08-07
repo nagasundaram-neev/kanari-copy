@@ -272,6 +272,7 @@ input.ui-input-text, textarea.ui-input-text {
 	padding: 0.6em 20px;
 	font-size: 16px;
 	font-weight: bold;
+	position: relative;
 }
 .popup{
 	display: none;
@@ -314,6 +315,7 @@ input.ui-input-text, textarea.ui-input-text {
 	height: 0;
 	margin-left: -10px;
 	width: 0;
+	bottom: -10px;
 	left: 50%;
 }
 .showArrow {
@@ -499,7 +501,7 @@ input.ui-input-text, textarea.ui-input-text {
 .net_promo_score {
 	border-right: 1px solid #664766;
 	float: left;
-	height: 69px;
+	height: 72px;
 	padding: 0.5% 0;
 	text-align: left;
 	width: 49%;
@@ -652,7 +654,7 @@ div.netScore{
 .doneOterDiv {
 	margin-top: 7%;
 }
-#numericCode .ui-input-text {
+.numericCode .ui-input-text {
 	border: 1px solid #CCCCCC;
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -663,7 +665,7 @@ div.netScore{
 	padding: 3%;
 	width: 93%;
 }
-#numericCode button.signInBtn {
+.numericCode button.signInBtn {
 	background: none repeat scroll 0 0 #FEC03B;
 	border: medium none;
 	border-radius: 0 0 0 0;
@@ -673,7 +675,7 @@ div.netScore{
 	padding: 10px 0;
 	text-shadow: none;
 }
-#numericCode .ui-submit span.ui-btn-text {
+.numericCode .ui-submit span.ui-btn-text {
 	font-size: 1.1em;
 }
 .numericCodeContainer {
