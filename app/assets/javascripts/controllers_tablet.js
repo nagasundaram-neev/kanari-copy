@@ -429,6 +429,7 @@ module.controller('insightsController', function($scope, $http, $location) {
 		};
 
 		$scope.feedbackMetrics();
+		setTimeout(loaded, 1000);
 
 	} else {
 		$location.url("/signin");
