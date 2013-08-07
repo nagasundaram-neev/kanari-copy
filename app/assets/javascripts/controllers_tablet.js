@@ -540,7 +540,7 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 					$scope.codeGenerated = true;
 					$scope.code = data.code;
 					$scope.billAmount = "";
-					$scope.loader = false;
+					// $scope.loader = false;
 				}).error(function(data, status) {
 					console.log("data in errorrr" + data + " status " + status);
 					$scope.error = data.error[0];
