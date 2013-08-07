@@ -730,6 +730,7 @@ module.controller('feedbackController', function($scope, $http, $location) {
 		}).success(function(data, status) {
 			console.log("User Role " + data + " status " + status);
 			setCookie("feedbackId", data.feedback_id, 0.29);
+			setCookie("restName",data.outlet_name, 0.29);
 			$location.url("/feedback_step2");
 		}).error(function(data, status) {
 			console.log("data " + data + " status " + status);
@@ -959,6 +960,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 					}).success(function(data, status) {
 						console.log("User Role " + data + " status " + status);
 						pointsEarned = data.points;
+						setCookie("pointsEarned",data.points,0.29);
 						$scope.erromsg = false;
 						if (getCookie('authToken')) {
 							$location.url("/feedbackSubmitSuccess");
@@ -1051,9 +1053,11 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 	setFooter(0);
 	if (getCookie('authToken')) {
 		//console.log("points " + pointsEarned);
-		$scope.points = pointsEarned;
+		//$scope.points = pointsEarned;
+		$scope.points = getCookie('pointsEarned');
 		//console.log("scope variable " + $scope.points);
 		$scope.home = function() {
+			deleteCookie('pointsEarned');
 			$location.url("/home");
 		};
 	} else {
@@ -1095,6 +1099,7 @@ module.controller('restaurantListController', function($scope, $http, $location)
 					deleteCookie('userRole');
 					deleteCookie('userName');
 					deleteCookie('feedbackId');
+					deleteCookie('pointsEarned');
 					deleteCookie("signInCount");
 					deleteAllCookies();
 					$location.url("/login");
@@ -1589,19 +1594,26 @@ module.factory('Facebook', function($http, $location) {
 		share : function() {
 			FB.login(function(response) {
 				if (response.authResponse) {
-					var body = '';
+					var fbMessage = 'I just saved AED '+getCookie('pointsEarned')+' by leaving feedback at '+getCookie('restName')+'. Thanks Kanari! Check it out: http://kanari.co';
+					alert("message for fb "+fbMessage)
 					FB.api('/me/feed', 'post', {
-						message : body
+						message : fbMessage
 					}, function(response) {
 						if (!response || response.error) {
 							//alert(response[0]);
 							//alert('Error occured');
+							deleteCookie('pointsEsrned');
+							deleteCookie('restName');
 						} else {
 							//alert('Post ID: ' + response.id);
+							deleteCookie('pointsEsrned');
+							deleteCookie('restName');
 						}
 					});
 
 				} else {
+					deleteCookie('pointsEsrned');
+					deleteCookie('restName');
 					//alert('User is logged out');
 				}
 			}, {
@@ -1615,8 +1627,8 @@ module.factory('Facebook', function($http, $location) {
 
 window.fbAsyncInit = function() {
 	FB.init({
-		//appId : '507524349327671'
-		appId : '369424903187034'
+		appId : '507524349327671'
+		//appId : '369424903187034'
 	});
 };
 

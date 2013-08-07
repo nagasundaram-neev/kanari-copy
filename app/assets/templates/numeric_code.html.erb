@@ -2,7 +2,7 @@
 	<div ng-show="codeGenerate" class="numericCodeContainer">
 		<h1 align="center" class="numericTxt"> Please enter bill amount </h1>
 		<div class="loaderDiv clearfix">
-			<input type="number" class="ui-input-text billAmountTxtBox" maxlength="5" placeholder="Enter bill amount.." ng-model="billAmount">
+			<input type="text" class="ui-input-text billAmountTxtBox" maxlength="5" placeholder="Enter bill amount.." ng-model="billAmount">
 			<div ng-show="loader" class="loader"><img src="/assets/ajax_loader.gif"></div>
 		</div>
 		<div ng-click="generateCode()" >
