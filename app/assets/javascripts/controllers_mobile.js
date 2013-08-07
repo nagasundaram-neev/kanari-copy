@@ -1595,7 +1595,7 @@ module.factory('Facebook', function($http, $location) {
 			FB.login(function(response) {
 				if (response.authResponse) {
 					var fbMessage = 'I just saved AED '+getCookie('pointsEarned')+' by leaving feedback at '+getCookie('restName')+'. Thanks Kanari! Check it out: http://kanari.co';
-					alert("message for fb "+fbMessage)
+					//alert("message for fb "+fbMessage)
 					FB.api('/me/feed', 'post', {
 						message : fbMessage
 					}, function(response) {
