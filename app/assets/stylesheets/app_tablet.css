@@ -274,21 +274,21 @@ input.ui-input-text, textarea.ui-input-text {
 	font-weight: bold;
 	position: relative;
 }
-.popup{
+.popup {
 	display: none;
 }
-.popup button{
+.popup button {
 	width: 100%;
 }
-.popup h4{
+.popup h4 {
 	font-size: 16px;
-	text-align:center;
+	text-align: center;
 }
 #header_menu .logoutDiv {
 	text-align: center;
 	width: 8.3% !important;
 	margin-right: 0px;
-	 float: left;
+	float: left;
 }
 #header_menu .logOut {
 	background: none repeat scroll 0 0 #C9C7C8;
@@ -345,7 +345,7 @@ input.ui-input-text, textarea.ui-input-text {
 	background: none repeat scroll 0 center transparent;
 	border: 0 none;
 	display: block;
-	 margin: 4% 0;
+	margin: 4% 0;
 	width: 48%;
 }
 .checkboxFive {
@@ -395,11 +395,11 @@ input.ui-input-text, textarea.ui-input-text {
 /* Header css ends here */
 
 /* Sign In css starts here */
-.clsforLogin{
+.clsforLogin {
 	background-color: #FEBF3B;
 	height: 100%;
 }
-.clsafterLogin{
+.clsafterLogin {
 	background-color: transparent;
 	position: absolute;
 	height: auto;
@@ -417,7 +417,7 @@ input.ui-input-text, textarea.ui-input-text {
 .loginTxt {
 	color: #644766;
 	font-size: 2.5em;
-	 margin: 5% 0 2% 6px;
+	margin: 5% 0 2% 6px;
 }
 .signInForm {
 	width: 35%;
@@ -502,7 +502,8 @@ input.ui-input-text, textarea.ui-input-text {
 	border-right: 1px solid #664766;
 	float: left;
 	height: 72px;
-	padding: 0.5% 0;
+	margin-bottom: -1000px;
+	padding: 0.5% 0 1000px;
 	text-align: left;
 	width: 49%;
 }
@@ -520,8 +521,8 @@ input.ui-input-text, textarea.ui-input-text {
 	font-size: 250%;
 	margin-top: 5%;
 }
-div.netScore{
-	padding:15%;
+div.netScore {
+	padding: 15%;
 }
 .txt1 {
 	font-size: 100%;
@@ -546,13 +547,15 @@ div.netScore{
 .net_rate_plus {
 	background: none repeat scroll 0 0 #FEC03B;
 	float: left;
-	margin-top: 5%;
+	/*margin-top: 5%;*/
+	margin-top: 12%;
 }
 
 .net_rate_plus_red {
 	background: none repeat scroll 0 0 #C84A58;
 	float: left;
-	margin-top: 5%;
+	/*margin-top: 5%;*/
+	margin-top: 12%;
 }
 .ratePValue {
 	background: none repeat scroll 0 0 transparent;
@@ -627,7 +630,6 @@ div.netScore{
 	color: #664766;
 	font-size: 153%;
 	font-weight: bold;
-	margin: 2%;
 	padding: 2.5% 0;
 }
 .numericTxt {
@@ -636,11 +638,12 @@ div.netScore{
 	margin-bottom: 5%;
 }
 .loaderDiv {
-
+position: relative;
 }
 .loader {
-	float: right;
-	margin-top: 3%;
+	 position: absolute;
+    right: -19px;
+    top: 13px;
 }
 
 .billAmountTxtBox {
