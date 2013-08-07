@@ -415,7 +415,7 @@ input.ui-input-text, textarea.ui-input-text {
 .loginTxt {
 	color: #644766;
 	font-size: 2.5em;
-	margin: 5% 0 1%;
+	 margin: 5% 0 2% 6px;
 }
 .signInForm {
 	width: 35%;
