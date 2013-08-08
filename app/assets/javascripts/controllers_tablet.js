@@ -181,7 +181,7 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 				'z-index' : '0',
 				'background-color' : 'transparent'
 			});
-			
+
 		}).error(function(data, status) {
 			console.log("data " + data + " status " + status + "authToken" + getCookie('authToken'));
 		});
@@ -254,8 +254,11 @@ module.controller('homePageController', function($scope, $http, $location) {
 	$(".userloggedIn").show();
 	$("#wrapper").removeClass("clsforLogin");
 	$("#wrapper").addClass("clsafterLogin");
+	$(".headerDiv a").removeClass("ui_btn_active");
+	$(".headerDiv span").hide();
 	$("#feedback").addClass("ui_btn_active");
 	$("#feedback span").show();
+	$(".popup").hide();
 	if (getCookie('authToken')) {
 		var overlayDiv = $("#overlaySuccess");
 		$scope.active1 = true;
@@ -419,6 +422,7 @@ module.controller('insightsController', function($scope, $http, $location) {
 				} else {
 					$scope.netflag = 0;
 				}
+				
 				$scope.feedCount = data.feedback_insights.feedbacks_count;
 				$scope.points = data.feedback_insights.rewards_pool;
 
@@ -439,7 +443,7 @@ module.controller('insightsController', function($scope, $http, $location) {
 module.controller('redemeController', function($scope, $http, $location) {
 	$(".userloggedIn").show();
 	$("#wrapper").removeClass("clsforLogin");
-	$("#wrapper").addClass("clsafterLogin");	
+	$("#wrapper").addClass("clsafterLogin");
 	$("#redemption").addClass("ui_btn_active");
 	$("#redemption span").show();
 	if (getCookie('authToken')) {
@@ -496,10 +500,12 @@ module.controller('redemeController', function($scope, $http, $location) {
 	}
 
 });
+ var flag = 0;
+
 module.controller('numericCodeController', function($scope, $http, $location) {
 	$(".userloggedIn").show();
 	$("#wrapper").removeClass("clsforLogin");
-	$("#wrapper").addClass("clsafterLogin");	
+	$("#wrapper").addClass("clsafterLogin");
 	$("#numeric_code").addClass("ui_btn_active");
 	$("#numeric_code span").show();
 	if (getCookie('authToken')) {
@@ -510,8 +516,13 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 		$scope.active4 = true;
 		$scope.erromsg = false;
 		$scope.listCodes = [];
-
-		$scope.generateCode = function(createKanariCode) {
+ // $( "#generateCode" ).click(function(event) {
+  // alert("in"+flag)
+ // flag = 0;
+ // event.preventDefault();
+ // });
+		$scope.generateCode = function() {
+			//alert("in "+$('#billAmnt').val());
 			if (!$scope.billAmount) {
 				$scope.error = "Please enter valid bill amount";
 				$scope.succmsg = false;
@@ -521,33 +532,34 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 				$scope.error = "Please enter valid bill amount";
 				$scope.succmsg = false;
 				$scope.erromsg = true;
-			} else {
+			} else if ($('#billAmnt').val()) {
 				console.log("amount " + $scope.billAmount)
 				$scope.loader = true;
 				var param = {
 					"bill_amount" : $scope.billAmount,
 					"auth_token" : getCookie("authToken")
 				}
-
-				$http({
-					method : 'POST',
-					url : '/api/kanari_codes',
-					data : param,
-				}).success(function(data, status) {
-					console.log("data in success " + data + " status " + status);
-					$scope.erromsg = false;
-					$scope.codeGenerate = false;
-					$scope.codeGenerated = true;
-					$scope.code = data.code;
-					$scope.billAmount = "";
-					// $scope.loader = false;
-				}).error(function(data, status) {
-					console.log("data in errorrr" + data + " status " + status);
-					$scope.error = data.error[0];
-					$scope.succmsg = false;
-					$scope.erromsg = true;
-					$scope.loader = false;
-				});
+					$http({
+						method : 'POST',
+						url : '/api/kanari_codes',
+						data : param,
+					}).success(function(data, status) {
+						console.log("data in success " + data + " status " + status);
+						$scope.erromsg = false;
+						$scope.codeGenerate = false;
+						$scope.codeGenerated = true;
+						$scope.code = data.code;
+						//$scope.billAmount = "";
+						$('#billAmnt').val("");
+						
+						$scope.loader = false;
+					}).error(function(data, status) {
+						console.log("data in errorrr" + data + " status " + status);
+						$scope.error = data.error[0];
+						$scope.succmsg = false;
+						$scope.erromsg = true;
+						$scope.loader = false;
+					});
 			}
 		};
 
@@ -589,7 +601,7 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 			$scope.erromsg = false;
 			$scope.listGeneratedCodes();
 		};
-		setTimeout(loaded, 2000);
+		//setTimeout(loaded, 1000);
 	} else {
 		$location.url("/signin");
 	}

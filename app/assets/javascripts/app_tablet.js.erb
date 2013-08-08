@@ -99,24 +99,12 @@ module.directive('highchart', function () {
         }
     });
     
-module.directive('timeagoAutoupdate', function($timeout) {
-  return {
-    restrict: 'A',
-    link: function(scope, elem, attrs) {
-      var updateTime = function() {
-        if (attrs.timeagoAutoupdate) {
-          var time = scope.$eval(attrs.timeagoAutoupdate);
-          elem.text(jQuery.timeago(time));
-          $timeout(updateTime, 15000);
-        }
-      };
-      scope.$watch(attrs.timeago, updateTime);
-    }
-  };
+    
+ module.filter('fromNow', function() {
+  return function(date) {
+    return moment(date).fromNow();
+  }
 });
-
-
-
-
+    
 
 
