@@ -899,7 +899,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 							console.log("User Role " + data + " status " + status);
 							//pointsEarned = data.points;
 							setCookie("pointsEarned", data.points, 0.29);
-							alert(getCookie('pointsEarned'));
+							// alert(getCookie('pointsEarned'));
 							$scope.erromsg = false;
 							if (getCookie('authToken')) {
 								$location.url("/feedbackSubmitSuccess");
@@ -957,7 +957,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 						console.log("User Role " + data + " status " + status);
 						pointsEarned = data.points;
 						setCookie("pointsEarned", data.points, 0.29);
-						alert(getCookie('pointsEarned'));
+						//alert(getCookie('pointsEarned'));
 						$scope.erromsg = false;
 						if (getCookie('authToken')) {
 							$location.url("/feedbackSubmitSuccess");
