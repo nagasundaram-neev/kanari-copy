@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130729082041) do
+ActiveRecord::Schema.define(version: 20130807085046) do
 
   create_table "code_generation_logs", force: true do |t|
     t.integer  "outlet_id"
@@ -200,6 +200,7 @@ ActiveRecord::Schema.define(version: 20130729082041) do
     t.integer  "approved_by"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "approved_at"
   end
 
   add_index "redemptions", ["outlet_id"], name: "index_redemptions_on_outlet_id", using: :btree

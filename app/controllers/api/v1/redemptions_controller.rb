@@ -51,6 +51,8 @@ class Api::V1::RedemptionsController < ApplicationController
     render json: {errors: ["Redemption request not found"]}, status: :not_found and return if redemption.nil?
     outlet = redemption.outlet
     authorize! :approve_redemptions, outlet
+    expiry_time = GlobalSetting.where(setting_name: 'redemption_expiry_time').first.setting_value.to_i rescue 30
+    render json: {errors: ["Redemption request expired"]}, status: :unprocessable_entity and return if((Time.zone.now - redemption.created_at ) > expiry_time.minutes)
     user = redemption.user
     points = redemption.points
 
@@ -63,7 +65,7 @@ class Api::V1::RedemptionsController < ApplicationController
         user_points_before =   user.points_available
         outlet.update_rewards_and_redeem_points(points)
         user.update_points_and_redeems_count(points)
-        redemption_parameters = { approved_by: current_user.id, rewards_pool_after_redemption: outlet.rewards_pool,
+        redemption_parameters = { approved_by: current_user.id, approved_at: Time.zone.now, rewards_pool_after_redemption: outlet.rewards_pool,
                                   user_points_after_redemption: user.points_available }
         if redemption.update(redemption_parameters)
           RedemptionLog.create({customer_id: outlet.customer_id, outlet_id: outlet.id, outlet_name: outlet.name,
