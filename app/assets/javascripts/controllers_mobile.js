@@ -856,7 +856,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 				$scope.nextFlag = 1;
 				$scope.prevFlag = 0;
 				$scope.recomendationBar = false;
-				$(".nxt").css("width", "50.3%");
+				$(".nxt").css("width", "50.22%");
 			} else if ($scope.nextFlag == 1) {
 				$scope.like = false;
 				$scope.dislike = false;
@@ -867,7 +867,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 				//$scope.nextFlag = 0;
 				$scope.prevFlag = 1;
 				$scope.nextFlag = -1;
-				//$(".nxt").css("width", "50%");
+				//$(".nxt").css("width", "50.22%");
 				$(".nxtTxt").html("SUBMIT");
 				$scope.erromsg = false;
 				$(".nxt img").hide();
