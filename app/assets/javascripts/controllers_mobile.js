@@ -1062,6 +1062,7 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 		//console.log("scope variable " + $scope.points);
 		$scope.home = function() {
 			deleteCookie('pointsEarned');
+			deleteCookie('restName');
 			$location.url("/home");
 		};
 		// $scope.twitter = function() {
@@ -1620,18 +1621,18 @@ module.factory('Facebook', function($http, $location) {
 						if (!response || response.error) {
 							//alert(response[0]);
 							//alert('Error occured');
-							deleteCookie('pointsEsrned');
-							deleteCookie('restName');
+							//deleteCookie('pointsEsrned');
+							//deleteCookie('restName');
 						} else {
 							//alert('Post ID: ' + response.id);
-							deleteCookie('pointsEsrned');
-							deleteCookie('restName');
+							//deleteCookie('pointsEsrned');
+							//deleteCookie('restName');
 						}
 					});
 
 				} else {
-					deleteCookie('pointsEsrned');
-					deleteCookie('restName');
+					//deleteCookie('pointsEsrned');
+					//deleteCookie('restName');
 					//alert('User is logged out');
 				}
 			}, {
