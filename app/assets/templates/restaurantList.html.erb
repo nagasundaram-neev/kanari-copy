@@ -1,7 +1,7 @@
 <div data-role="page" data-theme="b" id="restaurantList" ng-controller="restaurantListController">
 	<style>
 		#divexample1 {
-			height: 385px;
+			height: 389px;
 			overflow-y: auto;
 		}
 	</style>
@@ -30,15 +30,14 @@
 			<div class="clr"></div>
 		</div>
 		<div id="divexample1" >
-			<div ng-repeat="outlet in outlets | filter:search" class="nameDiv">
+			<div ng-repeat="outlet in outlets | filter:search | orderBy:'name'" class="nameDiv">
 				<div class="parentDivName" ng-click="showRestaurant(outlet.id)">
 					<div class="restName" style="line-height: 20px;text-transform:uppercase; font-size: 150%;">
-						{{outlet.name | truncate}}
+						{{outlet.name | truncate }}
 					</div>
 					<div class="" style="text-transform:capitalize;">
 						{{outlet.address | truncate}}
 					</div>
-					
 				</div>
 				<div class="pointsDiv" ng-click="redeemPoint(outlet.id)">
 					<div class="aedTxt">

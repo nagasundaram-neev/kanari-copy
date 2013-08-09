@@ -464,7 +464,7 @@ input.ui-input-text, textarea.ui-input-text {
 	float: right;
 	text-align: left;
 	padding-top: 3%;
-	width: 21%;
+	/*width: 21%;*/
 }
 .daily_change_span img {
 	padding: 6% 0;

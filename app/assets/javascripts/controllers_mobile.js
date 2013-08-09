@@ -527,12 +527,6 @@ module.controller('settingsController', function($scope, $http, $location) {
 	setFooter(0);
 	if (getCookie('authToken')) {
 		//var thisPicker = jQuery(this);
-		$('#date').scroller({
-			theme : "ios",
-			mode : "scroller",
-			display : "bottom",
-			dateFormat : 'dd/mm/yy'
-		});
 		//$('#date').scroller('setDate',$scope.date,true)
 
 		// $('#date').focus(function() {
@@ -730,7 +724,7 @@ module.controller('feedbackController', function($scope, $http, $location) {
 		}).success(function(data, status) {
 			console.log("User Role " + data + " status " + status);
 			setCookie("feedbackId", data.feedback_id, 0.29);
-			setCookie("restName",data.outlet_name, 0.29);
+			setCookie("restName", data.outlet_name, 0.29);
 			$location.url("/feedback_step2");
 		}).error(function(data, status) {
 			console.log("data " + data + " status " + status);
@@ -862,7 +856,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 				$scope.nextFlag = 1;
 				$scope.prevFlag = 0;
 				$scope.recomendationBar = false;
-				$(".nxt").css("width", "50.3%");
+				$(".nxt").css("width", "50.22%");
 			} else if ($scope.nextFlag == 1) {
 				$scope.like = false;
 				$scope.dislike = false;
@@ -873,7 +867,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 				//$scope.nextFlag = 0;
 				$scope.prevFlag = 1;
 				$scope.nextFlag = -1;
-				//$(".nxt").css("width", "50%");
+				//$(".nxt").css("width", "50.22%");
 				$(".nxtTxt").html("SUBMIT");
 				$scope.erromsg = false;
 				$(".nxt img").hide();
@@ -903,7 +897,9 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 							data : param
 						}).success(function(data, status) {
 							console.log("User Role " + data + " status " + status);
-							pointsEarned = data.points;
+							//pointsEarned = data.points;
+							setCookie("pointsEarned", data.points, 0.29);
+							// alert(getCookie('pointsEarned'));
 							$scope.erromsg = false;
 							if (getCookie('authToken')) {
 								$location.url("/feedbackSubmitSuccess");
@@ -960,7 +956,8 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 					}).success(function(data, status) {
 						console.log("User Role " + data + " status " + status);
 						pointsEarned = data.points;
-						setCookie("pointsEarned",data.points,0.29);
+						setCookie("pointsEarned", data.points, 0.29);
+						//alert(getCookie('pointsEarned'));
 						$scope.erromsg = false;
 						if (getCookie('authToken')) {
 							$location.url("/feedbackSubmitSuccess");
@@ -1046,20 +1043,35 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 	} else {
 		$location.url("/home");
 	}
-
 });
 
 module.controller('feedbackSubmitController', function($scope, $http, $routeParams, $location) {
 	setFooter(0);
 	if (getCookie('authToken')) {
+		if (getCookie('pointsEarned')) {
+			$scope.points = getCookie('pointsEarned');
+		} else {
+			$location.url("/home");
+		}
+		// var cb = new Codebird();
+		// cb.setConsumerKey("YeFlpVP16H9uRc2J0COEng", "ZEYmzEKWQvY3eSmzJikeOum1ELofSBjP5K1MVYQec");
+
 		//console.log("points " + pointsEarned);
 		//$scope.points = pointsEarned;
-		$scope.points = getCookie('pointsEarned');
+
 		//console.log("scope variable " + $scope.points);
 		$scope.home = function() {
 			deleteCookie('pointsEarned');
 			$location.url("/home");
 		};
+		// $scope.twitter = function() {
+		// alert("in twitter");
+		// cb.__call("oauth2_token", {}, function(reply) {
+		// var bearer_token = reply.access_token;
+		// alert("hi "+bearer_token);
+		// });
+		// };
+
 	} else {
 		$location.url("/login");
 	}
@@ -1394,6 +1406,12 @@ function setFooter(valueH) {
 	// }
 
 	$(document).on("pageshow", ".ui-page", function() {
+		$('#date').scroller({
+			theme : "ios",
+			mode : "scroller",
+			display : "bottom",
+			dateFormat : 'dd/mm/yy'
+		});
 		var $page = $(this), vSpace = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() + $page.children('.ui-content').height();
 
 		if (vSpace < $(window).height()) {
@@ -1498,28 +1516,28 @@ function moveToNext(field, nextFieldID) {
 
 $(document).ready(function() {
 	$('.backColr').live('touchstart', function(e) {
-			//$(this).removeClass('backColr');
-			$(this).addClass('backColr1');
-			//alert('alert');
-		});
+		//$(this).removeClass('backColr');
+		$(this).addClass('backColr1');
+		//alert('alert');
+	});
 
-		$('.backColr').live('touchend', function(e) {
-			$(this).removeClass('backColr1');
-			$(this).addClass('backColr');
-			//alert('alert');
-		});
-		$('.clearBackColr').live('touchstart', function(e) {
-			//$(this).removeClass('backColr');
-			$(this).addClass('clearBackColr1');
-			//alert('alert');
-		});
+	$('.backColr').live('touchend', function(e) {
+		$(this).removeClass('backColr1');
+		$(this).addClass('backColr');
+		//alert('alert');
+	});
+	$('.clearBackColr').live('touchstart', function(e) {
+		//$(this).removeClass('backColr');
+		$(this).addClass('clearBackColr1');
+		//alert('alert');
+	});
 
-		$('.clearBackColr').live('touchend', function(e) {
-			$(this).removeClass('clearBackColr1');
-			$(this).addClass('clearBackColr');
-			//alert('alert');
-		});
-		
+	$('.clearBackColr').live('touchend', function(e) {
+		$(this).removeClass('clearBackColr1');
+		$(this).addClass('clearBackColr');
+		//alert('alert');
+	});
+
 });
 
 /*** Facebook Connect ***/
@@ -1594,7 +1612,7 @@ module.factory('Facebook', function($http, $location) {
 		share : function() {
 			FB.login(function(response) {
 				if (response.authResponse) {
-					var fbMessage = 'I just saved AED '+getCookie('pointsEarned')+' by leaving feedback at '+getCookie('restName')+'. Thanks Kanari! Check it out: http://kanari.co';
+					var fbMessage = 'I just saved AED ' + getCookie('pointsEarned') + ' by leaving feedback at ' + getCookie('restName') + '. Thanks Kanari! Check it out: http://kanari.co';
 					//alert("message for fb "+fbMessage)
 					FB.api('/me/feed', 'post', {
 						message : fbMessage
