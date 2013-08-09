@@ -1,23 +1,22 @@
 GIT
-  remote: git://github.com/plataformatec/devise.git
-  revision: 2a8d0f9beeb31cd2287094c5dcf843d0bd069eb8
-  branch: master
+  remote: git://github.com/emilsoman/devise.git
+  revision: 6b5988d756d780903bf8c9ccb3e2b3b724ccebe8
+  branch: rails4
   specs:
-    devise (3.0.1)
+    devise (2.2.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
-      thread_safe (~> 0.1)
-      warden (~> 1.2.3)
+      warden (~> 1.2.1)
 
 GIT
-  remote: git://github.com/scambra/devise_invitable.git
-  revision: 9e5a9a7e0e5ad489206386865efdfca5b87de62b
-  branch: master
+  remote: git://github.com/emilsoman/devise_invitable.git
+  revision: 02f521b41516ced079d40e31755f0699bf739abc
+  branch: rails4
   specs:
-    devise_invitable (1.1.8)
-      actionmailer (>= 3.2.6, < 5)
-      devise (>= 3.0.0.rc)
+    devise_invitable (1.1.7)
+      actionmailer (>= 4.0.0.beta)
+      railties (>= 4.0.0.beta)
 
 GEM
   remote: https://rubygems.org/
