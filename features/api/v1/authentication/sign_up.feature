@@ -31,7 +31,8 @@ Feature: Sign Up
         |email|kobe@gmail.com|
 
     Scenario: Successful sign up with oauth provider when user doesn't exist
-      When I send a POST request to "/api/users" with the following:
+      Given A facebook user exists who has registered with Kanari facebook app
+      When I send a POST request to /api/users to use oauth with the following:
       """
       {
         "user" : {
@@ -39,8 +40,8 @@ Feature: Sign Up
           "last_name": "Bryant",
           "email": "kobe@gmail.com"
         },
-        "oauth_provider" : "facebook",
-        "access_token" : "access_token_123"
+        "oauth_provider": "facebook",
+        "access_token": "access_token_123"
       }
       """
       Then the response status should be "201"
@@ -57,13 +58,14 @@ Feature: Sign Up
         |last_name|Bryant|
         |email|kobe@gmail.com|
       And the user with email "kobe@gmail.com" should have the following social network accounts
-        |provider|access_token|
-        |facebook|access_token_123|
+        |provider|
+        |facebook|
 
     Scenario: Successful sign up with oauth provider when user exists
       Given "Kobe Bryant" is a user with email id "kobe@gmail.com" and password "password123"
         And his role is "user"
-      When I send a POST request to "/api/users" with the following:
+        And A facebook user exists who has registered with Kanari facebook app
+      When I send a POST request to /api/users to use oauth with the following:
       """
       {
         "user" : {
@@ -89,14 +91,15 @@ Feature: Sign Up
         |last_name|Bryant|
         |email|kobe@gmail.com|
       And the user with email "kobe@gmail.com" should have the following social network accounts
-        |provider|access_token|
-        |facebook|access_token_123|
+        |provider|
+        |facebook|
 
     Scenario: Oauth provider exists for the user
       Given "Kobe Bryant" is a user with email id "kobe@gmail.com" and password "password123"
         And his authentication token is "auth_token_123"
         And his role is "user"
-      When I send a POST request to "/api/users" with the following:
+        And A facebook user exists who has registered with Kanari facebook app
+      When I send a POST request to /api/users to use oauth with the following:
       """
       {
         "user" : {
@@ -109,7 +112,7 @@ Feature: Sign Up
       }
       """
       Then the response status should be "201"
-      When I send a POST request to "/api/users" with the following:
+      When I send a POST request to /api/users to use oauth with the following:
       """
       {
         "user" : {
@@ -130,6 +133,25 @@ Feature: Sign Up
       And the JSON response at "registration_complete" should be true
       Given I keep the JSON response at "auth_token" as "AUTH_TOKEN"
       Then the user with email "kobe@gmail.com" should have "%{AUTH_TOKEN}" as his authentication_token
+
+    Scenario: Oauth token is invalid
+      When I send a POST request to /api/users to use oauth with the following:
+      """
+      {
+        "user" : {
+          "first_name": "Kobe",
+          "last_name": "Bryant",
+          "email": "kobe@gmail.com"
+        },
+        "oauth_provider": "facebook",
+        "access_token": "invalid_access_token"
+      }
+      """
+      Then the response status should be "422"
+      And the JSON response should be:
+      """
+       { "errors" : ["Access token is invalid"] }
+      """
 
     Scenario: Passwords do not match
       When I send a POST request to "/api/users" with the following:

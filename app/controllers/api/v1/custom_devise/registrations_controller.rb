@@ -99,6 +99,10 @@ module Api
 
           def successful_signup?(resource)
             if oauth_signup?
+              unless SocialNetworkAccount.valid_access_token?(params[:oauth_provider], params[:access_token])
+                resource.errors.add(:access_token, 'is invalid')
+                return false #Invalid access_token
+              end
               existing_resource = resource_class.where(email: resource.email).first
               if existing_resource.present?
                 existing_resource.reset_authentication_token
