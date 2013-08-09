@@ -5,11 +5,12 @@
 		<meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no"  />
 		<title>Kanari</title>
 		<meta name="description" content="Kanari">
-
+		<meta property="og:image" content="http://kanari.co/launch/wp-content/uploads/2013/07/Kanari_Logo_WhiteBird_cropped.png"/>	
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 		<%= javascript_include_tag "jquery-mobile-angular-adapter-standalone-1.2.0.js" %>
 		 <!-- <%= javascript_include_tag "jquery.js" %>  -->
 		<%= javascript_include_tag "jquery.nicescroll.min.js" %>
+		<%= javascript_include_tag "mobiscroll-1.5.min.js" %>
 		<%= javascript_include_tag "jquery.nicescroll.plus.js" %>
 		<%= javascript_include_tag "angular-google-maps.js" %>
 		<%= javascript_include_tag "app_mobile" %>
@@ -19,6 +20,7 @@
 		<link href='http://fonts.googleapis.com/css?family=Roboto:100,300' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 		<%= stylesheet_link_tag "jquery.mobile-1.3.0.css", :media => "all" %>
+		<%= stylesheet_link_tag "mobiscroll-1.5.css", :media => "all" %>
 		<%= stylesheet_link_tag "style.css", :media => "all" %>
 	</head>
 	<body>

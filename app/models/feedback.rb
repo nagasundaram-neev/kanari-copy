@@ -5,4 +5,6 @@ class Feedback < ActiveRecord::Base
 
   scope :completed, -> { where(completed: true) }
   scope :pending,   -> { where(completed: nil || false) }
+
+  delegate :name, :to => :outlet
 end

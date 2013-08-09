@@ -6,19 +6,23 @@
 	<div class="signInForm">
 		<span class="arrow-up"><%= image_tag 'arrowa.png' %></span>
 		<div>
-			<input type="text" placeholder="Tablet Login" ng-model="email">
+			<input type="text" class="ui-input-text" placeholder="Tablet Login" ng-model="email">
 		</div>
 		<div>
-			<input type="password" placeholder="Password" ng-model="password">
+			<input type="password" class="ui-input-text" placeholder="Password" ng-model="password">
 		</div>
-		<fieldset class="rememberMe" data-role="controlgroup">
-			<input type="checkbox" name="chkrememberMe" id="checkbox-1" class="custom" ng-model="rememberMe" />
-			<label for="checkbox-1">Remember me</label>
-		</fieldset>
-		<div ng-click="chkLogin()">
-			<button type="submit" class="signInBtn btn">
-				Login
-			</button>
+		
+		<div class="checkboxFive">
+			<input type="checkbox" value="1" id="checkboxFiveInput" name="" />
+			<label for="checkboxFiveInput"></label>
+		</div>
+		<div class="rememberMe">
+			<!-- <input type="checkbox" name="chkrememberMe" id="checkbox-1" class="custom" ng-model="rememberMe" />
+			 --><label for="checkbox-1">Remember me</label>
+		</div>
+		<div class="clr"></div>
+		<div ng-click="chkLogin()" class="ui-btn">
+			<span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text"> Login </span></span><button class="signInBtn btn ui-btn-hidden" type="submit"></button>
 		</div>
 	</div>
 	<p ng-show="erromsg" class="errorMsg">

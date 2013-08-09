@@ -1,5 +1,4 @@
-<div id="redeme" align="center" ng-controller="redemeController" data-role="page">
-		<div ng:include="'<%= asset_path 'tablet_header.html' %>'"></div>
+<div id="scroller" align="center" ng-controller="redemeController" >
 		<h3 class="redemptionMsg" ng-show="!redemptionList.length">Currently you do not have any redemptions</h3>
 		<div class="redemptionsList" ng-show="redemptionList.length">
 			<div ng-repeat="redemptions in redemptionList" class="redemptionsListRow clearfix">

@@ -2,7 +2,7 @@
 	<div data-role="content">
 		<div class="username">
 			<div class="home" ng-click="home()"></div>
-			<div class="signUp" style="margin:3% 10% 0 0;">
+			<div class="signUp" style="margin:3% 14% 0 0;">
 				SETTINGS
 			</div>
 			<div class="clr"></div>
@@ -32,12 +32,17 @@
 				<span>{{transactionHistory.outlet_name}}</span>
 			</div>
 			<div class="contentText pointsTitle">
-				<span><b>{{transactionHistory.points}}</b> earned</span>
+				<div class="point" ng-switch on="transactionHistory.type"> 
+					<span ng-switch-when="Feedback"><b>{{transactionHistory.points}}</b> earned</span>
+					<span ng-switch-when="Redemption"><b>{{transactionHistory.points}}</b> redeemed</span>
+				</div>
 			</div>
 			<div class="clr"></div>
 		</div>
 		</div>
-		<div class="footerDiv">
+		
+	</div>
+	<div class="footerDiv" data-role="footer">
 			<div class="prev" ng-click="previous()">
 				<%= image_tag 'y_arrow_left.png' %>
 				<div class="prevTxt" >
@@ -46,5 +51,4 @@
 			</div>
 			<!-- <div class="clr"></div> -->
 		</div>
-	</div>
 </div>

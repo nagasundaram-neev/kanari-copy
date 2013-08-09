@@ -27,7 +27,7 @@ OutletType.create([
   { name: "Steakhouse" }
 ])
 
-GlobalSetting.create({
-  setting_name: "feedback_expiry_time",
-  setting_value: 120
-})
+GlobalSetting.create([
+   { setting_name: "feedback_expiry_time", setting_value: "120" },
+   { setting_name: "redemption_expiry_time", setting_value: "30" }
+])

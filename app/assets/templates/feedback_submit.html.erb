@@ -53,12 +53,12 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			</div>
 			<div id='parent' style='width: 100%;text-align:center;'>
 				<div id='child' style='overflow: hidden;width: 198px;margin: 0 auto;'>
-					<div ng-click="facebook()" class="backColorYellow" style="float: left"><img src="/assets/ic_fb_purple.png" />
+					<div ng-click="Facebook.share()" class="backColorYellow" style="float: left"><img src="/assets/ic_fb_purple.png" />
 					</div>
 					<div ng-click="twitter()" class="backColorYellow" style="float: left"><img src="/assets/ic_twitter_purple.png" />
 					</div>
-					<div ng-click="google()" class="backColorYellow" style="float: left"><img src="/assets/ic_gplus_purple.png" />
-					</div>
+					<a href="https://plus.google.com/share?CONTENT=_MESSAGE_GOES_HERE"><div class="backColorYellow" style="float: left"><img src="/assets/ic_gplus_purple.png" />
+					</div></a>
 				</div>
 			</div>
 			<div class="shareIconsDiv">
@@ -77,7 +77,10 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				<div class="clr"></div>
 			</div>
 		</div>
-		<div class="footerDiv" style="position: relative; margin:10% 0 0 0;">
+		
+	</div>
+	
+	<div data-role="footer" class="footerDiv" >
 			<div class="logo_btm">
 				<%= image_tag 'bird_yellow_k.png' %>
 			</div>
@@ -89,6 +92,4 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				<div class="clr"></div>
 			</div>
 		</div>
-	</div>
-
 </div>

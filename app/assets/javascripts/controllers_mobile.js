@@ -131,65 +131,72 @@ var feedbackFlag = 0;
 var signInCount = "";
 
 module.controller('loginController', function($scope, $http, $location) {
+	setFooter(1);
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
 	$scope.remember = false;
 	$scope.erromsg = false;
-	$scope.email = ""
-	$scope.chkLogin = function() {
-		if ($scope.email == "" && $scope.password == "" && !$scope.email && !$scope.password) {
-			console.log("email is blank");
-			$scope.error = " Please enter Email and Password";
-			$scope.erromsg = true;
-			return false;
-		}
-		var param = "{email:'" + $scope.email + "','password:'" + $scope.password + "'}";
+	$scope.email = "";
+	if (getCookie("authToken")) {
+		$location.url("/home");
+	} else {
+		$scope.chkLogin = function() {
+			if ($scope.email == "" && $scope.password == "" && !$scope.email && !$scope.password) {
+				console.log("email is blank");
+				$scope.error = " Please enter Email and Password";
+				$scope.erromsg = true;
+				return false;
+			}
+			var param = "{email:'" + $scope.email + "','password:'" + $scope.password + "'}";
 
-		$http({
-			method : 'post',
-			url : '/api/users/sign_in',
-		}).success(function(data, status) {
-			auth_token = data.user_role;
-			console.log("User Role " + data.user_role + " status " + status);
-			if ($scope.remember) {
-				setCookie('userRole', data.user_role, 7);
-				setCookie('authToken', data.auth_token, 7);
-				setCookie('userName', data.first_name + ' ' + data.last_name, 7);
-				setCookie('signInCount', data.sign_in_count);
-			} else {
-				setCookie('userRole', data.user_role, 0.29);
-				setCookie('authToken', data.auth_token, 0.29);
-				setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
-				setCookie('signInCount', data.sign_in_count, 0.29);
-			}
-			if (getCookie('userRole') == "user") {
-				$location.url("/home");
-			} else if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff" || getCookie('userRole') == "manager") {
-				$scope.error = "You are not authenticated to use this app";
-				$scope.erromsg = true;
-			}
-		}).error(function(data, status) {
-			console.log($scope.password)
-			console.log("data " + $scope.email + " status " + status);
-			if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff") {
-				$scope.error = "You are not authenticated to use this app";
-				$scope.erromsg = true;
-			} else {
-				$scope.error = "Invalid Email or Password";
-				$scope.erromsg = true;
-			}
+			$http({
+				method : 'post',
+				url : '/api/users/sign_in',
+			}).success(function(data, status) {
+				auth_token = data.user_role;
+				console.log("User Role " + data.user_role + " status " + status);
+				if ($scope.remember) {
+					//alert("in");
+					setCookie('userRole', data.user_role, 7);
+					setCookie('authToken', data.auth_token, 7);
+					setCookie('userName', data.first_name + ' ' + data.last_name, 7);
+					setCookie('signInCount', data.sign_in_count);
+				} else {
+					setCookie('userRole', data.user_role, 0.29);
+					setCookie('authToken', data.auth_token, 0.29);
+					setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
+					setCookie('signInCount', data.sign_in_count, 0.29);
+				}
+				if (getCookie('userRole') == "user") {
+					$location.url("/home");
+				} else if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff" || getCookie('userRole') == "manager") {
+					$scope.error = "You are not authenticated to use this app";
+					$scope.erromsg = true;
+				}
+			}).error(function(data, status) {
+				console.log($scope.password)
+				console.log("data " + $scope.email + " status " + status);
+				if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff") {
+					$scope.error = "You are not authenticated to use this app";
+					$scope.erromsg = true;
+				} else {
+					$scope.error = "Invalid Email or Password";
+					$scope.erromsg = true;
+				}
+			});
+		};
+		$scope.forgotPassword = function() {
+			$location.url('/forgotPassword');
+		};
+
+		$scope.home = function() {
+			$location.url("/index");
+		};
+
+		$scope.$watch('email + password', function() {
+			$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
 		});
-	};
-	$scope.forgotPassword = function() {
-		$location.url('/forgotPassword');
-	};
 
-	$scope.home = function() {
-		$location.url("/index");
-	};
-
-	$scope.$watch('email + password', function() {
-		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
-	});
+	}
 
 	// $scope.$watch('email + password', function() {
 	// $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
@@ -274,6 +281,7 @@ module.controller('resetPassController', function($scope, $http, $location, $rou
 });
 
 module.controller('homeController', function($scope, $http, $location) {
+	setFooter(0);
 	$scope.points = "";
 	console.log("sign in Count" + getCookie("signInCount"));
 	if (getCookie("authToken")) {
@@ -312,7 +320,15 @@ module.controller('homeController', function($scope, $http, $location) {
 				//alert("points"+$scope.points);
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
-
+				if (status == 401) {
+					deleteCookie('authToken');
+					deleteCookie('userRole');
+					deleteCookie('userName');
+					deleteCookie('feedbackId');
+					deleteCookie("signInCount");
+					deleteAllCookies();
+					$location.url("/login");
+				}
 			});
 		};
 
@@ -343,7 +359,15 @@ module.controller('homeController', function($scope, $http, $location) {
 				deleteCookie('feedbackId');
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
-				//$scope.points = "0";
+				if (status == 401) {
+					deleteCookie('authToken');
+					deleteCookie('userRole');
+					deleteCookie('userName');
+					deleteCookie('feedbackId');
+					deleteCookie("signInCount");
+					deleteAllCookies();
+					$location.url("/login");
+				}
 			});
 
 		} else {
@@ -392,6 +416,7 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 });
 
 module.controller('signUpController', function($scope, $http, $location) {
+	setFooter(0);
 	$scope.confPassword = "";
 	console.log("flag" + feedbackFlag);
 	if (feedbackFlag == 1) {
@@ -499,7 +524,18 @@ module.controller('changePasswordController', function($scope, $http, $location)
 });
 
 module.controller('settingsController', function($scope, $http, $location) {
+	setFooter(0);
 	if (getCookie('authToken')) {
+		//var thisPicker = jQuery(this);
+		//$('#date').scroller('setDate',$scope.date,true)
+
+		// $('#date').focus(function() {
+		// alert('Handler for .focus() called.'+$scope.date);
+		// if($scope.date){
+		// $("#date").scroller('setDate', $scope.date, true);
+		// }
+		// });
+
 		$scope.succMsg = false;
 		$scope.errorMsg = false;
 
@@ -537,9 +573,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 					$scope.lastName = data.user.last_name;
 					$scope.email = data.user.email;
 					$scope.password = data.user.password;
-					$scope.date = date[2];
-					$scope.month = date[1];
-					$scope.year = date[0];
+					$scope.date = date[2] + "/" + date[1] + "/" + date[0];
 					$scope.gender = data.user.gender;
 					$scope.location = data.user.location;
 				} else {
@@ -548,15 +582,21 @@ module.controller('settingsController', function($scope, $http, $location) {
 					$scope.email = data.user.email;
 					$scope.password = data.user.password;
 					$scope.date = "";
-					$scope.month = "";
-					$scope.year = "";
 					$scope.gender = data.user.gender;
 					$scope.location = data.user.location;
 				}
 
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
-
+				if (status == 401) {
+					deleteCookie('authToken');
+					deleteCookie('userRole');
+					deleteCookie('userName');
+					deleteCookie('feedbackId');
+					deleteCookie("signInCount");
+					deleteAllCookies();
+					$location.url("/login");
+				}
 			});
 
 			//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
@@ -565,48 +605,33 @@ module.controller('settingsController', function($scope, $http, $location) {
 		$scope.getProfile();
 
 		$scope.saveProfile = function() {
-
-			//console.log("length year"+$scope.year.length);
-			var date = $scope.date + "/" + $scope.month + "/" + $scope.year;
-			if (!$scope.date && !$scope.month && !$scope.year) {
-				$scope.error = "Enter the date of birth";
-				$scope.errorMsg = true;
-				$scope.succMsg = false;
-			} else if (!isDate(date)) {
-				$scope.error = "Enter valid date of birth";
-				$scope.errorMsg = true;
-				$scope.succMsg = false;
-			} else {
-				var param = {
-					"user" : {
-						"first_name" : $scope.firstName,
-						"last_name" : $scope.lastName,
-						"date_of_birth" : $scope.date + "-" + $scope.month + "-" + $scope.year,
-						"gender" : $scope.gender,
-						"location" : $scope.location,
-					},
-					"auth_token" : getCookie('authToken')
-				}
-
-				$http({
-					method : 'put',
-					url : '/api/users',
-					data : param
-				}).success(function(data, status) {
-					console.log("User Role " + data + " status " + status);
-					deleteCookie('authToken');
-					setCookie('authToken', data.auth_token, 0.29);
-					$scope.errorMsg = false;
-					$scope.succMsg = true;
-				}).error(function(data, status) {
-					console.log("data " + data + " status " + status);
-					$scope.error = data.errors[0];
-					$scope.errorMsg = true;
-					$scope.succMsg = false;
-				});
-
+			var param = {
+				"user" : {
+					"first_name" : $scope.firstName,
+					"last_name" : $scope.lastName,
+					"date_of_birth" : $scope.date,
+					"gender" : $scope.gender,
+					"location" : $scope.location,
+				},
+				"auth_token" : getCookie('authToken')
 			}
-			//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('') + ':X');
+
+			$http({
+				method : 'put',
+				url : '/api/users',
+				data : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				deleteCookie('authToken');
+				setCookie('authToken', data.auth_token, 0.29);
+				$scope.errorMsg = false;
+				$scope.succMsg = true;
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status);
+				$scope.error = data.errors[0];
+				$scope.errorMsg = true;
+				$scope.succMsg = false;
+			});
 		};
 
 		$scope.logout = function() {
@@ -648,6 +673,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 var pointsEarned = 0;
 
 module.controller('feedbackController', function($scope, $http, $location) {
+	setFooter(0);
 	$scope.digit1 = "";
 	$scope.digit2 = "";
 	$scope.digit3 = "";
@@ -698,9 +724,19 @@ module.controller('feedbackController', function($scope, $http, $location) {
 		}).success(function(data, status) {
 			console.log("User Role " + data + " status " + status);
 			setCookie("feedbackId", data.feedback_id, 0.29);
+			setCookie("restName", data.outlet_name, 0.29);
 			$location.url("/feedback_step2");
 		}).error(function(data, status) {
 			console.log("data " + data + " status " + status);
+			if (status == 401) {
+				deleteCookie('authToken');
+				deleteCookie('userRole');
+				deleteCookie('userName');
+				deleteCookie('feedbackId');
+				deleteCookie("signInCount");
+				deleteAllCookies();
+				$location.url("/login");
+			}
 			$scope.errorMsg = data.errors[0];
 			$scope.error = true;
 		});
@@ -709,6 +745,7 @@ module.controller('feedbackController', function($scope, $http, $location) {
 });
 
 module.controller('feedback_step2Controller', function($scope, $http, $location) {
+	setFooter(0);
 	if (getCookie("feedbackId")) {
 		$scope.nextFlag = 0;
 		$scope.prevFlag = 0;
@@ -819,7 +856,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 				$scope.nextFlag = 1;
 				$scope.prevFlag = 0;
 				$scope.recomendationBar = false;
-				$(".nxt").css("width", "50.3%");
+				$(".nxt").css("width", "50.22%");
 			} else if ($scope.nextFlag == 1) {
 				$scope.like = false;
 				$scope.dislike = false;
@@ -830,7 +867,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 				//$scope.nextFlag = 0;
 				$scope.prevFlag = 1;
 				$scope.nextFlag = -1;
-				//$(".nxt").css("width", "50%");
+				//$(".nxt").css("width", "50.22%");
 				$(".nxtTxt").html("SUBMIT");
 				$scope.erromsg = false;
 				$(".nxt img").hide();
@@ -860,7 +897,9 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 							data : param
 						}).success(function(data, status) {
 							console.log("User Role " + data + " status " + status);
-							pointsEarned = data.points;
+							//pointsEarned = data.points;
+							setCookie("pointsEarned", data.points, 0.29);
+							// alert(getCookie('pointsEarned'));
 							$scope.erromsg = false;
 							if (getCookie('authToken')) {
 								$location.url("/feedbackSubmitSuccess");
@@ -872,7 +911,15 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 							}
 						}).error(function(data, status) {
 							console.log("data in error" + data + " status " + status);
-							if (status == 404) {
+							if (status == 401) {
+								deleteCookie('authToken');
+								deleteCookie('userRole');
+								deleteCookie('userName');
+								deleteCookie('feedbackId');
+								deleteCookie("signInCount");
+								deleteAllCookies();
+								$location.url("/login");
+							} else if (status == 404) {
 								$scope.error = "Code expired"
 								$scope.erromsg1 = true;
 							} else {
@@ -909,6 +956,8 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 					}).success(function(data, status) {
 						console.log("User Role " + data + " status " + status);
 						pointsEarned = data.points;
+						setCookie("pointsEarned", data.points, 0.29);
+						//alert(getCookie('pointsEarned'));
 						$scope.erromsg = false;
 						if (getCookie('authToken')) {
 							$location.url("/feedbackSubmitSuccess");
@@ -920,7 +969,15 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 						}
 					}).error(function(data, status) {
 						console.log("data in error" + data + " status " + status);
-						if (status == 404) {
+						if (status == 401) {
+							deleteCookie('authToken');
+							deleteCookie('userRole');
+							deleteCookie('userName');
+							deleteCookie('feedbackId');
+							deleteCookie("signInCount");
+							deleteAllCookies();
+							$location.url("/login");
+						} else if (status == 404) {
 							$scope.error = "Code expired"
 							$scope.erromsg1 = true;
 						} else {
@@ -986,30 +1043,34 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 	} else {
 		$location.url("/home");
 	}
-
 });
 
 module.controller('feedbackSubmitController', function($scope, $http, $routeParams, $location) {
+	setFooter(0);
 	if (getCookie('authToken')) {
+		if (getCookie('pointsEarned')) {
+			$scope.points = getCookie('pointsEarned');
+		} else {
+			$location.url("/home");
+		}
+		// var cb = new Codebird();
+		// cb.setConsumerKey("YeFlpVP16H9uRc2J0COEng", "ZEYmzEKWQvY3eSmzJikeOum1ELofSBjP5K1MVYQec");
+
 		//console.log("points " + pointsEarned);
-		$scope.points = pointsEarned;
+		//$scope.points = pointsEarned;
+
 		//console.log("scope variable " + $scope.points);
 		$scope.home = function() {
+			deleteCookie('pointsEarned');
 			$location.url("/home");
 		};
-
-		$scope.facebook = function() {
-			var body = 'Reading JS SDK documentation';
-			FB.api('/me/feed', 'post', {
-				message : body
-			}, function(response) {
-				if (!response || response.error) {
-					alert('Error occured');
-				} else {
-					alert('Post ID: ' + response.id);
-				}
-			});
-		};
+		// $scope.twitter = function() {
+		// alert("in twitter");
+		// cb.__call("oauth2_token", {}, function(reply) {
+		// var bearer_token = reply.access_token;
+		// alert("hi "+bearer_token);
+		// });
+		// };
 
 	} else {
 		$location.url("/login");
@@ -1017,6 +1078,7 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 });
 
 module.controller('restaurantListController', function($scope, $http, $location) {
+	setFooter(0);
 	if (getCookie('authToken')) {
 		// $("#listRestaurant").niceScroll({cursorcolor:"#00F"});
 		$scope.outlets = [];
@@ -1044,6 +1106,16 @@ module.controller('restaurantListController', function($scope, $http, $location)
 				$scope.outlets = data.outlets;
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status);
+				if (status == 401) {
+					deleteCookie('authToken');
+					deleteCookie('userRole');
+					deleteCookie('userName');
+					deleteCookie('feedbackId');
+					deleteCookie('pointsEarned');
+					deleteCookie("signInCount");
+					deleteAllCookies();
+					$location.url("/login");
+				}
 			});
 
 			//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
@@ -1066,6 +1138,7 @@ module.controller('restaurantListController', function($scope, $http, $location)
 });
 
 module.controller('showRestaurantController', function($scope, $http, $routeParams, $location) {
+	setFooter(0);
 	if (getCookie('authToken')) {
 		$.mobile.loading('show');
 		$scope.lattitude = "";
@@ -1098,6 +1171,15 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 			$scope.longitude = data.outlet.longitude;
 		}).error(function(data, status) {
 			console.log("data in error" + data + " status " + status);
+			if (status == 401) {
+				deleteCookie('authToken');
+				deleteCookie('userRole');
+				deleteCookie('userName');
+				deleteCookie('feedbackId');
+				deleteCookie("signInCount");
+				deleteAllCookies();
+				$location.url("/login");
+			}
 		});
 
 		$scope.home = function() {
@@ -1123,6 +1205,7 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 });
 
 module.controller('redeemPointsController', function($scope, $http, $location, $routeParams) {
+	setFooter(0);
 	if (getCookie('authToken')) {
 
 		$scope.successMsg = false;
@@ -1152,6 +1235,15 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 				$scope.points = data.user.points_available;
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+				if (status == 401) {
+					deleteCookie('authToken');
+					deleteCookie('userRole');
+					deleteCookie('userName');
+					deleteCookie('feedbackId');
+					deleteCookie("signInCount");
+					deleteAllCookies();
+					$location.url("/login");
+				}
 			});
 		};
 
@@ -1203,6 +1295,7 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 });
 
 module.controller('transactionHistoryController', function($scope, $http, $location) {
+	setFooter(0);
 	if (getCookie('authToken')) {
 		$scope.home = function() {
 			$location.url("/home");
@@ -1211,30 +1304,40 @@ module.controller('transactionHistoryController', function($scope, $http, $locat
 		$scope.previous = function() {
 			$location.url("/settings");
 		};
-		
-		var param = {
-				"auth_token" : getCookie('authToken'),
-				"password" : 'X'
-			}
 
-			$http({
-				method : 'get',
-				url : '/api/activities',
-				params : param
-			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
-				$scope.transactionHList = data.activities;
-				$scope.points = data.user.points_available;
-			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
-			});
-			
+		var param = {
+			"auth_token" : getCookie('authToken'),
+			"password" : 'X'
+		}
+
+		$http({
+			method : 'get',
+			url : '/api/activities',
+			params : param
+		}).success(function(data, status) {
+			console.log("User Role " + data + " status " + status);
+			$scope.transactionHList = data.activities;
+			//$scope.points = data.user.points_available;
+		}).error(function(data, status) {
+			console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+			if (status == 401) {
+				deleteCookie('authToken');
+				deleteCookie('userRole');
+				deleteCookie('userName');
+				deleteCookie('feedbackId');
+				deleteCookie("signInCount");
+				deleteAllCookies();
+				$location.url("/login");
+			}
+		});
+
 	} else {
 		$location.url("/login");
 	}
 });
 
 module.controller('locationMapController', function($scope, $http, $location, $routeParams) {
+	setFooter(0);
 	$.mobile.loading('show');
 	// $scope.MapCtrl = function() {
 	// console.log("lattitude " + $routeParams.lat + " longitude " + $routeParams.long);
@@ -1288,6 +1391,42 @@ module.controller('locationMapController', function($scope, $http, $location, $r
 	$.mobile.loading('hide');
 
 });
+
+function setFooter(valueH) {
+	//alert($(document).height());
+	// if ($(document).height() == "420px") {
+	// $(".ui-content").css("height", function() {
+	// return $(document).height();
+	// });
+	// }
+	// else{
+	// $(".ui-content").css("height", function() {
+	// return ($(document).height()-75);
+	// });
+	// }
+
+	$(document).on("pageshow", ".ui-page", function() {
+		$('#date').scroller({
+			theme : "ios",
+			mode : "scroller",
+			display : "bottom",
+			dateFormat : 'dd/mm/yy'
+		});
+		var $page = $(this), vSpace = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() + $page.children('.ui-content').height();
+
+		if (vSpace < $(window).height()) {
+			//alert($(window).height());
+			if (valueH == 1) {
+				var vDiff = $(window).height() - $page.children('.ui-header').outerHeight() - $page.children('.ui-footer').outerHeight() - 78;
+				//minus thirty for margin
+			} else {
+				var vDiff = $(window).height() - $page.children('.ui-header').outerHeight() - $page.children('.ui-footer').outerHeight();
+				//minus thirty for margin
+			}
+			$page.children('.ui-content').height(vDiff);
+		}
+	});
+}
 
 function setCookie(name, value, days) {
 	//alert(value);
@@ -1374,6 +1513,33 @@ function moveToNext(field, nextFieldID) {
 	}
 }
 
+
+$(document).ready(function() {
+	$('.backColr').live('touchstart', function(e) {
+		//$(this).removeClass('backColr');
+		$(this).addClass('backColr1');
+		//alert('alert');
+	});
+
+	$('.backColr').live('touchend', function(e) {
+		$(this).removeClass('backColr1');
+		$(this).addClass('backColr');
+		//alert('alert');
+	});
+	$('.clearBackColr').live('touchstart', function(e) {
+		//$(this).removeClass('backColr');
+		$(this).addClass('clearBackColr1');
+		//alert('alert');
+	});
+
+	$('.clearBackColr').live('touchend', function(e) {
+		$(this).removeClass('clearBackColr1');
+		$(this).addClass('clearBackColr');
+		//alert('alert');
+	});
+
+});
+
 /*** Facebook Connect ***/
 module.run(function($rootScope, Facebook) {
 
@@ -1396,12 +1562,17 @@ module.factory('Facebook', function($http, $location) {
 				if (response.authResponse) {
 					console.log('Welcome!  Fetching your information.... ');
 					self.auth = response.authResponse;
+					//var date_of_birth = new Date(response.birthday);
 					FB.api('/me', function(response) {
+						var date_of_birth = new Date(response.birthday);
+						console.log("date of birth " + date_of_birth);
 						var param = {
 							"user" : {
 								"first_name" : response.first_name,
 								"last_name" : response.last_name,
 								"email" : response.email,
+								"gender" : response.gender,
+								"date_of_birth" : response.birthday
 							},
 							"oauth_provider" : "facebook",
 							"access_token" : self.auth.accessToken
@@ -1429,13 +1600,44 @@ module.factory('Facebook', function($http, $location) {
 					console.log('Facebook login failed', response);
 				}
 			}, {
-				scope : 'email'
+				scope : 'email,user_birthday'
 			});
 		},
 
 		signUp : function() {
 			$('#loginForm').addClass('loginClosed');
 			$('#loginForm').replaceWith($('#registerFormContainer').html());
+		},
+
+		share : function() {
+			FB.login(function(response) {
+				if (response.authResponse) {
+					var fbMessage = 'I just saved AED ' + getCookie('pointsEarned') + ' by leaving feedback at ' + getCookie('restName') + '. Thanks Kanari! Check it out: http://kanari.co';
+					//alert("message for fb "+fbMessage)
+					FB.api('/me/feed', 'post', {
+						message : fbMessage
+					}, function(response) {
+						if (!response || response.error) {
+							//alert(response[0]);
+							//alert('Error occured');
+							deleteCookie('pointsEsrned');
+							deleteCookie('restName');
+						} else {
+							//alert('Post ID: ' + response.id);
+							deleteCookie('pointsEsrned');
+							deleteCookie('restName');
+						}
+					});
+
+				} else {
+					deleteCookie('pointsEsrned');
+					deleteCookie('restName');
+					//alert('User is logged out');
+				}
+			}, {
+				scope : 'publish_stream'
+			});
+
 		},
 	}
 

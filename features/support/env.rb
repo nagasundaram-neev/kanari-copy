@@ -50,8 +50,6 @@ end
 
 Before do
   DatabaseCleaner.start
-  # Load the seed data here!
-  GlobalSetting.create({setting_name: "feedback_expiry_time",setting_value: 120})
 end
 
 After do |scenario|

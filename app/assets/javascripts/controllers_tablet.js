@@ -128,12 +128,16 @@ var refreshIntervalId;
 module.controller('headerCtrl', function($scope, $http, $location) {
 	var overlayDiv = $("#overlaySuccess");
 	$scope.popup = false;
-	$scope.clickf = function(getroot) {
-		$location.url('/' + getroot);
-	};
-
+	$(".headerDiv a").click(function() {
+		$(".headerDiv a").removeClass("ui_btn_active");
+		$(this).addClass("ui_btn_active");
+		$(".headerDiv span").hide();
+		$(this).children().show();
+	});
 	$scope.showPopup = function() {
-		$scope.popup = true;
+		$("#overlaySuccess").show();
+		$(".popup").show();
+		//$scope.popup = true;
 		overlayDiv.css({
 			'z-index' : '10',
 			'background-color' : '#000'
@@ -142,7 +146,9 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 	};
 
 	$scope.cancel = function() {
-		$scope.popup = false;
+		$("#overlaySuccess").hide();
+		$(".popup").hide();
+		//$scope.popup = false;
 		console.log("IN");
 		overlayDiv.css({
 			'z-index' : '0',
@@ -160,18 +166,22 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 			url : '/api/users/sign_out',
 			data : param
 		}).success(function(data, status) {
+			$(".userloggedIn").hide();
+
 			console.log("User Role " + data + " status " + status);
 			deleteCookie('authToken');
 			deleteCookie('userRole');
 			deleteCookie('userName');
 			deleteCookie('feedbackId');
 			deleteCookie("signInCount");
+			$(".popup").hide();
 			$location.url("/signin");
 			$scope.popup = false;
 			overlayDiv.css({
 				'z-index' : '0',
 				'background-color' : 'transparent'
 			});
+
 		}).error(function(data, status) {
 			console.log("data " + data + " status " + status + "authToken" + getCookie('authToken'));
 		});
@@ -192,6 +202,9 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 
 module.controller('signInController', function($scope, $http, $location) {
 	clearInterval(refreshIntervalId);
+	$("#wrapper").removeClass("clsafterLogin");
+	$("#wrapper").addClass("clsforLogin");
+	$(".userloggedIn").hide();
 	$scope.chkLogin = function() {
 		if ($scope.email == "" && $scope.password == "" && !$scope.email && !$scope.password) {
 			console.log("email is blank");
@@ -200,7 +213,6 @@ module.controller('signInController', function($scope, $http, $location) {
 			return false;
 		}
 		var param = "{email:'" + $scope.email + "@kanari.co','password:'" + $scope.password + "'}";
-
 		$http({
 			method : 'post',
 			url : '/api/users/sign_in',
@@ -226,7 +238,7 @@ module.controller('signInController', function($scope, $http, $location) {
 
 		}).error(function(data, status) {
 			//console.log($scope.password)
-			console.log("data " + $scope.email + " status " + status);
+			console.log("data " + $scope.email + " status " + $scope.password);
 			$scope.error = "Invalid Id or Password";
 			$scope.erromsg = true;
 		});
@@ -239,11 +251,22 @@ module.controller('signInController', function($scope, $http, $location) {
 });
 
 module.controller('homePageController', function($scope, $http, $location) {
+	$(".userloggedIn").show();
+	$("#wrapper").removeClass("clsforLogin");
+	$("#wrapper").addClass("clsafterLogin");
+	$(".headerDiv a").removeClass("ui_btn_active");
+	$(".headerDiv span").hide();
+	$("#feedback").addClass("ui_btn_active");
+	$("#feedback span").show();
+	$(".popup").hide();
 	if (getCookie('authToken')) {
+		var overlayDiv = $("#overlaySuccess");
 		$scope.active1 = true;
 		$scope.feedbackList = [];
 
 		$scope.listFeedbacks = function() {
+			//$.mobile.loading('show');
+
 			var param = {
 				"auth_token" : getCookie('authToken'),
 				"password" : "X"
@@ -256,16 +279,34 @@ module.controller('homePageController', function($scope, $http, $location) {
 			}).success(function(data, status) {
 				console.log("User Role " + data + " status " + status);
 				$scope.feedbackList = data.feedbacks;
-
+				//$.mobile.loading('hide');
+				overlayDiv.css({
+					'z-index' : '0',
+					'background-color' : 'transparent'
+				});
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+				//$.mobile.loading('hide');
+				overlayDiv.css({
+					'z-index' : '0',
+					'background-color' : 'transparent'
+				});
 			});
 		};
 
 		$scope.listFeedbacks();
-		refreshIntervalId = window.setInterval(function() {
+
+		$scope.refresh = function() {
+			overlayDiv.css({
+				'z-index' : '10',
+				'background-color' : '#000'
+			});
 			$scope.listFeedbacks();
-		}, 8000);
+		};
+		//document.addEventListener('DOMContentLoaded', function() {
+		//alert("in");
+		setTimeout(loaded, 1000);
+		//}, false);
 
 	} else {
 		$location.url("/signin");
@@ -274,7 +315,11 @@ module.controller('homePageController', function($scope, $http, $location) {
 });
 
 module.controller('insightsController', function($scope, $http, $location) {
-	clearInterval(refreshIntervalId);
+	$(".userloggedIn").show();
+	$("#wrapper").removeClass("clsforLogin");
+	$("#wrapper").addClass("clsafterLogin");
+	$("#insights").addClass("ui_btn_active");
+	$("#insights span").show();
 	if (getCookie('authToken')) {
 		$scope.active2 = true;
 
@@ -283,7 +328,7 @@ module.controller('insightsController', function($scope, $http, $location) {
 				"auth_token" : getCookie('authToken'),
 				"password" : "X"
 			}
- 
+
 			$http({
 				method : 'get',
 				url : '/api/feedbacks/metrics',
@@ -296,8 +341,10 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 				if ($scope.foodDailyChange > 0) {
 					$scope.foodFlag = 1;
-				} else {
+				} else if ($scope.foodDailyChange < 0) {
 					$scope.foodFlag = 0;
+				} else {
+					$scope.foodFlag = -1;
 				}
 
 				$scope.speedLike = data.feedback_insights.speed_of_service.like;
@@ -306,8 +353,10 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 				if ($scope.speedDailyChange > 0) {
 					$scope.speedFlag = 1;
-				} else {
+				} else if ($scope.speedDailyChange < 0) {
 					$scope.speedFlag = 0;
+				} else {
+					$scope.speedFlag = -1;
 				}
 
 				$scope.friendlinessLike = data.feedback_insights.friendliness_of_service.like;
@@ -316,8 +365,10 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 				if ($scope.friendlinessDailyChange > 0) {
 					$scope.friendlinessFlag = 1;
-				} else {
+				} else if ($scope.friendlinessDailyChange < 0) {
 					$scope.friendlinessFlag = 0;
+				} else {
+					$scope.friendlinessFlag = -1;
 				}
 
 				$scope.cleanlinessLike = data.feedback_insights.cleanliness.like;
@@ -326,8 +377,10 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 				if ($scope.cleanlinessDailyChange > 0) {
 					$scope.cleanlinessFlag = 1;
-				} else {
+				} else if ($scope.cleanlinessDailyChange < 0) {
 					$scope.cleanlinessFlag = 0;
+				} else {
+					$scope.cleanlinessFlag = -1;
 				}
 
 				$scope.ambienceLike = data.feedback_insights.ambience.like;
@@ -336,8 +389,10 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 				if ($scope.ambienceDailyChange > 0) {
 					$scope.ambienceFlag = 1;
-				} else {
+				} else if ($scope.ambienceDailyChange < 0) {
 					$scope.ambienceFlag = 0;
+				} else {
+					$scope.ambienceFlag = -1;
 				}
 
 				$scope.valueLike = data.feedback_insights.value_for_money.like;
@@ -346,19 +401,28 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 				if ($scope.valueDailyChange > 0) {
 					$scope.valueFlag = 1;
-				} else {
+				} else if ($scope.valueDailyChange < 0) {
 					$scope.valueFlag = 0;
+				} else {
+					$scope.valueFlag = -1;
 				}
 
 				$scope.netScore = data.feedback_insights.net_promoter_score.like - data.feedback_insights.net_promoter_score.dislike;
 				//$scope.netScoreDisLike = data.feedback_insights.net_promoter_score.dislike;
 				$scope.netScoreDailyChange = data.feedback_insights.net_promoter_score.change;
 
+				if ($scope.netScore > 0) {
+					$scope.netScoreFlag = 0;
+				} else {
+					$scope.netScoreFlag = 1;
+				}
+
 				if ($scope.netScoreDailyChange > 0) {
 					$scope.netflag = 1;
 				} else {
 					$scope.netflag = 0;
 				}
+
 				$scope.feedCount = data.feedback_insights.feedbacks_count;
 				$scope.points = data.feedback_insights.rewards_pool;
 
@@ -369,6 +433,7 @@ module.controller('insightsController', function($scope, $http, $location) {
 		};
 
 		$scope.feedbackMetrics();
+		setTimeout(loaded, 1000);
 
 	} else {
 		$location.url("/signin");
@@ -376,7 +441,11 @@ module.controller('insightsController', function($scope, $http, $location) {
 
 });
 module.controller('redemeController', function($scope, $http, $location) {
-	clearInterval(refreshIntervalId);
+	$(".userloggedIn").show();
+	$("#wrapper").removeClass("clsforLogin");
+	$("#wrapper").addClass("clsafterLogin");
+	$("#redemption").addClass("ui_btn_active");
+	$("#redemption span").show();
 	if (getCookie('authToken')) {
 		$scope.active3 = true;
 
@@ -425,13 +494,21 @@ module.controller('redemeController', function($scope, $http, $location) {
 			});
 
 		};
+		setTimeout(loaded, 1000);
 	} else {
 		$location.url("/signin")
 	}
 
 });
+var flag = 0;
+var testID = 0;
+
 module.controller('numericCodeController', function($scope, $http, $location) {
-	clearInterval(refreshIntervalId);
+	$(".userloggedIn").show();
+	$("#wrapper").removeClass("clsforLogin");
+	$("#wrapper").addClass("clsafterLogin");
+	$("#numeric_code").addClass("ui_btn_active");
+	$("#numeric_code span").show();
 	if (getCookie('authToken')) {
 		$scope.loader = false;
 		$scope.codeGenerate = true;
@@ -440,46 +517,63 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 		$scope.active4 = true;
 		$scope.erromsg = false;
 		$scope.listCodes = [];
+		// $( "#generateCode" ).click(function(event) {
+		// alert("in"+flag)
+		// flag = 0;
+		// event.preventDefault();
+		// });
+		$scope.generateCode = function() {
 
-		$scope.generateCode = function(createKanariCode) {
-			if (!$scope.billAmount) {
-				$scope.error = "Please enter valid bill amount";
-				$scope.succmsg = false;
-				$scope.erromsg = true;
-			}else if ($scope.billAmount < 0) {
-				console.log("in else if");
-				$scope.error = "Please enter valid bill amount";
-				$scope.succmsg = false;
-				$scope.erromsg = true;
-			} else {
-				console.log("amount " + $scope.billAmount)
-				$scope.loader = true;
-				var param = {
-					"bill_amount" : $scope.billAmount,
-					"auth_token" : getCookie("authToken")
-				}
-
-				$http({
-					method : 'POST',
-					url : '/api/kanari_codes',
-					data : param,
-				}).success(function(data, status) {
-					console.log("data in success " + data + " status " + status);
-					$scope.erromsg = false;
-					$scope.codeGenerate = false;
-					$scope.codeGenerated = true;
-					$scope.code = data.code;
-					$scope.billAmount = "";
-					$scope.loader = false;
-				}).error(function(data, status) {
-					console.log("data in errorrr" + data + " status " + status);
-					$scope.error = data.error[0];
+			if (testID != $scope.billAmount) {
+				testID = $scope.billAmount;
+				if (!$scope.billAmount) {
+					$scope.error = "Please enter valid bill amount";
 					$scope.succmsg = false;
 					$scope.erromsg = true;
-					$scope.loader = false;
-				});
+				} else if ($scope.billAmount < 0) {
+					console.log("in else if");
+					$scope.error = "Please enter valid bill amount";
+					$scope.succmsg = false;
+					$scope.erromsg = true;
+				} else {
+					console.log("amount " + $scope.billAmount)
+					$scope.loader = true;
+					var param = {
+						"bill_amount" : $scope.billAmount,
+						"auth_token" : getCookie("authToken")
+					}
+
+					$http({
+						method : 'POST',
+						url : '/api/kanari_codes',
+						data : param,
+					}).success(function(data, status) {
+						console.log("data in success " + data + " status " + status);
+						$scope.erromsg = false;
+						$scope.codeGenerate = false;
+						$scope.codeGenerated = true;
+
+						$scope.code = data.code;
+
+						//$scope.billAmount = "";
+						$('#billAmnt').val("");
+
+						$scope.loader = false;
+					}).error(function(data, status) {
+						console.log("data in errorrr" + data + " status " + status);
+						$scope.error = data.error[0];
+						$scope.succmsg = false;
+						$scope.erromsg = true;
+						$scope.loader = false;
+					});
+				}
 			}
 		};
+
+		var selectField = document.getElementById('Field10');
+		selectField.addEventListener('touchstart'/*'mousedown'*/, function(e) {
+			e.stopPropagation();
+		}, false);
 
 		$scope.listGeneratedCodes = function() {
 			var param = {
@@ -493,8 +587,10 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 				params : param
 			}).success(function(data, status) {
 				console.log("User Role " + data + " status " + status);
+
 				$scope.listCodes = data.feedbacks;
 				//console.log("codes"+$scope.listCodes);
+
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 			});
@@ -503,11 +599,11 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 		$scope.listGeneratedCodes();
 
 		$scope.parseDate = function(jsonDate) {
-				console.log("date " + jsonDate + " parsed date " + new Date(Date.parse(jsonDate)));
-				$scope.v = {
-					DDt : Date.parse(jsonDate)
-				}
-			};
+			console.log("date " + jsonDate + " parsed date " + new Date(Date.parse(jsonDate)));
+			$scope.v = {
+				DDt : Date.parse(jsonDate)
+			}
+		};
 
 		$scope.done = function() {
 			//console.log("in done btn pressed");
@@ -519,10 +615,10 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 			$scope.erromsg = false;
 			$scope.listGeneratedCodes();
 		};
+		setTimeout(loaded, 1000);
 	} else {
 		$location.url("/signin");
 	}
-
 });
 
 /* Cookie functions	*/
@@ -553,3 +649,12 @@ function getCookie(name) {
 function deleteCookie(name) {
 	setCookie(name, "", -1);
 }
+
+var myScroll;
+function loaded() {
+	myScroll = new iScroll('wrapper');
+}
+
+// document.addEventListener('DOMContentLoaded', function() {
+// setTimeout(loaded, 2000);
+// }, false);

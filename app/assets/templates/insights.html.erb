@@ -1,5 +1,4 @@
-<div id="insights" align="center" ng-controller="insightsController" data-role="page">
-	<div ng:include="'<%= asset_path 'tablet_header.html' %>'"></div>
+<div id="scroller" align="center" ng-controller="insightsController" >
 	<div class="insight_graph">
 		<!-- <highchart id="chart1" series="chart.series" title="chart.title" options="chart.options"></highchart> -->
 		<div class="score_1">
@@ -11,7 +10,11 @@
 				<!-- <span class="rateMValue rate_minus">-{{netScoreDisLike}}%</span> -->
 			</div>
 			<div class="daily_change">
-				<span class="net_rate_plus" style="width: {{netScore*4.5}}px">&nbsp;</span>
+				<div ng-switch on="netScoreFlag" style="width:68%;float: left;">
+					<span ng-switch-when="0" class="net_rate_plus" style="width: {{netScore*1}}%">&nbsp;</span>
+					<span ng-switch-when="1" class="net_rate_plus_red" style="width: {{netScore*-1}}%">&nbsp;</span>
+				</div>
+				<!-- <span class="net_rate_plus" style="width: {{netScore*4.5}}px">&nbsp;</span> -->
 				<!-- <span class="ratePValue rate_plus" ng-switch on="netScoreLike"><span ng-switch-when="0">{{netScoreLike}}%</span><span ng-switch-default>{{netScoreLike}}%</span></span> -->
 				<!-- <span class="ratePValue rate_plus">{{netScoreLike}}%</span> -->
 				<div class="daily_change_score">
@@ -31,13 +34,13 @@
 			<div class="score_div">
 				<div class="net_score">
 					<span class="txt1">Food</span>
-					<span class="rate_minus" style="width: {{foodDisLike*4.5}}px">&nbsp;</span>
+					<span class="rate_minus" style="width: {{foodDisLike*2.2}}px">&nbsp;</span>
 					<span class="rateMValue rate_minus" ng-switch on="foodDisLike"><span ng-switch-when="0">{{foodDisLike}}%</span><span ng-switch-default>-{{foodDisLike}}%</span></span>
 					<!-- <span class="rateMValue rate_minus">-{{foodDisLike}}%</span> -->
 				</div>
 
 				<div class="daily_change">
-					<span class="rate_plus" style="width: {{foodLike*4.5}}px">&nbsp;</span>
+					<span class="rate_plus" style="width: {{foodLike*2.2}}px">&nbsp;</span>
 					<span class="ratePValue rate_plus" ng-switch on="foodLike"><span ng-switch-when="0">{{foodLike}}%</span><span ng-switch-default>{{foodLike}}%</span></span>
 					<!-- <span class="ratePValue rate_plus">{{foodLike}}%</span> -->
 					<div ng-switch on="foodFlag">
@@ -50,20 +53,24 @@
 							<%= image_tag 'ic_red_arrow.png' %>
 							<span class="value1">{{foodDailyChange}}%</span>
 						</div>
+						<div class="daily_change_span" ng-switch-when="-1">
+							<!-- <%= image_tag 'ic_red_arrow.png' %> -->
+							<span class="value2">{{foodDailyChange}}%</span>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="score_div">
 				<div class="net_score" style="height: 58px;padding-top: 7px;">
-					<span class="txt1">Speed of
+					<span class="txt1" style="float: left; line-height: 20px;">Speed of
 						<br/>
 						Service</span>
-					<span class="rate_minus" style="width: {{speedDisLike*4.5}}px">&nbsp;</span>
-					<span class="rateMValue rate_minus" ng-switch on="speedDisLike"><span ng-switch-when="0">{{speedDisLike}}%</span><span ng-switch-default>-{{speedDisLike}}%</span></span>
+					<span class="rate_minus" style="width: {{speedDisLike*2.2}}px;margin-top: 12px;">&nbsp;</span>
+					<span class="rateMValue rate_minus" ng-switch on="speedDisLike" style="margin-top: 12px;"><span ng-switch-when="0">{{speedDisLike}}%</span><span ng-switch-default>-{{speedDisLike}}%</span></span>
 					<!-- <span class="rateMValue rate_minus">-{{speedDisLike}}%</span> -->
 				</div>
 				<div class="daily_change">
-					<span class="rate_plus" style="width: {{speedLike*4.5}}px">&nbsp;</span>
+					<span class="rate_plus" style="width: {{speedLike*2.2}}px;">&nbsp;</span>
 					<span class="ratePValue rate_plus" ng-switch on="speedLike"><span ng-switch-when="0">{{speedLike}}%</span><span ng-switch-default>{{speedLike}}%</span></span>
 					<!-- <span class="ratePValue rate_plus">{{speedLike}}%</span> -->
 					<div ng-switch on="speedFlag">
@@ -75,20 +82,24 @@
 							<%= image_tag 'ic_red_arrow.png' %>
 							<span class="value1">{{speedDailyChange}}%</span>
 						</div>
+						<div class="daily_change_span" ng-switch-when="-1">
+							<!-- <%= image_tag 'ic_red_arrow.png' %> -->
+							<span class="value2">{{speedDailyChange}}%</span>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="score_div">
 				<div class="net_score" style="height: 58px;padding-top: 7px;">
-					<span class="txt1">Friendliness
+					<span class="txt1" style="float: left; line-height: 20px;">Friendliness
 						<br/>
 						of Service</span>
-					<span class="rate_minus" style="width: {{friendlinessDisLike*4.5}}px">&nbsp;</span>
-					<span class="rateMValue rate_minus" ng-switch on="friendlinessDisLike"><span ng-switch-when="0">{{friendlinessDisLike}}%</span><span ng-switch-default>-{{friendlinessDisLike}}%</span></span>
+					<span class="rate_minus" style="width: {{friendlinessDisLike*2.2}}px;margin-top: 12px;">&nbsp;</span>
+					<span class="rateMValue rate_minus" ng-switch on="friendlinessDisLike" style="margin-top: 12px;"><span ng-switch-when="0">{{friendlinessDisLike}}%</span><span ng-switch-default>-{{friendlinessDisLike}}%</span></span>
 					<!-- <span class="rateMValue rate_minus">-{{friendlinessDisLike}}%</span> -->
 				</div>
 				<div class="daily_change">
-					<span class="rate_plus" style="width: {{friendlinessLike*4.5}}px">&nbsp;</span>
+					<span class="rate_plus" style="width: {{friendlinessLike*2.2}}px">&nbsp;</span>
 					<span class="ratePValue rate_plus" ng-switch on="friendlinessLike"><span ng-switch-when="0">{{friendlinessLike}}%</span><span ng-switch-default>{{friendlinessLike}}%</span></span>
 					<!-- <span class="ratePValue rate_plus">{{friendlinessLike}}%</span> -->
 					<div ng-switch on="friendlinessFlag">
@@ -101,18 +112,22 @@
 							<%= image_tag 'ic_red_arrow.png' %>
 							<span class="value1">{{friendlinessDailyChange}}%</span>
 						</div>
+						<div class="daily_change_span" ng-switch-when="-1">
+							<!-- <%= image_tag 'ic_red_arrow.png' %> -->
+							<span class="value2">{{friendlinessDailyChange}}%</span>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="score_div">
 				<div class="net_score">
 					<span class="txt1">Cleanliness</span>
-					<span class="rate_minus" style="width: {{cleanlinessDisLike*4.5}}px">&nbsp;</span>
+					<span class="rate_minus" style="width: {{cleanlinessDisLike*2.2}}px">&nbsp;</span>
 					<span class="rateMValue rate_minus" ng-switch on="cleanlinessDisLike"><span ng-switch-when="0">{{cleanlinessDisLike}}%</span><span ng-switch-default>-{{cleanlinessDisLike}}%</span></span>
 					<!-- <span class="rateMValue rate_minus">-{{cleanlinessDisLike}}%</span> -->
 				</div>
 				<div class="daily_change">
-					<span class="rate_plus" style="width: {{cleanlinessLike*4.5}}px">&nbsp;</span>
+					<span class="rate_plus" style="width: {{cleanlinessLike*2.2}}px">&nbsp;</span>
 					<span class="ratePValue rate_plus" ng-switch on="cleanlinessLike"><span ng-switch-when="0">{{cleanlinessLike}}%</span><span ng-switch-default>{{cleanlinessLike}}%</span></span>
 					<!-- <span class="ratePValue rate_plus">{{cleanlinessLike}}%</span> -->
 					<div ng-switch on="cleanlinessFlag">
@@ -125,18 +140,22 @@
 							<%= image_tag 'ic_red_arrow.png' %>
 							<span class="value1">{{cleanlinessDailyChange}}%</span>
 						</div>
+						<div class="daily_change_span" ng-switch-when="-1">
+							<!-- <%= image_tag 'ic_red_arrow.png' %> -->
+							<span class="value2">{{cleanlinessDailyChange}}%</span>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="score_div">
 				<div class="net_score">
 					<span class="txt1">Ambience</span>
-					<span class="rate_minus" style="width: {{ambienceDisLike*4.5}}px">&nbsp;</span>
+					<span class="rate_minus" style="width: {{ambienceDisLike*2.2}}px">&nbsp;</span>
 					<span class="rateMValue rate_minus" ng-switch on="ambienceDisLike"><span ng-switch-when="0">{{ambienceDisLike}}%</span><span ng-switch-default>-{{ambienceDisLike}}%</span></span>
 					<!-- <span class="rateMValue rate_minus">-{{ambienceDisLike}}%</span> -->
 				</div>
 				<div class="daily_change">
-					<span class="rate_plus" style="width: {{ambienceLike*4.5}}px">&nbsp;</span>
+					<span class="rate_plus" style="width: {{ambienceLike*2.2}}px">&nbsp;</span>
 					<span class="ratePValue rate_plus" ng-switch on="ambienceLike"><span ng-switch-when="0">{{ambienceLike}}%</span><span ng-switch-default>{{ambienceLike}}%</span></span>
 					<!-- <span class="ratePValue rate_plus">{{ambienceLike}}%</span> -->
 					<div ng-switch on="ambienceFlag">
@@ -148,17 +167,25 @@
 							<%= image_tag 'ic_red_arrow.png' %>
 							<span class="value1">{{ambienceDailyChange}}%</span>
 						</div>
+						<div class="daily_change_span" ng-switch-when="-1">
+							<!-- <%= image_tag 'ic_red_arrow.png' %> -->
+							<span class="value2">{{ambienceDailyChange}}%</span>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="score_div">
-				<div class="net_score">
-					<span class="txt1">Value for Money</span>
-					<span class="rate_minus" style="width: {{valueDisLike*4.5}}px">&nbsp;</span>
-					<span class="rateMValue rate_minus" ng-switch on="valueDisLike"><span ng-switch-when="0">{{valueDisLike}}%</span><span ng-switch-default>-{{valueDisLike}}%</span></span>
+				<!-- <div class="net_score"> -->
+					<div class="net_score" style="height: 58px;padding-top: 7px;">
+					<span class="txt1" style="float: left; line-height: 20px;">Value for
+						<br/>
+						Money</span>
+					<!-- <span class="txt1">Value for Money</span> -->
+					<span class="rate_minus" style="width: {{valueDisLike*2.2}}px;margin-top: 12px;">&nbsp;</span>
+					<span style="margin-top: 12px;" class="rateMValue rate_minus" ng-switch on="valueDisLike"><span ng-switch-when="0">{{valueDisLike}}%</span><span ng-switch-default>-{{valueDisLike}}%</span></span>
 				</div>
 				<div class="daily_change">
-					<span class="rate_plus" style="width: {{valueLike*4.5}}px">&nbsp;</span>
+					<span class="rate_plus" style="width: {{valueLike*2.2}}px">&nbsp;</span>
 					<span class="ratePValue rate_plus" ng-switch on="valueDisLike"><span ng-switch-when="0">{{valueLike}}%</span><span ng-switch-default>{{valueLike}}%</span></span>
 					<!-- <span class="ratePValue rate_plus">{{valueLike}}%</span> -->
 					<div ng-switch on="valueFlag">
@@ -171,11 +198,15 @@
 							<%= image_tag 'ic_red_arrow.png' %>
 							<span class="value1">{{valueDailyChange}}%</span>
 						</div>
+						<div class="daily_change_span" ng-switch-when="-1">
+							<!-- <%= image_tag 'ic_red_arrow.png' %> -->
+							<span class="value2">{{valueDailyChange}}%</span>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="score_final">
-				<div class="net_score">
+				<div class="net_score feedSub">
 					<span class="txt1">Feedback Submissions</span>
 					<br/>
 					<span class="value1">{{feedCount}}</span>

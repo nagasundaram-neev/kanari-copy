@@ -1,13 +1,12 @@
-<div id="numericCode" align="center" ng-controller="numericCodeController" data-role="page">
-	<div ng:include="'<%= asset_path 'tablet_header.html' %>'"></div>
+<div id="scroller" class="numericCode" align="center" ng-controller="numericCodeController" >
 	<div ng-show="codeGenerate" class="numericCodeContainer">
 		<h1 align="center" class="numericTxt"> Please enter bill amount </h1>
 		<div class="loaderDiv clearfix">
-			<input type="number" class="billAmountTxtBox" maxlength="5" placeholder="Enter bill amount.." ng-model="billAmount">
-			<div ng-show="loader" class="loader"><img src="/assets/ajax-loader.gif"></div>
+			<input id="Field10" type="number" id="billAmnt" class="ui-input-text billAmountTxtBox" maxlength="5" placeholder="Enter bill amount.." ng-model="billAmount">
+			<div ng-show="loader" class="loader"><img src="/assets/ajax_loader.gif"></div>
 		</div>
-		<div ng-click="generateCode()">
-			<button type="submit" class="signInBtn btn" >
+		<div ng-click="generateCode()" >
+			<button type="submit" id="generateCode" class="signInBtn btn" >
 				Generate Code
 			</button>
 		</div>
@@ -24,7 +23,7 @@
 			<div>
 				Please give this code to your Customer
 			</div>
-			<div ng-click="done()">
+			<div ng-click="done()" >
 				<button type="button" class="signInBtn btn" >
 					Done
 				</button>
@@ -37,7 +36,7 @@
 			<div class="col1 colBorderTop">
 				Date & Time
 			</div>
-			<div class="col1 colBorderTop">
+			<div class="col1 colBorderTop" style="text-align: right;">
 				Bill Size
 			</div>
 			<div class="col2 colBorderTop colBorderRight">
@@ -49,8 +48,8 @@
 				{{feedbacks.updated_at | date:'dd/MM/yyyy @ h:mma'}} 
 				<!-- {{feedbacks.updated_at | truncate}} --> 
 			</div>
-			<div class="col1">
-				{{feedbacks.bill_amount}}
+			<div class="col1" style="text-align: right;">
+				{{feedbacks.bill_amount |number:2}}
 			</div>
 			<div class="col2 colBorderRight">
 				{{feedbacks.code}}

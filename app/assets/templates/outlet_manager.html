@@ -18,11 +18,11 @@
 	<div class="header_title">
 		<span class="manager_outlet">Manage Account</span>
 		<span class="arrow-right blank_span">&nbsp;</span>
-		<span style="padding: 10px 20px;"><span class="outletM">Outlet Managers</span></span>
+		<span style="padding: 10px 20px;"><span class="outletM"><a href="#/outlet_manager">Outlet Managers</a></span></span>
 		<span class="blank_span"><img src="assets/div_line_yellow.jpg" /></span>
-		<span style="padding: 10px 20px;">Account Details </span>
+		<span style="padding: 10px 20px;"><a href="#/view_account">Account Details</a></span>
 		<span class="blank_span"><img src="assets/div_line_yellow.jpg" /></span>
-		<span style="padding: 10px 20px;">Payment History </span>
+		<span style="padding: 10px 20px;"><a href="#/payment_history">Payment History</a></span>
 		<span class="blank_span"><img src="assets/div_line_yellow.jpg" /></span>
 	</div>
 	<div id="outletManager" class="viewAccPage" style="margin:20px 0 20px 50px">
@@ -42,7 +42,7 @@
 						Email Address
 					</div>
 					<div class="border_right_none heading" style="width:56px">
-						DELETE
+						Delete
 					</div>
 				</div>
 				<div class="clr"></div>
@@ -60,7 +60,7 @@
 						{{manager.email}}
 					</div>
 					<div class="border_right_none data" style="width:56px">
-						<a href="" ng-click="DeleteManager(manager.id)">DELETE</a>
+						<a href="" ng-click="DeleteManager(manager.id)">Delete</a>
 					</div>
 				</div>
 			</div>
@@ -128,9 +128,9 @@
 						<button class="btn" disabled>
 							Update Manager
 						</button>
-						<button  ng-click="DeleteManager(manager_ID)" class="cancelBtn submitBtn btn btn-primary btn-large"  >
-							Delete
-						</button>
+						<a  ng-click="close_updatemanager()" class="cancelBtn submitBtn btn btn-primary btn-large"  >
+								Cancel
+							</a>
 						<p ng-show="error" class="errorMsg">
 							{{errorMsg}}
 						</p>

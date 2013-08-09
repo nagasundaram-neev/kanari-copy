@@ -7,11 +7,13 @@
 		<meta name="description" content="Kanari">
 		<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-		
-		<%= javascript_include_tag "jquery-mobile-angular-adapter-standalone-1.2.0.js" %>
-		<script src="http://code.jquery.com/jquery.min.js"></script>
-		
-		<script type='text/javascript' src="https://raw.github.com/rmm5t/jquery-timeago/master/jquery.timeago.js"></script>
+		<%= stylesheet_link_tag "bootstrap.css", :media => "all" %>
+		<%= javascript_include_tag "jquery.js" %>
+		<%= javascript_include_tag "angular.js" %>
+		<script type='text/javascript' src="https://rawgithub.com/timrwood/moment/2.1.0/min/moment.min.js"></script>
+		<%= javascript_include_tag "iscroll.js" %>
+		<%= javascript_include_tag "codebird.js" %>
+		<%= javascript_include_tag "sha1.js" %>
 		<%= javascript_include_tag "app_tablet" %>
 		<%= javascript_include_tag "controllers_tablet.js" %>
 		<!-- <link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'> -->
@@ -19,7 +21,61 @@
 		<%= stylesheet_link_tag "app_tablet.css", :media => "all" %>
 	</head>
 	<body>
-		<div id="splash" data-role="page" ></div>
+		<div ng-show="userLogin" class="userloggedIn" id="header_menu" class="navbar" ng-controller="headerCtrl">
+			<div data-role="controlgroup" data-type="horizontal">
+				<div class="headerDiv">
+					<a id="feedback" href="#/feedback" class="ui_btn"  data-role="button" ><%= image_tag 'ic_feedback.png' %>
+					<br/>
+					Feedback
+					<br/>
+					<span class="arrow-down">&nbsp;</span> </a>
+				</div>
+				<div class="headerDiv">
+					<a id="insights" href="#/insights" class="ui_btn"  data-role="button"><%= image_tag 'ic_insights.png' %>
+					<br/>
+					Insights
+					<br/>
+					<span class="arrow-down">&nbsp;</span> </a>
+				</div>
+				<div class="headerDiv">
+					<a id="redemption" href="#/redemption" class="ui_btn"   data-role="button"><%= image_tag 'ic_redemptions.png' %>
+					<br/>
+					Redemptions
+					<br/>
+					<span class="arrow-down">&nbsp;</span> </a>
+				</div>
+				<div class="headerDiv">
+					<a id="numeric_code" href="#/numeric_code" class="ui_btn" data-role="button"><%= image_tag 'ic_code.png' %>
+					<br/>
+					Code
+					<br/>
+					<span class="arrow-down">&nbsp;</span> </a>
+				</div>
+				<div class="logoutDiv">
+					<a href="javascript:void(0)" class="logOut ui_btn" ng-click="showPopup()" data-role="button"><%= image_tag 'ic_logout.png' %></a>
+				</div>
+			</div>
+
+		</div>
+		<div class="clr"></div>
+
+		<div ng-show="userLogin" class="userloggedIn marginTop" ng-show="userLogin" ng-controller="headerCtrl">
+			<div ng-show="popup" class="popup clearfix">
+				<h4>Are you sure you want to log out?</h4>
+				<div class="btn floatLeft">
+					<button ng-click="logout()">
+						Yes
+					</button>
+				</div>
+				<div class="btn floatLeft">
+					<button ng-click="cancel()">
+						No
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="clr"></div>
 		<div id="overlaySuccess"></div>
+		<div id="wrapper" class="ngView" ng-view></div>
 	</body>
 </html>

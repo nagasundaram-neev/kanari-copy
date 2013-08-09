@@ -81,7 +81,9 @@ end
 Given(/^the following feedbacks exist for "(.*?)"$/) do |date, hashes|
   feedback_hashes = hashes.hashes
   feedback_hashes.each do |feedback_hash|
+    feedback_hash.delete("created_at")
     feedback_hash.delete("updated_at")
+    feedback_hash[:created_at] = date
     feedback_hash[:updated_at] = date
     Feedback.create!(feedback_hash)
   end
@@ -94,6 +96,8 @@ Given(/^the following feedbacks exist for today$/) do |hashes|
   today = Time.zone.now.beginning_of_day
   feedback_hashes.each do |feedback_hash|
     feedback_hash.delete("updated_at")
+    feedback_hash.delete("created_at")
+    feedback_hash[:created_at] = today + 1.hours
     feedback_hash[:updated_at] = today + 1.hours
     Feedback.create!(feedback_hash)
   end
@@ -104,7 +108,9 @@ Given(/^the following feedbacks exist for yesterday$/) do |hashes|
   feedback_hashes = hashes.hashes
   yesterday = Time.zone.now.beginning_of_day - 1.day
   feedback_hashes.each do |feedback_hash|
+    feedback_hash.delete("created_at")
     feedback_hash.delete("updated_at")
+    feedback_hash[:created_at] = yesterday + 1.hours
     feedback_hash[:updated_at] = yesterday + 1.hours
     Feedback.create!(feedback_hash)
   end

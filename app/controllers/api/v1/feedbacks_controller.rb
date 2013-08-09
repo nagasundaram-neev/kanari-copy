@@ -1,7 +1,7 @@
 class Api::V1::FeedbacksController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :metrics]
+  before_action :authenticate_user!, only: [:index, :metrics, :trends]
   before_action :set_feedback, only: [:show, :edit, :destroy]
-  before_action :set_outlet, only: [:index, :metrics]
+  before_action :set_outlet, only: [:index, :metrics, :trends]
 
   respond_to :json
 
@@ -17,6 +17,12 @@ class Api::V1::FeedbacksController < ApplicationController
     authorize! :read_feedbacks, @outlet
     @feedback_insights = @outlet.insights(params)
     render json: @feedback_insights.to_json
+  end
+
+  def trends
+    authorize! :read_trends, @outlet
+    @feedback_trends = @outlet.trends(params)
+    render json: @feedback_trends.to_json
   end
 
   # PATCH/PUT /feedbacks/1
