@@ -29,7 +29,7 @@
 					<span class="img_outlet"><%= image_tag 'ic_outlet.png' %></span> <span class="title_outlet">Outlet Type</span>
 				</div>
 				<div class="outlet_info" style="padding: 1% 0;">
-					<span ng-repeat="outlet in outlets">{{outlet.name}}<span ng-show=" ! $last ">, </span></span>
+					<span ng-repeat="outlet in outlets">{{outlet.name}}<span ng-show=" ! $last ">, &nbsp; </span></span>
 				</div>
 				<div class="clr"></div>
 			</div>
@@ -38,7 +38,7 @@
 					<span class="img_outlet"><%= image_tag 'ic_cuisine.png' %></span> <span class="title_outlet"> Cuisine Type</span>
 				</div>
 				<div class="outlet_info" style="padding: 1% 0;">
-					<span ng-repeat="cuisine in cuisineTypes">{{cuisine.name}}<span ng-show=" ! $last ">, </span></span>
+					<span ng-repeat="cuisine in cuisineTypes">{{cuisine.name}}<span ng-show=" ! $last ">, &nbsp; </span></span>
 				</div>
 				<div class="clr"></div>
 			</div>
