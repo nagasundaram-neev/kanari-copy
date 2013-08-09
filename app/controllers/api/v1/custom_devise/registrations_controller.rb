@@ -104,7 +104,7 @@ module Api
               if existing_resource.present?
                 existing_resource.reset_authentication_token
                 existing_resource.save
-                if existing_oauth_provider = SocialNetworkAccount.where(provider: params[:oauth_provider]).first
+                if existing_oauth_provider = SocialNetworkAccount.where(provider: params[:oauth_provider], user: existing_resource).first
                   existing_oauth_provider.access_token = params[:access_token]
                   existing_oauth_provider.save
                   #User exists and oauth provider has been linked with already
