@@ -422,7 +422,7 @@ module.controller('insightsController', function($scope, $http, $location) {
 				} else {
 					$scope.netflag = 0;
 				}
-				
+
 				$scope.feedCount = data.feedback_insights.feedbacks_count;
 				$scope.points = data.feedback_insights.rewards_pool;
 
@@ -500,7 +500,8 @@ module.controller('redemeController', function($scope, $http, $location) {
 	}
 
 });
- var flag = 0;
+var flag = 0;
+var testID = 0;
 
 module.controller('numericCodeController', function($scope, $http, $location) {
 	$(".userloggedIn").show();
@@ -516,13 +517,14 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 		$scope.active4 = true;
 		$scope.erromsg = false;
 		$scope.listCodes = [];
- // $( "#generateCode" ).click(function(event) {
-  // alert("in"+flag)
- // flag = 0;
- // event.preventDefault();
- // });
+		// $( "#generateCode" ).click(function(event) {
+		// alert("in"+flag)
+		// flag = 0;
+		// event.preventDefault();
+		// });
 		$scope.generateCode = function() {
 			//alert("in "+$('#billAmnt').val());
+
 			if (!$scope.billAmount) {
 				$scope.error = "Please enter valid bill amount";
 				$scope.succmsg = false;
@@ -539,6 +541,8 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 					"bill_amount" : $scope.billAmount,
 					"auth_token" : getCookie("authToken")
 				}
+				if (testID != $scope.billAmount) {
+					testID = $scope.billAmount;
 					$http({
 						method : 'POST',
 						url : '/api/kanari_codes',
@@ -548,10 +552,12 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 						$scope.erromsg = false;
 						$scope.codeGenerate = false;
 						$scope.codeGenerated = true;
+
 						$scope.code = data.code;
+
 						//$scope.billAmount = "";
 						$('#billAmnt').val("");
-						
+
 						$scope.loader = false;
 					}).error(function(data, status) {
 						console.log("data in errorrr" + data + " status " + status);
@@ -560,8 +566,14 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 						$scope.erromsg = true;
 						$scope.loader = false;
 					});
+				}
 			}
 		};
+
+		var selectField = document.getElementById('Field10');
+		selectField.addEventListener('touchstart'/*'mousedown'*/, function(e) {
+			e.stopPropagation();
+		}, false);
 
 		$scope.listGeneratedCodes = function() {
 			var param = {
@@ -575,8 +587,10 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 				params : param
 			}).success(function(data, status) {
 				console.log("User Role " + data + " status " + status);
+
 				$scope.listCodes = data.feedbacks;
 				//console.log("codes"+$scope.listCodes);
+				setTimeout(loaded, 1000);
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 			});
@@ -601,7 +615,7 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 			$scope.erromsg = false;
 			$scope.listGeneratedCodes();
 		};
-		//setTimeout(loaded, 1000);
+
 	} else {
 		$location.url("/signin");
 	}
@@ -641,6 +655,6 @@ function loaded() {
 	myScroll = new iScroll('wrapper');
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-	setTimeout(loaded, 2000);
-}, false);
+// document.addEventListener('DOMContentLoaded', function() {
+// setTimeout(loaded, 2000);
+// }, false);
