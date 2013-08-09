@@ -10,9 +10,13 @@ default: &defaults
 
 development:
   <<: *defaults
+  facebook_app_id: '369424903187034'
+  facebook_app_secret: '30f0e007f1c49a328824647e6ecdd5a2'
 
 production:
   <<: *defaults
 
 test:
   <<: *defaults
+  facebook_app_id: '200285856800993'
+  facebook_app_secret: '5477853ff858902e18dfb9cae65ed510'

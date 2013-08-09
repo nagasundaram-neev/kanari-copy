@@ -6,6 +6,23 @@
 
 require 'cucumber/rails'
 require 'cucumber/api_steps'
+
+When /^I send a POST request to \/api\/users to use oauth with the following:$/ do |input|
+  request_type = 'POST'
+  path = '/api/users'
+
+  request_opts = {method: request_type.downcase.to_sym}
+
+  unless input.nil?
+    input_hash = JSON.parse(input)
+    if @facebook_user_token
+      input_hash["access_token"] = @facebook_user_token
+    end
+    request_opts[:params] = input_hash.to_json
+  end
+  page.driver.send(request_type.downcase.to_sym, path, input_hash.to_json)
+end
+
 require "json_spec/cucumber"
 
 #For json_spec
