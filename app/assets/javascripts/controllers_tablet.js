@@ -523,26 +523,26 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 		// event.preventDefault();
 		// });
 		$scope.generateCode = function() {
-			//alert("in "+$('#billAmnt').val());
 
-			if (!$scope.billAmount) {
-				$scope.error = "Please enter valid bill amount";
-				$scope.succmsg = false;
-				$scope.erromsg = true;
-			} else if ($scope.billAmount < 0) {
-				console.log("in else if");
-				$scope.error = "Please enter valid bill amount";
-				$scope.succmsg = false;
-				$scope.erromsg = true;
-			} else if ($('#billAmnt').val()) {
-				console.log("amount " + $scope.billAmount)
-				$scope.loader = true;
-				var param = {
-					"bill_amount" : $scope.billAmount,
-					"auth_token" : getCookie("authToken")
-				}
-				if (testID != $scope.billAmount) {
-					testID = $scope.billAmount;
+			if (testID != $scope.billAmount) {
+				testID = $scope.billAmount;
+				if (!$scope.billAmount) {
+					$scope.error = "Please enter valid bill amount";
+					$scope.succmsg = false;
+					$scope.erromsg = true;
+				} else if ($scope.billAmount < 0) {
+					console.log("in else if");
+					$scope.error = "Please enter valid bill amount";
+					$scope.succmsg = false;
+					$scope.erromsg = true;
+				} else {
+					console.log("amount " + $scope.billAmount)
+					$scope.loader = true;
+					var param = {
+						"bill_amount" : $scope.billAmount,
+						"auth_token" : getCookie("authToken")
+					}
+
 					$http({
 						method : 'POST',
 						url : '/api/kanari_codes',
@@ -590,7 +590,7 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 
 				$scope.listCodes = data.feedbacks;
 				//console.log("codes"+$scope.listCodes);
-				setTimeout(loaded, 1000);
+
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 			});
@@ -615,7 +615,7 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 			$scope.erromsg = false;
 			$scope.listGeneratedCodes();
 		};
-
+		setTimeout(loaded, 1000);
 	} else {
 		$location.url("/signin");
 	}
