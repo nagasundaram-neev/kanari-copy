@@ -30,8 +30,8 @@ describe SocialNetworkAccount do
       end
     end
     context "when provider is not facebook" do
-      it "should return true when email is valid" do
-        SocialNetworkAccount.valid_access_token?('facebook', 'test1234').should be_false
+      it "should return false" do
+        SocialNetworkAccount.valid_access_token?('not_facebook', 'test1234').should be_false
       end
     end
   end
