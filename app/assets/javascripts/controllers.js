@@ -129,9 +129,6 @@ var baseUrl = "localhost:8080";
 var auth_token = "";
 
 module.controller('commonCtrl', function($scope, $http, $location) {
-	//$scope.userName = "";
-	//getRefresh($scope);
-	//$scope.userName = getCookie('userName');
 	$(".content").css("min-height", function() {
 		return ($('.content')[0].scrollHeight) - 38;
 	});
@@ -182,6 +179,10 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 		$scope.accountm = false;
 		$('#accountm').hide();
 	}
+
+	$(".dropdown-menu li a").click(function() {
+		$("#dasboardCustomer").removeClass("open");
+	});
 });
 
 module.controller('Login', function($rootScope, $scope, $http, $location) {
@@ -690,7 +691,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					"outlet" : {
 						"manager_id" : managerId,
 						"cuisine_type_ids" : JSON.parse(getCookie('currentCuisineList')),
-						"outlet_type_ids" : JSON.parse(getCookie('currentOutletList')),						
+						"outlet_type_ids" : JSON.parse(getCookie('currentOutletList')),
 					},
 					"auth_token" : getCookie('authToken')
 				}
@@ -1085,7 +1086,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.listTabletIds = function() {
 			var param = {
 				"auth_token" : getCookie('authToken'),
-				"outlet_id":$routeParams.outletId
+				"outlet_id" : $routeParams.outletId
 			}
 			$http({
 				method : 'get',
@@ -1219,6 +1220,9 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		}
 		$scope.close_manager = function() {
 			$('.add_manager').hide();
+		}
+		$scope.close_updatemanager = function() {
+			$('.edit_manager').hide();
 		}
 		$scope.master = {};
 		$scope.create_manager = function(createManager) {
@@ -1554,14 +1558,10 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 						"phone_number" : $(".phoneno_1").val(),
 						"registered_address_line_1" : $scope.registered_address_line_1,
 						"registered_address_line_2" : $scope.registered_address_line_2,
-						// "registered_address_city" : $scope.registered_address_city,
-						// "registered_address_country" : $scope.registered_address_country,
 						"registered_address_city" : "Dubai",
 						"registered_address_country" : "UAE",
 						"mailing_address_line_1" : $scope.mailing_address_line_1,
 						"mailing_address_line_2" : $scope.mailing_address_line_2,
-						// "mailing_address_city" : $scope.mailing_address_city,
-						// "mailing_address_country" : $scope.mailing_address_country,
 						"mailing_address_city" : "Dubai",
 						"mailing_address_country" : "UAE",
 						"email" : $scope.email
@@ -1682,8 +1682,6 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 			$(".phoneno_2").val(data.customer.phone_number);
 			$scope.add1 = data.customer.registered_address_line_1;
 			$scope.add2 = data.customer.registered_address_line_2;
-			// $scope.city = data.customer.mailing_address_city;
-			// $scope.country = data.customer.mailing_address_country;
 			$scope.city = "Dubai";
 			$scope.country = "UAE";
 		}).error(function(data, status) {
@@ -1700,8 +1698,6 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 						"email" : $scope.email,
 						"registered_address_line_1" : $scope.add1,
 						"registered_address_line_2" : $scope.add2,
-						// "registered_address_city" : $scope.city,
-						// "registered_address_country" : $scope.country,
 						"registered_address_city" : "Dubai",
 						"registered_address_country" : "UAE",
 						"phone_number" : $(".phoneno_2").val()
@@ -1725,13 +1721,7 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 					"user" : {
 						"first_name" : $scope.first_name,
 						"last_name" : $scope.last_name,
-						//"email" : $scope.email,
 						"phone_number" : $(".phoneno_1").val(),
-						//	"password": $scope.first_name,
-						//"password_confirmation": $scope.first_name,
-						//"date_of_birth": "06-05-1987",
-						//"gender": "Male",
-						//"location": "SF",
 						"current_password" : $scope.password
 					},
 					"auth_token" : getCookie('authToken')
@@ -2089,7 +2079,161 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 		$('#dasboard').hide();
 		$('#account').addClass('active');
 		$rootScope.header = "Payment History | Kanari";
-}
+	}
+});
+var startDt;
+var endDt;
+module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location) {
+	if (getCookie('authToken')) {
+		$('.welcome').show();
+		$('.navBarCls').show();
+		$('.navBarCls ul li').removeClass('active');
+		$('#outlet').show();
+		$('#dasboard').hide();
+		$('#dasboardCustomer').addClass('active');
+		$rootScope.header = "Dashboard Comments | Kanari";
+		$scope.feedbackList = [];
+		$scope.outletNameList = [];
+
+		$scope.v = {
+			Dt : Date.now()
+		}
+
+		$("#dp3 .add-on").click(function() {
+			$('.datepicker').addClass("addLeft");
+		});
+
+		$("#dp2 .add-on").click(function() {
+			$('.datepicker').removeClass("addLeft");
+		});
+
+		// var dateFormat = attrs['date'] || 'yyyy-MM-dd';
+
+		$(function() {
+			//var startDate = new Date(2012, 1, 20);
+			//var endDate = new Date(2012, 1, 25);
+			$('#dp2').datepicker().on('changeDate', function(ev) {
+				var dt = new Date(ev.date.valueOf());
+				//dt.format("dddd, MMMM Do YYYY, h:mm:ss a");
+				//alert(ev.date.valueOf());
+				var month = dt.getMonth() + 1;
+				startDt = dt.getFullYear() + "-" +month + "-" + dt.getDate();
+				//alert(startDt);
+				if (startDt != 'undefined' && typeof endDt != 'undefined') {
+					console.log("hi in start date");
+					$scope.listFeedbacksDate();
+					$(".outletDropDown").change(function() {
+						$scope.listFeedbacksDate();
+					});
+				}
+				//alert(startDt);
+			});
+			$('#dp3').datepicker().on('changeDate', function(ev) {
+				var dt = new Date(ev.date.valueOf());
+				var month = dt.getMonth() + 1;
+				endDt = dt.getFullYear() + "-" +month + "-" + dt.getDate();
+				//alert(endDt);
+				if ( typeof startDt != 'undefined' && endDt != 'undefined') {
+					console.log("hi in end date");
+					$scope.listFeedbacksDate();
+					$(".outletDropDown").change(function() {
+						$scope.listFeedbacksDate();
+					});
+				}
+			});
+		});
+
+		$scope.listOutletNames = function() {
+			var param = {
+				"auth_token" : getCookie('authToken'),
+				"password" : 'X',
+			};
+			$http({
+				method : 'get',
+				url : '/api/outlets',
+				params : param,
+			}).success(function(data, status) {
+				console.log("Data in success " + data + " status " + status);
+				$scope.outletNameList = data.outlets;
+			}).error(function(data, status) {
+				console.log("data in error " + data + " status " + status);
+			});
+		};
+		$scope.listOutletNames();
+
+		var outletId = $scope.outletOption;
+		$scope.listFeedbacksDate = function() {
+			console.log("outetId "+$scope.outletOption);
+			var param = {
+				"auth_token" : getCookie('authToken'),
+				"password" : "X",
+				"outlet_id" : $scope.outletOption,
+				"start_time" : startDt,
+				"end_time" : endDt
+			}
+
+			$http({
+				method : 'get',
+				url : '/api/feedbacks',
+				params : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				$scope.feedbackList = data.feedbacks;
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+			});
+		};
+
+		$scope.listFeedbacks = function() {
+			//$.mobile.loading('show');
+
+			var param = {
+				"auth_token" : getCookie('authToken'),
+				"password" : "X"
+			}
+
+			$http({
+				method : 'get',
+				url : '/api/feedbacks',
+				params : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				$scope.feedbackList = data.feedbacks;
+
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+
+			});
+		};
+
+		$scope.listFeedbacks();
+	}
+});
+
+module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location) {
+	if (getCookie('authToken')) {
+		$('.welcome').show();
+		$('.navBarCls').show();
+		$('.navBarCls ul li').removeClass('active');
+		$('#outlet').show();
+		$('#dasboard').hide();
+		$('#dasboardCustomer').addClass('active');
+		$rootScope.header = "Dashboard Trends | Kanari";
+	}
+});
+module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location) {
+	if (getCookie('authToken')) {
+		$('.welcome').show();
+		$('.navBarCls').show();
+		$('.navBarCls ul li').removeClass('active');
+		$('#outlet').show();
+		$('#dasboard').hide();
+		$('#dasboardCustomer').addClass('active');
+		$rootScope.header = "Dashboard Snapshot | Kanari";
+		
+				
+		
+	}
 });
 function setCookie(name, value, days) {
 	if (days) {

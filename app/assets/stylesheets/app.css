@@ -34,8 +34,8 @@ body {
 .main_content .mandatoryFld {
 	padding: 0;
 	font-size: 13px;
-	  margin-bottom: 10px;
-   display: block;
+	margin-bottom: 10px;
+	display: block;
 }
 .left_margin {
 	margin-left: -17px;
@@ -113,7 +113,7 @@ body {
 }
 .navBarCls {
 	background: none repeat scroll 0 0 #664766;
-	overflow: hidden;
+	overflow: visible;
 	display: none;
 }
 .navBarCls .nav-tabs > li, .nav-pills > li {
@@ -129,6 +129,29 @@ body {
 	color: #5A4166;
 	/*border: none;*/
 }
+
+.nav-tabs .open .dropdown-toggle, .nav-pills .open .dropdown-toggle, .nav > li.dropdown.open.active > a:hover {
+	background-color: #E4E3E1 !important;
+	border-color: #E4E3E1 !important;
+	color: #5A4166 !important;
+}
+#dasboardCustomer .dropdown-menu {
+	background-color: #E4E3E1;
+	border: 1px solid #BFB5BD;
+	margin: -1px 0 0;
+	min-width: 135px;
+	padding: 0;
+}
+#dasboardCustomer .dropdown-menu a {
+	padding: 7px 15px;
+	border-bottom: 1px solid #BFB5BD;
+}
+#dasboardCustomer .dropdown-menu a img {
+	margin-right: 3px;
+}
+.dropdown-menu li > a:hover, .dropdown-menu .active > a, .dropdown-menu .active > a:hover {
+	background-color: #664766 !important;
+}
 .navBarCls .nav-tabs > li > a, .nav-pills > li > a {
 	margin-right: 1px;
 	padding: 2px 12px;
@@ -141,6 +164,9 @@ body {
 }
 .navBarCls .nav-tabs {
 	border: none;
+}
+.navBarCls ul.span12 {
+	overflow: visible;
 }
 
 /***Login***/
@@ -268,7 +294,7 @@ span.full_name {
 	font-size: 15px;
 	/*padding: 25px 0 35px;*/
 	/*display: block;*/
-	margin-right: 8px;
+	/*margin-right: 8px;*/
 }
 a.addRestaurant {
 	background: none repeat scroll 0 0 #F5BA44;
@@ -454,11 +480,11 @@ div.create_rest {
 	font-size: 13px;
 	/*margin: 1% -18%;*/
 }
-.header_title span.outletM{
+.header_title span.outletM {
 	border-bottom: 3px solid #5A4166;
-    display: block;
-    text-shadow: 0 0 #5A4166;
-    padding: 0 0 7px;
+	display: block;
+	text-shadow: 0 0 #5A4166;
+	padding: 0 0 7px;
 }
 .controls .successMsgMnger {
 	color: green;
@@ -545,8 +571,8 @@ div.create_rest {
 	margin-top: 0;
 	border-left: 2px solid #CCCCCC;
 }
-#outletManager .row{
-	 margin-left: 0;
+#outletManager .row {
+	margin-left: 0;
 }
 
 .tabletId {
@@ -757,7 +783,7 @@ ul.outlet_cuisine_type li a {
 	content: "\25C0";
 	position: absolute;
 	top: 10px;
-	left: -12px;
+	left: -13px;
 	font-size: 16px;
 	line-height: 16px;
 	color: #ddd;
@@ -851,7 +877,7 @@ input:focus {
 /* Set to green check and text when valid */
 .input-help li.valid {
 	color: #3a7d34;
-	background-position: 2px 6px;
+	background-position: 2px 8px;
 }
 
 /* Set submit button */
@@ -969,4 +995,247 @@ input {
 	display: block;
 	float: left;
 	border-left: none;
+}
+
+/***Dashboard Comment***/
+.home_page_view {
+	width: 100%;
+}
+.feedback_step {
+	border: 1px solid #D6D6D6;
+	border-radius: 10px 10px 10px 10px;
+	margin: 0.4% 0.6%;
+	overflow: hidden;
+	padding: 1% 0;
+	position: relative;
+}
+.promo_code {
+	color: #674665;
+	float: left;
+	padding: 1% 0;
+	width: 20%;
+	text-align: center;
+}
+.promo_txt {
+	font-size: 130%;
+	font-weight: bold;
+	line-height: 10px;
+}
+.promo_value {
+	display: block;
+	font-family: 'Roboto', sans-serif !important;
+	font-size: 535% !important;
+	font-weight: bold;
+	margin-top: 10%;
+}
+.promo_code_def {
+	border-left: 1px solid #D6D6D6;
+	border-right: 1px solid #D6D6D6;
+	float: left;
+	width: 31%;
+}
+
+.def_icon {
+	color: #999999;
+	float: left;
+	margin: 3% 2%;
+	text-align: center;
+	width: 70px;
+}
+.promo_code_desc {
+	float: left;
+	padding: 1% 2%;
+	position: relative;
+	text-align: justify;
+	width: 40%;
+}
+.update_time {
+	bottom: 3%;
+	position: absolute;
+	right: 3%;
+}
+
+.outletDropDown {
+	float: right;
+	margin: 6px;
+}
+
+/**** Dashboard snapshot ****/
+.insight_graph {
+	width: 100%;
+}
+.daily_change_span {
+	float: right;
+	text-align: left;
+	padding-top: 3%;
+	width: 21%;
+}
+.daily_change_span img {
+	padding: 6% 0;
+}
+.score_1 {
+	background: none repeat scroll 0 0 #E6E7E9;
+	border-radius: 5px 5px 5px 5px;
+	margin: 0.51%;
+	overflow: hidden;
+	padding: 0 0 0 1%;
+	border: 1px solid #C3C3C3;
+}
+.net_score {
+	border-right: 1px solid #664766;
+	float: left;
+	height: 45px;
+	margin-bottom: -1000px;
+	padding-bottom: 1000px;
+	padding-top: 20px;
+	text-align: left;
+	width: 49%;
+}
+
+.feedSub {
+	padding-top: 0;
+	width: 49.5%;
+}
+.daily_change_score {
+	float: right;
+	padding-top: 1%;
+	text-align: right;
+	width: 30%;
+}
+.net_promo_score {
+	border-right: 1px solid #664766;
+	float: left;
+	height: 72px;
+	margin-bottom: -1000px;
+	padding: 0.5% 0 1000px;
+	text-align: left;
+	width: 49%;
+}
+
+.daily_change {
+	float: left;
+	text-align: right;
+	width: 50%;
+	/*padding: 1% 0;*/
+}
+.netScore {
+	color: #664766;
+	font-family: number;
+	display: block;
+	font-size: 250%;
+	margin-top: 5%;
+}
+div.netScore {
+	padding: 15%;
+}
+.txt1 {
+	font-size: 100%;
+	color: #000000;
+}
+.value1 {
+	font-size: 140%;
+	font-family: number;
+	color: #664766;
+}
+.value2 {
+	color: #664766;
+	float: right;
+	font-family: number;
+	font-size: 140%;
+}
+.rate_plus {
+	background: none repeat scroll 0 0 #FEC03B;
+	float: left;
+	margin-top: 2%;
+}
+.net_rate_plus {
+	background: none repeat scroll 0 0 #FEC03B;
+	float: left;
+	/*margin-top: 5%;*/
+	margin-top: 12%;
+}
+
+.net_rate_plus_red {
+	background: none repeat scroll 0 0 #C84A58;
+	float: left;
+	/*margin-top: 5%;*/
+	margin-top: 12%;
+}
+.ratePValue {
+	background: none repeat scroll 0 0 transparent;
+	color: #664766;
+	font-weight: bold;
+	margin-left: 1%;
+}
+
+.rate_minus {
+	background: none repeat scroll 0 0 #C84A58;
+	float: right;
+	margin-top: 0%;
+}
+.rateMValue {
+	background: none repeat scroll 0 0 transparent;
+	color: #664766;
+	font-family: number;
+	font-weight: bold;
+	margin-left: 1%;
+}
+.rate1V {
+	width: 34%;
+}
+.rate2V {
+	width: 27%;
+}
+.rate3V {
+	width: 11%;
+}
+.rate4V {
+	width: 12%;
+}
+.rate5V {
+	width: 27%;
+}
+.rate6V {
+	width: 81%;
+}
+.rate7V {
+	width: 69%;
+}
+.main_score {
+	border-radius: 5px 5px 5px 5px;
+	border: 1px solid #C3C3C3;
+	margin: 0 0.5%;
+}
+.score_div {
+	overflow: hidden;
+	padding: 0 0 0 1%;
+	border-bottom: 1px solid #C3C3C3;
+}
+.score_final {
+	background: none repeat scroll 0 0 #E6E7E9;
+	border-top: 12px solid #D6D6D6;
+	overflow: hidden;
+}
+.score_final .net_score, .score_final .daily_change {
+	text-align: center;
+}
+/**** Dashboard snapshot ****/
+
+/****Calendar CSS***/
+#dp2, #dp3 {
+	float: right;
+	margin: 5px;
+}
+#dp3 span, #dp2 span {
+	float: right;
+}
+#dp3 .icon-th, #dp2 .icon-th {
+	background-position: -2px -2px;
+}
+.addLeft {
+	left: 980px !important;
+}
+
+.addLeft:before, .addLeft:after {
+	left: 200px !important;
 }

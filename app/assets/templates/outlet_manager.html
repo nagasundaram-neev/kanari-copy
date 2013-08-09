@@ -60,7 +60,7 @@
 						{{manager.email}}
 					</div>
 					<div class="border_right_none data" style="width:56px">
-						<a href="" ng-click="DeleteManager(manager.id)">DELETE</a>
+						<a href="" ng-click="DeleteManager(manager.id)">Delete</a>
 					</div>
 				</div>
 			</div>
@@ -128,9 +128,9 @@
 						<button class="btn" disabled>
 							Update Manager
 						</button>
-						<button  ng-click="DeleteManager(manager_ID)" class="cancelBtn submitBtn btn btn-primary btn-large"  >
-							Delete
-						</button>
+						<a  ng-click="close_updatemanager()" class="cancelBtn submitBtn btn btn-primary btn-large"  >
+								Cancel
+							</a>
 						<p ng-show="error" class="errorMsg">
 							{{errorMsg}}
 						</p>
