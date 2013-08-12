@@ -444,7 +444,7 @@
 }
 
 .searchDiv input::-moz-placeholder, textarea::-moz-placeholder {
-	color: #B1B2B4;
+	color: #AAAAAA;
 	text-shadow: none;
 }
 
@@ -454,7 +454,7 @@
 }
 
 .instructionDiv input::-moz-placeholder, textarea::-moz-placeholder {
-	color: #B1B2B4;
+	color: #AAAAAA;
 	text-shadow: none;
 }
 
@@ -493,7 +493,7 @@
 .searchDiv input {
 	text-shadow: none;
 	width: 80% !important;
-	color: #999999;
+	color: #664765;
 }
 .restListOuterDiv {
 	font-size: 0.8em
@@ -1165,7 +1165,8 @@ img, object {
 }
 
 #settings .ui-field-contain input::-moz-placeholder {/* Firefox 19+ */
-	color: #664765;
+	color: #E5E6E8;
+	opacity: 1;
 }
 
 #settings .ui-field-contain input:-ms-input-placeholder {
@@ -1644,7 +1645,7 @@ img, object {
 .outerDiv .ui-body-a, .ui-overlay-a {
 	background: none repeat scroll 0 0 #FFFFFF;
 	border: none;
-	color: #bbb !important;
+	color: #664765 !important;
 	text-shadow: none;
 }
 .outerDiv .ui-field-contain:last-child {

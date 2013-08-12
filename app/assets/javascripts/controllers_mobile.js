@@ -301,6 +301,7 @@ module.controller('homeController', function($scope, $http, $location) {
 				//var date = new Date();
 				$scope.points = data.user.points_available;
 				$scope.userName = data.user.first_name + " " + data.user.last_name;
+				$scope.role = getCookie('userRole');
 				if (data.user.points_redeemed == null) {
 					$scope.aedSaved = 0;
 				} else {
@@ -333,6 +334,7 @@ module.controller('homeController', function($scope, $http, $location) {
 		};
 
 		if (getCookie("signInCount") == 0) {
+			console.log("in sign in count");
 			$scope.getUserData();
 		}
 
@@ -447,6 +449,12 @@ module.controller('signUpController', function($scope, $http, $location) {
 				data : param
 			}).success(function(data, status) {
 				console.log("User Role " + data + " status " + status);
+				//setCookie('email', $scope.email, 0.29);
+				//setCookie('password', $scope.password, 0.29);
+				setCookie('userRole', data.user_role, 0.29);
+				setCookie('authToken', data.auth_token, 0.29);
+				setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
+				setCookie('signInCount', data.sign_in_count, 0.29);
 				$location.url("/signedUp");
 			}).error(function(data, status) {
 				console.log("data in error " + $scope.email + " status " + status);
@@ -472,10 +480,33 @@ module.controller('signUpController', function($scope, $http, $location) {
 });
 
 module.controller('signedUpController', function($scope, $http, $location) {
-
+	$scope.email = getCookie('email');
+	$scope.password = getCookie('password');
 	$scope.proceedAccount = function() {
-		$location.url("/login");
-	}
+		// console.log("email "+$scope.email+" password "+$scope.password);
+		// var param = "{email:'" + $scope.email + "','password:'" + $scope.password + "'}";
+		// $http({
+		// method : 'post',
+		// url : '/api/users/sign_in',
+		// }).success(function(data, status) {
+		// auth_token = data.user_role;
+		// console.log("User Role " + data.user_role + " status " + status);
+		// //deleteCookie('email');
+		// //deleteCookie('password');
+		// setCookie('userRole', data.user_role, 0.29);
+		// setCookie('authToken', data.auth_token, 0.29);
+		// setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
+		// setCookie('signInCount', data.sign_in_count, 0.29);
+		// $location.url("/home");
+		// }).error(function(data, status) {
+		// console.log("data " + $scope.email + " status " + status);
+		// });
+		// $scope.$watch('email + password', function() {
+		// $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
+		// });
+		$location.url("/home");
+		//$location.url("/login");
+	};
 });
 module.controller('changePasswordController', function($scope, $http, $location) {
 
@@ -1412,14 +1443,14 @@ function setFooter(valueH) {
 	// }
 
 	$(document).on("pageshow", ".ui-page", function() {
-		
+
 		$('#date').scroller({
 			theme : "ios",
 			mode : "scroller",
 			display : "bottom",
 			dateFormat : 'dd/mm/yy'
 		});
-		
+
 		var $page = $(this), vSpace = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() + $page.children('.ui-content').height();
 
 		if (vSpace < $(window).height()) {
@@ -1573,6 +1604,7 @@ module.factory('Facebook', function($http, $location) {
 					//var date_of_birth = new Date(response.birthday);
 					FB.api('/me', function(response) {
 						var date_of_birth = new Date(response.birthday);
+
 						console.log("date of birth " + date_of_birth);
 						var param = {
 							"user" : {
@@ -1580,7 +1612,7 @@ module.factory('Facebook', function($http, $location) {
 								"last_name" : response.last_name,
 								"email" : response.email,
 								"gender" : response.gender,
-								"date_of_birth" : response.birthday
+								"date_of_birth" : "1929-12-31"
 							},
 							"oauth_provider" : "facebook",
 							"access_token" : self.auth.accessToken
@@ -1598,8 +1630,6 @@ module.factory('Facebook', function($http, $location) {
 								setCookie('signInCount', data.sign_in_count, 7);
 								setCookie('userName', data.first_name + ' ' + data.last_name, 7);
 								$location.url('/home');
-							} else {
-
 							}
 						});
 
