@@ -539,6 +539,10 @@ div.netScore {
 	font-family: number;
 	font-size: 140%;
 }
+.value3{
+	font-size: 275%;
+}
+
 .rate_plus {
 	background: none repeat scroll 0 0 #FEC03B;
 	float: left;
