@@ -620,7 +620,6 @@ module.controller('settingsController', function($scope, $http, $location) {
 					},
 					"auth_token" : getCookie('authToken')
 				}
-
 				$http({
 					method : 'put',
 					url : '/api/users',
@@ -1282,7 +1281,7 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 					data : param
 				}).success(function(data, status) {
 					console.log("User Role " + data + " status " + status);
-					$scope.success = "You have successfully redeemed for " + $scope.amount + " points";
+					//$scope.success = "You have successfully redeemed for " + $scope.amount + " points";
 					$scope.listPoints();
 					$scope.successMsg = true;
 					$scope.erromsg = false;
@@ -1413,12 +1412,14 @@ function setFooter(valueH) {
 	// }
 
 	$(document).on("pageshow", ".ui-page", function() {
+		
 		$('#date').scroller({
 			theme : "ios",
 			mode : "scroller",
 			display : "bottom",
 			dateFormat : 'dd/mm/yy'
 		});
+		
 		var $page = $(this), vSpace = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() + $page.children('.ui-content').height();
 
 		if (vSpace < $(window).height()) {

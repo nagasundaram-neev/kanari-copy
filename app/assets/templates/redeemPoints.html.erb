@@ -10,25 +10,25 @@
 		<div class="outerDiv" align="center">
 			<div class="innrDiv">
 				<div>
-					You have
+					You can redeem up to maximum of
 				</div>
-				<div class="number">
-					{{points}}
+				<div>
+					<span class="aed">AED</span><span class="number">{{points}}</span>
 				</div>
-				<span class="points">POINTS</span>
+				<!-- <span class="points">POINTS</span> -->
 				<div class="clr"></div>
 			</div>
 			<div class="line"></div>
 		</div>
 		<div class="instructionDiv" align="center">
 			<div class="instruction">
-				Fill the amount you want to redeem at the selected restaurant
+				How much would you like to redeem?
 			</div>
 			<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
-				<input data-theme="a" data-inline="true" type="text" onfocus="this.type='number';" maxlength="5" name="txtPassword" ng-model="amount" class="passwordTxt" placeholder="Amount"/>
+				<input data-theme="a" data-inline="true" type="text" onfocus="this.type='number';" maxlength="5" name="txtPassword" ng-model="amount" class="passwordTxt" placeholder="Amount to redeem in AED"/>
 			</div>
-			<p ng-show="successMsg" class="succMsg">
-				{{success}}
+			<p ng-show="successMsg" class="redeemSuccMsg">
+				Your redemption request is being processed. Don't forget to inform your waiter that you are redeeming your Kanari points.
 			</p>
 			<p class="errorMsg" ng-show="erromsg" style="display: block">
 				{{error}}

@@ -1731,6 +1731,14 @@ img, object {
 	color: #0F9D58;
 	text-shadow: none;
 }
+
+.redeemSuccMsg{
+	border: 2px solid #664765;
+    color: #0F9D58;
+    margin: 3% 9%;
+    padding: 0.6%;
+    text-shadow: none;
+}
 .sucsessMsg {
 	color: #0F9D58;
 	text-shadow: none;
@@ -2015,5 +2023,8 @@ img, object {
 #redeemPoints .ui-body-a, #redeemPoints .ui-overlay-a {
 	text-shadow: none;
 	color: #664765;
+}
+.aed {
+	font-size:120%;
 }
 
