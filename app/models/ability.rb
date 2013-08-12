@@ -37,7 +37,6 @@ class Ability
       can :read_all, Customer
       can :read, Customer
       can :read_all_redemptions, Outlet
-      can :read_pending_redemptions, Outlet
       can :approve_redemptions, Outlet
       can :create, OutletType
       can :create, CuisineType
@@ -47,7 +46,7 @@ class Ability
       can :create, Customer
       can :update, Customer, customer_admin_id: user.id
       can :read, Customer, customer_admin_id: user.id
-      can :read_pending_redemptions, Outlet, customer: user.customer
+      can :read_all_redemptions, Outlet, customer: user.customer
       can :approve_redemptions, Outlet, customer: user.customer
       can :manage, Outlet, customer: user.customer
       can :create, Outlet
@@ -71,13 +70,13 @@ class Ability
       can :update, User, role: 'staff'
       can :read_feedbacks, Outlet, manager_id: user.id
       can :read_trends, Outlet, manager_id: user.id
-      can :read_pending_redemptions, Outlet, manager_id: user.id
+      can :read_all_redemptions, Outlet, manager_id: user.id
       can :approve_redemptions, Outlet, manager_id: user.id
       can :generate_code, Outlet, manager_id: user.id
     when 'staff'
       can :read, Outlet, id: (user.employed_outlet.id rescue nil)
       can :read_feedbacks, Outlet, id: (user.employed_outlet.id rescue nil)
-      can :read_pending_redemptions, Outlet, id: (user.employed_outlet.id rescue nil)
+      can :read_all_redemptions, Outlet, id: (user.employed_outlet.id rescue nil)
       can :approve_redemptions, Outlet, id: (user.employed_outlet.id rescue nil)
       can :generate_code, Outlet, id: (user.employed_outlet.id rescue nil)
     when 'user'

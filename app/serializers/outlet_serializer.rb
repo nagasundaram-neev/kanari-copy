@@ -16,7 +16,7 @@ class OutletSerializer < ActiveModel::Serializer
 
   def include_points_pending_redemption?
     ability = Ability.new(current_user)
-    ability.can? :read_pending_redemptions, Outlet
+    ability.can? :read_all_redemptions, Outlet
   end
 
 end

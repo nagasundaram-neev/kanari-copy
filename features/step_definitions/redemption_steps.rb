@@ -8,6 +8,18 @@ Given "the following redemptions exist" do |hashes|
   Redemption.count.should == redemption_hashes.size
 end
 
+Given(/^the following redemptions are requested before "([^"]*)" minutes$/) do |time_limit, hashes|
+  redemption_hashes = hashes.hashes
+  redemption_hashes.each do |redemption_hash|
+    approved = redemption_hash.delete("approved")
+    redemption_hash[:approved_by] = (approved.to_s == "false" ? nil : User.last.id)
+    redemption_hash.delete("created_at")
+    redemption_hash[:created_at] = ( Time.zone.now - time_limit.to_i.minutes )
+    Redemption.create!(redemption_hash)
+  end
+  Redemption.count.should == redemption_hashes.size
+end
+
 Given(/^the following redemptions exist for "(.*?)"$/) do |date, hashes|
   redemption_hashes = hashes.hashes
   redemption_hashes.each do |redemption_hash|
