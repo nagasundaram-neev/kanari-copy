@@ -424,6 +424,14 @@ module.controller('insightsController', function($scope, $http, $location) {
 				}
 
 				$scope.feedCount = data.feedback_insights.feedbacks_count;
+				if(data.feedback_insights.feedbacks_count == 0){
+					$scope.foodFlag = 2;
+					$scope.speedFlag = 2;
+					$scope.friendlinessFlag = 2;
+					$scope.cleanlinessFlag = 2;
+					$scope.ambienceFlag = 2;
+					$scope.valueFlag = 2;
+				}
 				$scope.points = data.feedback_insights.rewards_pool;
 
 			}).error(function(data, status) {
