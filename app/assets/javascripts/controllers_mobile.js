@@ -605,33 +605,39 @@ module.controller('settingsController', function($scope, $http, $location) {
 		$scope.getProfile();
 
 		$scope.saveProfile = function() {
-			var param = {
-				"user" : {
-					"first_name" : $scope.firstName,
-					"last_name" : $scope.lastName,
-					"date_of_birth" : $scope.date,
-					"gender" : $scope.gender,
-					"location" : $scope.location,
-				},
-				"auth_token" : getCookie('authToken')
-			}
-
-			$http({
-				method : 'put',
-				url : '/api/users',
-				data : param
-			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
-				deleteCookie('authToken');
-				setCookie('authToken', data.auth_token, 0.29);
-				$scope.errorMsg = false;
-				$scope.succMsg = true;
-			}).error(function(data, status) {
-				console.log("data " + data + " status " + status);
-				$scope.error = data.errors[0];
+			if (!$scope.firstName || !$scope.lastName) {
+				$scope.error = "Please provide first name and last name";
 				$scope.errorMsg = true;
 				$scope.succMsg = false;
-			});
+			} else {
+				var param = {
+					"user" : {
+						"first_name" : $scope.firstName,
+						"last_name" : $scope.lastName,
+						"date_of_birth" : $scope.date,
+						"gender" : $scope.gender,
+						"location" : $scope.location,
+					},
+					"auth_token" : getCookie('authToken')
+				}
+
+				$http({
+					method : 'put',
+					url : '/api/users',
+					data : param
+				}).success(function(data, status) {
+					console.log("User Role " + data + " status " + status);
+					deleteCookie('authToken');
+					setCookie('authToken', data.auth_token, 0.29);
+					$scope.errorMsg = false;
+					$scope.succMsg = true;
+				}).error(function(data, status) {
+					console.log("data " + data + " status " + status);
+					$scope.error = data.errors[0];
+					$scope.errorMsg = true;
+					$scope.succMsg = false;
+				});
+			}
 		};
 
 		$scope.logout = function() {
