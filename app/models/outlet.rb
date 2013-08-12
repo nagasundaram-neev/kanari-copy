@@ -28,12 +28,20 @@ class Outlet < ActiveRecord::Base
   end
 
   def get_feedbacks params
-    start_time = normalize_date(params[:start_time]) || self.created_at
-    end_time   = normalize_date(params[:end_time]) || Time.zone.now
     if params[:type] && params[:type] == "pending"
-      get_pending_feedbacks(start_time, end_time)
+      get_pending_feedbacks
     else
+      start_time, end_time = normalize_start_and_end_time(params[:start_time], params[:end_time])
       get_completed_feedbacks(start_time, end_time)
+    end
+  end
+
+  def get_redemptions(params)
+    if params[:type] && params[:type] == "pending"
+      get_pending_redemptions
+    else
+      start_time, end_time = normalize_start_and_end_time(params[:start_time], params[:end_time])
+      get_processed_redemptions(start_time, end_time)
     end
   end
 
@@ -108,6 +116,13 @@ class Outlet < ActiveRecord::Base
       DateTime.parse(date) rescue nil
     end
 
+    def normalize_start_and_end_time(start_time= nil, end_time=nil)
+      start_time = normalize_date(start_time) || self.created_at
+      end_time   = normalize_date(end_time) || Time.zone.now
+      start_time,end_time = end_time,start_time if(start_time > end_time)
+      [start_time, end_time]
+    end
+
     def get_net_promoter_score(feedbacks_till_yesterday, feedbacks_till_today)
       promoters_till_today = 0; passives_till_today = 0; net_promoters_till_yesterday = 0; 
       net_promoters_till_today = 0; neutrals_till_yesterday = 0; neutrals_till_today = 0
@@ -144,22 +159,26 @@ class Outlet < ActiveRecord::Base
       {:like => promoters_today.to_i, :dislike => passives_today.to_i, :neutral => neutrals_today.to_i, :change => (net_promoters_today - net_promoters_yesterday).to_i}
     end
 
-    def get_completed_feedbacks start_time, end_time
-      self.feedbacks.completed.where({updated_at: start_time..end_time}).order("updated_at desc")
+    def get_pending_feedbacks
+      self.feedbacks.pending.order("updated_at desc")
     end
 
-    def get_pending_feedbacks start_time, end_time
-      self.feedbacks.pending.where({updated_at: start_time..end_time}).order("updated_at desc")
+    def get_completed_feedbacks(start_time, end_time)
+     feedbacks = self.feedbacks.completed.where({updated_at: start_time..end_time}).order("updated_at desc")
+    end
+
+    def get_pending_redemptions
+      self.redemptions.pending.order("updated_at desc")
+    end
+
+    def get_processed_redemptions(start_time, end_time)
+      self.redemptions.processed.where({updated_at: start_time..end_time}).order("updated_at desc")
     end
 
     # Feedback Statistics
     def get_feedback_trends(start_time, end_time, all_feedbacks, all_redemptions)
-      p "Get feedback trends for #{all_feedbacks.pluck('feedbacks.id,points,rewards_pool_after_feedback,user_id,completed,outlet_id')}"
-      p "Get feedback trends for #{all_redemptions.pluck('redemptions.id,points,rewards_pool_after_redemption,user_id,approved_by,outlet_id')}"
       start_time,end_time = end_time,start_time if start_time > end_time
       all_feedbacks = all_feedbacks.order('feedbacks.updated_at desc') unless all_feedbacks.blank?
-p "Start time #{start_time}"
-p "End time #{end_time}"
       feedbacks_nps  = all_feedbacks.select {|f| f if (f.updated_at < end_time)}.first(NPS_LIMIT)
       feedbacks      = all_feedbacks.select {|f| f if (f.updated_at > start_time && f.updated_at < end_time)}
       redemptions    = all_redemptions.select {|f| f if (f.updated_at > start_time && f.updated_at < end_time)}
@@ -183,7 +202,7 @@ p "End time #{end_time}"
       end
       {:like => promoters, :dislike => passives, :neutral => neutrals}
     end
-    
+
     def get_net_promoter_score_statistics(feedbacks)
       promoters = 0; passives = 0; neutrals = 0
       if feedbacks.present?
@@ -230,8 +249,7 @@ p "End time #{end_time}"
       latest = (feedbacks | redemptions).compact.uniq.sort! {|i,j| i.updated_at <=> j.updated_at}.last
       rewards_pool = latest ? latest.send("rewards_pool_after_#{latest.class.name.downcase}") : 0 
       usage[:rewards_pool] = rewards_pool
-      usage 
+      usage
     end
 
 end
-

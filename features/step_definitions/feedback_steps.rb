@@ -35,6 +35,16 @@ Given "the following feedbacks exist" do |hashes|
   Feedback.count.should == feedback_hashes.size
 end
 
+Given(/^the following feedbacks are created before "([^"]*)" minutes$/) do |time_limit, hashes|
+  feedback_hashes = hashes.hashes
+  feedback_hashes.each do |feedback_hash|
+    feedback_hash.delete("created_at")
+    feedback_hash[:created_at] = ( Time.zone.now - time_limit.to_i.minutes )
+    Feedback.create!(feedback_hash)
+  end
+  Feedback.count.should == feedback_hashes.size
+end
+
 And /^the feedback with id "([^"]*)" should have the following attributes$/ do |feedback_id, table|
   feedback = Feedback.find(feedback_id)
   attr = table.rows_hash

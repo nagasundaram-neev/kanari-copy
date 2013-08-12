@@ -11,16 +11,9 @@ class Api::V1::RedemptionsController < ApplicationController
     else
       outlet = current_user.outlets.first
     end
-    if outlet.nil?
-      render json: {errors: ["Outlet not found."]}, status: :not_found and return
-    end
-    if params[:type] && params[:type] == 'pending'
-      authorize! :read_pending_redemptions, outlet
-      @redemptions = outlet.pending_redemptions
-    else
-      authorize! :read_all_redemptions, outlet
-      @redemptions = outlet.redemptions
-    end
+    render json: {errors: ["Outlet not found."]}, status: :not_found and return if outlet.nil?
+    authorize! :read_all_redemptions, outlet
+    @redemptions = outlet.get_redemptions(params)
     render json: @redemptions
   end
 
