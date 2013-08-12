@@ -1165,7 +1165,7 @@ img, object {
 }
 
 #settings .ui-field-contain input::-moz-placeholder {/* Firefox 19+ */
-	color: #E5E6E8;
+	color: #AAAAAA;
 	opacity: 1;
 }
 
