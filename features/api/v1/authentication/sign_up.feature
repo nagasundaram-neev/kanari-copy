@@ -138,6 +138,64 @@ Feature: Sign Up
       Given I keep the JSON response at "auth_token" as "AUTH_TOKEN"
       Then the user with email "kobe@gmail.com" should have "%{AUTH_TOKEN}" as his authentication_token
 
+    Scenario: Oauth provider exists for the user ( edge case when another user exists )
+      Given "Axl Rose" is a user with email id "axl@gmail.com" and password "password123"
+        And his authentication token is "auth_token_1234"
+        And his role is "user"
+        And A facebook user exists who has registered with Kanari facebook app
+      And I send a POST request to /api/users to use oauth with the following:
+      """
+      {
+        "user" : {
+          "first_name": "Axl",
+          "last_name": "Rose",
+          "email": "axl@gmail.com"
+        },
+        "oauth_provider" : "facebook",
+        "access_token" : "valid_token"
+      }
+      """
+      Given I will remember the access_token of "axl@gmail.com" for "facebook" provider
+      Given "Kobe Bryant" is a user with email id "kobe@gmail.com" and password "password123"
+        And his authentication token is "auth_token_123"
+        And his role is "user"
+        And A facebook user exists who has registered with Kanari facebook app
+      When I send a POST request to /api/users to use oauth with the following:
+      """
+      {
+        "user" : {
+          "first_name": "Kobe",
+          "last_name": "Bryant",
+          "email": "kobe@gmail.com"
+        },
+        "oauth_provider" : "facebook",
+        "access_token" : "access_token_123"
+      }
+      """
+      Then the response status should be "201"
+      When I send a POST request to /api/users to use oauth with the following:
+      """
+      {
+        "user" : {
+          "first_name": "Kobe",
+          "last_name": "Bryant",
+          "email": "kobe@gmail.com"
+        },
+        "oauth_provider" : "facebook",
+        "access_token" : "access_token_1234"
+      }
+      """
+      Then the response status should be "201"
+      And the JSON response should have "auth_token"
+        And the auth_token should be different from "auth_token_123"
+      And the JSON response at "user_role" should be "user"
+      And the JSON response at "first_name" should be "Kobe"
+      And the JSON response at "last_name" should be "Bryant"
+      And the JSON response at "registration_complete" should be true
+      Given I keep the JSON response at "auth_token" as "AUTH_TOKEN"
+      Then the user with email "kobe@gmail.com" should have "%{AUTH_TOKEN}" as his authentication_token
+      Then access_token of "axl@gmail.com" for "facebook" provider should not have changed
+
     Scenario: Oauth token is invalid
       When I send a POST request to /api/users to use oauth with the following:
       """

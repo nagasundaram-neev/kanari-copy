@@ -6,9 +6,9 @@ gem 'rails-api' #Rails on API mode
 
 # Use postgres as the database for Active Record
 gem 'mysql2' #Database adapter for ActiveRecord
-gem 'warden', '1.2.2'
-gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
-gem 'devise_invitable', github: 'scambra/devise_invitable', branch: 'rails4' #For sending registration invitations
+gem 'warden', '1.2.3'
+gem 'devise', github: 'emilsoman/devise', branch: 'rails4'
+gem 'devise_invitable', github: 'emilsoman/devise_invitable', branch: 'rails4' #For sending registration invitations
 gem 'cancan' #For authorization
 gem 'active_model_serializers'
 
