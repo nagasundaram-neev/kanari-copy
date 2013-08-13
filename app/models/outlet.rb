@@ -225,6 +225,7 @@ class Outlet < ActiveRecord::Base
       unless feedbacks.blank?
         users = []
         feedbacks.each {|f| users << f.user }
+        users = users.compact
         male_users      = users.select {|user| user if user.gender && user.gender.to_s.downcase == 'male'}.length
         female_users    = users.select {|user| user if user.gender && user.gender.to_s.downcase == 'female'}.length
         new_users       = users.select {|user| user if user.sign_in_count == 0 }.length
