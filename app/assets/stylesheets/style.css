@@ -700,6 +700,10 @@
 	height: 78px;
 	width: 30%;
 }
+#feedback .nextBackColr img {
+	float: left;
+	margin-top: 5%;
+}
 
 body {
 	/*font-family: "kanariFont", sans-serif;*/
@@ -834,6 +838,10 @@ img, object {
 	display: inline;
 	font-size: 100%;
 	/*padding: 0 20%;*/
+}
+#feedback .nxtTxt {
+	float: left;
+	display: block;
 }
 .footerDivRedeemPoints .prev {
 	background-color: #664765;
@@ -1106,6 +1114,7 @@ img, object {
 #signUp .ui-content, #forgotpass .ui-content {
 	padding: 5% 5% 0 !important;
 	/*padding: 0;*/
+	overflow: visible;
 }
 
 #signedUp .ui-content {
@@ -1668,6 +1677,7 @@ img, object {
 	padding: 5% 5% 0 !important;
 	/*padding: 0;*/
 	background: none repeat scroll 0 0 #F9C040 !important;
+	overflow: visible;
 }
 #forgotpass .ui-content {
 	overflow: hidden;
@@ -1756,7 +1766,7 @@ img, object {
 .rememberMe {
 	border: none;
 	/*padding: 0.5em 0 0.1em;*/
-	padding: 1.8em 0;
+	padding: 1.5em 0;
 }
 .rememberMe .ui-icon {
 	background-color: #6E4D6C;
