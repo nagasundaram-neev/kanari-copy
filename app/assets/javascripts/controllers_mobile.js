@@ -129,6 +129,7 @@ var baseUrl = "localhost:8080";
 var auth_token = "";
 var feedbackFlag = 0;
 var signInCount = "";
+var facebookFlag = 0;
 
 module.controller('loginController', function($scope, $http, $location) {
 	setFooter(1);
@@ -566,6 +567,12 @@ module.controller('settingsController', function($scope, $http, $location) {
 		// $("#date").scroller('setDate', $scope.date, true);
 		// }
 		// });
+		if(getCookie('facebookFlag') == 0){
+			$scope.changePass = true;
+		}else if(getCookie('facebookFlag') == 1){
+			$scope.changePass = false;
+		}
+		
 
 		$scope.succMsg = false;
 		$scope.errorMsg = false;
@@ -1624,11 +1631,13 @@ module.factory('Facebook', function($http, $location) {
 						}).success(function(data) {
 							if (data.registration_complete == true) {
 								console.log("in success" + data.first_name);
-								setCookie('userRole', data.user_role, 7);
-								setCookie('authToken', data.auth_token, 7);
+								setCookie('userRole', data.user_role, 0.29);
+								setCookie('authToken', data.auth_token, 0.29);
 								console.log("authToken" + getCookie('authToken'));
-								setCookie('signInCount', data.sign_in_count, 7);
-								setCookie('userName', data.first_name + ' ' + data.last_name, 7);
+								setCookie('signInCount', data.sign_in_count, 0.29);
+								setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
+								//facebookFlag = 1;
+								setCookie('facebookFlag', '1', 0.29);
 								$location.url('/home');
 							}
 						});

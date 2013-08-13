@@ -4,8 +4,7 @@ class SocialNetworkAccount < ActiveRecord::Base
   def self.valid_access_token?(provider, access_token)
     case provider
     when 'facebook'
-      #uri = URI('https://graph.facebook.com/me')
-      #params = { :fields => 'email', :access_token => access_token }
+      require 'net/http'
 
       uri = URI('https://graph.facebook.com/oauth/access_token')
       params = { grant_type: 'fb_exchange_token', client_id: AppConfig[:facebook_app_id], client_secret: AppConfig[:facebook_app_secret], fb_exchange_token: access_token}

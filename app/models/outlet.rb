@@ -59,7 +59,6 @@ class Outlet < ActiveRecord::Base
       day_start = day.beginning_of_day; day_end = day.end_of_day
       feedback_trends[:detailed_statistics][day.strftime("%Y-%m-%d")] = get_feedback_trends(day_start, day_end, feedbacks, redemptions)
     end
-
     return {:feedback_trends => feedback_trends}
   end
 
@@ -226,8 +225,9 @@ class Outlet < ActiveRecord::Base
       unless feedbacks.blank?
         users = []
         feedbacks.each {|f| users << f.user }
-        male_users      = users.select {|user| user if user.gender.to_s.downcase == 'male'}.length
-        female_users    = users.select {|user| user if user.gender.to_s.downcase == 'female'}.length
+        users = users.compact
+        male_users      = users.select {|user| user if user.gender && user.gender.to_s.downcase == 'male'}.length
+        female_users    = users.select {|user| user if user.gender && user.gender.to_s.downcase == 'female'}.length
         new_users       = users.select {|user| user if user.sign_in_count == 0 }.length
         returning_users = users.select {|user| user if user.sign_in_count > 0 }.length
         feedbacks_per_hour = feedbacks.group_by {|f| f.updated_at.strftime('%H')}

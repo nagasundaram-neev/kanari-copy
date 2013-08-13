@@ -412,9 +412,11 @@ module.controller('insightsController', function($scope, $http, $location) {
 				$scope.netScoreDailyChange = data.feedback_insights.net_promoter_score.change;
 
 				if ($scope.netScore > 0) {
-					$scope.netScoreFlag = 0;
+					$scope.netScorePlusBar = true;
+					$scope.netScoreMinusBar = false;
 				} else {
-					$scope.netScoreFlag = 1;
+					$scope.netScorePlusBar = false;
+					$scope.netScoreMinusBar = true;
 				}
 
 				if ($scope.netScoreDailyChange > 0) {
