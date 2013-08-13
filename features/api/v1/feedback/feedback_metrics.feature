@@ -97,7 +97,109 @@ Feature: Metrics for Feedback
          "rewards_pool": 1000
         }
       }
-	  """
+      """
+
+	Scenario: Staff or Manager successfully fetch feedback metrics for today: when there is one feedback for today and one for yesterday
+      Given the following users exist
+         |id        |first_name |email                          | password    | authentication_token  | role            |
+         |101       |Donald     |staff.bangalore.1@subway.com   | password123 | donald_auth_token     | staff           |
+      Given a customer named "Subway" exists with id "100" with admin "admin@subway.com"
+	    And the customer with id "100" has an outlet named "Subway - Bangalore" with id "10" with manager "manager@subway.com"
+		And outlet "Subway - Bangalore" was created on "2013-01-01 00:00:00"
+        And the outlet has "1000" points in its rewards pool
+        And outlet "Subway - Bangalore" has staffs
+          |staff.bangalore.1@subway.com   |
+          |staff.bangalore.2@subway.com   |
+        And the following feedbacks exist before "3" days
+          |id  |outlet_id |user_id |points |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating | comment                                                             | completed  |
+		  |1   |10        |1000    |400    |1            |1                |1                       |1        |1           |1               |10                     | I really enjoyed the pizza's in the out area by the street          | true       |
+		  |2   |10        |1001    |100    |1            |1                |1                       |1        |1           |1               |9                     | I am dissapointed with the service                                  | true       |
+		  |3   |10        |1002    |400    |1            |1                |1                       |1        |0           |1               |9                     | I really enjoyed the pizza's in the out area by the street          | true       |
+		  |4   |10        |1003    |100    |0            |1                |1                       |0        |0           |1               |8                     | I am dissapointed with the service                                  | true       |
+		  |5   |10        |1004    |400    |0            |0                |1                       |0        |0           |1               |7                     | I really enjoyed the pizza's in the out area by the street          | true       |
+		  |6   |10        |3000    |100    |-1           |0                |0                       |0        |-1          |1               |6                     | I am dissapointed with the service                                  | true       |
+		  |7   |10        |1000    |400    |-1           |-1               |-1                      |0        |-1          |0               |5                     | I really enjoyed the pizza's in the out area by the street          | true       |
+		  |8   |10        |3000    |100    |-1           |-1               |-1                      |0        |-1          |0               |4                     | I am dissapointed with the service                                  | true       |
+		  |9   |10        |1000    |400    |-1           |-1               |-1                      |0        |-1          |-1              |4                     | I really enjoyed the pizza's in the out area by the street          | true       |
+		  |10  |10        |3000    |100    |-1           |-1                |-1                     |-1       |-1          |-1              |3                     | I am dissapointed with the service                                  | true       |
+		  |11  |20        |4000    |200    |nil          |nil              |nil                     |nil      |nil         |nil             |nil                    | nil                                                                | nil        |
+		  |12  |20        |1000    |100    |nil          |nil              |nil                     |nil      |nil         |nil             |nil                    | nil                                                                | nil        |
+		  |13  |30        |2000    |200    |1            |0                |1                       |1        |1           |1               |10                    | Yummy chickens, I really liked it.                                  | true       |
+        And the following feedbacks exist before "2" days
+          |id  |outlet_id |user_id |points |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating | comment                                                   | completed  |
+		  |21   |10        |1000    |400    |1                |1           |1                      |1        |1      |1               |10                     | I really enjoyed the pizza's in the out area by the street     | true       |
+		  |22   |10        |1001    |100    |1                |1            |1                      |1        |1      |1               |9                     | I am dissapointed with the service                             | true       |
+		  |23   |10        |1002    |400    |1                |1            |1                      |1        |0      |1               |9                     | I really enjoyed the pizza's in the out area by the street     | true       |
+		  |24   |10        |1003    |100    |1                |1            |0                      |0        |0      |1               |8                     | I am dissapointed with the service                             | true       |
+		  |25   |10        |1004    |400    |0                |1            |0                      |0        |0      |1               |7                     | I really enjoyed the pizza's in the out area by the street     | true       |
+		  |26   |10        |3000    |100    |0                |0            |-1                     |0        |-1     |1               |6                     | I am dissapointed with the service                             | true       |
+		  |27   |10        |1000    |400    |-1               |-1           |-1                     |0        |-1     |0               |5                     | I really enjoyed the pizza's in the out area by the street     | true       |
+		  |28   |10        |3000    |100    |-1               |-1           |-1                     |0        |-1     |0               |4                     | I am dissapointed with the service                             | true       |
+		  |29   |10        |1000    |400    |-1               |-1           |-1                     |0        |-1     |-1              |4                     | I really enjoyed the pizza's in the out area by the street     | true       |
+		  |30  |10        |3000    |100     |-1               |-1           |-1                     |-1       |-1     |-1              |3                     | I am dissapointed with the service                             | true       |
+		  |31  |20        |4000    |200     |nil              |nil          |nil                    |nil      |nil    |nil             |nil                    | nil                                                           | nil        |
+		  |32  |20        |1000    |100     |nil              |nil          |nil                    |nil      |nil    |nil             |nil                    | nil                                                           | nil        |
+		  |33  |30        |2000    |200     |0                |1            |1                      |1        |1      |1               |10                    | Yummy chickens, I really liked it.                             | true       |
+        And the following feedbacks exist for yesterday
+          |id  |outlet_id |user_id |points |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating | comment                                                             | completed  |
+          |101   |10        |1000    |400  |1            |0                |-1                      |1        |1           |1               |8                     | I really enjoyed the pizza's in the out area by the street          | true       |
+        And the following feedbacks exist for today
+          |id  |outlet_id |user_id |points |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating | comment                                                   | completed  |
+          |102   |10        |1000  |400    |-1           |1                |0                      |1        |1           |1               |8                     | I really enjoyed the pizza's in the out area by the street     | true       |
+      When I authenticate as the user "donald_auth_token" with the password "random string"
+      And I send a GET request to "/api/feedbacks/metrics"
+	  Then the response status should be "200"
+      And the JSON response should be:
+      """
+      {
+	 "feedback_insights": {
+         "food_quality": {
+           "like"    : 0,
+           "dislike" : 100,
+           "neutral" : 0,
+           "change"  : -200 
+         },
+         "speed_of_service": {
+           "like"    : 100,
+           "dislike" : 0,
+           "neutral" : 0,
+           "change"  : 100
+         },
+         "friendliness_of_service": {
+           "like"    : 0,
+           "dislike" : 0,
+           "neutral" : 100,
+           "change"  : 100 
+         },
+         "ambience": {
+           "like"    : 100,
+           "dislike" : 0,
+           "neutral" : 0,
+           "change"  : 0
+         },
+         "cleanliness": {
+           "like"    : 100,
+           "dislike" : 0,
+           "neutral" : 0,
+           "change"  : 0
+         },
+         "value_for_money": {
+           "like"    : 100,
+           "dislike" : 0,
+           "neutral" : 0,
+           "change"  : 0
+         },
+         "net_promoter_score": {
+           "like"    : 27, 
+           "dislike" : 45,
+           "neutral" : 27,
+           "change"  : 1 
+         },
+         "feedbacks_count": 1,
+         "rewards_pool": 1000
+        }
+      }
+      """
 
 	Scenario: Manager successfully fetch feedback metrics for any day
       Given the following users exist

@@ -126,3 +126,16 @@ Given(/^the following feedbacks exist for yesterday$/) do |hashes|
   end
   Feedback.where(updated_at: (yesterday + 1.hours)).count.should == feedback_hashes.size
 end
+
+Given(/^the following feedbacks exist before "(.*?)" days$/) do |day, hashes|
+  feedback_hashes = hashes.hashes
+  thisday = Time.zone.now.beginning_of_day - day.to_i.day
+  feedback_hashes.each do |feedback_hash|
+    feedback_hash.delete("created_at")
+    feedback_hash.delete("updated_at")
+    feedback_hash[:created_at] = thisday + 1.hours
+    feedback_hash[:updated_at] = thisday + 1.hours
+    Feedback.create!(feedback_hash)
+  end
+  Feedback.where(updated_at: (thisday + 1.hours)).count.should == feedback_hashes.size
+end
