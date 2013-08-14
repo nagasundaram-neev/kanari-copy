@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130807085046) do
+ActiveRecord::Schema.define(version: 20130814060432) do
 
   create_table "code_generation_logs", force: true do |t|
     t.integer  "outlet_id"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20130807085046) do
     t.integer  "generated_by"
     t.integer  "feedback_id"
     t.string   "code"
-    t.integer  "bill_size"
+    t.float    "bill_size"
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20130807085046) do
     t.datetime "updated_at"
     t.integer  "generated_by"
     t.integer  "recommendation_rating"
-    t.integer  "bill_amount"
+    t.float    "bill_amount"
   end
 
   add_index "feedbacks", ["code"], name: "index_feedbacks_on_code", using: :btree

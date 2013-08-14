@@ -23,7 +23,7 @@ Feature: Create Kanari Code
       And I send a POST request to "/api/kanari_codes" with the following:
       """
       {
-        "bill_amount" : 1000
+        "bill_amount" : 1000.99
       }
       """
       Then the response status should be "201"
@@ -59,11 +59,11 @@ Feature: Create Kanari Code
       And a new feedback entry should be created with <rounded_points> points
     Examples:
       |bill_amount|rounded_points|
-      |100|10|
-      |101|10|
-      |105|10|
-      |106|10|
-      |109|10|
+      |100.99|10|
+      |101.99|10|
+      |105.99|10|
+      |106.99|10|
+      |109.99|10|
 
     Scenario: Manager successfully creates a kanari code
       Given the following users exist
@@ -85,7 +85,7 @@ Feature: Create Kanari Code
       And I send a POST request to "/api/kanari_codes" with the following:
       """
       {
-        "bill_amount" : 1000
+        "bill_amount" : 1000.99
       }
       """
       Then the response status should be "201"
@@ -112,7 +112,7 @@ Feature: Create Kanari Code
       And I send a POST request to "/api/kanari_codes" with the following:
       """
       {
-        "bill_amount" : 1000,
+        "bill_amount" : 1000.99,
         "outlet_id" : 10
       }
       """
@@ -144,7 +144,7 @@ Feature: Create Kanari Code
       And I send a POST request to "/api/kanari_codes" with the following:
       """
       {
-        "bill_amount" : 1000,
+        "bill_amount" : 1000.99,
         "outlet_id" : 10
       }
       """
