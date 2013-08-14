@@ -328,7 +328,6 @@ module.controller('insightsController', function($scope, $http, $location) {
 				"auth_token" : getCookie('authToken'),
 				"password" : "X"
 			}
-
 			$http({
 				method : 'get',
 				url : '/api/feedbacks/metrics',
@@ -443,6 +442,7 @@ module.controller('insightsController', function($scope, $http, $location) {
 		};
 
 		$scope.feedbackMetrics();
+		//setTimeout($scope.feedbackMetrics(), 120);
 		setTimeout(loaded, 1000);
 
 	} else {
