@@ -114,6 +114,7 @@
 #landPage .ui-content{
 	overflow: visible;
 }
+
 .roundBtn img {
 	width: 23%;
 }
@@ -1817,22 +1818,28 @@ img, object {
 	width: 49%;
 	margin: 5% 0;
 }
-#signUp .nameContainer {
-	background-color: transparent !important;
-	padding: 0 !important;
-	margin: 0 0 .2% !important;
-	width: 48.5% !important;
-	float: left !important;
+/** Css for firstname & lastname field starts here**/
+#signUp .ui-grid-a > *:nth-child(n){
+	width: 47%;
+	margin-right: 0;
 }
-#signUp .nameContainer input {
-	background: none repeat scroll 0 0 #FFFFFF !important;
-	/*border: 1px solid #000;*/
-	padding: 0.8em !important;
-	width: 85% !important;
+	
+#signUp .ui-block-b {
+	width: 50.3%!important;
+	padding-left:10px!important;
 }
-.nameContainer .ui-input-text input {
-	width: 120% !important
+#signUp .ui-block-b input, #signUp .ui-block-a input{
+	border-radius: 0;
+	box-shadow: none;
+	padding: 0.6em!important;
+	width: 99%!important;
+	display: block;
+
 }
+#signUp .ui-block-a input{
+	  width: 90% !important;
+}
+/** Css for firstname & lastname field ends here**/
 .ui-input-text input {
 	box-shadow: none;
 	padding: 0 0.4em;

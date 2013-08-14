@@ -11,15 +11,27 @@
 			<p class="alreadyUser" ng-show="feedBackMsg">
 				Thank you for leaving feedback. Sign up for earning points on your feedback
 			</p>
+
 			<div data-role="fieldcontain" class="loginDiv">
-				<div class="ui-input-text ui-body-a nameContainer" style="margin-right:2%!important">
+
+			<!-- 	<div class="ui-input-text ui-body-a nameContainer" style="margin-right:2%!important">
 					<input data-theme="a" data-inline="true" type="text" name="txtUsername" ng-model="firstName" placeholder="First Name"/>
 				</div>
 				<div class="ui-input-text ui-body-a nameContainer">
 					<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="lastName" class="passwordTxt" placeholder="Last Name"/>
 
 				</div>
-				<div class="clr"></div>
+				<div class="clr"></div> -->
+				<!-- Newly added for firstname & lastname -->
+			<div class="ui-grid-a">
+	            <div class="ui-block-a">
+	                <input data-theme="a" data-inline="true" type="text" name="txtUsername" ng-model="firstName" placeholder="First Name"/>
+	            </div>
+
+	            <div class="ui-block-b">
+	               		<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="lastName" class="passwordTxt" placeholder="Last Name"/>
+	            </div>       
+            </div>
 				<div class="ui-input-text ui-body-a">
 					<input data-theme="a" data-inline="true" type="email" name="txtPassword" ng-model="email" class="passwordTxt" placeholder="Email"/>
 				</div>
