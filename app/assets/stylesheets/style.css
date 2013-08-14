@@ -1170,10 +1170,10 @@ img, object {
 	color: #F5C03F;
 }
 #settings .ui-field-contain input::-webkit-input-placeholder {
-	color: #664765;
+	color: #AAAAAA;
 }
 #settings .ui-field-contain input:-moz-placeholder {/* Firefox 18- */
-	color: #664765;
+	color: #AAAAAA;
 }
 
 #settings .ui-field-contain input::-moz-placeholder {/* Firefox 19+ */
