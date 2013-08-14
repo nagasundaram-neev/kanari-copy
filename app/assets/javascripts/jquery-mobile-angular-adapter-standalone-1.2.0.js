@@ -12714,7 +12714,7 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 		aPage.css( "min-height",getScreenHeight() - aPagePadT - aPagePadB - aPageBorderT - aPageBorderB);
         /** Custom height to home page & sign up page for big height screen mobiles */
         var heightHome=$(document).height()-$(document).height()*19/100;
-        var heightSignUp=$(document).height()-$(document).height()*23/100;
+        var heightSignUp=$(document).height()-$(document).height()*22.2/100;
         $('#home .outerDiv').css('minHeight',heightHome+'px');   
         $('#signUp .ui-content').css('height',heightSignUp+'px');   
 	}

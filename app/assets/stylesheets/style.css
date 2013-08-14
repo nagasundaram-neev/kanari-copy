@@ -926,7 +926,7 @@ img, object {
 }
 
 #feedback_step2 .menDiv {
-	margin: 0 0 0 6.4%;
+	margin: 0 0 0 4.8%;
 	width: 100%;
 }
 
@@ -1642,6 +1642,8 @@ img, object {
 
 #feedback_step2 .keypad {
 	height: 420px;
+	width:100%;
+	margin:2% 0 3%;
 }
 
 .enter_code {
@@ -1820,13 +1822,13 @@ img, object {
 }
 /** Css for firstname & lastname field starts here**/
 #signUp .ui-grid-a > *:nth-child(n){
-	width: 47%;
+	width: 47.5%;
 	margin-right: 0;
 }
 	
 #signUp .ui-block-b {
-	width: 50.3%!important;
-	padding-left:10px!important;
+	width: 50%!important;
+	padding-left:7px!important;
 }
 #signUp .ui-block-b input, #signUp .ui-block-a input{
 	border-radius: 0;
@@ -1837,7 +1839,7 @@ img, object {
 
 }
 #signUp .ui-block-a input{
-	  width: 90% !important;
+	  width: 89% !important;
 }
 /** Css for firstname & lastname field ends here**/
 .ui-input-text input {
