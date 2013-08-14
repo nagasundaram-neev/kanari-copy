@@ -41,7 +41,7 @@ Feature: List Kanari Codes for pending feedbacks
             "value_for_money": 0,
             "comment": null,
             "points": 400,
-            "bill_amount": 4000,
+            "bill_amount": 4000.0,
             "code": "12345",
             "updated_at": "2013-07-08 00:00:00",
             "promoter_score": 0
@@ -56,7 +56,7 @@ Feature: List Kanari Codes for pending feedbacks
             "value_for_money": 0,
             "comment": null,
             "points": 200,
-            "bill_amount": 2000,
+            "bill_amount": 2000.0,
             "code": "34567",
             "updated_at": "2013-07-06 00:00:00",
             "promoter_score": 0

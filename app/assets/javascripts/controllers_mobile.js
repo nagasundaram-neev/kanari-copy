@@ -567,10 +567,11 @@ module.controller('settingsController', function($scope, $http, $location) {
 		// $("#date").scroller('setDate', $scope.date, true);
 		// }
 		// });
-		if(getCookie('facebookFlag') == 0){
-			$scope.changePass = true;
-		}else if(getCookie('facebookFlag') == 1){
+		
+		if(getCookie('facebookFlag')){
 			$scope.changePass = false;
+		}else{
+			$scope.changePass = true;
 		}
 		
 
@@ -725,7 +726,11 @@ module.controller('feedbackController', function($scope, $http, $location) {
 	$scope.error = false;
 
 	$scope.home = function() {
-		$location.url("/home");
+		if(getCookie('authToken')){
+			$location.url("/home");	
+		}else{
+			$location.url("/index");
+		}
 	};
 
 	$scope.clear = function() {
@@ -1091,6 +1096,8 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 module.controller('feedbackSubmitController', function($scope, $http, $routeParams, $location) {
 	setFooter(0);
 	if (getCookie('authToken')) {
+		
+		$("#fbShareSuccMsg").hide();
 		if (getCookie('pointsEarned')) {
 			$scope.points = getCookie('pointsEarned');
 		} else {
@@ -1169,7 +1176,6 @@ module.controller('restaurantListController', function($scope, $http, $location)
 		$scope.redeemPoint = function(outletId) {
 			//console.log(outletId);
 			$location.url("/confirmRedeem?outletId=" + outletId);
-			// $location.url("/showRestaurant?outletId=" + outletId);
 		};
 
 		$scope.showRestaurant = function(outletId) {
@@ -1610,20 +1616,22 @@ module.factory('Facebook', function($http, $location) {
 					self.auth = response.authResponse;
 					//var date_of_birth = new Date(response.birthday);
 					FB.api('/me', function(response) {
-						var date_of_birth = new Date(response.birthday);
-
-						console.log("date of birth " + date_of_birth);
+						var dt = new Date(response.birthday);
+						var month = dt.getMonth() + 1;
+						var startDt = dt.getFullYear() + "-" + month + "-" + dt.getDate();
+						console.log("access token " + startDt);
 						var param = {
 							"user" : {
 								"first_name" : response.first_name,
 								"last_name" : response.last_name,
 								"email" : response.email,
 								"gender" : response.gender,
-								"date_of_birth" : "1929-12-31"
+								"date_of_birth" : startDt
 							},
 							"oauth_provider" : "facebook",
 							"access_token" : self.auth.accessToken
 						};
+						
 						$http({
 							method : 'post',
 							url : '/api/users',
@@ -1673,6 +1681,8 @@ module.factory('Facebook', function($http, $location) {
 							//alert('Post ID: ' + response.id);
 							//deleteCookie('pointsEsrned');
 							//deleteCookie('restName');
+							//$scope.fbShareSuccMsg = true;
+							$("#fbShareSuccMsg").show();
 						}
 					});
 
