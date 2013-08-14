@@ -1822,7 +1822,7 @@ img, object {
 }
 /** Css for firstname & lastname field starts here**/
 #signUp .ui-grid-a > *:nth-child(n){
-	width: 47.5%;
+	width: 46%;
 	margin-right: 0;
 }
 	
@@ -1839,7 +1839,7 @@ img, object {
 
 }
 #signUp .ui-block-a input{
-	  width: 89% !important;
+	  width: 88% !important;
 }
 /** Css for firstname & lastname field ends here**/
 .ui-input-text input {
