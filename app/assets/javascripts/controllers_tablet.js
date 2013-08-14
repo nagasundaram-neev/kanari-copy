@@ -124,7 +124,12 @@ var Base64 = {
 		return string;
 	}
 }
+
 var refreshIntervalId;
+var flag = 0;
+var feedbackTimeout;
+var insightTimeout;
+
 module.controller('headerCtrl', function($scope, $http, $location) {
 	var overlayDiv = $("#overlaySuccess");
 	$scope.popup = false;
@@ -233,6 +238,7 @@ module.controller('signInController', function($scope, $http, $location) {
 			if (getCookie('userRole') == "manager" && data.registration_complete) {
 				$location.url("/login");
 			} else if (getCookie('userRole') == "staff" && data.registration_complete) {
+				flag = 1;
 				$location.url("/feedback");
 			}
 
@@ -250,7 +256,7 @@ module.controller('signInController', function($scope, $http, $location) {
 
 });
 
-module.controller('homePageController', function($scope, $http, $location) {
+module.controller('homePageController', function($scope, $http, $location,$timeout) {
 	$(".userloggedIn").show();
 	$("#wrapper").removeClass("clsforLogin");
 	$("#wrapper").addClass("clsafterLogin");
@@ -266,7 +272,6 @@ module.controller('homePageController', function($scope, $http, $location) {
 
 		$scope.listFeedbacks = function() {
 			//$.mobile.loading('show');
-
 			var param = {
 				"auth_token" : getCookie('authToken'),
 				"password" : "X"
@@ -284,6 +289,7 @@ module.controller('homePageController', function($scope, $http, $location) {
 					'z-index' : '0',
 					'background-color' : 'transparent'
 				});
+				console.log("in list feedbacks");
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 				//$.mobile.loading('hide');
@@ -292,6 +298,9 @@ module.controller('homePageController', function($scope, $http, $location) {
 					'background-color' : 'transparent'
 				});
 			});
+			
+			feedbackTimeout = $timeout($scope.listFeedbacks,120000);
+			
 		};
 
 		$scope.listFeedbacks();
@@ -305,8 +314,12 @@ module.controller('homePageController', function($scope, $http, $location) {
 		};
 		//document.addEventListener('DOMContentLoaded', function() {
 		//alert("in");
-		setTimeout(loaded, 1000);
-		//}, false);
+		if(flag == 1){
+		setTimeout(loaded, 2000);
+		}
+		
+		feedbackTimeout = $timeout($scope.listFeedbacks,120000);
+		
 
 	} else {
 		$location.url("/signin");
@@ -314,7 +327,7 @@ module.controller('homePageController', function($scope, $http, $location) {
 
 });
 
-module.controller('insightsController', function($scope, $http, $location) {
+module.controller('insightsController', function($scope, $http, $location,$timeout) {
 	$(".userloggedIn").show();
 	$("#wrapper").removeClass("clsforLogin");
 	$("#wrapper").addClass("clsafterLogin");
@@ -322,6 +335,7 @@ module.controller('insightsController', function($scope, $http, $location) {
 	$("#insights span").show();
 	if (getCookie('authToken')) {
 		$scope.active2 = true;
+		flag = 1;
 
 		$scope.feedbackMetrics = function() {
 			var param = {
@@ -425,7 +439,7 @@ module.controller('insightsController', function($scope, $http, $location) {
 				}
 
 				$scope.feedCount = data.feedback_insights.feedbacks_count;
-				if(data.feedback_insights.feedbacks_count == 0){
+				if (data.feedback_insights.feedbacks_count == 0) {
 					$scope.foodFlag = 2;
 					$scope.speedFlag = 2;
 					$scope.friendlinessFlag = 2;
@@ -439,26 +453,36 @@ module.controller('insightsController', function($scope, $http, $location) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 
 			});
+			
+			  insightTimeout = $timeout($scope.feedbackMetrics,120000);
 		};
+
 
 		$scope.feedbackMetrics();
 		//setTimeout($scope.feedbackMetrics(), 120);
-		setTimeout(loaded, 1000);
+		
+		insightTimeout = $timeout($scope.feedbackMetrics,120000);
+		
+		setTimeout(callScroller, 1000);
 
 	} else {
 		$location.url("/signin");
 	}
 
 });
-module.controller('redemeController', function($scope, $http, $location) {
+
+
+module.controller('redemeController', function($scope, $http, $location,$timeout) {
 	$(".userloggedIn").show();
 	$("#wrapper").removeClass("clsforLogin");
 	$("#wrapper").addClass("clsafterLogin");
 	$("#redemption").addClass("ui_btn_active");
 	$("#redemption span").show();
 	if (getCookie('authToken')) {
+		 $timeout.cancel(insightTimeout);
+		 $timeout.cancel(feedbackTimeout);
 		$scope.active3 = true;
-
+		flag = 1;
 		$scope.redemptionList = [];
 
 		$scope.listRedemptions = function() {
@@ -504,7 +528,7 @@ module.controller('redemeController', function($scope, $http, $location) {
 			});
 
 		};
-		setTimeout(loaded, 1000);
+		setTimeout(callScroller, 1000);
 	} else {
 		$location.url("/signin")
 	}
@@ -520,6 +544,9 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 	$("#numeric_code").addClass("ui_btn_active");
 	$("#numeric_code span").show();
 	if (getCookie('authToken')) {
+		$timeout.cancel(insightTimeout);
+		$timeout.cancel(feedbackTimeout);
+		flag = 1;
 		$scope.loader = false;
 		$scope.codeGenerate = true;
 		$scope.codeGenerated = false;
@@ -625,11 +652,18 @@ module.controller('numericCodeController', function($scope, $http, $location) {
 			$scope.erromsg = false;
 			$scope.listGeneratedCodes();
 		};
-		setTimeout(loaded, 1000);
+		
+		setTimeout(callScroller, 2000);
+		
 	} else {
 		$location.url("/signin");
 	}
 });
+
+
+function callScroller(){
+	myScroll = new iScroll('wrapper');
+}
 
 /* Cookie functions	*/
 function setCookie(name, value, days) {
@@ -660,10 +694,87 @@ function deleteCookie(name) {
 	setCookie(name, "", -1);
 }
 
-var myScroll;
-function loaded() {
-	myScroll = new iScroll('wrapper');
+var myScroll,
+	pullDownEl, pullDownOffset,
+	pullUpEl, pullUpOffset,
+	generatedCount = 0;
+
+function pullDownAction () {
+	setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
+		console.log("hi in hello refresh");
+		angular.element($('#homepage')).scope().listFeedbacks();
+		myScroll.refresh();		// Remember to refresh when contents are loaded (ie: on ajax completion)
+	}, 2000);	// <-- Simulate network congestion, remove setTimeout from production!
 }
+
+function pullUpAction () {
+	setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
+		//console.log("hi in hello refresh");
+		myScroll.refresh();		// Remember to refresh when contents are loaded (ie: on ajax completion)
+	}, 2000);	// <-- Simulate network congestion, remove setTimeout from production!
+}
+
+function loaded() {
+	//alert("in loaded");
+	myScroll = new iScroll('wrapper');
+	pullDownEl = document.getElementById('pullDown');
+	pullDownOffset = pullDownEl.offsetHeight;
+	pullUpEl = document.getElementById('pullUp');	
+	pullUpOffset = pullUpEl.offsetHeight;
+	
+	myScroll = new iScroll('wrapper', {
+		//useTransition: true,
+		topOffset: pullDownOffset,
+		onRefresh: function () {
+			if (pullDownEl.className.match('loading')) {
+				pullDownEl.className = '';
+				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Loading...';
+				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Pull down to refresh...';
+			} else if (pullUpEl.className.match('loading')) {
+				pullUpEl.className = '';
+				pullUpEl.querySelector('.pullUpLabel').innerHTML = '';
+			}
+		},
+		onScrollMove: function () {
+			if (this.y > 5 && !pullDownEl.className.match('flip')) {
+				pullDownEl.className = 'flip';
+				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Release to refresh...';
+				this.minScrollY = 0;
+			} else if (this.y < 5 && pullDownEl.className.match('flip')) {
+				pullDownEl.className = '';
+				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Pull down to refresh...';
+				this.minScrollY = -pullDownOffset;
+			} else if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+				pullUpEl.className = 'flip';
+				pullUpEl.querySelector('.pullUpLabel').innerHTML = '';
+				this.maxScrollY = this.maxScrollY;
+			} else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+				pullUpEl.className = '';
+				pullUpEl.querySelector('.pullUpLabel').innerHTML = '';
+				this.maxScrollY = pullUpOffset;
+			}
+		},
+		onScrollEnd: function () {
+			if (pullDownEl.className.match('flip')) {
+				pullDownEl.className = 'loading';
+				pullDownAction();
+				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Loading...';				
+					// Execute custom function (ajax call?)
+			} else if (pullUpEl.className.match('flip')) {
+				pullUpEl.className = 'loading';
+				pullUpEl.querySelector('.pullUpLabel').innerHTML = '';				
+				pullUpAction();	// Execute custom function (ajax call?)
+			}
+		}
+	});
+	
+	setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
+}
+
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
+document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 2000); }, false);
+
 
 // document.addEventListener('DOMContentLoaded', function() {
 // setTimeout(loaded, 2000);

@@ -726,7 +726,11 @@ module.controller('feedbackController', function($scope, $http, $location) {
 	$scope.error = false;
 
 	$scope.home = function() {
-		$location.url("/home");
+		if(getCookie('authToken')){
+			$location.url("/home");	
+		}else{
+			$location.url("/index");
+		}
 	};
 
 	$scope.clear = function() {

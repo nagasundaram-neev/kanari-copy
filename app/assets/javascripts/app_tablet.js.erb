@@ -105,6 +105,19 @@ module.directive('highchart', function () {
     return moment(date).fromNow();
   }
 });
-    
+
+module.directive('iScroll', ['$rootScope', '$parse', '$location', function($rootScope, $parse, $location) {
+  return {
+    restrict: 'C',
+    link: function(scope, elem, attrs) {
+      new iScroll('wrapper', { useTransition: false, bounce:true, vScroll:true,
+        onScrollEnd: function () {
+          console.log("onScrollEnd");
+          console.log("url is " + $location.url());
+        },
+      });
+    }
+  }
+}]);
 
 

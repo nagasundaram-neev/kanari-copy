@@ -1,8 +1,11 @@
-<div id="scroller" align="center" ng-controller="homePageController" >
+<div id="homepage" align="center" ng-controller="homePageController" >
 	<h3 class="redemptionMsg" ng-show="!feedbackList.length">Currently you do not have any feedbacks to list</h3>
 	<div ng-show="feedbackList.length" class="home_page_view">
-		<div id="refresh" ng-click="refresh()">
+		<!-- <div id="refresh" ng-click="refresh()">
 			<strong>Refresh feedbacks</strong>
+		</div> -->
+		<div id="pullDown">
+			<span class="pullDownIcon"></span><span class="pullDownLabel">Pull down to refresh...</span>
 		</div>
 		<div class="clr"></div>
 		<div ng-repeat="feedbacks in feedbackList" class="feedback_step">
@@ -67,7 +70,27 @@
 				</div>
 			</div>
 			<div class="divPadding promo_code_desc">
-				<span>{{feedbacks.comment}} <!-- The smokehouse BBQ chicken is the best sandwich that has ever been added to the
+				<span>ssdfdfsdfsdfsdfsfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsfsfs
+					sdfsdfsdfsfsfsfsdf
+					sdfsdfsdf
+					sdfsdf
+					sdfsd
+					fsdf
+					sdfsdf
+					sdfsd
+					fsdfsdf
+					sdfsd
+					fsdf
+					sdf
+					sdfsd
+					fsd
+					fsdf
+					sdf
+					sdfsd
+					fsd
+					fsd
+					fsd
+					fsd <!-- The smokehouse BBQ chicken is the best sandwich that has ever been added to the
 					stole of satwiches. It has all the flavour of fattning sandwiches but
 					with the healthy side... --><!-- </span>
 					</div>
@@ -149,5 +172,8 @@
 			</div>
 		</div>
 	</div>
+	<div id="pullUp">
+			<span class="pullUpIcon"></span><span class="pullUpLabel"></span>
+		</div>
 </div>
 
