@@ -1096,6 +1096,8 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 module.controller('feedbackSubmitController', function($scope, $http, $routeParams, $location) {
 	setFooter(0);
 	if (getCookie('authToken')) {
+		
+		$("#fbShareSuccMsg").hide();
 		if (getCookie('pointsEarned')) {
 			$scope.points = getCookie('pointsEarned');
 		} else {
@@ -1679,6 +1681,8 @@ module.factory('Facebook', function($http, $location) {
 							//alert('Post ID: ' + response.id);
 							//deleteCookie('pointsEsrned');
 							//deleteCookie('restName');
+							//$scope.fbShareSuccMsg = true;
+							$("#fbShareSuccMsg").show();
 						}
 					});
 

@@ -537,7 +537,7 @@ module.controller('redemeController', function($scope, $http, $location,$timeout
 var flag = 0;
 var testID = 0;
 
-module.controller('numericCodeController', function($scope, $http, $location) {
+module.controller('numericCodeController', function($scope, $http, $location,$timeout) {
 	$(".userloggedIn").show();
 	$("#wrapper").removeClass("clsforLogin");
 	$("#wrapper").addClass("clsafterLogin");
