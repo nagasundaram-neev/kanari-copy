@@ -24,7 +24,7 @@ class Api::V1::KanariCodesController < ApplicationController
       render json: {errors: ["Outlet not found"]}, status: :unprocessable_entity and return
     end
     authorize! :generate_code, outlet
-    bill_amount = params[:bill_amount].to_i
+    bill_amount = params[:bill_amount]
     points = rounded_ten_percentage_of(bill_amount)
     code = random_five_digit_number
     feedback = Feedback.new(code: code, bill_amount: bill_amount, points: points, outlet: outlet, generated_by: current_user, completed: false)

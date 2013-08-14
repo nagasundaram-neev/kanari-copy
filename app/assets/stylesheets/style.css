@@ -242,7 +242,7 @@
 .headTitle span, .contentText span, .headTitleLast span {
 	display: block;
 	/*padding: 16% 0;*/
-	text-align: left;
+	text-align: center;
 	padding-left: 10px;
 }
 
