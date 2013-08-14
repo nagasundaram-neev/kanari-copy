@@ -23,7 +23,7 @@ Feature: Kanari Code Generation Audit Log
       And I send a POST request to "/api/kanari_codes" with the following:
       """
       {
-        "bill_amount" : 1000.99
+        "bill_amount" : 1000.00
       }
       """
       Then the response status should be "201"
@@ -34,7 +34,7 @@ Feature: Kanari Code Generation Audit Log
         |outlet_id|1000|
         |outlet_name|Subway - Bangalore|
         |generated_by|5|
-        |bill_size|1000.99|
+        |bill_size|1000.00|
       And the code in the log table should be %{CODE}
 
     Scenario Outline: Failed generation of kanari code, should NOT have any log entry
@@ -57,7 +57,7 @@ Feature: Kanari Code Generation Audit Log
       And I send a POST request to "/api/kanari_codes" with the following:
       """
       {
-        "bill_amount" : 1000.99,
+        "bill_amount" : 1000.00,
         "outlet_id" : 10
       }
       """
@@ -71,7 +71,7 @@ Feature: Kanari Code Generation Audit Log
         |outlet_id|1000|
         |outlet_name|Subway - Bangalore|
         |generated_by|5|
-        |bill_size|1000|
+        |bill_size|1000.00|
       Examples:
         |token_prefix|
         |admin|
