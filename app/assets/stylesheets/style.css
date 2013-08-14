@@ -111,7 +111,9 @@
 	/*padding: 0 1.5%;*/
 	padding: 0;
 }
-
+#landPage .ui-content{
+	overflow: visible;
+}
 .roundBtn img {
 	width: 23%;
 }
