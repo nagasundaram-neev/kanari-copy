@@ -480,10 +480,10 @@ input.ui-input-text, textarea.ui-input-text {
 .net_score {
 	border-right: 1px solid #664766;
 	float: left;
-	height: 45px;
+	/*height: 60px;*/
 	margin-bottom: -1000px;
 	padding-bottom: 1000px;
-	padding-top: 20px;
+	padding-top: 30px;
 	text-align: left;
 	width: 49%;
 }
@@ -528,10 +528,18 @@ div.netScore {
 	font-size: 100%;
 	color: #000000;
 }
+.score_div .txt1 {
+	font-size: 130%;
+}
 .value1 {
 	font-size: 140%;
 	font-family: number;
 	color: #664766;
+}
+.score_final .value1{
+	 display: block;
+    font-size: 200%;
+    margin: 10px 0;
 }
 .value2 {
 	color: #664766;
@@ -546,7 +554,7 @@ div.netScore {
 .rate_plus {
 	background: none repeat scroll 0 0 #FEC03B;
 	float: left;
-	margin-top: 20px;
+	margin-top: 30px;
 }
 .net_rate_plus {
 	background: none repeat scroll 0 0 #FEC03B;
@@ -609,6 +617,7 @@ div.netScore {
 .score_div {
 	overflow: hidden;
 	padding: 0 0 0 1%;
+	height: 80px;
 	border-bottom: 1px solid #C3C3C3;
 }
 .score_final {
