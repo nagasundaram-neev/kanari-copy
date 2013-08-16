@@ -7,18 +7,23 @@
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 		<%= stylesheet_link_tag "app.css", :media => "all" %>
 		<%= stylesheet_link_tag "bootstrap.css", :media => "all" %>
+		<%= stylesheet_link_tag "datepicker.css", :media => "all" %>
 		<%= stylesheet_link_tag "bootstrap-responsive.css", :media => "all" %>
-		
+
 		<%= favicon_link_tag 'favicon.ico' %>
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 		<%= javascript_include_tag "jquery.js" %>
+		<%= javascript_include_tag "bootstrap-datepicker.js" %>
 		<%= javascript_include_tag "jquery.nicescroll.min.js" %>
 		<%= javascript_include_tag "jquery.nicescroll.plus.js" %>
 		<%= javascript_include_tag "jquery.maskedinput.js" %>
 		<%= javascript_include_tag "jquery.validate.js" %>
 
 		<%= javascript_include_tag "angular.js" %>
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+		<script src="http://code.highcharts.com/highcharts-more.js"></script>
+		<script type='text/javascript' src="https://rawgithub.com/timrwood/moment/2.1.0/min/moment.min.js"></script>
 		<%= javascript_include_tag "app" %>
 
 		<%= javascript_include_tag "controllers.js" %>
@@ -49,6 +54,21 @@
 					<li id="dasboard" class="diffLinks">
 						<a href="#/createInvitation" class="active"><%= image_tag 'icon_dasboard_in.png' %> Dashboard</a>
 					</li>
+
+					<li id="dasboardCustomer" class="diffLinks dropdown" ng-class="{open: open}">
+						<a class="dropdown-toggle" href="javascript:void(0)" ng-click="open=!open"><%= image_tag 'icon_dasboard_in.png' %>Dashboard <!-- <span class="caret"></span> --></a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+							<li>
+								<a tabindex="-1" href="#/snapshot"><%= image_tag 'ic_snapshots.png' %>SNAPSHOT </a>
+							</li>
+							<li>
+								<a tabindex="-1" href="#/trends"><%= image_tag 'ic_trends.png' %>TRENDS</a>
+							</li>
+							<li>
+								<a tabindex="-1" href="#/comments" style="border-bottom:none"><%= image_tag 'ic_comments.png' %>COMMENTS</a>
+							</li>
+						</ul>
+					</li>
 					<li class="active" id="outlet" class="diffLinks">
 						<a href="#/outlets"><%= image_tag 'icon_outlet_in.png' %> Outlets</a>
 					</li>
@@ -62,7 +82,5 @@
 			</div>
 		</div>
 	</body>
-	<script>
-	
-</script>
+	<script></script>
 </html>

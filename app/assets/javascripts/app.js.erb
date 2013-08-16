@@ -21,10 +21,13 @@ var module = angular.module('kanari', []).
      when('/create_kanari_code',{templateUrl:"<%= asset_path 'createKanariCode.html'%>"}).
      when('/view_account',{templateUrl:"<%= asset_path 'viewAccount.html.erb'%>"}).
      when('/add_outlet_cuisine_type', {templateUrl: "<%= asset_path 'add_outlet_cuisine_type.html' %>"}).
-      when('/outlet_manager', {templateUrl: "<%= asset_path 'outlet_manager.html' %>"}).
-        when('/payment_history', {templateUrl: "<%= asset_path 'paymentHistory.html' %>"}).
-       when('/outlet_manager_account', {templateUrl: "<%= asset_path 'outlet_manager_account.html' %>"}).
+     when('/outlet_manager', {templateUrl: "<%= asset_path 'outlet_manager.html' %>"}).
+     when('/payment_history', {templateUrl: "<%= asset_path 'paymentHistory.html' %>"}).
+     when('/outlet_manager_account', {templateUrl: "<%= asset_path 'outlet_manager_account.html' %>"}).
      when('/logout', {templateUrl: "<%= asset_path 'logOut.html' %>"}).
+     when('/comments', {templateUrl: "<%= asset_path 'dashboard_comments.html' %>"}).
+     when('/trends', {templateUrl: "<%= asset_path 'dashboard_trends.html' %>"}).
+     when('/snapshot', {templateUrl: "<%= asset_path 'dashboard_snapshot.html' %>"}).
      when('/change_password', {templateUrl: "<%= asset_path 'changePassword.html' %>"}).
      otherwise({redirectTo: '/login'});
      $locationProvider.hashPrefix = "";
@@ -150,6 +153,63 @@ module.directive('map', function($http) {
 			})
 		}
 	};
+});
+
+module.directive('hcPie', function () {
+  return {
+    restrict: 'C',
+    replace: true,
+    scope: {
+      items: '='
+    },
+    controller: function ($scope, $element, $attrs) {
+      console.log(2);
+
+    },
+    template: '<div id="container" style="margin: 0 auto">not working</div>',
+    link: function (scope, element, attrs) {
+      console.log(3);
+      var chart = new Highcharts.Chart({
+        chart: {
+          renderTo: 'container',
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false
+        },
+        title: {
+          text: 'Browser market shares at a specific website, 2010'
+        },
+        tooltip: {
+          pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+          percentageDecimals: 1
+        },
+        plotOptions: {
+          column: {
+          	 stacking: 'normal',
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: true,
+              color: '#000000',
+              connectorColor: '#000000',
+              formatter: function () {
+                return '<b>' + this.point.name + '</b>: ' + this.percentage + ' %';
+              }
+            }
+          }
+        },
+        series: [{
+          type: 'column',
+          name: 'Browser share',
+          data: scope.items
+        }]
+      });
+      scope.$watch("items", function (newValue) {
+        chart.series[0].setData(newValue, true);
+      }, true);
+      
+    }
+  }
 });
 
 module.directive('showtab',
@@ -280,6 +340,11 @@ module.directive('passwordValidate', function() {
 		}
 	};
 }); 
+module.filter('fromNow', function() {
+  return function(date) {
+    return moment(date).fromNow();
+  }
+});
 
 
 

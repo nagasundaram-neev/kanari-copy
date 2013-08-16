@@ -2107,18 +2107,11 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 			$('.datepicker').removeClass("addLeft");
 		});
 
-		// var dateFormat = attrs['date'] || 'yyyy-MM-dd';
-
 		$(function() {
-			//var startDate = new Date(2012, 1, 20);
-			//var endDate = new Date(2012, 1, 25);
 			$('#dp2').datepicker().on('changeDate', function(ev) {
 				var dt = new Date(ev.date.valueOf());
-				//dt.format("dddd, MMMM Do YYYY, h:mm:ss a");
-				//alert(ev.date.valueOf());
 				var month = dt.getMonth() + 1;
-				startDt = dt.getFullYear() + "-" +month + "-" + dt.getDate();
-				//alert(startDt);
+				startDt = dt.getFullYear() + "-" + month + "-" + dt.getDate();
 				if (startDt != 'undefined' && typeof endDt != 'undefined') {
 					console.log("hi in start date");
 					$scope.listFeedbacksDate();
@@ -2126,13 +2119,11 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 						$scope.listFeedbacksDate();
 					});
 				}
-				//alert(startDt);
 			});
 			$('#dp3').datepicker().on('changeDate', function(ev) {
 				var dt = new Date(ev.date.valueOf());
 				var month = dt.getMonth() + 1;
-				endDt = dt.getFullYear() + "-" +month + "-" + dt.getDate();
-				//alert(endDt);
+				endDt = dt.getFullYear() + "-" + month + "-" + dt.getDate();
 				if ( typeof startDt != 'undefined' && endDt != 'undefined') {
 					console.log("hi in end date");
 					$scope.listFeedbacksDate();
@@ -2163,7 +2154,7 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 
 		var outletId = $scope.outletOption;
 		$scope.listFeedbacksDate = function() {
-			console.log("outetId "+$scope.outletOption);
+			console.log("outetId " + $scope.outletOption);
 			var param = {
 				"auth_token" : getCookie('authToken'),
 				"password" : "X",
@@ -2210,7 +2201,7 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 	}
 });
 
-module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location) {
+module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location, limitToFilter) {
 	if (getCookie('authToken')) {
 		$('.welcome').show();
 		$('.navBarCls').show();
@@ -2219,6 +2210,188 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		$('#dasboard').hide();
 		$('#dasboardCustomer').addClass('active');
 		$rootScope.header = "Dashboard Trends | Kanari";
+		$scope.outletNameList = [];
+		$scope.trendsList = [];
+		var results1 = [];
+		var results2 = [];
+		var results3 = [];
+		var resultsDate = [];
+
+		$scope.v = {
+			Dt : Date.now()
+		}
+
+		$("#dp3 .add-on").click(function() {
+			$('.datepicker').addClass("addLeft");
+		});
+
+		$("#dp2 .add-on").click(function() {
+			$('.datepicker').removeClass("addLeft");
+		});
+
+		$(function() {
+			$('#dp2').datepicker().on('changeDate', function(ev) {
+				var dt = new Date(ev.date.valueOf());
+				var month = dt.getMonth() + 1;
+				startDt = dt.yyyymmdd();
+				if (startDt != 'undefined' && typeof endDt != 'undefined') {
+					console.log("hi in start date");
+					$scope.listOfTrendsDate();
+					$(".outletDropDown").change(function() {
+						$scope.listOfTrendsDate();
+					});
+				}
+			});
+			$('#dp3').datepicker().on('changeDate', function(ev) {
+				var dt = new Date(ev.date.valueOf());
+				var month = dt.getMonth() + 1;
+				endDt = dt.yyyymmdd();
+				if ( typeof startDt != 'undefined' && endDt != 'undefined') {
+					console.log("hi in end date");
+					$scope.listOfTrendsDate();
+					$(".outletDropDown").change(function() {
+						$scope.listOfTrendsDate();
+					});
+				}
+			});
+		});
+
+		Date.prototype.yyyymmdd = function() {
+
+			var yyyy = this.getFullYear().toString();
+			var mm = (this.getMonth() + 1).toString();
+			// getMonth() is zero-based
+			var dd = this.getDate().toString();
+
+			return yyyy + '-' + (mm[1] ? mm : "0" + mm[0]) + '-' + (dd[1] ? dd : "0" + dd[0]);
+		};
+
+		var outletId = $scope.outletOption;
+		$scope.listOfTrendsDate = function() {
+			console.log("outetId " + $scope.outletOption);
+			var param = {
+				"auth_token" : getCookie('authToken'),
+				"outlet_id" : $scope.outletOption,
+				"start_time" : startDt,
+				"end_time" : endDt
+			}
+
+			$http({
+				method : 'get',
+				url : '/api/feedbacks/trends',
+				params : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				$scope.trendsList = data.feedback_trends.detailed_statistics;
+				var arrayLength = Object.keys($scope.trendsList).length;
+				for (var i = 0; i < arrayLength; i++) {
+					dateV = Object.keys($scope.trendsList)[i];
+					var foodLike = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.like;
+					var foodNeutral = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.neutral;
+					var foodDisLike = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.dislike;
+					
+					resultsDate.push(i+1);				
+					results1.push(foodLike);
+					results2.push(foodNeutral);
+					results3.push(foodDisLike);
+					
+				}	
+				getFoodGraph();			
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+			});
+		};
+
+		$scope.listOutletNames = function() {
+			var param = {
+				"auth_token" : getCookie('authToken'),
+				"password" : 'X',
+			};
+			$http({
+				method : 'get',
+				url : '/api/outlets',
+				params : param,
+			}).success(function(data, status) {
+				console.log("Data in success " + data + " status " + status);
+				$scope.outletNameList = data.outlets;
+			}).error(function(data, status) {
+				console.log("data in error " + data + " status " + status);
+			});
+		};
+		$scope.listOutletNames();
+
+		function getDaysBetweenDates(d0, d1) {
+
+			var msPerDay = 8.64e7;
+
+			// Copy dates so don't mess them up
+			var x0 = new Date(d0);
+			var x1 = new Date(d1);
+
+			// Set to noon - avoid DST errors
+			x0.setHours(12, 0, 0);
+			x1.setHours(12, 0, 0);
+
+			// Round to remove daylight saving errors
+			return Math.round((x1 - x0) / msPerDay);
+		}
+
+		function incr_date(date_str, no_of_days_to_add) {
+			var futureDate = new Date(date_str);
+
+			futureDate.setDate(new Date().getDate() + no_of_days_to_add);
+			var next_date_str = futureDate;
+
+			return next_date_str;
+		}
+
+		function getFoodGraph() {
+			$('#container').highcharts({
+
+				chart : {
+					type : 'column'
+				},
+
+				title : {
+					text : 'Customer experience Metrics | Stacked column chart'
+				},
+
+				xAxis : {
+					categories : resultsDate
+				},
+
+				yAxis : {
+					allowDecimals : false,
+					min : 0,
+					title : {
+						text : 'Points%'
+					}
+				},
+
+				tooltip : {
+					formatter : function() {
+						return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '<br/>' + 'Total: ' + this.point.stackTotal;
+					}
+				},
+
+				plotOptions : {
+					column : {
+						stacking : 'normal'
+					}
+				},
+
+				series : [{
+					name : 'Positive',
+					data : results1
+				}, {
+					name : 'Neutral',
+					data : results2
+				}, {
+					name : 'Negative',
+					data : results3
+				}]
+			});
+		}
 	}
 });
 module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location) {
@@ -2230,9 +2403,142 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		$('#dasboard').hide();
 		$('#dasboardCustomer').addClass('active');
 		$rootScope.header = "Dashboard Snapshot | Kanari";
-		
-				
-		
+
+		$scope.feedbackMetrics = function() {
+			var param = {
+				"auth_token" : getCookie('authToken'),
+				"password" : "X"
+			}
+
+			$http({
+				method : 'get',
+				url : '/api/feedbacks/metrics',
+				params : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				$scope.foodLike = data.feedback_insights.food_quality.like;
+				$scope.foodDisLike = data.feedback_insights.food_quality.dislike;
+				$scope.foodDailyChange = data.feedback_insights.food_quality.change;
+
+				if ($scope.foodDailyChange > 0) {
+					$scope.foodFlag = 1;
+				} else if ($scope.foodDailyChange < 0) {
+					$scope.foodFlag = 0;
+				} else {
+					$scope.foodFlag = -1;
+				}
+
+				$scope.speedLike = data.feedback_insights.speed_of_service.like;
+				$scope.speedDisLike = data.feedback_insights.speed_of_service.dislike;
+				$scope.speedDailyChange = data.feedback_insights.speed_of_service.change;
+
+				if ($scope.speedDailyChange > 0) {
+					$scope.speedFlag = 1;
+				} else if ($scope.speedDailyChange < 0) {
+					$scope.speedFlag = 0;
+				} else {
+					$scope.speedFlag = -1;
+				}
+
+				$scope.friendlinessLike = data.feedback_insights.friendliness_of_service.like;
+				$scope.friendlinessDisLike = data.feedback_insights.friendliness_of_service.dislike;
+				$scope.friendlinessDailyChange = data.feedback_insights.friendliness_of_service.change;
+
+				if ($scope.friendlinessDailyChange > 0) {
+					$scope.friendlinessFlag = 1;
+				} else if ($scope.friendlinessDailyChange < 0) {
+					$scope.friendlinessFlag = 0;
+				} else {
+					$scope.friendlinessFlag = -1;
+				}
+
+				$scope.cleanlinessLike = data.feedback_insights.cleanliness.like;
+				$scope.cleanlinessDisLike = data.feedback_insights.cleanliness.dislike;
+				$scope.cleanlinessDailyChange = data.feedback_insights.cleanliness.change;
+
+				if ($scope.cleanlinessDailyChange > 0) {
+					$scope.cleanlinessFlag = 1;
+				} else if ($scope.cleanlinessDailyChange < 0) {
+					$scope.cleanlinessFlag = 0;
+				} else {
+					$scope.cleanlinessFlag = -1;
+				}
+
+				$scope.ambienceLike = data.feedback_insights.ambience.like;
+				$scope.ambienceDisLike = data.feedback_insights.ambience.dislike;
+				$scope.ambienceDailyChange = data.feedback_insights.ambience.change;
+
+				if ($scope.ambienceDailyChange > 0) {
+					$scope.ambienceFlag = 1;
+				} else if ($scope.ambienceDailyChange < 0) {
+					$scope.ambienceFlag = 0;
+				} else {
+					$scope.ambienceFlag = -1;
+				}
+
+				$scope.valueLike = data.feedback_insights.value_for_money.like;
+				$scope.valueDisLike = data.feedback_insights.value_for_money.dislike;
+				$scope.valueDailyChange = data.feedback_insights.value_for_money.change;
+
+				if ($scope.valueDailyChange > 0) {
+					$scope.valueFlag = 1;
+				} else if ($scope.valueDailyChange < 0) {
+					$scope.valueFlag = 0;
+				} else {
+					$scope.valueFlag = -1;
+				}
+
+				$scope.netScore = data.feedback_insights.net_promoter_score.like - data.feedback_insights.net_promoter_score.dislike;
+				//$scope.netScoreDisLike = data.feedback_insights.net_promoter_score.dislike;
+				$scope.netScoreDailyChange = data.feedback_insights.net_promoter_score.change;
+
+				if ($scope.netScore > 0) {
+					$scope.netScoreFlag = 0;
+				} else {
+					$scope.netScoreFlag = 1;
+				}
+
+				if ($scope.netScoreDailyChange > 0) {
+					$scope.netflag = 1;
+				} else {
+					$scope.netflag = 0;
+				}
+
+				$scope.feedCount = data.feedback_insights.feedbacks_count;
+				$scope.points = data.feedback_insights.rewards_pool;
+
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+
+			});
+		};
+
+		$scope.feedbackMetrics();
+
+		$scope.listFeedbacks = function() {
+			//$.mobile.loading('show');
+
+			var param = {
+				"auth_token" : getCookie('authToken'),
+				"password" : "X"
+			}
+
+			$http({
+				method : 'get',
+				url : '/api/feedbacks',
+				params : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				$scope.feedbackList = data.feedbacks;
+
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+
+			});
+		};
+
+		$scope.listFeedbacks();
+
 	}
 });
 function setCookie(name, value, days) {
