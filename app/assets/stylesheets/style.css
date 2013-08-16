@@ -807,6 +807,7 @@ img, object {
 #transaction_history .prev img, #transaction_history .nxt img {
 	vertical-align: top;
 	margin-top: 0.1%;
+	 margin-left: -8%;
 }
 .transactionHistory {
 	height: 385px;
