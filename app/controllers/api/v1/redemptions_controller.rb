@@ -62,9 +62,9 @@ class Api::V1::RedemptionsController < ApplicationController
                                   user_points_after_redemption: user.points_available }
         if redemption.update(redemption_parameters)
           RedemptionLog.create({customer_id: outlet.customer_id, outlet_id: outlet.id, outlet_name: outlet.name,
-            tablet_id: current_user.tablet_id, user_id: user.id, user_first_name: user.first_name, user_last_name: user.last_name,
+            generated_by: current_user.email, user_id: user.id, user_first_name: user.first_name, user_last_name: user.last_name,
             user_email: user.email, points: points, outlet_points_before: outlet_points_before, outlet_points_after: outlet.rewards_pool,
-            user_points_before: user_points_before, user_points_after: user.points_available })
+            user_points_before: user_points_before, user_points_after: user.points_available, redemption_id: redemption.id })
           render json: nil, status: :ok
         else
           render json: redemption.errors, status: :unprocessable_entity

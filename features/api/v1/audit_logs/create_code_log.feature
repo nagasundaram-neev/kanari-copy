@@ -33,7 +33,7 @@ Feature: Kanari Code Generation Audit Log
         |customer_id|100|
         |outlet_id|1000|
         |outlet_name|Subway - Bangalore|
-        |generated_by|5|
+        |generated_by|100001@subway.com|
         |bill_size|1000.00|
       And the code in the log table should be %{CODE}
 

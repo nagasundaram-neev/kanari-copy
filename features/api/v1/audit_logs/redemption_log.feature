@@ -50,13 +50,14 @@ Feature: Redemption Audit Log
         |user_email|simpleuser@gmail.com|
         |customer_id|100|
         |outlet_id|10|
-        |tablet_id|123456|
+        |generated_by|123456@kanari.co|
         |outlet_name|Subway - Bangalore|
         |points|100|
         |outlet_points_before|1000|
         |outlet_points_after|900|
         |user_points_before|200|
         |user_points_after|100|
+        |redemption_id|1|
       When I authenticate as the user "donald_auth_token" with the password "random string"
       And I send a PUT request to "/api/redemptions/1" with the following:
       """

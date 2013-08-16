@@ -30,7 +30,7 @@ class Api::V1::KanariCodesController < ApplicationController
     feedback = Feedback.new(code: code, bill_amount: bill_amount, points: points, outlet: outlet, generated_by: current_user, completed: false)
     if feedback.save
       CodeGenerationLog.create({customer_id: outlet.customer_id, outlet_id: outlet.id, outlet_name: outlet.name, feedback_id: feedback.id,
-                                generated_by: current_user.id, code: code, bill_size: bill_amount, status: feedback.completed  })
+                                generated_by: current_user.email, code: code, bill_size: bill_amount })
       render json: {code: code}, status: :created
     else
       render json: {errors: feedback.errors.full_messages}, status: :unprocessable_entity

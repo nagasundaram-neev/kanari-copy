@@ -11,17 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130814060432) do
+ActiveRecord::Schema.define(version: 20130816110907) do
 
   create_table "code_generation_logs", force: true do |t|
     t.integer  "outlet_id"
     t.string   "outlet_name"
     t.integer  "customer_id"
-    t.integer  "generated_by"
+    t.string   "generated_by"
     t.integer  "feedback_id"
     t.string   "code"
     t.float    "bill_size"
-    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -181,7 +180,6 @@ ActiveRecord::Schema.define(version: 20130814060432) do
     t.integer  "outlet_id"
     t.string   "outlet_name"
     t.integer  "customer_id"
-    t.integer  "tablet_id"
     t.integer  "points"
     t.integer  "outlet_points_before"
     t.integer  "outlet_points_after"
@@ -189,6 +187,8 @@ ActiveRecord::Schema.define(version: 20130814060432) do
     t.integer  "user_points_after"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "generated_by"
+    t.integer  "redemption_id"
   end
 
   create_table "redemptions", force: true do |t|
