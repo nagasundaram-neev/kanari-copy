@@ -1,9 +1,9 @@
-Feature: Lists Feedback log
+Feature: Lists Redemption log
 
     Background:
       Given I send and accept JSON
 
-	Scenario: Kanari Admin successfully lists feedback logs
+	Scenario: Kanari Admin successfully lists redemption logs
      Given the following users exist
        |id  |first_name |email                          |password    |authentication_token  |role            |
        |1   |Adam       |superadmin@kanari.co           |password123 |admin_auth_token      |kanari_admin    |
@@ -20,17 +20,17 @@ Feature: Lists Feedback log
         And outlet "Subway - Bangalore" has staffs
           |staff.bangalore.1@subway.com   |
           |staff.bangalore.2@subway.com   |
-     Given the following transactions exist in "Feedback Log" table
-          |id  |outlet_id |outlet_name        |code  |points |customer_id |feedback_id |user_first_name |user_last_name |user_email       |outlet_points_before  |outlet_points_after  |user_points_before     |user_points_after |created_at         |
-          |1   |10        |Subway - Bangalore |12345 |400    |1           |1           |Ram             |Singh          |user2@gmail.com  |1000                  |1400                 |1000                   |1400              |2013-07-08 00:00:00|
-          |2   |10        |Subway - Bangalore |23456 |100    |1           |2           |Sam             |Singh          |user3@gmail.com  |1400                  |1500                 |100                    |200              |2013-07-07 01:00:00|
-          |3   |10        |Subway - Bangalore |34567 |200    |1           |3           |Jay             |Singh          |user1@gmail.com  |1500                  |1700                 |1000                   |1200              |2013-07-06 02:00:00|
-          |4   |20        |Subway - Pune      |45678 |100    |1           |4           |Ram             |Singh          |user2@gmail.com  |1000                  |1100                 |1400                   |1500              |2013-07-06 02:00:00|
-          |5   |30        |Taj    - Mumbai    |56789 |120    |2           |5           |Abe             |Singh          |user4@gmail.com  |1000                  |1120                 |1000                   |1120              |2013-07-06 00:06:00|
+     Given the following transactions exist in "Redemption Log" table
+          |id  |outlet_id |outlet_name        |generated_by|points |customer_id |redemption_id |user_first_name |user_last_name |user_email       |outlet_points_before  |outlet_points_after  |user_points_before     |user_points_after |created_at         |
+          |1   |10        |Subway - Bangalore |staff.bangalore.1|400    |1           |1           |Ram             |Singh          |user2@gmail.com  |1000                  |1400                 |1000                   |1400              |2013-07-08 00:00:00|
+          |2   |10        |Subway - Bangalore |staff.bangalore.1|100    |1           |2           |Sam             |Singh          |user3@gmail.com  |1400                  |1500                 |100                    |200              |2013-07-07 01:00:00|
+          |3   |10        |Subway - Bangalore |staff.bangalore.2|200    |1           |3           |Jay             |Singh          |user1@gmail.com  |1500                  |1700                 |1000                   |1200              |2013-07-06 02:00:00|
+          |4   |20        |Subway - Pune      |staff.pune.1     |100    |1           |4           |Ram             |Singh          |user2@gmail.com  |1000                  |1100                 |1400                   |1500              |2013-07-06 02:00:00|
+          |5   |30        |Taj    - Mumbai    |staff.mumbai.1   |120    |2           |5           |Abe             |Singh          |user4@gmail.com  |1000                  |1120                 |1000                   |1120              |2013-07-06 00:06:00|
       When I authenticate as the user "admin_auth_token" with the password "random string"
        And I send a GET request to "/api/audit_logs" with the following:
       """
-      outlet_id=10&type=feedback&start_time='2013-07-06 00:00:00'&end_time='2013-07-10 02:00:00'
+      outlet_id=10&type=redemption&start_time='2013-07-06 00:00:00'&end_time='2013-07-10 02:00:00'
       """
       Then the response status should be "200"
       And the JSON response should be:
@@ -42,8 +42,8 @@ Feature: Lists Feedback log
             "customer_id": 1,
             "outlet_id": 10,
             "outlet_name": "Subway - Bangalore",
-            "feedback_id": 1,
-            "code": "12345",
+            "redemption_id": 1,
+            "tablet_id": "staff.bangalore.1",
             "points": 400,
             "user_first_name": "Ram",
             "user_last_name":  "Singh",
@@ -59,8 +59,8 @@ Feature: Lists Feedback log
             "customer_id": 1,
             "outlet_id": 10,
             "outlet_name": "Subway - Bangalore",
-            "feedback_id": 2,
-            "code": "23456",
+            "redemption_id": 2,
+            "tablet_id": "staff.bangalore.1",
             "points": 100,
             "user_first_name": "Sam",
             "user_last_name":  "Singh",
@@ -76,8 +76,8 @@ Feature: Lists Feedback log
             "customer_id": 1,
             "outlet_id": 10,
             "outlet_name": "Subway - Bangalore",
-            "feedback_id": 3,
-            "code": "34567",
+            "redemption_id": 3,
+            "tablet_id": "staff.bangalore.2",
             "points": 200,
             "user_first_name": "Jay",
             "user_last_name":  "Singh",
@@ -92,7 +92,7 @@ Feature: Lists Feedback log
       }
       """
 
-  Scenario: Kanari Admin successfully lists ALL feedback logs
+  Scenario: Kanari Admin successfully lists ALL redemption logs
      Given the following users exist
        |id  |first_name |email                          |password    |authentication_token  |role            |
        |1   |Adam       |superadmin@kanari.co           |password123 |admin_auth_token      |kanari_admin    |
@@ -105,17 +105,17 @@ Feature: Lists Feedback log
         And outlet "Subway - Bangalore" has staffs
           |staff.bangalore.1@subway.com   |
           |staff.bangalore.2@subway.com   |
-     Given the following transactions exist in "Feedback Log" table
-          |id  |outlet_id |outlet_name        |code  |points |customer_id |feedback_id |user_first_name |user_last_name |user_email       |outlet_points_before  |outlet_points_after  |user_points_before     |user_points_after |created_at         |
-          |1   |10        |Subway - Bangalore |12345 |400    |1           |1           |Ram             |Singh          |user2@gmail.com  |1000                  |1400                 |1000                   |1400              |2013-07-08 00:00:00|
-          |2   |10        |Subway - Bangalore |23456 |100    |1           |2           |Sam             |Singh          |user3@gmail.com  |1400                  |1500                 |100                    |200              |2013-07-07 01:00:00|
-          |3   |10        |Subway - Bangalore |34567 |200    |1           |3           |Jay             |Singh          |user1@gmail.com  |1500                  |1700                 |1000                   |1200              |2013-07-06 02:00:00|
-          |4   |20        |Subway - Pune      |45678 |100    |1           |4           |Ram             |Singh          |user2@gmail.com  |1000                  |1100                 |1400                   |1500              |2013-07-06 02:00:00|
-          |5   |30        |Taj    - Mumbai    |56789 |120    |2           |5           |Abe             |Singh          |user4@gmail.com  |1000                  |1120                 |1000                   |1120              |2013-07-06 00:06:00|
+     Given the following transactions exist in "Redemption Log" table
+          |id  |outlet_id |outlet_name        |generated_by|points |customer_id |redemption_id |user_first_name |user_last_name |user_email       |outlet_points_before  |outlet_points_after  |user_points_before     |user_points_after |created_at         |
+          |1   |10        |Subway - Bangalore |staff.bangalore.1|400    |1           |1           |Ram             |Singh          |user2@gmail.com  |1000                  |1400                 |1000                   |1400              |2013-07-08 00:00:00|
+          |2   |10        |Subway - Bangalore |staff.bangalore.1|100    |1           |2           |Sam             |Singh          |user3@gmail.com  |1400                  |1500                 |100                    |200              |2013-07-07 01:00:00|
+          |3   |10        |Subway - Bangalore |staff.bangalore.2|200    |1           |3           |Jay             |Singh          |user1@gmail.com  |1500                  |1700                 |1000                   |1200              |2013-07-06 02:00:00|
+          |4   |20        |Subway - Pune      |staff.pune.1     |100    |1           |4           |Ram             |Singh          |user2@gmail.com  |1000                  |1100                 |1400                   |1500              |2013-07-06 02:00:00|
+          |5   |30        |Taj    - Mumbai    |staff.mumbai.1   |120    |2           |5           |Abe             |Singh          |user4@gmail.com  |1000                  |1120                 |1000                   |1120              |2013-07-06 00:06:00|
     When I authenticate as the user "admin_auth_token" with the password "random string"
 	  And I send a GET request to "/api/audit_logs" with the following:
 	  """
-	  outlet_id=10&type=feedback
+	  outlet_id=10&type=redemption
 	  """
 	  Then the response status should be "200"
     And the JSON response should be:
@@ -127,8 +127,8 @@ Feature: Lists Feedback log
             "customer_id": 1,
             "outlet_id": 10,
             "outlet_name": "Subway - Bangalore",
-            "feedback_id": 1,
-            "code": "12345",
+            "redemption_id": 1,
+            "tablet_id": "staff.bangalore.1",
             "points": 400,
             "user_first_name": "Ram",
             "user_last_name":  "Singh",
@@ -144,8 +144,8 @@ Feature: Lists Feedback log
             "customer_id": 1,
             "outlet_id": 10,
             "outlet_name": "Subway - Bangalore",
-            "feedback_id": 2,
-            "code": "23456",
+            "redemption_id": 2,
+            "tablet_id": "staff.bangalore.1",
             "points": 100,
             "user_first_name": "Sam",
             "user_last_name":  "Singh",
@@ -161,8 +161,8 @@ Feature: Lists Feedback log
             "customer_id": 1,
             "outlet_id": 10,
             "outlet_name": "Subway - Bangalore",
-            "feedback_id": 3,
-            "code": "34567",
+            "redemption_id": 3,
+            "tablet_id": "staff.bangalore.2",
             "points": 200,
             "user_first_name": "Jay",
             "user_last_name":  "Singh",
@@ -177,7 +177,7 @@ Feature: Lists Feedback log
       }
       """
 
-   Scenario: Kanari Admin successfully lists feedback logs: when there is no logs present for the outlet
+   Scenario: Kanari Admin successfully lists redemption logs: when there is no logs present for the outlet
      Given the following users exist
        |id  |first_name |email                          |password    |authentication_token  |role            |
        |1   |Adam       |superadmin@kanari.co           |password123 |admin_auth_token      |kanari_admin    |
@@ -190,14 +190,14 @@ Feature: Lists Feedback log
         And outlet "Subway - Bangalore" has staffs
           |staff.bangalore.1@subway.com   |
           |staff.bangalore.2@subway.com   |
-     Given the following transactions exist in "Feedback Log" table
-          |id  |outlet_id |outlet_name        |code  |points |customer_id |feedback_id |user_first_name |user_last_name |user_email       |outlet_points_before  |outlet_points_after  |user_points_before     |user_points_after |created_at         |
-          |1   |20        |Subway - Pune      |45678 |100    |1           |4           |Ram             |Singh          |user2@gmail.com  |1000                  |1100                 |1400                   |1500              |2013-07-06 02:00:00|
-          |2   |30        |Taj    - Mumbai    |56789 |120    |2           |5           |Abe             |Singh          |user4@gmail.com  |1000                  |1120                 |1000                   |1120              |2013-07-06 00:06:00|
+     Given the following transactions exist in "Redemption Log" table
+          |id  |outlet_id |outlet_name        |generated_by|points |customer_id |redemption_id |user_first_name |user_last_name |user_email       |outlet_points_before  |outlet_points_after  |user_points_before     |user_points_after |created_at         |
+          |1   |20        |Subway - Pune      |staff.pune.1     |100    |1           |4           |Ram             |Singh          |user2@gmail.com  |1000                  |1100                 |1400                   |1500              |2013-07-06 02:00:00|
+          |2   |30        |Taj    - Mumbai    |staff.mumbai.1   |120    |2           |5           |Abe             |Singh          |user4@gmail.com  |1000                  |1120                 |1000                   |1120              |2013-07-06 00:06:00|
       When I authenticate as the user "admin_auth_token" with the password "random string"
        And I send a GET request to "/api/audit_logs" with the following:
        """
-       outlet_id=10&type=feedback&start_time='2013-07-06 00:00:00'&end_time='2013-07-10 02:00:00'
+       outlet_id=10&type=redemption&start_time='2013-07-06 00:00:00'&end_time='2013-07-10 02:00:00'
        """
        Then the response status should be "200"
        And the JSON response should be:
@@ -220,10 +220,10 @@ Feature: Lists Feedback log
         And outlet "Subway - Bangalore" has staffs
           |staff.bangalore.1@subway.com   |
           |staff.bangalore.2@subway.com   |
-      Given the following transactions exist in "Feedback Log" table
-          |id  |outlet_id |outlet_name        |code  |points |customer_id |feedback_id |user_first_name |user_last_name |user_email       |outlet_points_before  |outlet_points_after  |user_points_before     |user_points_after |created_at         |
-          |1   |20        |Subway - Pune      |45678 |100    |1           |4           |Ram             |Singh          |user2@gmail.com  |1000                  |1100                 |1400                   |1500              |2013-07-06 02:00:00|
-          |2   |30        |Taj    - Mumbai    |56789 |120    |2           |5           |Abe             |Singh          |user4@gmail.com  |1000                  |1120                 |1000                   |1120              |2013-07-06 00:06:00|
+     Given the following transactions exist in "Redemption Log" table
+          |id  |outlet_id |outlet_name        |generated_by|points |customer_id |redemption_id |user_first_name |user_last_name |user_email       |outlet_points_before  |outlet_points_after  |user_points_before     |user_points_after |created_at         |
+          |1   |20        |Subway - Pune      |staff.pune.1     |100    |1           |4           |Ram             |Singh          |user2@gmail.com  |1000                  |1100                 |1400                   |1500              |2013-07-06 02:00:00|
+          |2   |30        |Taj    - Mumbai    |staff.mumbai.1   |120    |2           |5           |Abe             |Singh          |user4@gmail.com  |1000                  |1120                 |1000                   |1120              |2013-07-06 00:06:00|
       When I authenticate as the user "admin_auth_token" with the password "random string"
        And I send a GET request to "/api/audit_logs" with the following:
        """
@@ -248,13 +248,13 @@ Feature: Lists Feedback log
         And outlet "Subway - Bangalore" has staffs
           |staff.bangalore.1@subway.com   |
           |staff.bangalore.2@subway.com   |
-     Given the following transactions exist in "Feedback Log" table
-          |id  |outlet_id |outlet_name        |code  |points |customer_id |feedback_id |user_first_name |user_last_name |user_email       |outlet_points_before  |outlet_points_after  |user_points_before     |user_points_after |created_at         |
-          |1   |10        |Subway - Bangalore |12345 |400    |1           |1           |Ram             |Singh          |user2@gmail.com  |1000                  |1400                 |1000                   |1400              |2013-07-08 00:00:00|
-          |2   |10        |Subway - Bangalore |23456 |100    |1           |2           |Sam             |Singh          |user3@gmail.com  |1400                  |1500                 |100                    |200              |2013-07-07 01:00:00|
-          |3   |10        |Subway - Bangalore |34567 |200    |1           |3           |Jay             |Singh          |user1@gmail.com  |1500                  |1700                 |1000                   |1200              |2013-07-06 02:00:00|
-          |4   |20        |Subway - Pune      |45678 |100    |1           |4           |Ram             |Singh          |user2@gmail.com  |1000                  |1100                 |1400                   |1500              |2013-07-06 02:00:00|
-          |5   |30        |Taj    - Mumbai    |56789 |120    |2           |5           |Abe             |Singh          |user4@gmail.com  |1000                  |1120                 |1000                   |1120              |2013-07-06 00:06:00|
+     Given the following transactions exist in "Redemption Log" table
+          |id  |outlet_id |outlet_name        |generated_by|points |customer_id |redemption_id |user_first_name |user_last_name |user_email       |outlet_points_before  |outlet_points_after  |user_points_before     |user_points_after |created_at         |
+          |1   |10        |Subway - Bangalore |staff.bangalore.1|400    |1           |1           |Ram             |Singh          |user2@gmail.com  |1000                  |1400                 |1000                   |1400              |2013-07-08 00:00:00|
+          |2   |10        |Subway - Bangalore |staff.bangalore.1|100    |1           |2           |Sam             |Singh          |user3@gmail.com  |1400                  |1500                 |100                    |200              |2013-07-07 01:00:00|
+          |3   |10        |Subway - Bangalore |staff.bangalore.2|200    |1           |3           |Jay             |Singh          |user1@gmail.com  |1500                  |1700                 |1000                   |1200              |2013-07-06 02:00:00|
+          |4   |20        |Subway - Pune      |staff.pune.1     |100    |1           |4           |Ram             |Singh          |user2@gmail.com  |1000                  |1100                 |1400                   |1500              |2013-07-06 02:00:00|
+          |5   |30        |Taj    - Mumbai    |staff.mumbai.1   |120    |2           |5           |Abe             |Singh          |user4@gmail.com  |1000                  |1120                 |1000                   |1120              |2013-07-06 00:06:00|
      When I authenticate as the user "admin_auth_token" with the password "random string"
      And I send a GET request to "/api/audit_logs" with the following:
      """
@@ -279,13 +279,13 @@ Feature: Lists Feedback log
         And outlet "Subway - Bangalore" has staffs
           |staff.bangalore.1@subway.com   |
           |staff.bangalore.2@subway.com   |
-     Given the following transactions exist in "Feedback Log" table
-          |id  |outlet_id |outlet_name        |code  |points |customer_id |feedback_id |user_first_name |user_last_name |user_email       |outlet_points_before  |outlet_points_after  |user_points_before     |user_points_after |created_at         |
-          |1   |10        |Subway - Bangalore |12345 |400    |1           |1           |Ram             |Singh          |user2@gmail.com  |1000                  |1400                 |1000                   |1400              |2013-07-08 00:00:00|
-          |2   |10        |Subway - Bangalore |23456 |100    |1           |2           |Sam             |Singh          |user3@gmail.com  |1400                  |1500                 |100                    |200              |2013-07-07 01:00:00|
-          |3   |10        |Subway - Bangalore |34567 |200    |1           |3           |Jay             |Singh          |user1@gmail.com  |1500                  |1700                 |1000                   |1200              |2013-07-06 02:00:00|
-          |4   |20        |Subway - Pune      |45678 |100    |1           |4           |Ram             |Singh          |user2@gmail.com  |1000                  |1100                 |1400                   |1500              |2013-07-06 02:00:00|
-          |5   |30        |Taj    - Mumbai    |56789 |120    |2           |5           |Abe             |Singh          |user4@gmail.com  |1000                  |1120                 |1000                   |1120              |2013-07-06 00:06:00|
+     Given the following transactions exist in "Redemption Log" table
+          |id  |outlet_id |outlet_name        |generated_by|points |customer_id |redemption_id |user_first_name |user_last_name |user_email       |outlet_points_before  |outlet_points_after  |user_points_before     |user_points_after |created_at         |
+          |1   |10        |Subway - Bangalore |staff.bangalore.1|400    |1           |1           |Ram             |Singh          |user2@gmail.com  |1000                  |1400                 |1000                   |1400              |2013-07-08 00:00:00|
+          |2   |10        |Subway - Bangalore |staff.bangalore.1|100    |1           |2           |Sam             |Singh          |user3@gmail.com  |1400                  |1500                 |100                    |200              |2013-07-07 01:00:00|
+          |3   |10        |Subway - Bangalore |staff.bangalore.2|200    |1           |3           |Jay             |Singh          |user1@gmail.com  |1500                  |1700                 |1000                   |1200              |2013-07-06 02:00:00|
+          |4   |20        |Subway - Pune      |staff.pune.1     |100    |1           |4           |Ram             |Singh          |user2@gmail.com  |1000                  |1100                 |1400                   |1500              |2013-07-06 02:00:00|
+          |5   |30        |Taj    - Mumbai    |staff.mumbai.1   |120    |2           |5           |Abe             |Singh          |user4@gmail.com  |1000                  |1120                 |1000                   |1120              |2013-07-06 00:06:00|
       When I authenticate as the user "admin_auth_token" with the password "random string"
        And I send a GET request to "/api/audit_logs" with the following:
       """
@@ -304,7 +304,7 @@ Feature: Lists Feedback log
       When I authenticate as the user "random_auth_token" with the password "random string"
 	  And I send a GET request to "/api/audit_logs" with the following:
 	  """
-	  outlet_id=10&type=feedback&start_time='2013-07-06 00:00:00'&end_time='2013-07-10 02:00:00'
+	  outlet_id=10&type=redemption&start_time='2013-07-06 00:00:00'&end_time='2013-07-10 02:00:00'
 	  """
       Then the response status should be "403"
       And the JSON response should be:
@@ -321,7 +321,7 @@ Feature: Lists Feedback log
   Scenario: User is not authenticated
      When I send a GET request to "/api/audit_logs" with the following:
      """
-     outlet_id=10&type=feedback&start_time='2013-07-06 00:00:00'&end_time='2013-07-10 02:00:00'
+     outlet_id=10&type=redemption&start_time='2013-07-06 00:00:00'&end_time='2013-07-10 02:00:00'
      """
       Then the response status should be "401"
       And the JSON response should be:
