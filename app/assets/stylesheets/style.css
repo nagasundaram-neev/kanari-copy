@@ -580,8 +580,8 @@
 }
 .backColr {
 	background-color: #E5E6E8;
-	  height: 70px;
-    padding: 4% 0;
+	height: 70px;
+	padding: 4% 0;
 	float: left;
 	width: 32.7%;
 	border-right: 3px solid #FFFFFF;
@@ -808,6 +808,7 @@ img, object {
 #transaction_history .prev img, #transaction_history .nxt img {
 	vertical-align: top;
 	margin-top: 0.1%;
+	margin-left: -10px;
 }
 .transactionHistory {
 	height: 385px;
