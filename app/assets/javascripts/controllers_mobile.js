@@ -130,9 +130,13 @@ var auth_token = "";
 var feedbackFlag = 0;
 var signInCount = "";
 var facebookFlag = 0;
+var logOut = 0;
 
 module.controller('loginController', function($scope, $http, $location) {
 	setFooter(1);
+	if(logOut == 1){
+	location.reload();
+	}
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
 	$scope.remember = false;
 	$scope.erromsg = false;
@@ -558,16 +562,6 @@ module.controller('changePasswordController', function($scope, $http, $location)
 module.controller('settingsController', function($scope, $http, $location) {
 	setFooter(0);
 	if (getCookie('authToken')) {
-		//var thisPicker = jQuery(this);
-		//$('#date').scroller('setDate',$scope.date,true)
-
-		// $('#date').focus(function() {
-		// alert('Handler for .focus() called.'+$scope.date);
-		// if($scope.date){
-		// $("#date").scroller('setDate', $scope.date, true);
-		// }
-		// });
-		
 		if(getCookie('facebookFlag')){
 			$scope.changePass = false;
 		}else{
@@ -695,6 +689,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 				deleteCookie('userName');
 				deleteCookie('feedbackId');
 				deleteCookie("signInCount");
+				logOut = 1;
 				deleteAllCookies();
 				$location.url("/login");
 			}).error(function(data, status) {
@@ -1443,18 +1438,6 @@ module.controller('locationMapController', function($scope, $http, $location, $r
 });
 
 function setFooter(valueH) {
-	//alert($(document).height());
-	// if ($(document).height() == "420px") {
-	// $(".ui-content").css("height", function() {
-	// return $(document).height();
-	// });
-	// }
-	// else{
-	// $(".ui-content").css("height", function() {
-	// return ($(document).height()-75);
-	// });
-	// }
-
 	$(document).on("pageshow", ".ui-page", function() {
 
 		$('#date').scroller({
@@ -1472,6 +1455,7 @@ function setFooter(valueH) {
 				var vDiff = $(window).height() - $page.children('.ui-header').outerHeight() - $page.children('.ui-footer').outerHeight() - 78;
 				//minus thirty for margin
 			} else {
+				//alert(valueH);
 				var vDiff = $(window).height() - $page.children('.ui-header').outerHeight() - $page.children('.ui-footer').outerHeight();
 				//minus thirty for margin
 			}
@@ -1720,3 +1704,6 @@ window.fbAsyncInit = function() {
 		ref.parentNode.insertBefore(js, ref);
 	}(document));
 
+ window.addEventListener('load', function(e) {
+    setTimeout(function() { window.scrollTo(0, 1); }, 1);
+  }, false);
