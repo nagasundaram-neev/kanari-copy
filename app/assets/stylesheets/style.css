@@ -111,7 +111,7 @@
 	/*padding: 0 1.5%;*/
 	padding: 0;
 }
-#landPage .ui-content{
+#landPage .ui-content {
 	overflow: visible;
 }
 
@@ -128,7 +128,7 @@
 }
 #home .imgDiv {
 	/*margin: 0 10%;*/
-	margin: 0 10%;
+	margin: 0 8%;
 }
 
 .searchDiv .ui-corner-all {
@@ -580,8 +580,8 @@
 }
 .backColr {
 	background-color: #E5E6E8;
-	 height: 70px;
-    padding: 4% 0;
+	height: 70px;
+	padding: 4% 0;
 	float: left;
 	width: 32.7%;
 	border-right: 3px solid #FFFFFF;
@@ -808,7 +808,7 @@ img, object {
 #transaction_history .prev img, #transaction_history .nxt img {
 	vertical-align: top;
 	margin-top: 0.1%;
-	 margin-left: -8%;
+	margin-left: -10px;
 }
 .transactionHistory {
 	height: 385px;
@@ -1644,8 +1644,8 @@ img, object {
 
 #feedback_step2 .keypad {
 	height: 420px;
-	width:100%;
-	margin:2% 0 3%;
+	width: 100%;
+	margin: 2% 0 3%;
 }
 
 .enter_code {
@@ -1750,12 +1750,12 @@ img, object {
 	text-shadow: none;
 }
 
-.redeemSuccMsg{
+.redeemSuccMsg {
 	border: 2px solid #664765;
-    color: #0F9D58;
-    margin: 3% 9%;
-    padding: 0.6%;
-    text-shadow: none;
+	color: #0F9D58;
+	margin: 3% 9%;
+	padding: 0.6%;
+	text-shadow: none;
 }
 .sucsessMsg {
 	color: #0F9D58;
@@ -1823,25 +1823,25 @@ img, object {
 	margin: 5% 0;
 }
 /** Css for firstname & lastname field starts here**/
-#signUp .ui-grid-a > *:nth-child(n){
-	width: 46%;
+#signUp .ui-grid-a > *:nth-child(n) {
+	/*width: 46%;*/
 	margin-right: 0;
 }
-	
+
 #signUp .ui-block-b {
-	width: 50%!important;
-	padding-left:7px!important;
+	width: 49% !important;
+	margin-left: 0.2em;
+	float: right;
 }
-#signUp .ui-block-b input, #signUp .ui-block-a input{
+#signUp .ui-block-b input, #signUp .ui-block-a input {
 	border-radius: 0;
 	box-shadow: none;
-	padding: 0.6em!important;
-	width: 99%!important;
+	padding: 0.6em !important;
+	width: 95% !important;
 	display: block;
-
 }
-#signUp .ui-block-a input{
-	  width: 88% !important;
+#signUp .ui-block-a input {
+	width: 88% !important;
 }
 /** Css for firstname & lastname field ends here**/
 .ui-input-text input {
@@ -2049,6 +2049,6 @@ img, object {
 	color: #664765;
 }
 .aed {
-	font-size:120%;
+	font-size: 120%;
 }
 
