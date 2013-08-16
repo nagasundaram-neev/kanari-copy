@@ -290,11 +290,10 @@ span.full_name {
 	font-family: 'Roboto', sans-serif !important;
 }
 .main_content span {
-	color: #5A4166;
+	/*color: #5A4166;
 	font-size: 15px;
-	/*padding: 25px 0 35px;*/
-	/*display: block;*/
-	/*margin-right: 8px;*/
+	margin-right: 8px;*/
+	font-size: 15px;
 }
 a.addRestaurant {
 	background: none repeat scroll 0 0 #F5BA44;
@@ -683,7 +682,7 @@ ul.taketour li a:hover {
 	margin-top: -2px
 }
 /***Change Password**/
-.
+
 .changePass {
 
 }
@@ -1059,13 +1058,23 @@ input {
 	float: right;
 	margin: 6px;
 }
+/***Dashboard Comments End***/
 
 /**** Dashboard snapshot ****/
-.insight_graph {
-	width: 100%;
+.snapshotMenuDropDown{
+	float: right;
+    margin: 5px 10px;
+}
+.insight_graph1, .insight_graph2 {
+	width: 50%;
+	float: left;
+}
+.insight_graph2 {
+	height: 550px;
+	overflow-y: auto;
 }
 .daily_change_span {
-	float: right;
+	float: right !important;
 	text-align: left;
 	padding-top: 3%;
 	width: 21%;
@@ -1111,7 +1120,9 @@ input {
 	text-align: left;
 	width: 49%;
 }
-
+#dashboardSnapshot .main_content span {
+	margin-right: 0 !important;
+}
 .daily_change {
 	float: left;
 	text-align: right;
@@ -1120,21 +1131,19 @@ input {
 }
 .netScore {
 	color: #664766;
-	font-family: number;
 	display: block;
-	font-size: 250%;
-	margin-top: 5%;
+	font-size: 250% !important;
+    margin-top: 5px;
 }
-div.netScore {
-	padding: 15%;
-}
+
 .txt1 {
 	font-size: 100%;
 	color: #000000;
 }
 .value1 {
-	font-size: 140%;
-	font-family: number;
+	 display: block;
+    font-size: 250% !important;
+    margin-top: 10px;
 	color: #664766;
 }
 .value2 {
@@ -1215,11 +1224,76 @@ div.netScore {
 	background: none repeat scroll 0 0 #E6E7E9;
 	border-top: 12px solid #D6D6D6;
 	overflow: hidden;
+	 height: 60px;
 }
 .score_final .net_score, .score_final .daily_change {
 	text-align: center;
 }
+.insight_graph1 .txt1 {
+	color: #505050 !important;
+}
+.insight_graph1 .score_div .net_score, .insight_graph1 .net_promo_score {
+	border-right: 1px solid #C3C3C3;
+}
+.insight_graph1 .daily_change_score span{
+	color: #505050 !important;
+}
+.insight_graph1 .score_final .net_score {
+	border-right: 2px solid #664766;
+}
+.insight_graph1 .daily_change_score{width: 34%;}
+.insight_graph2 .promo_code_def {
+	width: 36%;
+}
+.insight_graph1 .main_score .txt1{font-size: 20px;}
+.insight_graph1 .score_1 .txt1, .insight_graph1 .score_final .txt1{font-size: 15px;}
+.insight_graph2 .def_icon {
+	font-size: 11px;
+	width: 62px;
+	margin: 0;
+}
+.insight_graph2 .promo_code_desc {
+	width: 39%;
+}
+.insight_graph2 .main_content span {
+	font-size: 13px;
+}
+.insight_graph2 .promo_value {
+	font-size: 340% !important;
+	margin-top: 15%;
+}
+.insight_graph2 .promo_code_desc span, .insight_graph2 .update_time span {
+	color: #505050;
+}
+
 /**** Dashboard snapshot ****/
+
+/**** Dashboard Trends ****/
+.menu_bar{
+	width:240px;
+	padding: 25px 0;
+	border-right: 1px solid #CCCCCC;
+	float:left;
+}
+.menu_bar .headingCls{
+	border-top: 1px solid #CCCCCC;
+	padding: 10px 10px 0;
+	font-weight: bold;
+}
+.menu_bar ul{
+	 list-style: none outside none;
+	  margin: 0 0 9px 35px;
+}
+.menu_bar ul li{
+	border-top: 1px solid #CCCCCC;
+	padding: 3px 0;
+	font-size: 14px;
+}
+.menu_bar ul li a{ color: #5A4166;}
+.menu_bar ul li a:hover{text-decoration: none;}
+.chart_div{float:left;width: 600px;}
+tspan{diaplay:none;}
+/**** Dashboard Trends End ****/
 
 /****Calendar CSS***/
 #dp2, #dp3 {

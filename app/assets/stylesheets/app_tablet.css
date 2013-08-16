@@ -751,7 +751,7 @@ position: relative;
 }
 .promo_code {
 	float: left;
-	width: 15%;
+	width: 11%;
 	/*height: 135px;*/
 	padding: 1% 0;
 	color: #674665;
@@ -785,15 +785,15 @@ position: relative;
 	color: #999999;
 }
 .promo_txt {
-	font-size: 130%;
+	font-size: 15px;
 	font-weight: bold;
 	line-height: 10px;
 }
 .promo_value {
-	font-size: 340%;
+	font-size: 380%;
 	font-family: number;
 	display: block;
-	margin-top: 15%;
+	margin-top: 18%;
 }
 /*Home Page CSS ends here*/
 
