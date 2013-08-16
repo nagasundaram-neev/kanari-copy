@@ -7,6 +7,8 @@ default: &defaults
   liked              : 1
   disliked           : -1
   neutral            : 0
+  facebook_app_id: '369424903187034'
+  facebook_app_secret: '30f0e007f1c49a328824647e6ecdd5a2'
 
 development:
   <<: *defaults
