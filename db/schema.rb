@@ -11,17 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130814060432) do
+ActiveRecord::Schema.define(version: 20130816071235) do
 
   create_table "code_generation_logs", force: true do |t|
     t.integer  "outlet_id"
     t.string   "outlet_name"
     t.integer  "customer_id"
-    t.integer  "generated_by"
+    t.string   "generated_by"
     t.integer  "feedback_id"
     t.string   "code"
     t.float    "bill_size"
-    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

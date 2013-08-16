@@ -29,6 +29,7 @@ Kanari::Application.routes.draw do
       resources :social_network_accounts
       resources :users, :only => [:index]
       resources :activities, :only => [:index]
+      resources :audit_logs, :only => [:index]
       resources :new_registration_points, :only => [:create]
       get "/users/invitation/:invitation_token" => "invitations#show"
       get "/feedbacks/metrics" => "feedbacks#metrics"

@@ -33,6 +33,7 @@ class Ability
       #Kanari admin's permissions
       can :create, PaymentInvoice
       can :read, Outlet
+      can :read, :audit_logs
       can :read_feedbacks, Outlet
       can :read_all, Customer
       can :read, Customer
