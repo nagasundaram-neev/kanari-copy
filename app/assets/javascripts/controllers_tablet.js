@@ -299,7 +299,7 @@ module.controller('homePageController', function($scope, $http, $location,$timeo
 				});
 			});
 			
-			feedbackTimeout = $timeout($scope.listFeedbacks,120000);
+			//feedbackTimeout = $timeout($scope.listFeedbacks,120000);
 			
 		};
 
@@ -318,7 +318,7 @@ module.controller('homePageController', function($scope, $http, $location,$timeo
 		setTimeout(loaded, 2000);
 		}
 		
-		feedbackTimeout = $timeout($scope.listFeedbacks,120000);
+		//feedbackTimeout = $timeout($scope.listFeedbacks,120000);
 		
 
 	} else {
@@ -480,7 +480,7 @@ module.controller('redemeController', function($scope, $http, $location,$timeout
 	$("#redemption span").show();
 	if (getCookie('authToken')) {
 		 $timeout.cancel(insightTimeout);
-		 $timeout.cancel(feedbackTimeout);
+		// $timeout.cancel(feedbackTimeout);
 		$scope.active3 = true;
 		flag = 1;
 		$scope.redemptionList = [];
@@ -545,7 +545,7 @@ module.controller('numericCodeController', function($scope, $http, $location,$ti
 	$("#numeric_code span").show();
 	if (getCookie('authToken')) {
 		$timeout.cancel(insightTimeout);
-		$timeout.cancel(feedbackTimeout);
+		//$timeout.cancel(feedbackTimeout);
 		flag = 1;
 		$scope.loader = false;
 		$scope.codeGenerate = true;
