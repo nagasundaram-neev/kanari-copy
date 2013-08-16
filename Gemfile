@@ -1,16 +1,16 @@
 source 'https://rubygems.org'
+ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 gem 'rails-api' #Rails on API mode
 
-# Use postgres as the database for Active Record
 gem 'mysql2' #Database adapter for ActiveRecord
-gem 'warden', '1.2.3'
+gem 'warden', '1.2.3' # warden >= 1.2.3 which has patches for nil Session
 gem 'devise', github: 'emilsoman/devise', branch: 'rails4'
 gem 'devise_invitable', github: 'emilsoman/devise_invitable', branch: 'rails4' #For sending registration invitations
 gem 'cancan' #For authorization
-gem 'active_model_serializers'
+gem 'active_model_serializers' #Serializing ActiveRecord -> JSON
 
 # Javascript server side engine for asset pipeline
 gem 'therubyracer'
@@ -38,9 +38,6 @@ gem 'unicorn'
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
-# Use debugger
-gem 'debugger', group: [:development, :test]
-
 #Testing
 gem "rspec-rails", :group => [:development, :test] #Unit test framework
 gem "database_cleaner", :group => :test #For cleaning database during unit tests
@@ -56,4 +53,3 @@ gem 'json_spec', group: :test # JSON matchers for tests
 gem 'debugger', group: [:development, :test]
 gem 'foreman', :group => :development
 gem 'rails-erd', :group => :development
-gem "mysql2"
