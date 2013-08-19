@@ -459,10 +459,6 @@ module.controller('insightsController', function($scope, $http, $location,$timeo
 
 
 		$scope.feedbackMetrics();
-		//setTimeout($scope.feedbackMetrics(), 120);
-		
-		insightTimeout = $timeout($scope.feedbackMetrics,120000);
-		
 		setTimeout(callScroller, 1000);
 
 	} else {
