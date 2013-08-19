@@ -577,7 +577,7 @@ input.ui-input-text, textarea.ui-input-text {
 	background: none repeat scroll 0 0 transparent;
 	color: #664766;
 	font-weight: bold;
-	margin-left: 1%;
+	margin-left: 3px;
 }
 
 .rate_minus {
@@ -590,8 +590,7 @@ input.ui-input-text, textarea.ui-input-text {
 	color: #664766;
 	font-family: number;
 	font-weight: bold;
-	margin-left: 1%;
-	margin-right: 2px;
+	margin-right: 3px;
 }
 .rate1V {
 	width: 34%;
