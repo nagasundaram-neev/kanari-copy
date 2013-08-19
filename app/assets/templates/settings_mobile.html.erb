@@ -57,37 +57,6 @@
 					</div>
 					<div class="clr"></div>
 				</div>
-				<!-- <div data-role="fieldcontain" class="profileTextBottom" align="center">
-				<h2>Notifications</h2>
-				</div>
-				<div class="ui-input-text ui-body-a notificationCheckbox">
-				<label>@</label>
-				<%= image_tag 'ic_ticks.png' %>
-				<div class="clr"></div>
-				</div> -->
-				<!-- <div data-role="fieldcontain" class="profileTextBottom" align="center">
-				<h2>Social</h2>
-				</div>
-				<div class="ui-input-text ui-body-a notificationCheckboxFb">
-				<label><%= image_tag 'ic_fb_small_purple.png' %></label>
-				<%= image_tag 'ic_ticks_grey.png' %>
-				<div class="clr"></div>
-				</div>
-				<div class="ui-input-text ui-body-a notificationCheckboxTwitter">
-				<label><%= image_tag 'ic_twitter_small_purple.png' %></label>
-				<%= image_tag 'ic_ticks_grey.png' %>
-				<div class="clr"></div>
-				</div> -->
-
-				<!-- <div data-role="fieldcontain" class="profileTextBottom" align="center">
-				<h2>Invite friends</h2>
-				</div>
-
-				<div class="ui-input-text ui-body-a inviteFriends">
-				<a href="#"><%= image_tag 'ic_fb_yellow.png' %></a>
-				<a href="#"><%= image_tag 'ic_twitter_yellow.png' %></a>
-				<a href="#"><%= image_tag 'ic_gplus_yellow.png' %></a>
-				</div> -->
 				<div data-role="fieldcontain" class="profileTextBottom" align="center">
 					<h2>HISTORY</h2>
 				</div>
@@ -98,11 +67,12 @@
 				</div>
 			</div>
 		</div>
+		<div align="center">
+			<span class="errorMsg" ng-show="errorMsg"> {{error}} </span>
+			<span class="succMsg" ng-show="succMsg"> Settings updated successfully. </span>
+		</div>
 	</div>
-	<div class="clr"></div>
-	<div data-role="footer" class="saveDiv footerDiv" >
-		<span class="errorMsg" ng-show="errorMsg"> {{error}} </span>
-		<span class="succMsg" ng-show="succMsg"> Settings updated successfully. </span>
+	<div data-role="footer" class="saveDiv footerDiv">
 		<input type="button" class="signBtn" ng-click="saveProfile()" data-inline="true" value="Save"/>
 	</div>
 </div>
