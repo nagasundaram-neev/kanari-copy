@@ -1,4 +1,6 @@
+require 'normalize_time'
 class Outlet < ActiveRecord::Base
+  include NormalizeTime
 
   # Net Promoter Score, is based on last 100 records
   # TODO: Make it outlet specific
@@ -111,17 +113,6 @@ class Outlet < ActiveRecord::Base
 
   private
 
-    def normalize_date date
-      DateTime.parse(date) rescue nil
-    end
-
-    def normalize_start_and_end_time(start_time= nil, end_time=nil)
-      start_time = normalize_date(start_time) || self.created_at
-      end_time   = normalize_date(end_time) || Time.zone.now
-      start_time,end_time = end_time,start_time if(start_time > end_time)
-      [start_time, end_time]
-    end
-
     def get_net_promoter_score(feedbacks_till_yesterday, feedbacks_till_today)
       promoters_till_today = 0; passives_till_today = 0; net_promoters_till_yesterday = 0; 
       net_promoters_till_today = 0; neutrals_till_yesterday = 0; neutrals_till_today = 0
@@ -163,7 +154,7 @@ class Outlet < ActiveRecord::Base
     end
 
     def get_completed_feedbacks(start_time, end_time)
-     feedbacks = self.feedbacks.completed.where({updated_at: start_time..end_time}).order("updated_at desc")
+      self.feedbacks.completed.where({updated_at: start_time..end_time}).order("updated_at desc")
     end
 
     def get_pending_redemptions
