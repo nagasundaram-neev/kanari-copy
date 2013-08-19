@@ -9,7 +9,7 @@ $locationProvider.hashPrefix("");
 $routeProvider.
 when('/signin', {templateUrl: "<%= asset_path 'tablet_signin.html' %>"}).
 when('/feedback', {templateUrl: "<%= asset_path 'homepage.html' %>"}).
-when('/insights', {templateUrl: "<%= asset_path 'insights.html' %>",controller: 'insightsController'}).
+when('/insights', {templateUrl: "<%= asset_path 'insights.html' %>"}).
 when('/redemption', {templateUrl: "<%= asset_path 'redemptions.html' %>"}).
 when('/numeric_code', {templateUrl: "<%= asset_path 'numeric_code.html' %>"}).
 otherwise({redirectTo: '/signin'});
