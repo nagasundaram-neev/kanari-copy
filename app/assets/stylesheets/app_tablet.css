@@ -7,6 +7,10 @@
 	font-family: number;
 	src: url('open-sans.light.ttf');
 }
+@font-face {
+	font-family: myriadpro;
+	src: url('MYRIADPRO-REGULAR.OTF');
+}
 * {
 	margin: 0;
 	padding: 0;
@@ -463,7 +467,7 @@ input.ui-input-text, textarea.ui-input-text {
 .daily_change_span {
 	float: right;
 	text-align: left;
-	padding-top: 20px;
+	padding-top: 30px;
 	/*width: 21%;*/
 }
 .daily_change_span img {
@@ -518,18 +522,18 @@ input.ui-input-text, textarea.ui-input-text {
 	color: #664766;
 	font-family: number;
 	display: block;
-	font-size: 250%;
+	font-size: 45px;
 	margin-top: 5%;
 }
 div.netScore {
 	padding: 15%;
 }
 .txt1 {
-	font-size: 100%;
+	font-size: 20px;
 	color: #000000;
 }
 .score_div .txt1 {
-	font-size: 130%;
+	font-size: 24px;
 }
 .value1 {
 	font-size: 140%;
@@ -538,7 +542,7 @@ div.netScore {
 }
 .score_final .value1{
 	 display: block;
-    font-size: 200%;
+    font-size: 45px;
     margin: 10px 0;
 }
 .value2 {
@@ -760,14 +764,14 @@ position: relative;
 }
 .promo_code {
 	float: left;
-	width: 11%;
+	width: 80px;
 	/*height: 135px;*/
-	padding: 1% 0;
+	padding: 1% 10px;
 	color: #674665;
 }
 .promo_code_def {
 	float: left;
-	width: 31%;
+	width: 240px;
 	border-left: 1px solid #D6D6D6;
 	border-right: 1px solid #D6D6D6;
 }
@@ -776,7 +780,7 @@ position: relative;
 	padding: 1% 2%;
 	position: relative;
 	text-align: justify;
-	width: 45%;
+	width: 44%;
 }
 .update_time {
 	bottom: 3%;
@@ -785,24 +789,25 @@ position: relative;
 }
 .def_icon {
 	float: left;
-	margin: 3% 2%;
+	margin: 3% 0;
 	text-align: center;
-	width: 70px;
+	width: 76px;
 	/*margin: 5px 17px;
 	 text-align: center;
 	 width: 90px;*/
 	color: #999999;
 }
 .promo_txt {
-	font-size: 15px;
+	font-size: 20px;
 	font-weight: bold;
+	font-family: myriadpro;
 	line-height: 10px;
 }
 .promo_value {
 	font-size: 380%;
 	font-family: number;
 	display: block;
-	margin-top: 18%;
+	margin-top: 25%;
 }
 /*Home Page CSS ends here*/
 
