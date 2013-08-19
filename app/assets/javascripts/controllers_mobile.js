@@ -133,7 +133,8 @@ var facebookFlag = 0;
 var logOut = 0;
 
 module.controller('loginController', function($scope, $http, $location) {
-	setFooter(1);
+	console.log("under login controller")
+	
 	if(logOut == 1){
 	location.reload();
 	}
@@ -286,7 +287,7 @@ module.controller('resetPassController', function($scope, $http, $location, $rou
 });
 
 module.controller('homeController', function($scope, $http, $location) {
-	setFooter(0);
+	
 	$scope.points = "";
 	console.log("sign in Count" + getCookie("signInCount"));
 	if (getCookie("authToken")) {
@@ -423,7 +424,7 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 });
 
 module.controller('signUpController', function($scope, $http, $location) {
-	setFooter(0);
+	
 	$scope.confPassword = "";
 	console.log("flag" + feedbackFlag);
 	if (feedbackFlag == 1) {
@@ -560,7 +561,7 @@ module.controller('changePasswordController', function($scope, $http, $location)
 });
 
 module.controller('settingsController', function($scope, $http, $location) {
-	setFooter(0);
+	
 	if (getCookie('authToken')) {
 		if(getCookie('facebookFlag')){
 			$scope.changePass = false;
@@ -712,7 +713,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 var pointsEarned = 0;
 
 module.controller('feedbackController', function($scope, $http, $location) {
-	setFooter(0);
+	
 	$scope.digit1 = "";
 	$scope.digit2 = "";
 	$scope.digit3 = "";
@@ -788,8 +789,8 @@ module.controller('feedbackController', function($scope, $http, $location) {
 });
 
 module.controller('feedback_step2Controller', function($scope, $http, $location) {
-	setFooter(0);
-	if (getCookie("feedbackId")) {
+	
+	//if (getCookie("feedbackId")) {
 		$scope.nextFlag = 0;
 		$scope.prevFlag = 0;
 		$scope.like = true;
@@ -1083,13 +1084,13 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 				$(".nxt img").show();
 			}
 		};
-	} else {
-		$location.url("/home");
-	}
+	//} else {
+//		$location.url("/home");
+	//}
 });
 
 module.controller('feedbackSubmitController', function($scope, $http, $routeParams, $location) {
-	setFooter(0);
+	
 	if (getCookie('authToken')) {
 		
 		$("#fbShareSuccMsg").hide();
@@ -1124,7 +1125,7 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 });
 
 module.controller('restaurantListController', function($scope, $http, $location) {
-	setFooter(0);
+	
 	if (getCookie('authToken')) {
 		// $("#listRestaurant").niceScroll({cursorcolor:"#00F"});
 		$scope.outlets = [];
@@ -1183,7 +1184,7 @@ module.controller('restaurantListController', function($scope, $http, $location)
 });
 
 module.controller('showRestaurantController', function($scope, $http, $routeParams, $location) {
-	setFooter(0);
+	
 	if (getCookie('authToken')) {
 		$.mobile.loading('show');
 		$scope.lattitude = "";
@@ -1250,7 +1251,7 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 });
 
 module.controller('redeemPointsController', function($scope, $http, $location, $routeParams) {
-	setFooter(0);
+	
 	if (getCookie('authToken')) {
 
 		$scope.successMsg = false;
@@ -1340,7 +1341,7 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 });
 
 module.controller('transactionHistoryController', function($scope, $http, $location) {
-	setFooter(0);
+	
 	if (getCookie('authToken')) {
 		$scope.home = function() {
 			$location.url("/home");
@@ -1382,7 +1383,7 @@ module.controller('transactionHistoryController', function($scope, $http, $locat
 });
 
 module.controller('locationMapController', function($scope, $http, $location, $routeParams) {
-	setFooter(0);
+	
 	$.mobile.loading('show');
 	// $scope.MapCtrl = function() {
 	// console.log("lattitude " + $routeParams.lat + " longitude " + $routeParams.long);
@@ -1438,31 +1439,38 @@ module.controller('locationMapController', function($scope, $http, $location, $r
 });
 
 function setFooter(valueH) {
+	console.log("set footer caller with value "+valueH)
+}
 	$(document).on("pageshow", ".ui-page", function() {
-
+	console.log("under page show");
 		$('#date').scroller({
 			theme : "ios",
 			mode : "scroller",
 			display : "bottom",
 			dateFormat : 'dd/mm/yy'
 		});
-
+		
 		var $page = $(this), vSpace = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() + $page.children('.ui-content').height();
-
-		if (vSpace < $(window).height()) {
+//console.log($page.children('.ui-content'));
+		if (vSpace > $(window).height()) {
 			//alert($(window).height());
-			if (valueH == 1) {
-				var vDiff = $(window).height() - $page.children('.ui-header').outerHeight() - $page.children('.ui-footer').outerHeight() - 78;
+			//if (valueH == 1) {
+	//		var vDiff = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() ;
+	//		console.log($page.children('.ui-footer').outerHeight())
+	//		console.log($(window).height() - vDiff)
 				//minus thirty for margin
-			} else {
+			//} else {
 				//alert(valueH);
-				var vDiff = $(window).height() - $page.children('.ui-header').outerHeight() - $page.children('.ui-footer').outerHeight();
+			//	var vDiff = $(window).height() - $page.children('.ui-header').outerHeight() - $page.children('.ui-footer').outerHeight();
 				//minus thirty for margin
-			}
-			$page.children('.ui-content').height(vDiff);
+			//}
+			var url_buffer = 50;
+			$page.height($(window).height()+url_buffer);
+			//alert("setting height")
+			//$page.children('.ui-content').height($(window).height() - vDiff);
 		}
 	});
-}
+//}
 
 function setCookie(name, value, days) {
 	//alert(value);

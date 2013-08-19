@@ -35,6 +35,9 @@
 	bottom: 0;/*position: absolute;*/
 	width: 100%;
 	font-weight: normal !important;
+	position: absolute;
+    width: 100%;
+    text-align:left;
 }
 .genderBtn input::-webkit-input-placeholder {
 	color: #F5C03F !important
@@ -727,12 +730,13 @@ img, object {
  max-width: 23%;
  }*/
 
-.logo_btm img {
-	float: left;
-	margin-left: 4.5%;
-	max-height: 90%;
+[data-role=footer] .logo_btm {
+	/*float: left;*/
+	margin-left: 2.5%;
+	max-height: 70px;
 	bottom: 0;
-	max-width: 23%;
+	display: block;
+	/*max-width: 23%;*/
 }
 #login .ui-btn-corner-all {
 	border-radius: 0px;
@@ -1933,8 +1937,11 @@ img, object {
 }
 .logo_btm {
 	/*bottom: 0;*/
-	position: relative;
-	clear: both;
+	/*position: relative;
+	clear: both;*/
+	/* background: url("/assets/login_bird.png") no-repeat scroll left center / auto 100% transparent;*/
+    height: 67px;
+    text-align: left;
 }
 
 /**Restaurant Info**/
