@@ -249,7 +249,17 @@ module.controller('signInController', function($scope, $http, $location) {
 			$scope.erromsg = true;
 		});
 	};
-
+	
+	// var selectField1 = document.getElementById('inputFields1');
+		// selectField1.addEventListener('touchstart'/*'mousedown'*/, function(e) {
+			// alert("in");
+			// e.stopPropagation();
+		// }, false);
+	// var selectField2 = document.getElementById('inputFields2');
+		// selectField2.addEventListener('touchstart'/*'mousedown'*/, function(e) {
+			// e.stopPropagation();
+		// }, false);
+		
 	$scope.$watch('email + password', function() {
 		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + '@kanari.co:' + $scope.password);
 	});
@@ -314,9 +324,9 @@ module.controller('homePageController', function($scope, $http, $location,$timeo
 		};
 		//document.addEventListener('DOMContentLoaded', function() {
 		//alert("in");
-		if(flag == 1){
-		setTimeout(loaded, 2000);
-		}
+	//	if(flag == 1){
+		setTimeout(loaded, 1000);
+		//}
 		
 		//feedbackTimeout = $timeout($scope.listFeedbacks,120000);
 		
@@ -459,10 +469,6 @@ module.controller('insightsController', function($scope, $http, $location,$timeo
 
 
 		$scope.feedbackMetrics();
-		//setTimeout($scope.feedbackMetrics(), 120);
-		
-		insightTimeout = $timeout($scope.feedbackMetrics,120000);
-		
 		setTimeout(callScroller, 1000);
 
 	} else {
@@ -609,6 +615,7 @@ module.controller('numericCodeController', function($scope, $http, $location,$ti
 
 		var selectField = document.getElementById('Field10');
 		selectField.addEventListener('touchstart'/*'mousedown'*/, function(e) {
+			alert("in");
 			e.stopPropagation();
 		}, false);
 
@@ -773,7 +780,7 @@ function loaded() {
 
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 
-document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 2000); }, false);
+//document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 2000); }, false);
 
 
 // document.addEventListener('DOMContentLoaded', function() {

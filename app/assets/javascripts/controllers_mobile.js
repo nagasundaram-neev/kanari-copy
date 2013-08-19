@@ -339,13 +339,13 @@ module.controller('homeController', function($scope, $http, $location) {
 			});
 		};
 
-		if (getCookie("signInCount") == 0) {
+		if (getCookie("signInCount") == 1) {
 			console.log("in sign in count");
 			$scope.getUserData();
 		}
 
 		//alert("token "+getCookie("authToken"));
-		if (getCookie("signInCount") == 1 && getCookie('feedbackId')) {
+		if (getCookie("signInCount") == 0 && getCookie('feedbackId')) {
 			console.log("sign in Count if " + signInCount);
 			var param = {
 				"feedback_id" : getCookie('feedbackId'),
