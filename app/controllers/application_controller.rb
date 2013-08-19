@@ -16,7 +16,7 @@ class ApplicationController < ActionController::API
     render json: {errors: ["Insufficient privileges"]}, status: :forbidden
   end
 
-  #Handle authorization exception from CanCan
+  #Handle RecordNotFound errors
   rescue_from ActiveRecord::RecordNotFound do |exception|
     render json: {errors: [exception.message]}, status: :unprocessable_entity
   end

@@ -227,7 +227,7 @@ Feature: Lists Feedback log
       When I authenticate as the user "admin_auth_token" with the password "random string"
        And I send a GET request to "/api/audit_logs" with the following:
        """
-       outlet_id=50&type=code_generation&start_time='2013-07-06 00:00:00'&end_time='2013-07-10 02:00:00'
+       outlet_id=50&type=feedback&start_time='2013-07-06 00:00:00'&end_time='2013-07-10 02:00:00'
        """
        Then the response status should be "404"
        And the JSON response should be:
