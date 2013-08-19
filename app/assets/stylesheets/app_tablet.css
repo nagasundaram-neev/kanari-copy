@@ -523,11 +523,11 @@ input.ui-input-text, textarea.ui-input-text {
 	font-family: number;
 	display: block;
 	font-size: 45px;
-	margin-top: 5%;
+	margin: 15px 0;
 }
-div.netScore {
+/*div.netScore {
 	padding: 15%;
-}
+}*/
 .txt1 {
 	font-size: 20px;
 	color: #000000;
@@ -540,10 +540,10 @@ div.netScore {
 	font-family: number;
 	color: #664766;
 }
-.score_final .value1{
-	 display: block;
-    font-size: 45px;
-    margin: 10px 0;
+.score_final .value1 {
+	display: block;
+	font-size: 45px;
+	margin: 15px 0;
 }
 .value2 {
 	color: #664766;
@@ -551,7 +551,7 @@ div.netScore {
 	font-family: number;
 	font-size: 140%;
 }
-.value3{
+.value3 {
 	font-size: 275%;
 }
 
@@ -564,7 +564,7 @@ div.netScore {
 	background: none repeat scroll 0 0 #FEC03B;
 	float: left;
 	/*margin-top: 5%;*/
-	margin-top: 12%;
+	margin-top: 10%;
 }
 
 .net_rate_plus_red {
@@ -591,6 +591,7 @@ div.netScore {
 	font-family: number;
 	font-weight: bold;
 	margin-left: 1%;
+	margin-right: 2px;
 }
 .rate1V {
 	width: 34%;
@@ -655,12 +656,12 @@ div.netScore {
 	margin-bottom: 5%;
 }
 .loaderDiv {
-position: relative;
+	position: relative;
 }
 .loader {
-	 position: absolute;
-    right: -19px;
-    top: 13px;
+	position: absolute;
+	right: -19px;
+	top: 13px;
 }
 
 .billAmountTxtBox {
