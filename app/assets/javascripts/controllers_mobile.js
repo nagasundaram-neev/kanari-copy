@@ -134,9 +134,9 @@ var logOut = 0;
 
 module.controller('loginController', function($scope, $http, $location) {
 	console.log("under login controller")
-	
-	if(logOut == 1){
-	location.reload();
+
+	if (logOut == 1) {
+		location.reload();
 	}
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
 	$scope.remember = false;
@@ -287,7 +287,7 @@ module.controller('resetPassController', function($scope, $http, $location, $rou
 });
 
 module.controller('homeController', function($scope, $http, $location) {
-	
+
 	$scope.points = "";
 	console.log("sign in Count" + getCookie("signInCount"));
 	if (getCookie("authToken")) {
@@ -424,7 +424,7 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 });
 
 module.controller('signUpController', function($scope, $http, $location) {
-	
+
 	$scope.confPassword = "";
 	console.log("flag" + feedbackFlag);
 	if (feedbackFlag == 1) {
@@ -561,14 +561,13 @@ module.controller('changePasswordController', function($scope, $http, $location)
 });
 
 module.controller('settingsController', function($scope, $http, $location) {
-	
+
 	if (getCookie('authToken')) {
-		if(getCookie('facebookFlag')){
+		if (getCookie('facebookFlag')) {
 			$scope.changePass = false;
-		}else{
+		} else {
 			$scope.changePass = true;
 		}
-		
 
 		$scope.succMsg = false;
 		$scope.errorMsg = false;
@@ -713,7 +712,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 var pointsEarned = 0;
 
 module.controller('feedbackController', function($scope, $http, $location) {
-	
+
 	$scope.digit1 = "";
 	$scope.digit2 = "";
 	$scope.digit3 = "";
@@ -722,9 +721,9 @@ module.controller('feedbackController', function($scope, $http, $location) {
 	$scope.error = false;
 
 	$scope.home = function() {
-		if(getCookie('authToken')){
-			$location.url("/home");	
-		}else{
+		if (getCookie('authToken')) {
+			$location.url("/home");
+		} else {
 			$location.url("/index");
 		}
 	};
@@ -789,196 +788,138 @@ module.controller('feedbackController', function($scope, $http, $location) {
 });
 
 module.controller('feedback_step2Controller', function($scope, $http, $location) {
-	
+
 	//if (getCookie("feedbackId")) {
-		$scope.nextFlag = 0;
-		$scope.prevFlag = 0;
-		$scope.like = true;
-		$scope.prev = false;
-		$scope.dislike = false;
-		$scope.optionKeypad = true;
-		$scope.recomendation = false;
-		$scope.recomendationBar = false;
-		$scope.counts = [];
-		$scope.erromsg = false;
-		$scope.willRecommend = "";
-		$scope.feedBackArray = [0, 0, 0, 0, 0, 0];
-		$scope.feedBackSize = 6;
-		$scope.feedBackCategoryName = ["food", "friendlines", "speed", "ambiance", "cleanliness", "value"];
-		$(".nxt").css("width", "100%");
+	$scope.nextFlag = 0;
+	$scope.prevFlag = 0;
+	$scope.like = true;
+	$scope.prev = false;
+	$scope.dislike = false;
+	$scope.optionKeypad = true;
+	$scope.recomendation = false;
+	$scope.recomendationBar = false;
+	$scope.counts = [];
+	$scope.erromsg = false;
+	$scope.willRecommend = "";
+	$scope.feedBackArray = [0, 0, 0, 0, 0, 0];
+	$scope.feedBackSize = 6;
+	$scope.feedBackCategoryName = ["food", "friendlines", "speed", "ambiance", "cleanliness", "value"];
+	$(".nxt").css("width", "100%");
 
-		var yBarCount = 0;
+	var yBarCount = 0;
 
-		for (var i = 0; i <= 10; i++) {
-			$scope.counts[i] = i;
+	for (var i = 0; i <= 10; i++) {
+		$scope.counts[i] = i;
+	}
+
+	$scope.food_quality = 0;
+	$scope.friendlines_quality = 0;
+	$scope.speed_quality = 0;
+	$scope.ambiance_quality = 0;
+	$scope.cleanliness_quality = 0;
+	$scope.value_quality = 0;
+
+	$scope.home = function() {
+		$location.url("/home");
+	};
+
+	$scope.recommendation = function(count) {
+		if ($('#feedback_' + count).hasClass('Ybar')) {
+			for (var i = 0; i <= count; i++) {
+				yBarCount = i;
+				$("#feedback_" + i).removeClass("Ybar").addClass("Pbar");
+			}
+		} else {
+			for (var i = count + 1; i <= yBarCount; i++) {
+				$("#feedback_" + i).removeClass("Pbar").addClass("Ybar");
+			}
+		}
+		$scope.willRecommend = parseInt(count);
+	};
+
+	var response = 0;
+	$scope.categoryname = "";
+	$scope.select_feedback_category = function(category) {
+		category_switch = 0;
+		if ($scope.like) {
+			if ($scope.feedBackArray[category] == 0) {
+				$scope.feedBackArray[category] = 1;
+				$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_4.png');
+				$("#feed_" + category).css("background-color", "#664765");
+				$("#feed_" + category + " span").css("color", "#E5E6E8");
+			} else if ($scope.feedBackArray[category] == 1) {
+				$scope.feedBackArray[category] = 0;
+				$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_3.png');
+				$("#feed_" + category).css("background-color", "#E5E6E8");
+				$("#feed_" + category + " span").css("color", "#664765");
+			}
+
+		} else {
+			if ($scope.feedBackArray[category] == 0) {
+				$scope.feedBackArray[category] = -1;
+				$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_2.png');
+				$("#feed_" + category).css("background-color", "#664765");
+				$("#feed_" + category + " span").css("color", "#E5E6E8");
+			} else if ($scope.feedBackArray[category] == -1) {
+				$scope.feedBackArray[category] = 0;
+				$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_1.png');
+				$("#feed_" + category).css("background-color", "#E5E6E8");
+				$("#feed_" + category + " span").css("color", "#664765");
+			}
 		}
 
-		$scope.food_quality = 0;
-		$scope.friendlines_quality = 0;
-		$scope.speed_quality = 0;
-		$scope.ambiance_quality = 0;
-		$scope.cleanliness_quality = 0;
-		$scope.value_quality = 0;
+	};
 
-		$scope.home = function() {
-			$location.url("/home");
-		};
-
-		$scope.recommendation = function(count) {
-			if ($('#feedback_' + count).hasClass('Ybar')) {
-				for (var i = 0; i <= count; i++) {
-					yBarCount = i;
-					$("#feedback_" + i).removeClass("Ybar").addClass("Pbar");
-				}
-			} else {
-				for (var i = count + 1; i <= yBarCount; i++) {
-					$("#feedback_" + i).removeClass("Pbar").addClass("Ybar");
-				}
-			}
-			$scope.willRecommend = parseInt(count);
-		};
-
-		var response = 0;
-		$scope.categoryname = "";
-		$scope.select_feedback_category = function(category) {
-			category_switch = 0;
-			if ($scope.like) {
-				if ($scope.feedBackArray[category] == 0) {
-					$scope.feedBackArray[category] = 1;
-					$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_4.png');
-					$("#feed_" + category).css("background-color", "#664765");
-					$("#feed_" + category + " span").css("color", "#E5E6E8");
-				} else if ($scope.feedBackArray[category] == 1) {
-					$scope.feedBackArray[category] = 0;
-					$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_3.png');
-					$("#feed_" + category).css("background-color", "#E5E6E8");
-					$("#feed_" + category + " span").css("color", "#664765");
-				}
-
-			} else {
-				if ($scope.feedBackArray[category] == 0) {
-					$scope.feedBackArray[category] = -1;
-					$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_2.png');
-					$("#feed_" + category).css("background-color", "#664765");
-					$("#feed_" + category + " span").css("color", "#E5E6E8");
-				} else if ($scope.feedBackArray[category] == -1) {
-					$scope.feedBackArray[category] = 0;
-					$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_1.png');
-					$("#feed_" + category).css("background-color", "#E5E6E8");
-					$("#feed_" + category + " span").css("color", "#664765");
+	$scope.next = function() {
+		if ($scope.nextFlag == 0) {
+			console.log("hi ")
+			for (var i = 0; i < $scope.feedBackSize; i++) {
+				if ($scope.feedBackArray[i] == 0) {
+					$scope.feedBackArray[i] = 0;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_1.png');
+					$("#feed_" + i).css("background-color", "#E5E6E8");
+					$("#feed_" + i + " span").css("color", "#664765");
+				} else if ($scope.feedBackArray[i] == 1) {
+					$scope.feedBackArray[i] = 1;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_2.png');
+					$("#feed_" + i).css("background-color", "#CCCCCC");
+					$("#feed_" + i + " span").css("color", "#664765");
+				} else if ($scope.feedBackArray[i] == -1) {
+					$scope.feedBackArray[i] = -1;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_2.png');
+					$("#feed_" + i).css("background-color", "#664765");
+					$("#feed_" + i + " span").css("color", "#E5E6E8 ");
 				}
 			}
-
-		};
-
-		$scope.next = function() {
-			if ($scope.nextFlag == 0) {
-				console.log("hi ")
-				for (var i = 0; i < $scope.feedBackSize; i++) {
-					if ($scope.feedBackArray[i] == 0) {
-						$scope.feedBackArray[i] = 0;
-						$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_1.png');
-						$("#feed_" + i).css("background-color", "#E5E6E8");
-						$("#feed_" + i + " span").css("color", "#664765");
-					} else if ($scope.feedBackArray[i] == 1) {
-						$scope.feedBackArray[i] = 1;
-						$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_2.png');
-						$("#feed_" + i).css("background-color", "#CCCCCC");
-						$("#feed_" + i + " span").css("color", "#664765");
-					} else if ($scope.feedBackArray[i] == -1) {
-						$scope.feedBackArray[i] = -1;
-						$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_2.png');
-						$("#feed_" + i).css("background-color", "#664765");
-						$("#feed_" + i + " span").css("color", "#E5E6E8 ");
-					}
-				}
-				$scope.like = false;
-				$scope.optionKeypad = true;
-				$scope.dislike = true;
-				$scope.prev = true;
-				$scope.recomendation = false;
-				$scope.nextFlag = 1;
-				$scope.prevFlag = 0;
-				$scope.recomendationBar = false;
-				$(".nxt").css("width", "50.22%");
-			} else if ($scope.nextFlag == 1) {
-				$scope.like = false;
-				$scope.dislike = false;
-				$scope.recomendation = true;
-				$scope.recomendationBar = true;
-				$scope.optionKeypad = false;
-				$scope.prev = true;
-				//$scope.nextFlag = 0;
-				$scope.prevFlag = 1;
-				$scope.nextFlag = -1;
-				//$(".nxt").css("width", "50.22%");
-				$(".nxtTxt").html("SUBMIT");
-				$scope.erromsg = false;
-				$(".nxt img").hide();
-				console.log("feedback " + $scope.feedBackArray);
-			} else if ($scope.nextFlag == -1) {
-				console.log("submitting feedback");
-				if (!$scope.willRecommend) {
-					if ($scope.willRecommend == '0') {
-						console.log("in hio ");
-						var param = {
-							"feedback" : {
-								"food_quality" : parseInt($scope.feedBackArray[0]),
-								"speed_of_service" : parseInt($scope.feedBackArray[2]),
-								"friendliness_of_service" : parseInt($scope.feedBackArray[1]),
-								"ambience" : parseInt($scope.feedBackArray[3]),
-								"cleanliness" : parseInt($scope.feedBackArray[4]),
-								"value_for_money" : parseInt($scope.feedBackArray[5]),
-								"comment" : $scope.comment,
-								"recommendation_rating" : $scope.willRecommend
-							},
-							"auth_token" : getCookie('authToken')
-						}
-
-						$http({
-							method : 'put',
-							url : '/api/feedbacks/' + getCookie('feedbackId'),
-							data : param
-						}).success(function(data, status) {
-							console.log("User Role " + data + " status " + status);
-							//pointsEarned = data.points;
-							setCookie("pointsEarned", data.points, 0.29);
-							// alert(getCookie('pointsEarned'));
-							$scope.erromsg = false;
-							if (getCookie('authToken')) {
-								$location.url("/feedbackSubmitSuccess");
-								deleteCookie('feedbackId');
-							} else {
-								feedbackFlag = 1;
-								$location.url("/signUp");
-								//deleteCookie('feedbackId');
-							}
-						}).error(function(data, status) {
-							console.log("data in error" + data + " status " + status);
-							if (status == 401) {
-								deleteCookie('authToken');
-								deleteCookie('userRole');
-								deleteCookie('userName');
-								deleteCookie('feedbackId');
-								deleteCookie("signInCount");
-								deleteAllCookies();
-								$location.url("/login");
-							} else if (status == 404) {
-								$scope.error = "Code expired"
-								$scope.erromsg1 = true;
-							} else {
-								$scope.error = data.errors[0];
-								$scope.erromsg1 = true;
-							}
-							deleteCookie('feedbackId');
-						});
-
-					} else {
-						console.log("recommend" + $scope.willRecommend);
-						$scope.error = "Please recommend this place to your friend or colleague";
-						$scope.erromsg = true;
-					}
-				} else {
+			$scope.like = false;
+			$scope.optionKeypad = true;
+			$scope.dislike = true;
+			$scope.prev = true;
+			$scope.recomendation = false;
+			$scope.nextFlag = 1;
+			$scope.prevFlag = 0;
+			$scope.recomendationBar = false;
+			$(".nxt").css("width", "50.22%");
+		} else if ($scope.nextFlag == 1) {
+			$scope.like = false;
+			$scope.dislike = false;
+			$scope.recomendation = true;
+			$scope.recomendationBar = true;
+			$scope.optionKeypad = false;
+			$scope.prev = true;
+			//$scope.nextFlag = 0;
+			$scope.prevFlag = 1;
+			$scope.nextFlag = -1;
+			//$(".nxt").css("width", "50.22%");
+			$(".nxtTxt").html("SUBMIT");
+			$scope.erromsg = false;
+			$(".nxt img").hide();
+			console.log("feedback " + $scope.feedBackArray);
+		} else if ($scope.nextFlag == -1) {
+			console.log("submitting feedback");
+			if (!$scope.willRecommend) {
+				if ($scope.willRecommend == '0') {
+					console.log("in hio ");
 					var param = {
 						"feedback" : {
 							"food_quality" : parseInt($scope.feedBackArray[0]),
@@ -999,9 +940,9 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 						data : param
 					}).success(function(data, status) {
 						console.log("User Role " + data + " status " + status);
-						pointsEarned = data.points;
+						//pointsEarned = data.points;
 						setCookie("pointsEarned", data.points, 0.29);
-						//alert(getCookie('pointsEarned'));
+						// alert(getCookie('pointsEarned'));
 						$scope.erromsg = false;
 						if (getCookie('authToken')) {
 							$location.url("/feedbackSubmitSuccess");
@@ -1030,69 +971,127 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 						}
 						deleteCookie('feedbackId');
 					});
+
+				} else {
+					console.log("recommend" + $scope.willRecommend);
+					$scope.error = "Please recommend this place to your friend or colleague";
+					$scope.erromsg = true;
 				}
-			}
-		};
+			} else {
+				var param = {
+					"feedback" : {
+						"food_quality" : parseInt($scope.feedBackArray[0]),
+						"speed_of_service" : parseInt($scope.feedBackArray[2]),
+						"friendliness_of_service" : parseInt($scope.feedBackArray[1]),
+						"ambience" : parseInt($scope.feedBackArray[3]),
+						"cleanliness" : parseInt($scope.feedBackArray[4]),
+						"value_for_money" : parseInt($scope.feedBackArray[5]),
+						"comment" : $scope.comment,
+						"recommendation_rating" : $scope.willRecommend
+					},
+					"auth_token" : getCookie('authToken')
+				}
 
-		$scope.goBack = function() {
-			deleteCookie('feedbackId');
-			$location.url("/feedback");
-		};
-
-		$scope.previous = function() {
-			console.log("in previous ");
-			if ($scope.prevFlag == 0) {
-				for (var i = 0; i < $scope.feedBackSize; i++) {
-					if ($scope.feedBackArray[i] == 0) {
-						$scope.feedBackArray[i] = 0;
-						$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_3.png');
-						$("#feed_" + i).css("background-color", "#E5E6E8");
-						$("#feed_" + i + " span").css("color", "#664765");
-					} else if ($scope.feedBackArray[i] == -1) {
-						$scope.feedBackArray[i] = -1;
-						$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_4.png');
-						$("#feed_" + i).css("background-color", "#CCCCCC");
-						$("#feed_" + i + " span").css("color", "#664765");
-					} else if ($scope.feedBackArray[i] == 1) {
-						$scope.feedBackArray[i] = 1;
-						$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_4.png');
-						$("#feed_" + i).css("background-color", "#664765");
-						$("#feed_" + i + " span").css("color", "#E5E6E8");
+				$http({
+					method : 'put',
+					url : '/api/feedbacks/' + getCookie('feedbackId'),
+					data : param
+				}).success(function(data, status) {
+					console.log("User Role " + data + " status " + status);
+					pointsEarned = data.points;
+					setCookie("pointsEarned", data.points, 0.29);
+					//alert(getCookie('pointsEarned'));
+					$scope.erromsg = false;
+					if (getCookie('authToken')) {
+						$location.url("/feedbackSubmitSuccess");
+						deleteCookie('feedbackId');
+					} else {
+						feedbackFlag = 1;
+						$location.url("/signUp");
+						//deleteCookie('feedbackId');
 					}
-				}
-				$scope.like = true;
-				$scope.dislike = false;
-				$scope.optionKeypad = true;
-				$scope.recomendationBar = false;
-				$scope.recomendation = false;
-				$scope.prevFlag = 1;
-				$scope.prev = false;
-				$(".nxt").css("width", "100%");
-				$scope.nextFlag = 0;
-				//$scope.prevFlag = -1;
-			} else if ($scope.prevFlag == 1) {
-				$scope.like = false;
-				$scope.dislike = true;
-				$scope.prev = true;
-				$scope.recomendationBar = false;
-				$scope.recomendation = false;
-				$scope.optionKeypad = true;
-				$scope.prevFlag = 0;
-				$scope.nextFlag = 1;
-				$(".nxt").css("width", "49.5%");
-				$(".nxtTxt").html("NEXT");
-				$(".nxt img").show();
+				}).error(function(data, status) {
+					console.log("data in error" + data + " status " + status);
+					if (status == 401) {
+						deleteCookie('authToken');
+						deleteCookie('userRole');
+						deleteCookie('userName');
+						deleteCookie('feedbackId');
+						deleteCookie("signInCount");
+						deleteAllCookies();
+						$location.url("/login");
+					} else if (status == 404) {
+						$scope.error = "Code expired"
+						$scope.erromsg1 = true;
+					} else {
+						$scope.error = data.errors[0];
+						$scope.erromsg1 = true;
+					}
+					deleteCookie('feedbackId');
+				});
 			}
-		};
+		}
+	};
+
+	$scope.goBack = function() {
+		deleteCookie('feedbackId');
+		$location.url("/feedback");
+	};
+
+	$scope.previous = function() {
+		console.log("in previous ");
+		if ($scope.prevFlag == 0) {
+			for (var i = 0; i < $scope.feedBackSize; i++) {
+				if ($scope.feedBackArray[i] == 0) {
+					$scope.feedBackArray[i] = 0;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_3.png');
+					$("#feed_" + i).css("background-color", "#E5E6E8");
+					$("#feed_" + i + " span").css("color", "#664765");
+				} else if ($scope.feedBackArray[i] == -1) {
+					$scope.feedBackArray[i] = -1;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_4.png');
+					$("#feed_" + i).css("background-color", "#CCCCCC");
+					$("#feed_" + i + " span").css("color", "#664765");
+				} else if ($scope.feedBackArray[i] == 1) {
+					$scope.feedBackArray[i] = 1;
+					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_4.png');
+					$("#feed_" + i).css("background-color", "#664765");
+					$("#feed_" + i + " span").css("color", "#E5E6E8");
+				}
+			}
+			$scope.like = true;
+			$scope.dislike = false;
+			$scope.optionKeypad = true;
+			$scope.recomendationBar = false;
+			$scope.recomendation = false;
+			$scope.prevFlag = 1;
+			$scope.prev = false;
+			$(".nxt").css("width", "100%");
+			$scope.nextFlag = 0;
+			//$scope.prevFlag = -1;
+		} else if ($scope.prevFlag == 1) {
+			$scope.like = false;
+			$scope.dislike = true;
+			$scope.prev = true;
+			$scope.recomendationBar = false;
+			$scope.recomendation = false;
+			$scope.optionKeypad = true;
+			$scope.prevFlag = 0;
+			$scope.nextFlag = 1;
+			$(".nxt").css("width", "49.5%");
+			$(".nxtTxt").html("NEXT");
+			$(".nxt img").show();
+		}
+	};
 	//} else {
-//		$location.url("/home");
+	//		$location.url("/home");
 	//}
 });
 
 module.controller('feedbackSubmitController', function($scope, $http, $routeParams, $location) {
-	
+
 	if (getCookie('authToken')) {
-		
+
 		$("#fbShareSuccMsg").hide();
 		if (getCookie('pointsEarned')) {
 			$scope.points = getCookie('pointsEarned');
@@ -1125,7 +1124,7 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 });
 
 module.controller('restaurantListController', function($scope, $http, $location) {
-	
+
 	if (getCookie('authToken')) {
 		// $("#listRestaurant").niceScroll({cursorcolor:"#00F"});
 		$scope.outlets = [];
@@ -1184,7 +1183,7 @@ module.controller('restaurantListController', function($scope, $http, $location)
 });
 
 module.controller('showRestaurantController', function($scope, $http, $routeParams, $location) {
-	
+
 	if (getCookie('authToken')) {
 		$.mobile.loading('show');
 		$scope.lattitude = "";
@@ -1251,7 +1250,7 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 });
 
 module.controller('redeemPointsController', function($scope, $http, $location, $routeParams) {
-	
+
 	if (getCookie('authToken')) {
 
 		$scope.successMsg = false;
@@ -1341,7 +1340,7 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 });
 
 module.controller('transactionHistoryController', function($scope, $http, $location) {
-	
+
 	if (getCookie('authToken')) {
 		$scope.home = function() {
 			$location.url("/home");
@@ -1383,7 +1382,7 @@ module.controller('transactionHistoryController', function($scope, $http, $locat
 });
 
 module.controller('locationMapController', function($scope, $http, $location, $routeParams) {
-	
+
 	$.mobile.loading('show');
 	// $scope.MapCtrl = function() {
 	// console.log("lattitude " + $routeParams.lat + " longitude " + $routeParams.long);
@@ -1439,38 +1438,65 @@ module.controller('locationMapController', function($scope, $http, $location, $r
 });
 
 function setFooter(valueH) {
-	console.log("set footer caller with value "+valueH)
+	console.log("set footer caller with value " + valueH)
 }
-	$(document).on("pageshow", ".ui-page", function() {
+
+
+$(document).on("pageshow", ".ui-page", function() {
 	console.log("under page show");
-		$('#date').scroller({
-			theme : "ios",
-			mode : "scroller",
-			display : "bottom",
-			dateFormat : 'dd/mm/yy'
-		});
+	$('#date').scroller({
+		theme : "ios",
+		mode : "scroller",
+		display : "bottom",
+		dateFormat : 'dd/mm/yy'
+	});
+	
 		
 		var $page = $(this), vSpace = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() + $page.children('.ui-content').height();
-//console.log($page.children('.ui-content'));
-		if (vSpace > $(window).height()) {
+		//console.log($page.children('.ui-content'));
+		//alert(vSpace);
+		//alert($(window).height());
+		var url_buffer = 50;
+		if (vSpace < $(window).height()) {
 			//alert($(window).height());
 			//if (valueH == 1) {
-	//		var vDiff = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() ;
-	//		console.log($page.children('.ui-footer').outerHeight())
-	//		console.log($(window).height() - vDiff)
-				//minus thirty for margin
+			//		var vDiff = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() ;
+			//		console.log($page.children('.ui-footer').outerHeight())
+			//		console.log($(window).height() - vDiff)
+			//minus thirty for margin
 			//} else {
-				//alert(valueH);
+			//alert(valueH);
 			//	var vDiff = $(window).height() - $page.children('.ui-header').outerHeight() - $page.children('.ui-footer').outerHeight();
-				//minus thirty for margin
+			//minus thirty for margin
 			//}
-			var url_buffer = 50;
-			$page.height($(window).height()+url_buffer);
+
+			$page.height($(window).height());
 			//alert("setting height")
 			//$page.children('.ui-content').height($(window).height() - vDiff);
 		}
-	});
+	
+	if ($page.height() > $(window).height()) {
+		$page.children('.ui-footer').css('position', 'relative')
+		$page.children('.ui-footer').css('margin-top', '14px')
+		//alert("page height grater, will need to scroll")
+	} else {
+		//alert("height sufficient no need to scroll")
+	}
+
+	setTimeout(function() {
+		window.scrollTo(0, 1)
+	}, 100);
+
+	//document.write("You are using iOS5");
+});
 //}
+function iOSversion() {
+	if (/iP(hone|od|ad)/.test(navigator.platform)) {
+		// supports iOS 2.0 and later: <http://bit.ly/TJjs1V>
+		var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+		return [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || 0, 10)];
+	}
+}
 
 function setCookie(name, value, days) {
 	//alert(value);
@@ -1623,7 +1649,7 @@ module.factory('Facebook', function($http, $location) {
 							"oauth_provider" : "facebook",
 							"access_token" : self.auth.accessToken
 						};
-						
+
 						$http({
 							method : 'post',
 							url : '/api/users',
@@ -1712,6 +1738,8 @@ window.fbAsyncInit = function() {
 		ref.parentNode.insertBefore(js, ref);
 	}(document));
 
- window.addEventListener('load', function(e) {
-    setTimeout(function() { window.scrollTo(0, 1); }, 1);
-  }, false);
+window.addEventListener('load', function(e) {
+	setTimeout(function() {
+		window.scrollTo(0, 1);
+	}, 1);
+}, false);

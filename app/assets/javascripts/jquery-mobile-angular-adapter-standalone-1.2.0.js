@@ -1,4 +1,3 @@
-
 /**
 * jQuery Mobile angularJS adaper standalone v1.2.0
 * http://github.com/tigbro/jquery-mobile-angular-adapter
@@ -12711,12 +12710,8 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 			aPagePadB = parseFloat( aPage.css( "padding-bottom" ) ),
 			aPageBorderT = parseFloat( aPage.css( "border-top-width" ) ),
 			aPageBorderB = parseFloat( aPage.css( "border-bottom-width" ) );
-		aPage.css( "min-height",getScreenHeight() - aPagePadT - aPagePadB - aPageBorderT - aPageBorderB);
-        /** Custom height to home page & sign up page for big height screen mobiles */
-        var heightHome=$(document).height()-$(document).height()*19/100;
-        var heightSignUp=$(document).height()-$(document).height()*22.2/100;
-        $('#home .outerDiv').css('minHeight',heightHome+'px');   
-        $('#signUp .ui-content').css('height',heightSignUp+'px');   
+
+		aPage.css( "min-height", getScreenHeight() - aPagePadT - aPagePadB - aPageBorderT - aPageBorderB );
 	}
 
 	//shared page enhancements

@@ -1205,6 +1205,10 @@ img, object {
 	font-weight: normal;
 }
 
+#settings .ui-btn-up-a , .ui-btn-hover-a{
+	background:#F5C03F !important;
+}
+
 #settings .dateDiv input:-ms-input-placeholder {
 	color: #F5C03F !important;
 	text-align: center;
