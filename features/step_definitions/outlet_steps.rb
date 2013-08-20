@@ -38,6 +38,11 @@ And /^the outlet's id is "([^"]*)"$/ do |id|
   @outlet.save
 end
 
+Given(/^the outlet is disabled$/) do
+    @outlet.disabled = true
+    @outlet.save
+end
+
 Given(/^the outlet doesn't have any feedback$/) do
   @outlet.feedbacks = []
   @outlet.save
@@ -53,12 +58,18 @@ And /^the outlet's outlet types should be "([^"]*)"$/ do |outlet_types|
 end
 
 And /^the outlet "([^"]*)" should be present under customer with id "([^"]*)"$/ do |outlet_name, customer_id|
-  @existing_outlet = Outlet.where(name: outlet_name).first
-  Customer.find(customer_id).outlets.should == [@existing_outlet]
+  @existing_outlet = Outlet.unscoped.where(name: outlet_name).first
+  Outlet.unscoped do
+   Customer.find(customer_id).outlets.should == [@existing_outlet]
+  end
 end
 
 And "the outlet should be disabled" do
   @existing_outlet.disabled.should == true
+end
+
+And "the outlet should be enabled" do
+  @existing_outlet.disabled.should == false
 end
 
 Given /^outlet "(.*?)" has staffs$/ do |outlet_name, table|

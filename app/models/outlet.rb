@@ -6,6 +6,7 @@ class Outlet < ActiveRecord::Base
   # TODO: Make it outlet specific
   NPS_LIMIT = 100
 
+  default_scope -> {  where(disabled: false) }
   belongs_to :customer, inverse_of: :outlets
   has_many :feedbacks, inverse_of: :outlet
   has_many :redemptions, inverse_of: :outlet

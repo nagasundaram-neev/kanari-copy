@@ -14,9 +14,8 @@ class Api::V1::OutletsController < ApplicationController
 
   # GET /outlets/1
   def show
-    outlet = Outlet.find(params[:id])
-    authorize! :read, outlet
-    render json: outlet
+    authorize! :read, @outlet
+    render json: @outlet
   end
 
   # POST /outlets
@@ -46,6 +45,18 @@ class Api::V1::OutletsController < ApplicationController
     end
   end
 
+  # PATCH/PUT /outlets/1
+  def disable
+    @outlet = Outlet.unscoped.where(id: params[:id]).first
+    render json: {errors: ["Outlet not found"]}, status: :notfound and return if @outlet.nil?
+    authorize! :disable, @outlet
+    if @outlet.update_column('disabled', !@outlet.disabled)
+      render json: nil, status: 200
+    else
+      render json: @outlet.errors, status: :unprocessable_entity
+    end
+  end
+
   # DELETE /outlets/1
   # DELETE /outlets/1.json
   def destroy
@@ -59,11 +70,12 @@ class Api::V1::OutletsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_outlet
-      @outlet = Outlet.find(params[:id])
+      @outlet = Outlet.where(id: params[:id]).first
+      render json: {errors: ["Outlet not found"]}, status: 404 and return if @outlet.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def outlet_params
-      params.require(:outlet).permit(:name, :address, :latitude, :longitude, :website_url, :email, :phone_number, :open_hours, :has_delivery, :serves_alcohol, :has_outdoor_seating, :manager_id, :disabled)
+      params.require(:outlet).permit(:name, :address, :latitude, :longitude, :website_url, :email, :phone_number, :open_hours, :has_delivery, :serves_alcohol, :has_outdoor_seating, :manager_id)
     end
 end

@@ -38,6 +38,7 @@ class Ability
       can :read_all, Customer
       can :read, Customer
       can :read_all_redemptions, Outlet
+      can :disable, Outlet
       can :approve_redemptions, Outlet
       can :create, OutletType
       can :create, CuisineType

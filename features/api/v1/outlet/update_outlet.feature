@@ -18,7 +18,6 @@ Feature: Update Outlet
       {
         "outlet" : {
           "name" : "China Pearl - Bengaluru",
-          "disabled" : true,
           "latitude": 12.97,
           "longitude": "77.61"
         }
@@ -32,9 +31,9 @@ Feature: Update Outlet
       And the outlet "China Pearl - Bengaluru" should be present under customer with id "100"
       And the outlet's email should still be "outlet@outlet.com"
       And the outlet's latitude and longitude should be "12.97" and "77.61"
-      And the outlet should be disabled
+      And the outlet should be enabled
 
-    Scenario: Staff successfully update an outlet
+    Scenario: Manager successfully update an outlet
       Given the following users exist
          |id        |first_name |email                          | password    | authentication_token  | role            |
          |101       |Donald     |manager@chinapearl.com         | password123 | donald_auth_token     | manager         |
@@ -52,7 +51,6 @@ Feature: Update Outlet
       {
         "outlet" : {
           "name" : "China Pearl - Bengaluru",
-          "disabled" : true,
           "latitude": 12.97,
           "longitude": "77.61"
         }
@@ -66,7 +64,7 @@ Feature: Update Outlet
       And the outlet "China Pearl - Bengaluru" should be present under customer with id "100"
       And the outlet's email should still be "outlet@outlet.com"
       And the outlet's latitude and longitude should be "12.97" and "77.61"
-      And the outlet should be disabled
+      And the outlet should be enabled
 
     Scenario: Update manager
       Given the following users exist
@@ -117,7 +115,6 @@ Feature: Update Outlet
       {
         "outlet" : {
           "name" : "China Pearl - Bengaluru",
-          "disabled" : true,
           "cuisine_type_ids" : [1,2],
           "outlet_type_ids" : [1,3]
         }
@@ -145,18 +142,44 @@ Feature: Update Outlet
       """
       {
         "outlet" : {
-          "name" : "China Pearl - Bengaluru",
-          "disabled" : true
+          "name" : "China Pearl - Bengaluru"
         }
       }
       """
-      Then the response status should be "422"
+      Then the response status should be "404"
       And the JSON response should be:
       """
-      { "errors" : ["Couldn't find Outlet with id=21"] }
+      { "errors" : ["Outlet not found"] }
       """
 
-    Scenario: Outlet belongs to a different customer account
+    Scenario: Outlet is disabled
+      Given "Adam" is a user with email id "user@gmail.com" and password "password123"
+        And his role is "customer_admin"
+        And his authentication token is "auth_token_123"
+      Given a customer named "China Pearl" exists with id "100"
+        And the customer with id "100" has an outlet named "China Pearl - Bangalore"
+        And the outlet's id is "20"
+        And the outlet's email is "outlet@outlet.com"
+        And the outlet is disabled
+        And he is the admin for customer "China Pearl"
+      When I authenticate as the user "auth_token_123" with the password "random string"
+      And I send a PUT request to "/api/outlets/20" with the following:
+      """
+      {
+        "outlet" : {
+          "name" : "China Pearl - Bengaluru",
+          "latitude": 12.97,
+          "longitude": "77.61"
+        }
+      }
+      """
+      Then the response status should be "404"
+      And the JSON response should be:
+      """
+      { "errors" : ["Outlet not found"] }
+      """
+	
+	Scenario: Outlet belongs to a different customer account
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"
         And his role is "customer_admin"
         And his authentication token is "auth_token_123"
