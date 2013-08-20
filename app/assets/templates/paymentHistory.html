@@ -25,7 +25,32 @@
 		<span style="padding: 10px 20px;"><span class="outletM"><a href="#/payment_history">Payment History</a></span></span>
 		<span class="blank_span"><img src="assets/div_line_yellow.jpg" /></span>
 	</div>
-	<div id="payment_history" class="viewAccPage" style="margin:20px 0 20px 50px">
-		Payment History
+	<div id="payment_history" class="viewAccPage" style="margin:10px 20px;">
+		<span class="selectDate">Select date range:</span>
+		<div class="input-append date"  id="payDate1" data-date="13-08-2013" data-date-format="dd-mm-yyyy">
+			<input class="span2" size="16" type="text" ng-model="startDate"  placeholder="Start Date" readonly>
+			<span class="add-on"><i class="icon-th"></i></span>
+		</div>
+		<div class="input-append date"  id="payDate2" data-date="13-08-2013" data-date-format="dd-mm-yyyy">
+			<input id="sDate" class="span2" size="16" type="text" ng-model="endDate" placeholder="End Date" readonly>
+			<span class="add-on"><i class="icon-th"></i></span>
+		</div>
+		<div class="clr"></div>
+		<div class="paymentHistoryTbl">
+			<div class="payHistoryHeader">
+				<div class="headCol headCol1">Kanari Invoice Number </div>
+				<div class="headCol headCol2">Reciept Date </div>
+				<div class="headCol headCol3">Item Description</div>
+				<div class="headCol headCol4">Amount Paid</div>
+				<div class="border_right_none headCol headCol5">Link to PDF</div>
+			</div>
+			<div class="paymentHistoryData" ng-repeat="paymentHistory in paymentHistoryList">
+				<div class="dataCol headCol1">{{paymentHistory.kanari_invoice_id}}</div>
+				<div class="dataCol headCol2">{{paymentHistory.receipt_date | date:'dd/MM/yyyy'}}</div>
+				<div class="dataCol headCol3">Al Bustan Rotana Hotel, Dubai</div>
+				<div class="dataCol headCol4"><span>{{paymentHistory.amount_paid}}&nbsp;</span>AED</div>
+				<div class="border_right_none dataCol headCol5"><img src="assets/icon_pdf.png" /></div>
+			</div>
+		</div>
 	</div>
 </div>

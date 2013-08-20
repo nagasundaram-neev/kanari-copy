@@ -2079,8 +2079,75 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 		$('#dasboard').hide();
 		$('#account').addClass('active');
 		$rootScope.header = "Payment History | Kanari";
+		$scope.paymentHistoryList = [];
+
+		$(function() {
+			$('#payDate1').datepicker().on('changeDate', function(ev) {
+				var dt = new Date(ev.date.valueOf());
+				var month = dt.getMonth() + 1;
+				startDt = dt.getFullYear() + "-" + month + "-" + dt.getDate();
+				if (startDt != 'undefined' && typeof endDt != 'undefined') {
+					console.log("hi in start date");
+					$scope.listPaymentHistory();
+					$(".outletDropDown").change(function() {
+						$scope.listPaymentHistory();
+					});
+				}
+			});
+			$('#payDate2').datepicker().on('changeDate', function(ev) {
+				var dt = new Date(ev.date.valueOf());
+				var month = dt.getMonth() + 1;
+				endDt = dt.getFullYear() + "-" + month + "-" + dt.getDate();
+				if ( typeof startDt != 'undefined' && endDt != 'undefined') {
+					console.log("hi in end date");
+					$scope.listPaymentHistory();
+					$(".outletDropDown").change(function() {
+						$scope.listPaymentHistory();
+					});
+				}
+			});
+		});
+
+		$scope.listPaymentHistory = function() {
+				var outletId = $scope.outletOption;
+			if (startDt != "" && endDt != "") {
+				var param = {
+					"auth_token" : getCookie('authToken'),
+					"password" : 'X',
+					"outlet_id" : $scope.outletOption,
+					"start_time" : startDt,
+					"end_time" : endDt
+				};
+			} else {
+				var param = {
+					"auth_token" : getCookie('authToken'),
+					"password" : 'X',
+				};
+			}
+			$http({
+				method : 'get',
+				url : '/api/payment_invoices',
+				params : param,
+			}).success(function(data, status) {
+				console.log("Data in success " + data + " status " + status);
+				$scope.paymentHistoryList = data.payment_invoices;
+			}).error(function(data, status) {
+				console.log("data in error " + data + " status " + status);
+			});
+
+			$("#payDate1 .add-on").click(function() {
+				//$('.datepicker').addClass("addLeft");
+			});
+
+			$("#payDate2 .add-on").click(function() {
+				//$('.datepicker').removeClass("addLeft");
+			});
+		};
+
+		$scope.listPaymentHistory();
 	}
 });
+
 var startDt;
 var endDt;
 module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location) {
@@ -2289,14 +2356,14 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					var foodLike = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.like;
 					var foodNeutral = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.neutral;
 					var foodDisLike = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.dislike;
-					
-					resultsDate.push(i+1);				
+
+					resultsDate.push(i + 1);
 					results1.push(foodLike);
 					results2.push(foodNeutral);
 					results3.push(foodDisLike);
-					
-				}	
-				getFoodGraph();			
+
+				}
+				getFoodGraph();
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 			});
@@ -2392,6 +2459,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				}]
 			});
 		}
+
 	}
 });
 module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location) {
