@@ -21,9 +21,12 @@ class Api::V1::OutletsController < ApplicationController
   # POST /outlets
   def create
     @outlet = Outlet.new(outlet_params)
+    authorize! :create, @outlet
+    customer = current_user.customer
+    outlet_limit_exceeded = (customer.outlets.count >= customer.authorized_outlets)
+    render json: {errors: ["Outlets limit exceeded"]}, status: :unprocessable_entity and return if outlet_limit_exceeded
     @outlet.outlet_types = OutletType.find(params[:outlet][:outlet_type_ids]) rescue []
     @outlet.cuisine_types = CuisineType.find(params[:outlet][:cuisine_type_ids]) rescue []
-    authorize! :create, @outlet
 
     @outlet.customer = current_user.customer
     if @outlet.save

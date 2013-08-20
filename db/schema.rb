@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130816110907) do
+ActiveRecord::Schema.define(version: 20130819095818) do
 
   create_table "code_generation_logs", force: true do |t|
     t.integer  "outlet_id"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20130816110907) do
     t.datetime "updated_at"
     t.integer  "customer_admin_id"
     t.string   "email"
+    t.integer  "authorized_outlets",         default: 1
   end
 
   create_table "customers_users", force: true do |t|
