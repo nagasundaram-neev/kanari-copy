@@ -1,4 +1,8 @@
 /* app css stylesheet */
+@font-face {
+	font-family: myriadpro;
+	src: url('MYRIADPRO-REGULAR.OTF');
+}
 * {
 	margin: 0;
 }
@@ -291,8 +295,8 @@ span.full_name {
 }
 .main_content span {
 	/*color: #5A4166;
-	font-size: 15px;
-	margin-right: 8px;*/
+	 font-size: 15px;
+	 margin-right: 8px;*/
 	font-size: 15px;
 }
 a.addRestaurant {
@@ -1016,9 +1020,10 @@ input {
 	text-align: center;
 }
 .promo_txt {
-	font-size: 130%;
+	font-size: 13px !important;
 	font-weight: bold;
 	line-height: 10px;
+	font-family: myriadpro;
 }
 .promo_value {
 	display: block;
@@ -1061,9 +1066,9 @@ input {
 /***Dashboard Comments End***/
 
 /**** Dashboard snapshot ****/
-.snapshotMenuDropDown{
+.snapshotMenuDropDown {
 	float: right;
-    margin: 5px 10px;
+	margin: 5px 10px;
 }
 .insight_graph1, .insight_graph2 {
 	width: 50%;
@@ -1133,7 +1138,7 @@ input {
 	color: #664766;
 	display: block;
 	font-size: 250% !important;
-    margin-top: 5px;
+	margin-top: 5px;
 }
 
 .txt1 {
@@ -1141,9 +1146,9 @@ input {
 	color: #000000;
 }
 .value1 {
-	 display: block;
-    font-size: 250% !important;
-    margin-top: 10px;
+	display: block;
+	font-size: 250% !important;
+	margin-top: 10px;
 	color: #664766;
 }
 .value2 {
@@ -1224,7 +1229,7 @@ input {
 	background: none repeat scroll 0 0 #E6E7E9;
 	border-top: 12px solid #D6D6D6;
 	overflow: hidden;
-	 height: 60px;
+	height: 60px;
 }
 .score_final .net_score, .score_final .daily_change {
 	text-align: center;
@@ -1235,18 +1240,24 @@ input {
 .insight_graph1 .score_div .net_score, .insight_graph1 .net_promo_score {
 	border-right: 1px solid #C3C3C3;
 }
-.insight_graph1 .daily_change_score span{
+.insight_graph1 .daily_change_score span {
 	color: #505050 !important;
 }
 .insight_graph1 .score_final .net_score {
 	border-right: 2px solid #664766;
 }
-.insight_graph1 .daily_change_score{width: 34%;}
+.insight_graph1 .daily_change_score {
+	width: 34%;
+}
 .insight_graph2 .promo_code_def {
 	width: 36%;
 }
-.insight_graph1 .main_score .txt1{font-size: 20px;}
-.insight_graph1 .score_1 .txt1, .insight_graph1 .score_final .txt1{font-size: 15px;}
+.insight_graph1 .main_score .txt1 {
+	font-size: 20px;
+}
+.insight_graph1 .score_1 .txt1, .insight_graph1 .score_final .txt1 {
+	font-size: 15px;
+}
 .insight_graph2 .def_icon {
 	font-size: 11px;
 	width: 62px;
@@ -1259,8 +1270,9 @@ input {
 	font-size: 13px;
 }
 .insight_graph2 .promo_value {
-	font-size: 340% !important;
+	font-size: 40px !important;
 	margin-top: 15%;
+	font-family: number;
 }
 .insight_graph2 .promo_code_desc span, .insight_graph2 .update_time span {
 	color: #505050;
@@ -1269,30 +1281,39 @@ input {
 /**** Dashboard snapshot ****/
 
 /**** Dashboard Trends ****/
-.menu_bar{
-	width:240px;
+.menu_bar {
+	width: 240px;
 	padding: 25px 0;
 	border-right: 1px solid #CCCCCC;
-	float:left;
+	float: left;
 }
-.menu_bar .headingCls{
+.menu_bar .headingCls {
 	border-top: 1px solid #CCCCCC;
 	padding: 10px 10px 0;
 	font-weight: bold;
 }
-.menu_bar ul{
-	 list-style: none outside none;
-	  margin: 0 0 9px 35px;
+.menu_bar ul {
+	list-style: none outside none;
+	margin: 0 0 9px 35px;
 }
-.menu_bar ul li{
+.menu_bar ul li {
 	border-top: 1px solid #CCCCCC;
 	padding: 3px 0;
 	font-size: 14px;
 }
-.menu_bar ul li a{ color: #5A4166;}
-.menu_bar ul li a:hover{text-decoration: none;}
-.chart_div{float:left;width: 600px;}
-tspan{diaplay:none;}
+.menu_bar ul li a {
+	color: #5A4166;
+}
+.menu_bar ul li a:hover {
+	text-decoration: none;
+}
+.chart_div {
+	float: left;
+	width: 600px;
+}
+tspan {
+	diaplay: none;
+}
 /**** Dashboard Trends End ****/
 
 /****Calendar CSS***/
@@ -1313,3 +1334,69 @@ tspan{diaplay:none;}
 .addLeft:before, .addLeft:after {
 	left: 200px !important;
 }
+
+/** Payment History **/
+#payDate1, #payDate2 {
+	float: left;
+	margin: 5px;
+}
+.selectDate {
+	float: left;
+	margin: 8px 0;
+}
+#payDate1 span, #payDate2 span {
+	float: right;
+}
+#payDate1 .icon-th, #payDate2 .icon-th {
+	background-position: -2px -2px;
+}
+.paymentHistoryTbl {
+	border: 1px solid #CCCCCC;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-ms-border-radius: 10px;
+	overflow: hidden;
+	margin-top: 10px;
+}
+.payHistoryHeader {
+	background: none repeat scroll 0 0 #EBEBEB;
+	overflow: hidden;
+}
+.paymentHistoryData {
+	border-bottom: 1px solid #CCCCCC;
+	overflow: hidden;
+	 font-size: 14px;
+}
+.border_bottom_none {
+	border-bottom: none;
+}
+.headCol {
+	float: left;
+	padding: 8px 10px;
+	font-size: 14px;
+	border-right: 1px solid #CCCCCC;
+}
+.dataCol {
+	float: left;
+	padding: 8px 10px;
+	color: #9D9D9D;
+	border-right: 1px solid #CCCCCC;
+}
+.headCol1 {
+	width: 200px
+}
+.headCol2 {
+	width: 150px
+}
+.headCol3 {
+	width: 360px
+}
+.headCol4 {
+	width: 180px
+}
+.headCol5 {
+	width: 78px;
+	text-align: center;
+}
+.paymentHistoryData span{color: #5A4166;}
