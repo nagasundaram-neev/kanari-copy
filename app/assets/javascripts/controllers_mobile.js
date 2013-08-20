@@ -1088,16 +1088,28 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 	//}
 });
 
+var socialMessage;
+var tweetMessage;
 module.controller('feedbackSubmitController', function($scope, $http, $routeParams, $location) {
 
 	if (getCookie('authToken')) {
 
 		$("#fbShareSuccMsg").hide();
+		$("#tweetShareSuccMsg").hide();
+		$("#gPlusShareSuccMsg").hide();
+		$scope.tweetShareSuccMsg = false;
 		if (getCookie('pointsEarned')) {
 			$scope.points = getCookie('pointsEarned');
 		} else {
 			$location.url("/home");
 		}
+
+		socialMessage = 'I just saved AED ' + getCookie('pointsEarned') + ' by leaving feedback at ' + getCookie('restName') + '. Thanks Kanari! Check it out: http://kanari.co';
+		tweetMessage = 'I just saved AED ' + getCookie('pointsEarned') + ' by leaving feedback at ' + getCookie('restName') + '. Thanks @GetKanari! Check it out: http://kanari.co';
+		
+
+		//$("#twitter").attr("href", "https://twitter.com/share?text="+socialMessage);
+
 		// var cb = new Codebird();
 		// cb.setConsumerKey("YeFlpVP16H9uRc2J0COEng", "ZEYmzEKWQvY3eSmzJikeOum1ELofSBjP5K1MVYQec");
 
@@ -1110,13 +1122,33 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 			deleteCookie('restName');
 			$location.url("/home");
 		};
-		// $scope.twitter = function() {
-		// alert("in twitter");
-		// cb.__call("oauth2_token", {}, function(reply) {
-		// var bearer_token = reply.access_token;
-		// alert("hi "+bearer_token);
-		// });
-		// };
+
+		$scope.twitter = function() {
+			//window.open();
+			var popup = window.open("https://twitter.com/share?text=" + tweetMessage, 'popUpWindow', 'height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
+			//$scope.success = "Post to Twitter successfull!"
+			//$("#fbShareSuccMsg").show();
+
+			var timer = setInterval(function() {
+				if (popup.closed) {
+					clearInterval(timer);
+					//alert('closed');
+					$("#fbShareSuccMsg").hide();
+					$("#tweetShareSuccMsg").show();
+				}
+			}, 1000);
+			// $('.selected').click
+			// $("#fbShareSuccMsg").hide();
+			// $scope.tweetShareSuccMsg = true;
+			//$("#tweetShareSuccMsg").show();
+		};
+		
+		$scope.google = function(){
+		
+			var popup = window.open("https://plus.google.com/share?data-text=lkjnkln" + socialMessage, 'popUpWindow', 'height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
+			
+			
+		};
 
 	} else {
 		$location.url("/login");
@@ -1450,31 +1482,30 @@ $(document).on("pageshow", ".ui-page", function() {
 		display : "bottom",
 		dateFormat : 'dd/mm/yy'
 	});
-	
-		
-		var $page = $(this), vSpace = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() + $page.children('.ui-content').height();
-		//console.log($page.children('.ui-content'));
-		//alert(vSpace);
-		//alert($(window).height());
-		var url_buffer = 50;
-		if (vSpace < $(window).height()) {
-			//alert($(window).height());
-			//if (valueH == 1) {
-			//		var vDiff = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() ;
-			//		console.log($page.children('.ui-footer').outerHeight())
-			//		console.log($(window).height() - vDiff)
-			//minus thirty for margin
-			//} else {
-			//alert(valueH);
-			//	var vDiff = $(window).height() - $page.children('.ui-header').outerHeight() - $page.children('.ui-footer').outerHeight();
-			//minus thirty for margin
-			//}
 
-			$page.height($(window).height());
-			//alert("setting height")
-			//$page.children('.ui-content').height($(window).height() - vDiff);
-		}
-	
+	var $page = $(this), vSpace = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() + $page.children('.ui-content').height();
+	//console.log($page.children('.ui-content'));
+	//alert(vSpace);
+	//alert($(window).height());
+	var url_buffer = 50;
+	if (vSpace < $(window).height()) {
+		//alert($(window).height());
+		//if (valueH == 1) {
+		//		var vDiff = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() ;
+		//		console.log($page.children('.ui-footer').outerHeight())
+		//		console.log($(window).height() - vDiff)
+		//minus thirty for margin
+		//} else {
+		//alert(valueH);
+		//	var vDiff = $(window).height() - $page.children('.ui-header').outerHeight() - $page.children('.ui-footer').outerHeight();
+		//minus thirty for margin
+		//}
+
+		$page.height($(window).height());
+		//alert("setting height")
+		//$page.children('.ui-content').height($(window).height() - vDiff);
+	}
+
 	if ($page.height() > $(window).height()) {
 		$page.children('.ui-footer').css('position', 'relative')
 		$page.children('.ui-footer').css('margin-top', '14px')
@@ -1685,10 +1716,10 @@ module.factory('Facebook', function($http, $location) {
 		share : function() {
 			FB.login(function(response) {
 				if (response.authResponse) {
-					var fbMessage = 'I just saved AED ' + getCookie('pointsEarned') + ' by leaving feedback at ' + getCookie('restName') + '. Thanks Kanari! Check it out: http://kanari.co';
+					//var fbMessage = 'I just saved AED ' + getCookie('pointsEarned') + ' by leaving feedback at ' + getCookie('restName') + '. Thanks Kanari! Check it out: http://kanari.co';
 					//alert("message for fb "+fbMessage)
 					FB.api('/me/feed', 'post', {
-						message : fbMessage
+						message : socialMessage
 					}, function(response) {
 						if (!response || response.error) {
 							//alert(response[0]);
