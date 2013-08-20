@@ -55,42 +55,62 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				<div id='child' style='overflow: hidden;width: 198px;margin: 0 auto;'>
 					<div ng-click="Facebook.share()" class="backColorYellow" style="float: left"><img src="/assets/ic_fb_purple.png" />
 					</div>
-					<div ng-click="twitter()" class="backColorYellow" style="float: left"><img src="/assets/ic_twitter_purple.png" />
-					</div>
-					<a href="https://plus.google.com/share?CONTENT=_MESSAGE_GOES_HERE"><div class="backColorYellow" style="float: left"><img src="/assets/ic_gplus_purple.png" />
+					<a id="twitter" href="javascript:void(0);" ng-click="twitter()">
+					<div class="backColorYellow" style="float: left"><img src="/assets/ic_twitter_purple.png" />
 					</div></a>
+					<a id="gogglePlus" href="javascript:void(0);" ng-click="google()"><div class="backColorYellow" style="float: left"><img src="/assets/ic_gplus_purple.png" />
+					</div></a>
+					<script type="text/javascript">
+						(function() {
+							var po = document.createElement('script');
+							po.type = 'text/javascript';
+							po.async = true;
+							po.src = 'https://apis.google.com/js/plusone.js';
+							var s = document.getElementsByTagName('script')[0];
+							s.parentNode.insertBefore(po, s);
+						})();
+					</script>
 				</div>
 			</div>
-			<p id="fbShareSuccMsg" class="succMsg">Your message has been posted successfully</p>			
+			<p id="fbShareSuccMsg" class="succMsg">
+				Post to Facebook successfull!
+			</p>
+			<p id="tweetShareSuccMsg" class="succMsg">
+				Post to Twitter successfull!
+			</p>
+			<p id="gPlusShareSuccMsg" class="succMsg">
+				Post to Google+ successfull!
+			</p>
 			<div class="shareIconsDiv">
 				<!-- <div class="backColorYellow">
-					<div ng-click="facebook()" class="fb_image1"><img src="/assets/ic_fb_purple.png" />
-					</div>
+				<div ng-click="facebook()" class="fb_image1"><img src="/assets/ic_fb_purple.png" />
+				</div>
 				</div>
 				<div class="backColorYellow">
-					<div ng-click="twitter()" class="twit_image1"><img src="/assets/ic_twitter_purple.png" />
-					</div>
+				<div ng-click="twitter()" class="twit_image1"><img src="/assets/ic_twitter_purple.png" />
+				</div>
 				</div>
 				<div class="backColorYellow">
-					<div ng-click="google()" class="google_image1"><img src="/assets/ic_gplus_purple.png" />
-					</div>
+				<div ng-click="google()" class="google_image1"><img src="/assets/ic_gplus_purple.png" />
+				</div>
 				</div> -->
 				<div class="clr"></div>
 			</div>
 		</div>
-		
+
 	</div>
-	
+
 	<div data-role="footer" class="footerDiv" >
-			<div class="logo_btm">
-				<%= image_tag 'bird_yellow_k.png' %>
+		<div class="logo_btm">
+			<%= image_tag 'bird_yellow_k.png' %>
+		</div>
+		<div class="clr"></div>
+		<div class="username">
+			<div style="padding: 0 45%;">
+				<div ng-click="home()" class="home"></div>
 			</div>
 			<div class="clr"></div>
-			<div class="username">
-				<div style="padding: 0 45%;">
-					<div ng-click="home()" class="home"></div>
-				</div>
-				<div class="clr"></div>
-			</div>
 		</div>
+	</div>
+
 </div>
