@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
     when 'kanari_admin'
       Outlet.unscoped
     when 'customer_admin'
-      customer.nil? ? [] : customer.outlets
+      customer.nil? ? [] : ( Outlet.unscoped.where(customer: customer) )
     when 'manager'
       managed_outlets
     when 'staff'
