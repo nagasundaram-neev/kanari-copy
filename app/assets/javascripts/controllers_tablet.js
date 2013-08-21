@@ -615,7 +615,7 @@ module.controller('numericCodeController', function($scope, $http, $location,$ti
 
 		var selectField = document.getElementById('Field10');
 		selectField.addEventListener('touchstart'/*'mousedown'*/, function(e) {
-			alert("in");
+			//alert("in");
 			e.stopPropagation();
 		}, false);
 
