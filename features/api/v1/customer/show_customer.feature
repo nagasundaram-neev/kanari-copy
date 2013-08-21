@@ -23,6 +23,7 @@ Feature: Show Customer
             "phone_number": null
           },
           "email": null,
+          "authorized_outlets": 1,
           "mailing_address_city": null,
           "mailing_address_country": null,
           "mailing_address_line_1": null,
@@ -59,6 +60,7 @@ Feature: Show Customer
             "phone_number": null
           },
           "email": null,
+          "authorized_outlets": 1,
           "mailing_address_city": null,
           "mailing_address_country": null,
           "mailing_address_line_1": null,
