@@ -150,7 +150,8 @@ Feature: List Outlets
          ]
       }
       """
-    Scenario: User's role is customer_admin
+	
+	Scenario: User's role is customer_admin
       Given the following users exist
         |first_name |email                          | password    | authentication_token  | role            |
         |Adam       |superadmin@kanari.co           | password123 | admin_auth_token      | kanari_admin    |
@@ -210,31 +211,6 @@ Feature: List Outlets
               "phone_number": null
             },
             "name": "Subway - Bangalore",
-            "open_hours": null,
-            "phone_number": null,
-            "serves_alcohol": null,
-            "website_url": null,
-            "cuisine_types": [],
-            "outlet_types": [],
-            "redeemable_points": 0,
-            "points_pending_redemption": 0
-          },
-          {
-            "id" : 2,
-            "address": null,
-            "disabled": true,
-            "email": null,
-            "has_delivery": null,
-            "has_outdoor_seating": null,
-            "latitude": null,
-            "longitude": null,
-            "manager": {
-              "email": "manager@subway.com",
-              "first_name": "George",
-              "last_name": null,
-              "phone_number": null
-            },
-            "name": "Subway - Pune",
             "open_hours": null,
             "phone_number": null,
             "serves_alcohol": null,
