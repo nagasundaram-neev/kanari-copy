@@ -72,6 +72,12 @@ And "the outlet should be enabled" do
   @existing_outlet.disabled.should == false
 end
 
+Given /^outlet "(.*?)" is disabled$/ do |outlet_name|
+  outlet = Outlet.unscoped.where(name: outlet_name).first
+  outlet.disabled = true
+  outlet.save!
+end
+
 Given /^outlet "(.*?)" has staffs$/ do |outlet_name, table|
   # table is a Cucumber::Ast::Table
   staff_emails = table.raw.flatten

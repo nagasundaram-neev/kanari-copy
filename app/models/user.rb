@@ -58,9 +58,9 @@ class User < ActiveRecord::Base
   def outlets
     case role
     when 'kanari_admin'
-      Outlet.all
+      Outlet.unscoped
     when 'customer_admin'
-      customer.nil? ? [] : customer.outlets
+      customer.nil? ? [] : ( Outlet.unscoped.where(customer: customer) )
     when 'manager'
       managed_outlets
     when 'staff'
