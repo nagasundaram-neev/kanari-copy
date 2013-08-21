@@ -58,9 +58,9 @@ class User < ActiveRecord::Base
   def outlets
     case role
     when 'kanari_admin'
-      Outlet.all
+      Outlet.unscoped
     when 'customer_admin'
-      customer.nil? ? [] : customer.outlets
+      customer.nil? ? [] : ( Outlet.unscoped.where(customer: customer) )
     when 'manager'
       managed_outlets
     when 'staff'
@@ -69,6 +69,17 @@ class User < ActiveRecord::Base
       Outlet.where(disabled: false)
     else
       return []
+    end
+  end
+
+  def is_active?
+    case role
+    when 'user', 'kanari_admin', 'customer_admin'
+      return true
+    when 'manager'
+      managed_outlets.length >= 1
+    when 'staff'
+      Array(employed_outlet).length >= 1
     end
   end
 

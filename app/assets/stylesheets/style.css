@@ -1223,25 +1223,25 @@ img, object {
 	/*font-family: KanariLightFont;*/
 	font-weight: bold !important;
 	margin: 0 !important;
-	padding: 1.5% 0;
+	padding: 1.2% 0;
 	text-transform: uppercase;
 }
 .profileText h2, .profileTextBottom h2 {
 	margin: 0 !important;
 	text-shadow: none;
-	font-size: 148%;
+	font-size: 148%
 	font-weight: normal;
 	letter-spacing: 2px;
 }
 .profileTextBottom {
-	padding: 1.5% !important;
+	padding: 1.2% !important;
 }
 #settings .ui-btn-inline {
 	clear: both;
 	width: 100%;
 	border: 0 !important;
 	margin: 0% 0 0;
-	height: 35px;
+	height: 45px;
 	font-size: 220% !important;
 }
 #settings .ui-btn-inline span.ui-btn-text {
@@ -1571,7 +1571,8 @@ img, object {
 .saveDiv .ui-corner-all, .saveDiv .ui-btn-corner-all {
 	border-radius: 0;
 	border: medium none;
-	 font-size: 45%;
+	 font-size: 50%;
+	 margin: 1.8% 0;
 }
 .settingDiv .ui-slider-switch .ui-btn.ui-slider-handle {
 	margin: 2px 0 0 -14px;
@@ -1950,6 +1951,13 @@ img, object {
     height: 67px;
     text-align: left;
 }
+
+#feedbackSub .logo_btm{
+	height:70px;
+	text-align: left;
+}
+
+
 
 /**Restaurant Info**/
 .rest_name {
