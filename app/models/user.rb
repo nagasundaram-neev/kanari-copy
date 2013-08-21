@@ -55,10 +55,14 @@ class User < ActiveRecord::Base
     activities
   end
 
-  def outlets
+  def outlets(options={})
     case role
     when 'kanari_admin'
-      Outlet.unscoped
+      if(options[:customer_id]).present?
+        Outlet.unscoped.where(customer_id: options[:customer_id])
+      else
+        Outlet.unscoped
+      end
     when 'customer_admin'
       customer.nil? ? [] : ( Outlet.unscoped.where(customer: customer) )
     when 'manager'
