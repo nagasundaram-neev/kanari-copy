@@ -1951,6 +1951,13 @@ img, object {
     text-align: left;
 }
 
+#feedbackSub .logo_btm{
+	height:70px;
+	text-align: left;
+}
+
+
+
 /**Restaurant Info**/
 .rest_name {
 	font-size: 1.4em;

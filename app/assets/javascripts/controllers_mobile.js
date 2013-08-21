@@ -1139,7 +1139,7 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 			}, 1000);
 			// $('.selected').click
 			// $("#fbShareSuccMsg").hide();
-			// $scope.tweetShareSuccMsg = true;
+			// $scope.tweetShareSuccMsg = true;it
 			//$("#tweetShareSuccMsg").show();
 		};
 		
