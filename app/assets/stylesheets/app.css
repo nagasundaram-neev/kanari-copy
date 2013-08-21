@@ -297,7 +297,7 @@ span.full_name {
 	/*color: #5A4166;
 	 font-size: 15px;
 	 margin-right: 8px;*/
-	font-size: 15px;
+	/*font-size: 15px;*/
 }
 a.addRestaurant {
 	background: none repeat scroll 0 0 #F5BA44;
@@ -702,6 +702,9 @@ ul.taketour li a:hover {
 #viewaccount .passwordTxt {
 	width: 250px;
 }
+#viewaccount lable{
+	 width: 185px;
+}
 #viewaccount .control-group {
 	margin-left: 247px;
 	margin-bottom: 10px;
@@ -1081,11 +1084,12 @@ input {
 .daily_change_span {
 	float: right !important;
 	text-align: left;
-	padding-top: 3%;
-	width: 21%;
+	padding-top: 8%;
+	width: 33%;
 }
 .daily_change_span img {
 	padding: 6% 0;
+	float: left;
 }
 .score_1 {
 	background: none repeat scroll 0 0 #E6E7E9;
@@ -1147,20 +1151,20 @@ input {
 }
 .value1 {
 	display: block;
-	font-size: 250% !important;
-	margin-top: 10px;
+	font-size: 22px !important;
+	margin-top: 5px;
 	color: #664766;
 }
 .value2 {
 	color: #664766;
 	float: right;
-	font-family: number;
-	font-size: 140%;
+	/*font-family: number;*/
+	font-size: 22px;
 }
 .rate_plus {
 	background: none repeat scroll 0 0 #FEC03B;
 	float: left;
-	margin-top: 2%;
+	margin-top: 7%;
 }
 .net_rate_plus {
 	background: none repeat scroll 0 0 #FEC03B;
@@ -1178,7 +1182,8 @@ input {
 .ratePValue {
 	background: none repeat scroll 0 0 transparent;
 	color: #664766;
-	font-weight: bold;
+	 font-size: 15px;
+    font-weight: normal;
 	margin-left: 1%;
 }
 
@@ -1190,9 +1195,10 @@ input {
 .rateMValue {
 	background: none repeat scroll 0 0 transparent;
 	color: #664766;
-	font-family: number;
-	font-weight: bold;
-	margin-left: 1%;
+	/*font-family: number;*/
+	 font-size: 15px;
+    font-weight: normal;
+	margin-right: 1%;
 }
 .rate1V {
 	width: 34%;
@@ -1253,13 +1259,15 @@ input {
 	width: 36%;
 }
 .insight_graph1 .main_score .txt1 {
-	font-size: 20px;
+	font-family: roboto;
+    font-size: 16px;
+    font-weight: bold;
 }
 .insight_graph1 .score_1 .txt1, .insight_graph1 .score_final .txt1 {
 	font-size: 15px;
 }
 .insight_graph2 .def_icon {
-	font-size: 11px;
+	font-size: 13px;
 	width: 62px;
 	margin: 0;
 }
@@ -1276,6 +1284,7 @@ input {
 }
 .insight_graph2 .promo_code_desc span, .insight_graph2 .update_time span {
 	color: #505050;
+	 font-size: 14px;
 }
 
 /**** Dashboard snapshot ****/
@@ -1283,7 +1292,7 @@ input {
 /**** Dashboard Trends ****/
 .menu_bar {
 	width: 240px;
-	padding: 25px 0;
+	padding: 10px 0;
 	border-right: 1px solid #CCCCCC;
 	float: left;
 }
@@ -1311,9 +1320,14 @@ input {
 	float: left;
 	width: 600px;
 }
-tspan {
-	diaplay: none;
+.chart_heading{
+	display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 20px 15px;
 }
+#dashboard_trends ul li a:active{font-weight:bold;}
+#dashboard_trends ul li a.active{font-weight:bold;}
 /**** Dashboard Trends End ****/
 
 /****Calendar CSS***/
