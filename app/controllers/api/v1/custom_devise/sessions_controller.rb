@@ -11,6 +11,7 @@ module Api
 
         def create
           self.resource = warden.authenticate!(auth_options)
+          render json: {errors: ["Inactive User"]}, status: :unprocessable_entity and return unless resource.is_active?
           sign_in(resource_name, resource)
           resource.reset_authentication_token!
           resource.save!
