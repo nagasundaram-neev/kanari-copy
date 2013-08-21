@@ -20,6 +20,7 @@ Feature: List customer accounts
            {
             "customer_admin": null,
             "email": null,
+            "authorized_outlets": 1,
             "mailing_address_city": null,
             "mailing_address_country": null,
             "mailing_address_line_1": null,
@@ -34,6 +35,7 @@ Feature: List customer accounts
           {
             "customer_admin": null,
             "email": null,
+            "authorized_outlets": 1,
             "mailing_address_city": null,
             "mailing_address_country": null,
             "mailing_address_line_1": null,
@@ -48,6 +50,7 @@ Feature: List customer accounts
           {
             "customer_admin": null,
             "email": null,
+            "authorized_outlets": 1,
             "mailing_address_city": null,
             "mailing_address_country": null,
             "mailing_address_line_1": null,
@@ -93,6 +96,7 @@ Feature: List customer accounts
             "phone_number": null
           },
           "email": null,
+          "authorized_outlets": 1,
           "mailing_address_city": null,
           "mailing_address_country": null,
           "mailing_address_line_1": null,
