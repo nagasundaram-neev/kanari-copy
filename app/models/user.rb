@@ -72,6 +72,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  def is_active?
+    case role
+    when 'user', 'kanari_admin', 'customer_admin'
+      return true
+    when 'manager'
+      managed_outlets.length >= 1
+    when 'staff'
+      Array(employed_outlet).length >= 1
+    end
+  end
+
   def registration_complete?
     if role == 'customer_admin'
       !customer.nil?
