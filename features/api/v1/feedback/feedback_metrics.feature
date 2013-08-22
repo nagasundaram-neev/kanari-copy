@@ -52,46 +52,46 @@ Feature: Metrics for Feedback
       {
 	    "feedback_insights": {
          "food_quality": {
-           "like"    : 40,
-           "dislike" : 40,
-           "neutral" : 20,
-           "change"  : 20 
+           "like"    : 40.0,
+           "dislike" : 40.0,
+           "neutral" : 20.0,
+           "change"  : 20.0 
          },
          "speed_of_service": {
-           "like"    : 50,
-           "dislike" : 40,
-           "neutral" : 10,
-           "change"  : 10
+           "like"    : 50.0,
+           "dislike" : 40.0,
+           "neutral" : 10.0,
+           "change"  : 10.0
          },
          "friendliness_of_service": {
-           "like"    : 30,
-           "dislike" : 50,
-           "neutral" : 20,
-           "change"  : -30 
+           "like"    : 30.0,
+           "dislike" : 50.0,
+           "neutral" : 20.0,
+           "change"  : -30.0 
          },
          "ambience": {
-           "like"    : 30,
-           "dislike" : 10,
-           "neutral" : 60,
-           "change"  : 0
+           "like"    : 30.0,
+           "dislike" : 10.0,
+           "neutral" : 60.0,
+           "change"  : 0.0
          },
          "cleanliness": {
-           "like"    : 20,
-           "dislike" : 50,
-           "neutral" : 30,
-           "change"  : 0
+           "like"    : 20.0,
+           "dislike" : 50.0,
+           "neutral" : 30.0,
+           "change"  : 0.0
          },
          "value_for_money": {
-           "like"    : 60,
-           "dislike" : 20,
-           "neutral" : 20,
-           "change"  : 0
+           "like"    : 60.0,
+           "dislike" : 20.0,
+           "neutral" : 20.0,
+           "change"  : 0.0
          },
          "net_promoter_score": {
-           "like"    : 30,
-           "dislike" : 50,
-           "neutral" : 20,
-           "change"  : 0 
+           "like"    : 30.0,
+           "dislike" : 50.0,
+           "neutral" : 20.0,
+           "change"  : 0.0
          },
          "feedbacks_count": 10,
          "rewards_pool": 1000
@@ -154,46 +154,46 @@ Feature: Metrics for Feedback
       {
 	 "feedback_insights": {
          "food_quality": {
-           "like"    : 0,
-           "dislike" : 100,
-           "neutral" : 0,
-           "change"  : -200 
+           "like"    : 0.0,
+           "dislike" : 100.0,
+           "neutral" : 0.0,
+           "change"  : -200.0 
          },
          "speed_of_service": {
-           "like"    : 100,
-           "dislike" : 0,
-           "neutral" : 0,
-           "change"  : 100
+           "like"    : 100.0,
+           "dislike" : 0.0,
+           "neutral" : 0.0,
+           "change"  : 100.0
          },
          "friendliness_of_service": {
-           "like"    : 0,
-           "dislike" : 0,
-           "neutral" : 100,
-           "change"  : 100 
+           "like"    : 0.0,
+           "dislike" : 0.0,
+           "neutral" : 100.0,
+           "change"  : 100.0 
          },
          "ambience": {
-           "like"    : 100,
-           "dislike" : 0,
-           "neutral" : 0,
-           "change"  : 0
+           "like"    : 100.0,
+           "dislike" : 0.0,
+           "neutral" : 0.0,
+           "change"  : 0.0
          },
          "cleanliness": {
-           "like"    : 100,
-           "dislike" : 0,
-           "neutral" : 0,
-           "change"  : 0
+           "like"    : 100.0,
+           "dislike" : 0.0,
+           "neutral" : 0.0,
+           "change"  : 0.0
          },
          "value_for_money": {
-           "like"    : 100,
-           "dislike" : 0,
-           "neutral" : 0,
-           "change"  : 0
+           "like"    : 100.0,
+           "dislike" : 0.0,
+           "neutral" : 0.0,
+           "change"  : 0.0
          },
          "net_promoter_score": {
-           "like"    : 27, 
-           "dislike" : 45,
-           "neutral" : 27,
-           "change"  : 1 
+           "like"    : 27.27272727272727,
+           "dislike" : 45.45454545454545,
+           "neutral" : 27.27272727272728,
+           "change"  : 0.8658008658008605
          },
          "feedbacks_count": 1,
          "rewards_pool": 1000
@@ -254,46 +254,46 @@ Feature: Metrics for Feedback
       {
 	    "feedback_insights": {
          "food_quality": {
-           "like"    : 40,
-           "dislike" : 40,
-           "neutral" : 20,
-           "change"  : 20 
+           "like"    : 40.0,
+           "dislike" : 40.0,
+           "neutral" : 20.0,
+           "change"  : 20.0 
          },
          "speed_of_service": {
-           "like"    : 50,
-           "dislike" : 40,
-           "neutral" : 10,
-           "change"  : 10
+           "like"    : 50.0,
+           "dislike" : 40.0,
+           "neutral" : 10.0,
+           "change"  : 10.0
          },
          "friendliness_of_service": {
-           "like"    : 30,
-           "dislike" : 50,
-           "neutral" : 20,
-           "change"  : -30 
+           "like"    : 30.0,
+           "dislike" : 50.0,
+           "neutral" : 20.0,
+           "change"  : -30.0 
          },
          "ambience": {
-           "like"    : 30,
-           "dislike" : 10,
-           "neutral" : 60,
-           "change"  : 0
+           "like"    : 30.0,
+           "dislike" : 10.0,
+           "neutral" : 60.0,
+           "change"  : 0.0
          },
          "cleanliness": {
-           "like"    : 20,
-           "dislike" : 50,
-           "neutral" : 30,
-           "change"  : 0
+           "like"    : 20.0,
+           "dislike" : 50.0,
+           "neutral" : 30.0,
+           "change"  : 0.0
          },
          "value_for_money": {
-           "like"    : 60,
-           "dislike" : 20,
-           "neutral" : 20,
-           "change"  : 0
+           "like"    : 60.0,
+           "dislike" : 20.0,
+           "neutral" : 20.0,
+           "change"  : 0.0
          },
          "net_promoter_score": {
-           "like"    : 60,
-           "dislike" : 25,
-           "neutral" : 15,
-           "change"  : 15
+           "like"    : 60.0,
+           "dislike" : 25.0,
+           "neutral" : 15.0,
+           "change"  : 15.0
          },
          "feedbacks_count": 10,
          "rewards_pool": 1000
