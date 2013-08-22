@@ -201,7 +201,7 @@ class Outlet < ActiveRecord::Base
         passives  = (feedbacks.select{|f| AppConfig[:detractors].include?f.recommendation_rating }.length.to_f / feedbacks.length)* 100
         neutrals  = 100 - ( promoters + passives )
       end
-      nps = {:like => promoters.to_i, :dislike => passives.to_i, :neutral => neutrals.to_i}
+      nps = {:like => promoters, :dislike => passives, :neutral => neutrals}
     end
 
     def get_average_bill_amount_statistics(feedbacks)
