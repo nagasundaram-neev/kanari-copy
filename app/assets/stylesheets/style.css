@@ -286,17 +286,38 @@
 	color: #664765;
 	float: left;
 	height: 55px;
-	padding: 4% 4%;
+	 padding: 2% 0 2% 4%;
 	text-shadow: none;
-	width: 31.8%;
+	width: 35.73%;
+}
+.restListTitleDivLeft {
+	background-color: #664765;
+	border-right: 1px solid #FFFFFF;
+	color: #FFFFFF;
+	float: left;
+	padding: 6% 0 6% 2%;
+	text-align: left;
+	text-shadow: none;
+	width: 58%;
 }
 
+.restListTitleDivRight {
+	background-color: #664765;
+	color: #FFFFFF;
+	float: left;
+	padding: 6% 0 6% 4%;
+	text-align: left;
+	text-shadow: none;
+	/*width: 39.4%;*/
+	width: 35.73%;
+}
 .parentDivName {
 	border-bottom: 1px solid #CCCCCC;
 	float: left;
 	height: 55px;
-	padding: 5% 0 3% 2%;
-	width: 58.2%;
+	padding: 2% 0 2% 2%;
+	width: 58%;
+	border-right: 1px solid #FFFFFF;
 	word-wrap: break-word;
 }
 
@@ -344,6 +365,7 @@
 	color: #593F5A;
 	font-size: 1.8em;
 	float: right;
+	padding-right:10%;
 }
 
 .thanksMsg {
@@ -424,27 +446,7 @@
 	/*padding:4.5em 0;*/
 	height: 150px;
 }
-.restListTitleDivLeft {
-	background-color: #664765;
-	border-right: 1px solid #FFFFFF;
-	color: #FFFFFF;
-	float: left;
-	padding: 6% 0 6% 2%;
-	text-align: left;
-	text-shadow: none;
-	width: 58%;
-}
 
-.restListTitleDivRight {
-	background-color: #664765;
-	color: #FFFFFF;
-	float: left;
-	padding: 6% 0 6% 4%;
-	text-align: left;
-	text-shadow: none;
-	/*width: 39.4%;*/
-	width: 35.7%;
-}
 .searchDiv {
 	/*	margin: 0 2%;*/
 }
