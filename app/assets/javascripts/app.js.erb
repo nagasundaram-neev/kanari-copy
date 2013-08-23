@@ -131,8 +131,8 @@ module.directive('map', function($http) {
 			}//end addMarker
 			function clearOverlays() {
 			if (markersArray) {
-			for (i in markersArray) {
-			markersArray[i].setMap(null);
+			for (var j in markersArray) {
+			markersArray[j].setMap(null);
 			}
 			}
 			}
