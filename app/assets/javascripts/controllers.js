@@ -254,7 +254,7 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 				} else if (getCookie('userRole') == "customer_admin" && data.registration_complete) {
 					$location.url("/outlets");
 				} else if (getCookie('userRole') == "customer_admin" && !data.registration_complete) {
-					alert("acceptInvitationStep2");
+					// alert("acceptInvitationStep2");
 					$location.url("/acceptInvitationStep2");
 				} else if (getCookie('userRole') == "manager" && data.registration_complete) {
 					$location.url("/outlets");
