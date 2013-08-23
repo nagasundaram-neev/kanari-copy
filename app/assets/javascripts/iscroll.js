@@ -225,7 +225,6 @@ iScroll.prototype = {
 	_scrollbar: function (dir) {
 		var that = this,
 			bar;
-
 		if (!that[dir + 'Scrollbar']) {
 			if (that[dir + 'ScrollbarWrapper']) {
 				if (hasTransform) that[dir + 'ScrollbarIndicator'].style[transform] = '';

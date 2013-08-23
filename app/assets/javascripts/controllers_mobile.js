@@ -175,6 +175,11 @@ module.controller('loginController', function($scope, $http, $location) {
 				if (getCookie('userRole') == "user") {
 					$location.url("/home");
 				} else if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff" || getCookie('userRole') == "manager") {
+					deleteCookie('authToken');
+					deleteCookie('userRole');
+					deleteCookie('userName');
+					deleteCookie('feedbackId');
+					deleteCookie("signInCount");
 					$scope.error = "You are not authenticated to use this app";
 					$scope.erromsg = true;
 				}
@@ -182,6 +187,11 @@ module.controller('loginController', function($scope, $http, $location) {
 				console.log($scope.password)
 				console.log("data " + $scope.email + " status " + status);
 				if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff") {
+					deleteCookie('authToken');
+					deleteCookie('userRole');
+					deleteCookie('userName');
+					deleteCookie('feedbackId');
+					deleteCookie("signInCount");
 					$scope.error = "You are not authenticated to use this app";
 					$scope.erromsg = true;
 				} else {
