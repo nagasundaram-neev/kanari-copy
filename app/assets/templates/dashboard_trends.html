@@ -1,0 +1,75 @@
+<div data-role="page" class="main_content span12" data-theme="b" id="dashboardTrends" ng-controller="dashboardTrendsCtrl">
+	<div class="header_title">
+		<span class="manager_outlet">Dashboard</span>
+		<span class="arrow-right blank_span">&nbsp;</span>
+		<span style="padding: 10px 20px;">Key Metrics</span>
+		<div class="input-append date"  id="dp3" data-date="13-08-2013" data-date-format="dd-mm-yyyy">
+			<input id="sDate" class="span2" size="16" type="text" ng-model="endDate" placeholder="End Date" readonly>
+			<span class="add-on"><i class="icon-th"></i></span>
+		</div>
+		<div class="input-append date"  id="dp2" data-date="13-08-2013" data-date-format="dd-mm-yyyy">
+			<input class="span2" size="16" type="text" ng-model="startDate"  placeholder="Start Date" readonly>
+			<span class="add-on"><i class="icon-th"></i></span>
+		</div>
+		<select ng-model="outletOption" ng-change="selectOutlet()" class="outletDropDown" ng-options="value.id as value.name for value in outletNameList">
+			<option value="">Select Outlet</option>
+		</select>
+	</div>
+	<div id="dashboard_trends" class="viewAccPage" style=" padding: 0;margin:0 10px 0 0;overflow: hidden;">
+		<div class="menu_bar">
+			<div class="headingCls" style="border-top:none;">
+				<img src="/assets/ic_customer_experience.png" />
+				<span>Customer Experience</span>
+			</div>
+			<div class="clr"></div>
+			<ul class="custExp">
+				<li><a id="food" href="javascript:void(0)" class="active">Food Quality</a></li>
+				<li><a id="speed" href="javascript:void(0)">Speed of Service</a></li>
+				<li><a id="friendly" href="javascript:void(0)">Friendliness of Service</a></li>
+				<li><a id="ambiance" href="javascript:void(0)">Ambiance</a></li>
+				<li><a id="cleanly" href="javascript:void(0)">Cleanliness</a></li>
+				<li><a id="moneyVal" href="javascript:void(0)">Value for Money</a></li>
+			</ul>
+			<div class="clr"></div>
+			<div class="headingCls">
+				<img src="/assets/ic_net_promotor_score.png" />
+				<span>Net Promoter Score </span>
+			</div>
+			<div class="clr"></div>
+			<ul class="netPromo">
+				<li><a id="npsOverview" href="javascript:void(0)">NPS Overview</a></li>
+				<li><a id="npsBreakdown" href="javascript:void(0)">NPS Breakdown</a></li>
+			</ul>
+			<div class="clr"></div>
+			<div class="headingCls">
+				<img src="/assets/ic_usuage.png" />
+				<span>Usage </span>
+			</div>
+			<div class="clr"></div>
+			<ul class="usage">
+				<li><a id="feedbackSubmit" href="javascript:void(0)">Feedback Submission</a></li>
+				<li><a id="redemProc" href="javascript:void(0)">Redemptions Processed</a></li>
+				<li><a id="discountClaim" href="javascript:void(0)">Discounts Cliamed</a></li>
+				<li><a id="pointsIssued" href="javascript:void(0)">Points Issued</a></li>
+				<li><a id="rewardsPool" href="javascript:void(0)">Rewards Pool</a></li>
+			</ul>
+			<div class="clr"></div>
+			<div class="headingCls">
+				<img src="/assets/ic_customers.png" />
+				<span>Customers</span>
+			</div>
+			<div class="clr"></div>
+			<ul class="customers">
+				<li><a id="demographics" href="javascript:void(0)">Demographics</a></li>
+				<li><a id="usersGraph" href="javascript:void(0)">New Vs Returning Users</a></li>
+				<li><a id="timeOfVisit" href="javascript:void(0)">Time of Visit</a></li>
+				<li><a id="chequeSize" href="javascript:void(0)">Cheque Size(Average, Breakdown)</a></li>
+			</ul>
+			<div class="clr"></div>
+		</div>
+		<div class="chart_div">
+			<span class="chart_heading">{{chart_heading}}</span>
+			<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+		</div>
+	</div>
+</div>
