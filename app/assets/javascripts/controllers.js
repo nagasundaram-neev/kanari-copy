@@ -198,6 +198,7 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 	$scope.remember = false;
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
 	$scope.erromsg = false;
+	var acceptInvitationStep2;
 
 	$scope.login = function() {
 		$location.url("/login");
@@ -254,7 +255,7 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 				} else if (getCookie('userRole') == "customer_admin" && data.registration_complete) {
 					$location.url("/outlets");
 				} else if (getCookie('userRole') == "customer_admin" && !data.registration_complete) {
-					// alert("acceptInvitationStep2");
+					acceptInvitationStep2 = true;
 					$location.url("/acceptInvitationStep2");
 				} else if (getCookie('userRole') == "manager" && data.registration_complete) {
 					$location.url("/outlets");
@@ -1584,7 +1585,11 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 				}).success(function(data, status) {
 					console.log("data in success " + data + " status " + status);
 					$scope.error = false;
+					if(acceptInvitationStep2 == true){
+						$location.url("/outlets");
+					}else{
 					$scope.success = true;
+					}
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
 					$scope.errorMsg = data.errors[0];
