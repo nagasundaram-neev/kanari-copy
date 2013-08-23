@@ -323,6 +323,7 @@ a.addRestaurant:hover {
 .outlet_lenght {
 	border-bottom: 1px solid #CCCCCC;
 	padding: 5px 0 !important;
+	 font-size: 15px;
 }
 .outlets_list {
 	margin: 5px 0
@@ -352,6 +353,7 @@ a.addRestaurant:hover {
 }
 .outlet_text {
 	padding: 0px !important;
+	font-size: 15px;
 }
 .outlet_id {
 	background: none repeat scroll 0 0 #5A4166;
@@ -702,8 +704,8 @@ ul.taketour li a:hover {
 #viewaccount .passwordTxt {
 	width: 250px;
 }
-#viewaccount lable{
-	 width: 185px;
+#viewaccount lable {
+	width: 185px;
 }
 #viewaccount .control-group {
 	margin-left: 247px;
@@ -1019,11 +1021,12 @@ input {
 	color: #674665;
 	float: left;
 	padding: 1% 0;
-	width: 20%;
+	width: 12%;
 	text-align: center;
 }
+
 .promo_txt {
-	font-size: 13px !important;
+	font-size: 16px !important;
 	font-weight: bold;
 	line-height: 10px;
 	font-family: myriadpro;
@@ -1031,15 +1034,14 @@ input {
 .promo_value {
 	display: block;
 	font-family: 'Roboto', sans-serif !important;
-	font-size: 535% !important;
-	font-weight: bold;
-	margin-top: 10%;
+	font-size: 70px !important;
+	 margin-top: 20px;
 }
 .promo_code_def {
 	border-left: 1px solid #D6D6D6;
 	border-right: 1px solid #D6D6D6;
 	float: left;
-	width: 31%;
+	width: 26%;
 }
 
 .def_icon {
@@ -1048,18 +1050,21 @@ input {
 	margin: 3% 2%;
 	text-align: center;
 	width: 70px;
+	font-size: 14px;
 }
 .promo_code_desc {
 	float: left;
 	padding: 1% 2%;
 	position: relative;
 	text-align: justify;
-	width: 40%;
+	width: 57%;
+	font-size: 14px;
 }
 .update_time {
 	bottom: 3%;
 	position: absolute;
 	right: 3%;
+	font-size: 14px;
 }
 
 .outletDropDown {
@@ -1182,8 +1187,8 @@ input {
 .ratePValue {
 	background: none repeat scroll 0 0 transparent;
 	color: #664766;
-	 font-size: 15px;
-    font-weight: normal;
+	font-size: 15px;
+	font-weight: normal;
 	margin-left: 1%;
 }
 
@@ -1196,8 +1201,8 @@ input {
 	background: none repeat scroll 0 0 transparent;
 	color: #664766;
 	/*font-family: number;*/
-	 font-size: 15px;
-    font-weight: normal;
+	font-size: 15px;
+	font-weight: normal;
 	margin-right: 1%;
 }
 .rate1V {
@@ -1256,12 +1261,12 @@ input {
 	width: 34%;
 }
 .insight_graph2 .promo_code_def {
-	width: 36%;
+	width: 38%;
 }
 .insight_graph1 .main_score .txt1 {
 	font-family: roboto;
-    font-size: 16px;
-    font-weight: bold;
+	font-size: 16px;
+	font-weight: bold;
 }
 .insight_graph1 .score_1 .txt1, .insight_graph1 .score_final .txt1 {
 	font-size: 15px;
@@ -1271,8 +1276,11 @@ input {
 	width: 62px;
 	margin: 0;
 }
+#dashboardSnapshot .promo_code{
+	width: 15%;
+}
 .insight_graph2 .promo_code_desc {
-	width: 39%;
+	width: 42%;
 }
 .insight_graph2 .main_content span {
 	font-size: 13px;
@@ -1284,7 +1292,7 @@ input {
 }
 .insight_graph2 .promo_code_desc span, .insight_graph2 .update_time span {
 	color: #505050;
-	 font-size: 14px;
+	font-size: 14px;
 }
 
 /**** Dashboard snapshot ****/
@@ -1320,14 +1328,18 @@ input {
 	float: left;
 	width: 600px;
 }
-.chart_heading{
+.chart_heading {
 	display: block;
-    font-size: 16px;
-    font-weight: bold;
-    margin: 20px 15px;
+	font-size: 16px;
+	font-weight: bold;
+	margin: 20px 15px;
 }
-#dashboard_trends ul li a:active{font-weight:bold;}
-#dashboard_trends ul li a.active{font-weight:bold;}
+#dashboard_trends ul li a:active {
+	font-weight: bold;
+}
+#dashboard_trends ul li a.active {
+	font-weight: bold;
+}
 /**** Dashboard Trends End ****/
 
 /****Calendar CSS***/
@@ -1380,7 +1392,7 @@ input {
 .paymentHistoryData {
 	border-bottom: 1px solid #CCCCCC;
 	overflow: hidden;
-	 font-size: 14px;
+	font-size: 14px;
 }
 .border_bottom_none {
 	border-bottom: none;
@@ -1413,4 +1425,6 @@ input {
 	width: 78px;
 	text-align: center;
 }
-.paymentHistoryData span{color: #5A4166;}
+.paymentHistoryData span {
+	color: #5A4166;
+}

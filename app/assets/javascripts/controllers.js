@@ -183,6 +183,12 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 	$(".dropdown-menu li a").click(function() {
 		$("#dasboardCustomer").removeClass("open");
 	});
+
+	$("li#dasboardCustomer").hover(function() {
+		$("#dasboardCustomer").addClass("open");
+	}, function() {
+		$("#dasboardCustomer").removeClass("open");
+	});
 });
 
 module.controller('Login', function($rootScope, $scope, $http, $location) {
@@ -247,8 +253,9 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 					$location.url("/createInvitation");
 				} else if (getCookie('userRole') == "customer_admin" && data.registration_complete) {
 					$location.url("/outlets");
-				} else if (getCookie('userRole') == "manager" && !data.registration_complete) {
-					$location.url("/outlets");
+				} else if (getCookie('userRole') == "customer_admin" && !data.registration_complete) {
+					alert("acceptInvitationStep2");
+					$location.url("/acceptInvitationStep2");
 				} else if (getCookie('userRole') == "manager" && data.registration_complete) {
 					$location.url("/outlets");
 				} else if (getCookie("userRole") == "user") {
@@ -1707,10 +1714,10 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 						"registered_address_country" : "UAE",
 						"phone_number" : $(".phoneno_2").val(),
 						"mailing_address_line_1" : $scope.mailadd1,
-					    "mailing_address_line_2" : $scope.mailadd2,
-					    "mailing_address_city" : "Dubai",
-					    "mailing_address_country" : "UAE",
-					    "email" : $scope.emailAdd
+						"mailing_address_line_2" : $scope.mailadd2,
+						"mailing_address_city" : "Dubai",
+						"mailing_address_country" : "UAE",
+						"email" : $scope.emailAdd
 					},
 					"auth_token" : getCookie('authToken')
 				}
@@ -2254,7 +2261,6 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 
 		$scope.listFeedbacks = function() {
 			//$.mobile.loading('show');
-
 			var param = {
 				"auth_token" : getCookie('authToken'),
 				"password" : "X"
@@ -2293,37 +2299,35 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		var results2 = [];
 		var results3 = [];
 		var resultsDate = [];
-		var idV ="";
-		var metricsId ="custExp";
+		var idV = "";
+		var metricsId = "custExp";
 		var usageLegend = "";
+		var npsBreakdownV = 0;
+		var npsOverview = 0;
 
 		$scope.v = {
 			Dt : Date.now()
 		}
-		
-		
-		if (metricsId == "custExp") {
-			$scope.chart_heading = "Customer Experience Metrics"
-		}		else if (metricsId == "netPromo") {
-			$scope.chart_heading = "Net Promoter Score Metrics"
-		}else if (metricsId == "usage") {
-			$scope.chart_heading = "Usage Metrics"
-		}else if (metricsId == "usage") {
-			$scope.chart_heading = "Usage Metrics"
-		}else if (metricsId == "customers") {
-			$scope.chart_heading = "Customers Metrics"
-		}
 
-				
 		$("#dashboard_trends ul li a").click(function() {
 			$('#dashboard_trends ul li a').removeClass("active");
 			$(this).addClass("active");
 			idV = $(this).attr("id");
 			$scope.listOfTrendsDate(idV);
 		});
-		
+
+		$scope.chart_heading = "Customer Experience Metrics";
 		$("#dashboard_trends ul").click(function() {
-			metricsId = $(this).attr("class");			
+			metricsId = $(this).attr("class");
+			if (metricsId == "custExp") {
+				$scope.chart_heading = "Customer Experience Metrics";
+			} else if (metricsId == "netPromo") {
+				$scope.chart_heading = "Net Promoter Score Metrics";
+			} else if (metricsId == "usage") {
+				$scope.chart_heading = "Usage Metrics";
+			} else if (metricsId == "customers") {
+				$scope.chart_heading = "Customers Metrics";
+			}
 		});
 
 		$("#dp3 .add-on").click(function() {
@@ -2340,8 +2344,14 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				var month = dt.getMonth() + 1;
 				startDt = dt.yyyymmdd();
 				if (startDt != 'undefined' && typeof endDt != 'undefined') {
-					console.log("hi in start date");
-					$scope.listOfTrendsDate(idV);
+					if ((new Date(startDt).getTime() > new Date(endDt).getTime())) {
+						var r = confirm("End Date should be greater than Start Date");
+						if (r == true) {
+
+						}
+					} else {
+						$scope.listOfTrendsDate(idV);
+					}
 					$(".outletDropDown").change(function() {
 						$scope.listOfTrendsDate(idV);
 					});
@@ -2353,7 +2363,14 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				endDt = dt.yyyymmdd();
 				if ( typeof startDt != 'undefined' && endDt != 'undefined') {
 					console.log("hi in end date");
-					$scope.listOfTrendsDate(idV);
+					if ((new Date(startDt).getTime() > new Date(endDt).getTime())) {
+						var r = confirm("End Date should be greater than Start Date");
+						if (r == true) {
+
+						}
+					} else {
+						$scope.listOfTrendsDate(idV);
+					}
 					$(".outletDropDown").change(function() {
 						$scope.listOfTrendsDate(idV);
 					});
@@ -2372,8 +2389,12 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		};
 
 		var outletId = $scope.outletOption;
+		$scope.selectOutlet = function() {
+			$scope.listOfTrendsDate(idV);
+		}
+
 		$scope.listOfTrendsDate = function(idValue) {
-			if(!idValue){
+			if (!idValue) {
 				idValue = "food";
 				metricsId = "custExp";
 			}
@@ -2395,86 +2416,120 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				results2 = [];
 				results3 = [];
 				resultsDate = [];
+				var time = [];
+				var finaltime = [];
 				$scope.trendsList = data.feedback_trends.detailed_statistics;
 				var arrayLength = Object.keys($scope.trendsList).length;
 				for (var i = 0; i < arrayLength; i++) {
 					dateV = Object.keys($scope.trendsList)[i];
 					/** Customer Experience Start**/
-					if(idValue == "food"){
+					if (idValue == "food") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].food_quality.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].food_quality.neutral;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].food_quality.dislike;
-					}
-					else if(idValue == "speed"){
+					} else if (idValue == "speed") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].speed_of_service.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].speed_of_service.neutral;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].speed_of_service.dislike;
-					}
-					else if(idValue == "friendly"){
+					} else if (idValue == "friendly") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].friendliness_of_service.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].friendliness_of_service.neutral;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].friendliness_of_service.dislike;
-					}
-					else if(idValue == "ambiance"){
+					} else if (idValue == "ambiance") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].ambience.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].ambience.neutral;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].ambience.dislike;
-					}
-					else if(idValue == "cleanly"){
+					} else if (idValue == "cleanly") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].cleanliness.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].cleanliness.neutral;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].cleanliness.dislike;
-					}
-					else if(idValue == "moneyVal"){
+					} else if (idValue == "moneyVal") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].value_for_money.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].value_for_money.neutral;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].value_for_money.dislike;
 					}
 					/** Customer Experience End**/
-					
+
+					/**Net Promoter Score start**/
+					else if (idValue == "npsBreakdown") {
+						var foodLike = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.like;
+						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.neutral;
+						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.dislike;
+						npsBreakdownV = 1;
+					} else if (idValue == "npsOverview") {
+						var foodLike = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.like - data.feedback_trends.detailed_statistics[dateV].net_promoter_score.dislike;
+						npsBreakdownV = 0;
+						npsOverview = 1;
+					}
+					/**Net Promoter Score End**/
+
 					/**Usage start**/
-					else if(idValue == "feedbackSubmit"){
+					else if (idValue == "feedbackSubmit") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].usage.feedbacks_count;
 						usageLegend = "Feedback count";
-					}
-					else if(idValue == "redemProc"){
+					} else if (idValue == "redemProc") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].usage.redemptions_count;
 						usageLegend = "Redemption count";
-					}
-					else if(idValue == "discountClaim"){
+					} else if (idValue == "discountClaim") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].usage.discounts_claimed;
 						usageLegend = "Discount claimed ";
-					}
-					else if(idValue == "pointsIssued"){
+					} else if (idValue == "pointsIssued") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].usage.points_issued;
 						usageLegend = "Points issued";
-					}
-					else if(idValue == "rewardsPool"){
+					} else if (idValue == "rewardsPool") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].usage.rewards_pool;
 						usageLegend = "Reward pool";
 					}
 					/**Usage end**/
+
+					/**Customers start**/
+					else if (idValue == "demographics") {
+						var foodLike = data.feedback_trends.detailed_statistics[dateV].customers.male;
+						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].customers.female;
+						custLegend1 = "Male";
+						custLegend2 = "Female";
+					} else if (idValue == "usersGraph") {
+						var foodLike = data.feedback_trends.detailed_statistics[dateV].customers.new;
+						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].customers.returning;
+						custLegend1 = "New";
+						custLegend2 = "Returning";
+					} else if (idValue == "timeOfVisit") {
+						finaltime[i] = [];
+						for (var j = 0; j < 24; j++) {
+							time[j] = data.feedback_trends.detailed_statistics[dateV].customers.time_of_visit[j];
+							finaltime[i].push(time[j]);
+						}
+						timeOfVisit = 1;
+						//usageLegend = "Cheque Size";
+					} else if (idValue == "chequeSize") {
+						var foodLike = data.feedback_trends.detailed_statistics[dateV].average_bill_amount;
+						npsOverview = 1;
+						usageLegend = "Cheque Size";
+					}
+					/**Customers End**/
+
 					resultsDate.push(i + 1);
 					results1.push(foodLike);
 					results2.push(foodNeutral);
 					results3.push(foodDisLike);
-
+					;
 				}
-				
-				
-				if (metricsId == "custExp") {
+				if (metricsId == "custExp" || npsBreakdownV == "1") {
 					getCustExpGraph();
-					
-				} else if (metricsId == "usage"){
+				} else if (metricsId == "usage" || npsOverview == "1") {
 					getUsageGraph();
+				} else if (metricsId == "customers" && timeOfVisit == "1") {
+					getTimeVisitGraph();
+				} else if (metricsId == "customers") {
+					customerGraph();
 				}
 
-				
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 			});
 		};
 
+		$scope.listOfTrendsDate(idV);
 		$scope.listOutletNames = function() {
 			var param = {
 				"auth_token" : getCookie('authToken'),
@@ -2526,17 +2581,17 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				},
 
 				title : {
-					text : 'Customer experience Metrics | Stacked column chart',
-					color:'#A08A75'
+					text : $scope.chart_heading + ' | Stacked column chart',
+					color : '#A08A75'
 				},
 
 				xAxis : {
 					categories : resultsDate,
 					title : {
 						text : 'Days Of week',
-						style: {
-								color:'#7C7A7D',
-							}
+						style : {
+							color : '#7C7A7D',
+						}
 					}
 				},
 
@@ -2545,9 +2600,9 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					min : 0,
 					title : {
 						text : 'Points%',
-						style: {
-								color:'#7C7A7D',
-							}
+						style : {
+							color : '#7C7A7D',
+						}
 					}
 				},
 
@@ -2555,7 +2610,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					formatter : function() {
 						return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '<br/>' + 'Total: ' + this.point.stackTotal;
 					},
-					
 				},
 
 				plotOptions : {
@@ -2563,91 +2617,298 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						stacking : 'normal'
 					}
 				},
-				legend: {
-						layout: 'horizontal',
-						align: 'left',
-						x: 300,
-						verticalAlign: 'top',
-						y:20,
-						floating: true,
-						backgroundColor: '#fff',
-						style: {
-						fontColor:'#A08A75'
-						}
-					},
+				legend : {
+					layout : 'horizontal',
+					align : 'left',
+					x : 300,
+					verticalAlign : 'top',
+					y : 20,
+					floating : true,
+					backgroundColor : '#fff',
+					style : {
+						fontColor : '#A08A75'
+					}
+				},
 				series : [{
 					name : 'Positive',
 					data : results1,
-					color:'#D8882F',					
+					color : '#D8882F',
 				}, {
 					name : 'Neutral',
 					data : results2,
-					color:'#3A240D'
+					color : '#3A240D'
 				}, {
 					name : 'Negative',
 					data : results3,
-					color:'#664766'
+					color : '#664766'
 				}]
 			});
 		}
-		
-		function getUsageGraph(){
-        $('#container').highcharts({
-            chart: {
-                type: 'column',
-                margin: [ 50, 50, 100, 80]
-            },
-            title: {
-                text: 'Usage Metrics | Stacked column chart',
-                color:'#A08A75',
-            },
-            xAxis: {
-                categories:resultsDate,
-                labels: {
-                    align: 'right',
-                    style: {
-                        fontSize: '13px',
-                        fontFamily: 'Verdana, sans-serif'
-                    }
-                },
-                title : {
-						text : 'Days Of week',
-						style: {
-								color:'#7C7A7D',
-							}
-					}
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Points%',
-                    style: {
-								color:'#7C7A7D',
-							}
-                }
-            },
-           legend: {
-						layout: 'horizontal',
-						align: 'left',
-						x: 400,
-						verticalAlign: 'top',
-						y:25,
-						floating: true,
-						backgroundColor: '#fff',
-						style: {
-						fontColor:'#A08A75'
+
+		function getUsageGraph() {
+			$('#container').highcharts({
+				chart : {
+					type : 'column'
+				},
+				title : {
+					text : $scope.chart_heading + ' | Stacked column chart',
+					color : '#A08A75',
+				},
+				xAxis : {
+					categories : resultsDate,
+					labels : {
+						align : 'right',
+						style : {
+							fontSize : '13px',
+							fontFamily : 'Verdana, sans-serif'
 						}
 					},
-            tooltip: {
-                pointFormat: usageLegend +' <b>{point.y:.1f}</b>',
-            },
-            series: [{
-                name: usageLegend,
-                data: results1,
-                color:'#664766'
-            }]
-        });
-    }
+					title : {
+						text : 'Days Of week',
+						style : {
+							color : '#7C7A7D',
+						}
+					}
+				},
+				yAxis : {
+
+					title : {
+						text : 'Points%',
+						style : {
+							color : '#7C7A7D',
+						}
+					}
+				},
+				legend : {
+					layout : 'horizontal',
+					align : 'left',
+					x : 400,
+					verticalAlign : 'top',
+					y : 20,
+					floating : true,
+					backgroundColor : '#fff',
+					style : {
+						fontColor : '#A08A75'
+					}
+				},
+				tooltip : {
+					pointFormat : usageLegend + ' <b>{point.y:.1f}</b>',
+				},
+				series : [{
+					name : usageLegend,
+					data : results1,
+					color : '#664766'
+				}]
+			});
+		}
+
+		function customerGraph() {
+			$('#container').highcharts({
+				chart : {
+					type : 'column'
+				},
+				title : {
+					text : $scope.chart_heading + ' | Stacked column chart',
+					color : '#A08A75',
+				},
+				xAxis : {
+					categories : resultsDate,
+					labels : {
+						align : 'right',
+						style : {
+							fontSize : '13px',
+							fontFamily : 'Verdana, sans-serif'
+						}
+					},
+					title : {
+						text : 'Days Of week',
+						style : {
+							color : '#7C7A7D',
+						}
+					}
+				},
+				yAxis : {
+
+					title : {
+						text : 'Points%',
+						style : {
+							color : '#7C7A7D',
+						}
+					}
+				},
+				credits : {
+					enabled : false
+				},
+				series : [{
+					name : custLegend1,
+					data : results1,
+					color : '#D8882F'
+				}, {
+					name : custLegend2,
+					data : results3,
+					color : '#664766'
+				}]
+			});
+		}
+
+		function getTimeVisitGraph() {
+			console.log(resultsDate);
+			$('#container').highcharts({
+
+				chart : {
+					type : 'line'
+				},
+
+				title : {
+					text : $scope.chart_heading + ' | Stacked column chart',
+					color : '#A08A75'
+				},
+
+				xAxis : {
+					categories : resultsDate,
+					title : {
+						text : 'Days Of week',
+						style : {
+							color : '#7C7A7D',
+						}
+					}
+				},
+
+				yAxis : {
+					allowDecimals : false,
+					min : 0,
+					title : {
+						text : 'Points%',
+						style : {
+							color : '#7C7A7D',
+						}
+					}
+				},
+
+				tooltip : {
+					formatter : function() {
+						return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '<br/>' + 'Total: ' + this.point.stackTotal;
+					},
+				},
+
+				plotOptions : {
+					column : {
+						stacking : 'normal'
+					}
+				},
+				legend : {
+					enabled : false,
+					layout : 'horizontal',
+					align : 'left',
+					x : 300,
+					verticalAlign : 'top',
+					y : 20,
+					floating : true,
+					backgroundColor : '#fff',
+					style : {
+						fontColor : '#A08A75'
+					}
+				},
+				series : [{
+					name : '1st hour',
+					data : timeOfVisit[0],
+					color : '#D8882F',
+				}, {
+					name : '2nd hour',
+					data : timeOfVisit[1],
+					color : '#3A240D'
+				}, {
+					name : '3rd hour',
+					data : timeOfVisit[2],
+					color : '#664766'
+				}, {
+					name : '4th hour',
+					data : timeOfVisit[3],
+					color : '#664766'
+				}, {
+					name : '5th hour',
+					data : timeOfVisit[4],
+					color : '#664766'
+				}, {
+					name : '6th hour',
+					data : timeOfVisit[5],
+					color : '#664766'
+				}, {
+					name : '7th hour',
+					data : timeOfVisit[6],
+					color : '#664766'
+				}, {
+					name : '8th hour',
+					data : timeOfVisit[7],
+					color : '#664766'
+				}, {
+					name : '9th hour',
+					data : timeOfVisit[8],
+					color : '#664766'
+				}, {
+					name : '10th hour',
+					data : timeOfVisit[9],
+					color : '#664766'
+				}, {
+					name : '11th hour',
+					data : timeOfVisit[10],
+					color : '#664766'
+				}, {
+					name : '12th hour',
+					data : timeOfVisit[11],
+					color : '#664766'
+				}, {
+					name : '13th hour',
+					data : timeOfVisit[12],
+					color : '#664766'
+				}, {
+					name : '14th hour',
+					data : timeOfVisit[13],
+					color : '#664766'
+				}, {
+					name : '15th hour',
+					data : timeOfVisit[14],
+					color : '#664766'
+				}, {
+					name : '16th hour',
+					data : timeOfVisit[15],
+					color : '#664766'
+				}, {
+					name : '17th hour',
+					data : timeOfVisit[16],
+					color : '#664766'
+				}, {
+					name : '18th hour',
+					data : timeOfVisit[17],
+					color : '#664766'
+				}, {
+					name : '19th hour',
+					data : timeOfVisit[18],
+					color : '#664766'
+				}, {
+					name : '20th hour',
+					data : timeOfVisit[19],
+					color : '#664766'
+				}, {
+					name : '21th hour',
+					data : timeOfVisit[20],
+					color : '#664766'
+				}, {
+					name : '22th hour',
+					data : timeOfVisit[21],
+					color : '#664766'
+				}, {
+					name : '23th hour',
+					data : timeOfVisit[22],
+					color : '#664766'
+				}, {
+					name : '24th hour',
+					data : timeOfVisit[23],
+					color : '#664766'
+				}]
+			});
+		}
+
 	}
 });
 module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location) {
@@ -2663,6 +2924,7 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		$scope.feedbackMetrics = function() {
 			var param = {
 				"auth_token" : getCookie('authToken'),
+				"outlet_id" : $scope.outletOption,				
 				"password" : "X"
 			}
 
@@ -2772,10 +3034,9 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		$scope.feedbackMetrics();
 
 		$scope.listFeedbacks = function() {
-			//$.mobile.loading('show');
-
 			var param = {
 				"auth_token" : getCookie('authToken'),
+				"outlet_id" : $scope.outletOption,
 				"password" : "X"
 			}
 
@@ -2794,6 +3055,29 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		};
 
 		$scope.listFeedbacks();
+		
+		$scope.selectOutletSnap = function() {
+			$scope.listFeedbacks();
+			$scope.feedbackMetrics();
+		}
+		
+		$scope.listOutletNames = function() {
+			var param = {
+				"auth_token" : getCookie('authToken'),
+				"password" : 'X',
+			};
+			$http({
+				method : 'get',
+				url : '/api/outlets',
+				params : param,
+			}).success(function(data, status) {
+				console.log("Data in success " + data + " status " + status);
+				$scope.outletNameList = data.outlets;
+			}).error(function(data, status) {
+				console.log("data in error " + data + " status " + status);
+			});
+		};
+		$scope.listOutletNames();
 
 	}
 });

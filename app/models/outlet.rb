@@ -121,15 +121,15 @@ class Outlet < ActiveRecord::Base
         promoters_till_yesterday = (feedbacks_till_yesterday.select{|f| AppConfig[:promoters].include?f.recommendation_rating }.length.to_f / feedbacks_till_yesterday.length) * 100
         passives_till_yesterday  = (feedbacks_till_yesterday.select{|f| AppConfig[:detractors].include?f.recommendation_rating }.length.to_f / feedbacks_till_yesterday.length) * 100
         neutrals_till_yesterday  = 100 - ( promoters_till_yesterday + passives_till_yesterday )
-        net_promoters_till_yesterday = promoters_till_yesterday.to_i - passives_till_yesterday.to_i
+        net_promoters_till_yesterday = promoters_till_yesterday - passives_till_yesterday
       end
       if feedbacks_till_today.present?
         promoters_till_today = (feedbacks_till_today.select{|f| AppConfig[:promoters].include?f.recommendation_rating }.length.to_f / feedbacks_till_today.length) * 100
         passives_till_today  = (feedbacks_till_today.select{|f| AppConfig[:detractors].include?f.recommendation_rating }.length.to_f / feedbacks_till_today.length)* 100
         neutrals_till_today  = 100 - ( promoters_till_today + passives_till_today )
-        net_promoters_till_today = promoters_till_today.to_i - passives_till_today.to_i
+        net_promoters_till_today = promoters_till_today - passives_till_today
       end
-      {:like => promoters_till_today.to_i, :dislike => passives_till_today.to_i, :neutral => neutrals_till_today.to_i, :change => net_promoters_till_today - net_promoters_till_yesterday}
+      {:like => promoters_till_today, :dislike => passives_till_today, :neutral => neutrals_till_today, :change => net_promoters_till_today - net_promoters_till_yesterday}
     end
 
     def get_field_metrics(feedbacks_yesterday, feedbacks_today, type)
@@ -147,7 +147,7 @@ class Outlet < ActiveRecord::Base
         neutrals_today  = 100 - ( promoters_today + passives_today )
         net_promoters_today = promoters_today - passives_today
       end
-      {:like => promoters_today.to_i, :dislike => passives_today.to_i, :neutral => neutrals_today.to_i, :change => (net_promoters_today - net_promoters_yesterday).to_i}
+      {:like => promoters_today, :dislike => passives_today, :neutral => neutrals_today, :change => (net_promoters_today - net_promoters_yesterday)}
     end
 
     def get_pending_feedbacks
@@ -201,7 +201,7 @@ class Outlet < ActiveRecord::Base
         passives  = (feedbacks.select{|f| AppConfig[:detractors].include?f.recommendation_rating }.length.to_f / feedbacks.length)* 100
         neutrals  = 100 - ( promoters + passives )
       end
-      nps = {:like => promoters.to_i, :dislike => passives.to_i, :neutral => neutrals.to_i}
+      nps = {:like => promoters, :dislike => passives, :neutral => neutrals}
     end
 
     def get_average_bill_amount_statistics(feedbacks)

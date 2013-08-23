@@ -104,9 +104,9 @@ Feature: Dashboard Trends
              "neutral" : 1
            },
            "net_promoter_score": {
-             "like"    : 40,
-             "dislike" : 30,
-             "neutral" : 30
+             "like"    : 40.0,
+             "dislike" : 30.0,
+             "neutral" : 30.0
            },
            "usage": {
              "feedbacks_count": 10,
@@ -158,9 +158,9 @@ Feature: Dashboard Trends
                "neutral" : 0
              },
              "net_promoter_score": {
-               "like"    : 40,
-               "dislike" : 30,
-               "neutral" : 30
+               "like"    : 40.0,
+               "dislike" : 30.0,
+               "neutral" : 30.0
              },
              "usage": {
                "feedbacks_count": 5,
@@ -211,9 +211,9 @@ Feature: Dashboard Trends
                "neutral" : 1
              },
              "net_promoter_score": {
-               "like"    : 60,
-               "dislike" : 20,
-               "neutral" : 20
+               "like"    : 60.0,
+               "dislike" : 20.0,
+               "neutral" : 20.0
              },
              "usage": {
                "feedbacks_count": 5,

@@ -21,7 +21,7 @@
 		<%= javascript_include_tag "jquery.validate.js" %>
 
 		<%= javascript_include_tag "angular.js" %>
-		<script src="http://code.highcharts.com/highcharts.js"></script>
+			<%= javascript_include_tag "highcharts.js" %>
 		<script src="http://code.highcharts.com/highcharts-more.js"></script>
 		<script type='text/javascript' src="https://rawgithub.com/timrwood/moment/2.1.0/min/moment.min.js"></script>
 		<%= javascript_include_tag "app" %>
@@ -40,7 +40,6 @@
 						<%= image_tag 'div_line_logout.jpg' %>
 						<a ng-click="logout()" class="logOut"><%= image_tag 'icon_logout.png' %> Logout</a>
 					</div>
-
 				</div>
 			</div>
 			<div class="navBarCls">
@@ -55,7 +54,7 @@
 						<a href="#/createInvitation" class="active"><%= image_tag 'icon_dasboard_in.png' %> Dashboard</a>
 					</li>
 
-					<!-- <li id="dasboardCustomer" class="diffLinks dropdown" ng-class="{open: open}">
+					<li id="dasboardCustomer" class="diffLinks dropdown" ng-class="{open: open}">
 						<a class="dropdown-toggle" href="javascript:void(0)" ng-click="open=!open"><%= image_tag 'icon_dasboard_in.png' %>Dashboard <!-- <span class="caret"></span> --></a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 							<li>
@@ -68,7 +67,7 @@
 								<a tabindex="-1" href="#/comments" style="border-bottom:none"><%= image_tag 'ic_comments.png' %>COMMENTS</a>
 							</li>
 						</ul>
-					</li> -->
+					</li>
 					<li class="active" id="outlet" class="diffLinks">
 						<a href="#/outlets"><%= image_tag 'icon_outlet_in.png' %> Outlets</a>
 					</li>
