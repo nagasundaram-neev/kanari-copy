@@ -249,24 +249,24 @@ module.controller('signInController', function($scope, $http, $location) {
 			$scope.erromsg = true;
 		});
 	};
-	
+
 	// var selectField1 = document.getElementById('inputFields1');
-		// selectField1.addEventListener('touchstart'/*'mousedown'*/, function(e) {
-			// alert("in");
-			// e.stopPropagation();
-		// }, false);
+	// selectField1.addEventListener('touchstart'/*'mousedown'*/, function(e) {
+	// alert("in");
+	// e.stopPropagation();
+	// }, false);
 	// var selectField2 = document.getElementById('inputFields2');
-		// selectField2.addEventListener('touchstart'/*'mousedown'*/, function(e) {
-			// e.stopPropagation();
-		// }, false);
-		
+	// selectField2.addEventListener('touchstart'/*'mousedown'*/, function(e) {
+	// e.stopPropagation();
+	// }, false);
+
 	$scope.$watch('email + password', function() {
 		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + '@kanari.co:' + $scope.password);
 	});
 
 });
 
-module.controller('homePageController', function($scope, $http, $location,$timeout) {
+module.controller('homePageController', function($scope, $http, $location, $timeout) {
 	$(".userloggedIn").show();
 	$("#wrapper").removeClass("clsforLogin");
 	$("#wrapper").addClass("clsafterLogin");
@@ -308,9 +308,9 @@ module.controller('homePageController', function($scope, $http, $location,$timeo
 					'background-color' : 'transparent'
 				});
 			});
-			
+
 			//feedbackTimeout = $timeout($scope.listFeedbacks,120000);
-			
+
 		};
 
 		$scope.listFeedbacks();
@@ -324,12 +324,11 @@ module.controller('homePageController', function($scope, $http, $location,$timeo
 		};
 		//document.addEventListener('DOMContentLoaded', function() {
 		//alert("in");
-	//	if(flag == 1){
-		setTimeout(loaded, 1000);
+		//	if(flag == 1){
+		setTimeout(loaded, 2000);
 		//}
-		
+
 		//feedbackTimeout = $timeout($scope.listFeedbacks,120000);
-		
 
 	} else {
 		$location.url("/signin");
@@ -337,7 +336,7 @@ module.controller('homePageController', function($scope, $http, $location,$timeo
 
 });
 
-module.controller('insightsController', function($scope, $http, $location,$timeout) {
+module.controller('insightsController', function($scope, $http, $location, $timeout) {
 	$(".userloggedIn").show();
 	$("#wrapper").removeClass("clsforLogin");
 	$("#wrapper").addClass("clsafterLogin");
@@ -463,13 +462,12 @@ module.controller('insightsController', function($scope, $http, $location,$timeo
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 
 			});
-			
-			  insightTimeout = $timeout($scope.feedbackMetrics,120000);
+
+			insightTimeout = $timeout($scope.feedbackMetrics, 120000);
 		};
 
-
 		$scope.feedbackMetrics();
-		setTimeout(callScroller, 1000);
+		setTimeout(setupScrollbars, 1000);
 
 	} else {
 		$location.url("/signin");
@@ -477,19 +475,48 @@ module.controller('insightsController', function($scope, $http, $location,$timeo
 
 });
 
-
-module.controller('redemeController', function($scope, $http, $location,$timeout) {
+module.controller('redemeController', function($scope, $http, $location, $timeout) {
 	$(".userloggedIn").show();
+	var overlayDiv = $("#overlaySuccess");
 	$("#wrapper").removeClass("clsforLogin");
 	$("#wrapper").addClass("clsafterLogin");
 	$("#redemption").addClass("ui_btn_active");
 	$("#redemption span").show();
 	if (getCookie('authToken')) {
-		 $timeout.cancel(insightTimeout);
+		$timeout.cancel(insightTimeout);
 		// $timeout.cancel(feedbackTimeout);
+
+		$scope.showRedemptions = function() {
+			//$("#scroller").removeAttr("style")
+			$scope.processedRedemptions();
+			// var scrollNode = document.querySelector(".redeemptions"), options = {};
+			// var scroller = new TouchScroll(scrollNode, options);
+			setTimeout(setupScrollbars, 1000);
+			$("#overlaySuccess").show();
+			$(".redeemptions").show();
+			//$scope.popup = true;
+			overlayDiv.css({
+				'z-index' : '10',
+				'background-color' : '#000'
+			});
+			$(".redeemptions").focus();
+		};
+
+		$scope.close = function() {
+			//console.log("IN");
+			$("#overlaySuccess").hide();
+			$(".redeemptions").hide();
+			//$scope.popup = false;
+			overlayDiv.css({
+				'z-index' : '0',
+				'background-color' : 'transparent'
+			});
+		};
+
 		$scope.active3 = true;
 		flag = 1;
 		$scope.redemptionList = [];
+		$scope.processedRedemptionList = [];
 
 		$scope.listRedemptions = function() {
 			var param = {
@@ -510,6 +537,26 @@ module.controller('redemeController', function($scope, $http, $location,$timeout
 
 			});
 		};
+
+		$scope.processedRedemptions = function() {
+			var param = {
+				"auth_token" : getCookie('authToken')
+			}
+
+			$http({
+				method : 'get',
+				url : '/api/redemptions',
+				params : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				$scope.processedRedemptionList = data.redemptions;
+				console.log("list" + $scope.redemptionList)
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+
+			});
+		};
+
 		$scope.listRedemptions();
 
 		$scope.confirm = function(id) {
@@ -532,9 +579,10 @@ module.controller('redemeController', function($scope, $http, $location,$timeout
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 
 			});
-
 		};
-		setTimeout(callScroller, 1000);
+
+		setTimeout(setupScrollbars, 1000);
+
 	} else {
 		$location.url("/signin")
 	}
@@ -543,7 +591,7 @@ module.controller('redemeController', function($scope, $http, $location,$timeout
 var flag = 0;
 var testID = 0;
 
-module.controller('numericCodeController', function($scope, $http, $location,$timeout) {
+module.controller('numericCodeController', function($scope, $http, $location, $timeout) {
 	$(".userloggedIn").show();
 	$("#wrapper").removeClass("clsforLogin");
 	$("#wrapper").addClass("clsafterLogin");
@@ -659,17 +707,26 @@ module.controller('numericCodeController', function($scope, $http, $location,$ti
 			$scope.erromsg = false;
 			$scope.listGeneratedCodes();
 		};
-		
-		setTimeout(callScroller, 2000);
-		
+
+		setTimeout(setupScrollbars, 2000);
+
 	} else {
 		$location.url("/signin");
 	}
 });
 
+function callScroller() {
+	//alert("in scroll call");
+	myscroll = new iScroll('wrapper');
+}
 
-function callScroller(){
-	myScroll = new iScroll('wrapper');
+function setupScrollbars() {
+	//Created an array for adding n iScroll objects
+	var myScroll = new Array();
+	$('.scrollable').each(function() {
+		id = $(this).attr('id');
+		myScroll.push(new iScroll(id));
+	});
 }
 
 /* Cookie functions	*/
@@ -701,24 +758,25 @@ function deleteCookie(name) {
 	setCookie(name, "", -1);
 }
 
-var myScroll,
-	pullDownEl, pullDownOffset,
-	pullUpEl, pullUpOffset,
-	generatedCount = 0;
+var myScroll, pullDownEl, pullDownOffset, pullUpEl, pullUpOffset, generatedCount = 0;
 
-function pullDownAction () {
-	setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
+function pullDownAction() {
+	setTimeout(function() {// <-- Simulate network congestion, remove setTimeout from production!
 		console.log("hi in hello refresh");
 		angular.element($('#homepage')).scope().listFeedbacks();
-		myScroll.refresh();		// Remember to refresh when contents are loaded (ie: on ajax completion)
-	}, 2000);	// <-- Simulate network congestion, remove setTimeout from production!
+		myScroll.refresh();
+		// Remember to refresh when contents are loaded (ie: on ajax completion)
+	}, 2000);
+	// <-- Simulate network congestion, remove setTimeout from production!
 }
 
-function pullUpAction () {
-	setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
+function pullUpAction() {
+	setTimeout(function() {// <-- Simulate network congestion, remove setTimeout from production!
 		//console.log("hi in hello refresh");
-		myScroll.refresh();		// Remember to refresh when contents are loaded (ie: on ajax completion)
-	}, 2000);	// <-- Simulate network congestion, remove setTimeout from production!
+		myScroll.refresh();
+		// Remember to refresh when contents are loaded (ie: on ajax completion)
+	}, 2000);
+	// <-- Simulate network congestion, remove setTimeout from production!
 }
 
 function loaded() {
@@ -726,13 +784,13 @@ function loaded() {
 	myScroll = new iScroll('wrapper');
 	pullDownEl = document.getElementById('pullDown');
 	pullDownOffset = pullDownEl.offsetHeight;
-	pullUpEl = document.getElementById('pullUp');	
+	pullUpEl = document.getElementById('pullUp');
 	pullUpOffset = pullUpEl.offsetHeight;
-	
+
 	myScroll = new iScroll('wrapper', {
 		//useTransition: true,
-		topOffset: pullDownOffset,
-		onRefresh: function () {
+		topOffset : pullDownOffset,
+		onRefresh : function() {
 			if (pullDownEl.className.match('loading')) {
 				pullDownEl.className = '';
 				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Loading...';
@@ -742,7 +800,7 @@ function loaded() {
 				pullUpEl.querySelector('.pullUpLabel').innerHTML = '';
 			}
 		},
-		onScrollMove: function () {
+		onScrollMove : function() {
 			if (this.y > 5 && !pullDownEl.className.match('flip')) {
 				pullDownEl.className = 'flip';
 				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Release to refresh...';
@@ -761,28 +819,33 @@ function loaded() {
 				this.maxScrollY = pullUpOffset;
 			}
 		},
-		onScrollEnd: function () {
+		onScrollEnd : function() {
 			if (pullDownEl.className.match('flip')) {
 				pullDownEl.className = 'loading';
 				pullDownAction();
-				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Loading...';				
-					// Execute custom function (ajax call?)
+				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Loading...';
+				// Execute custom function (ajax call?)
 			} else if (pullUpEl.className.match('flip')) {
 				pullUpEl.className = 'loading';
-				pullUpEl.querySelector('.pullUpLabel').innerHTML = '';				
-				pullUpAction();	// Execute custom function (ajax call?)
+				pullUpEl.querySelector('.pullUpLabel').innerHTML = '';
+				pullUpAction();
+				// Execute custom function (ajax call?)
 			}
 		}
 	});
-	
-	setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
+
+	setTimeout(function() {
+		document.getElementById('wrapper').style.left = '0';
+	}, 800);
 }
 
-document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+document.addEventListener('touchmove', function(e) {
+	e.preventDefault();
+}, false);
 
 //document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 2000); }, false);
-
 
 // document.addEventListener('DOMContentLoaded', function() {
 // setTimeout(loaded, 2000);
 // }, false);
+

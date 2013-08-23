@@ -798,7 +798,7 @@ img, object {
 	height: 18px;
 	padding: 0.8em 0;
 	/*border-bottom: 1px solid #FFFFFF;*/
-	width: 49.5%;
+	width: 49.2%;
 	text-align: center;
 }
 #showRestaurant .prev {
@@ -1219,19 +1219,21 @@ img, object {
 .profileText, .profileTextBottom {
 	border: 0 none;
 	color: #664765;
-	
+	font-size: 145%;
 	/*font-family: KanariLightFont;*/
-	font-weight: bold !important;
+	/*font-weight: bold !important;*/
+	font-weight: normal !important;
 	margin: 0 !important;
 	padding: 1.2% 0;
 	text-transform: uppercase;
 }
-.profileText h2, .profileTextBottom h2 {
+.profileText span, .profileTextBottom span {
 	margin: 0 !important;
 	text-shadow: none;
 	font-size: 148%
 	font-weight: normal;
 	letter-spacing: 2px;
+	font-family:'Roboto',sans-serif !important;
 }
 .profileTextBottom {
 	padding: 1.2% !important;
@@ -1840,12 +1842,12 @@ img, object {
 	margin-right: 0;
 }
 
-#signUp .ui-block-b {
+#signUp .ui-block-b, #login .ui-block-b {
 	width: 49% !important;
 	margin-left: 0.2em;
 	float: right;
 }
-#signUp .ui-block-b input, #signUp .ui-block-a input {
+#signUp .ui-block-b input, #login .ui-block-b input, #signUp .ui-block-a input, #login .ui-block-a input {
 	border-radius: 0;
 	box-shadow: none;
 	padding: 0.6em !important;

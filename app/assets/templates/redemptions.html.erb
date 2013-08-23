@@ -1,10 +1,119 @@
 <div id="scroller" align="center" ng-controller="redemeController" >
-		<h3 class="redemptionMsg" ng-show="!redemptionList.length">Currently you do not have any redemptions</h3>
-		<div class="redemptionsList" ng-show="redemptionList.length">
-			<div ng-repeat="redemptions in redemptionList" class="redemptionsListRow clearfix">
-				<div class="col1">{{redemptions.user.first_name}} {{redemptions.user.last_name}}</div>
-				<div class="col2">Dhs {{redemptions.points}}</div>
-				<div class="col3" ng-click="confirm(redemptions.id)"><span>Confirm</span></div>
+	<h3 class="redemptionMsg" ng-show="!redemptionList.length">You don't have any active redemptions at the moment</h3>
+	<div id="refresh" ng-click="showRedemptions()">
+		<span>Processed Redemptions</span>
+	</div>
+	<div class="clr"></div>
+	<div class="redemptionsList" ng-show="redemptionList.length">
+		<div class="clr"></div>
+		<div class="redemptionsListRow redemptHdr clearfix">
+			<div class="col">
+				<span>User Name</span>
+			</div>
+			<div class="col5">
+				Requested At
+			</div>
+			<div class="col6">
+				Amount
+			</div>
+			<div class="col3">
+				Confirm
 			</div>
 		</div>
+		<div ng-repeat="redemptions in redemptionList" class="redemptionsListRow clearfix">
+			<div class="col1">
+				{{redemptions.user.first_name}} {{redemptions.user.last_name}}
+			</div>
+			<div class="col2">
+				{{redemptions.created_at | date:'h:mma'}}
+			</div>
+			<div class="col7">
+				Dhs {{redemptions.points}}
+			</div>
+			<div class="col4" ng-click="confirm(redemptions.id)">
+				<span>Confirm</span>
+			</div>
+		</div>
+	</div>
+	<span class="redeemptions"> 
+		<img class="closeBtn" src="/assets/b_closes.png" ng-click="close()" />
+		<div class="redemptionsListRow redemptHdr clearfix">
+			<div class="col5">
+				Requested At
+			</div>
+			<div class="col">
+				<span>User Name</span>
+			</div>
+			<div class="col6">
+				Amount
+			</div>
+			<div class="col6">
+				Status
+			</div>
+			<div class="col5">
+				Confirmed At
+			</div>
+		</div>
+		<div id="scroller" ng-repeat="redemptions in processedRedemptionList" class="redemptionsListRow redemptRow clearfix">
+			<div class="col1">
+				{{redemptions.created_at | date:'dd/MM/yyyy @h:mma'}}
+			</div>
+			<div class="col2">
+				{{redemptions.user.first_name}} {{redemptions.user.last_name}}
+			</div>
+			<div class="col7">
+				Dhs {{redemptions.points}}
+			</div>
+			<div ng-switch on="redemptions.approved_by">
+				<div ng-switch-default class="col7">
+					Processed
+				</div>
+				<div ng-switch-when="null" class="col7">
+					Expired
+				</div>
+			</div>
+			<div class="col1">
+				{{redemptions.updated_at | date:'dd/MM/yyyy @ h:mma' }}
+			</div>
+		</div> </span>
 </div>
+
+ <!-- <script type="text/javascript">
+	/* This function makes a div scrollable with android and iphone */
+	function isTouchDevice() {/* Added Android 3.0 honeycomb detection because touchscroll.js breaks the built in div scrolling of android 3.0 mobile safari browser */
+		if ((navigator.userAgent.match(/ipad 3/i)) || (navigator.userAgent.match(/honeycomb/i)))
+			return false;
+		try {
+			document.createEvent("TouchEvent");
+			return true;
+		} catch (e) {
+			return false;
+		}
+	}
+
+	function touchScroll(id) {
+		if (isTouchDevice()) {//if touch events exist...
+			var el = document.getElementById(id);
+			var scrollStartPosY = 0;
+			var scrollStartPosX = 0;
+			document.getElementById(id).addEventListener("touchstart", function(event) {
+				
+				scrollStartPosY = this.scrollTop + event.touches[0].pageY;
+				scrollStartPosX = this.scrollLeft + event.touches[0].pageX;
+				event.preventDefault();
+				// Keep this remarked so you can click on buttons and links in the div
+			}, false);
+			document.getElementById(id).addEventListener("touchmove", function(event) {
+				// These if statements allow the full page to scroll (not just the div) if they are // at the top of the div scroll or the bottom of the div scroll // The -5 and +5 below are in case they are trying to scroll the page sideways // but their finger moves a few pixels down or up. The event.preventDefault() function // will not be called in that case so that the whole page can scroll.
+				//alert("hi");
+				if ((this.scrollTop < this.scrollHeight - this.offsetHeight && this.scrollTop + event.touches[0].pageY < scrollStartPosY - 5) || (this.scrollTop != 0 && this.scrollTop + event.touches[0].pageY > scrollStartPosY + 5))
+					event.preventDefault();
+				if ((this.scrollLeft < this.scrollWidth - this.offsetWidth && this.scrollLeft + event.touches[0].pageX < scrollStartPosX - 5) || (this.scrollLeft != 0 && this.scrollLeft + event.touches[0].pageX > scrollStartPosX + 5))
+					event.preventDefault();
+				this.scrollTop = scrollStartPosY - event.touches[0].pageY;
+				this.scrollLeft = scrollStartPosX - event.touches[0].pageX;
+			}, false);
+		}
+	}
+	touchScroll('touchscroll_div');
+</script>  -->
