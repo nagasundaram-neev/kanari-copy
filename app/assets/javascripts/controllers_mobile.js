@@ -173,6 +173,7 @@ module.controller('loginController', function($scope, $http, $location) {
 					setCookie('signInCount', data.sign_in_count, 0.29);
 				}
 				if (getCookie('userRole') == "user") {
+					console.log("hi in login success ");
 					$location.url("/home");
 				} else if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff" || getCookie('userRole') == "manager") {
 					deleteCookie('authToken');
@@ -1543,6 +1544,7 @@ function setCookie(name, value, days) {
 	//alert(value);
 	if (days) {
 		var date = new Date();
+		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
 		var expires = "; expires=" + date.toGMTString();
 	} else
 		var expires = "";
