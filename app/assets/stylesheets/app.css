@@ -1083,7 +1083,7 @@ input {
 	float: left;
 }
 .insight_graph2 {
-	height: 550px;
+	height: 583px;
 	overflow-y: auto;
 }
 .daily_change_span {
@@ -1091,7 +1091,7 @@ input {
 	 margin-left: 1px !important;
     padding-top: 5%;
     text-align: left;
-    width: 27%;
+    width: 33%;
 }
 .daily_change_span img {
 	padding: 6% 0;
