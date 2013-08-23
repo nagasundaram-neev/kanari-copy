@@ -1342,7 +1342,7 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 				$scope.error = "Please enter valid amount for redemption";
 				$scope.successMsg = false;
 				$scope.erromsg = true;
-			} else if ($scope.amount < 0) {
+			} else if ($scope.amount < 0 || $scope.amount == 0) {
 				console.log("in else if");
 				$scope.error = "Please enter valid amount for redemption";
 				$scope.successMsg = false;
@@ -1543,7 +1543,6 @@ function setCookie(name, value, days) {
 	//alert(value);
 	if (days) {
 		var date = new Date();
-		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
 		var expires = "; expires=" + date.toGMTString();
 	} else
 		var expires = "";
