@@ -4,7 +4,7 @@
 		<div class="score_1">
 			<div class="net_promo_score">
 				<span class="txt1">Net Promoter	Score</span>
-				<span class="netScore" style="width:20%;"> {{netScore}} </span>
+				<span class="netScore" style="width:20%;"> {{netScore | number:2}} </span>
 				<div ng-show="netScoreMinusBar" style="width:100%;float:right;  margin-top: -43px !important;">
 					<span class="rate_minus" style="width: {{netScore*-0.50}}%">&nbsp;</span>
 					<!-- <span ng-switch-when="1" class="net_rate_plus_red" style="width: {{netScore*-1}}%">&nbsp;</span> -->
@@ -23,7 +23,7 @@
 				<!-- <span class="ratePValue rate_plus">{{netScoreLike}}%</span> -->
 				<div class="daily_change_score">
 					<span class="txt1">Daily Change</span>
-					<div class="netScore">{{netScoreDailyChange}}%</div>
+					<div class="netScore">{{netScoreDailyChange | number:2}}%</div>
 					<!-- <div class="daily_change_span" ng-switch-when="1">
 					<%= image_tag 'ic_yellow_arrow.png' %>
 					<span class="value1" ng-switch on="netScoreDailyChange"><span ng-switch-when="0">{{netScoreDailyChange}}%</span> <span ng-switch-default>+{{netScoreDailyChange}}%</span></span>

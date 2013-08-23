@@ -1088,9 +1088,10 @@ input {
 }
 .daily_change_span {
 	float: right !important;
-	text-align: left;
-	padding-top: 8%;
-	width: 33%;
+	 margin-left: 1px !important;
+    padding-top: 5%;
+    text-align: left;
+    width: 27%;
 }
 .daily_change_span img {
 	padding: 6% 0;
@@ -1169,7 +1170,7 @@ input {
 .rate_plus {
 	background: none repeat scroll 0 0 #FEC03B;
 	float: left;
-	margin-top: 7%;
+	 margin-top: 20px;
 }
 .net_rate_plus {
 	background: none repeat scroll 0 0 #FEC03B;
@@ -1265,7 +1266,7 @@ input {
 }
 .insight_graph1 .main_score .txt1 {
 	font-family: roboto;
-	font-size: 16px;
+	font-size: 15px;
 	font-weight: bold;
 }
 .insight_graph1 .score_1 .txt1, .insight_graph1 .score_final .txt1 {
