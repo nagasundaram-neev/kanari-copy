@@ -487,10 +487,8 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 		// $timeout.cancel(feedbackTimeout);
 
 		$scope.showRedemptions = function() {
-			//$("#scroller").removeAttr("style")
+			//window.history.back();
 			$scope.processedRedemptions();
-			// var scrollNode = document.querySelector(".redeemptions"), options = {};
-			// var scroller = new TouchScroll(scrollNode, options);
 			setTimeout(setupScrollbars, 1000);
 			$("#overlaySuccess").show();
 			$(".redeemptions").show();

@@ -37,6 +37,9 @@
 	</div>
 	<span class="redeemptions"> 
 		<img class="closeBtn" src="/assets/b_closes.png" ng-click="close()" />
+		<h3 class="redemptionMsg" ng-show="!processedRedemptionList.length">You don't have any process redemptions at the moment</h3>
+		<div class="clr"></div>
+		<div ng-show="processedRedemptionList.length">
 		<div class="redemptionsListRow redemptHdr clearfix">
 			<div class="col5">
 				Requested At
@@ -83,7 +86,9 @@
 			<!-- <div class="col1">
 				
 			</div> -->
-		</div> </span>
+		</div>
+		</div>
+		 </span>
 </div>
 
  <!-- <script type="text/javascript">
