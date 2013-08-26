@@ -9,7 +9,7 @@ end
 
 Then(/^the "(.*?)" of customer with id "(.*?)" should be "(.*?)"$/) do |attribute, id, value|
   customer = Customer.find(id)
-  customer.send(attribute).should == value
+  customer.send(attribute).to_s.should == value.to_s
 end
 
 Given(/^the maximum number of authorized outlets for customer with id "(.*?)" is "(.*?)"$/) do |customer_id, authorized_outlets|
