@@ -428,7 +428,8 @@
 }
 .adviceDiv {
 	color: #664765;
-	min-height: 318px;
+	font-size: 114%;
+	min-height: 295px;
 }
 
 .adviceDiv .ui-shadow-inset {
@@ -883,7 +884,7 @@ img, object {
 	margin: 0% 0 0;
 }
 #transaction_history .prev {
-	padding: 0.74em 0;
+	padding: 0.95em 0;
 	background-color: #664765;
 	font-size: 0.9em;
 	border-right: 0 none;

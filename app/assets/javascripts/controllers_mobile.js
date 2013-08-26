@@ -921,7 +921,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			//$scope.nextFlag = 0;
 			$scope.prevFlag = 1;
 			$scope.nextFlag = -1;
-			//$(".nxt").css("width", "50.22%");
+			$(".nxt").css("width", "50.22%");
 			$(".nxtTxt").html("SUBMIT");
 			$scope.erromsg = false;
 			$(".nxt img").hide();

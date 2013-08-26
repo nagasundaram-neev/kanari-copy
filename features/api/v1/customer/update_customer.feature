@@ -29,6 +29,32 @@ Feature: Update Customer
       And the "name" of customer with id "100" should be "China Pearl"
       And the "email" of customer with id "100" should be "newemail@gmail.com"
 
+    Scenario: User's role is kanari_admin
+      Given the following users exist
+        |first_name |email                          | password    | authentication_token  | role            |
+        |Adam       |superadmin@kanari.co           | password123 | admin_auth_token      | kanari_admin    |
+        |Bill       |admin@subway.com               | password123 | bill_auth_token       | customer_admin  |
+        |Clinton    |admin@nbc.com                  | password123 | clinton_auth_token    | customer_admin  |
+      Given a customer named "Subway" exists with id "100" with admin "admin@subway.com"
+      Given a customer named "Noushad the Big Chef" exists with id "101" with admin "admin@nbc.com"
+      When I authenticate as the user "admin_auth_token" with the password "random string"
+      And I send a PUT request to "/api/customers/100" with the following:
+      """
+      {
+        "customer" : {
+		  "authorized_outlets" : "5",
+          "name" : "modified Subway"
+        }
+      }
+      """
+      Then the response status should be "200"
+      And the JSON response should be:
+      """
+      null
+      """
+      And the "authorized_outlets" of customer with id "100" should be "5"
+      And the "name" of customer with id "100" should be "Subway"
+
     Scenario: Customer belongs to a different customer_admin
       Given the following users exist
         |first_name |email                          | password    | authentication_token  | role            |
@@ -69,7 +95,6 @@ Feature: Update Customer
       """
       Examples:
         |role           |
-        |kanari_admin   |
         |manager        |
         |staff          |
         |user           |

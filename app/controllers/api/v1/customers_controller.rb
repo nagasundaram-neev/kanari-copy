@@ -42,7 +42,8 @@ class Api::V1::CustomersController < ApplicationController
   # PATCH/PUT /customers/1.json
   def update
     authorize! :update, @customer
-    if @customer.update(customer_params)
+    update_customer_params = ( current_user.role == 'kanari_admin' ? admin_customer_params : customer_params)
+    if @customer.update(update_customer_params)
       render json: nil, status: 200
     else
       render json: @customer.errors, status: :unprocessable_entity
@@ -72,5 +73,10 @@ class Api::V1::CustomersController < ApplicationController
         :registered_address_line_1, :registered_address_line_2, :registered_address_city, :registered_address_country,
         :mailing_address_line_1, :mailing_address_line_2, :mailing_address_city, :mailing_address_country
       )
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def admin_customer_params
+      params.require(:customer).permit(:authorized_outlets)
     end
 end
