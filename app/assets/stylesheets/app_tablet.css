@@ -737,12 +737,13 @@ input.ui-input-text, textarea.ui-input-text {
 	margin-top: 9%;
 }
 .dateTimeList {
-	width: 65%;
+	 width: 100%;
 	padding: 5% 0 3%;
 }
 .dateTimeListhead {
 	color: #664766;
 	font-weight: bold;
+	
 }
 .dateTimeList .col1, .dateTimeList .col2 {
 	padding: 2%;
@@ -758,10 +759,12 @@ input.ui-input-text, textarea.ui-input-text {
 	text-align: left;
 }
 .dateTimeList .col2 {
-	width: 16%;
+	width: 18%;
 }
 .dateTimeList .colBorderTop {
 	border-top: 1px solid #ccc;
+	background: none repeat scroll 0 0 #EAEAEA;
+	font-family: myriadpro;
 }
 .dateTimeList .colBorderRight {
 	border-right: 1px solid #ccc;

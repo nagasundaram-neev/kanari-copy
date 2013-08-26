@@ -181,7 +181,7 @@
 					<div ng-switch on="ambienceFlag">
 						<div class="daily_change_span" ng-switch-when="1">
 							<%= image_tag 'ic_yellow_arrow.png' %>
-							<span class="value1" ng-switch on="ambienceDailyChange"><span ng-switch-when="0">{{ambienceDailyChange}}%</span><span ng-switch-default>+{{ambienceDailyChange}}%</span></span>
+							<span class="value1" ng-switch on="ambienceDailyChange"><span ng-switch-when="0">{{ambienceDailyChange | number:0}}%</span><span ng-switch-default>+{{ambienceDailyChange | number:0}}%</span></span>
 						</div>
 						<div class="daily_change_span" ng-switch-when="0">
 							<%= image_tag 'ic_red_arrow.png' %>

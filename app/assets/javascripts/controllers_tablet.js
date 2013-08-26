@@ -689,6 +689,8 @@ module.controller('numericCodeController', function($scope, $http, $location, $t
 		};
 
 		$scope.listGeneratedCodes();
+		setTimeout(setupScrollbars, 1000);
+
 
 		$scope.parseDate = function(jsonDate) {
 			console.log("date " + jsonDate + " parsed date " + new Date(Date.parse(jsonDate)));
@@ -708,8 +710,7 @@ module.controller('numericCodeController', function($scope, $http, $location, $t
 			$scope.listGeneratedCodes();
 		};
 
-		setTimeout(setupScrollbars, 2000);
-
+		
 	} else {
 		$location.url("/signin");
 	}
