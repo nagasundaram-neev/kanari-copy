@@ -799,13 +799,13 @@ img, object {
 	float: left;
 	/*padding: 0.8em 0;*/
 	height: 18px;
-	padding: 0.8em 0;
+	padding: 0.95em 0;
 	/*border-bottom: 1px solid #FFFFFF;*/
 	width: 49.2%;
 	text-align: center;
 }
 #showRestaurant .prev {
-	padding: 1.31em 0;
+	padding: 0.95em 0;
 }
 .prev img, .nxt img {
 	vertical-align: top;
@@ -818,7 +818,7 @@ img, object {
 	margin-left: -10px;
 }
 .transactionHistory {
-	height: 385px;
+	height: 430px;
 	overflow-y: auto;
 }
 .prevTxt {
@@ -830,7 +830,7 @@ img, object {
 	float: left;
 	/*padding: 0.735em 0;*/
 	height: 18px;
-	padding: 0.8em 0;
+	padding: 0.95em 0;
 	width: 50.5%;
 	text-align: center;
 }
@@ -848,7 +848,7 @@ img, object {
 .nxtTxt {
 	color: #664765;
 	display: inline;
-	font-size: 100%;
+	/*font-size: 100%;*/
 	/*padding: 0 20%;*/
 }
 #feedback .nxtTxt {

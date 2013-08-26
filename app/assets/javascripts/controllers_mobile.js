@@ -816,6 +816,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 	$scope.feedBackSize = 6;
 	$scope.feedBackCategoryName = ["food", "friendlines", "speed", "ambiance", "cleanliness", "value"];
 	$(".nxt").css("width", "100%");
+	$(".nxt img").css("padding-top", "0");
 
 	var yBarCount = 0;
 
@@ -911,6 +912,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			$scope.prevFlag = 0;
 			$scope.recomendationBar = false;
 			$(".nxt").css("width", "50.22%");
+			$(".nxt img").css("padding-top", "1%");
 		} else if ($scope.nextFlag == 1) {
 			$scope.like = false;
 			$scope.dislike = false;
@@ -985,7 +987,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 
 				} else {
 					console.log("recommend" + $scope.willRecommend);
-					$scope.error = "Please recommend this place to your friend or colleague";
+					$scope.error = "Your feedback is valuable! We'd really appreciate you answering the above questions.";
 					$scope.erromsg = true;
 				}
 			} else {
@@ -1078,6 +1080,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			$scope.prevFlag = 1;
 			$scope.prev = false;
 			$(".nxt").css("width", "100%");
+			$(".nxt img").css("padding-top", "0%");
 			$scope.nextFlag = 0;
 			//$scope.prevFlag = -1;
 		} else if ($scope.prevFlag == 1) {
@@ -1092,6 +1095,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			$(".nxt").css("width", "49.5%");
 			$(".nxtTxt").html("NEXT");
 			$(".nxt img").show();
+			$(".nxt img").css("padding-top", "1%");
 		}
 	};
 	//} else {
@@ -1303,9 +1307,8 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 		$scope.erromsg = false;
 
 		$scope.previous = function() {
-			// $location.url("/showRestaurant?outletId=" + $routeParams.outletId);
-			$location.url("/redeemPoints");
-		};
+			window.history.back();
+		};	
 
 		$scope.home = function() {
 			$location.url("/home");
