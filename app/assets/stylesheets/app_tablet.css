@@ -818,15 +818,16 @@ width: 100%;
 .promo_code_def {
 	float: left;
 	width: 240px;
+	 margin-right: 10px;
 	border-left: 1px solid #D6D6D6;
 	border-right: 1px solid #D6D6D6;
 }
 .promo_code_desc {
-	float: left;
+	/*float: left;*/
 	padding: 1% 2%;
 	position: relative;
-	text-align: justify;
-	width: 44%;
+	text-align: left;
+	/*width: 50%;*/
 }
 .update_time {
 	bottom: 3%;
@@ -897,11 +898,13 @@ width: 100%;
 	border-bottom:none;
 }
 .redemptHdr .col, .redemptHdr .col3 {
-	width: 30%;
+	width: 20%;
 	text-align:left;
 	float: left;
 }
-
+.redemptHdr .col{
+	width: 28%;
+}
 /*.redeemptions .redemptHdr .col3{
 	float: left;
     text-align: left;
@@ -911,11 +914,11 @@ width: 100%;
 	padding-left: 3%;
 }
 .redeemptions .redemptHdr .col5, .redemptRow .col1{
-	width : 24% !important;
+	width : 25% !important;
 }
 
 .redeemptions .redemptHdr .col, .redemptRow .col2{
-	width : 27% !important;
+	width : 25% !important;
 }
 
 .redeemptions .redemptHdr .col6, .redemptRow .col7{
@@ -923,16 +926,16 @@ width: 100%;
 }
 
 .redemptHdr .col3{
-	text-align:center;
+	text-align:left;
 }
 
 .redemptHdr .col6{
-	width: 10%;
+	width: 22%;
 	text-align:left;
 	float: left;
 }
 .redemptHdr .col5{
-	width: 30%;
+	width: 28%;
 	text-align:left;
 	float: left;
 }
@@ -941,21 +944,24 @@ width: 100%;
 	/*font-size: 1.2em;*/
 }
 .redemptionsListRow .col1, .redemptionsListRow .col4  {
-	width: 30%;
+	width: 20%;
 	text-align:left;
 	text-transform: capitalize;
 }
+.redemptionsListRow .col1{
+	width: 28%;
+}
 .redemptionsListRow .col4 {
-	text-align:center;
+	text-align:left;
 }
 .redemptionsListRow .col2 {
-	width: 30%;
+	width: 28%;
 	text-transform:capitalize;
 	text-align:left;
 }
 
 .redemptionsListRow .col7 {
-	width: 10%;
+	width: 22%;
 	text-align:left;
 	float:left;
 }

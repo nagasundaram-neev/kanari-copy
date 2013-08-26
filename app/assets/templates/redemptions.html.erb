@@ -72,9 +72,17 @@
 					Expired
 				</div>
 			</div>
-			<div class="col1">
-				{{redemptions.updated_at | date:'dd/MM/yyyy @ h:mma' }}
+			<div ng-switch on="redemptions.approved_by">
+				<div ng-switch-default class="col1">
+					{{redemptions.updated_at | date:'dd/MM/yyyy @ h:mma' }}
+				</div>
+				<div ng-switch-when="null" class="col1" style="text-align: center">
+					-
+				</div>
 			</div>
+			<!-- <div class="col1">
+				
+			</div> -->
 		</div> </span>
 </div>
 
