@@ -825,7 +825,7 @@ width: 100%;
 }
 .promo_code_desc {
 	/*float: left;*/
-	padding: 1% 2%;
+	padding: 1% 15px;
 	position: relative;
 	text-align: left;
 	/*width: 50%;*/
