@@ -1171,6 +1171,9 @@ module.controller('restaurantListController', function($scope, $http, $location)
 	if (getCookie('authToken')) {
 		// $("#listRestaurant").niceScroll({cursorcolor:"#00F"});
 		$scope.outlets = [];
+		
+		
+	//	$("#restaurantList .footerDiv").css
 
 		$scope.home = function() {
 			$location.url("/home");
@@ -1518,6 +1521,7 @@ $(document).on("pageshow", ".ui-page", function() {
 	}
 
 	if ($page.height() > $(window).height()) {
+		console.log("page "+$page);
 		$page.children('.ui-footer').css('position', 'relative')
 		$page.children('.ui-footer').css('margin-top', '14px')
 		//alert("page height grater, will need to scroll")
