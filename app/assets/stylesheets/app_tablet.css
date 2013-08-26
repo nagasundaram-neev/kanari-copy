@@ -257,7 +257,7 @@ input.ui-input-text, textarea.ui-input-text {
 #header_menu .headerDiv {
 	float: left;
 	margin-right: 1px;
-	width: 22.9%;
+	width: 22.8%;
 	position: relative;
 	text-align: center;
 }
@@ -314,7 +314,7 @@ input.ui-input-text, textarea.ui-input-text {
 }
 #header_menu .logoutDiv {
 	text-align: center;
-	width: 8.3% !important;
+	width: 8.45% !important;
 	margin-right: 0px;
 	float: left;
 }
