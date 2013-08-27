@@ -17,6 +17,7 @@ class Outlet < ActiveRecord::Base
   has_many :outlet_types, through: :outlets_outlet_types
   has_many :outlets_staffs
   has_many :staffs, through: :outlets_staffs
+  has_many :payment_invoices, inverse_of: :outlet
 
   def redeemable_points
     rewards_pool - points_pending_redemption
