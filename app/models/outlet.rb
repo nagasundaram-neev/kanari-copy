@@ -206,7 +206,7 @@ class Outlet < ActiveRecord::Base
     end
 
     def get_average_bill_amount_statistics(feedbacks)
-      feedbacks.present? ? ( feedbacks.inject(0){|sum, f| sum + f.bill_amount.to_i}.to_f / feedbacks.length ).to_i : 0
+      feedbacks.present? ? ( feedbacks.inject(0){|sum, f| sum + f.bill_amount.to_i}.to_f / feedbacks.length ) : 0
     end
 
     def get_cusomers_statistics(feedbacks)
