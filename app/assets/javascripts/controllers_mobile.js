@@ -1532,8 +1532,8 @@ $(document).on("pageshow", ".ui-page", function() {
 
 	if ($page.height() > $(window).height()) {
 		console.log("page " + $page);
-		//$page.children('.ui-footer').css('position', 'relative')
-		//$page.children('.ui-footer').css('margin-top', '14px')
+		$page.children('.ui-footer').css('position', 'relative')
+		$page.children('.ui-footer').css('margin-top', '14px')
 		//alert("page height grater, will need to scroll")
 	} else {
 		//alert("height sufficient no need to scroll")

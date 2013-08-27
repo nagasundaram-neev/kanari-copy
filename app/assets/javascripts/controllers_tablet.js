@@ -279,15 +279,25 @@ module.controller('homePageController', function($scope, $http, $location, $time
 		var overlayDiv = $("#overlaySuccess");
 		$scope.active1 = true;
 		$scope.feedbackList = [];
+		
+		
+		Date.prototype.yyyymmdd = function() {
+			var yyyy = this.getFullYear().toString();
+			var mm = (this.getMonth() + 1).toString();
+			// getMonth() is zero-based
+			var dd = this.getDate().toString();
+
+			return yyyy + '-' + (mm[1] ? mm : "0" + mm[0]) + '-' + (dd[1] ? dd : "0" + dd[0]);
+		};
 
 		$scope.listFeedbacks = function() {
 			//alert(new Date());
 			//$.mobile.loading('show');
-			//console.log("date "+new Date());
+			var dt = new Date();
+			console.log("date "+dt.yyyymmdd()+" 5:00:00");
 			var param = {
 				"auth_token" : getCookie('authToken'),
-				//"start_time" : getCookie('startTime'),
-				//"end_time" : new Date(),
+				"start_time" : dt.yyyymmdd()+" 5:00:00",
 				"password" : "X"
 			}
 
@@ -304,7 +314,6 @@ module.controller('homePageController', function($scope, $http, $location, $time
 					'background-color' : 'transparent'
 				});
 				console.log("in list feedbacks");
-				setCookie("startTime",new Date(),0.29);
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 				//$.mobile.loading('hide');
