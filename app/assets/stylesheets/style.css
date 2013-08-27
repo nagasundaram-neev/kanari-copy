@@ -154,6 +154,7 @@
 	background-image: -o-linear-gradient( #E5E6E8,#E5E6E8 );
 	background-image: linear-gradient( #E5E6E8,#E5E6E8 );
 	border: none;
+	margin: 0.2em 0;
 }
 
 .adviceDiv .ui-body-a, .ui-overlay-a {
@@ -285,7 +286,7 @@
 	border-bottom: 1px solid #FFFFFF;
 	color: #664765;
 	float: left;
-	height: 55px;
+	height: 40px;
 	 padding: 2% 0 2% 4%;
 	text-shadow: none;
 	width: 35.73%;
@@ -295,7 +296,7 @@
 	border-right: 1px solid #FFFFFF;
 	color: #FFFFFF;
 	float: left;
-	padding: 6% 0 6% 2%;
+	padding: 4% 0 4% 2%;
 	text-align: left;
 	text-shadow: none;
 	width: 58%;
@@ -305,7 +306,7 @@
 	background-color: #664765;
 	color: #FFFFFF;
 	float: left;
-	padding: 6% 0 6% 4%;
+	padding: 4% 0 4% 4%;
 	text-align: left;
 	text-shadow: none;
 	/*width: 39.4%;*/
@@ -314,7 +315,7 @@
 .parentDivName {
 	border-bottom: 1px solid #CCCCCC;
 	float: left;
-	height: 55px;
+	height: 40px;
 	padding: 2% 0 2% 2%;
 	width: 58%;
 	border-right: 1px solid #FFFFFF;
@@ -513,7 +514,7 @@
 }
 
 .searchDiv div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text, .ui-input-search input.ui-input-text {
-	padding: 1em 0;
+	padding: 0.5em 0;
 	display: inline;
 	width: 46%;
 }
@@ -1489,13 +1490,20 @@ img, object {
 }
 
 .searchIcon {
-	background-image: url("/assets/ic_search_purple.png");
+	/*background-image: url("/assets/ic_search_purple.png");
 	background-position: 0 0;
 	cursor: pointer;
 	float: right;
 	height: 39px;
-	margin: 2% 0 0;
-	width: 39px;
+	margin: 0% 0 0;
+	width: 39px;*/
+	background-image: url("/assets/ic_search_purple.png");
+    background-position: 0 0;
+    cursor: pointer;
+    float: right;
+    height: 33px;
+    margin: 0.9% 0 0;
+    width: 29px;
 }
 #signUp .ui-field-contain .ui-input-search, .ui-field-contain div.ui-input-text {
 	background: none repeat scroll 0 0 #FFFFFF;
@@ -1706,6 +1714,11 @@ img, object {
 #forgotpass .ui-content {
 	overflow: hidden;
 }
+
+#restaurantList .prev{
+	width:99.9%;
+}
+
 .forgotPass {
 }
 .rememberMe .ui-checkbox .ui-btn-icon-left .ui-btn-inner, .ui-radio .ui-btn-icon-left .ui-btn-inner {

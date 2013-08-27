@@ -1121,7 +1121,6 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 
 		socialMessage = 'I just saved AED ' + getCookie('pointsEarned') + ' by leaving feedback at ' + getCookie('restName') + '. Thanks Kanari! Check it out: http://kanari.co';
 		tweetMessage = 'I just saved AED ' + getCookie('pointsEarned') + ' by leaving feedback at ' + getCookie('restName') + '. Thanks @GetKanari! Check it out: http://kanari.co';
-		
 
 		//$("#twitter").attr("href", "https://twitter.com/share?text="+socialMessage);
 
@@ -1157,12 +1156,11 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 			// $scope.tweetShareSuccMsg = true;it
 			//$("#tweetShareSuccMsg").show();
 		};
-		
-		$scope.google = function(){
-		
+
+		$scope.google = function() {
+
 			var popup = window.open("https://plus.google.com/share?data-text=lkjnkln" + socialMessage, 'popUpWindow', 'height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
-			
-			
+
 		};
 
 	} else {
@@ -1175,11 +1173,14 @@ module.controller('restaurantListController', function($scope, $http, $location)
 	if (getCookie('authToken')) {
 		// $("#listRestaurant").niceScroll({cursorcolor:"#00F"});
 		$scope.outlets = [];
-		
-		
-	//	$("#restaurantList .footerDiv").css
+
+		//	$("#restaurantList .footerDiv").css
 
 		$scope.home = function() {
+			$location.url("/home");
+		};
+
+		$scope.previous = function() {
 			$location.url("/home");
 		};
 
@@ -1308,7 +1309,7 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 
 		$scope.previous = function() {
 			window.history.back();
-		};	
+		};
 
 		$scope.home = function() {
 			$location.url("/home");
@@ -1321,7 +1322,7 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 
 			$http({
 				method : 'get',
-				url : '/api/outlets/'+$routeParams.outletId,
+				url : '/api/outlets/' + $routeParams.outletId,
 				params : param
 			}).success(function(data, status) {
 				console.log("User Role " + data + " status " + status);
@@ -1500,6 +1501,12 @@ $(document).on("pageshow", ".ui-page", function() {
 		dateFormat : 'dd/mm/yy'
 	});
 
+	//page.style.height = window.innerHeight + 'px';
+//alert("full screen "+window.isInFullScreen);	
+	// if (window.innerHeight == screen.height) {
+		// // browser is fullscreen
+		// alert("full screen ");	
+	// }
 	var $page = $(this), vSpace = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() + $page.children('.ui-content').height();
 	//console.log($page.children('.ui-content'));
 	//alert(vSpace);
@@ -1524,9 +1531,9 @@ $(document).on("pageshow", ".ui-page", function() {
 	}
 
 	if ($page.height() > $(window).height()) {
-		console.log("page "+$page);
-		$page.children('.ui-footer').css('position', 'relative')
-		$page.children('.ui-footer').css('margin-top', '14px')
+		console.log("page " + $page);
+		//$page.children('.ui-footer').css('position', 'relative')
+		//$page.children('.ui-footer').css('margin-top', '14px')
 		//alert("page height grater, will need to scroll")
 	} else {
 		//alert("height sufficient no need to scroll")
