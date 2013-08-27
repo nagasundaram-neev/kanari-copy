@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130819095818) do
+ActiveRecord::Schema.define(version: 20130821131636) do
 
   create_table "code_generation_logs", force: true do |t|
     t.integer  "outlet_id"
@@ -169,6 +169,9 @@ ActiveRecord::Schema.define(version: 20130819095818) do
     t.integer  "customer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "outlet_id"
+    t.string   "invoice_url"
+    t.string   "kanari_plan"
   end
 
   add_index "payment_invoices", ["customer_id"], name: "index_payment_invoices_on_customer_id", using: :btree
