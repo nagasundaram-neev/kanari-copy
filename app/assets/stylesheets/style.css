@@ -1762,6 +1762,11 @@ img, object {
 	text-align: center;
 	margin: 2% 12%;
 }
+
+#feedback_step2 .errorMsg {
+	margin: 0;
+}
+
 .succMsg {
 	color: #0F9D58;
 	text-shadow: none;

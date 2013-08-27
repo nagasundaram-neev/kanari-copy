@@ -1321,12 +1321,12 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 
 			$http({
 				method : 'get',
-				url : '/api/users',
+				url : '/api/outlets/'+$routeParams.outletId,
 				params : param
 			}).success(function(data, status) {
 				console.log("User Role " + data + " status " + status);
 				//var date = new Date();
-				$scope.points = data.user.points_available;
+				$scope.points = data.outlet.redeemable_points;
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 				if (status == 401) {
