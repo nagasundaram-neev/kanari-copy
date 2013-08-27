@@ -281,9 +281,13 @@ module.controller('homePageController', function($scope, $http, $location, $time
 		$scope.feedbackList = [];
 
 		$scope.listFeedbacks = function() {
+			//alert(new Date());
 			//$.mobile.loading('show');
+			//console.log("date "+new Date());
 			var param = {
 				"auth_token" : getCookie('authToken'),
+				//"start_time" : getCookie('startTime'),
+				//"end_time" : new Date(),
 				"password" : "X"
 			}
 
@@ -300,6 +304,7 @@ module.controller('homePageController', function($scope, $http, $location, $time
 					'background-color' : 'transparent'
 				});
 				console.log("in list feedbacks");
+				setCookie("startTime",new Date(),0.29);
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 				//$.mobile.loading('hide');

@@ -1,4 +1,6 @@
+require 'normalize_time'
 class Api::V1::PaymentInvoicesController < ApplicationController
+  include NormalizeTime
   before_filter :authenticate_user!
   before_action :set_payment_invoice, only: [:show, :update, :destroy]
 
@@ -7,16 +9,12 @@ class Api::V1::PaymentInvoicesController < ApplicationController
   # GET /payment_invoices
   # GET /payment_invoices.json
   def index
+    start_time, end_time = normalize_start_and_end_time(params[:start_time], params[:end_time])
     authorize! :read, PaymentInvoice
     if !set_customer
       return #Already rendered errors json
     end
-    @payment_invoices = @customer.payment_invoices
-    if !params[:start_date].nil? && !params[:end_date].nil?
-      start_date = DateTime.parse(params[:start_date])
-      end_date = DateTime.parse(params[:end_date])
-      @payment_invoices = @payment_invoices.where(receipt_date: start_date..end_date)
-    end
+    @payment_invoices = @customer.payment_invoices.where(receipt_date: start_time..end_time)
     render json: @payment_invoices
   end
 
@@ -38,7 +36,7 @@ class Api::V1::PaymentInvoicesController < ApplicationController
   # POST /payment_invoices.json
   def create
     authorize! :create, PaymentInvoice
-    if !validate_customer
+    if !validate_customer_and_outlet
       return #Already rendered errors json
     end
     @payment_invoice = PaymentInvoice.new(payment_invoice_params)
@@ -90,17 +88,22 @@ class Api::V1::PaymentInvoicesController < ApplicationController
       end
     end
 
-    def validate_customer
-      begin
-        @customer = Customer.find(params[:customer_id])
-      rescue
+    def validate_customer_and_outlet
+      @customer = Customer.where(id: params[:customer_id]).first
+      if @customer.nil?
         render json: {errors: ["Invalid customer ID"]}, status: :unprocessable_entity
         return false
       end
+      @outlet = Outlet.where(customer_id: @customer.id, id: params[:payment_invoice][:outlet_id]).first
+      if @outlet.nil?
+        render json: {errors: ["Invalid outlet ID"]}, status: :unprocessable_entity
+        return false
+      end
+      return true
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def payment_invoice_params
-      params.require(:payment_invoice).permit(:kanari_invoice_id, :receipt_date, :amount_paid)
+      params.require(:payment_invoice).permit(:outlet_id, :kanari_plan, :kanari_invoice_id, :receipt_date, :amount_paid, :invoice_url)
     end
 end
