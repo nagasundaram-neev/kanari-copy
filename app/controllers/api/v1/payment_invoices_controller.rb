@@ -1,4 +1,6 @@
+require 'normalize_time'
 class Api::V1::PaymentInvoicesController < ApplicationController
+  include NormalizeTime
   before_filter :authenticate_user!
   before_action :set_payment_invoice, only: [:show, :update, :destroy]
 
@@ -7,16 +9,12 @@ class Api::V1::PaymentInvoicesController < ApplicationController
   # GET /payment_invoices
   # GET /payment_invoices.json
   def index
+    start_time, end_time = normalize_start_and_end_time(params[:start_time], params[:end_time])
     authorize! :read, PaymentInvoice
     if !set_customer
       return #Already rendered errors json
     end
-    @payment_invoices = @customer.payment_invoices
-    if !params[:start_date].nil? && !params[:end_date].nil?
-      start_date = DateTime.parse(params[:start_date])
-      end_date = DateTime.parse(params[:end_date])
-      @payment_invoices = @payment_invoices.where(receipt_date: start_date..end_date)
-    end
+    @payment_invoices = @customer.payment_invoices.where(receipt_date: start_date..end_date)
     render json: @payment_invoices
   end
 
