@@ -499,9 +499,17 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 	if (getCookie('authToken')) {
 		$timeout.cancel(insightTimeout);
 		// $timeout.cancel(feedbackTimeout);
-
+		// var flagP = 0;
+		// $scope.popupHeight = $(window).height() - 150;
+		// $(window).bind('orientationchange', 'load', function(event) {
+			// $scope.popupHeight = $(window).height() - 150;
+			// if(flagP == 1){
+				// $scope.showRedemptions();
+			// }
+		// });
 		$scope.showRedemptions = function() {
 			//window.history.back();
+			//flagP = 1;
 			$scope.processedRedemptions();
 			setTimeout(setupScrollbars, 1000);
 			$("#overlaySuccess").show();
@@ -512,10 +520,12 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 				'background-color' : '#000'
 			});
 			$(".redeemptions").focus();
+			$('#scrollbar1').oneFingerScroll();
 		};
 
 		$scope.close = function() {
 			//console.log("IN");
+			flagP = 0;
 			$("#overlaySuccess").hide();
 			$(".redeemptions").hide();
 			//$scope.popup = false;
@@ -570,6 +580,7 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 		};
 
 		$scope.listRedemptions();
+		$('#scrollbar3').oneFingerScroll();
 
 		$scope.confirm = function(id) {
 			console.log("confirmed" + id);
@@ -593,13 +604,14 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 			});
 		};
 
-		setTimeout(setupScrollbars, 1000);
+		//setTimeout(setupScrollbars, 2000);
 
 	} else {
 		$location.url("/signin")
 	}
 
 });
+
 var flag = 0;
 var testID = 0;
 
@@ -701,8 +713,9 @@ module.controller('numericCodeController', function($scope, $http, $location, $t
 		};
 
 		$scope.listGeneratedCodes();
-		setTimeout(setupScrollbars, 1000);
-
+		//setTimeout(setupScrollbars, 2000);
+		
+		$('#scrollbar2').oneFingerScroll();
 
 		$scope.parseDate = function(jsonDate) {
 			console.log("date " + jsonDate + " parsed date " + new Date(Date.parse(jsonDate)));
@@ -722,7 +735,6 @@ module.controller('numericCodeController', function($scope, $http, $location, $t
 			$scope.listGeneratedCodes();
 		};
 
-		
 	} else {
 		$location.url("/signin");
 	}
@@ -782,6 +794,23 @@ function pullDownAction() {
 	}, 2000);
 	// <-- Simulate network congestion, remove setTimeout from production!
 }
+
+jQuery.fn.oneFingerScroll = function() {
+	//alert("in scroll");
+	var scrollStartPos = 0;
+	$(this).bind('touchstart', function(event) {
+		// jQuery clones events, but only with a limited number of properties for perf reasons. Need the original event to get 'touches'
+		var e = event.originalEvent;
+		scrollStartPos = $(this).scrollTop() + e.touches[0].pageY;
+		e.preventDefault();
+	});
+	$(this).bind('touchmove', function(event) {
+		var e = event.originalEvent;
+		$(this).scrollTop(scrollStartPos - e.touches[0].pageY);
+		e.preventDefault();
+	});
+	return this;
+};
 
 function pullUpAction() {
 	setTimeout(function() {// <-- Simulate network congestion, remove setTimeout from production!
