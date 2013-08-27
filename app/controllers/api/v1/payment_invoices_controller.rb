@@ -14,7 +14,7 @@ class Api::V1::PaymentInvoicesController < ApplicationController
     if !set_customer
       return #Already rendered errors json
     end
-    @payment_invoices = @customer.payment_invoices.where(receipt_date: start_date..end_date)
+    @payment_invoices = @customer.payment_invoices.where(receipt_date: start_time..end_time)
     render json: @payment_invoices
   end
 

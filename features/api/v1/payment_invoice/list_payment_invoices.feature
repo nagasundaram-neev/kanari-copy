@@ -20,7 +20,7 @@ Feature: List Payment Invcoices
       When I authenticate as the user "auth_token_123" with the password "random string"
       And I send a GET request to "/api/payment_invoices" with the following:
       """
-      start_date=2013-01-22&end_date=2013-01-24
+	  start_time=2013-01-22 00:00:00&end_time=2013-01-24 00:00:00
       """
       Then the response status should be "200"
       And the JSON response should be:
@@ -121,7 +121,7 @@ Feature: List Payment Invcoices
       When I authenticate as the user "auth_token_123" with the password "random string"
       And I send a GET request to "/api/payment_invoices" with the following:
       """
-      start_date=2013-01-22&end_date=2013-01-24
+	  start_time=2013-01-22 00:00:00&end_time=2013-01-24 00:00:00
       """
       Then the response status should be "200"
       And the JSON response should be:
@@ -140,7 +140,7 @@ Feature: List Payment Invcoices
       When I authenticate as the user "auth_token_123" with the password "random string"
       And I send a GET request to "/api/payment_invoices" with the following:
       """
-      start_date=2013-01-22&end_date=2013-01-24
+	  start_time=2013-01-22 00:00:00&end_time=2013-01-24 00:00:00
       """
       Then the response status should be "403"
       And the JSON response should be:
@@ -166,7 +166,7 @@ Feature: List Payment Invcoices
       When I authenticate as the user "auth_token_1234" with the password "random string"
       And I send a GET request to "/api/payment_invoices" with the following:
       """
-      start_date=22-01-2013&end_date=24-01-2013
+	  start_time=2013-01-22 00:00:00&end_time=2013-01-24 00:00:00
       """
       Then the response status should be "401"
       And the JSON response should be:
