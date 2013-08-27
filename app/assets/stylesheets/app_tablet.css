@@ -4,6 +4,10 @@
 	src: url('segoeuil_0.ttf'); /* IE9 */
 }
 @font-face {
+	font-family: segoeuilbold;
+	src: url('Segoe UI Semibold.ttf'); /* IE9 */
+}
+@font-face {
 	font-family: number;
 	src: url('open-sans.light.ttf');
 }
@@ -298,7 +302,7 @@ input.ui-input-text, textarea.ui-input-text {
    overflow-x: hidden; /* hide scrollbar on x-axis */
  }
 
-#scroller{
+#scroller, #redemeDiv{
 	transform: none !important;
 	-webkit-transform: none !important;
 	-moz-transform: none !important;
@@ -769,6 +773,39 @@ input.ui-input-text, textarea.ui-input-text {
 .dateTimeList .colBorderRight {
 	border-right: 1px solid #ccc;
 }
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) {
+/* Styles */
+#scrollbar2{
+	height:170px;
+}
+#scrollbar1{
+	height:470px;
+}
+#scrollbar3{
+	height:470px;
+}
+}
+
+/* iPads (portrait) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) {
+/* Styles */
+#scrollbar2{
+	height:480px;
+}
+#scrollbar1{
+	height:720px;
+}
+#scrollbar3{
+	height:730px;
+}
+}
 /* Numeric Code CSS ends here	*/
 
 /*Home Page CSS starts here*/
@@ -808,7 +845,7 @@ input.ui-input-text, textarea.ui-input-text {
     border-radius: 3px 3px 3px 3px;
     color: #555555;
     display: block;
-    font-size: 120%;
+    font-size:18px;
     padding: 2% 2% 3%;
 width: 100%;
 }
@@ -880,19 +917,17 @@ width: 100%;
 .redemptionsListRow {
 	border-top: 1px solid #CCC;
 	/*padding: 2% 1%;*/
-	padding: 2% 1% 2% 3%;
+	padding: 2% 0;
 }
 /*.redeemptions .redemptionsListRow {
 	border-bottom: 1px solid #CCC;
 }*/
 .redemptHdr{
 	font-weight:bold;
-	color:#664766;
-	font-family: myriadpro;
+	 color: #664765;
+    font-family: segoeuilbold;
+    font-size: 18px;
 	background: none repeat scroll 0 0 #EAEAEA;
-	font-size: 110%;
-	padding-left:3%;
-	/*border-bottom: 1px solid #A4A4A4;*/
 	border-top: 1px solid #A4A4A4;
 }
 .closeBtn{
@@ -903,14 +938,16 @@ width: 100%;
 .redeemptions .redemptHdr{
 	background: none repeat scroll 0 0 #EAEAEA;
 	border-bottom:none;
+	padding-left: 3%;
 }
 .redemptHdr .col, .redemptHdr .col3 {
-	width: 20%;
-	text-align:left;
+	width: 20%;	
 	float: left;
 }
 .redemptHdr .col{
 	width: 28%;
+	 text-align: left;
+	 padding-left: 5%;
 }
 /*.redeemptions .redemptHdr .col3{
 	float: left;
@@ -922,56 +959,66 @@ width: 100%;
 }
 .redeemptions .redemptHdr .col5, .redemptRow .col1{
 	width : 26% !important;
+	 text-align: left;
+	 padding-left: 0 !important;
 }
 
+.redemptRow .col1{
+	width : 26% !important;
+}
 .redeemptions .redemptHdr .col, .redemptRow .col2{
 	width : 25% !important;
+	text-align: left;
+	padding-left: 0 !important;
 }
 
 .redeemptions .redemptHdr .col6, .redemptRow .col7{
-	width : 11% !important; 
+	width : 11.5% !important; 
+	 text-align: left;
 }
 
 .redemptHdr .col3{
-	text-align:left;
+	float: left;
 }
 
 .redemptHdr .col6{
 	width: 22%;
-	text-align:left;
 	float: left;
 }
 .redemptHdr .col5{
-	width: 28%;
-	text-align:left;
+	width: 25%;
 	float: left;
 }
-.redemptionsListRow .col1, .redemptionsListRow .col2, .redemptionsListRow .col3, .redemptionsListRow .col4 {
-	float: left;
+.redemptionsListRow .col1, .redemptionsListRow .col2,.redemptionsListRow .col7, .redemptionsListRow .col4 {
+	color: #2D2D2D;
+    float: left;
+    font-family: myFirstFont;
+    font-size: 18px;
+    text-align: center !important;
 	/*font-size: 1.2em;*/
 }
 .redemptionsListRow .col1, .redemptionsListRow .col4  {
 	width: 20%;
-	text-align:left;
 	text-transform: capitalize;
 }
 .redemptionsListRow .col1{
 	width: 28%;
+	 text-align: left !important;
+	 padding-left: 5%;
 }
 .redemptionsListRow .col4 {
-	text-align:left;
 }
 .redemptionsListRow .col2 {
-	width: 28%;
+	width: 25%;
 	text-transform:capitalize;
-	text-align:left;
+	 text-align: left !important;
 }
 
 .redemptionsListRow .col7 {
 	width: 22%;
-	text-align:left;
-	float:left;
+	text-align: left !important;
 }
+.redemptionsListRow .textAlign{text-align: center !important}
 /*.redemptionsListRow .col3 {
 	width: 25%;
 }
