@@ -279,9 +279,9 @@ module.controller('homePageController', function($scope, $http, $location, $time
 		var overlayDiv = $("#overlaySuccess");
 		$scope.active1 = true;
 		$scope.feedbackList = [];
-		
-		
+
 		Date.prototype.yyyymmdd = function() {
+
 			var yyyy = this.getFullYear().toString();
 			var mm = (this.getMonth() + 1).toString();
 			// getMonth() is zero-based
@@ -294,10 +294,21 @@ module.controller('homePageController', function($scope, $http, $location, $time
 			//alert(new Date());
 			//$.mobile.loading('show');
 			var dt = new Date();
-			console.log("date "+dt.yyyymmdd()+" 5:00:00");
+			var startdt = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), 5, 0, 0)
+
+			var timeZone = String(String(dt).split("(")[1]).split(")")[0];
+
+			//var now = new Date();
+			//var nowUtc = new Date( now.getTime() + (now.getTimezoneOffset() * 60000));
+			//var strtDt = new Date();
+			console.log("start date " + startdt);
+			if (!$scope.$$phase) {
+				//$digest or $apply
+			}
+
 			var param = {
 				"auth_token" : getCookie('authToken'),
-				"start_time" : dt.yyyymmdd()+" 5:00:00",
+				"start_time" : startdt,
 				"password" : "X"
 			}
 
@@ -359,11 +370,29 @@ module.controller('insightsController', function($scope, $http, $location, $time
 	if (getCookie('authToken')) {
 		$scope.active2 = true;
 		flag = 1;
+		
+		Date.prototype.yyyymmdd = function() {
+
+			var yyyy = this.getFullYear().toString();
+			var mm = (this.getMonth() + 1).toString();
+			// getMonth() is zero-based
+			var dd = this.getDate().toString();
+
+			return yyyy + '-' + (mm[1] ? mm : "0" + mm[0]) + '-' + (dd[1] ? dd : "0" + dd[0]);
+		};
+
 
 		$scope.feedbackMetrics = function() {
+
+			var dt = new Date();
+			var startdt = dt.yyyymmdd(); 
+			
+			console.log("date "+startdt);
+			
 			var param = {
-				"auth_token" : getCookie('authToken'),
-				"password" : "X"
+			"auth_token" : getCookie('authToken'),
+			"date" : startdt,
+			"password" : "X"
 			}
 			$http({
 				method : 'get',
@@ -502,10 +531,10 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 		// var flagP = 0;
 		// $scope.popupHeight = $(window).height() - 150;
 		// $(window).bind('orientationchange', 'load', function(event) {
-			// $scope.popupHeight = $(window).height() - 150;
-			// if(flagP == 1){
-				// $scope.showRedemptions();
-			// }
+		// $scope.popupHeight = $(window).height() - 150;
+		// if(flagP == 1){
+		// $scope.showRedemptions();
+		// }
 		// });
 		$scope.showRedemptions = function() {
 			//window.history.back();
@@ -714,7 +743,7 @@ module.controller('numericCodeController', function($scope, $http, $location, $t
 
 		$scope.listGeneratedCodes();
 		//setTimeout(setupScrollbars, 2000);
-		
+
 		$('#scrollbar2').oneFingerScroll();
 
 		$scope.parseDate = function(jsonDate) {
