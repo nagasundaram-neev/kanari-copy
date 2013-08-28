@@ -230,7 +230,7 @@ module.controller('forgotPasswordController', function($scope, $http, $location)
 	$scope.cancel = function() {
 		$location.url("/login");
 	};
-		flagPage = 0;
+	flagPage = 0;
 	$scope.home = function() {
 		$location.url("/index");
 	};
@@ -462,6 +462,7 @@ module.controller('signUpController', function($scope, $http, $location) {
 					"first_name" : $scope.firstName,
 					"last_name" : $scope.lastName,
 					"email" : $scope.email,
+					"gender" : "male",
 					"password" : $scope.password,
 					"password_confirmation" : $scope.confPassword
 				}
@@ -537,7 +538,7 @@ module.controller('changePasswordController', function($scope, $http, $location)
 	$scope.back = function() {
 		$location.url("/settings");
 	};
-flagPage = 0;
+	flagPage = 0;
 	$scope.changePassword = function() {
 		if (!$scope.newPassword || !$scope.confirmPassword) {
 			$scope.error = "Password fields can't be blank";
@@ -657,6 +658,9 @@ module.controller('settingsController', function($scope, $http, $location) {
 		$scope.getProfile();
 
 		$scope.saveProfile = function() {
+			if($scope.gender){
+				console.log("in gendr "+$scope.gender);
+			}
 			if (!$scope.firstName || !$scope.lastName) {
 				$scope.error = "Please provide first name and last name";
 				$scope.errorMsg = true;
@@ -731,7 +735,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 var pointsEarned = 0;
 
 module.controller('feedbackController', function($scope, $http, $location) {
-flagPage = 0;
+	flagPage = 0;
 	$scope.digit1 = "";
 	$scope.digit2 = "";
 	$scope.digit3 = "";
@@ -809,7 +813,7 @@ flagPage = 0;
 module.controller('feedback_step2Controller', function($scope, $http, $location) {
 
 	//if (getCookie("feedbackId")) {
-		flagPage = 0;
+	flagPage = 0;
 	$scope.nextFlag = 0;
 	$scope.prevFlag = 0;
 	$scope.like = true;
@@ -1117,7 +1121,7 @@ var tweetMessage;
 module.controller('feedbackSubmitController', function($scope, $http, $routeParams, $location) {
 
 	if (getCookie('authToken')) {
-	flagPage = 0;
+		flagPage = 0;
 		$("#fbShareSuccMsg").hide();
 		$("#tweetShareSuccMsg").hide();
 		$("#gPlusShareSuccMsg").hide();
@@ -1178,13 +1182,9 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 });
 
 module.controller('restaurantListController', function($scope, $http, $location) {
-
 	if (getCookie('authToken')) {
-		// $("#listRestaurant").niceScroll({cursorcolor:"#00F"});
 		$scope.outlets = [];
 		flagPage = 1;
-
-		//	$("#restaurantList .footerDiv").css
 
 		$scope.home = function() {
 			$location.url("/home");
@@ -1225,12 +1225,10 @@ module.controller('restaurantListController', function($scope, $http, $location)
 				}
 			});
 
-			//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
 		};
 		$scope.getRestaurantList();
 
 		$scope.redeemPoint = function(outletId) {
-			//console.log(outletId);
 			$location.url("/confirmRedeem?outletId=" + outletId);
 		};
 
@@ -1314,7 +1312,7 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 module.controller('redeemPointsController', function($scope, $http, $location, $routeParams) {
 
 	if (getCookie('authToken')) {
-flagPage = 0;
+		flagPage = 0;
 		$scope.successMsg = false;
 		$scope.erromsg = false;
 
@@ -1446,7 +1444,7 @@ module.controller('transactionHistoryController', function($scope, $http, $locat
 module.controller('locationMapController', function($scope, $http, $location, $routeParams) {
 
 	$.mobile.loading('show');
-	flagPage = 0;
+
 	// $scope.MapCtrl = function() {
 	// console.log("lattitude " + $routeParams.lat + " longitude " + $routeParams.long);
 	// }
@@ -1515,15 +1513,22 @@ $(document).on("pageshow", ".ui-page", function() {
 	});
 
 	//page.style.height = window.innerHeight + 'px';
-//alert("full screen "+window.isInFullScreen);	
+	//alert("full screen "+window.isInFullScreen);
 	// if (window.innerHeight == screen.height) {
-		// // browser is fullscreen
-		// alert("full screen ");	
+	// // browser is fullscreen
+	// alert("full screen ");
 	// }
+	
 	var $page = $(this), vSpace = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() + $page.children('.ui-content').height();
+	//alert($(window).innerHeight()+"vspace "+$(window).outerHeight());
 	//console.log($page.children('.ui-content'));
 	//alert(vSpace);
 	//alert($(window).height());
+	if($(window).height() > 500 && $(window).height() < 570){
+		//alert("in ");
+		$("#divexample1").css('height','420px');
+	}	
+	//$("#restaurantList .ui-content").css('min-height','200px !important');
 	var url_buffer = 50;
 	if (vSpace < $(window).height()) {
 		//alert($(window).height());
@@ -1537,6 +1542,7 @@ $(document).on("pageshow", ".ui-page", function() {
 		//	var vDiff = $(window).height() - $page.children('.ui-header').outerHeight() - $page.children('.ui-footer').outerHeight();
 		//minus thirty for margin
 		//}
+		//alert("in ");
 
 		$page.height($(window).height());
 		//alert("setting height")
@@ -1546,9 +1552,9 @@ $(document).on("pageshow", ".ui-page", function() {
 	if ($page.height() > $(window).height()) {
 		console.log("page " + $page);
 		$page.children('.ui-footer').css('position', 'relative');
-		if(flagPage == 0){
+		if (flagPage == 0) {
 			$page.children('.ui-footer').css('margin-top', '14px');
-		}else{
+		} else {
 			$page.children('.ui-footer').css('margin-top', '0');
 		}
 

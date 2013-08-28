@@ -103,7 +103,10 @@
 .dobDiv input::-moz-placeholder, .dobDiv textarea::-moz-placeholder {
 	background: #664765;
 }
-
+#divexample1{
+	height:448px;
+	overflow-y: auto;
+}
 .dot {
 	float: left;
 	padding: 1.5% 0;
@@ -113,6 +116,7 @@
 .ui-content {
 	/*padding: 0 1.5%;*/
 	padding: 0;
+	overflow: hidden;
 }
 #landPage .ui-content {
 	overflow: visible;
@@ -1715,10 +1719,12 @@ img, object {
 	overflow: hidden;
 }
 
-#restaurantList .prev{
+#restaurantList .footDummyDiv{
 	width:99.9%;
 }
-
+#restaurantList{
+	height:594px !important;
+}
 .forgotPass {
 }
 .rememberMe .ui-checkbox .ui-btn-icon-left .ui-btn-inner, .ui-radio .ui-btn-icon-left .ui-btn-inner {

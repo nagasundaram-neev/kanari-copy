@@ -1,14 +1,8 @@
-<div data-role="page" data-theme="b" id="restaurantList" ng-controller="restaurantListController">
-	<style>
-		#divexample1 {
-			height: 450px;
-			overflow-y: auto;
-		}
-	</style>
+<div data-role="page"  id="restaurantListfgfghg" ng-controller="restaurantListController">
 	<div data-role="content">
 		<div class="username">
 			<div class="home" ng-click="home()"></div>
-			<div class="signUp">
+			<div class="signUp" style="margin:3% 14% 0 0;">
 				RESTAURANT LISTING
 			</div>
 			<div class="clr"></div>
@@ -29,6 +23,7 @@
 			</div>
 			<div class="clr"></div>
 		</div>
+			</div>
 		<div id="divexample1" >
 			<div ng-repeat="outlet in outlets | filter:search | orderBy:'name'" class="nameDiv">
 				<div class="parentDivName" ng-click="showRestaurant(outlet.id)">
@@ -55,14 +50,4 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="footerDiv" data-role="footer" >
-		<div class="prev" ng-click="previous()" >
-			<%= image_tag 'y_arrow_left.png' %>
-			<div class="prevTxt" >
-				BACK
-			</div>
-		</div>
-	</div>
 </div>
-
