@@ -1,6 +1,6 @@
 class OutletSerializer < ActiveModel::Serializer
   attributes :id, :name, :disabled, :address, :latitude, :longitude, :website_url, :email, :phone_number, :open_hours, :has_delivery, :serves_alcohol,
-  :has_outdoor_seating, :redeemable_points, :points_pending_redemption, :customer_name, :customer_id
+  :has_outdoor_seating, :redeemable_points, :points_pending_redemption, :customer_name, :customer_id, :created_at
 
   has_one :manager, serializer: ManagerSerializer
   has_many :cuisine_types
@@ -16,6 +16,11 @@ class OutletSerializer < ActiveModel::Serializer
 
   def customer_name
    object.customer.name
+  end
+
+  def include_created_at?
+    ability = Ability.new(current_user)
+    ability.can? :read, Customer
   end
 
   def include_customer_name?

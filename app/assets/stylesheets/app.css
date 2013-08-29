@@ -1349,7 +1349,7 @@ input {
 	margin: 5px;
 }
 #dp3 span, #dp2 span, #receipt_date span {
-	float: right;
+	margin-left: -3px;
 }
 #dp3 .icon-th, #dp2 .icon-th, #receipt_date .icon-th {
 	background-position: -2px -2px;
@@ -1372,7 +1372,7 @@ input {
 	margin: 8px 0;
 }
 #payDate1 span, #payDate2 span {
-	float: right;
+	margin-left: -3px;
 }
 #payDate1 .icon-th, #payDate2 .icon-th {
 	background-position: -2px -2px;

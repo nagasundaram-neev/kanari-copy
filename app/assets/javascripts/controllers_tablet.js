@@ -337,7 +337,7 @@ module.controller('homePageController', function($scope, $http, $location, $time
 				});
 			});
 
-			feedbackTimeout = $timeout($scope.listFeedbacks, 120000);
+			//feedbackTimeout = $timeout($scope.listFeedbacks, 120000);
 
 		};
 
