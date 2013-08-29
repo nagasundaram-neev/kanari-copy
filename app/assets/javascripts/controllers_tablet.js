@@ -385,7 +385,8 @@ module.controller('insightsController', function($scope, $http, $location, $time
 		$scope.feedbackMetrics = function() {
 
 			var dt = new Date();
-			var startdt = dt.yyyymmdd(); 
+			console.log(dt);
+			var startdt = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), 5, 0, 0)
 			
 			console.log("date "+startdt);
 			
