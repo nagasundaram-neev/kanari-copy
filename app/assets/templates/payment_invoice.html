@@ -18,7 +18,7 @@
 							<lable >
 								Company Name<span class="star">*</span>
 							</lable>
-							<input type="text" name="currency" class="biginput" id="autocomplete">
+							<input type="text" placeholder="Company Name" name="currency" class="biginput" id="autocomplete">
 							<div class="input-help">
 								<h4>Invalid Invoice Id</h4>
 							</div>
@@ -87,8 +87,10 @@
 							<lable >
 								Invoice PDF<span class="star">*</span>
 							</lable>
-							<input type="text" placeholder="Invoice PDF" name="invoice_pdf" ng-model="invoice_pdf"  required />
-
+							<input type="url" placeholder="Invoice PDF URL" name="invoice_pdf" ng-model="invoice_pdf"  required />
+							<span class="invoicePdfUrl">
+								e.g. http://kanari.neevtech.com
+							</span>
 						</div>
 					</div>
 					<div style="margin: 10px 0 0 145px;" class="control-group">

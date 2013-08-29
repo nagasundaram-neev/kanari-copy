@@ -323,7 +323,7 @@ a.addRestaurant:hover {
 .outlet_lenght {
 	border-bottom: 1px solid #CCCCCC;
 	padding: 5px 0 !important;
-	 font-size: 15px;
+	font-size: 15px;
 }
 .outlets_list {
 	margin: 5px 0
@@ -1035,7 +1035,7 @@ input {
 	display: block;
 	font-family: 'Roboto', sans-serif !important;
 	font-size: 70px !important;
-	 margin-top: 20px;
+	margin-top: 20px;
 }
 .promo_code_def {
 	border-left: 1px solid #D6D6D6;
@@ -1088,10 +1088,10 @@ input {
 }
 .daily_change_span {
 	float: right !important;
-	 margin-left: 1px !important;
-    padding-top: 5%;
-    text-align: left;
-    width: 33%;
+	margin-left: 1px !important;
+	padding-top: 5%;
+	text-align: left;
+	width: 33%;
 }
 .daily_change_span img {
 	padding: 6% 0;
@@ -1170,7 +1170,7 @@ input {
 .rate_plus {
 	background: none repeat scroll 0 0 #FEC03B;
 	float: left;
-	 margin-top: 20px;
+	margin-top: 20px;
 }
 .net_rate_plus {
 	background: none repeat scroll 0 0 #FEC03B;
@@ -1277,7 +1277,7 @@ input {
 	width: 62px;
 	margin: 0;
 }
-#dashboardSnapshot .promo_code{
+#dashboardSnapshot .promo_code {
 	width: 15%;
 }
 .insight_graph2 .promo_code_desc {
@@ -1433,9 +1433,32 @@ input {
 	color: #5A4166;
 }
 
+/**Payment Invoice **/
+.invoicePdfUrl {
+	color: #999999;
+	float: left;
+	padding-left: 5px;
+	position: absolute;
+	width: 203px;
+}
 /** Auto Complete**/
-	
-.autocomplete-suggestions { border: 1px solid #999; background: #fff; cursor: default; overflow: auto; }
-.autocomplete-suggestion { padding: 5px; font-size: 1em; white-space: nowrap; overflow: hidden; }
-.autocomplete-selected { background: #f0f0f0; }
-.autocomplete-suggestions strong { font-weight: normal; color: #3399ff; }
+
+.autocomplete-suggestions {
+	border: 1px solid #999;
+	background: #fff;
+	cursor: default;
+	overflow: auto;
+}
+.autocomplete-suggestion {
+	padding: 5px;
+	font-size: 1em;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.autocomplete-selected {
+	background: #f0f0f0;
+}
+.autocomplete-suggestions strong {
+	font-weight: normal;
+	color: #3399ff;
+}
