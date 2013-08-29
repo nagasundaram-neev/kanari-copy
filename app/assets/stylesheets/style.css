@@ -2103,3 +2103,13 @@ img, object {
 	font-size: 120%;
 }
 
+
+/* Retina changes */
+
+/*.feedback img{
+	width: 50px;
+}
+
+.redeems img{
+	width: 65px;
+}*/
