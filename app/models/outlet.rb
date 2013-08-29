@@ -67,15 +67,13 @@ class Outlet < ActiveRecord::Base
   end
 
   def insights(params={})
-    today     = normalize_date(params[:date]) || Time.zone.now.to_date
-    yesterday = today - 1.day
+    today     = normalize_date(params[:date]) || Time.zone.now.beginning_of_day
     tomorrow  = today + 1.day
-
+    yesterday = today - 1.day
     feedbacks_till_today     = self.feedbacks.completed.where("updated_at < ?", tomorrow).limit(NPS_LIMIT)
     feedbacks_till_yesterday = self.feedbacks.completed.where("updated_at < ?", today).limit(NPS_LIMIT)
-    feedbacks_today          = feedbacks_till_today.select{|f| (f.updated_at.to_date == today)}
-    feedbacks_yesterday      = feedbacks_till_today.select{|f| (f.updated_at.to_date == yesterday)}
-
+    feedbacks_today          = feedbacks_till_today.select{|f| (f.updated_at >= today && f.updated_at < tomorrow)}
+    feedbacks_yesterday      = feedbacks_till_today.select{|f| (f.updated_at >= yesterday && f.updated_at < today)}
     feedback_metrics = {
       :food_quality               =>  {:like => 0, :dislike => 0, :neutral => 0, :change => 0},
       :speed_of_service           =>  {:like => 0, :dislike => 0, :neutral => 0, :change => 0},

@@ -100,7 +100,6 @@ Given(/^the following feedbacks exist for "(.*?)"$/) do |date, hashes|
   Feedback.where(updated_at: date).count.should == feedback_hashes.size
 end
 
-
 Given(/^the following feedbacks exist for today$/) do |hashes|
   feedback_hashes = hashes.hashes
   today = Time.zone.now.beginning_of_day
