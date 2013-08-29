@@ -279,7 +279,8 @@ module.controller('homePageController', function($scope, $http, $location, $time
 		var overlayDiv = $("#overlaySuccess");
 		$scope.active1 = true;
 		$scope.feedbackList = [];
-
+		//$('#overlaySuccess').show();
+		//$('#overlaySuccess').append('<img id="theImg" src="/assets/ajax-loader.gif" />')
 		Date.prototype.yyyymmdd = function() {
 
 			var yyyy = this.getFullYear().toString();
@@ -319,12 +320,14 @@ module.controller('homePageController', function($scope, $http, $location, $time
 			}).success(function(data, status) {
 				console.log("User Role " + data + " status " + status);
 				$scope.feedbackList = data.feedbacks;
-				//$.mobile.loading('hide');
-				overlayDiv.css({
+				$("#overlaySuccess").hide();
+				$('#overlaySuccess img').hide();
+				$("#overlaySuccess").css({				
 					'z-index' : '0',
 					'background-color' : 'transparent'
 				});
 				console.log("in list feedbacks");
+				setTimeout(loaded, 2000);
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 				//$.mobile.loading('hide');
@@ -334,7 +337,7 @@ module.controller('homePageController', function($scope, $http, $location, $time
 				});
 			});
 
-			//feedbackTimeout = $timeout($scope.listFeedbacks,120000);
+			feedbackTimeout = $timeout($scope.listFeedbacks, 120000);
 
 		};
 
@@ -350,7 +353,7 @@ module.controller('homePageController', function($scope, $http, $location, $time
 		//document.addEventListener('DOMContentLoaded', function() {
 		//alert("in");
 		//	if(flag == 1){
-		setTimeout(loaded, 2000);
+
 		//}
 
 		//feedbackTimeout = $timeout($scope.listFeedbacks,120000);
@@ -370,7 +373,7 @@ module.controller('insightsController', function($scope, $http, $location, $time
 	if (getCookie('authToken')) {
 		$scope.active2 = true;
 		flag = 1;
-		
+
 		Date.prototype.yyyymmdd = function() {
 
 			var yyyy = this.getFullYear().toString();
@@ -381,19 +384,18 @@ module.controller('insightsController', function($scope, $http, $location, $time
 			return yyyy + '-' + (mm[1] ? mm : "0" + mm[0]) + '-' + (dd[1] ? dd : "0" + dd[0]);
 		};
 
-
 		$scope.feedbackMetrics = function() {
 
 			var dt = new Date();
 			console.log(dt);
 			var startdt = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), 5, 0, 0)
-			
-			console.log("date "+startdt);
-			
+
+			console.log("date " + startdt);
+
 			var param = {
-			"auth_token" : getCookie('authToken'),
-			"date" : startdt,
-			"password" : "X"
+				"auth_token" : getCookie('authToken'),
+				"date" : startdt,
+				"password" : "X"
 			}
 			$http({
 				method : 'get',
@@ -855,9 +857,9 @@ function loaded() {
 	//alert("in loaded");
 	myScroll = new iScroll('wrapper');
 	pullDownEl = document.getElementById('pullDown');
-	pullDownOffset = pullDownEl.offsetHeight;
-	pullUpEl = document.getElementById('pullUp');
-	pullUpOffset = pullUpEl.offsetHeight;
+	pullDownOffset = 5;
+	//pullUpEl = document.getElementById('pullUp');
+	//pullUpOffset = pullUpEl.offsetHeight;
 
 	myScroll = new iScroll('wrapper', {
 		//useTransition: true,
@@ -867,29 +869,37 @@ function loaded() {
 				pullDownEl.className = '';
 				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Loading...';
 				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Pull down to refresh...';
-			} else if (pullUpEl.className.match('loading')) {
-				pullUpEl.className = '';
-				pullUpEl.querySelector('.pullUpLabel').innerHTML = '';
 			}
+			// else if (pullUpEl.className.match('loading')) {
+			// pullUpEl.className = '';
+			// pullUpEl.querySelector('.pullUpLabel').innerHTML = '';
+			// }
 		},
 		onScrollMove : function() {
 			if (this.y > 5 && !pullDownEl.className.match('flip')) {
 				pullDownEl.className = 'flip';
 				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Release to refresh...';
+				$("#overlaySuccess").show();
+				$('#overlaySuccess img').show();
+				$("#overlaySuccess").css({
+					'z-index' : '10',
+					'background-color' : '#000'
+				});
 				this.minScrollY = 0;
 			} else if (this.y < 5 && pullDownEl.className.match('flip')) {
 				pullDownEl.className = '';
 				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Pull down to refresh...';
 				this.minScrollY = -pullDownOffset;
-			} else if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
-				pullUpEl.className = 'flip';
-				pullUpEl.querySelector('.pullUpLabel').innerHTML = '';
-				this.maxScrollY = this.maxScrollY;
-			} else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
-				pullUpEl.className = '';
-				pullUpEl.querySelector('.pullUpLabel').innerHTML = '';
-				this.maxScrollY = pullUpOffset;
 			}
+			// else if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+			// pullUpEl.className = 'flip';
+			// pullUpEl.querySelector('.pullUpLabel').innerHTML = '';
+			// this.maxScrollY = this.maxScrollY;
+			// } else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+			// pullUpEl.className = '';
+			// pullUpEl.querySelector('.pullUpLabel').innerHTML = '';
+			// this.maxScrollY = pullUpOffset;
+			// }
 		},
 		onScrollEnd : function() {
 			if (pullDownEl.className.match('flip')) {
@@ -897,12 +907,13 @@ function loaded() {
 				pullDownAction();
 				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Loading...';
 				// Execute custom function (ajax call?)
-			} else if (pullUpEl.className.match('flip')) {
-				pullUpEl.className = 'loading';
-				pullUpEl.querySelector('.pullUpLabel').innerHTML = '';
-				pullUpAction();
-				// Execute custom function (ajax call?)
 			}
+			// else if (pullUpEl.className.match('flip')) {
+			// pullUpEl.className = 'loading';
+			// pullUpEl.querySelector('.pullUpLabel').innerHTML = '';
+			// pullUpAction();
+			// // Execute custom function (ajax call?)
+			// }
 		}
 	});
 
