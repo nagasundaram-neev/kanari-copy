@@ -424,6 +424,7 @@ module.controller('createInvitation', function($rootScope, $scope, $http, $locat
 		$('.navBarCls ul li').removeClass('active');
 		$('#outlet').hide();
 		$('#account').hide();
+		$('#dasboardCustomer').hide();
 		$('#dasboard').addClass('active');
 
 		$scope.statement = false;
@@ -479,34 +480,105 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 		$('.navBarCls ul li').removeClass('active');
 		$('#outlet').hide();
 		$('#account').hide();
+		$('#dasboardCustomer').hide();
 		$('#dasboard').addClass('active');
 		$scope.paymentInvoiceSuccess = false;
 		$scope.paymentInvoiceFail = false;
-		$scope.payment_invoice = function() {
-			var invoiceId = $scope.kanari_invoice_id;
-			var receiptDate = $scope.receipt_date;
-			var amount = $scope.amount_paid;
-			var param = {
-				"payment_invoice" : {
-					"kanari_invoice_id" : invoiceId,
-					"receipt_date" : receiptDate,
-					"amount_paid" : amount
-				}
-			}
+		$scope.titles = [];
+		var currencies = [];
+		var custId;
 
+		$('#receipt_date').datepicker().on('changeDate', function(ev) {
+			var dt = new Date(ev.date.valueOf());
+			var month = dt.getMonth() + 1;
+			recipt_date = dt.getFullYear() + "-" + month + "-" + dt.getDate();
+			if ( typeof startDt != 'undefined' && endDt != 'undefined') {
+				console.log("hi in end date");
+				$(".outletDropDown").change(function() {
+				});
+			}
+		});
+
+		//Get Customer List
+		var param = {
+			"auth_token" : getCookie('authToken')
+		};
+		$http({
+			method : 'get',
+			url : 'api/customers',
+			params : param,
+		}).success(function(data, status) {
+			console.log("data in success " + data.lenght + " status " + status);
+			var arrayLengthOutlet = data.customers.length;
+			for (var i = 0, len = arrayLengthOutlet; i < len; i++) {
+				currencies.push({
+					"value" : data.customers[i].customer_admin.first_name,
+					"id" : data.customers[i].id
+				})
+			}
+			$('#autocomplete').autocomplete({
+				lookup : currencies,
+				onSelect : function(suggestion) {
+					custId = suggestion.id;
+					$scope.getOutletList(custId);
+				}
+			});
+		}).error(function(data, status) {
+			console.log("data in error" + data + " status " + status);
+		});
+
+		//Get Outlet List according to the customer
+		$scope.getOutletList = function(custId) {
+			console.log(custId);
+			var param = {
+				"customer_id" : custId,
+				"auth_token" : getCookie('authToken')
+			};
 			$http({
-				method : 'POST',
-				url : '/api/customers/' + invoiceId + '/payment_invoices',
-				data : param,
+				method : 'get',
+				url : 'api/outlets',
+				params : param,
 			}).success(function(data, status) {
-				console.log("data in success " + data + " status " + status);
-				$scope.paymentInvoiceSuccess = true;
+				console.log("data in success " + data.lenght + " status " + status);
+				$scope.outletsList = data.outlets;
 			}).error(function(data, status) {
 				console.log("data in error" + data + " status " + status);
-				$scope.paymentInvoiceFail = true;
 			});
+		}
 
-			$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
+		$scope.payment_invoice = function(paymentInvoice) {
+			if ($scope.paymentInvoice.$valid && $("#sDate").val()) {
+				$scope.dateEntered = false;
+				var param = {
+					"payment_invoice" : {
+						"kanari_invoice_id" : $scope.kanari_invoice_id,
+						"outlet_id" : $scope.formoutlet1,
+						"kanari_plan" : $scope.kanari_plan,
+						"receipt_date" : recipt_date,
+						"amount_paid" : $scope.amount_paid,
+						"invoice_url" : $scope.invoice_pdf
+					},
+					"auth_token" : getCookie('authToken')
+				}
+
+				$http({
+					method : 'POST',
+					url : '/api/customers/' + custId + '/payment_invoices',
+					data : param,
+				}).success(function(data, status) {
+					console.log("data in success " + data + " status " + status);
+					$scope.paymentInvoiceSuccess = true;
+				}).error(function(data, status) {
+					console.log("data in error" + data + " status " + status);
+					$scope.paymentInvoiceFail = true;
+				});
+
+				$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
+			}
+			else{
+				$scope.paymentInvoiceSuccess = false;
+				$scope.dateEntered = true;
+			}
 		};
 	} else {
 		$location.url("/login");
@@ -1585,10 +1657,10 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 				}).success(function(data, status) {
 					console.log("data in success " + data + " status " + status);
 					$scope.error = false;
-					if(acceptInvitationStep2 == true){
+					if (acceptInvitationStep2 == true) {
 						$location.url("/outlets");
-					}else{
-					$scope.success = true;
+					} else {
+						$scope.success = true;
 					}
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
@@ -2129,14 +2201,13 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 				}
 			});
 		});
-
+		$scope.paymentHistoryList = [];
 		$scope.listPaymentHistory = function() {
 			var outletId = $scope.outletOption;
 			if (startDt != "" && endDt != "") {
 				var param = {
 					"auth_token" : getCookie('authToken'),
 					"password" : 'X',
-					"outlet_id" : $scope.outletOption,
 					"start_time" : startDt,
 					"end_time" : endDt
 				};
@@ -2152,19 +2223,40 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 				params : param,
 			}).success(function(data, status) {
 				console.log("Data in success " + data + " status " + status);
+				$scope.paymentHistoryList = [];
 				$scope.paymentHistoryList = data.payment_invoices;
+				var arrayLength = data.payment_invoices.length;
+				for (var i = 0; i < arrayLength; i++) {
+					if (data.payment_invoices[i].outlet_id) {
+						$scope.getOutlet(data.payment_invoices[i].outlet_id, i)
+					}
+				}
+				//console.log($scope.outletList);
 			}).error(function(data, status) {
 				console.log("data in error " + data + " status " + status);
 			});
-
-			$("#payDate1 .add-on").click(function() {
-				//$('.datepicker').addClass("addLeft");
-			});
-
-			$("#payDate2 .add-on").click(function() {
-				//$('.datepicker').removeClass("addLeft");
-			});
 		};
+
+		$scope.getOutlet = function(outletId, payInNo) {
+
+			var param = {
+				"auth_token" : getCookie('authToken'),
+				"password" : 'X',
+			};
+
+			$http({
+				method : 'get',
+				url : '/api/outlets/' + outletId,
+				params : param,
+			}).success(function(data, status) {
+				console.log("Data in success " + data + " status " + status);
+				console.log(payInNo);
+				$scope.paymentHistoryList[payInNo].outlet_id = data.outlet.name;
+				console.log($scope.paymentHistoryList);
+			}).error(function(data, status) {
+				console.log("data in error " + data + " status " + status);
+			});
+		}
 
 		$scope.listPaymentHistory();
 	}
@@ -2494,7 +2586,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						custLegend1 = "Male";
 						custLegend2 = "Female";
 					} else if (idValue == "usersGraph") {
-						var foodLike = data.feedback_trends.detailed_statistics[dateV].customers.new;
+						var foodLike = data.feedback_trends.detailed_statistics[dateV].customers.
+						new         ;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].customers.returning;
 						custLegend1 = "New";
 						custLegend2 = "Returning";
@@ -2517,7 +2610,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					results1.push(foodLike);
 					results2.push(foodNeutral);
 					results3.push(foodDisLike);
-					;
 				}
 				if (metricsId == "custExp" || npsBreakdownV == "1") {
 					getCustExpGraph();
@@ -2929,7 +3021,7 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		$scope.feedbackMetrics = function() {
 			var param = {
 				"auth_token" : getCookie('authToken'),
-				"outlet_id" : $scope.outletOption,				
+				"outlet_id" : $scope.outletOption,
 				"password" : "X"
 			}
 
@@ -3070,12 +3162,12 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		};
 
 		$scope.listFeedbacks();
-		
+
 		$scope.selectOutletSnap = function() {
 			$scope.listFeedbacks();
 			$scope.feedbackMetrics();
 		}
-		
+
 		$scope.listOutletNames = function() {
 			var param = {
 				"auth_token" : getCookie('authToken'),

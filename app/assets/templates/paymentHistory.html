@@ -3,11 +3,11 @@
 		.input-help {
 			left: 225px;
 		}
-		.controls .successMsg{
+		.controls .successMsg {
 			margin-bottom: 0;
 		}
-		.viewAccPage lable{
-			 width: 144px;
+		.viewAccPage lable {
+			width: 144px;
 		}
 		/*#divexample1 {
 		 height: 100px;
@@ -38,18 +38,44 @@
 		<div class="clr"></div>
 		<div class="paymentHistoryTbl">
 			<div class="payHistoryHeader">
-				<div class="headCol headCol1">Kanari Invoice Number </div>
-				<div class="headCol headCol2">Reciept Date </div>
-				<div class="headCol headCol3">Item Description</div>
-				<div class="headCol headCol4">Amount Paid</div>
-				<div class="border_right_none headCol headCol5">Link to PDF</div>
+				<div class="headCol headCol1">
+					Kanari Invoice Number
+				</div>
+				<div class="headCol headCol2">
+					Reciept Date
+				</div>
+				<div class="headCol headCol3">
+					Item Description
+				</div>
+				<div class="headCol headCol6">
+					Kanari Plan
+				</div>
+				<div class="headCol headCol4">
+					Amount Paid
+				</div>
+				<div class="border_right_none headCol headCol5">
+					Link to PDF
+				</div>
 			</div>
-			<div class="paymentHistoryData" ng-repeat="paymentHistory in paymentHistoryList">
-				<div class="dataCol headCol1">{{paymentHistory.kanari_invoice_id}}</div>
-				<div class="dataCol headCol2">{{paymentHistory.receipt_date | date:'dd/MM/yyyy'}}</div>
-				<div class="dataCol headCol3">Al Bustan Rotana Hotel, Dubai</div>
-				<div class="dataCol headCol4"><span>{{paymentHistory.amount_paid}}&nbsp;</span>AED</div>
-				<div class="border_right_none dataCol headCol5"><img src="assets/icon_pdf.png" /></div>
+			<div class="paymentHistoryData" ng-repeat="paymentHistory in paymentHistoryList" >
+				<div class="dataCol headCol1">
+					{{paymentHistory.kanari_invoice_id}}
+				</div>
+				<div class="dataCol headCol2">
+					{{paymentHistory.receipt_date | date:'dd/MM/yyyy'}}
+				</div>
+				<div class="dataCol headCol3">
+					{{paymentHistory.outlet_id}}
+				</div>
+				<div class="dataCol headCol6">
+					{{paymentHistory.kanari_plan}}
+				</div>
+				<div class="dataCol headCol4">
+					<span>{{paymentHistory.amount_paid}}&nbsp;</span>AED
+				</div>
+				<div class="border_right_none dataCol headCol5">
+					<a target="_blank" href="{{paymentHistory.invoice_url}}"><img src="assets/icon_pdf.png" /></a>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -1348,10 +1348,10 @@ input {
 	float: right;
 	margin: 5px;
 }
-#dp3 span, #dp2 span {
+#dp3 span, #dp2 span, #receipt_date span {
 	float: right;
 }
-#dp3 .icon-th, #dp2 .icon-th {
+#dp3 .icon-th, #dp2 .icon-th, #receipt_date .icon-th {
 	background-position: -2px -2px;
 }
 .addLeft {
@@ -1411,21 +1411,31 @@ input {
 	border-right: 1px solid #CCCCCC;
 }
 .headCol1 {
-	width: 200px
+	width: 155px
 }
 .headCol2 {
-	width: 150px
+	width: 95px
 }
 .headCol3 {
 	width: 360px
 }
 .headCol4 {
-	width: 180px
+	width: 95px
 }
 .headCol5 {
 	width: 78px;
 	text-align: center;
 }
+.headCol6 {
+	width: 155px
+}
 .paymentHistoryData span {
 	color: #5A4166;
 }
+
+/** Auto Complete**/
+	
+.autocomplete-suggestions { border: 1px solid #999; background: #fff; cursor: default; overflow: auto; }
+.autocomplete-suggestion { padding: 5px; font-size: 1em; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #f0f0f0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399ff; }
