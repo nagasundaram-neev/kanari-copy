@@ -51,9 +51,8 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			<div class="shareTxt">
 				Share your experience
 			</div>
-			<div id='parent' style='width: 100%;text-align:center;'>
-				<div id='child' style='overflow: hidden;width: 198px;margin: 0 auto;'>
-					<div ng-click="Facebook.share()" class="backColorYellow" style="float: left"><img src="/assets/ic_fb_purple.png" />
+			<div id="parent" style="overflow: hidden;width: 195px;margin: 0 auto;">
+				<div ng-click="Facebook.share()" class="backColorYellow" style="float: left"><img src="/assets/ic_fb_purple.png" />
 					</div>
 					<a id="twitter" data-url="false" href="javascript:void(0);" ng-click="twitter()">
 					<div class="backColorYellow" style="float: left"><img src="/assets/ic_twitter_purple.png" />
@@ -70,7 +69,6 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 							s.parentNode.insertBefore(po, s);
 						})();
 					</script>
-				</div>
 			</div>
 			<p id="fbShareSuccMsg" class="succMsg">
 				Post to Facebook successfull!
