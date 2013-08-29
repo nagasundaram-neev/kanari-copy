@@ -59,9 +59,9 @@ class User < ActiveRecord::Base
     case role
     when 'kanari_admin'
       if(options[:customer_id]).present?
-        Outlet.unscoped.where(customer_id: options[:customer_id])
+        Outlet.unscoped.where(customer_id: options[:customer_id]).includes(:customer)
       else
-        Outlet.unscoped
+        Outlet.unscoped.includes(:customer)
       end
     when 'customer_admin'
       customer.nil? ? [] : ( Outlet.unscoped.where(customer: customer) )
