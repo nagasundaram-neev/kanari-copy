@@ -231,7 +231,8 @@ class Outlet < ActiveRecord::Base
       usage =  { :feedbacks_count => 0, :redemptions_count => 0, :discounts_claimed => 0, :points_issued => 0, :rewards_pool => 0 }
       unless feedbacks.blank?
         usage[:feedbacks_count] = feedbacks.length
-        usage[:points_issued]   = feedbacks.inject(0){|sum, f| sum + f.points.to_i} 
+        feedbacks_with_user = feedbacks.select{|f| !([0, nil].include?f.user_id) }
+        usage[:points_issued] = feedbacks_with_user.inject(0){|sum, f| sum + f.points.to_i}
       end 
       unless redemptions.blank?
         usage[:redemptions_count] = redemptions.length
