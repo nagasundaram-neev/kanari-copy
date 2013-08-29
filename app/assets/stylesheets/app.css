@@ -1463,3 +1463,91 @@ input {
 	font-weight: normal;
 	color: #3399ff;
 }
+
+/* Admin Console CSS */
+.adminConsoleHdr {
+	background-color: #dcdbda;
+    border: 1px solid #dcdbda;
+    font-size: 14px;
+    padding: 10px;
+    width: 100%;
+}
+
+.adminConsoleColumns{
+	border: 1px solid #dcdbda;
+	 padding: 10px;
+	 font-size: 14px;
+	 width: 100%;
+}
+.adminConsoleColumns .col{
+	float:left;
+	text-align:left;
+	 width: 120px;
+}
+
+.adminConsoleColumns .col1{
+	float:left;
+	text-align:left;
+	 width: 175px;
+}
+
+.outletTble .colSave{
+	float: left;
+    text-align: right;
+    width: 67px;
+}
+.colSave span{
+	background-color: #F5BA44;
+    font-size: 16px;
+    padding: 2px 8px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-ms-border-radius: 3px;
+}
+
+.adminConsoleColumns .col3{
+	float: left;
+    text-align: left;
+    width: 45px;
+}
+
+.adminConsoleColumns .col3{
+	float:left;
+	text-align:left;
+	width: 0px;
+}
+
+.adminConsoleColumns .col2{
+	float:left;
+	text-align:left;
+	width: 185px;
+}
+
+.outletTble .colHdr {
+	float: left;
+     width: 120px;
+}
+
+.outletTble .colHdrDisabled{
+	width:60px;
+	text-align: center;
+}
+
+.outletTble .colHdr1 {
+	float: left;
+    width: 171px;
+}
+
+.outletTble .colHdr2 {
+	float: left;
+    width: 185px;
+}
+
+.outletTble input{
+	float: none;
+}
+
+.outletTble{
+	color:#444343;
+}
