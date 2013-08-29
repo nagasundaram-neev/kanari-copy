@@ -30,6 +30,8 @@ Feature: Show Outlet
       {
         "outlet" : {
         "name": "Subway - Bangalore",
+        "customer_id": 100,
+        "customer_name": "Subway",
         "address": null,
         "disabled": false,
         "email": null,

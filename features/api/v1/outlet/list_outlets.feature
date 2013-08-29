@@ -50,6 +50,8 @@ Feature: List Outlets
            {
             "id" : 1,
             "name": "Subway - Bangalore",
+            "customer_id": 100,
+            "customer_name": "Subway",
             "address": null,
             "disabled": false,
             "email": null,
@@ -75,6 +77,8 @@ Feature: List Outlets
           {
             "id" : 2,
             "name": "Subway - Pune",
+            "customer_id": 100,
+            "customer_name": "Subway",
             "address": null,
             "disabled": true,
             "email": null,
@@ -100,6 +104,8 @@ Feature: List Outlets
           {
             "id" : 3,
             "name": "NBC - Cochin",
+            "customer_id": 200,
+            "customer_name": "Noushad the Big Chef",
             "address": null,
             "disabled": false,
             "email": null,
@@ -125,6 +131,8 @@ Feature: List Outlets
           {
             "id" : 4,
             "name": "NBC - Bangalore",
+            "customer_id": 200,
+            "customer_name": "Noushad the Big Chef",
             "address": null,
             "disabled": false,
             "email": null,
@@ -201,6 +209,8 @@ Feature: List Outlets
            {
             "id" : 1,
             "name": "Subway - Bangalore",
+            "customer_id": 100,
+            "customer_name": "Subway",
             "address": null,
             "disabled": false,
             "email": null,
@@ -226,6 +236,8 @@ Feature: List Outlets
           {
             "id" : 2,
             "name": "Subway - Pune",
+            "customer_id": 100,
+            "customer_name": "Subway",
             "address": null,
             "disabled": true,
             "email": null,

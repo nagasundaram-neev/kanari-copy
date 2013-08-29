@@ -813,7 +813,7 @@ module.controller('feedbackController', function($scope, $http, $location) {
 module.controller('feedback_step2Controller', function($scope, $http, $location) {
 
 	//if (getCookie("feedbackId")) {
-	flagPage = 0;
+	flagPage = 1;
 	$scope.nextFlag = 0;
 	$scope.prevFlag = 0;
 	$scope.like = true;
