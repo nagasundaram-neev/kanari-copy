@@ -1244,7 +1244,7 @@ img, object {
 .profileText span, .profileTextBottom span {
 	margin: 0 !important;
 	text-shadow: none;
-	font-size: 148%
+	font-size: 148%;
 	font-weight: normal;
 	letter-spacing: 2px;
 	font-family:'Roboto',sans-serif !important;
@@ -1288,7 +1288,6 @@ img, object {
 	color: #F5C03F;
 	font-weight: normal;
 	text-shadow: none;
-}
 }
 .genderBtn .ui-corner-all, .genderBtn .ui-btn-corner-all {
 	border-radius: 0 !important;
