@@ -1076,7 +1076,7 @@ input {
 /**** Dashboard snapshot ****/
 .snapshotMenuDropDown {
 	float: right;
-	margin: 5px 10px;
+	margin: 6px;
 }
 .insight_graph1, .insight_graph2 {
 	width: 50%;
@@ -1137,6 +1137,16 @@ input {
 }
 #dashboardSnapshot .main_content span {
 	margin-right: 0 !important;
+}
+.dashboardHeader {
+	float: left;
+	 margin-left: 27px;
+}
+#dashboardComments, #dashboardTrends, #dashboardSnapshot {
+	width: auto;
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
 }
 .daily_change {
 	float: left;
@@ -1327,7 +1337,7 @@ input {
 }
 .chart_div {
 	float: left;
-	width: 600px;
+	width: 950px;
 }
 .chart_heading {
 	display: block;
@@ -1355,11 +1365,11 @@ input {
 	background-position: -2px -2px;
 }
 .addLeft {
-	left: 980px !important;
+	/*left: 980px !important;*/
 }
 
 .addLeft:before, .addLeft:after {
-	left: 200px !important;
+	/*left: 200px !important;*/
 }
 
 /** Payment History **/
@@ -1417,10 +1427,10 @@ input {
 	width: 95px
 }
 .headCol3 {
-	width: 360px
+	width: 350px
 }
 .headCol4 {
-	width: 95px
+	width: 105px
 }
 .headCol5 {
 	width: 78px;
@@ -1467,87 +1477,87 @@ input {
 /* Admin Console CSS */
 .adminConsoleHdr {
 	background-color: #dcdbda;
-    border: 1px solid #dcdbda;
-    font-size: 14px;
-    padding: 10px;
-    width: 100%;
-}
-
-.adminConsoleColumns{
 	border: 1px solid #dcdbda;
-	 padding: 10px;
-	 font-size: 14px;
-	 width: 100%;
-}
-.adminConsoleColumns .col{
-	float:left;
-	text-align:left;
-	 width: 120px;
+	font-size: 14px;
+	padding: 10px;
+	width: 100%;
 }
 
-.adminConsoleColumns .col1{
-	float:left;
-	text-align:left;
-	 width: 175px;
+.adminConsoleColumns {
+	border: 1px solid #dcdbda;
+	padding: 10px;
+	font-size: 14px;
+	width: 100%;
 }
-
-.outletTble .colSave{
+.adminConsoleColumns .col {
 	float: left;
-    text-align: right;
-    width: 67px;
+	text-align: left;
+	width: 120px;
 }
-.colSave span{
+
+.adminConsoleColumns .col1 {
+	float: left;
+	text-align: left;
+	width: 175px;
+}
+
+.outletTble .colSave {
+	float: left;
+	text-align: right;
+	width: 67px;
+}
+.colSave span {
 	background-color: #F5BA44;
-    font-size: 16px;
-    padding: 2px 8px;
+	font-size: 16px;
+	padding: 2px 8px;
 	border-radius: 3px;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	-ms-border-radius: 3px;
 }
 
-.adminConsoleColumns .col3{
+.adminConsoleColumns .col3 {
 	float: left;
-    text-align: left;
-    width: 45px;
+	text-align: left;
+	width: 45px;
 }
 
-.adminConsoleColumns .col3{
-	float:left;
-	text-align:left;
+.adminConsoleColumns .col3 {
+	float: left;
+	text-align: left;
 	width: 0px;
 }
 
-.adminConsoleColumns .col2{
-	float:left;
-	text-align:left;
+.adminConsoleColumns .col2 {
+	float: left;
+	text-align: left;
 	width: 185px;
 }
 
 .outletTble .colHdr {
 	float: left;
-     width: 120px;
+	width: 120px;
 }
 
-.outletTble .colHdrDisabled{
-	width:60px;
+.outletTble .colHdrDisabled {
+	width: 60px;
 	text-align: center;
 }
 
 .outletTble .colHdr1 {
 	float: left;
-    width: 171px;
+	width: 171px;
 }
 
 .outletTble .colHdr2 {
 	float: left;
-    width: 185px;
+	width: 185px;
 }
 
-.outletTble input{
+.outletTble input {
 	float: none;
 }
 
-.outletTble{
-	color:#444343;
+.outletTble {
+	color: #444343;
 }

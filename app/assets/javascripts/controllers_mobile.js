@@ -1551,6 +1551,7 @@ $(document).on("pageshow", ".ui-page", function() {
 
 	if ($page.height() > $(window).height()) {
 		console.log("page " + $page);
+		$("#divexample1").css('height','280px');
 		$page.children('.ui-footer').css('position', 'relative');
 		if (flagPage == 0) {
 			$page.children('.ui-footer').css('margin-top', '14px');

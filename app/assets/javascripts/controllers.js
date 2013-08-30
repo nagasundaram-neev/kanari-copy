@@ -371,8 +371,9 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 		$('.welcome').show();
 		$('.navBarCls').show();
 		$('#dasboard').hide();
-		$('#outlet').show();
 		$('#account').show();
+		$('#outlet').show();
+		$('#dasboardCustomer').show();
 		$('.navBarCls ul li').removeClass('active');
 		$('#outlet').addClass('active');
 		$scope.auth_token = getCookie('authToken');
@@ -481,7 +482,9 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 		$('#outlet').hide();
 		$('#account').hide();
 		$('#dasboardCustomer').hide();
+		$('#dasboard').show();
 		$('#dasboard').addClass('active');
+
 		$scope.paymentInvoiceSuccess = false;
 		$scope.paymentInvoiceFail = false;
 		$scope.titles = [];
@@ -512,7 +515,7 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 			var arrayLengthOutlet = data.customers.length;
 			for (var i = 0, len = arrayLengthOutlet; i < len; i++) {
 				currencies.push({
-					"value" : data.customers[i].customer_admin.first_name,
+					"value" : data.customers[i].name,
 					"id" : data.customers[i].id
 				})
 			}
@@ -574,8 +577,7 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 				});
 
 				$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
-			}
-			else{
+			} else {
 				$scope.paymentInvoiceSuccess = false;
 				$scope.dateEntered = true;
 			}
@@ -596,6 +598,7 @@ module.controller('listPaymentInvoiceCtrl', function($rootScope, $scope, $http, 
 		$('#outlet').show();
 		$('#account').show();
 		$('#dasboard').hide();
+		$('#dasboardCustomer').hide();
 		$('#outlet').addClass('active');
 		$scope.InvoiceList = [];
 		$scope.list_payment_invoice = function() {
@@ -654,6 +657,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		var managerId;
 		$scope.auth_token = getCookie('authToken');
 		$('.navBarCls').show();
+		$('#dasboardCustomer').show();
 		$scope.error = false;
 		$scope.successMsg = false;
 		$scope.outletTypes = [];
@@ -1501,6 +1505,7 @@ module.controller('outletManagerCtrl', function($rootScope, $scope, $routeParams
 		$('#accountm').show();
 		$('.navBarCls ul li').removeClass('active');
 		$('#accountm').addClass('active');
+		$('#dasboardCustomer').show();
 		$rootScope.header = "Outlet Manager | Kanari";
 
 		var manager_id = getCookie('userId');
@@ -1568,9 +1573,6 @@ module.controller('acceptInvitationCtrl', function($rootScope, $scope, $routePar
 			return false;
 		}
 	};
-	// var param = {
-	// "inv_token" : $routeParams.invi_token
-	// }
 	$rootScope.header = "Accept Invitation | Kanari";
 	$http({
 		method : 'get',
@@ -1678,65 +1680,6 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 	}
 });
 
-module.controller('locationCtrl', function($scope, $routeParams, $route, $http, $location) {
-	if (getCookie('authToken')) {
-		/**Location***/
-
-		/** END Location**/
-	} else {
-		$location.url("/login");
-	}
-});
-
-module.controller('takeTourCtrl', function($rootScope, $scope, $routeParams, $http, $location) {
-	if (getCookie('authToken')) {
-		$rootScope.header = "Take Tour | Kanari";
-		$('.welcome').show();
-		$('.navBarCls').show();
-		$scope.kanariWorks = true;
-		$scope.register = false;
-		$scope.srchRestaurant = false;
-		$scope.deals = false;
-
-		if (getCookie('userRole') == "manager") {
-			$('#account').hide();
-			$scope.accountm = true;
-		}
-
-		$scope.changeTab = function(currentTab) {
-			//alert('in');
-			$location.url("/take_tour");
-			if (currentTab == "kanariWorks") {
-				$scope.kanariWorks = true;
-				$scope.register = false;
-				$scope.srchRestaurant = false;
-				$scope.deals = false;
-			} else if (currentTab == "register") {
-				$scope.kanariWorks = false;
-				$scope.register = true;
-				$scope.srchRestaurant = false;
-				$scope.deals = false;
-			} else if (currentTab == "srchRestaurant") {
-				$scope.kanariWorks = false;
-				$scope.register = false;
-				$scope.srchRestaurant = true;
-				$scope.deals = false;
-			} else if (currentTab == "deals") {
-				$scope.kanariWorks = false;
-				$scope.register = false;
-				$scope.srchRestaurant = false;
-				$scope.deals = true;
-			}
-		}
-	}
-});
-
-module.controller('rightSideCtrl', function($scope, $routeParams, $http, $location) {
-	$('.navBarCls ul li').removeClass('active');
-	$('#dasboard').hide();
-	$('#outlet').addClass('active');
-});
-
 module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $location) {
 	if (getCookie('authToken')) {
 		$rootScope.header = "Settings | Kanari";
@@ -1745,6 +1688,8 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 		$('.navBarCls ul li').removeClass('active');
 		$('#dasboard').hide();
 		$('#account').addClass('active');
+		$('#dasboardCustomer').show();
+
 		$scope.success = false;
 		var customer_id = getCookie('userId');
 
@@ -1860,6 +1805,8 @@ module.controller('changePassCtrl', function($rootScope, $scope, $routeParams, $
 		$('.navBarCls ul li').removeClass('active');
 		$('#dasboard').hide();
 		$('#account').addClass('active');
+		$('#dasboardCustomer').show();
+
 		$scope.success = false;
 		$scope.error = false;
 
@@ -1914,7 +1861,10 @@ module.controller('createKanariCodeCtrl', function($scope, $routeParams, $route,
 		$('.navBarCls').show();
 		$('.navBarCls ul li').removeClass('active');
 		$('#dasboard').hide();
+		$('#dasboardCustomer').show();
 		$('#account').addClass('active');
+		$('.dashboardLi').hide();
+
 		$scope.success = false;
 		$scope.error = false;
 	} else {
@@ -1950,6 +1900,7 @@ module.controller('outletCuisineTypeCtrl', function($scope, $rootScope, $routePa
 		$('#outlet').hide();
 		$('#account').hide();
 		$('#dasboard').addClass('active');
+		$('#dasboardCustomer').hide();
 		$rootScope.header = "Add Outlet/Cuiseine Type | Kanari";
 		$scope.outletTypes = [];
 		$scope.updateOMode = false;
@@ -2171,7 +2122,10 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 		$('.navBarCls ul li').removeClass('active');
 		$('#outlet').show();
 		$('#dasboard').hide();
+		$('#dasboardCustomer').show();
 		$('#account').addClass('active');
+		$('.dashboardLi').hide();
+
 		$rootScope.header = "Payment History | Kanari";
 		$scope.paymentHistoryList = [];
 
@@ -2267,11 +2221,11 @@ var endDt;
 module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location) {
 	if (getCookie('authToken')) {
 		$('.welcome').show();
-		$('.navBarCls').show();
+		$('.hideNav').hide();
+		$('.showNav').show();
 		$('.navBarCls ul li').removeClass('active');
-		$('#outlet').show();
-		$('#dasboard').hide();
-		$('#dasboardCustomer').addClass('active');
+
+		$('#comments').addClass('active');
 		$rootScope.header = "Dashboard Comments | Kanari";
 		$scope.feedbackList = [];
 		$scope.outletNameList = [];
@@ -2384,11 +2338,11 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location, limitToFilter) {
 	if (getCookie('authToken')) {
 		$('.welcome').show();
-		$('.navBarCls').show();
+		$('.hideNav').hide();
+		$('.showNav').show();
 		$('.navBarCls ul li').removeClass('active');
-		$('#outlet').show();
-		$('#dasboard').hide();
-		$('#dasboardCustomer').addClass('active');
+
+		$('#trends').addClass('active');
 		$rootScope.header = "Dashboard Trends | Kanari";
 		$scope.outletNameList = [];
 		$scope.trendsList = [];
@@ -2406,10 +2360,24 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			Dt : Date.now()
 		}
 
+		var d = new Date();
+
+		var month = d.getMonth() + 1;
+		var day = d.getDate();
+
+		var currentDate = d.getFullYear() + '-' + (('' + month).length < 2 ? '0' : '') + month + '-' + (('' + day).length < 2 ? '0' : '') + day;
+
 		$("#dashboard_trends ul li a").click(function() {
 			$('#dashboard_trends ul li a').removeClass("active");
 			$(this).addClass("active");
 			idV = $(this).attr("id");
+			if (idV == "timeOfVisit") {
+				$("#dp3").hide();
+				$("#startDt").attr("placeholder", "Select Date");
+			} else {
+				$("#dp3").show();
+				$("#startDt").attr("placeholder", "Start Date");
+			}
 			$scope.listOfTrendsDate(idV);
 		});
 
@@ -2440,6 +2408,9 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				var dt = new Date(ev.date.valueOf());
 				var month = dt.getMonth() + 1;
 				startDt = dt.yyyymmdd();
+				if (idV == "timeOfVisit") {
+					endDt = startDt;
+				}
 				if (startDt != 'undefined' && typeof endDt != 'undefined') {
 					if ((new Date(startDt).getTime() > new Date(endDt).getTime())) {
 						var r = confirm("End Date should be greater than Start Date");
@@ -2459,7 +2430,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				var month = dt.getMonth() + 1;
 				endDt = dt.yyyymmdd();
 				if ( typeof startDt != 'undefined' && endDt != 'undefined') {
-					console.log("hi in end date");
 					if ((new Date(startDt).getTime() > new Date(endDt).getTime())) {
 						var r = confirm("End Date should be greater than Start Date");
 						if (r == true) {
@@ -2494,13 +2464,35 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			if (!idValue) {
 				idValue = "food";
 				metricsId = "custExp";
-			}
-			console.log("outetId " + $scope.outletOption);
-			var param = {
-				"auth_token" : getCookie('authToken'),
-				"outlet_id" : $scope.outletOption,
-				"start_time" : startDt,
-				"end_time" : endDt
+				var param = {
+					"auth_token" : getCookie('authToken'),
+					"outlet_id" : $scope.outletOption,
+					"start_time" : startDt,
+					"end_time" : endDt
+				}
+
+			} else if (idValue == "timeOfVisit" && !startDt) {
+				var param = {
+					"auth_token" : getCookie('authToken'),
+					"outlet_id" : $scope.outletOption,
+					"start_time" : currentDate,
+					"end_time" : currentDate
+				}
+			} else if (idValue == "timeOfVisit" && startDt) {
+				var param = {
+					"auth_token" : getCookie('authToken'),
+					"outlet_id" : $scope.outletOption,
+					"start_time" : startDt,
+					"end_time" : startDt
+				}
+
+			} else {
+				var param = {
+					"auth_token" : getCookie('authToken'),
+					"outlet_id" : $scope.outletOption,
+					"start_time" : startDt,
+					"end_time" : endDt
+				}
 			}
 
 			$http({
@@ -2514,7 +2506,11 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				results3 = [];
 				resultsDate = [];
 				var time = [];
-				var finaltime = [];
+				finaltime = [];
+				timeOfV = 0;
+				npsBreakdownV = 0;
+				npsOverview = 0;
+				//var timeOfVisit = [];
 				$scope.trendsList = data.feedback_trends.detailed_statistics;
 				var arrayLength = Object.keys($scope.trendsList).length;
 				for (var i = 0; i < arrayLength; i++) {
@@ -2555,7 +2551,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						npsBreakdownV = 1;
 					} else if (idValue == "npsOverview") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.like - data.feedback_trends.detailed_statistics[dateV].net_promoter_score.dislike;
-						npsBreakdownV = 0;
 						npsOverview = 1;
 					}
 					/**Net Promoter Score End**/
@@ -2587,18 +2582,17 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						custLegend2 = "Female";
 					} else if (idValue == "usersGraph") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].customers.
-						new         ;
+						new ;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].customers.returning;
 						custLegend1 = "New";
 						custLegend2 = "Returning";
 					} else if (idValue == "timeOfVisit") {
-						finaltime[i] = [];
+						finaltime = [];
 						for (var j = 0; j < 24; j++) {
 							time[j] = data.feedback_trends.detailed_statistics[dateV].customers.time_of_visit[j];
-							finaltime[i].push(time[j]);
+							finaltime.push(time[j]);
 						}
-						timeOfVisit = 1;
-						//usageLegend = "Cheque Size";
+						timeOfV = 1;
 					} else if (idValue == "chequeSize") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].average_bill_amount;
 						npsOverview = 1;
@@ -2615,7 +2609,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					getCustExpGraph();
 				} else if (metricsId == "usage" || npsOverview == "1") {
 					getUsageGraph();
-				} else if (metricsId == "customers" && timeOfVisit == "1") {
+				} else if (metricsId == "customers" && timeOfV == "1") {
+					//alert("in");
 					getTimeVisitGraph();
 				} else if (metricsId == "customers") {
 					customerGraph();
@@ -2717,7 +2712,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				legend : {
 					layout : 'horizontal',
 					align : 'left',
-					x : 300,
+					x : 650,
 					verticalAlign : 'top',
 					y : 20,
 					floating : true,
@@ -2779,7 +2774,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				legend : {
 					layout : 'horizontal',
 					align : 'left',
-					x : 400,
+					x : 750,
 					verticalAlign : 'top',
 					y : 20,
 					floating : true,
@@ -2849,7 +2844,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		function getTimeVisitGraph() {
-			console.log(resultsDate);
 			$('#container').highcharts({
 
 				chart : {
@@ -2862,20 +2856,19 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				},
 
 				xAxis : {
-					categories : resultsDate,
+					categories : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
 					title : {
-						text : 'Days Of week',
+						text : 'Hours of Day',
 						style : {
 							color : '#7C7A7D',
 						}
 					}
 				},
-
 				yAxis : {
 					allowDecimals : false,
 					min : 0,
 					title : {
-						text : 'Points%',
+						text : 'No of Visits',
 						style : {
 							color : '#7C7A7D',
 						}
@@ -2884,7 +2877,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 
 				tooltip : {
 					formatter : function() {
-						return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '<br/>' + 'Total: ' + this.point.stackTotal;
+						//return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '<br/>' + 'Total: ' + this.point.stackTotal;
+						return '<b>' + this.x + 'th </b>Hour : <b>' + this.y + '</b> Visit';
 					},
 				},
 
@@ -2894,10 +2888,9 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					}
 				},
 				legend : {
-					enabled : false,
 					layout : 'horizontal',
 					align : 'left',
-					x : 300,
+					x : 650,
 					verticalAlign : 'top',
 					y : 20,
 					floating : true,
@@ -2907,101 +2900,9 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					}
 				},
 				series : [{
-					name : '1st hour',
-					data : timeOfVisit[0],
+					name : 'No of Visits',
+					data : finaltime,
 					color : '#D8882F',
-				}, {
-					name : '2nd hour',
-					data : timeOfVisit[1],
-					color : '#3A240D'
-				}, {
-					name : '3rd hour',
-					data : timeOfVisit[2],
-					color : '#664766'
-				}, {
-					name : '4th hour',
-					data : timeOfVisit[3],
-					color : '#664766'
-				}, {
-					name : '5th hour',
-					data : timeOfVisit[4],
-					color : '#664766'
-				}, {
-					name : '6th hour',
-					data : timeOfVisit[5],
-					color : '#664766'
-				}, {
-					name : '7th hour',
-					data : timeOfVisit[6],
-					color : '#664766'
-				}, {
-					name : '8th hour',
-					data : timeOfVisit[7],
-					color : '#664766'
-				}, {
-					name : '9th hour',
-					data : timeOfVisit[8],
-					color : '#664766'
-				}, {
-					name : '10th hour',
-					data : timeOfVisit[9],
-					color : '#664766'
-				}, {
-					name : '11th hour',
-					data : timeOfVisit[10],
-					color : '#664766'
-				}, {
-					name : '12th hour',
-					data : timeOfVisit[11],
-					color : '#664766'
-				}, {
-					name : '13th hour',
-					data : timeOfVisit[12],
-					color : '#664766'
-				}, {
-					name : '14th hour',
-					data : timeOfVisit[13],
-					color : '#664766'
-				}, {
-					name : '15th hour',
-					data : timeOfVisit[14],
-					color : '#664766'
-				}, {
-					name : '16th hour',
-					data : timeOfVisit[15],
-					color : '#664766'
-				}, {
-					name : '17th hour',
-					data : timeOfVisit[16],
-					color : '#664766'
-				}, {
-					name : '18th hour',
-					data : timeOfVisit[17],
-					color : '#664766'
-				}, {
-					name : '19th hour',
-					data : timeOfVisit[18],
-					color : '#664766'
-				}, {
-					name : '20th hour',
-					data : timeOfVisit[19],
-					color : '#664766'
-				}, {
-					name : '21th hour',
-					data : timeOfVisit[20],
-					color : '#664766'
-				}, {
-					name : '22th hour',
-					data : timeOfVisit[21],
-					color : '#664766'
-				}, {
-					name : '23th hour',
-					data : timeOfVisit[22],
-					color : '#664766'
-				}, {
-					name : '24th hour',
-					data : timeOfVisit[23],
-					color : '#664766'
 				}]
 			});
 		}
@@ -3011,11 +2912,10 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location) {
 	if (getCookie('authToken')) {
 		$('.welcome').show();
-		$('.navBarCls').show();
+		$('.hideNav').hide();
+		$('.showNav').show();
 		$('.navBarCls ul li').removeClass('active');
-		$('#outlet').show();
-		$('#dasboard').hide();
-		$('#dasboardCustomer').addClass('active');
+		$('#snapshot').addClass('active');
 		$rootScope.header = "Dashboard Snapshot | Kanari";
 
 		$scope.feedbackMetrics = function() {
