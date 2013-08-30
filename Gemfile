@@ -50,6 +50,6 @@ gem 'cucumber-api-steps', :require => false, :group => :test #Cucumber steps for
 gem 'json_spec', group: :test # JSON matchers for tests
 
 #Development
-gem 'debugger', group: [:development, :test]
+gem 'debugger', '1.6.1', group: [:development, :test]
 gem 'foreman', :group => :development
 gem 'rails-erd', :group => :development
