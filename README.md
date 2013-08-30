@@ -16,9 +16,17 @@ You need to install these :
 4. MySql server
 
 Using RVM for Ruby version management is recommended.
+
+### Installing RVM and Ruby in a fresh linux box (as a non root user) :
+
+1. sudo apt-get install curl
+2. \curl -L https://get.rvm.io | bash -s stable --ruby
+3. In a new terminal if `rvm list` doesn't show the instaled ruby, start terminal as login shell. (Open your terminal and see the settings)
+
 [This blog post](http://ryanbigg.com/2010/12/ubuntu-ruby-rvm-rails-and-you/) talks about setting up an environment with Ruby 1.9.
-Setting up Ruby 2.0 using RVM is not very different from the steps in the article. You may want to look into `--autolibs` flag
-of RVM which will automatically install the dependencies for you while installing a Ruby version to make things simpler.
+Setting up Ruby 2.0 using RVM is not very different from the steps in the article and you should already have Ruby 2.0 if you
+followed the above instructions.
+
 
 After you have installed Ruby and bundler ruby gem, see the "Getting Started" section to start the application
 
@@ -45,7 +53,7 @@ Point your browser to http://localhost:8080 and you should see the Homepage.
 
 To build the project a.k.a run the tests,
 
-    rake db:test:prepare
+    RAILS_ENV=test rake db:migrate
     rake
 
 ## Development on Steroids
