@@ -382,6 +382,7 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 			$scope.userAction = true;
 			$scope.accountm = false;
 			$('#accountm').hide();
+			$('#adminConsole').hide();
 		} else {
 			$('#account').hide();
 			$scope.accountm = true;
@@ -481,6 +482,7 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 		$('#outlet').hide();
 		$('#account').hide();
 		$('#dasboardCustomer').hide();
+		$('#adminConsole').hide();
 		$('#dasboard').addClass('active');
 		$scope.paymentInvoiceSuccess = false;
 		$scope.paymentInvoiceFail = false;
@@ -574,8 +576,7 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 				});
 
 				$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
-			}
-			else{
+			} else {
 				$scope.paymentInvoiceSuccess = false;
 				$scope.dateEntered = true;
 			}
@@ -595,6 +596,7 @@ module.controller('listPaymentInvoiceCtrl', function($rootScope, $scope, $http, 
 		$('.navBarCls ul li').removeClass('active');
 		$('#outlet').show();
 		$('#account').show();
+		$('#adminConsole').hide();
 		$('#dasboard').hide();
 		$('#outlet').addClass('active');
 		$scope.InvoiceList = [];
@@ -651,6 +653,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.form_cuisine3 = false;
 		$('.welcome').show();
 		$('#dasboard').hide();
+		$('#adminConsole').hide();
 		var managerId;
 		$scope.auth_token = getCookie('authToken');
 		$('.navBarCls').show();
@@ -1498,6 +1501,7 @@ module.controller('outletManagerCtrl', function($rootScope, $scope, $routeParams
 		$('.welcome').show();
 		$('.navBarCls').show();
 		$('#dasboard').hide();
+		$('#adminConsole').hide();
 		$('#accountm').show();
 		$('.navBarCls ul li').removeClass('active');
 		$('#accountm').addClass('active');
@@ -1693,6 +1697,7 @@ module.controller('takeTourCtrl', function($rootScope, $scope, $routeParams, $ht
 		$rootScope.header = "Take Tour | Kanari";
 		$('.welcome').show();
 		$('.navBarCls').show();
+		$('#adminConsole').hide();
 		$scope.kanariWorks = true;
 		$scope.register = false;
 		$scope.srchRestaurant = false;
@@ -1734,6 +1739,7 @@ module.controller('takeTourCtrl', function($rootScope, $scope, $routeParams, $ht
 module.controller('rightSideCtrl', function($scope, $routeParams, $http, $location) {
 	$('.navBarCls ul li').removeClass('active');
 	$('#dasboard').hide();
+	$('#adminConsole').hide();
 	$('#outlet').addClass('active');
 });
 
@@ -1744,6 +1750,7 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 		$('.navBarCls').show();
 		$('.navBarCls ul li').removeClass('active');
 		$('#dasboard').hide();
+		$('#adminConsole').hide();
 		$('#account').addClass('active');
 		$scope.success = false;
 		var customer_id = getCookie('userId');
@@ -1859,6 +1866,7 @@ module.controller('changePassCtrl', function($rootScope, $scope, $routeParams, $
 		$('.navBarCls').show();
 		$('.navBarCls ul li').removeClass('active');
 		$('#dasboard').hide();
+		$('#adminConsole').hide();
 		$('#account').addClass('active');
 		$scope.success = false;
 		$scope.error = false;
@@ -1914,6 +1922,7 @@ module.controller('createKanariCodeCtrl', function($scope, $routeParams, $route,
 		$('.navBarCls').show();
 		$('.navBarCls ul li').removeClass('active');
 		$('#dasboard').hide();
+		$('#adminConsole').hide();
 		$('#account').addClass('active');
 		$scope.success = false;
 		$scope.error = false;
@@ -1950,6 +1959,7 @@ module.controller('outletCuisineTypeCtrl', function($scope, $rootScope, $routePa
 		$('#outlet').hide();
 		$('#account').hide();
 		$('#dasboard').addClass('active');
+		$('#adminConsole').show();
 		$rootScope.header = "Add Outlet/Cuiseine Type | Kanari";
 		$scope.outletTypes = [];
 		$scope.updateOMode = false;
@@ -2171,6 +2181,7 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 		$('.navBarCls ul li').removeClass('active');
 		$('#outlet').show();
 		$('#dasboard').hide();
+		$('#adminConsole').hide();
 		$('#account').addClass('active');
 		$rootScope.header = "Payment History | Kanari";
 		$scope.paymentHistoryList = [];
@@ -2271,6 +2282,7 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 		$('.navBarCls ul li').removeClass('active');
 		$('#outlet').show();
 		$('#dasboard').hide();
+		$('#adminConsole').hide();
 		$('#dasboardCustomer').addClass('active');
 		$rootScope.header = "Dashboard Comments | Kanari";
 		$scope.feedbackList = [];
@@ -2388,6 +2400,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		$('.navBarCls ul li').removeClass('active');
 		$('#outlet').show();
 		$('#dasboard').hide();
+		$('#adminConsole').hide();
 		$('#dasboardCustomer').addClass('active');
 		$rootScope.header = "Dashboard Trends | Kanari";
 		$scope.outletNameList = [];
@@ -2587,7 +2600,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						custLegend2 = "Female";
 					} else if (idValue == "usersGraph") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].customers.
-						new         ;
+						new          ;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].customers.returning;
 						custLegend1 = "New";
 						custLegend2 = "Returning";
@@ -3015,6 +3028,7 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		$('.navBarCls ul li').removeClass('active');
 		$('#outlet').show();
 		$('#dasboard').hide();
+		$('#adminConsole').hide();
 		$('#dasboardCustomer').addClass('active');
 		$rootScope.header = "Dashboard Snapshot | Kanari";
 
@@ -3188,6 +3202,174 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 
 	}
 });
+
+module.controller('adminConsoleOutletCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location) {
+	if (getCookie('authToken')) {
+		$rootScope.header = "Admin Console | Kanari";
+		$('.welcome').show();
+		$('.navBarCls').show();
+		//$('.navBarCls ul li').removeClass('active');
+		$('#dasboard').show();
+		$('#outlet').hide();
+		$('#account').hide();
+		$('#dasboardCustomer').hide();
+		$('.navBarCls ul li').removeClass('active');
+		$('#outlet').hide();
+		$('#account').hide();
+		$('#adminConsole').show();
+		$('#adminConsole').addClass('active');
+		//$('#account').addClass('active');
+		$scope.success = false;
+		$scope.enabled = false;
+		$scope.disabled = false;
+
+		$scope.outletDetails = [];
+
+		$scope.loadOutletDetails = function() {
+			var param = {
+				"auth_token" : getCookie('authToken'),
+				"password" : 'X',
+			};
+			$http({
+				method : 'get',
+				url : '/api/outlets',
+				params : param,
+			}).success(function(data, status) {
+				console.log("Data in success " + data + " status " + status);
+				$scope.outletDetails = data.outlets;
+			}).error(function(data, status) {
+				console.log("data in error " + data + " status " + status);
+			});
+		};
+
+		$scope.loadOutletDetails();
+
+		// $scope.checkDisable = function(chk,id){
+		//
+		// };
+
+		$scope.disableOutlet = function(chk, id) {
+			//$scope.auth_token = getCookie('authToken');
+			console.log("hi " + chk);
+
+			var params = {
+				"outlet" : {
+					"disabled" : chk
+				},
+				"auth_token" : getCookie('authToken')
+			}
+			$http({
+				method : 'PUT',
+				url : '/api/outlets/' + id + "/disable",
+				data : params,
+			}).success(function(data, status) {
+				console.log("data in success " + data + " status " + status);
+				$scope.error = data.auth_token;
+				$scope.outNO = id;
+				//conseol.log("id "+$scope.outNO);
+				if (chk == true) {
+					$scope.enabled = true;
+					$scope.disabled = false;
+				} else {
+					$scope.enabled = false;
+					$scope.disabled = true;
+				}
+				$scope.statement = true;
+				$scope.erromsg = false;
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+				$scope.erromsg = true;
+			});
+		};
+	} else {
+		$location.url("/login");
+	}
+});
+
+module.controller('adminConsoleCustomerCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location) {
+	if (getCookie('authToken')) {
+		$rootScope.header = "Admin Console | Kanari";
+		$('.welcome').show();
+		$('.navBarCls').show();
+		//$('.navBarCls ul li').removeClass('active');
+		$('#dasboard').show();
+		$('#outlet').hide();
+		$('#account').hide();
+		$('#dasboardCustomer').hide();
+		$('.navBarCls ul li').removeClass('active');
+		$('#outlet').hide();
+		$('#account').hide();
+		$('#adminConsole').show();
+		$('#adminConsole').addClass('active');
+		//$('#account').addClass('active');
+		$scope.success = false;
+		$scope.custUpdate = false;
+		$scope.customerName = "";
+		$scope.customerDetails = [];
+
+		$scope.loadCustomerDetails = function() {
+			var param = {
+				"auth_token" : getCookie('authToken'),
+				"password" : 'X',
+			};
+			$http({
+				method : 'get',
+				url : '/api/customers',
+				params : param,
+			}).success(function(data, status) {
+				console.log("Data in success " + data + " status " + status);
+				$scope.customerDetails = data.customers;
+				$scope.outletNo = data.customers.authorized_outlets;
+			}).error(function(data, status) {
+				console.log("data in error " + data + " status " + status);
+			});
+		};
+
+		$scope.loadCustomerDetails();
+
+		$scope.increase_decreaseVal = function(id, type) {
+			cus = $scope.customerDetails[id]
+			if (type == 1) {
+				cus.authorized_outlets += 1
+			} else if (cus.authorized_outlets != 0) {
+				cus.authorized_outlets -= 1
+			}
+		};
+
+		$scope.updateCustomerOutlets = function(id) {
+			console.log("id " + id);
+			cus = $scope.customerDetails[id]
+			console.log(cus.authorized_outlets)
+			console.log($scope.customerDetails[id])
+			var params = {
+				"customer" : {
+					"authorized_outlets" : cus.authorized_outlets,//outletNo,
+				},
+				"auth_token" : getCookie('authToken')
+			}
+			$http({
+				method : 'PUT',
+				url : '/api/customers/' + cus.id,
+				data : params,
+			}).success(function(data, status) {
+				console.log("data in success " + data + " status " + status);
+				$scope.error = data.auth_token;
+				$scope.customerNo = cus.id;
+				$scope.custUpdate = true;
+				$scope.statement = true;
+				$scope.erromsg = false;
+			}).error(function(data, status) {
+				console.log("data in error" + data + " status " + status);
+				$scope.erromsg = true;
+			});
+
+		};
+
+	} else {
+		$location.url("/login");
+	}
+});
+
 function setCookie(name, value, days) {
 	if (days) {
 		var date = new Date();

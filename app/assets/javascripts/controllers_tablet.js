@@ -245,8 +245,13 @@ module.controller('signInController', function($scope, $http, $location) {
 		}).error(function(data, status) {
 			//console.log($scope.password)
 			console.log("data " + $scope.email + " status " + $scope.password);
-			$scope.error = "Invalid Id or Password";
-			$scope.erromsg = true;
+			if (data.errors == "Inactive User") {
+				$scope.error = "Outlet assigned to you is disabled";
+				$scope.erromsg = true;
+			} else {
+				$scope.error = "Invalid Id or Password";
+				$scope.erromsg = true;
+			}
 		});
 	};
 
@@ -322,7 +327,7 @@ module.controller('homePageController', function($scope, $http, $location, $time
 				$scope.feedbackList = data.feedbacks;
 				$("#overlaySuccess").hide();
 				$('#overlaySuccess img').hide();
-				$("#overlaySuccess").css({				
+				$("#overlaySuccess").css({
 					'z-index' : '0',
 					'background-color' : 'transparent'
 				});
