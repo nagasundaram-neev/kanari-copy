@@ -281,6 +281,7 @@ module.controller('homePageController', function($scope, $http, $location, $time
 	$("#feedback span").show();
 	$(".popup").hide();
 	if (getCookie('authToken')) {
+		var dt;
 		var overlayDiv = $("#overlaySuccess");
 		$scope.active1 = true;
 		$scope.feedbackList = [];
@@ -299,7 +300,15 @@ module.controller('homePageController', function($scope, $http, $location, $time
 		$scope.listFeedbacks = function() {
 			//alert(new Date());
 			//$.mobile.loading('show');
-			var dt = new Date();
+			dt = new Date();
+			var time = dt.getHours();
+			console.log("time "+time);
+			
+			if(time > 0 && time < 5){
+				console.log("hi i an in");
+				dt.setDate(dt.getDate() - 1);
+			}
+			
 			var startdt = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), 5, 0, 0)
 
 			var timeZone = String(String(dt).split("(")[1]).split(")")[0];
@@ -376,6 +385,7 @@ module.controller('insightsController', function($scope, $http, $location, $time
 	$("#insights").addClass("ui_btn_active");
 	$("#insights span").show();
 	if (getCookie('authToken')) {
+		var dt;
 		$scope.active2 = true;
 		flag = 1;
 
@@ -391,8 +401,16 @@ module.controller('insightsController', function($scope, $http, $location, $time
 
 		$scope.feedbackMetrics = function() {
 
-			var dt = new Date();
-			console.log(dt);
+			dt = new Date();
+			
+			var time = dt.getHours();
+			console.log("time "+time);
+			
+			if(time > 0 && time < 5){
+				console.log("hi i an in");
+				dt.setDate(dt.getDate() - 1);
+			}
+			
 			var startdt = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), 5, 0, 0)
 
 			console.log("date " + startdt);

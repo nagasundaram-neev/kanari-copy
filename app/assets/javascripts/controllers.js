@@ -2211,8 +2211,6 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 				console.log("data in error " + data + " status " + status);
 			});
 		};
-		
-		
 
 		$scope.getOutlet = function(outletId, payInNo) {
 
@@ -3208,10 +3206,6 @@ module.controller('adminConsoleOutletCtrl', function($scope, $rootScope, $routeP
 
 		$scope.loadOutletDetails();
 
-		// $scope.checkDisable = function(chk,id){
-		//
-		// };
-
 		$scope.disableOutlet = function(chk, id) {
 			//$scope.auth_token = getCookie('authToken');
 			console.log("hi " + chk);
@@ -3283,6 +3277,14 @@ module.controller('adminConsoleCustomerCtrl', function($scope, $rootScope, $rout
 			}).success(function(data, status) {
 				console.log("Data in success " + data + " status " + status);
 				$scope.customerDetails = data.customers;
+				$scope.customerDetails.sort(function(a, b) {
+					var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase()
+					if (nameA < nameB)//sort string ascending
+						return -1
+					if (nameA > nameB)
+						return 1
+					return 0 //default return value (no sorting)
+				});
 				$scope.outletNo = data.customers.authorized_outlets;
 			}).error(function(data, status) {
 				console.log("data in error " + data + " status " + status);
@@ -3318,7 +3320,7 @@ module.controller('adminConsoleCustomerCtrl', function($scope, $rootScope, $rout
 			}).success(function(data, status) {
 				console.log("data in success " + data + " status " + status);
 				$scope.error = data.auth_token;
-				$scope.customerNo = cus.id;
+				$scope.customerName = cus.name;
 				$scope.custUpdate = true;
 				$scope.statement = true;
 				$scope.erromsg = false;
