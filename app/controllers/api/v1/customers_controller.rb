@@ -10,8 +10,8 @@ class Api::V1::CustomersController < ApplicationController
     if current_user.role == 'customer_admin'
       render json: current_user.customer and return
     else
-      customers = Customer.all
       authorize! :read_all, Customer
+      customers = Customer.order('name asc')
       render json: customers and return
     end
   end
