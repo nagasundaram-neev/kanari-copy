@@ -30,7 +30,7 @@
 							<span class="full_name">{{outlet.manager.first_name}} {{outlet.manager.last_name}}</span>
 						</div>
 						<div class="action">
-							<a href="#/create_outlet?outletId={{outlet.id}}" class="outlet_action actions" ng-hide="outlet.disabled"> <%= image_tag 'icon_view_dashboard.png' %>
+							<a href="#/snapshot?outletId={{outlet.id}}" target="_blank" class="outlet_action actions" ng-hide="outlet.disabled"> <%= image_tag 'icon_view_dashboard.png' %>
 							<br/>
 							View Dashboard </a>
 							<a href="javascript:void(0);" class="outlet_action actions" ng-show="outlet.disabled"> <%= image_tag 'icon_view_dashboard.png' %>

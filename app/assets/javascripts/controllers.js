@@ -547,6 +547,10 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 			}).success(function(data, status) {
 				console.log("data in success " + data.lenght + " status " + status);
 				$scope.outletsList = data.outlets;
+				console.log(data.outlets.length);
+				if (data.outlets.length>0) {
+					$scope.formoutlet1 = data.outlets[0].id;
+				}
 			}).error(function(data, status) {
 				console.log("data in error" + data + " status " + status);
 			});
@@ -574,7 +578,6 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 				}).success(function(data, status) {
 					console.log("data in success " + data + " status " + status);
 					$scope.paymentInvoiceSuccess = true;
-
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
 					$scope.paymentInvoiceFail = true;
@@ -587,17 +590,10 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 			}
 		};
 
-		$scope.clearForm = function() {
+		$scope.clearForm = function(){
 			$scope.paymentInvoiceSuccess = false;
 			document.getElementById('paymentInvoiceForm').reset();
 			$scope.outletsList = "";
-			// $scope.kanari_invoice_id = "";
-			// $("#autocomplete").val('');
-			// $("#sDate").val('');
-			//$scope.formoutlet1 = "";
-			// $scope.kanari_plan = "";
-			// $scope.amount_paid = "";
-			// $scope.invoice_pdf = "";
 		};
 	} else {
 		$location.url("/login");
@@ -2254,7 +2250,17 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 		$rootScope.header = "Dashboard Comments | Kanari";
 		$scope.feedbackList = [];
 		$scope.outletNameList = [];
-
+		
+		
+		if ($routeParams.outletId) {
+		$scope.addOutletId = true;
+		$scope.addOutletNo = $routeParams.outletId;
+		$scope.outletOption = $routeParams.outletId;
+		}
+		else{
+			$scope.addOutletId = false;
+		}
+		
 		$scope.v = {
 			Dt : Date.now()
 		}
@@ -2306,6 +2312,7 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 			}).success(function(data, status) {
 				console.log("Data in success " + data + " status " + status);
 				$scope.outletNameList = data.outlets;
+				$scope.outletOption = parseInt($routeParams.outletId);
 			}).error(function(data, status) {
 				console.log("data in error " + data + " status " + status);
 			});
@@ -2339,6 +2346,7 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 			//$.mobile.loading('show');
 			var param = {
 				"auth_token" : getCookie('authToken'),
+				"outlet_id" : $scope.outletOption,
 				"password" : "X"
 			}
 
@@ -2380,7 +2388,18 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		var usageLegend = "";
 		var npsBreakdownV = 0;
 		var npsOverview = 0;
-
+		
+		
+		if ($routeParams.outletId) {
+		$scope.addOutletId = true;
+		$scope.addOutletNo = $routeParams.outletId;
+		$scope.outletOption = $routeParams.outletId;
+		}
+		else{
+			$scope.addOutletId = false;
+		}
+		
+		
 		$scope.v = {
 			Dt : Date.now()
 		}
@@ -2484,7 +2503,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		$scope.selectOutlet = function() {
 			$scope.listOfTrendsDate(idV);
 		}
-
+		
+		
 		$scope.listOfTrendsDate = function(idValue) {
 			if (!idValue) {
 				idValue = "food";
@@ -2606,8 +2626,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						custLegend1 = "Male";
 						custLegend2 = "Female";
 					} else if (idValue == "usersGraph") {
-						var foodLike = data.feedback_trends.detailed_statistics[dateV].customers.
-						new   ;
+						var foodLike = data.feedback_trends.detailed_statistics[dateV].customers.new;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].customers.returning;
 						custLegend1 = "New";
 						custLegend2 = "Returning";
@@ -2659,6 +2678,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			}).success(function(data, status) {
 				console.log("Data in success " + data + " status " + status);
 				$scope.outletNameList = data.outlets;
+				$scope.outletOption  = parseInt($routeParams.outletId);
 			}).error(function(data, status) {
 				console.log("data in error " + data + " status " + status);
 			});
@@ -2943,14 +2963,24 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		$('#snapshot').addClass('active');
 		$('#adminConsole').hide();
 		$rootScope.header = "Dashboard Snapshot | Kanari";
-
+		
+		if ($routeParams.outletId) {
+		$scope.addOutletId = true;
+		$scope.addOutletNo = $routeParams.outletId;
+		$scope.outletOption = $routeParams.outletId;
+		}
+		else{
+			$scope.addOutletId = false;
+		}
+		
 		$scope.feedbackMetrics = function() {
+			
 			var param = {
 				"auth_token" : getCookie('authToken'),
 				"outlet_id" : $scope.outletOption,
 				"password" : "X"
 			}
-
+			
 			$http({
 				method : 'get',
 				url : '/api/feedbacks/metrics',
@@ -3066,10 +3096,29 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 
 		$scope.feedbackMetrics();
 
+		Date.prototype.yyyymmdd = function() {
+
+			var yyyy = this.getFullYear().toString();
+			var mm = (this.getMonth() + 1).toString();
+			// getMonth() is zero-based
+			var dd = this.getDate().toString();
+
+			return yyyy + '-' + (mm[1] ? mm : "0" + mm[0]) + '-' + (dd[1] ? dd : "0" + dd[0]);
+		};
+
 		$scope.listFeedbacks = function() {
-			var param = {
+			var dt = new Date();
+			var startdt = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), 5, 0, 0)
+			var timeZone = String(String(dt).split("(")[1]).split(")")[0];
+			console.log("start date " + startdt);
+			if (!$scope.$$phase) {
+				//$digest or $apply
+			}
+			
+				var param = {
 				"auth_token" : getCookie('authToken'),
 				"outlet_id" : $scope.outletOption,
+				"start_time" : startdt,
 				"password" : "X"
 			}
 
@@ -3079,7 +3128,7 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 				params : param
 			}).success(function(data, status) {
 				console.log("User Role " + data + " status " + status);
-				$scope.feedbackList = data.feedbacks;
+				$scope.feedbackListSnapShot = data.feedbacks;
 
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
@@ -3106,6 +3155,7 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 			}).success(function(data, status) {
 				console.log("Data in success " + data + " status " + status);
 				$scope.outletNameList = data.outlets;
+				$scope.outletOption  = parseInt($routeParams.outletId);
 			}).error(function(data, status) {
 				console.log("data in error " + data + " status " + status);
 			});
@@ -3149,36 +3199,12 @@ module.controller('adminConsoleOutletCtrl', function($scope, $rootScope, $routeP
 			}).success(function(data, status) {
 				console.log("Data in success " + data + " status " + status);
 				$scope.outletDetails = data.outlets;
-				$scope.outletDetails.sort(function(a, b) {
-					var nameA = a.disabled, nameB = b.disabled
-					if (nameA == false)//sort string ascending
-						return -1
-					if (nameA == true)
-						return 1
-					return 0 //default return value (no sorting)
-				});
-
 			}).error(function(data, status) {
 				console.log("data in error " + data + " status " + status);
 			});
 		};
 
 		$scope.loadOutletDetails();
-
-		//$scope.sort = "name";
-		$scope.reverse = false;
-
-		$scope.changeSort = function(value) {
-			
-			//if ($scope.sort == value) {
-				$scope.sortingOrder = value;
-				$scope.reverse = !$scope.reverse;
-				return;
-			//}
-
-			//$scope.sort = value;
-			$scope.reverse = false;
-		}
 
 		$scope.disableOutlet = function(chk, id) {
 			//$scope.auth_token = getCookie('authToken');
