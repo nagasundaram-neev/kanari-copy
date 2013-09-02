@@ -224,7 +224,7 @@ class Outlet < ActiveRecord::Base
         feedbacks_per_hour = feedbacks.group_by {|f| f.updated_at.strftime('%H')}
         ("00".."23").each {|hr| time_of_visit["#{hr.to_i}"] = ( feedbacks_per_hour["#{hr}"] && feedbacks_per_hour["#{hr}"].length) || 0 }
       end
-      customer = {:male => male_users, :female => female_users, :new => new_users, :returning => returning_users, :time_of_visit => time_of_visit} 
+      customer = {:male => male_users, :female => female_users, :new_users => new_users, :returning_users => returning_users, :time_of_visit => time_of_visit} 
    end
 
     def get_usage_statistics(feedbacks=[],redemptions=[])
