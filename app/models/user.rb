@@ -59,12 +59,12 @@ class User < ActiveRecord::Base
     case role
     when 'kanari_admin'
       if(options[:customer_id]).present?
-        Outlet.unscoped.where(customer_id: options[:customer_id]).includes(:customer)
+        Outlet.unscoped.where(customer_id: options[:customer_id]).includes(:customer).order('customers.name asc, outlets.disabled asc, outlets.name asc, outlets.address asc, outlets.id asc')
       else
-        Outlet.unscoped.includes(:customer)
+        Outlet.unscoped.includes(:customer).order('customers.name asc, outlets.disabled asc, outlets.name asc, outlets.address asc, outlets.id asc')
       end
     when 'customer_admin'
-      customer.nil? ? [] : ( Outlet.unscoped.where(customer: customer) )
+      customer.nil? ? [] : ( Outlet.unscoped.where(customer: customer).order('outlets.disabled asc,outlets.name asc,outlets.address asc,outlets.id asc') )
     when 'manager'
       managed_outlets
     when 'staff'
