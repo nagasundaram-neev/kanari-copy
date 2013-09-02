@@ -1077,7 +1077,7 @@ input {
 /**** Dashboard snapshot ****/
 .snapshotMenuDropDown {
 	float: right;
-	margin: 5px 10px;
+	margin: 6px;
 }
 .insight_graph1, .insight_graph2 {
 	width: 50%;
@@ -1138,6 +1138,16 @@ input {
 }
 #dashboardSnapshot .main_content span {
 	margin-right: 0 !important;
+}
+.dashboardHeader {
+	float: left;
+	 margin-left: 27px;
+}
+#dashboardComments, #dashboardTrends, #dashboardSnapshot {
+	width: auto;
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
 }
 .daily_change {
 	float: left;
@@ -1328,7 +1338,7 @@ input {
 }
 .chart_div {
 	float: left;
-	width: 600px;
+	width: 950px;
 }
 .chart_heading {
 	display: block;
@@ -1356,11 +1366,11 @@ input {
 	background-position: -2px -2px;
 }
 .addLeft {
-	left: 980px !important;
+	/*left: 980px !important;*/
 }
 
 .addLeft:before, .addLeft:after {
-	left: 200px !important;
+	/*left: 200px !important;*/
 }
 
 /** Payment History **/
@@ -1418,10 +1428,10 @@ input {
 	width: 95px
 }
 .headCol3 {
-	width: 360px
+	width: 350px
 }
 .headCol4 {
-	width: 95px
+	width: 105px
 }
 .headCol5 {
 	width: 78px;
@@ -1474,56 +1484,56 @@ input {
     /*width: 100%;*/
 }
 
-.adminConsoleColumns{
+.adminConsoleColumns {
 	border: 1px solid #dcdbda;
 	 padding: 10px;
 	 border-top:none;
 	 font-size: 14px;
 	 /*width: 100%;*/
 }
-.adminConsoleColumns .col{
-	float:left;
-	text-align:left;
-	 width: 120px;
+.adminConsoleColumns .col {
+	float: left;
+	text-align: left;
+	width: 120px;
 }
 
-.adminConsoleColumns .col1{
-	float:left;
-	text-align:left;
-	 width: 175px;
+.adminConsoleColumns .col1 {
+	float: left;
+	text-align: left;
+	width: 175px;
 }
 
-.outletTble .colSave{
+.outletTble .colSave {
 	float: left;
     text-align: right;
     width: 72px;
 }
-.colSave span{
+.colSave span {
 	background-color: #F5BA44;
-    font-size: 16px;
-    padding: 2px 8px;
     cursor: pointer;
+	font-size: 16px;
+	padding: 2px 8px;
 	border-radius: 3px;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	-ms-border-radius: 3px;
 }
 
-.adminConsoleColumns .col3{
+.adminConsoleColumns .col3 {
 	float: left;
-    text-align: left;
-    width: 45px;
+	text-align: left;
+	width: 45px;
 }
 
-.adminConsoleColumns .col3{
-	float:left;
-	text-align:left;
+.adminConsoleColumns .col3 {
+	float: left;
+	text-align: left;
 	width: 0px;
 }
 
-.adminConsoleColumns .col2{
-	float:left;
-	text-align:left;
+.adminConsoleColumns .col2 {
+	float: left;
+	text-align: left;
 	width: 185px;
 }
 
@@ -1542,9 +1552,14 @@ input {
     width: 166px;
 }
 
+.outletTble .colHdrDisabled {
+	width: 60px;
+	text-align: center;
+}
+
 .outletTble .colHdr1 {
 	float: left;
-    width: 171px;
+	width: 171px;
 }
 
 .outletTble .colCustomer1 {
@@ -1556,7 +1571,7 @@ input {
     width: 171px;
 }
 
-.outletTble input{
+.outletTble input {
 	float: none;
 }
 

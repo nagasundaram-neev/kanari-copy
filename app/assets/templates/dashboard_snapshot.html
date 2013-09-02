@@ -1,13 +1,46 @@
-<div data-role="page" class="main_content span12" data-theme="b" id="dashboardSnapshot" ng-controller="dashboardSnapshotCtrl">
-	<div class="header_title">
-		<span class="manager_outlet">Dashboard</span>
-		<span class="arrow-right blank_span">&nbsp;</span>
-		<span style="padding: 10px 20px;">Snapshot</span>
-		<select ng-model="outletOption" class="snapshotMenuDropDown" ng-options="value.id as value.name for value in outletNameList" ng-change="selectOutletSnap()">
+<div data-role="page" class="main_content span12" style="width: auto;" data-theme="b" id="dashboardSnapshot" ng-controller="dashboardSnapshotCtrl">
+	<style>
+		.span12 a.kanarilogo img {
+			width: 220px;
+		}
+		.welcome {
+			margin-top: 32px;
+		}
+		.ngView {
+			padding: 0;
+		}
+		.navBarCls .nav-tabs > li > a, .nav-pills > li > a {
+			padding: 6px 12px !important;
+		}
+		#dp2, #dp3 {
+			margin: 6px;
+		}
+		.viewAccPage {
+			margin: 15px 25px;
+			padding: 5px 0;
+		}
+		.showNav ul{margin-right: 35px !important}
+		.header .span12{  width: 1235px;}
+	</style>
+	<div class="showNav navBarCls" >
+		<div class="dashboardHeader">
+			<select ng-model="outletOption" class="snapshotMenuDropDown" ng-options="value.id as value.name for value in outletNameList" ng-change="selectOutletSnap()">
 			<option value="">Select Outlet</option>
 		</select>
+		</div>
+		<ul class="span12 nav nav-tabs">
+			<li id="comments" class="diffLinks">
+				<a href="#/comments" style="border-bottom:none"><img src="assets/ic_comments.png" />COMMENTS</a>
+			</li>
+			<li id="trends" class="diffLinks">
+				<a href="#/trends"><img src="assets/ic_trends.png" />TRENDS</a>
+			</li>
+			<li id="snapshot" class="active diffLinks">
+				<a href="#/snapshot" class="active"><img src="assets/ic_snapshots.png" />SNAPSHOT </a>
+			</li>
+		</ul>
 	</div>
-	<div id="outletManager" class="viewAccPage" style="margin: 10px;overflow: hidden;">
+	<div id="outletManager" class="viewAccPage" style="overflow: hidden;">
 		<div class="insight_graph1">
 		<!-- <highchart id="chart1" series="chart.series" title="chart.title" options="chart.options"></highchart> -->
 		<div class="score_1">

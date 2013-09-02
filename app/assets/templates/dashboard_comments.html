@@ -1,28 +1,58 @@
-<div data-role="page" class="main_content span12" data-theme="b" id="dashboardComments" ng-controller="dashboardCommentsCtrl">
-	<div class="header_title">
-		<span class="manager_outlet">Dashboard</span>
-		<span class="arrow-right blank_span">&nbsp;</span>
-		<span style="padding: 10px 20px;">Comments</span>
-		<div class="input-append date"  id="dp3"  data-date="{{v.Dt | date:'dd-MM-yyyy'}}" data-date-format="dd-mm-yyyy">
-			<input id="sDate" class="span2" size="16" type="text" ng-model="endDate" value="End Date" readonly>
-			<span class="add-on"><i class="icon-th"></i></span>
-			<!-- data-date="{{v.Dt | date:'dd-MM-yyyy'}}" -->
+<div data-role="page" class="main_content span12" style="width: auto;" data-theme="b" id="dashboardComments" ng-controller="dashboardCommentsCtrl">
+	<style>
+		.span12 a.kanarilogo img {
+			width: 220px;
+		}
+		.welcome {
+			margin-top: 32px;
+		}
+		.ngView {
+			padding: 0;
+		}
+		.navBarCls .nav-tabs > li > a, .nav-pills > li > a {
+			padding: 6px 12px !important;
+		}
+		#dp2, #dp3 {
+			margin: 6px;
+		}
+		.viewAccPage {
+			margin: 15px 25px;
+			padding: 5px 0;
+		}
+		.showNav ul{margin-right: 35px !important}
+		.header .span12{  width: 1235px;}
+	</style>
+	<div class="showNav navBarCls" >
+		<div class="dashboardHeader">
+			<div class="input-append date"  id="dp3"  data-date="{{v.Dt | date:'dd-MM-yyyy'}}" data-date-format="dd-mm-yyyy">
+				<input id="sDate" class="span2" size="16" type="text" ng-model="endDate" value="End Date" readonly>
+				<span class="add-on"><i class="icon-th"></i></span>
+				<!-- data-date="{{v.Dt | date:'dd-MM-yyyy'}}" -->
+			</div>
+			<div class="input-append date"  id="dp2" data-date="{{v.Dt | date:'dd-MM-yyyy'}}" data-date-format="dd-mm-yyyy">
+				<input class="span2" size="16" type="text" ng-model="startDate"  value="Start Date" readonly>
+				<span class="add-on"><i class="icon-th"></i></span>
+			</div>
+			<select ng-model="outletOption" class="outletDropDown" ng-options="value.id as value.name for value in outletNameList">
+				<option value="">Select Outlet</option>
+			</select>
 		</div>
-		<div class="input-append date"  id="dp2" data-date="{{v.Dt | date:'dd-MM-yyyy'}}" data-date-format="dd-mm-yyyy">
-			<input class="span2" size="16" type="text" ng-model="startDate"  value="Start Date" readonly>
-			<span class="add-on"><i class="icon-th"></i></span>
-		</div>
-		<select ng-model="outletOption" class="outletDropDown" ng-options="value.id as value.name for value in outletNameList">
-			<option value="">Select Outlet</option>
-		</select>
+		<ul class="span12 nav nav-tabs">
+			<li id="comments" class="dashboardLi diffLinks">
+				<a href="#/comments" style="border-bottom:none"><img src="assets/ic_comments.png" />COMMENTS</a>
+			</li>
+			<li id="trends" class="dashboardLi diffLinks">
+				<a href="#/trends"><img src="assets/ic_trends.png" />TRENDS</a>
+			</li>
+			<li id="snapshot" class="dashboardLi diffLinks">
+				<a href="#/snapshot" class="active"><img src="assets/ic_snapshots.png" />SNAPSHOT </a>
+			</li>
+		</ul>
 	</div>
-	<div id="outletManager" class="viewAccPage" >
+
+	<div id="outletManager" class="viewAccPage"  >
 		<h3 class="redemptionMsg" ng-show="!feedbackList.length">Currently you do not have any feedbacks to list</h3>
 		<div ng-show="feedbackList.length" class="home_page_view">
-			<!-- <div id="refresh" ng-click="refresh()">
-			<strong>Refresh feedbacks</strong>
-			</div>
-			<div class="clr"></div> -->
 			<div ng-repeat="feedbacks in feedbackList" class="feedback_step">
 				<div class="divPadding promo_code">
 					<span class="promo_txt">Promoter
