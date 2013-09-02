@@ -2252,7 +2252,17 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 		$rootScope.header = "Dashboard Comments | Kanari";
 		$scope.feedbackList = [];
 		$scope.outletNameList = [];
-
+		
+		
+		if ($routeParams.outletId) {
+		$scope.addOutletId = true;
+		$scope.addOutletNo = $routeParams.outletId;
+		$scope.outletOption = $routeParams.outletId;
+		}
+		else{
+			$scope.addOutletId = false;
+		}
+		
 		$scope.v = {
 			Dt : Date.now()
 		}
@@ -2304,6 +2314,7 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 			}).success(function(data, status) {
 				console.log("Data in success " + data + " status " + status);
 				$scope.outletNameList = data.outlets;
+				$scope.outletOption = parseInt($routeParams.outletId);
 			}).error(function(data, status) {
 				console.log("data in error " + data + " status " + status);
 			});
@@ -2337,6 +2348,7 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 			//$.mobile.loading('show');
 			var param = {
 				"auth_token" : getCookie('authToken'),
+				"outlet_id" : $scope.outletOption,
 				"password" : "X"
 			}
 
@@ -2378,7 +2390,18 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		var usageLegend = "";
 		var npsBreakdownV = 0;
 		var npsOverview = 0;
-
+		
+		
+		if ($routeParams.outletId) {
+		$scope.addOutletId = true;
+		$scope.addOutletNo = $routeParams.outletId;
+		$scope.outletOption = $routeParams.outletId;
+		}
+		else{
+			$scope.addOutletId = false;
+		}
+		
+		
 		$scope.v = {
 			Dt : Date.now()
 		}
@@ -2482,7 +2505,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		$scope.selectOutlet = function() {
 			$scope.listOfTrendsDate(idV);
 		}
-
+		
+		
 		$scope.listOfTrendsDate = function(idValue) {
 			if (!idValue) {
 				idValue = "food";
@@ -2604,8 +2628,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						custLegend1 = "Male";
 						custLegend2 = "Female";
 					} else if (idValue == "usersGraph") {
-						var foodLike = data.feedback_trends.detailed_statistics[dateV].customers.
-						new  ;
+						var foodLike = data.feedback_trends.detailed_statistics[dateV].customers.new;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].customers.returning;
 						custLegend1 = "New";
 						custLegend2 = "Returning";
@@ -2657,6 +2680,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			}).success(function(data, status) {
 				console.log("Data in success " + data + " status " + status);
 				$scope.outletNameList = data.outlets;
+				$scope.outletOption  = parseInt($routeParams.outletId);
 			}).error(function(data, status) {
 				console.log("data in error " + data + " status " + status);
 			});
@@ -2941,14 +2965,24 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		$('#snapshot').addClass('active');
 		$('#adminConsole').hide();
 		$rootScope.header = "Dashboard Snapshot | Kanari";
-
+		
+		if ($routeParams.outletId) {
+		$scope.addOutletId = true;
+		$scope.addOutletNo = $routeParams.outletId;
+		$scope.outletOption = $routeParams.outletId;
+		}
+		else{
+			$scope.addOutletId = false;
+		}
+		
 		$scope.feedbackMetrics = function() {
+			
 			var param = {
 				"auth_token" : getCookie('authToken'),
 				"outlet_id" : $scope.outletOption,
 				"password" : "X"
 			}
-
+			
 			$http({
 				method : 'get',
 				url : '/api/feedbacks/metrics',
@@ -3082,7 +3116,8 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 			if (!$scope.$$phase) {
 				//$digest or $apply
 			}
-			var param = {
+			
+				var param = {
 				"auth_token" : getCookie('authToken'),
 				"outlet_id" : $scope.outletOption,
 				"start_time" : startdt,
@@ -3122,6 +3157,7 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 			}).success(function(data, status) {
 				console.log("Data in success " + data + " status " + status);
 				$scope.outletNameList = data.outlets;
+				$scope.outletOption  = parseInt($routeParams.outletId);
 			}).error(function(data, status) {
 				console.log("data in error " + data + " status " + status);
 			});

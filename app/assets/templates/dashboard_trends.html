@@ -38,13 +38,16 @@
 		</div>
 		<ul class="span12 nav nav-tabs">
 			<li id="comments" class="dashboardLi diffLinks">
-				<a href="#/comments" style="border-bottom:none"><img src="assets/ic_comments.png" />COMMENTS</a>
+				<a ng-show="addOutletId" href="#/comments?outletId={{addOutletNo}}" style="border-bottom:none"><img src="assets/ic_comments.png" />COMMENTS</a>
+				<a ng-hide="addOutletId" href="#/comments" style="border-bottom:none"><img src="assets/ic_comments.png" />COMMENTS</a>
 			</li>
 			<li id="trends" class="dashboardLi diffLinks">
-				<a href="#/trends"><img src="assets/ic_trends.png" />TRENDS</a>
+				<a ng-show="addOutletId" href="#/trends?outletId={{addOutletNo}}"><img src="assets/ic_trends.png" />TRENDS</a>
+				<a ng-hide="addOutletId" href="#/trends"><img src="assets/ic_trends.png" />TRENDS</a>
 			</li>
-			<li id="snapshot" class="dashboardLi diffLinks">
-				<a href="#/snapshot" class="active"><img src="assets/ic_snapshots.png" />SNAPSHOT </a>
+			<li id="snapshot" class="active dashboardLi diffLinks">
+				<a ng-show="addOutletId" href="#/snapshot?outletId={{addOutletNo}}" class="active"><img src="assets/ic_snapshots.png" />SNAPSHOT </a>
+				<a ng-hide="addOutletId" href="#/snapshot" class="active"><img src="assets/ic_snapshots.png" />SNAPSHOT </a>
 			</li>
 		</ul>
 	</div>
