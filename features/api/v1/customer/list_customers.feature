@@ -17,7 +17,7 @@ Feature: List customer accounts
       """
        {
          "customers": [
-           {
+          {
             "customer_admin": null,
             "email": null,
             "authorized_outlets": 1,
@@ -25,7 +25,7 @@ Feature: List customer accounts
             "mailing_address_country": null,
             "mailing_address_line_1": null,
             "mailing_address_line_2": null,
-            "name": "Subway",
+            "name": "KFC",
             "phone_number": null,
             "registered_address_city": null,
             "registered_address_country": null,
@@ -46,8 +46,8 @@ Feature: List customer accounts
             "registered_address_country": null,
             "registered_address_line_1": null,
             "registered_address_line_2": null
-          },
-          {
+           },
+           {
             "customer_admin": null,
             "email": null,
             "authorized_outlets": 1,
@@ -55,13 +55,13 @@ Feature: List customer accounts
             "mailing_address_country": null,
             "mailing_address_line_1": null,
             "mailing_address_line_2": null,
-            "name": "KFC",
+            "name": "Subway",
             "phone_number": null,
             "registered_address_city": null,
             "registered_address_country": null,
             "registered_address_line_1": null,
             "registered_address_line_2": null
-           }
+          }
          ]
        }
       """
