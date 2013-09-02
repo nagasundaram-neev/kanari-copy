@@ -8,7 +8,9 @@
 				what your customers are saying about your business.</span>
 			<!-- <a ng-show="outlets.length" href="#/list_payment_invoice" title="Payment Invoice Link" class="addRestaurant"><%= image_tag "icon_new_restaurant_outlet.png" %>List Payment Invoices</a> -->
 			<a ng-show="userAction" href="#/create_outlet" title="addRestaurant" class="addRestaurant"><%= image_tag "icon_new_restaurant_outlet.png" %>New Restaurant Outlet</a>
-			<div ng-hide="userAction">&nbsp;</div>
+			<div ng-hide="userAction">
+				&nbsp;
+			</div>
 			<div class="clr"></div>
 			<div ng-show="outlets.length">
 				<span class="outlet_lenght"> Viewing {{outlets.length}} outlets</span>
@@ -16,7 +18,8 @@
 					<div class="sr_outlet" ng-repeat="outlet in outlets">
 						<div class="outlet_name border_right">
 							<span class="outlet_id">{{$index+1}}</span>
-							<a href="#/create_outlet?outletId={{outlet.id}}">{{outlet.name}}</a>
+							<a href="#/create_outlet?outletId={{outlet.id}}" ng-hide="outlet.disabled">{{outlet.name}}</a>
+							<a href="javascript:void(0);" ng-show="outlet.disabled">{{outlet.name}}</a>
 							<span class="disable_outlet_cls" ng-show="outlet.disabled">(Disabled)</span>
 							<br/>
 							<span class="address">{{outlet.address}}</span>
@@ -27,27 +30,29 @@
 							<span class="full_name">{{outlet.manager.first_name}} {{outlet.manager.last_name}}</span>
 						</div>
 						<div class="action">
-						
-							<a href="#/snapshot" target="_blank" class="outlet_action actions" >
-								<%= image_tag 'icon_view_dashboard.png' %>
-								<br/>
-								View Dashboard
-							</a>
-							<a href="#/create_outlet?outletId={{outlet.id}}" class="outlet_action actions" >
-								<%= image_tag 'icon_modify_profile.png' %>
-								<br/>
-								Modify Profile
-							</a>
-							<a href="#/create_outlet?outletId={{outlet.id}}" class="outlet_action actions" >
-								<%= image_tag 'icon_download_report.png' %>
-								<br/>
-								Download Report
-							</a>
+							<a href="#/create_outlet?outletId={{outlet.id}}" class="outlet_action actions" ng-hide="outlet.disabled"> <%= image_tag 'icon_view_dashboard.png' %>
+							<br/>
+							View Dashboard </a>
+							<a href="javascript:void(0);" class="outlet_action actions" ng-show="outlet.disabled"> <%= image_tag 'icon_view_dashboard.png' %>
+							<br/>
+							View Dashboard </a>
+							<a href="#/create_outlet?outletId={{outlet.id}}" class="outlet_action actions" ng-hide="outlet.disabled"> <%= image_tag 'icon_modify_profile.png' %>
+							<br/>
+							Modify Profile </a>
+							<a href="javascript:void(0);" class="outlet_action actions" ng-show="outlet.disabled"> <%= image_tag 'icon_modify_profile.png' %>
+							<br/>
+							Modify Profile </a>
+							<a href="#/create_outlet?outletId={{outlet.id}}" class="outlet_action actions" ng-hide="outlet.disabled"> <%= image_tag 'icon_download_report.png' %>
+							<br/>
+							Download Report </a>
+							<a href="javascript:void(0);" class="outlet_action actions" ng-show="outlet.disabled"> <%= image_tag 'icon_download_report.png' %>
+							<br/>
+							Download Report </a>
 						</div>
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 
 		<!-- <div class="divRight" ng-include src ="'<%= asset_path 'rightSidePanel.html' %>'" ></div> -->

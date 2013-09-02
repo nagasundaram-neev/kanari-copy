@@ -506,6 +506,7 @@ div.create_rest {
 	font-size: 13px;
 	/*margin: 1% -18%;*/
 }
+
 .header_title span.outletM {
 	border-bottom: 3px solid #5A4166;
 	display: block;
@@ -1563,17 +1564,18 @@ input {
 /* Admin Console CSS */
 .adminConsoleHdr {
 	background-color: #dcdbda;
-	border: 1px solid #dcdbda;
-	font-size: 14px;
-	padding: 10px;
-	width: 100%;
+    border: 1px solid #dcdbda;
+    font-size: 14px;
+    padding: 10px;
+    /*width: 100%;*/
 }
 
 .adminConsoleColumns {
 	border: 1px solid #dcdbda;
-	padding: 10px;
-	font-size: 14px;
-	width: 100%;
+	 padding: 10px;
+	 border-top:none;
+	 font-size: 14px;
+	 /*width: 100%;*/
 }
 .adminConsoleColumns .col {
 	float: left;
@@ -1589,11 +1591,12 @@ input {
 
 .outletTble .colSave {
 	float: left;
-	text-align: right;
-	width: 67px;
+    text-align: right;
+    width: 72px;
 }
 .colSave span {
 	background-color: #F5BA44;
+    cursor: pointer;
 	font-size: 16px;
 	padding: 2px 8px;
 	border-radius: 3px;
@@ -1622,7 +1625,17 @@ input {
 
 .outletTble .colHdr {
 	float: left;
-	width: 120px;
+    width: 126px;
+}
+
+.outletTble .colHdrDisabled {
+    width: 78px;
+    text-align: center;
+}
+
+.outletTble .colCustomer {
+    text-align: center;
+    width: 166px;
 }
 
 .outletTble .colHdrDisabled {
@@ -1635,15 +1648,77 @@ input {
 	width: 171px;
 }
 
+.outletTble .colCustomer1 {
+    width: 166px;
+}
+
 .outletTble .colHdr2 {
 	float: left;
-	width: 185px;
+    width: 171px;
 }
 
 .outletTble input {
 	float: none;
 }
 
-.outletTble {
-	color: #444343;
+.outletTble{
+	color:#444343;
+	margin: 2px 20px 20px;
 }
+
+.inputBox input{
+	width:100px;
+}
+.outletTble .colAuthoOutlet{
+	float: left;
+    text-align: center;
+    width: 263px;
+}
+
+.colAuthoOutlet input{
+	border: 1px solid #CCCCCC;
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px;
+    margin: 0 auto;
+    overflow: hidden;
+    width: 60px;
+    border: medium none;
+    box-shadow: none;
+}
+
+.inputBox span{
+	border: 1px solid #CCCCCC;
+}
+
+.inputBox{
+	border: 1px solid #CCCCCC;
+    border-radius: 5px 5px 5px 5px;
+    margin: 0 auto;
+	width: 86px;
+}
+
+.arrows{
+	border-right:medium none !important;
+	border-top: medium none !important;
+	border-bottom: medium none !important;
+	border-radius:0 5px 5px 0;
+	float: right;
+	cursor: pointer;
+    height: 26px;
+}
+
+.upArrow{
+	margin-top: -6px;
+}
+.downArrow{
+	margin-top: -24px;
+}
+
+#adminConosoleOutlet .successMsg, #adminConsoleCustomer .successMsg {
+	color: #0F9D58;
+	/*margin-top: 10px;*/
+	font-size: 15px;
+	text-align: center;
+	/*margin: 1% -18%;*/
+}
+
