@@ -98,6 +98,9 @@ body {
 .main_content {
 	background: none repeat scroll 0 0 #FFFFFF;
 	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-ms-border-radius: 10px;
 }
 .footer {
 	background: none repeat scroll 0 0 #664766;
@@ -127,6 +130,9 @@ body {
 	color: #FFFFFF;
 	text-transform: uppercase;
 	border-radius: 0 0 0 0;
+	-moz-border-radius: 0 0 0 0;
+	-webkit-border-radius: 0 0 0 0;
+	-ms-border-radius: 0 0 0 0;
 }
 .navBarCls .nav-tabs > li > a:hover {
 	background: none repeat scroll 0 0 #E4E3E1;
@@ -271,6 +277,9 @@ span.full_name {
 .divRight {
 	border: 1px solid #CCCCCC;
 	border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+	-webkit-border-radius: 10px 10px 10px 10px;
+	-ms-border-radius: 10px 10px 10px 10px;
 	float: right;
 	height: 300px;
 	padding: 10px 25px;
@@ -302,6 +311,9 @@ span.full_name {
 a.addRestaurant {
 	background: none repeat scroll 0 0 #F5BA44;
 	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	-ms-border-radius: 5px 5px 5px 5px;
 	color: #664765;
 	font-size: 17px;
 	margin: 20px 5px;
@@ -331,6 +343,9 @@ a.addRestaurant:hover {
 .sr_outlet {
 	border: 1px solid #CCCCCC;
 	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-ms-border-radius: 5px;
 	margin-bottom: 15px;
 	overflow: hidden;
 }
@@ -358,6 +373,9 @@ a.addRestaurant:hover {
 .outlet_id {
 	background: none repeat scroll 0 0 #5A4166;
 	border-radius: 33px 33px 33px 33px;
+	-moz-border-radius: 33px 33px 33px 33px;
+	-webkit-border-radius: 33px 33px 33px 33px;
+	-ms-border-radius: 33px 33px 33px 33px;
 	font-size: 12px !important;
 	color: #FFFFFF !important;
 	display: inline !important;
@@ -392,6 +410,9 @@ a.addRestaurant:hover {
 a.actions {
 	background: none repeat scroll 0 0 #E5E5E5;
 	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	-ms-border-radius: 5px 5px 5px 5px;
 	margin: 0 5px;
 	text-align: center;
 	width: 108px;
@@ -601,6 +622,9 @@ div.create_rest {
 	margin: 0 0 20px;
 	border: 1px solid #CCCCCC;
 	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	-ms-border-radius: 5px 5px 5px 5px;
 }
 #location .location_select {
 	display: block;
@@ -632,6 +656,9 @@ button.enabel_Btn {
 .btn_cls {
 	background: none repeat scroll 0 0 #F5BA44;
 	border-radius: 7px 7px 7px 7px;
+	-moz-border-radius: 7px 7px 7px 7px;
+	-webkit-border-radius: 7px 7px 7px 7px;
+	-ms-border-radius: 7px 7px 7px 7px;
 	padding: 5px 10px;
 }
 .manager_list span {
@@ -735,6 +762,9 @@ ul.taketour li a:hover {
 	padding: 5px !important;
 	text-shadow: none !important;
 	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	-ms-border-radius: 5px 5px 5px 5px;
 	margin-left: 5px;
 }
 a.changePassword:hover {
@@ -783,6 +813,9 @@ ul.outlet_cuisine_type li a {
 	background: #fefefe;
 	font-size: .875em;
 	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-ms-border-radius: 5px;
 	box-shadow: 0 1px 3px #aaa;
 	border: 1px solid #ddd;
 	opacity: 0.9;
@@ -1006,12 +1039,23 @@ input {
 }
 
 /***Dashboard Comment***/
+.dashboardLi a img {
+	margin-right: 5px;
+}
 .home_page_view {
 	width: 100%;
+	height: 580px;
+	overflow-y: auto;
+}
+#dashboardComments .home_page_view {
+	height: 530px;
 }
 .feedback_step {
 	border: 1px solid #D6D6D6;
 	border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+	-webkit-border-radius: 10px 10px 10px 10px;
+	-ms-border-radius: 10px 10px 10px 10px;
 	margin: 0.4% 0.6%;
 	overflow: hidden;
 	padding: 1% 0;
@@ -1020,16 +1064,26 @@ input {
 .promo_code {
 	color: #674665;
 	float: left;
-	padding: 1% 0;
 	width: 12%;
 	text-align: center;
 }
-
+.insight_graph2 h3, h3.redemptionMsg{
+	font-size: 16px;
+    margin: 10px;
+}
 .promo_txt {
-	font-size: 16px !important;
+	color: #999999;
+	font-family: myriadpro;
+	font-size: 11px !important;
 	font-weight: bold;
 	line-height: 10px;
-	font-family: myriadpro;
+}
+
+#dashboardComments .promo_txt {
+	font-size: 14px !important;
+}
+#dashboardComments .update_time {
+	font-size: 12px;
 }
 .promo_value {
 	display: block;
@@ -1041,7 +1095,7 @@ input {
 	border-left: 1px solid #D6D6D6;
 	border-right: 1px solid #D6D6D6;
 	float: left;
-	width: 26%;
+	width: 21%;
 }
 
 .def_icon {
@@ -1054,17 +1108,18 @@ input {
 }
 .promo_code_desc {
 	float: left;
-	padding: 1% 2%;
+	padding: 1%;
 	position: relative;
 	text-align: justify;
-	width: 57%;
+	width: 64%;
 	font-size: 14px;
 }
 .update_time {
-	bottom: 3%;
+	bottom: 2%;
+	color: #999999;
+	font-size: 11px;
 	position: absolute;
-	right: 3%;
-	font-size: 14px;
+	right: 2%;
 }
 
 .outletDropDown {
@@ -1079,27 +1134,31 @@ input {
 	margin: 6px;
 }
 .insight_graph1, .insight_graph2 {
-	width: 50%;
+	width: 45%;
 	float: left;
 }
 .insight_graph2 {
 	height: 583px;
 	overflow-y: auto;
+	width: 55%;
 }
 .daily_change_span {
 	float: right !important;
 	margin-left: 1px !important;
 	padding-top: 5%;
 	text-align: left;
-	width: 33%;
+	width: 30%;
 }
 .daily_change_span img {
 	padding: 6% 0;
 	float: left;
 }
 .score_1 {
-	background: none repeat scroll 0 0 #E6E7E9;
+	background: none repeat scroll 0 0 #F5F5F5;
 	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	-ms-border-radius: 5px 5px 5px 5px;
 	margin: 0.51%;
 	overflow: hidden;
 	padding: 0 0 0 1%;
@@ -1140,7 +1199,7 @@ input {
 }
 .dashboardHeader {
 	float: left;
-	 margin-left: 27px;
+	margin-left: 27px;
 }
 #dashboardComments, #dashboardTrends, #dashboardSnapshot {
 	width: auto;
@@ -1157,8 +1216,10 @@ input {
 .netScore {
 	color: #664766;
 	display: block;
-	font-size: 250% !important;
-	margin-top: 5px;
+	font-family: 'Roboto', sans-serif !important;
+	font-size: 38px !important;
+	/*font-weight: bold;*/
+	margin-top: 13px;
 }
 
 .txt1 {
@@ -1166,10 +1227,16 @@ input {
 	color: #000000;
 }
 .value1 {
-	display: block;
-	font-size: 22px !important;
-	margin-top: 5px;
 	color: #664766;
+	display: block;
+	font-family: 'Roboto', sans-serif !important;
+	font-size: 38px !important;
+	/*font-weight: bold;*/
+	margin-top: 10px;
+}
+.score_div .value1{
+	font-size: 22px !important;
+	margin-top: 7px;
 }
 .value2 {
 	color: #664766;
@@ -1197,8 +1264,8 @@ input {
 }
 .ratePValue {
 	background: none repeat scroll 0 0 transparent;
-	color: #664766;
-	font-size: 15px;
+	color: #5A4166;
+	font-size: 13px;
 	font-weight: normal;
 	margin-left: 1%;
 }
@@ -1210,9 +1277,8 @@ input {
 }
 .rateMValue {
 	background: none repeat scroll 0 0 transparent;
-	color: #664766;
-	/*font-family: number;*/
-	font-size: 15px;
+	color: #5A4166;
+	font-size: 13px;
 	font-weight: normal;
 	margin-right: 1%;
 }
@@ -1239,6 +1305,9 @@ input {
 }
 .main_score {
 	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	-ms-border-radius: 5px 5px 5px 5px;
 	border: 1px solid #C3C3C3;
 	margin: 0 0.5%;
 }
@@ -1248,8 +1317,12 @@ input {
 	border-bottom: 1px solid #C3C3C3;
 }
 .score_final {
-	background: none repeat scroll 0 0 #E6E7E9;
+	background: none repeat scroll 0 0 #F5F5F5;
 	border-top: 12px solid #D6D6D6;
+	border-radius: 0 0 5px 5px;
+	-moz-border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;
+	-ms-border-radius: 0 0 5px 5px;
 	overflow: hidden;
 	height: 60px;
 }
@@ -1266,24 +1339,27 @@ input {
 	color: #505050 !important;
 }
 .insight_graph1 .score_final .net_score {
-	border-right: 2px solid #664766;
+	border-right: 1px solid #c3c3c3;
 }
 .insight_graph1 .daily_change_score {
 	width: 34%;
 }
 .insight_graph2 .promo_code_def {
-	width: 38%;
+	width: 30%;
 }
 .insight_graph1 .main_score .txt1 {
-	font-family: roboto;
-	font-size: 15px;
-	font-weight: bold;
+	color: #888888 !important;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 18px;
+	text-shadow: none;
 }
 .insight_graph1 .score_1 .txt1, .insight_graph1 .score_final .txt1 {
-	font-size: 15px;
+	font-size: 13px;
+	color: #888888 !important;
 }
 .insight_graph2 .def_icon {
-	font-size: 13px;
+	font-size: 11px;
 	width: 62px;
 	margin: 0;
 }
@@ -1291,19 +1367,21 @@ input {
 	width: 15%;
 }
 .insight_graph2 .promo_code_desc {
-	width: 42%;
-}
-.insight_graph2 .main_content span {
-	font-size: 13px;
+	width: 52%;
+	padding: 0 1% 2%;
+	color: #5A4166;
+	font-size: 12px;
 }
 .insight_graph2 .promo_value {
-	font-size: 40px !important;
-	margin-top: 15%;
+	font-size: 48px !important;
+	margin-top: 20%;
 	font-family: number;
 }
 .insight_graph2 .promo_code_desc span, .insight_graph2 .update_time span {
-	color: #505050;
-	font-size: 14px;
+	/*bottom: 2%;
+	 color: #999999;
+	 font-size: 11px;
+	 right: 2%;*/
 }
 
 /**** Dashboard snapshot ****/
@@ -1312,22 +1390,24 @@ input {
 .menu_bar {
 	width: 240px;
 	padding: 10px 0;
-	border-right: 1px solid #CCCCCC;
+	border-right: 1px solid #F0F0F0;
 	float: left;
 }
 .menu_bar .headingCls {
-	border-top: 1px solid #CCCCCC;
-	padding: 10px 10px 0;
+	border-top: 1px solid #F0F0F0;
+	font-size: 16px;
 	font-weight: bold;
+	margin: 0 20px 0 10px;
+	padding: 10px 0 6px;
 }
 .menu_bar ul {
 	list-style: none outside none;
 	margin: 0 0 9px 35px;
 }
 .menu_bar ul li {
-	border-top: 1px solid #CCCCCC;
-	padding: 3px 0;
-	font-size: 14px;
+	border-top: 1px solid #F0F0F0;
+	font-size: 13px;
+	padding: 5px 0 5px 15px;
 }
 .menu_bar ul li a {
 	color: #5A4166;
@@ -1343,13 +1423,19 @@ input {
 	display: block;
 	font-size: 16px;
 	font-weight: bold;
-	margin: 20px 15px;
+	margin: 20px 10px;
 }
 #dashboard_trends ul li a:active {
 	font-weight: bold;
+	color: #C84A58;
 }
 #dashboard_trends ul li a.active {
 	font-weight: bold;
+	color: #C84A58;
+}
+#dashboard_trends ul li a:hover {
+	font-weight: bold;
+	color: #C84A58;
 }
 /**** Dashboard Trends End ****/
 

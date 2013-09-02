@@ -544,6 +544,10 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 			}).success(function(data, status) {
 				console.log("data in success " + data.lenght + " status " + status);
 				$scope.outletsList = data.outlets;
+				console.log(data.outlets.length);
+				if (data.outlets.length>0) {
+					$scope.formoutlet1 = data.outlets[0].id;
+				}
 			}).error(function(data, status) {
 				console.log("data in error" + data + " status " + status);
 			});
@@ -571,6 +575,7 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 				}).success(function(data, status) {
 					console.log("data in success " + data + " status " + status);
 					$scope.paymentInvoiceSuccess = true;
+
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
 					$scope.paymentInvoiceFail = true;
@@ -581,6 +586,19 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 				$scope.paymentInvoiceSuccess = false;
 				$scope.dateEntered = true;
 			}
+		};
+
+		$scope.clearForm = function() {
+			$scope.paymentInvoiceSuccess = false;
+			document.getElementById('paymentInvoiceForm').reset();
+			$scope.outletsList = "";
+			// $scope.kanari_invoice_id = "";
+			// $("#autocomplete").val('');
+			// $("#sDate").val('');
+			//$scope.formoutlet1 = "";
+			// $scope.kanari_plan = "";
+			// $scope.amount_paid = "";
+			// $scope.invoice_pdf = "";
 		};
 	} else {
 		$location.url("/login");
@@ -2582,7 +2600,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						custLegend2 = "Female";
 					} else if (idValue == "usersGraph") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].customers.
-						new ;
+						new  ;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].customers.returning;
 						custLegend1 = "New";
 						custLegend2 = "Returning";
@@ -3040,10 +3058,28 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 
 		$scope.feedbackMetrics();
 
+		Date.prototype.yyyymmdd = function() {
+
+			var yyyy = this.getFullYear().toString();
+			var mm = (this.getMonth() + 1).toString();
+			// getMonth() is zero-based
+			var dd = this.getDate().toString();
+
+			return yyyy + '-' + (mm[1] ? mm : "0" + mm[0]) + '-' + (dd[1] ? dd : "0" + dd[0]);
+		};
+
 		$scope.listFeedbacks = function() {
+			var dt = new Date();
+			var startdt = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), 5, 0, 0)
+			var timeZone = String(String(dt).split("(")[1]).split(")")[0];
+			console.log("start date " + startdt);
+			if (!$scope.$$phase) {
+				//$digest or $apply
+			}
 			var param = {
 				"auth_token" : getCookie('authToken'),
 				"outlet_id" : $scope.outletOption,
+				"start_time" : startdt,
 				"password" : "X"
 			}
 
@@ -3053,7 +3089,7 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 				params : param
 			}).success(function(data, status) {
 				console.log("User Role " + data + " status " + status);
-				$scope.feedbackList = data.feedbacks;
+				$scope.feedbackListSnapShot = data.feedbacks;
 
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));

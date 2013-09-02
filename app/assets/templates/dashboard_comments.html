@@ -4,7 +4,7 @@
 			width: 220px;
 		}
 		.welcome {
-			margin-top: 32px;
+			margin-top: 28px;
 		}
 		.ngView {
 			padding: 0;
@@ -33,7 +33,7 @@
 				<input class="span2" size="16" type="text" ng-model="startDate"  value="Start Date" readonly>
 				<span class="add-on"><i class="icon-th"></i></span>
 			</div>
-			<select ng-model="outletOption" class="outletDropDown" ng-options="value.id as value.name for value in outletNameList">
+			<select ng-model="outletOption" class="outletDropDown" ng-options="value.id as value.name+', '+value.address for value in outletNameList">
 				<option value="">Select Outlet</option>
 			</select>
 		</div>
@@ -119,7 +119,7 @@
 				</div>
 				<div class="clr"></div>
 				<div class="update_time">
-					<span class="timeago" >{{feedbacks.updated_at | fromNow}}</span>
+					<span class="timeago" >{{feedbacks.updated_at | date:'h:mm a, EEEE MMM. d, y'}}</span>
 				</div>
 			</div>
 		</div>

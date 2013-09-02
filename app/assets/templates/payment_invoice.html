@@ -12,7 +12,7 @@
 					*
 				</div> Indicates mandatory fields</span>
 			<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 41%;">
-				<form ng-app="form-example" class="row form-horizontal" name="paymentInvoice" ng-submit="payment_invoice(paymentInvoice)" novalidate>
+				<form id="paymentInvoiceForm" ng-app="form-example" class="row form-horizontal" name="paymentInvoice" ng-submit="payment_invoice(paymentInvoice)" novalidate>
 					<div class="control-group">
 						<div class="controls">
 							<lable >
@@ -101,6 +101,7 @@
 							<button class="btn" disabled>
 								Create Payment Invoice
 							</button>
+							<a href="" class="submitBtn btn btn-primary btn-large"  ng-click="clearForm()">Clear Form</a>
 						</div>
 						<p class="successMsg" ng-show="paymentInvoiceSuccess">
 							Payment invoice has beed generated sucessfully.
