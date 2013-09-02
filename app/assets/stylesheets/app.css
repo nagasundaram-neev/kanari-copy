@@ -1636,3 +1636,18 @@ input {
 	/*margin: 1% -18%;*/
 }
 
+.outletTble a:hover{
+	text-decoration: none;
+	color:#444343;
+	cursor:pointer;
+}
+
+.outletTble a{
+	color:#444343;
+	cursor:pointer;
+}
+
+.outletTble a:visited {
+	color:#005580;
+}
+

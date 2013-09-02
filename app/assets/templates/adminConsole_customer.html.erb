@@ -12,7 +12,7 @@
 		<span style="padding: 10px 20px;"><a href="#/adminConsole_outlet">Outlet</a></span>
 		<span class="blank_span"><%= image_tag 'div_line_yellow.jpg' %></span>
 	</div>
-	<p class="successMsg" ng-show="custUpdate">Customer {{customerNo}} is successfully updated!!</p>
+	<p class="successMsg" ng-show="custUpdate">{{customerName}} has been successfully updated</p>
 	<div class="viewAccPage outletTble">
 		<div class="adminConsoleHdr">
 			<div class="colHdr1 colCustomer1">
@@ -32,7 +32,7 @@
 			</div>
 			<div class="clr"></div>
 		</div>
-		<div ng-repeat="customers in customerDetails" class="adminConsoleColumns">
+		<div ng-repeat="customers in customerDetails"  class="adminConsoleColumns">
 			<div class="colHdr1 colCustomer1">
 				{{customers.name}}
 			</div>
@@ -41,7 +41,7 @@
 			</div>
 			<div class="colHdr2 colAuthoOutlet">
 				<div class="inputBox">
-					<input type="text" ng-model="customers.authorized_outlets" id="textb" value="0"/>
+					<input type="text" ng-model="customers.authorized_outlets" value="0"/>
 					<span class="arrows">
 					<img class="upArrow" ng-click="increase_decreaseVal($index,1)" src="/assets/up_arrow.png"/></br>
 					<img class="downArrow" ng-click="increase_decreaseVal($index,0)" src="/assets/down_arrow.png"/> 

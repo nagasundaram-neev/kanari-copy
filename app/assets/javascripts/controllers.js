@@ -574,7 +574,7 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 				}).success(function(data, status) {
 					console.log("data in success " + data + " status " + status);
 					$scope.paymentInvoiceSuccess = true;
-					
+
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
 					$scope.paymentInvoiceFail = true;
@@ -586,15 +586,15 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 				$scope.dateEntered = true;
 			}
 		};
-		
-		$scope.clearForm = function(){
+
+		$scope.clearForm = function() {
 			$scope.paymentInvoiceSuccess = false;
 			document.getElementById('paymentInvoiceForm').reset();
 			$scope.outletsList = "";
 			// $scope.kanari_invoice_id = "";
 			// $("#autocomplete").val('');
 			// $("#sDate").val('');
-			 //$scope.formoutlet1 = "";
+			//$scope.formoutlet1 = "";
 			// $scope.kanari_plan = "";
 			// $scope.amount_paid = "";
 			// $scope.invoice_pdf = "";
@@ -2215,8 +2215,6 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 				console.log("data in error " + data + " status " + status);
 			});
 		};
-		
-		
 
 		$scope.getOutlet = function(outletId, payInNo) {
 
@@ -2609,7 +2607,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						custLegend2 = "Female";
 					} else if (idValue == "usersGraph") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].customers.
-						new ;
+						new   ;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].customers.returning;
 						custLegend1 = "New";
 						custLegend2 = "Returning";
@@ -3151,6 +3149,15 @@ module.controller('adminConsoleOutletCtrl', function($scope, $rootScope, $routeP
 			}).success(function(data, status) {
 				console.log("Data in success " + data + " status " + status);
 				$scope.outletDetails = data.outlets;
+				$scope.outletDetails.sort(function(a, b) {
+					var nameA = a.disabled, nameB = b.disabled
+					if (nameA == false)//sort string ascending
+						return -1
+					if (nameA == true)
+						return 1
+					return 0 //default return value (no sorting)
+				});
+
 			}).error(function(data, status) {
 				console.log("data in error " + data + " status " + status);
 			});
@@ -3158,9 +3165,20 @@ module.controller('adminConsoleOutletCtrl', function($scope, $rootScope, $routeP
 
 		$scope.loadOutletDetails();
 
-		// $scope.checkDisable = function(chk,id){
-		//
-		// };
+		//$scope.sort = "name";
+		$scope.reverse = false;
+
+		$scope.changeSort = function(value) {
+			
+			//if ($scope.sort == value) {
+				$scope.sortingOrder = value;
+				$scope.reverse = !$scope.reverse;
+				return;
+			//}
+
+			//$scope.sort = value;
+			$scope.reverse = false;
+		}
 
 		$scope.disableOutlet = function(chk, id) {
 			//$scope.auth_token = getCookie('authToken');
@@ -3233,6 +3251,14 @@ module.controller('adminConsoleCustomerCtrl', function($scope, $rootScope, $rout
 			}).success(function(data, status) {
 				console.log("Data in success " + data + " status " + status);
 				$scope.customerDetails = data.customers;
+				$scope.customerDetails.sort(function(a, b) {
+					var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase()
+					if (nameA < nameB)//sort string ascending
+						return -1
+					if (nameA > nameB)
+						return 1
+					return 0 //default return value (no sorting)
+				});
 				$scope.outletNo = data.customers.authorized_outlets;
 			}).error(function(data, status) {
 				console.log("data in error " + data + " status " + status);
@@ -3268,7 +3294,7 @@ module.controller('adminConsoleCustomerCtrl', function($scope, $rootScope, $rout
 			}).success(function(data, status) {
 				console.log("data in success " + data + " status " + status);
 				$scope.error = data.auth_token;
-				$scope.customerNo = cus.id;
+				$scope.customerName = cus.name;
 				$scope.custUpdate = true;
 				$scope.statement = true;
 				$scope.erromsg = false;
