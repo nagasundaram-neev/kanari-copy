@@ -3206,7 +3206,7 @@ module.controller('adminConsoleOutletCtrl', function($scope, $rootScope, $routeP
 
 		$scope.loadOutletDetails();
 
-		$scope.disableOutlet = function(chk, id) {
+		$scope.disableOutlet = function(chk, id,outletName) {
 			//$scope.auth_token = getCookie('authToken');
 			console.log("hi " + chk);
 
@@ -3223,7 +3223,8 @@ module.controller('adminConsoleOutletCtrl', function($scope, $rootScope, $routeP
 			}).success(function(data, status) {
 				console.log("data in success " + data + " status " + status);
 				$scope.error = data.auth_token;
-				$scope.outNO = id;
+				//$scope.outNO = id;
+				$scope.outletName = outletName;
 				//conseol.log("id "+$scope.outNO);
 				if (chk == true) {
 					$scope.enabled = true;
