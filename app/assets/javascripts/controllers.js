@@ -2574,17 +2574,17 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			$scope.listOfTrendsDate(idV);
 		});
 
-		$scope.chart_heading = "Customer Experience Metrics";
+		$scope.chart_heading = "Customer Experience";
 		$("#dashboard_trends ul").click(function() {
 			metricsId = $(this).attr("class");
 			if (metricsId == "custExp") {
-				$scope.chart_heading = "Customer Experience Metrics";
+				$scope.chart_heading = "Customer Experience";
 			} else if (metricsId == "netPromo") {
-				$scope.chart_heading = "Net Promoter Score Metrics";
+				$scope.chart_heading = "Net Promoter Score";
 			} else if (metricsId == "usage") {
-				$scope.chart_heading = "Usage Metrics";
+				$scope.chart_heading = "Usage";
 			} else if (metricsId == "customers") {
-				$scope.chart_heading = "Customers Metrics";
+				$scope.chart_heading = "Customers";
 			}
 		});
 
@@ -2948,6 +2948,9 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				title : {
 					text : $scope.chart_heading + ' | Stacked column chart',
 					color : '#A08A75',
+					style :{
+						display:'none'
+					}
 				},
 				xAxis : {
 					categories : resultsDate,
@@ -3006,6 +3009,9 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				title : {
 					text : $scope.chart_heading + ' | Stacked column chart',
 					color : '#A08A75',
+					style :{
+						display:'none'
+					}
 				},
 				xAxis : {
 					categories : resultsDate,
@@ -3056,7 +3062,10 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 
 				title : {
 					text : $scope.chart_heading + ' | Stacked column chart',
-					color : '#A08A75'
+					color : '#A08A75',
+					style :{
+						display:'none'
+					}
 				},
 
 				xAxis : {
