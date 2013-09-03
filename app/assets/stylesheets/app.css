@@ -1095,6 +1095,7 @@ input {
 	font-family: 'Roboto', sans-serif !important;
 	font-size: 70px !important;
 	margin-top: 20px;
+	font-weight: 100;
 }
 .promo_code_def {
 	border-left: 1px solid #D6D6D6;
@@ -1499,6 +1500,7 @@ input {
 	border-bottom: 1px solid #CCCCCC;
 	overflow: hidden;
 	font-size: 14px;
+	padding-bottom: 5px;
 }
 .border_bottom_none {
 	border-bottom: none;
@@ -1511,7 +1513,8 @@ input {
 }
 .dataCol {
 	float: left;
-	padding: 8px 10px;
+	margin-bottom: -1000px;
+    padding: 8px 10px 1000px;
 	color: #9D9D9D;
 	border-right: 1px solid #CCCCCC;
 }
