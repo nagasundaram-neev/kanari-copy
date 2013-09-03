@@ -29,9 +29,10 @@
 							<lable >
 								Outlet<span class="star">*</span>
 							</lable>
-							<select ng-model='formoutlet1' ng-change="selectOutlet()" required ng-options='outletsList.id as outletsList.name for outletsList in outletsList'>
+							<select ng-show="isOutlet" ng-model='formoutlet1' ng-change="selectOutlet()" required ng-options='outletsList.id as outletsList.name for outletsList in outletsList'>
 								<option value="">Select Outlet</option>
 							</select>
+							<div ng-hide="isOutlet" class="errorMsg">No outlet for this customer.</div>
 						</div>
 					</div>
 					<div class="control-group">
