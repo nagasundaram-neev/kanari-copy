@@ -304,7 +304,7 @@ module.controller('homePageController', function($scope, $http, $location, $time
 			var time = dt.getHours();
 			console.log("time "+time);
 			
-			if(time > 0 && time < 5){
+			if(time >= 0 && time < 5){
 				console.log("hi i an in");
 				dt.setDate(dt.getDate() - 1);
 			}
@@ -406,7 +406,7 @@ module.controller('insightsController', function($scope, $http, $location, $time
 			var time = dt.getHours();
 			console.log("time "+time);
 			
-			if(time > 0 && time < 5){
+			if(time >= 0 && time < 5){
 				console.log("hi i an in");
 				dt.setDate(dt.getDate() - 1);
 			}
