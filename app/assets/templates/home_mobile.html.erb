@@ -1,13 +1,14 @@
 <div data-role="page" data-theme="b" id="home" ng-controller="homeController">
 	<style>
 .setting {
-background-image: url("/assets/ic_setting_yellow.png");
-background-position: 0 3px;
-background-repeat: no-repeat;
-cursor: pointer;
-float: right;
-height: 47px;
-width: 42px;
+background-image: url("/assets/icon_Setting.svg");
+    background-position: 0 3px;
+    background-repeat: no-repeat;
+    background-size: 43px 42px;
+    cursor: pointer;
+    float: right;
+    height: 47px;
+    width: 45px;
 }
 .calender{
 background-image: url(<%= asset_path 'ic_calender_yellow.png' %>
@@ -69,13 +70,15 @@ background-image: url(<%= asset_path 'ic_calender_yellow.png' %>
 			<div class="imgDiv">
 				<div class="yellowBack" ng-click="feedback()">
 					<div class="feedback">
-						<%= image_tag 'b_leave_feedback.png' %>
+						<!-- <%= image_tag 'icon_LeaveFeedback.svg' %>. -->
+						<img src="/assets/icon_LeaveFeedback.svg" style="height: 50px;" />
 					</div>
 					<span class="feedbackTxt">LEAVE FEEDBACK</span>
 				</div>
 				<div class="yellowBack" ng-click="redeemPoints()" style="border-right: medium none;">
 					<div class="redeems">
 						<%= image_tag 'b_redeem_points.png' %>
+						<!-- <img src="http://www.html5rocks.com/static/demos/svgmobile_fundamentals/images/HTML5-logo-granim.svg" height="64" alt="Nice green circle"/> -->
 					</div>
 					<span class="feedbackTxt">REDEEM POINTS</span>
 				</div>
