@@ -25,8 +25,8 @@
 		<%= javascript_include_tag "angular.js" %>
 		<%= javascript_include_tag "highcharts.js" %>
 		<script src="http://code.highcharts.com/highcharts-more.js"></script>
-		<script type='text/javascript' src="https://rawgithub.com/timrwood/moment/2.1.0/min/moment.min.js"></script>
-
+		<%= javascript_include_tag "moment.min.js" %>
+		
 		<%= javascript_include_tag "app" %>
 
 		<%= javascript_include_tag "controllers.js" %>
@@ -37,7 +37,7 @@
 		<div class="content" ng-controller="commonCtrl">
 			<div class="header">
 				<div class="span12">
-					<a class="kanarilogo" href="" ng-click="goTOOulet()"><%= image_tag 'Kanari-Logo-Horizontal-300x77.png' %></a>
+					<a class="kanarilogo" href="" ng-click="goTOOulet()"><%= image_tag 'Kanari-Logo-Horizontal-216x41.png' %></a>
 					<div class="welcome">
 						Hello <a ng-click="goTOOulet()" class="userName" id="userName">{{userName}}</a>
 						<%= image_tag 'div_line_logout.jpg' %>

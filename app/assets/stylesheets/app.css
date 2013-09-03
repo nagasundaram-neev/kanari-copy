@@ -56,8 +56,11 @@ body {
 .welcome {
 	float: right;
 	display: none;
-	margin-top: 50px;
+	margin-top: 28px;
 	font-size: 12px;
+}
+.span12 a.kanarilogo img{
+	 margin-top: 5px;
 }
 .welcome a {
 	text-decoration: none;
@@ -1049,7 +1052,7 @@ input {
 	overflow-y: auto;
 }
 #dashboardComments .home_page_view {
-	height: 530px;
+	/*height: 620px;*/
 }
 .feedback_step {
 	border: 1px solid #D6D6D6;
@@ -1148,8 +1151,8 @@ input {
 	float: right !important;
 	margin-left: 1px !important;
 	padding-top: 5%;
-	text-align: left;
-	width: 30%;
+	text-align: right;
+	width: 31%;
 }
 .daily_change_span img {
 	padding: 6% 0;
@@ -1238,7 +1241,7 @@ input {
 }
 .score_div .value1{
 	font-size: 22px !important;
-	margin-top: 7px;
+	margin-top: 4px;
 }
 .value2 {
 	color: #664766;
@@ -1398,7 +1401,7 @@ input {
 .menu_bar .headingCls {
 	border-top: 1px solid #F0F0F0;
 	font-size: 16px;
-	font-weight: bold;
+	/*font-weight: bold;*/
 	margin: 0 20px 0 10px;
 	padding: 10px 0 6px;
 }
@@ -1420,11 +1423,12 @@ input {
 .chart_div {
 	float: left;
 	width: 950px;
+	margin: 0 20px;
 }
 .chart_heading {
 	display: block;
 	font-size: 16px;
-	font-weight: bold;
+	/*font-weight: bold;*/
 	margin: 20px 10px;
 }
 #dashboard_trends ul li a:active {
