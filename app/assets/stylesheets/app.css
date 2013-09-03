@@ -56,16 +56,17 @@ body {
 .welcome {
 	float: right;
 	display: none;
-	margin-top: 28px;
+	margin-top: 22px;
+	padding-bottom: 5px;
 	font-size: 12px;
 }
-.span12 a.kanarilogo img{
-	 margin-top: 5px;
+.span12 a.kanarilogo img {
+	margin-top: 5px;
 }
 .welcome a {
 	text-decoration: none;
 	color: #5A4166;
-	font-weight: bold;
+	font-weight: 100;
 	cursor: pointer;
 	margin-right: 10px;
 }
@@ -1071,10 +1072,10 @@ input {
 	width: 12%;
 	text-align: center;
 }
-.insight_graph2 h3, h3.redemptionMsg{
+.insight_graph2 h3, h3.redemptionMsg {
 	font-size: 16px;
-    margin: 10px;
-    font-weight: normal;
+	margin: 10px;
+	font-weight: normal;
 }
 .promo_txt {
 	color: #999999;
@@ -1085,7 +1086,7 @@ input {
 }
 
 #dashboardComments .promo_txt {
-	font-size: 14px !important;
+	font-size: 13px !important;
 }
 #dashboardComments .update_time {
 	font-size: 12px;
@@ -1094,7 +1095,7 @@ input {
 	display: block;
 	font-family: 'Roboto', sans-serif !important;
 	font-size: 70px !important;
-	margin-top: 20px;
+	margin-top: 30px;
 	font-weight: 100;
 }
 .promo_code_def {
@@ -1110,11 +1111,11 @@ input {
 	margin: 3% 2%;
 	text-align: center;
 	width: 70px;
-	font-size: 14px;
+	font-size: 13px;
 }
 .promo_code_desc {
 	float: left;
-	padding: 1%;
+	padding: 0 1%;
 	position: relative;
 	text-align: justify;
 	width: 64%;
@@ -1151,13 +1152,14 @@ input {
 .daily_change_span {
 	float: right !important;
 	margin-left: 1px !important;
-	padding-top: 5%;
+	padding-top: 6%;
 	text-align: right;
-	width: 33%;
+	width: 30%;
 }
 .daily_change_span img {
-	padding: 6% 3px;
-	float: left;
+	/*padding: 6% 1px;
+	 float: left;*/
+	vertical-align: bottom;
 }
 .score_1 {
 	background: none repeat scroll 0 0 #F5F5F5;
@@ -1234,15 +1236,19 @@ input {
 }
 .value1 {
 	color: #664766;
-	display: block;
+	/*display: block;*/
 	font-family: 'Roboto', sans-serif !important;
 	font-size: 38px !important;
 	font-weight: 100;
 	margin-top: 10px;
 }
-.score_div .value1{
-	font-size: 22px !important;
+.score_final .value1{
+	display: block;
+}
+.score_div .value1 {
+	font-size: 20px !important;
 	margin-top: 4px;
+	margin-left: 1px;
 }
 .value2 {
 	color: #664766;
@@ -1403,15 +1409,15 @@ input {
 .menu_bar .headingCls {
 	border-top: 1px solid #F0F0F0;
 	font-size: 16px;
-	 border-bottom: 1px solid #F0F0F0;
+	border-bottom: 1px solid #F0F0F0;
 	/*margin: 0 20px 0 10px;*/
-	margin: 0;
+	margin-right: 20px;
 	padding: 10px 0 6px;
 }
 .menu_bar ul {
 	list-style: none outside none;
 	/*margin: 0 0 9px 35px;*/
-	margin: 0;
+	margin: 0 20px 0 0;
 }
 .menu_bar ul li {
 	border-top: 1px solid #F0F0F0;
@@ -1419,7 +1425,7 @@ input {
 	padding: 5px 0 5px 15px;
 }
 .menu_bar ul li a {
-	color: #5A4166;
+	color: #999999;
 }
 .menu_bar ul li a:hover {
 	text-decoration: none;
@@ -1440,7 +1446,7 @@ input {
 	color: #C84A58;
 }
 #dashboard_trends ul li a.active {
-	/*font-weight: bold;*/
+	font-weight: bold;
 	color: #C84A58;
 }
 #dashboard_trends ul li a:hover {
@@ -1514,7 +1520,7 @@ input {
 .dataCol {
 	float: left;
 	margin-bottom: -1000px;
-    padding: 8px 10px 1000px;
+	padding: 8px 10px 1000px;
 	color: #9D9D9D;
 	border-right: 1px solid #CCCCCC;
 }
@@ -1575,18 +1581,18 @@ input {
 /* Admin Console CSS */
 .adminConsoleHdr {
 	background-color: #dcdbda;
-    border: 1px solid #dcdbda;
-    font-size: 14px;
-    padding: 10px;
-    /*width: 100%;*/
+	border: 1px solid #dcdbda;
+	font-size: 14px;
+	padding: 10px;
+	/*width: 100%;*/
 }
 
 .adminConsoleColumns {
 	border: 1px solid #dcdbda;
-	 padding: 10px;
-	 border-top:none;
-	 font-size: 14px;
-	 /*width: 100%;*/
+	padding: 10px;
+	border-top: none;
+	font-size: 14px;
+	/*width: 100%;*/
 }
 .adminConsoleColumns .col {
 	float: left;
@@ -1602,12 +1608,12 @@ input {
 
 .outletTble .colSave {
 	float: left;
-    text-align: right;
-    width: 72px;
+	text-align: right;
+	width: 72px;
 }
 .colSave span {
 	background-color: #F5BA44;
-    cursor: pointer;
+	cursor: pointer;
 	font-size: 16px;
 	padding: 2px 8px;
 	border-radius: 3px;
@@ -1636,17 +1642,17 @@ input {
 
 .outletTble .colHdr {
 	float: left;
-    width: 126px;
+	width: 126px;
 }
 
 .outletTble .colHdrDisabled {
-    width: 78px;
-    text-align: center;
+	width: 78px;
+	text-align: center;
 }
 
 .outletTble .colCustomer {
-    text-align: center;
-    width: 166px;
+	text-align: center;
+	width: 166px;
 }
 
 .outletTble .colHdrDisabled {
@@ -1660,68 +1666,68 @@ input {
 }
 
 .outletTble .colCustomer1 {
-    width: 166px;
+	width: 166px;
 }
 
 .outletTble .colHdr2 {
 	float: left;
-    width: 171px;
+	width: 171px;
 }
 
 .outletTble input {
 	float: none;
 }
 
-.outletTble{
-	color:#444343;
+.outletTble {
+	color: #444343;
 	margin: 2px 20px 20px;
 }
 
-.inputBox input{
-	width:100px;
+.inputBox input {
+	width: 100px;
 }
-.outletTble .colAuthoOutlet{
+.outletTble .colAuthoOutlet {
 	float: left;
-    text-align: center;
-    width: 263px;
+	text-align: center;
+	width: 263px;
 }
 
-.colAuthoOutlet input{
+.colAuthoOutlet input {
 	border: 1px solid #CCCCCC;
-    border-radius: 5px 5px 5px 5px;
-    -moz-border-radius: 5px;
-    margin: 0 auto;
-    overflow: hidden;
-    width: 60px;
-    border: medium none;
-    box-shadow: none;
+	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px;
+	margin: 0 auto;
+	overflow: hidden;
+	width: 60px;
+	border: medium none;
+	box-shadow: none;
 }
 
-.inputBox span{
+.inputBox span {
 	border: 1px solid #CCCCCC;
 }
 
-.inputBox{
+.inputBox {
 	border: 1px solid #CCCCCC;
-    border-radius: 5px 5px 5px 5px;
-    margin: 0 auto;
+	border-radius: 5px 5px 5px 5px;
+	margin: 0 auto;
 	width: 86px;
 }
 
-.arrows{
-	border-right:medium none !important;
+.arrows {
+	border-right: medium none !important;
 	border-top: medium none !important;
 	border-bottom: medium none !important;
-	border-radius:0 5px 5px 0;
+	border-radius: 0 5px 5px 0;
 	float: right;
 	cursor: pointer;
-    height: 26px;
+	height: 26px;
 }
 
-.upArrow{
+.upArrow {
 	margin-top: -6px;
 }
-.downArrow{
+.downArrow {
 	margin-top: -24px;
 }
 
@@ -1733,18 +1739,18 @@ input {
 	/*margin: 1% -18%;*/
 }
 
-.outletTble a:hover{
+.outletTble a:hover {
 	text-decoration: none;
-	color:#444343;
-	cursor:pointer;
+	color: #444343;
+	cursor: pointer;
 }
 
-.outletTble a{
-	color:#444343;
-	cursor:pointer;
+.outletTble a {
+	color: #444343;
+	cursor: pointer;
 }
 
 .outletTble a:visited {
-	color:#005580;
+	color: #005580;
 }
 

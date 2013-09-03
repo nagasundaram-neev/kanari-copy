@@ -1972,6 +1972,8 @@ module.controller('changePassCtrl', function($rootScope, $scope, $routeParams, $
 				$scope.success = false;
 			}
 		}
+	}else{
+		$location.url("/login");
 	}
 });
 module.controller('sidePanelCtrl', function($scope, $routeParams, $route, $http, $location) {
@@ -2262,6 +2264,8 @@ module.controller('outletCuisineTypeCtrl', function($scope, $rootScope, $routePa
 				}
 			});
 		}
+	}else{
+		$location.url("/login");
 	}
 });
 
@@ -2370,6 +2374,9 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 		}
 
 		$scope.listPaymentHistory();
+	}
+	else{
+		$location.url("/login");
 	}
 });
 
@@ -2516,6 +2523,9 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 		$scope.selectOutlet = function() {
 			$scope.listFeedbacks();
 		}
+	}
+	else{
+		$location.url("/login");
 	}
 });
 
@@ -3112,6 +3122,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			});
 		}
 
+	}else{
+		$location.url("/login");
 	}
 });
 module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location) {
@@ -3133,7 +3145,6 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		}
 
 		$scope.feedbackMetrics = function() {
-
 			var param = {
 				"auth_token" : getCookie('authToken'),
 				"outlet_id" : $scope.outletOption,
@@ -3338,6 +3349,9 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		};
 		$scope.listOutletNames();
 
+	}
+	else{
+		$location.url("/login");
 	}
 });
 
