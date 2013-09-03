@@ -742,6 +742,8 @@ module.controller('feedbackController', function($scope, $http, $location) {
 	$scope.digit4 = "";
 	$scope.digit5 = "";
 	$scope.error = false;
+	$scope.numbers = {};
+	$scope.numbers = ["","","","",""];
 
 	$scope.home = function() {
 		if (getCookie('authToken')) {
@@ -750,29 +752,20 @@ module.controller('feedbackController', function($scope, $http, $location) {
 			$location.url("/index");
 		}
 	};
-
+var digitScope = 0;
 	$scope.clear = function() {
-		$scope.digit1 = "";
-		$scope.digit2 = "";
-		$scope.digit3 = "";
-		$scope.digit4 = "";
-		$scope.digit5 = "";
+		$scope.numbers= {};
+		$scope.numbers = ["","","","",""];
 		$scope.error = false;
+		digitScope = 0
 	};
-
+   
 	$scope.enterValues = function(val) {
-		//console.log("digit1 " + $scope.digit1);
-		if (!$scope.digit1 || $scope.digit1 == "") {
-			$scope.digit1 = val;
-		} else if (!$scope.digit2 || $scope.digit2 == "") {
-			$scope.digit2 = val;
-		} else if (!$scope.digit3 || $scope.digit3 == "") {
-			$scope.digit3 = val;
-		} else if (!$scope.digit4 || $scope.digit4 == "") {
-			$scope.digit4 = val;
-		} else if (!$scope.digit5 || $scope.digit5 == "") {
-			$scope.digit5 = val;
+		if(digitScope < 5){
+		$scope.numbers[digitScope] = val;
+		digitScope++;
 		}
+		
 	};
 
 	$scope.next = function() {

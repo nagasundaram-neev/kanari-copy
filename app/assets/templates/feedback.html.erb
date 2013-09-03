@@ -23,11 +23,11 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				Enter your code to proceed
 			</div>
 			<div class="menDiv">
-				<div class="backColr">
-					{{digit1}}
+				<div ng-repeat="digit in numbers" class="backColr">
+					{{digit}}
 
 				</div>
-				<div class="backColr">
+				<!-- <div class="backColr">
 					{{digit2}}
 				</div>
 				<div class="backColr">
@@ -38,7 +38,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				</div>
 				<div class="backColr" style="border-right:0">
 					{{digit5}}
-				</div>
+				</div> -->
 				<div class="clr"></div>
 			</div>
 		</div>
