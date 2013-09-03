@@ -2873,7 +2873,10 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 
 				title : {
 					text : $scope.chart_heading + ' | Stacked column chart',
-					color : '#A08A75'
+					color : '#A08A75',
+					style :{
+						display:'none'
+					}
 				},
 
 				xAxis : {
@@ -2909,6 +2912,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					}
 				},
 				legend : {
+					enabled:false,
 					layout : 'horizontal',
 					align : 'left',
 					x : 650,
@@ -2971,6 +2975,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					}
 				},
 				legend : {
+					enabled:false,
 					layout : 'horizontal',
 					align : 'left',
 					x : 750,
@@ -3087,6 +3092,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					}
 				},
 				legend : {
+					enabled:false,
 					layout : 'horizontal',
 					align : 'left',
 					x : 650,
