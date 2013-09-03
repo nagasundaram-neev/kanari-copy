@@ -2501,6 +2501,7 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 			}).success(function(data, status) {
 				console.log("User Role " + data + " status " + status);
 				$scope.feedbackList = data.feedbacks;
+				
 
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
@@ -2745,6 +2746,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					} else if (idValue == "npsOverview") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.like - data.feedback_trends.detailed_statistics[dateV].net_promoter_score.dislike;
 						npsOverview = 1;
+						usageLegend = "NPS Overview";
 					}
 					/**Net Promoter Score End**/
 
@@ -2912,13 +2914,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					}
 				},
 				legend : {
-					enabled:false,
-					layout : 'horizontal',
-					align : 'left',
-					x : 650,
-					verticalAlign : 'top',
-					y : 20,
-					floating : true,
+					x : -300,
 					backgroundColor : '#fff',
 					style : {
 						fontColor : '#A08A75'
@@ -2978,13 +2974,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					}
 				},
 				legend : {
-					enabled:false,
-					layout : 'horizontal',
-					align : 'left',
-					x : 750,
-					verticalAlign : 'top',
-					y : 20,
-					floating : true,
+					x : -350,
 					backgroundColor : '#fff',
 					style : {
 						fontColor : '#A08A75'
@@ -3036,6 +3026,13 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						style : {
 							color : '#7C7A7D',
 						}
+					}
+				},
+				legend : {
+					x : -350,
+					backgroundColor : '#fff',
+					style : {
+						fontColor : '#A08A75'
 					}
 				},
 				credits : {
@@ -3101,13 +3098,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					}
 				},
 				legend : {
-					enabled:false,
-					layout : 'horizontal',
-					align : 'left',
-					x : 650,
-					verticalAlign : 'top',
-					y : 20,
-					floating : true,
+					x : -370,
 					backgroundColor : '#fff',
 					style : {
 						fontColor : '#A08A75'

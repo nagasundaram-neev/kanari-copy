@@ -1152,10 +1152,10 @@ input {
 	margin-left: 1px !important;
 	padding-top: 5%;
 	text-align: right;
-	width: 31%;
+	width: 33%;
 }
 .daily_change_span img {
-	padding: 6% 0;
+	padding: 6% 3px;
 	float: left;
 }
 .score_1 {
@@ -1223,7 +1223,7 @@ input {
 	display: block;
 	font-family: 'Roboto', sans-serif !important;
 	font-size: 38px !important;
-	/*font-weight: bold;*/
+	font-weight: 100;
 	margin-top: 13px;
 }
 
@@ -1236,7 +1236,7 @@ input {
 	display: block;
 	font-family: 'Roboto', sans-serif !important;
 	font-size: 38px !important;
-	/*font-weight: bold;*/
+	font-weight: 100;
 	margin-top: 10px;
 }
 .score_div .value1{
@@ -1246,7 +1246,8 @@ input {
 .value2 {
 	color: #664766;
 	float: right;
-	/*font-family: number;*/
+	font-weight: 100;
+	font-family: 'Roboto', sans-serif !important;
 	font-size: 22px;
 }
 .rate_plus {
@@ -1380,7 +1381,7 @@ input {
 .insight_graph2 .promo_value {
 	font-size: 48px !important;
 	margin-top: 20%;
-	font-family: number;
+	font-weight: 100;
 }
 .insight_graph2 .promo_code_desc span, .insight_graph2 .update_time span {
 	/*bottom: 2%;
@@ -1401,13 +1402,15 @@ input {
 .menu_bar .headingCls {
 	border-top: 1px solid #F0F0F0;
 	font-size: 16px;
-	/*font-weight: bold;*/
-	margin: 0 20px 0 10px;
+	 border-bottom: 1px solid #F0F0F0;
+	/*margin: 0 20px 0 10px;*/
+	margin: 0;
 	padding: 10px 0 6px;
 }
 .menu_bar ul {
 	list-style: none outside none;
-	margin: 0 0 9px 35px;
+	/*margin: 0 0 9px 35px;*/
+	margin: 0;
 }
 .menu_bar ul li {
 	border-top: 1px solid #F0F0F0;
@@ -1432,15 +1435,15 @@ input {
 	margin: 20px 10px;
 }
 #dashboard_trends ul li a:active {
-	font-weight: bold;
+	/*font-weight: bold;*/
 	color: #C84A58;
 }
 #dashboard_trends ul li a.active {
-	font-weight: bold;
+	/*font-weight: bold;*/
 	color: #C84A58;
 }
 #dashboard_trends ul li a:hover {
-	font-weight: bold;
+	/*font-weight: bold;*/
 	color: #C84A58;
 }
 /**** Dashboard Trends End ****/
