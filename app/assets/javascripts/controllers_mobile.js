@@ -130,15 +130,15 @@ var auth_token = "";
 var feedbackFlag = 0;
 var signInCount = "";
 var facebookFlag = 0;
-var logOut = 0;
+//var logOut = 0;
 var flagPage = 0;
 
 module.controller('loginController', function($scope, $http, $location) {
 	console.log("under login controller")
 
-	if (logOut == 1) {
-		location.reload();
-	}
+	// if (logOut == 1) {
+		// location.reload();
+	// }
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
 	$scope.remember = false;
 	$scope.erromsg = false;
@@ -712,7 +712,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 				deleteCookie('userName');
 				deleteCookie('feedbackId');
 				deleteCookie("signInCount");
-				logOut = 1;
+				//logOut = 1;
 				deleteAllCookies();
 				$location.url("/login");
 			}).error(function(data, status) {
