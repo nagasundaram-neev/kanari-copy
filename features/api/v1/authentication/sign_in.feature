@@ -56,6 +56,7 @@ Feature: Sign In
       And the JSON response at "user_role" should be "customer_admin"
       And the JSON response at "registration_complete" should be false
       And the JSON response at "customer_id" should be null
+      And the JSON response at "can_create_new_outlet" should be false
 
     Scenario: customer_admin who has created a customer account
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"
@@ -70,6 +71,41 @@ Feature: Sign In
       And the JSON response at "user_role" should be "customer_admin"
       And the JSON response at "registration_complete" should be true
       And the JSON response at "customer_id" should be 100
+      And the JSON response at "can_create_new_outlet" should be true
+
+    Scenario: customer_admin who has created a customer account and outlet limit NOT reached
+      Given "Adam" is a user with email id "user@gmail.com" and password "password123"
+        And his role is "customer_admin"
+        And his authentication token is "auth_token_123"
+        And a customer named "Subway" exists with id "100" with admin "user@gmail.com"
+        And the customer with id "100" has an outlet named "Subway - Bangalore"
+        And the maximum number of authorized outlets for customer with id "100" is "2"
+      When I authenticate as the user "auth_token_123" with the password "X"
+      And I send a POST request to "/api/users/sign_in"
+      Then the response status should be "200"
+      And the JSON response should have "auth_token"
+        And the auth_token should be different from "auth_token_123"
+      And the JSON response at "user_role" should be "customer_admin"
+      And the JSON response at "registration_complete" should be true
+      And the JSON response at "customer_id" should be 100
+      And the JSON response at "can_create_new_outlet" should be true
+
+    Scenario: customer_admin who has created a customer account and outlet limit reached
+      Given "Adam" is a user with email id "user@gmail.com" and password "password123"
+        And his role is "customer_admin"
+        And his authentication token is "auth_token_123"
+        And a customer named "Subway" exists with id "100" with admin "user@gmail.com"
+        And the customer with id "100" has an outlet named "Subway - Bangalore"
+        And the maximum number of authorized outlets for customer with id "100" is "1"
+      When I authenticate as the user "auth_token_123" with the password "X"
+      And I send a POST request to "/api/users/sign_in"
+      Then the response status should be "200"
+      And the JSON response should have "auth_token"
+        And the auth_token should be different from "auth_token_123"
+      And the JSON response at "user_role" should be "customer_admin"
+      And the JSON response at "registration_complete" should be true
+      And the JSON response at "customer_id" should be 100
+      And the JSON response at "can_create_new_outlet" should be false
 
     Scenario: customer_admin who has active outlets
       Given "Adam" is a user with email id "user@gmail.com" and password "password123"

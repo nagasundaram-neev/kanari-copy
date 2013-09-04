@@ -15,15 +15,15 @@ module Api
           sign_in(resource_name, resource)
           resource.reset_authentication_token!
           resource.save!
-          render json: {
-            auth_token: resource.authentication_token,
-            first_name: resource.first_name,
-            last_name: resource.last_name,
-            user_role: resource.role,
-            sign_in_count: resource.sign_in_count,
-            registration_complete: resource.registration_complete?,
-            customer_id: (resource.customer.nil? ? nil : resource.customer.id)
-          }
+          if resource.role == 'customer_admin'
+            render json: { auth_token: resource.authentication_token, first_name: resource.first_name, last_name: resource.last_name,
+              user_role: resource.role, sign_in_count: resource.sign_in_count, registration_complete: resource.registration_complete?,
+              customer_id: (resource.customer.nil? ? nil : resource.customer.id), can_create_new_outlet: resource.can_create_new_outlet? }
+          else
+            render json: { auth_token: resource.authentication_token, first_name: resource.first_name, last_name: resource.last_name,
+              user_role: resource.role, sign_in_count: resource.sign_in_count, registration_complete: resource.registration_complete?,
+              customer_id: (resource.customer.nil? ? nil : resource.customer.id) }
+          end
         end
 
         def destroy

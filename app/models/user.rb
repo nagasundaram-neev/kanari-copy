@@ -76,6 +76,15 @@ class User < ActiveRecord::Base
     end
   end
 
+  def can_create_new_outlet?
+    if self.role == 'customer_admin'
+      customer = self.customer
+      customer && ( customer.authorized_outlets > customer.outlets.count ) ? true : false
+    else
+      return false
+    end
+  end
+
   def is_active?
     case role
     when 'user', 'kanari_admin', 'customer_admin'
