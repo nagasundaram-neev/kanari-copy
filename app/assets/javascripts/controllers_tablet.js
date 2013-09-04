@@ -505,7 +505,7 @@ module.controller('insightsController', function($scope, $http, $location, $time
 				if ($scope.netScore > 0) {
 					$scope.netScorePlusBar = true;
 					$scope.netScoreMinusBar = false;
-				} else {
+				} else if($scope.netScore < 0) {
 					$scope.netScorePlusBar = false;
 					$scope.netScoreMinusBar = true;
 				}

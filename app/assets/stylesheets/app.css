@@ -1049,7 +1049,7 @@ input {
 }
 .home_page_view {
 	width: 100%;
-	height: 580px;
+	height: 610px;
 	overflow-y: auto;
 }
 #dashboardComments .home_page_view {
@@ -1145,21 +1145,21 @@ input {
 	float: left;
 }
 .insight_graph2 {
-	height: 583px;
-	overflow-y: auto;
+	/*height: 583px;
+	overflow-y: auto;*/
 	width: 55%;
 }
 .daily_change_span {
 	float: right !important;
 	margin-left: 1px !important;
-	padding-top: 6%;
+	/*padding-top: 6%;*/
 	text-align: right;
 	width: 30%;
 }
 .daily_change_span img {
 	/*padding: 6% 1px;
 	 float: left;*/
-	vertical-align: bottom;
+	vertical-align: sub;
 }
 .score_1 {
 	background: none repeat scroll 0 0 #F5F5F5;
@@ -1176,9 +1176,9 @@ input {
 	border-right: 1px solid #664766;
 	float: left;
 	height: 45px;
-	margin-bottom: -1000px;
-	padding-bottom: 1000px;
-	padding-top: 20px;
+	/*margin-bottom: -1000px;
+	padding-bottom: 1000px;*/
+	padding-top: 30px;
 	text-align: left;
 	width: 49%;
 }
@@ -1189,7 +1189,7 @@ input {
 }
 .daily_change_score {
 	float: right;
-	padding-top: 1%;
+	/*padding-top: 1%;*/
 	text-align: right;
 	width: 30%;
 }
@@ -1219,8 +1219,13 @@ input {
 	float: left;
 	text-align: right;
 	width: 50%;
+	 height: 45px;
+    padding-top: 30px;
 	/*padding: 1% 0;*/
 }
+
+.score_1 .daily_change{padding-top: 0.5%;}
+.score_final .daily_change{padding-top: 0;}
 .netScore {
 	color: #664766;
 	display: block;
@@ -1260,7 +1265,7 @@ input {
 .rate_plus {
 	background: none repeat scroll 0 0 #FEC03B;
 	float: left;
-	margin-top: 20px;
+	/*margin-top: 20px;*/
 }
 .net_rate_plus {
 	background: none repeat scroll 0 0 #FEC03B;
@@ -1353,6 +1358,7 @@ input {
 }
 .insight_graph1 .score_final .net_score {
 	border-right: 1px solid #c3c3c3;
+	height: 60px;
 }
 .insight_graph1 .daily_change_score {
 	width: 34%;
