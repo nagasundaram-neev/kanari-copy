@@ -1,5 +1,5 @@
 <div id="homepage" align="center" ng-controller="homePageController" >
-	<h3 class="redemptionMsg" ng-show="!feedbackList.length">Your customers have not submitted any feedback today</h3>
+	<h3 class="redemptionMsg" ng-show="feedbkMsg">Your customers have not submitted any feedback today</h3>
 	<div ng-show="feedbackList.length" class="home_page_view">
 		<!-- <div id="refresh" ng-click="refresh()">
 			<strong>Refresh feedbacks</strong>

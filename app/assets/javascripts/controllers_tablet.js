@@ -284,6 +284,7 @@ module.controller('homePageController', function($scope, $http, $location, $time
 		var dt;
 		var overlayDiv = $("#overlaySuccess");
 		$scope.active1 = true;
+		$scope.feedbkMsg = false;
 		$scope.feedbackList = [];
 		//$('#overlaySuccess').show();
 		//$('#overlaySuccess').append('<img id="theImg" src="/assets/ajax-loader.gif" />')
@@ -302,13 +303,13 @@ module.controller('homePageController', function($scope, $http, $location, $time
 			//$.mobile.loading('show');
 			dt = new Date();
 			var time = dt.getHours();
-			console.log("time "+time);
-			
-			if(time >= 0 && time < 5){
+			console.log("time " + time);
+
+			if (time >= 0 && time < 5) {
 				console.log("hi i an in");
 				dt.setDate(dt.getDate() - 1);
 			}
-			
+
 			var startdt = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), 5, 0, 0)
 
 			var timeZone = String(String(dt).split("(")[1]).split(")")[0];
@@ -340,7 +341,12 @@ module.controller('homePageController', function($scope, $http, $location, $time
 					'z-index' : '0',
 					'background-color' : 'transparent'
 				});
-				console.log("in list feedbacks");
+				if ($scope.feedbackList.length > 0) {
+					$scope.feedbkMsg = false
+				} else {
+					$scope.feedbkMsg = true;
+				}
+				console.log("in list feedbacks " + $scope.feedbackList.length);
 				setTimeout(loaded, 2000);
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
@@ -349,6 +355,14 @@ module.controller('homePageController', function($scope, $http, $location, $time
 					'z-index' : '0',
 					'background-color' : 'transparent'
 				});
+				if (status == 401) {
+					deleteCookie('authToken');
+					deleteCookie('userRole');
+					deleteCookie('userName');
+					deleteCookie('feedbackId');
+					deleteCookie("signInCount");
+					$location.url("/signin");
+				}
 			});
 
 			//feedbackTimeout = $timeout($scope.listFeedbacks, 120000);
@@ -388,7 +402,6 @@ module.controller('insightsController', function($scope, $http, $location, $time
 		var dt;
 		$scope.active2 = true;
 		flag = 1;
-
 		Date.prototype.yyyymmdd = function() {
 
 			var yyyy = this.getFullYear().toString();
@@ -402,15 +415,15 @@ module.controller('insightsController', function($scope, $http, $location, $time
 		$scope.feedbackMetrics = function() {
 
 			dt = new Date();
-			
+
 			var time = dt.getHours();
-			console.log("time "+time);
-			
-			if(time >= 0 && time < 5){
+			console.log("time " + time);
+
+			if (time >= 0 && time < 5) {
 				console.log("hi i an in");
 				dt.setDate(dt.getDate() - 1);
 			}
-			
+
 			var startdt = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), 5, 0, 0)
 
 			console.log("date " + startdt);
@@ -529,6 +542,15 @@ module.controller('insightsController', function($scope, $http, $location, $time
 
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+				if (status == 401) {
+					//alert("hi");
+					deleteCookie('authToken');
+					deleteCookie('userRole');
+					deleteCookie('userName');
+					deleteCookie('feedbackId');
+					deleteCookie("signInCount");
+					$location.url("/signin");
+				}
 
 			});
 
@@ -562,6 +584,8 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 		// $scope.showRedemptions();
 		// }
 		// });
+
+		$scope.redemptionMsg = false;
 		$scope.showRedemptions = function() {
 			//window.history.back();
 			//flagP = 1;
@@ -608,9 +632,22 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 			}).success(function(data, status) {
 				console.log("User Role " + data + " status " + status);
 				$scope.redemptionList = data.redemptions;
+				if ($scope.redemptionList.length > 0) {
+					$scope.redemptionMsg = false;
+				} else {
+					$scope.redemptionMsg = true;
+				}
 				console.log("list" + $scope.redemptionList)
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+				if (status == 401) {
+					deleteCookie('authToken');
+					deleteCookie('userRole');
+					deleteCookie('userName');
+					deleteCookie('feedbackId');
+					deleteCookie("signInCount");
+					$location.url("/signin");
+				}
 
 			});
 		};
@@ -630,6 +667,14 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 				console.log("list" + $scope.redemptionList)
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+				if (status == 401) {
+					deleteCookie('authToken');
+					deleteCookie('userRole');
+					deleteCookie('userName');
+					deleteCookie('feedbackId');
+					deleteCookie("signInCount");
+					$location.url("/signin");
+				}
 
 			});
 		};
@@ -655,6 +700,14 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 				$scope.listRedemptions();
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+				if (status == 401) {
+					deleteCookie('authToken');
+					deleteCookie('userRole');
+					deleteCookie('userName');
+					deleteCookie('feedbackId');
+					deleteCookie("signInCount");
+					$location.url("/signin");
+				}
 
 			});
 		};
@@ -735,6 +788,14 @@ module.controller('numericCodeController', function($scope, $http, $location, $t
 						$scope.succmsg = false;
 						$scope.erromsg = true;
 						$scope.loader = false;
+						if (status == 401) {
+							deleteCookie('authToken');
+							deleteCookie('userRole');
+							deleteCookie('userName');
+							deleteCookie('feedbackId');
+							deleteCookie("signInCount");
+							$location.url("/signin");
+						}
 					});
 				}
 			}
@@ -764,6 +825,14 @@ module.controller('numericCodeController', function($scope, $http, $location, $t
 
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
+				if (status == 401) {
+					deleteCookie('authToken');
+					deleteCookie('userRole');
+					deleteCookie('userName');
+					deleteCookie('feedbackId');
+					deleteCookie("signInCount");
+					$location.url("/signin");
+				}
 			});
 		};
 
