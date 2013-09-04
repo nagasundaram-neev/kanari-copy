@@ -20,7 +20,8 @@ Feature: Show Customer
             "email": "admin@subway.com",
             "first_name": "Bill",
             "last_name": null,
-            "phone_number": null
+            "phone_number": null,
+            "can_create_outlet": true
           },
           "email": null,
           "authorized_outlets": 1,
@@ -57,7 +58,8 @@ Feature: Show Customer
             "email": "admin@subway.com",
             "first_name": "Bill",
             "last_name": null,
-            "phone_number": null
+            "phone_number": null,
+            "can_create_outlet": true
           },
           "email": null,
           "authorized_outlets": 1,
@@ -74,6 +76,47 @@ Feature: Show Customer
         }
       }
       """
+
+   Scenario: User's role is customer_admin : No. of authorized Outlet limits exceeded
+      Given the following users exist
+        |first_name |email                          | password    | authentication_token  | role            |
+        |Adam       |superadmin@kanari.co           | password123 | admin_auth_token      | kanari_admin    |
+        |Bill       |admin@subway.com               | password123 | bill_auth_token       | customer_admin  |
+        |Clinton    |admin@nbc.com                  | password123 | clinton_auth_token    | customer_admin  |
+      Given a customer named "Subway" exists with id "100" with admin "admin@subway.com"
+        And the customer with id "100" has an outlet named "Subway - Bangalore"
+        And the maximum number of authorized outlets for customer with id "100" is "1"
+      Given a customer named "Noushad the Big Chef" exists with id "101" with admin "admin@nbc.com"
+      When I authenticate as the user "bill_auth_token" with the password "random string"
+      And I send a GET request to "/api/customers/100"
+      Then the response status should be "200"
+      And the JSON response should be:
+      """
+      {
+        "customer": {
+          "customer_admin": {
+            "email": "admin@subway.com",
+            "first_name": "Bill",
+            "last_name": null,
+            "phone_number": null,
+            "can_create_outlet": false
+          },
+          "email": null,
+          "authorized_outlets": 1,
+          "mailing_address_city": null,
+          "mailing_address_country": null,
+          "mailing_address_line_1": null,
+          "mailing_address_line_2": null,
+          "name": "Subway",
+          "phone_number": null,
+          "registered_address_city": null,
+          "registered_address_country": null,
+          "registered_address_line_1": null,
+          "registered_address_line_2": null
+        }
+      }
+      """
+
 
     Scenario: Customer belongs to a different customer_admin
       Given the following users exist

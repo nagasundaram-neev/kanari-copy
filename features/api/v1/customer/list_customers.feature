@@ -93,7 +93,8 @@ Feature: List customer accounts
             "email": "admin@subway.com",
             "first_name": "Bill",
             "last_name": null,
-            "phone_number": null
+            "phone_number": null,
+            "can_create_outlet": true
           },
           "email": null,
           "authorized_outlets": 1,
