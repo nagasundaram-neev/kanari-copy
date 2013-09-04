@@ -184,13 +184,13 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 	}
 
 	// $scope.gotoDahboard = function(section) {
-		// alert(getCookie('authToken'));
-		// if (getCookie('authToken')) {
-			// $location.url("/snapshot");
-		// }
-		// else{
-			// $location.url("/login");
-		// }
+	// alert(getCookie('authToken'));
+	// if (getCookie('authToken')) {
+	// $location.url("/snapshot");
+	// }
+	// else{
+	// $location.url("/login");
+	// }
 	// }
 
 });
@@ -393,17 +393,10 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 		$('#outlet').addClass('active');
 		$scope.auth_token = getCookie('authToken');
 		$scope.userRole = getCookie('userRole');
-		$scope.outlets = []
-		if (getCookie('userRole') == "customer_admin" && getCookie('auth_outlet') == "true") {
-			$scope.userAction = true;
-			$scope.accountm = false;
-			$('#accountm').hide();
-		} else {
-			$('#account').hide();
-			$scope.accountm = true;
-			$('#accountm').show();
-		}
-		
+		$scope.outlets = [];
+		var outletCount;
+		var authOutlet;
+
 		var param = {
 			"auth_token" : getCookie('authToken')
 		};
@@ -417,6 +410,7 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 			$scope.error = data.auth_token;
 			$scope.statement = true;
 			$scope.erromsg = false;
+			outletCount = data.outlets.length;
 		}).error(function(data, status) {
 			console.log("data in error" + data + " status " + status);
 			if (status == 401) {
@@ -424,6 +418,47 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 			}
 			$scope.erromsg = true;
 		});
+
+		var customer_id = getCookie('userId');
+
+		var param = {
+			"auth_token" : getCookie('authToken')
+		}
+
+		$http({
+			method : 'get',
+			url : '/api/customers/' + customer_id,
+			params : param,
+		}).success(function(data, status) {
+			console.log("data in success " + data + " status " + status);
+			authOutlet = data.customer.authorized_outlets;
+			if (outletCount <= authOutlet) {
+				setCookie('auth_outlet', "true", 7);
+				showAddOutletBtn();
+			} else {
+				setCookie('auth_outlet', "false", 7);
+				showAddOutletBtn();
+			}
+		}).error(function(data, status) {
+			console.log("data in error" + data + " status " + status);
+			if (status == 401) {
+				$location.url("/login");
+			}
+
+		});
+
+		function showAddOutletBtn() {
+			if (getCookie('userRole') == "customer_admin" && getCookie('auth_outlet') == "true") {
+				$scope.userAction = true;
+				$scope.accountm = false;
+				$('#accountm').hide();
+			} else {
+				$('#account').hide();
+				$scope.accountm = true;
+				$('#accountm').show();
+			}
+		}
+
 	} else {
 		$location.url("/login");
 	}
@@ -725,8 +760,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		} else {
 			$('#account').hide();
 		}
-		
-		if(getCookie('auth_outlet') == "false" && !$routeParams.outletId){
+
+		if (getCookie('auth_outlet') == "false" && !$routeParams.outletId) {
 			$location.url("/outlets");
 		}
 
@@ -2462,8 +2497,8 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 			}).success(function(data, status) {
 				console.log("Data in success " + data + " status " + status);
 				$scope.outletNameList = data.outlets;
-				if($routeParams.outletId){
-				$scope.outletOption = parseInt($routeParams.outletId);
+				if ($routeParams.outletId) {
+					$scope.outletOption = parseInt($routeParams.outletId);
 				}
 			}).error(function(data, status) {
 				console.log("data in error " + data + " status " + status);
@@ -2684,7 +2719,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		$scope.listOfTrendsDate = function(idValue) {
-			console.log("inFun"+$scope.outletTrend);
+			console.log("inFun" + $scope.outletTrend);
 			if (!idValue) {
 				idValue = "food";
 				metricsId = "custExp";
@@ -2839,7 +2874,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				} else if (metricsId == "customers") {
 					customerGraph();
 				}
-				
 
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
@@ -2862,8 +2896,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			}).success(function(data, status) {
 				console.log("Data in success " + data + " status " + status);
 				$scope.outletNameList = data.outlets;
-				if($routeParams.outletId){
-				$scope.outletTrend = parseInt($routeParams.outletId);
+				if ($routeParams.outletId) {
+					$scope.outletTrend = parseInt($routeParams.outletId);
 				}
 			}).error(function(data, status) {
 				console.log("data in error " + data + " status " + status);
@@ -3369,8 +3403,8 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 			}).success(function(data, status) {
 				console.log("Data in success " + data + " status " + status);
 				$scope.outletNameList = data.outlets;
-				if($routeParams.outletId){
-				$scope.outletOption = parseInt($routeParams.outletId);
+				if ($routeParams.outletId) {
+					$scope.outletOption = parseInt($routeParams.outletId);
 				}
 			}).error(function(data, status) {
 				console.log("data in error " + data + " status " + status);
