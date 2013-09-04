@@ -658,8 +658,8 @@ module.controller('settingsController', function($scope, $http, $location) {
 		$scope.getProfile();
 
 		$scope.saveProfile = function() {
-			if($scope.gender){
-				console.log("in gendr "+$scope.gender);
+			if ($scope.gender) {
+				console.log("in gendr " + $scope.gender);
 			}
 			if (!$scope.firstName || !$scope.lastName) {
 				$scope.error = "Please provide first name and last name";
@@ -743,7 +743,7 @@ module.controller('feedbackController', function($scope, $http, $location) {
 	$scope.digit5 = "";
 	$scope.error = false;
 	$scope.numbers = {};
-	$scope.numbers = ["","","","",""];
+	$scope.numbers = ["", "", "", "", ""];
 
 	$scope.home = function() {
 		if (getCookie('authToken')) {
@@ -752,53 +752,55 @@ module.controller('feedbackController', function($scope, $http, $location) {
 			$location.url("/index");
 		}
 	};
-var digitScope = 0;
+	var digitScope = 0;
 	$scope.clear = function() {
-		$scope.numbers= {};
-		$scope.numbers = ["","","","",""];
+		$scope.numbers = {};
+		$scope.numbers = ["", "", "", "", ""];
 		$scope.error = false;
 		digitScope = 0
 	};
-   
+
 	$scope.enterValues = function(val) {
-		if(digitScope < 5){
-		$scope.numbers[digitScope] = val;
-		digitScope++;
+		if (digitScope < 5) {
+			$scope.numbers[digitScope] = val;
+			digitScope++;
 		}
-		
+
 	};
 
 	$scope.next = function() {
 		var kanariCode;
-		if ($scope.digit1 && $scope.digit2 && $scope.digit3 && $scope.digit4 && $scope.digit5) {
-			kanariCode = $scope.digit1 + "" + $scope.digit2 + "" + $scope.digit3 + "" + $scope.digit4 + "" + $scope.digit5;
-		} else {
-			kanaricode = "";
-		}
-
-		$http({
-			method : 'get',
-			url : '/api/kanari_codes/' + kanariCode,
-			//params : param
-		}).success(function(data, status) {
-			console.log("User Role " + data + " status " + status);
-			setCookie("feedbackId", data.feedback_id, 0.29);
-			setCookie("restName", data.outlet_name, 0.29);
-			$location.url("/feedback_step2");
-		}).error(function(data, status) {
-			console.log("data " + data + " status " + status);
-			if (status == 401) {
-				deleteCookie('authToken');
-				deleteCookie('userRole');
-				deleteCookie('userName');
-				deleteCookie('feedbackId');
-				deleteCookie("signInCount");
-				deleteAllCookies();
-				$location.url("/login");
-			}
-			$scope.errorMsg = data.errors[0];
+		kanariCode = $scope.numbers[0] + "" + $scope.numbers[1] + "" + $scope.numbers[2] + "" + $scope.numbers[3] + "" + $scope.numbers[4];
+		console.log("code " + kanariCode);
+		if (!$scope.numbers[0] && !$scope.numbers[1] && !$scope.numbers[2] && !$scope.numbers[3] && !$scope.numbers[4]) {
+			console.log("hi ");
+			$scope.errorMsg = "Invalid code";
 			$scope.error = true;
-		});
+		} else {
+			$http({
+				method : 'get',
+				url : '/api/kanari_codes/' + kanariCode,
+				//params : param
+			}).success(function(data, status) {
+				console.log("User Role " + data + " status " + status);
+				setCookie("feedbackId", data.feedback_id, 0.29);
+				setCookie("restName", data.outlet_name, 0.29);
+				$location.url("/feedback_step2");
+			}).error(function(data, status) {
+				console.log("data " + data + " status " + status);
+				if (status == 401) {
+					deleteCookie('authToken');
+					deleteCookie('userRole');
+					deleteCookie('userName');
+					deleteCookie('feedbackId');
+					deleteCookie("signInCount");
+					deleteAllCookies();
+					$location.url("/login");
+				}
+				$scope.errorMsg = data.errors[0];
+				$scope.error = true;
+			});
+		}
 
 	};
 });
@@ -1511,16 +1513,16 @@ $(document).on("pageshow", ".ui-page", function() {
 	// // browser is fullscreen
 	// alert("full screen ");
 	// }
-	
+
 	var $page = $(this), vSpace = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() + $page.children('.ui-content').height();
 	//alert($(window).innerHeight()+"vspace "+$(window).outerHeight());
 	//console.log($page.children('.ui-content'));
 	//alert(vSpace);
 	//alert($(window).height());
-	if($(window).height() > 500 && $(window).height() < 570){
+	if ($(window).height() > 500 && $(window).height() < 570) {
 		//alert("in ");
-		$("#divexample1").css('height','420px');
-	}	
+		$("#divexample1").css('height', '420px');
+	}
 	//$("#restaurantList .ui-content").css('min-height','200px !important');
 	var url_buffer = 50;
 	if (vSpace < $(window).height()) {
@@ -1544,7 +1546,7 @@ $(document).on("pageshow", ".ui-page", function() {
 
 	if ($page.height() > $(window).height()) {
 		console.log("page " + $page);
-		$("#divexample1").css('height','280px');
+		$("#divexample1").css('height', '280px');
 		$page.children('.ui-footer').css('position', 'relative');
 		if (flagPage == 0) {
 			$page.children('.ui-footer').css('margin-top', '14px');
