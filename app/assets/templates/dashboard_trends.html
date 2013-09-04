@@ -29,7 +29,7 @@
 				<input id="startDt" class="span2" size="16" type="text" ng-model="startDate"  placeholder="Start Date" readonly>
 				<span class="add-on"><i class="icon-th"></i></span>
 			</div>
-			<select ng-model="outletOption" ng-change="selectOutlet()" class="outletDropDown" ng-options="value.id as value.name+', '+value.address for value in outletNameList">
+			<select ng-model="outletTrend" ng-change="selectOutlet()" class="outletDropDown" ng-options="value.id as value.name+', '+value.address for value in outletNameList">
 				<option value="">Select Outlet</option>
 			</select>
 		</div>

@@ -1044,7 +1044,7 @@ input {
 }
 
 /***Dashboard Comment***/
-.dashboardLi a img {
+.dashboardLi a img, .hideNav ul li a img{
 	margin-right: 5px;
 }
 .home_page_view {
@@ -1154,7 +1154,7 @@ input {
 	margin-left: 1px !important;
 	/*padding-top: 6%;*/
 	text-align: right;
-	width: 30%;
+	width: 32%;
 }
 .daily_change_span img {
 	/*padding: 6% 1px;
@@ -1438,7 +1438,7 @@ input {
 }
 .chart_div {
 	float: left;
-	width: 950px;
+	width: 900px;
 	margin: 0 20px;
 }
 .chart_heading {

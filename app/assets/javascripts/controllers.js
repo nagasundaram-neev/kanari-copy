@@ -183,15 +183,16 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 		$('#accountm').hide();
 	}
 
-	$(".dropdown-menu li a").click(function() {
-		$("#dasboardCustomer").removeClass("open");
-	});
+	// $scope.gotoDahboard = function(section) {
+		// alert(getCookie('authToken'));
+		// if (getCookie('authToken')) {
+			// $location.url("/snapshot");
+		// }
+		// else{
+			// $location.url("/login");
+		// }
+	// }
 
-	$("li#dasboardCustomer").hover(function() {
-		$("#dasboardCustomer").addClass("open");
-	}, function() {
-		$("#dasboardCustomer").removeClass("open");
-	});
 });
 
 module.controller('Login', function($rootScope, $scope, $http, $location) {
@@ -2455,7 +2456,9 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 			}).success(function(data, status) {
 				console.log("Data in success " + data + " status " + status);
 				$scope.outletNameList = data.outlets;
+				if($routeParams.outletId){
 				$scope.outletOption = parseInt($routeParams.outletId);
+				}
 			}).error(function(data, status) {
 				console.log("data in error " + data + " status " + status);
 				if (status == 401) {
@@ -2559,11 +2562,13 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		var npsOverview = 0;
 
 		if ($routeParams.outletId) {
+			//alert("in");
 			$scope.addOutletId = true;
 			$scope.addOutletNo = $routeParams.outletId;
-			$scope.outletOption = $routeParams.outletId;
+			$scope.outletTrend = parseInt($routeParams.outletId);
 		} else {
 			$scope.addOutletId = false;
+			//$scope.outletTrend = parseInt($routeParams.outletId);
 		}
 
 		$scope.v = {
@@ -2667,18 +2672,19 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			return yyyy + '-' + (mm[1] ? mm : "0" + mm[0]) + '-' + (dd[1] ? dd : "0" + dd[0]);
 		};
 
-		var outletId = $scope.outletOption;
+		//var outletId = $scope.outletOption;
 		$scope.selectOutlet = function() {
 			$scope.listOfTrendsDate(idV);
 		}
 
 		$scope.listOfTrendsDate = function(idValue) {
+			console.log("inFun"+$scope.outletTrend);
 			if (!idValue) {
 				idValue = "food";
 				metricsId = "custExp";
 				var param = {
 					"auth_token" : getCookie('authToken'),
-					"outlet_id" : $scope.outletOption,
+					"outlet_id" : $scope.outletTrend,
 					"start_time" : startDt,
 					"end_time" : endDt
 				}
@@ -2686,14 +2692,14 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			} else if (idValue == "timeOfVisit" && !startDt) {
 				var param = {
 					"auth_token" : getCookie('authToken'),
-					"outlet_id" : $scope.outletOption,
+					"outlet_id" : $scope.outletTrend,
 					"start_time" : currentDate,
 					"end_time" : currentDate
 				}
 			} else if (idValue == "timeOfVisit" && startDt) {
 				var param = {
 					"auth_token" : getCookie('authToken'),
-					"outlet_id" : $scope.outletOption,
+					"outlet_id" : $scope.outletTrend,
 					"start_time" : startDt,
 					"end_time" : startDt
 				}
@@ -2701,7 +2707,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			} else {
 				var param = {
 					"auth_token" : getCookie('authToken'),
-					"outlet_id" : $scope.outletOption,
+					"outlet_id" : $scope.outletTrend,
 					"start_time" : startDt,
 					"end_time" : endDt
 				}
@@ -2827,6 +2833,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				} else if (metricsId == "customers") {
 					customerGraph();
 				}
+				
 
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
@@ -2849,7 +2856,9 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			}).success(function(data, status) {
 				console.log("Data in success " + data + " status " + status);
 				$scope.outletNameList = data.outlets;
-				$scope.outletOption = parseInt($routeParams.outletId);
+				if($routeParams.outletId){
+				$scope.outletTrend = parseInt($routeParams.outletId);
+				}
 			}).error(function(data, status) {
 				console.log("data in error " + data + " status " + status);
 				if (status == 401) {
@@ -3354,7 +3363,9 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 			}).success(function(data, status) {
 				console.log("Data in success " + data + " status " + status);
 				$scope.outletNameList = data.outlets;
+				if($routeParams.outletId){
 				$scope.outletOption = parseInt($routeParams.outletId);
+				}
 			}).error(function(data, status) {
 				console.log("data in error " + data + " status " + status);
 				if (status == 401) {
