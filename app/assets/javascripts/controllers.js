@@ -250,6 +250,7 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 					$("#userName").text(getCookie('userRole'));
 				} else if (getCookie('userRole') == "customer_admin") {
 					$("#userName").text(getCookie('userName'));
+					setCookie('auth_outlet', data.can_create_new_outlet, 7);
 				} else if (getCookie('userRole') == "manager") {
 					$("#userName").text(getCookie('userName'));
 				}
@@ -393,7 +394,7 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 		$scope.auth_token = getCookie('authToken');
 		$scope.userRole = getCookie('userRole');
 		$scope.outlets = []
-		if (getCookie('userRole') == "customer_admin") {
+		if (getCookie('userRole') == "customer_admin" && getCookie('auth_outlet') == "true") {
 			$scope.userAction = true;
 			$scope.accountm = false;
 			$('#accountm').hide();
@@ -402,6 +403,7 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 			$scope.accountm = true;
 			$('#accountm').show();
 		}
+		
 		var param = {
 			"auth_token" : getCookie('authToken')
 		};
@@ -722,6 +724,10 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$scope.userAction = true;
 		} else {
 			$('#account').hide();
+		}
+		
+		if(getCookie('auth_outlet') == "false" && !$routeParams.outletId){
+			$location.url("/outlets");
 		}
 
 		$scope.getOutletTypes = function() {
