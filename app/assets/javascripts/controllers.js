@@ -396,7 +396,16 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 		$scope.outlets = [];
 		var outletCount;
 		var authOutlet;
-
+		
+		if (getCookie('userRole') == "customer_admin") {
+				$scope.accountm = false;
+				$('#accountm').hide();
+			} else {
+				$('#account').hide();
+				$scope.accountm = true;
+				$('#accountm').show();
+			}
+			
 		var param = {
 			"auth_token" : getCookie('authToken')
 		};
@@ -432,13 +441,9 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 		}).success(function(data, status) {
 			console.log("data in success " + data + " status " + status);
 			authOutlet = data.customer.authorized_outlets;
-			if (outletCount <= authOutlet) {
-				setCookie('auth_outlet', "true", 7);
-				showAddOutletBtn();
-			} else {
-				setCookie('auth_outlet', "false", 7);
-				showAddOutletBtn();
-			}
+			setCookie('auth_outlet', data.customer.customer_admin.can_create_outlet, 7);			
+			showAddOutletBtn();
+			
 		}).error(function(data, status) {
 			console.log("data in error" + data + " status " + status);
 			if (status == 401) {
@@ -450,12 +455,8 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 		function showAddOutletBtn() {
 			if (getCookie('userRole') == "customer_admin" && getCookie('auth_outlet') == "true") {
 				$scope.userAction = true;
-				$scope.accountm = false;
-				$('#accountm').hide();
 			} else {
-				$('#account').hide();
-				$scope.accountm = true;
-				$('#accountm').show();
+				$scope.userAction = false;
 			}
 		}
 
@@ -761,7 +762,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$('#account').hide();
 		}
 
-		if (getCookie('auth_outlet') == "false" && !$routeParams.outletId) {
+		if (getCookie('auth_outlet') == "false" && !$routeParams.outletId && $location.path() == "/create_outlet") {
 			$location.url("/outlets");
 		}
 
@@ -1422,6 +1423,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$('.navBarCls ul li').removeClass('active');
 			$('#account').addClass('active');
 		}
+		
 
 		$scope.add_new_manager = function() {
 			$('.add_manager').show();
