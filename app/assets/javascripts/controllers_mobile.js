@@ -742,65 +742,70 @@ module.controller('feedbackController', function($scope, $http, $location) {
 	$scope.digit4 = "";
 	$scope.digit5 = "";
 	$scope.error = false;
-	$scope.numbers = {};
-	$scope.numbers = ["", "", "", "", ""];
 
 	$scope.home = function() {
-		if (getCookie('authToken')) {
-			$location.url("/home");
-		} else {
+		if(getCookie('authToken')){
+			$location.url("/home");	
+		}else{
 			$location.url("/index");
 		}
 	};
-	var digitScope = 0;
+
 	$scope.clear = function() {
-		$scope.numbers = {};
-		$scope.numbers = ["", "", "", "", ""];
+		$scope.digit1 = "";
+		$scope.digit2 = "";
+		$scope.digit3 = "";
+		$scope.digit4 = "";
+		$scope.digit5 = "";
 		$scope.error = false;
-		digitScope = 0
 	};
 
 	$scope.enterValues = function(val) {
-		if (digitScope < 5) {
-			$scope.numbers[digitScope] = val;
-			digitScope++;
+		//console.log("digit1 " + $scope.digit1);
+		if (!$scope.digit1 || $scope.digit1 == "") {
+			$scope.digit1 = val;
+		} else if (!$scope.digit2 || $scope.digit2 == "") {
+			$scope.digit2 = val;
+		} else if (!$scope.digit3 || $scope.digit3 == "") {
+			$scope.digit3 = val;
+		} else if (!$scope.digit4 || $scope.digit4 == "") {
+			$scope.digit4 = val;
+		} else if (!$scope.digit5 || $scope.digit5 == "") {
+			$scope.digit5 = val;
 		}
-
 	};
 
 	$scope.next = function() {
 		var kanariCode;
-		kanariCode = $scope.numbers[0] + "" + $scope.numbers[1] + "" + $scope.numbers[2] + "" + $scope.numbers[3] + "" + $scope.numbers[4];
-		console.log("code " + kanariCode);
-		if (!$scope.numbers[0] && !$scope.numbers[1] && !$scope.numbers[2] && !$scope.numbers[3] && !$scope.numbers[4]) {
-			console.log("hi ");
-			$scope.errorMsg = "Invalid code";
-			$scope.error = true;
+		if ($scope.digit1 && $scope.digit2 && $scope.digit3 && $scope.digit4 && $scope.digit5) {
+			kanariCode = $scope.digit1 + "" + $scope.digit2 + "" + $scope.digit3 + "" + $scope.digit4 + "" + $scope.digit5;
 		} else {
-			$http({
-				method : 'get',
-				url : '/api/kanari_codes/' + kanariCode,
-				//params : param
-			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
-				setCookie("feedbackId", data.feedback_id, 0.29);
-				setCookie("restName", data.outlet_name, 0.29);
-				$location.url("/feedback_step2");
-			}).error(function(data, status) {
-				console.log("data " + data + " status " + status);
-				if (status == 401) {
-					deleteCookie('authToken');
-					deleteCookie('userRole');
-					deleteCookie('userName');
-					deleteCookie('feedbackId');
-					deleteCookie("signInCount");
-					deleteAllCookies();
-					$location.url("/login");
-				}
-				$scope.errorMsg = data.errors[0];
-				$scope.error = true;
-			});
+			kanaricode = "";
 		}
+
+		$http({
+			method : 'get',
+			url : '/api/kanari_codes/' + kanariCode,
+			//params : param
+		}).success(function(data, status) {
+			console.log("User Role " + data + " status " + status);
+			setCookie("feedbackId", data.feedback_id, 0.29);
+			setCookie("restName", data.outlet_name, 0.29);
+			$location.url("/feedback_step2");
+		}).error(function(data, status) {
+			console.log("data " + data + " status " + status);
+			if (status == 401) {
+				deleteCookie('authToken');
+				deleteCookie('userRole');
+				deleteCookie('userName');
+				deleteCookie('feedbackId');
+				deleteCookie("signInCount");
+				deleteAllCookies();
+				$location.url("/login");
+			}
+			$scope.errorMsg = data.errors[0];
+			$scope.error = true;
+		});
 
 	};
 });

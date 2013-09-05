@@ -158,6 +158,7 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(auth_token);
 		deleteCookie('authToken');
 		deleteCookie('userRole');
+		deleteCookie('outletDropDwn');
 		$location.url("/login");
 
 	}
@@ -2468,6 +2469,13 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 			$scope.addOutletId = false;
 		}
 
+		if(getCookie('outletDropDwn')){
+		 	 $scope.addOutletNo = parseInt(getCookie('outletDropDwn'));
+			 $scope.outletOption = parseInt(getCookie('outletDropDwn')); 
+		 }
+		
+
+
 		$scope.v = {
 			Dt : Date.now()
 		}
@@ -2583,6 +2591,7 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 
 		$scope.listFeedbacks();
 		$scope.selectOutlet = function() {
+			setCookie('outletDropDwn', $scope.outletOption, 0.29);
 			$scope.listFeedbacks();
 		}
 	} else {
@@ -2620,6 +2629,12 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			$scope.addOutletId = false;
 			//$scope.outletTrend = parseInt($routeParams.outletId);
 		}
+		
+		if(getCookie('outletDropDwn')){
+		 	 $scope.addOutletNo = parseInt(getCookie('outletDropDwn'));
+			 $scope.outletTrend = parseInt(getCookie('outletDropDwn')); 
+		 }
+		
 
 		$scope.v = {
 			Dt : Date.now()
@@ -2744,6 +2759,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 
 		//var outletId = $scope.outletOption;
 		$scope.selectOutlet = function() {
+			setCookie('outletDropDwn', $scope.outletTrend, 0.29);
 			$scope.listOfTrendsDate(idV);
 		}
 
@@ -3212,6 +3228,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		$location.url("/login");
 	}
 });
+
+
 module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location) {
 	if (getCookie('authToken')) {
 		$('.welcome').show();
@@ -3229,7 +3247,12 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		} else {
 			$scope.addOutletId = false;
 		}
-
+		
+		 if(getCookie('outletDropDwn')){
+		 	 $scope.addOutletNo = parseInt(getCookie('outletDropDwn'));
+			 $scope.outletOption = parseInt(getCookie('outletDropDwn')); 
+		 }
+		
 		$scope.feedbackMetrics = function() {
 			var param = {
 				"auth_token" : getCookie('authToken'),
@@ -3370,7 +3393,7 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		$scope.listFeedbacks = function() {
 			dt = new Date();
 			var time = dt.getHours();
-			console.log("time " + time);
+			//console.log("time " + time);
 
 			if (time >= 0 && time < 5) {
 				console.log("hi i an in");
@@ -3378,7 +3401,7 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 			}
 			var startdt = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), 5, 0, 0)
 			var timeZone = String(String(dt).split("(")[1]).split(")")[0];
-			console.log("start date " + startdt);
+			//console.log("start date " + startdt);
 			if (!$scope.$$phase) {
 				//$digest or $apply
 			}
@@ -3397,7 +3420,7 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 			}).success(function(data, status) {
 				console.log("User Role " + data + " status " + status);
 				$scope.feedbackListSnapShot = data.feedbacks;
-				console.log(data.feedbacks.length);
+				//console.log(data.feedbacks.length);
 				if (data.feedbacks.length == 0) {
 					$scope.feedBackListCount = true;
 				} else {
@@ -3416,6 +3439,8 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		$scope.listFeedbacks();
 
 		$scope.selectOutletSnap = function() {
+			//console.log("hi "+$scope.outletOption);
+			setCookie('outletDropDwn', $scope.outletOption, 0.29);
 			$scope.listFeedbacks();
 			$scope.feedbackMetrics();
 		}
@@ -3442,7 +3467,9 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 				}
 			});
 		};
+		
 		$scope.listOutletNames();
+						
 
 	} else {
 		$location.url("/login");
