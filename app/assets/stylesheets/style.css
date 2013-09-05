@@ -781,6 +781,11 @@ img, object {
 	width: 19.2%;
 }
 
+#feedback .backColr :nth-child(4) {
+	border-right: 0 !important;
+}
+
+
 #feedback .menDiv {
 	margin: 2% 0 0 0;
 	width: 100%;
