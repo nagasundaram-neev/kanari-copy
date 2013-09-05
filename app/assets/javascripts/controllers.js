@@ -158,6 +158,7 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(auth_token);
 		deleteCookie('authToken');
 		deleteCookie('userRole');
+		deleteCookie('outletDropDwn');
 		$location.url("/login");
 
 	}
@@ -2448,6 +2449,13 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 			$scope.addOutletId = false;
 		}
 
+		if(getCookie('outletDropDwn')){
+		 	 $scope.addOutletNo = parseInt(getCookie('outletDropDwn'));
+			 $scope.outletOption = parseInt(getCookie('outletDropDwn')); 
+		 }
+		
+
+
 		$scope.v = {
 			Dt : Date.now()
 		}
@@ -2576,6 +2584,7 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 
 		$scope.listFeedbacks();
 		$scope.selectOutlet = function() {
+			setCookie('outletDropDwn', $scope.outletOption, 0.29);
 			$scope.listFeedbacks();
 		}
 	} else {
@@ -2613,6 +2622,12 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			$scope.addOutletId = false;
 			//$scope.outletTrend = parseInt($routeParams.outletId);
 		}
+		
+		if(getCookie('outletDropDwn')){
+		 	 $scope.addOutletNo = parseInt(getCookie('outletDropDwn'));
+			 $scope.outletTrend = parseInt(getCookie('outletDropDwn')); 
+		 }
+		
 
 		$scope.v = {
 			Dt : Date.now()
@@ -2717,6 +2732,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 
 		//var outletId = $scope.outletOption;
 		$scope.selectOutlet = function() {
+			setCookie('outletDropDwn', $scope.outletTrend, 0.29);
 			$scope.listOfTrendsDate(idV);
 		}
 
@@ -3204,7 +3220,12 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		} else {
 			$scope.addOutletId = false;
 		}
-
+		
+		 if(getCookie('outletDropDwn')){
+		 	 $scope.addOutletNo = parseInt(getCookie('outletDropDwn'));
+			 $scope.outletOption = parseInt(getCookie('outletDropDwn')); 
+		 }
+		
 		$scope.feedbackMetrics = function() {
 			var param = {
 				"auth_token" : getCookie('authToken'),
@@ -3391,6 +3412,8 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		$scope.listFeedbacks();
 
 		$scope.selectOutletSnap = function() {
+			//console.log("hi "+$scope.outletOption);
+			setCookie('outletDropDwn', $scope.outletOption, 0.29);
 			$scope.listFeedbacks();
 			$scope.feedbackMetrics();
 		}
