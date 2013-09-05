@@ -1073,8 +1073,9 @@ input {
 }
 .insight_graph2 h3, h3.redemptionMsg {
 	font-size: 16px;
-	margin: 10px;
-	font-weight: normal;
+    font-weight: normal;
+    line-height: 41px;
+    text-align: center;
 }
 .promo_txt {
 	color: #999999;
