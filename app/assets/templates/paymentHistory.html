@@ -9,12 +9,12 @@
 		.viewAccPage lable {
 			width: 144px;
 		}
-		.daterangepicker{ left: 93px !important;}
-		/*#divexample1 {
-		 height: 100px;
-		 overflow: auto;
-		 }*/
-		/*.nicescroll-rails{left: 726px !important;}*/
+		.daterangepicker {
+			left: 93px !important;
+		}
+		div.outlet_text {
+			padding: 20px 0 !important;
+		}
 	</style>
 	<div class="header_title">
 		<span class="manager_outlet">Manage Account</span>
@@ -28,9 +28,12 @@
 	</div>
 	<div id="payment_history" class="viewAccPage" style="margin:10px 20px;">
 		<span class="selectDate">Select date range:</span>
-		 <input type="text" style="width: 210px;float: left" name="reservation" id="reportrange" value="Date from - Date to"  class="span4 firstshow"/>
+		<input type="text" style="width: 210px;float: left" name="reservation" id="reportrange" value="Date from - Date to"  class="span4 firstshow"/>
 		<div class="clr"></div>
-		<div class="paymentHistoryTbl">
+		<div class="outlet_text" ng-show="!paymentHistoryList.length">
+			<span ng-show="payHistoryListCount">Your outlets do not having any Payment Invoice.</span>
+		</div>
+		<div class="paymentHistoryTbl" ng-show="paymentHistoryList.length">
 			<div class="payHistoryHeader">
 				<div class="headCol headCol1">
 					Invoice Number

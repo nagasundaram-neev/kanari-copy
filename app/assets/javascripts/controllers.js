@@ -827,6 +827,12 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			}).success(function(data, status) {
 				$scope.error = false;
 				$scope.managerList = data.managers;
+				if(data.managers.length > 0){
+					$scope.outletMgrListCount = false;
+				}
+				else{
+					$scope.outletMgrListCount = true;
+				}
 				var managerlist = data.managers;
 				if (managerlist != "") {
 					$scope.managerField = true;
@@ -2399,10 +2405,16 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 				$scope.paymentHistoryList = [];
 				$scope.paymentHistoryList = data.payment_invoices;
 				var arrayLength = data.payment_invoices.length;
+				if(arrayLength>0){
 				for (var i = 0; i < arrayLength; i++) {
 					if (data.payment_invoices[i].outlet_id) {
 						$scope.getOutlet(data.payment_invoices[i].outlet_id, i)
 					}
+				}
+				$scope.payHistoryListCount = false;
+				}
+				else{
+					$scope.payHistoryListCount = true;
 				}
 				//console.log($scope.outletList);
 			}).error(function(data, status) {
