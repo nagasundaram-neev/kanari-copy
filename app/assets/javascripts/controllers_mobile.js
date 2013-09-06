@@ -132,12 +132,13 @@ var signInCount = "";
 var facebookFlag = 0;
 //var logOut = 0;
 var flagPage = 0;
+var iphoneFlag = 0;
 
 module.controller('loginController', function($scope, $http, $location) {
 	console.log("under login controller")
 
 	// if (logOut == 1) {
-		// location.reload();
+	// location.reload();
 	// }
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
 	$scope.remember = false;
@@ -744,9 +745,9 @@ module.controller('feedbackController', function($scope, $http, $location) {
 	$scope.error = false;
 
 	$scope.home = function() {
-		if(getCookie('authToken')){
-			$location.url("/home");	
-		}else{
+		if (getCookie('authToken')) {
+			$location.url("/home");
+		} else {
 			$location.url("/index");
 		}
 	};
@@ -1245,7 +1246,7 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 
 	if (getCookie('authToken')) {
 		$.mobile.loading('show');
-		flagPage = 0;
+		flagPage = 1;
 		$scope.lattitude = "";
 		$scope.longitude = "";
 		$scope.outlets = [];
@@ -1312,7 +1313,7 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 module.controller('redeemPointsController', function($scope, $http, $location, $routeParams) {
 
 	if (getCookie('authToken')) {
-		flagPage = 0;
+		flagPage = 1;
 		$scope.successMsg = false;
 		$scope.erromsg = false;
 
@@ -1512,45 +1513,41 @@ $(document).on("pageshow", ".ui-page", function() {
 		dateFormat : 'dd/mm/yy'
 	});
 
-	//page.style.height = window.innerHeight + 'px';
-	//alert("full screen "+window.isInFullScreen);
-	// if (window.innerHeight == screen.height) {
-	// // browser is fullscreen
-	// alert("full screen ");
-	// }
-
 	var $page = $(this), vSpace = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() + $page.children('.ui-content').height();
-	//alert($(window).innerHeight()+"vspace "+$(window).outerHeight());
-	//console.log($page.children('.ui-content'));
-	//alert(vSpace);
-	//alert($(window).height());
 	if ($(window).height() > 500 && $(window).height() < 570) {
 		//alert("in ");
 		$("#divexample1").css('height', '420px');
 	}
-	//$("#restaurantList .ui-content").css('min-height','200px !important');
 	var url_buffer = 50;
 	if (vSpace < $(window).height()) {
-		//alert($(window).height());
-		//if (valueH == 1) {
-		//		var vDiff = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() ;
-		//		console.log($page.children('.ui-footer').outerHeight())
-		//		console.log($(window).height() - vDiff)
-		//minus thirty for margin
-		//} else {
-		//alert(valueH);
-		//	var vDiff = $(window).height() - $page.children('.ui-header').outerHeight() - $page.children('.ui-footer').outerHeight();
-		//minus thirty for margin
-		//}
-		//alert("in ");
 
 		$page.height($(window).height());
-		//alert("setting height")
-		//$page.children('.ui-content').height($(window).height() - vDiff);
 	}
 
+	//alert("page " + $page.height() + "window " + $(window).height());
+
+	if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
+		//if (document.cookie.indexOf("iphone_redirect=false") == -1)
+		// alert("iphone ");
+		$("#divexample1").css('height', '280px');
+		$page.children('.ui-footer').css('position', 'relative');
+		if (flagPage == 0) {
+			$page.children('.ui-footer').css('margin-top', '14px');
+		} else {
+			$page.children('.ui-footer').css('margin-top', '0');
+		}
+		setFooterIphone();
+	} else {
+		setFooterIphone();
+	}
+
+	setTimeout(function() {
+		window.scrollTo(0, 1)
+	}, 100);
+
+
+	function setFooterIphone() {
 	if ($page.height() > $(window).height()) {
-		console.log("page " + $page);
 		$("#divexample1").css('height', '280px');
 		$page.children('.ui-footer').css('position', 'relative');
 		if (flagPage == 0) {
@@ -1559,18 +1556,21 @@ $(document).on("pageshow", ".ui-page", function() {
 			$page.children('.ui-footer').css('margin-top', '0');
 		}
 
-		//alert("page height grater, will need to scroll")
 	} else {
 		//alert("height sufficient no need to scroll")
 	}
+}
 
-	setTimeout(function() {
-		window.scrollTo(0, 1)
-	}, 100);
 
 	//document.write("You are using iOS5");
 });
 //}
+
+document.ontouchmove = function(e){ 
+  	//alert("hi in touch");
+    //e.preventDefault(); 
+}
+
 function iOSversion() {
 	if (/iP(hone|od|ad)/.test(navigator.platform)) {
 		// supports iOS 2.0 and later: <http://bit.ly/TJjs1V>
