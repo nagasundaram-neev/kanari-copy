@@ -827,10 +827,9 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			}).success(function(data, status) {
 				$scope.error = false;
 				$scope.managerList = data.managers;
-				if(data.managers.length > 0){
+				if (data.managers.length > 0) {
 					$scope.outletMgrListCount = false;
-				}
-				else{
+				} else {
 					$scope.outletMgrListCount = true;
 				}
 				var managerlist = data.managers;
@@ -2334,33 +2333,33 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 		$scope.paymentHistoryList = [];
 
 		// $(function() {
-			// $('#payDate1').datepicker().on('changeDate', function(ev) {
-				// var dt = new Date(ev.date.valueOf());
-				// var month = dt.getMonth() + 1;
-				// startDt = dt.getFullYear() + "-" + month + "-" + dt.getDate();
-				// if (startDt != 'undefined' && typeof endDt != 'undefined') {
-					// console.log("hi in start date");
-					// $scope.listPaymentHistory();
-					// $(".outletDropDown").change(function() {
-						// $scope.listPaymentHistory();
-					// });
-				// }
-			// });
-			// $('#payDate2').datepicker().on('changeDate', function(ev) {
-				// var dt = new Date(ev.date.valueOf());
-				// var month = dt.getMonth() + 1;
-				// endDt = dt.getFullYear() + "-" + month + "-" + dt.getDate();
-				// if ( typeof startDt != 'undefined' && endDt != 'undefined') {
-					// console.log("hi in end date");
-					// $scope.listPaymentHistory();
-					// $(".outletDropDown").change(function() {
-						// $scope.listPaymentHistory();
-					// });
-				// }
-			// });
+		// $('#payDate1').datepicker().on('changeDate', function(ev) {
+		// var dt = new Date(ev.date.valueOf());
+		// var month = dt.getMonth() + 1;
+		// startDt = dt.getFullYear() + "-" + month + "-" + dt.getDate();
+		// if (startDt != 'undefined' && typeof endDt != 'undefined') {
+		// console.log("hi in start date");
+		// $scope.listPaymentHistory();
+		// $(".outletDropDown").change(function() {
+		// $scope.listPaymentHistory();
 		// });
-		
-		$('#reportrange').daterangepicker({			
+		// }
+		// });
+		// $('#payDate2').datepicker().on('changeDate', function(ev) {
+		// var dt = new Date(ev.date.valueOf());
+		// var month = dt.getMonth() + 1;
+		// endDt = dt.getFullYear() + "-" + month + "-" + dt.getDate();
+		// if ( typeof startDt != 'undefined' && endDt != 'undefined') {
+		// console.log("hi in end date");
+		// $scope.listPaymentHistory();
+		// $(".outletDropDown").change(function() {
+		// $scope.listPaymentHistory();
+		// });
+		// }
+		// });
+		// });
+
+		$('#reportrange').daterangepicker({
 			ranges : {
 				'Today' : [moment(), moment()],
 				'Yesterday' : [moment().subtract('days', 1), moment().subtract('days', 1)],
@@ -2373,13 +2372,13 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 			},
 			startDate : moment().subtract('days', 29),
 			endDate : moment()
-		}, function(start, end) {			
+		}, function(start, end) {
 			$('#reportrange span').html(start.format('D MMMM, YYYY') + ' - ' + end.format('D MMMM, YYYY'));
 			startDt = start.format('DD-MM-YYYY');
 			endDt = end.format('DD-MM-YYYY');
 			$scope.listPaymentHistory();
 		});
-		
+
 		$scope.paymentHistoryList = [];
 		$scope.listPaymentHistory = function() {
 			var outletId = $scope.outletOption;
@@ -2405,15 +2404,14 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 				$scope.paymentHistoryList = [];
 				$scope.paymentHistoryList = data.payment_invoices;
 				var arrayLength = data.payment_invoices.length;
-				if(arrayLength>0){
-				for (var i = 0; i < arrayLength; i++) {
-					if (data.payment_invoices[i].outlet_id) {
-						$scope.getOutlet(data.payment_invoices[i].outlet_id, i)
+				if (arrayLength > 0) {
+					for (var i = 0; i < arrayLength; i++) {
+						if (data.payment_invoices[i].outlet_id) {
+							$scope.getOutlet(data.payment_invoices[i].outlet_id, i)
+						}
 					}
-				}
-				$scope.payHistoryListCount = false;
-				}
-				else{
+					$scope.payHistoryListCount = false;
+				} else {
 					$scope.payHistoryListCount = true;
 				}
 				//console.log($scope.outletList);
@@ -2481,18 +2479,16 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 			$scope.addOutletId = false;
 		}
 
-		if(getCookie('outletDropDwn')){
-		 	 $scope.addOutletNo = parseInt(getCookie('outletDropDwn'));
-			 $scope.outletOption = parseInt(getCookie('outletDropDwn')); 
-		 }
-		
-
+		if (getCookie('outletDropDwn')) {
+			$scope.addOutletNo = parseInt(getCookie('outletDropDwn'));
+			$scope.outletOption = parseInt(getCookie('outletDropDwn'));
+		}
 
 		$scope.v = {
 			Dt : Date.now()
 		}
-		
-		$('#reportrange').daterangepicker({			
+
+		$('#reportrange').daterangepicker({
 			ranges : {
 				'Today' : [moment(), moment()],
 				'Yesterday' : [moment().subtract('days', 1), moment().subtract('days', 1)],
@@ -2505,11 +2501,11 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 			},
 			startDate : moment().subtract('days', 29),
 			endDate : moment()
-		}, function(start, end) {			
+		}, function(start, end) {
 			$('#reportrange span').html(start.format('D MMMM, YYYY') + ' - ' + end.format('D MMMM, YYYY'));
 			startDt = start.format('DD-MM-YYYY');
 			endDt = end.format('DD-MM-YYYY');
-			$scope.listFeedbacksDate();	
+			$scope.listFeedbacksDate();
 		});
 
 		$scope.listOutletNames = function() {
@@ -2631,6 +2627,9 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		var usageLegend = "";
 		var npsBreakdownV = 0;
 		var npsOverview = 0;
+		var xAxisVal = "";
+		var yAxisVal = "";
+		var graphType = "";
 
 		if ($routeParams.outletId) {
 			//alert("in");
@@ -2641,12 +2640,11 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			$scope.addOutletId = false;
 			//$scope.outletTrend = parseInt($routeParams.outletId);
 		}
-		
-		if(getCookie('outletDropDwn')){
-		 	 $scope.addOutletNo = parseInt(getCookie('outletDropDwn'));
-			 $scope.outletTrend = parseInt(getCookie('outletDropDwn')); 
-		 }
-		
+
+		if (getCookie('outletDropDwn')) {
+			$scope.addOutletNo = parseInt(getCookie('outletDropDwn'));
+			$scope.outletTrend = parseInt(getCookie('outletDropDwn'));
+		}
 
 		$scope.v = {
 			Dt : Date.now()
@@ -2689,15 +2687,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			}
 		});
 
-		// $("#dp3 .add-on").click(function() {
-			// $('.datepicker').addClass("addLeft");
-		// });
-// 
-		// $("#dp2 .add-on").click(function() {
-			// $('.datepicker').removeClass("addLeft");
-		// });
-		
-		$('#reportrange').daterangepicker({			
+		$('#reportrange').daterangepicker({
 			ranges : {
 				'Today' : [moment(), moment()],
 				'Yesterday' : [moment().subtract('days', 1), moment().subtract('days', 1)],
@@ -2710,54 +2700,12 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			},
 			startDate : moment().subtract('days', 29),
 			endDate : moment()
-		}, function(start, end) {			
+		}, function(start, end) {
 			$('#reportrange span').html(start.format('D MMMM, YYYY') + ' - ' + end.format('D MMMM, YYYY'));
 			startDt = start.format('DD-MM-YYYY');
 			endDt = end.format('DD-MM-YYYY');
 			$scope.listOfTrendsDate(idV);
 		});
-
-		// $(function() {
-			// $('#dp2').datepicker().on('changeDate', function(ev) {
-				// var dt = new Date(ev.date.valueOf());
-				// var month = dt.getMonth() + 1;
-				// startDt = dt.yyyymmdd();
-				// if (idV == "timeOfVisit") {
-					// endDt = startDt;
-				// }
-				// if (startDt != 'undefined' && typeof endDt != 'undefined') {
-					// if ((new Date(startDt).getTime() > new Date(endDt).getTime())) {
-						// var r = confirm("End Date should be greater than Start Date");
-						// if (r == true) {
-// 
-						// }
-					// } else {
-						// $scope.listOfTrendsDate(idV);
-					// }
-					// $(".outletDropDown").change(function() {
-						// $scope.listOfTrendsDate(idV);
-					// });
-				// }
-			// });
-			// $('#dp3').datepicker().on('changeDate', function(ev) {
-				// var dt = new Date(ev.date.valueOf());
-				// var month = dt.getMonth() + 1;
-				// endDt = dt.yyyymmdd();
-				// if ( typeof startDt != 'undefined' && endDt != 'undefined') {
-					// if ((new Date(startDt).getTime() > new Date(endDt).getTime())) {
-						// var r = confirm("End Date should be greater than Start Date");
-						// if (r == true) {
-// 
-						// }
-					// } else {
-						// $scope.listOfTrendsDate(idV);
-					// }
-					// $(".outletDropDown").change(function() {
-						// $scope.listOfTrendsDate(idV);
-					// });
-				// }
-			// });
-		// });
 
 		Date.prototype.yyyymmdd = function() {
 
@@ -2836,26 +2784,56 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].food_quality.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].food_quality.neutral;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].food_quality.dislike;
+						xAxisVal = "Time Interval (Months, Weeks, Days)";
+						yAxisVal = "Feedback Submissions";
+						custLegend1 = "Positive";
+						custLegend2 = "Neutral";
+						custLegend3 = "Negative";
 					} else if (idValue == "speed") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].speed_of_service.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].speed_of_service.neutral;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].speed_of_service.dislike;
+						xAxisVal = "Time Interval (Months, Weeks, Days)";
+						yAxisVal = "Feedback Submissions";
+						custLegend1 = "Positive";
+						custLegend2 = "Neutral";
+						custLegend3 = "Negative";
 					} else if (idValue == "friendly") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].friendliness_of_service.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].friendliness_of_service.neutral;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].friendliness_of_service.dislike;
+						xAxisVal = "Time Interval (Months, Weeks, Days)";
+						yAxisVal = "Feedback Submissions";
+						custLegend1 = "Positive";
+						custLegend2 = "Neutral";
+						custLegend3 = "Negative";
 					} else if (idValue == "ambiance") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].ambience.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].ambience.neutral;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].ambience.dislike;
+						xAxisVal = "Time Interval (Months, Weeks, Days)";
+						yAxisVal = "Feedback Submissions";
+						custLegend1 = "Positive";
+						custLegend2 = "Neutral";
+						custLegend3 = "Negative";
 					} else if (idValue == "cleanly") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].cleanliness.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].cleanliness.neutral;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].cleanliness.dislike;
+						xAxisVal = "Time Interval (Months, Weeks, Days)";
+						yAxisVal = "Feedback Submissions";
+						custLegend1 = "Positive";
+						custLegend2 = "Neutral";
+						custLegend3 = "Negative";
 					} else if (idValue == "moneyVal") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].value_for_money.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].value_for_money.neutral;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].value_for_money.dislike;
+						xAxisVal = "Time Interval (Months, Weeks, Days)";
+						yAxisVal = "Feedback Submissions";
+						custLegend1 = "Positive";
+						custLegend2 = "Neutral";
+						custLegend3 = "Negative";
 					}
 					/** Customer Experience End**/
 
@@ -2865,29 +2843,47 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.neutral;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.dislike;
 						npsBreakdownV = 1;
+						//graphType = "area";
+						xAxisVal = "Time Interval (Months, Weeks, Days)";
+						yAxisVal = "Number of submissions (100%)";
+						custLegend1 = "% Promoters";
+						custLegend2 = "passives";
+						custLegend3 = "detractors";
 					} else if (idValue == "npsOverview") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.like - data.feedback_trends.detailed_statistics[dateV].net_promoter_score.dislike;
 						npsOverview = 1;
-						usageLegend = "NPS Overview";
+						usageLegend = "Net Promoter Score";
+						xAxisVal = "Time Interval (Months, Weeks, Days)";
+						yAxisVal = "Net Promoter Score [limit axes to -100 & +100]";
 					}
 					/**Net Promoter Score End**/
 
 					/**Usage start**/
 					else if (idValue == "feedbackSubmit") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].usage.feedbacks_count;
-						usageLegend = "Feedback count";
+						usageLegend = "Number of submissions";
+						xAxisVal = "Time Interval (Months, Weeks, Days)";
+						yAxisVal = "Number of submissions";
 					} else if (idValue == "redemProc") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].usage.redemptions_count;
-						usageLegend = "Redemption count";
+						usageLegend = "Redemptions";
+						xAxisVal = "Time Interval (Months, Weeks, Days)";
+						yAxisVal = "Redemptions";
 					} else if (idValue == "discountClaim") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].usage.discounts_claimed;
-						usageLegend = "Discount claimed ";
+						usageLegend = "Discounts Claimed";
+						xAxisVal = "Time Interval (Months, Weeks, Days)";
+						yAxisVal = "Discounts Claimed";
 					} else if (idValue == "pointsIssued") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].usage.points_issued;
-						usageLegend = "Points issued";
+						usageLegend = "Points Issued";
+						xAxisVal = "Time Interval (Months, Weeks, Days)";
+						yAxisVal = "Points Issued";
 					} else if (idValue == "rewardsPool") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].usage.rewards_pool;
-						usageLegend = "Reward pool";
+						usageLegend = "Rewards Pool";
+						xAxisVal = "Time Interval (Months, Weeks, Days)";
+						yAxisVal = "Rewards Pool";
 					}
 					/**Usage end**/
 
@@ -2897,22 +2893,34 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].customers.female;
 						custLegend1 = "Male";
 						custLegend2 = "Female";
+						graphType = "line";
+						xAxisVal = "Time Interval (Months, Weeks, Days)";
+						yAxisVal = "Customer Interactions (Feedback Submissions + Redemptions)";
 					} else if (idValue == "usersGraph") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].customers.new_users;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].customers.returning_users;
-						custLegend1 = "New";
-						custLegend2 = "Returning";
-					} else if (idValue == "timeOfVisit") {
-						finaltime = [];
-						for (var j = 0; j < 24; j++) {
-							time[j] = data.feedback_trends.detailed_statistics[dateV].customers.time_of_visit[j];
-							finaltime.push(time[j]);
-						}
-						timeOfV = 1;
-					} else if (idValue == "chequeSize") {
+						custLegend1 = "New Users";
+						custLegend2 = "Returning Users";
+						graphType = "area";
+						xAxisVal = "Time Interval (Months, Weeks, Days)";
+						yAxisVal = "Customer Interactions (Feedback Submissions + Redemptions?)";
+					}
+					// else if (idValue == "timeOfVisit") {
+					// finaltime = [];
+					// for (var j = 0; j < 24; j++) {
+					// time[j] = data.feedback_trends.detailed_statistics[dateV].customers.time_of_visit[j];
+					// finaltime.push(time[j]);
+					// }
+					// timeOfV = 1;
+					// }
+					else if (idValue == "chequeSize") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].average_bill_amount;
 						npsOverview = 1;
-						usageLegend = "Cheque Size";
+						graphType = "line";
+						usageLegend = "Avg. Cheque Size";
+						xAxisVal = "Time Interval (Months, Weeks, Days)";
+						yAxisVal = "AED";
+
 					}
 					/**Customers End**/
 
@@ -2924,11 +2932,13 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				if (metricsId == "custExp" || npsBreakdownV == "1") {
 					getCustExpGraph();
 				} else if (metricsId == "usage" || npsOverview == "1") {
+					graphType = "line";
 					getUsageGraph();
-				} else if (metricsId == "customers" && timeOfV == "1") {
-					//alert("in");
-					getTimeVisitGraph();
-				} else if (metricsId == "customers") {
+				}
+				// else if (metricsId == "customers" && timeOfV == "1") {
+				// getTimeVisitGraph();
+				// }
+				else if (metricsId == "customers") {
 					customerGraph();
 				}
 
@@ -2994,7 +3004,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			$('#container').highcharts({
 
 				chart : {
-					type : 'column'
+					type : 'area'
 				},
 
 				title : {
@@ -3008,7 +3018,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				xAxis : {
 					categories : resultsDate,
 					title : {
-						text : 'Days Of week',
+						text : xAxisVal,
 						style : {
 							color : '#7C7A7D',
 						}
@@ -3019,7 +3029,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					allowDecimals : false,
 					min : 0,
 					title : {
-						text : 'Points%',
+						text : yAxisVal,
 						style : {
 							color : '#7C7A7D',
 						}
@@ -3032,9 +3042,16 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					},
 				},
 
+				// plotOptions : {
+					// column : {
+						// stacking : 'normal'
+					// }
+				// },
 				plotOptions : {
-					column : {
-						stacking : 'normal'
+					area : {
+						marker : {
+							enabled : false,
+						}
 					}
 				},
 				legend : {
@@ -3045,15 +3062,15 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					}
 				},
 				series : [{
-					name : 'Positive',
+					name : custLegend1,
 					data : results1,
-					color : '#D8882F',
+					color : '#D8882F'
 				}, {
-					name : 'Neutral',
+					name : custLegend2,
 					data : results2,
 					color : '#3A240D'
 				}, {
-					name : 'Negative',
+					name : custLegend3,
 					data : results3,
 					color : '#664766'
 				}]
@@ -3063,7 +3080,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		function getUsageGraph() {
 			$('#container').highcharts({
 				chart : {
-					type : 'column'
+					type : graphType
 				},
 				title : {
 					text : $scope.chart_heading + ' | Stacked column chart',
@@ -3082,7 +3099,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						}
 					},
 					title : {
-						text : 'Days Of week',
+						text : xAxisVal,
 						style : {
 							color : '#7C7A7D',
 						}
@@ -3091,7 +3108,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				yAxis : {
 
 					title : {
-						text : 'Points%',
+						text : yAxisVal,
 						style : {
 							color : '#7C7A7D',
 						}
@@ -3118,7 +3135,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		function customerGraph() {
 			$('#container').highcharts({
 				chart : {
-					type : 'column'
+					type : graphType
 				},
 				title : {
 					text : $scope.chart_heading + ' | Stacked column chart',
@@ -3137,7 +3154,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						}
 					},
 					title : {
-						text : 'Days Of week',
+						text : xAxisVal,
 						style : {
 							color : '#7C7A7D',
 						}
@@ -3146,19 +3163,26 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				yAxis : {
 
 					title : {
-						text : 'Points%',
+						text : yAxisVal,
 						style : {
 							color : '#7C7A7D',
 						}
 					}
 				},
 				legend : {
-					x : -350,
+					x : -300,
 					backgroundColor : '#fff',
 					style : {
 						fontColor : '#A08A75'
 					}
 				},
+				// plotOptions : {
+					// area : {
+						// marker : {
+							// enabled : false,
+						// }
+					// }
+				// },
 				credits : {
 					enabled : false
 				},
@@ -3241,7 +3265,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 	}
 });
 
-
 module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location) {
 	if (getCookie('authToken')) {
 		$('.welcome').show();
@@ -3259,12 +3282,12 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		} else {
 			$scope.addOutletId = false;
 		}
-		
-		 if(getCookie('outletDropDwn')){
-		 	 $scope.addOutletNo = parseInt(getCookie('outletDropDwn'));
-			 $scope.outletOption = parseInt(getCookie('outletDropDwn')); 
-		 }
-		
+
+		if (getCookie('outletDropDwn')) {
+			$scope.addOutletNo = parseInt(getCookie('outletDropDwn'));
+			$scope.outletOption = parseInt(getCookie('outletDropDwn'));
+		}
+
 		$scope.feedbackMetrics = function() {
 			var param = {
 				"auth_token" : getCookie('authToken'),
@@ -3479,9 +3502,8 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 				}
 			});
 		};
-		
+
 		$scope.listOutletNames();
-						
 
 	} else {
 		$location.url("/login");
