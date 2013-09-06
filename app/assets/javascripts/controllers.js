@@ -397,16 +397,16 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 		$scope.outlets = [];
 		var outletCount;
 		var authOutlet;
-		
+
 		if (getCookie('userRole') == "customer_admin") {
-				$scope.accountm = false;
-				$('#accountm').hide();
-			} else {
-				$('#account').hide();
-				$scope.accountm = true;
-				$('#accountm').show();
-			}
-			
+			$scope.accountm = false;
+			$('#accountm').hide();
+		} else {
+			$('#account').hide();
+			$scope.accountm = true;
+			$('#accountm').show();
+		}
+
 		var param = {
 			"auth_token" : getCookie('authToken')
 		};
@@ -442,9 +442,9 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 		}).success(function(data, status) {
 			console.log("data in success " + data + " status " + status);
 			authOutlet = data.customer.authorized_outlets;
-			setCookie('auth_outlet', data.customer.customer_admin.can_create_outlet, 7);			
+			setCookie('auth_outlet', data.customer.customer_admin.can_create_outlet, 7);
 			showAddOutletBtn();
-			
+
 		}).error(function(data, status) {
 			console.log("data in error" + data + " status " + status);
 			if (status == 401) {
@@ -827,6 +827,12 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			}).success(function(data, status) {
 				$scope.error = false;
 				$scope.managerList = data.managers;
+				if(data.managers.length > 0){
+					$scope.outletMgrListCount = false;
+				}
+				else{
+					$scope.outletMgrListCount = true;
+				}
 				var managerlist = data.managers;
 				if (managerlist != "") {
 					$scope.managerField = true;
@@ -1424,7 +1430,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$('.navBarCls ul li').removeClass('active');
 			$('#account').addClass('active');
 		}
-		
 
 		$scope.add_new_manager = function() {
 			$('.add_manager').show();
@@ -2328,32 +2333,53 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 		$rootScope.header = "Payment History | Kanari";
 		$scope.paymentHistoryList = [];
 
-		$(function() {
-			$('#payDate1').datepicker().on('changeDate', function(ev) {
-				var dt = new Date(ev.date.valueOf());
-				var month = dt.getMonth() + 1;
-				startDt = dt.getFullYear() + "-" + month + "-" + dt.getDate();
-				if (startDt != 'undefined' && typeof endDt != 'undefined') {
-					console.log("hi in start date");
-					$scope.listPaymentHistory();
-					$(".outletDropDown").change(function() {
-						$scope.listPaymentHistory();
-					});
-				}
-			});
-			$('#payDate2').datepicker().on('changeDate', function(ev) {
-				var dt = new Date(ev.date.valueOf());
-				var month = dt.getMonth() + 1;
-				endDt = dt.getFullYear() + "-" + month + "-" + dt.getDate();
-				if ( typeof startDt != 'undefined' && endDt != 'undefined') {
-					console.log("hi in end date");
-					$scope.listPaymentHistory();
-					$(".outletDropDown").change(function() {
-						$scope.listPaymentHistory();
-					});
-				}
-			});
+		// $(function() {
+			// $('#payDate1').datepicker().on('changeDate', function(ev) {
+				// var dt = new Date(ev.date.valueOf());
+				// var month = dt.getMonth() + 1;
+				// startDt = dt.getFullYear() + "-" + month + "-" + dt.getDate();
+				// if (startDt != 'undefined' && typeof endDt != 'undefined') {
+					// console.log("hi in start date");
+					// $scope.listPaymentHistory();
+					// $(".outletDropDown").change(function() {
+						// $scope.listPaymentHistory();
+					// });
+				// }
+			// });
+			// $('#payDate2').datepicker().on('changeDate', function(ev) {
+				// var dt = new Date(ev.date.valueOf());
+				// var month = dt.getMonth() + 1;
+				// endDt = dt.getFullYear() + "-" + month + "-" + dt.getDate();
+				// if ( typeof startDt != 'undefined' && endDt != 'undefined') {
+					// console.log("hi in end date");
+					// $scope.listPaymentHistory();
+					// $(".outletDropDown").change(function() {
+						// $scope.listPaymentHistory();
+					// });
+				// }
+			// });
+		// });
+		
+		$('#reportrange').daterangepicker({			
+			ranges : {
+				'Today' : [moment(), moment()],
+				'Yesterday' : [moment().subtract('days', 1), moment().subtract('days', 1)],
+				'Last 7 Days' : [moment().subtract('days', 6), moment()],
+				'Last 14 Days' : [moment().subtract('days', 13), moment()],
+				'Last 30 Days' : [moment().subtract('days', 29), moment()],
+				'Last 90 Days' : [moment().subtract('days', 89), moment()],
+				//'This Month' : [moment().startOf('month'), moment().endOf('month')],
+				//'Last Month' : [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+			},
+			startDate : moment().subtract('days', 29),
+			endDate : moment()
+		}, function(start, end) {			
+			$('#reportrange span').html(start.format('D MMMM, YYYY') + ' - ' + end.format('D MMMM, YYYY'));
+			startDt = start.format('DD-MM-YYYY');
+			endDt = end.format('DD-MM-YYYY');
+			$scope.listPaymentHistory();
 		});
+		
 		$scope.paymentHistoryList = [];
 		$scope.listPaymentHistory = function() {
 			var outletId = $scope.outletOption;
@@ -2379,10 +2405,16 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 				$scope.paymentHistoryList = [];
 				$scope.paymentHistoryList = data.payment_invoices;
 				var arrayLength = data.payment_invoices.length;
+				if(arrayLength>0){
 				for (var i = 0; i < arrayLength; i++) {
 					if (data.payment_invoices[i].outlet_id) {
 						$scope.getOutlet(data.payment_invoices[i].outlet_id, i)
 					}
+				}
+				$scope.payHistoryListCount = false;
+				}
+				else{
+					$scope.payHistoryListCount = true;
 				}
 				//console.log($scope.outletList);
 			}).error(function(data, status) {
@@ -2459,40 +2491,25 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 		$scope.v = {
 			Dt : Date.now()
 		}
-
-		$("#dp3 .add-on").click(function() {
-			$('.datepicker').addClass("addLeft");
-		});
-
-		$("#dp2 .add-on").click(function() {
-			$('.datepicker').removeClass("addLeft");
-		});
-
-		$(function() {
-			$('#dp2').datepicker().on('changeDate', function(ev) {
-				var dt = new Date(ev.date.valueOf());
-				var month = dt.getMonth() + 1;
-				startDt = dt.getFullYear() + "-" + month + "-" + dt.getDate();
-				if (startDt != 'undefined' && typeof endDt != 'undefined') {
-					console.log("hi in start date");
-					$scope.listFeedbacksDate();
-					$(".outletDropDown").change(function() {
-						$scope.listFeedbacksDate();
-					});
-				}
-			});
-			$('#dp3').datepicker().on('changeDate', function(ev) {
-				var dt = new Date(ev.date.valueOf());
-				var month = dt.getMonth() + 1;
-				endDt = dt.getFullYear() + "-" + month + "-" + dt.getDate();
-				if ( typeof startDt != 'undefined' && endDt != 'undefined') {
-					console.log("hi in end date");
-					$scope.listFeedbacksDate();
-					$(".outletDropDown").change(function() {
-						$scope.listFeedbacksDate();
-					});
-				}
-			});
+		
+		$('#reportrange').daterangepicker({			
+			ranges : {
+				'Today' : [moment(), moment()],
+				'Yesterday' : [moment().subtract('days', 1), moment().subtract('days', 1)],
+				'Last 7 Days' : [moment().subtract('days', 6), moment()],
+				'Last 14 Days' : [moment().subtract('days', 13), moment()],
+				'Last 30 Days' : [moment().subtract('days', 29), moment()],
+				'Last 90 Days' : [moment().subtract('days', 89), moment()],
+				//'This Month' : [moment().startOf('month'), moment().endOf('month')],
+				//'Last Month' : [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+			},
+			startDate : moment().subtract('days', 29),
+			endDate : moment()
+		}, function(start, end) {			
+			$('#reportrange span').html(start.format('D MMMM, YYYY') + ' - ' + end.format('D MMMM, YYYY'));
+			startDt = start.format('DD-MM-YYYY');
+			endDt = end.format('DD-MM-YYYY');
+			$scope.listFeedbacksDate();	
 		});
 
 		$scope.listOutletNames = function() {
@@ -2556,6 +2573,8 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 			var param = {
 				"auth_token" : getCookie('authToken'),
 				"outlet_id" : $scope.outletOption,
+				"start_time" : startDt,
+				"end_time" : endDt,
 				"password" : "X"
 			}
 
@@ -2670,55 +2689,75 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			}
 		});
 
-		$("#dp3 .add-on").click(function() {
-			$('.datepicker').addClass("addLeft");
+		// $("#dp3 .add-on").click(function() {
+			// $('.datepicker').addClass("addLeft");
+		// });
+// 
+		// $("#dp2 .add-on").click(function() {
+			// $('.datepicker').removeClass("addLeft");
+		// });
+		
+		$('#reportrange').daterangepicker({			
+			ranges : {
+				'Today' : [moment(), moment()],
+				'Yesterday' : [moment().subtract('days', 1), moment().subtract('days', 1)],
+				'Last 7 Days' : [moment().subtract('days', 6), moment()],
+				'Last 14 Days' : [moment().subtract('days', 13), moment()],
+				'Last 30 Days' : [moment().subtract('days', 29), moment()],
+				'Last 90 Days' : [moment().subtract('days', 89), moment()],
+				//'This Month' : [moment().startOf('month'), moment().endOf('month')],
+				//'Last Month' : [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+			},
+			startDate : moment().subtract('days', 29),
+			endDate : moment()
+		}, function(start, end) {			
+			$('#reportrange span').html(start.format('D MMMM, YYYY') + ' - ' + end.format('D MMMM, YYYY'));
+			startDt = start.format('DD-MM-YYYY');
+			endDt = end.format('DD-MM-YYYY');
+			$scope.listOfTrendsDate(idV);
 		});
 
-		$("#dp2 .add-on").click(function() {
-			$('.datepicker').removeClass("addLeft");
-		});
-
-		$(function() {
-			$('#dp2').datepicker().on('changeDate', function(ev) {
-				var dt = new Date(ev.date.valueOf());
-				var month = dt.getMonth() + 1;
-				startDt = dt.yyyymmdd();
-				if (idV == "timeOfVisit") {
-					endDt = startDt;
-				}
-				if (startDt != 'undefined' && typeof endDt != 'undefined') {
-					if ((new Date(startDt).getTime() > new Date(endDt).getTime())) {
-						var r = confirm("End Date should be greater than Start Date");
-						if (r == true) {
-
-						}
-					} else {
-						$scope.listOfTrendsDate(idV);
-					}
-					$(".outletDropDown").change(function() {
-						$scope.listOfTrendsDate(idV);
-					});
-				}
-			});
-			$('#dp3').datepicker().on('changeDate', function(ev) {
-				var dt = new Date(ev.date.valueOf());
-				var month = dt.getMonth() + 1;
-				endDt = dt.yyyymmdd();
-				if ( typeof startDt != 'undefined' && endDt != 'undefined') {
-					if ((new Date(startDt).getTime() > new Date(endDt).getTime())) {
-						var r = confirm("End Date should be greater than Start Date");
-						if (r == true) {
-
-						}
-					} else {
-						$scope.listOfTrendsDate(idV);
-					}
-					$(".outletDropDown").change(function() {
-						$scope.listOfTrendsDate(idV);
-					});
-				}
-			});
-		});
+		// $(function() {
+			// $('#dp2').datepicker().on('changeDate', function(ev) {
+				// var dt = new Date(ev.date.valueOf());
+				// var month = dt.getMonth() + 1;
+				// startDt = dt.yyyymmdd();
+				// if (idV == "timeOfVisit") {
+					// endDt = startDt;
+				// }
+				// if (startDt != 'undefined' && typeof endDt != 'undefined') {
+					// if ((new Date(startDt).getTime() > new Date(endDt).getTime())) {
+						// var r = confirm("End Date should be greater than Start Date");
+						// if (r == true) {
+// 
+						// }
+					// } else {
+						// $scope.listOfTrendsDate(idV);
+					// }
+					// $(".outletDropDown").change(function() {
+						// $scope.listOfTrendsDate(idV);
+					// });
+				// }
+			// });
+			// $('#dp3').datepicker().on('changeDate', function(ev) {
+				// var dt = new Date(ev.date.valueOf());
+				// var month = dt.getMonth() + 1;
+				// endDt = dt.yyyymmdd();
+				// if ( typeof startDt != 'undefined' && endDt != 'undefined') {
+					// if ((new Date(startDt).getTime() > new Date(endDt).getTime())) {
+						// var r = confirm("End Date should be greater than Start Date");
+						// if (r == true) {
+// 
+						// }
+					// } else {
+						// $scope.listOfTrendsDate(idV);
+					// }
+					// $(".outletDropDown").change(function() {
+						// $scope.listOfTrendsDate(idV);
+					// });
+				// }
+			// });
+		// });
 
 		Date.prototype.yyyymmdd = function() {
 
