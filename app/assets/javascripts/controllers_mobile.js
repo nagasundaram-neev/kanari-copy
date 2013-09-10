@@ -1292,7 +1292,7 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 module.controller('redeemPointsController', function($scope, $http, $location, $routeParams) {
 
 	if (getCookie('authToken')) {
-		flagPage = 1;
+		flagPage = 0;
 		$scope.successMsg = false;
 		$scope.erromsg = false;
 
@@ -1492,13 +1492,6 @@ $(document).on("pageshow", ".ui-page", function() {
 		dateFormat : 'dd/mm/yy'
 	});
 
-	// var updateLayout = function() {
-	//
-	// window.scrollTo(0, 1);
-	// };
-	//
-	// setInterval(updateLayout, 500);
-
 	var $page = $(this), vSpace = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() + $page.children('.ui-content').height();
 	if ($(window).height() > 500 && $(window).height() < 570) {
 		//alert("in ");
@@ -1510,12 +1503,10 @@ $(document).on("pageshow", ".ui-page", function() {
 		$page.height($(window).height());
 	}
 
-	//alert("page " + $page.height() + "window " + $(window).height());
-
 	if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
 		//if (document.cookie.indexOf("iphone_redirect=false") == -1)
-		// alert("iphone ");
-		$("#divexample1").css('height', '280px');
+		//alert("iphone ");
+		$("#divexample1").css('height', '320px');
 		$page.children('.ui-footer').css('position', 'relative');
 		if (flagPage == 0) {
 			$page.children('.ui-footer').css('margin-top', '14px');
@@ -1531,25 +1522,19 @@ $(document).on("pageshow", ".ui-page", function() {
 	window.scrollTo(0, 1)
 	}, 1000);
 
-	
-	// /iPhone/.test(navigator.agent) && !location.hash && setTimeout(function () {
-  	// window.scrollTo(0, 1);
-  	// alert("hi"+navigator.agent)
-// }, 1000);
-
 	var scrnHeight = screen.availHeight;
-
+	var pageHt = $page.height();
+	var divHeightInDoc = pageHt + 25;
+	//$("div[data-role='page']").css( "height",  divHeightInDoc);
+	//alert("page " + $page.height() + "window " + $(window).height());
 	if (scrnHeight == 548) {
-		$page.children('.ui-footer').css('position', 'absolute');
+		//$page.children('.ui-footer').css('position', 'absolute');
+		$("div[data-role='page']").style.setProperty("height", divHeightInDoc + "px", 'important');
 	}
-
-	// if(screen.availHeight != $(window).height()){
-	// setFooterIphone();
-	// }
 
 	function setFooterIphone() {
 		if ($page.height() > $(window).height()) {
-			$("#divexample1").css('height', '280px');
+			$("#divexample1").css('height', '320px');
 			$page.children('.ui-footer').css('position', 'relative');
 			if (flagPage == 0) {
 				$page.children('.ui-footer').css('margin-top', '14px');
