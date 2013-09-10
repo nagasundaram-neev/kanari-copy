@@ -1527,19 +1527,25 @@ $(document).on("pageshow", ".ui-page", function() {
 		setFooterIphone();
 	}
 
-	setTimeout(function() {
-		window.scrollTo(0, 1)
-	}, 100);
+	// setTimeout(function() {
+	// window.scrollTo(0, 1)
+	// }, 1000);
 
-var scrnHeight = screen.availHeight;
+	/
+	mobi / i.test(navigator.userAgent) && !location.hash && setTimeout(function() {
+		if (!pageYOffset)
+			window.scrollTo(0, 1);
+	}, 1000);
 
-if(scrnHeight == 548){
-	$page.children('.ui-footer').css('position', 'absolute');
-}
+	var scrnHeight = screen.availHeight;
 
-// if(screen.availHeight != $(window).height()){
+	if (scrnHeight == 548) {
+		$page.children('.ui-footer').css('position', 'absolute');
+	}
+
+	// if(screen.availHeight != $(window).height()){
 	// setFooterIphone();
-// }
+	// }
 
 	function setFooterIphone() {
 		if ($page.height() > $(window).height()) {

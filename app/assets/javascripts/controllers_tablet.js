@@ -518,7 +518,7 @@ module.controller('insightsController', function($scope, $http, $location, $time
 				if ($scope.netScore > 0) {
 					$scope.netScorePlusBar = true;
 					$scope.netScoreMinusBar = false;
-				} else if($scope.netScore < 0) {
+				} else if ($scope.netScore < 0) {
 					$scope.netScorePlusBar = false;
 					$scope.netScoreMinusBar = true;
 				}
@@ -575,16 +575,10 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 	$("#redemption span").show();
 	if (getCookie('authToken')) {
 		$timeout.cancel(insightTimeout);
-		// $timeout.cancel(feedbackTimeout);
-		// var flagP = 0;
-		// $scope.popupHeight = $(window).height() - 150;
-		// $(window).bind('orientationchange', 'load', function(event) {
-		// $scope.popupHeight = $(window).height() - 150;
-		// if(flagP == 1){
-		// $scope.showRedemptions();
-		// }
-		// });
-
+		overlayDiv.css({
+			'z-index' : '0',
+			'background-color' : 'transparent'
+		});
 		$scope.redemptionMsg = false;
 		$scope.showRedemptions = function() {
 			//window.history.back();
