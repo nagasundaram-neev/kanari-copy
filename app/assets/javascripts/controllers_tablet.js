@@ -573,12 +573,14 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 	$("#wrapper").addClass("clsafterLogin");
 	$("#redemption").addClass("ui_btn_active");
 	$("#redemption span").show();
+	$("#overlaySuccess").hide();
+	$(".redeemptions").hide();
 	if (getCookie('authToken')) {
 		$timeout.cancel(insightTimeout);
-		overlayDiv.css({
-			'z-index' : '0',
-			'background-color' : 'transparent'
-		});
+		// overlayDiv.css({
+			// 'z-index' : '0',
+			// 'background-color' : 'transparent'
+		// });
 		$scope.redemptionMsg = false;
 		$scope.showRedemptions = function() {
 			//window.history.back();
@@ -674,10 +676,12 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 		};
 
 		$scope.listRedemptions();
+		
 		$('#scrollbar3').oneFingerScroll();
 
 		$scope.confirm = function(id) {
 			console.log("confirmed" + id);
+			//alert("hi i am in "+id);
 			var param = {
 				"redemption" : {
 					"approve" : true
