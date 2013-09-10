@@ -1527,15 +1527,15 @@ $(document).on("pageshow", ".ui-page", function() {
 		setFooterIphone();
 	}
 
-	// setTimeout(function() {
-	// window.scrollTo(0, 1)
-	// }, 1000);
-
-	/
-	mobi / i.test(navigator.userAgent) && !location.hash && setTimeout(function() {
-		if (!pageYOffset)
-			window.scrollTo(0, 1);
+	setTimeout(function() {
+	window.scrollTo(0, 1)
 	}, 1000);
+
+	
+	// /iPhone/.test(navigator.agent) && !location.hash && setTimeout(function () {
+  	// window.scrollTo(0, 1);
+  	// alert("hi"+navigator.agent)
+// }, 1000);
 
 	var scrnHeight = screen.availHeight;
 
