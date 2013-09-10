@@ -38,31 +38,31 @@
 			<ul class="">
 				<li data-ng-class="{active:profileShow,create_outlet:true }">
 					<a ng-click="changeTab('profileShow')" > <%= image_tag 'icon_profile.png' %>
-					Profile
+					<div class="menuTitle">Profile</div>
 					<br/>
 					<span>Name, Description and contact info</span> </a>
 				</li>
 				<li data-ng-class="{active:locationShow,create_location:true}" >
 					<a  ng-click="changeTab('locationShow')"> <%= image_tag 'icon_location.png' %>
-					Location
+					<div class="menuTitle">Location</div>
 					<br/>
 					<span>Specify the exact location of your outlet</span> </a>
 				</li>
 				<li ng-show="userAction" data-ng-class="{active:permissionShow,create_manager:true}">
 					<a ng-click="changeTab('permissionShow')"> <%= image_tag 'icon_permissions.png' %>
-					Manager
+					<div class="menuTitle">Manager</div>
 					<br/>
 					<span>Assign a manager to your outlet</span> </a>
 				</li>
 				<li data-ng-class="{active:ReportShow,create_report:true}">
 					<a ng-click="changeTab('ReportShow')"> <%= image_tag 'icon_reports.png' %>
-					Reports
+					<div class="menuTitle">Reports</div>
 					<br/>
 					<span>Who gets the reports and how often</span> </a>
 				</li>
 				<li data-ng-class="{active:TabletIdShow,create_tabletId:true}">
 					<a ng-click="changeTab('TabletIdShow')"> <%= image_tag 'icon_create_tablet_id.png' %>
-					Tablets
+					<div class="menuTitle">Tablets</div>
 					<br/>
 					<span>Create a tablet login for your outlet</span> </a>
 				</li>

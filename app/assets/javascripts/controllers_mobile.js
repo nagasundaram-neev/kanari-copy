@@ -509,27 +509,6 @@ module.controller('signedUpController', function($scope, $http, $location) {
 	$scope.password = getCookie('password');
 	flagPage = 0;
 	$scope.proceedAccount = function() {
-		// console.log("email "+$scope.email+" password "+$scope.password);
-		// var param = "{email:'" + $scope.email + "','password:'" + $scope.password + "'}";
-		// $http({
-		// method : 'post',
-		// url : '/api/users/sign_in',
-		// }).success(function(data, status) {
-		// auth_token = data.user_role;
-		// console.log("User Role " + data.user_role + " status " + status);
-		// //deleteCookie('email');
-		// //deleteCookie('password');
-		// setCookie('userRole', data.user_role, 0.29);
-		// setCookie('authToken', data.auth_token, 0.29);
-		// setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
-		// setCookie('signInCount', data.sign_in_count, 0.29);
-		// $location.url("/home");
-		// }).error(function(data, status) {
-		// console.log("data " + $scope.email + " status " + status);
-		// });
-		// $scope.$watch('email + password', function() {
-		// $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
-		// });
 		$location.url("/home");
 		//$location.url("/login");
 	};
@@ -1513,6 +1492,13 @@ $(document).on("pageshow", ".ui-page", function() {
 		dateFormat : 'dd/mm/yy'
 	});
 
+	// var updateLayout = function() {
+	//
+	// window.scrollTo(0, 1);
+	// };
+	//
+	// setInterval(updateLayout, 500);
+
 	var $page = $(this), vSpace = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() + $page.children('.ui-content').height();
 	if ($(window).height() > 500 && $(window).height() < 570) {
 		//alert("in ");
@@ -1545,32 +1531,39 @@ $(document).on("pageshow", ".ui-page", function() {
 		window.scrollTo(0, 1)
 	}, 100);
 
+var scrnHeight = screen.availHeight;
 
-	function setFooterIphone() {
-	if ($page.height() > $(window).height()) {
-		$("#divexample1").css('height', '280px');
-		$page.children('.ui-footer').css('position', 'relative');
-		if (flagPage == 0) {
-			$page.children('.ui-footer').css('margin-top', '14px');
-		} else {
-			$page.children('.ui-footer').css('margin-top', '0');
-		}
-
-	} else {
-		//alert("height sufficient no need to scroll")
-	}
+if(scrnHeight == 548){
+	$page.children('.ui-footer').css('position', 'absolute');
 }
 
+// if(screen.availHeight != $(window).height()){
+	// setFooterIphone();
+// }
+
+	function setFooterIphone() {
+		if ($page.height() > $(window).height()) {
+			$("#divexample1").css('height', '280px');
+			$page.children('.ui-footer').css('position', 'relative');
+			if (flagPage == 0) {
+				$page.children('.ui-footer').css('margin-top', '14px');
+			} else {
+				$page.children('.ui-footer').css('margin-top', '0');
+			}
+
+		} else {
+			//alert("height sufficient no need to scroll")
+		}
+	}
 
 	//document.write("You are using iOS5");
 });
 //}
 
-document.ontouchmove = function(e){ 
-  	//alert("hi in touch");
-    //e.preventDefault(); 
+document.ontouchmove = function(e) {
+	//alert("hi in touch");
+	//e.preventDefault();
 }
-
 function iOSversion() {
 	if (/iP(hone|od|ad)/.test(navigator.platform)) {
 		// supports iOS 2.0 and later: <http://bit.ly/TJjs1V>

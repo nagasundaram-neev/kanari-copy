@@ -37,17 +37,17 @@ var module = angular.module('kanari', []).
 
 
 module.directive('map', function($http) {
+	var geocoder;
 	return {
 		restrict : 'E',
 		replace : true,
 		template : '<div></div>',
 		controller : function($scope) {
-
 		},
 		link : function(scope, element, attrs) {					            
 			scope.$on('clickMessageFromParent',  function (scopeDetails, msgFromParent) {
 			var queryStringId = getUrlVars()["outletId"];
-			var geocoder = new google.maps.Geocoder();
+			geocoder = new google.maps.Geocoder();
 			var myOptions = {
 			zoom :9,
 			minZoom: 6,

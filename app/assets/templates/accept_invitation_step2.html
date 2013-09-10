@@ -11,14 +11,14 @@
 				*
 			</div> Indicates mandatory fields</span>
 		<div class="acceptInv outerDiv">
-			<form ng-app="form-example" name="acceptInv2" class="row form-horizontal" ng-submit="acceptInvitation2(acceptInv2)" novalidate>
+			<form ng-app="form-example" name="acceptInv2" id="acceptInvStep2" class="row form-horizontal" ng-submit="acceptInvitation2(acceptInv2)" novalidate>
 				<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 42%;">
 					<div class="control-group">
 						<lable>
 							Business Name<span class="star">*</span>
 						</lable>
 						<div class="controls">
-							<input data-theme="a" data-inline="true" type="text" name="name" ng-model="name" placeholder="Bussiness name" required/>
+							<input data-theme="a" data-inline="true" id="buisNm" type="text" name="name" ng-model="name" placeholder="Bussiness name" required/>
 							<div class="input-help">
 								<h4>Please provide business name</h4>
 							</div>
@@ -125,7 +125,7 @@
 							Email<span class="star">*</span>
 						</lable>
 						<div class="controls">
-							<input data-theme="a" data-inline="true" type="email" name="email" ng-model="email" value="" placeholder="Email" required/>
+							<input data-theme="a" data-inline="true" type="email" name="email" ng-model="email1" value="" placeholder="Email" required/>
 							<div class="input-help">
 								<h4>Invalid Email</h4>
 							</div>
@@ -136,13 +136,13 @@
 					<div class="clr"></div>
 					<div style="margin: 10px 0 0 190px;" class="control-group">
 						<!-- <input type="button" class="loginBtn" ng-click="acceptInvitation2()" data-inline="true" value="Save" /> -->
-						<div class="controls">
+						<div class="controls" ng-show="button">
 							<button type="submit" class="btn">
 								Proceed
 							</button>
 							<button class="btn" disabled>
 								Proceed
-							</button>
+							</button> 
 						</div>
 						<p class="errorMsg" ng-show="error">
 							{{errorMsg}}

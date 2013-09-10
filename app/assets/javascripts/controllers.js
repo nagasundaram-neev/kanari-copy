@@ -184,16 +184,6 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 		$('#accountm').hide();
 	}
 
-	// $scope.gotoDahboard = function(section) {
-	// alert(getCookie('authToken'));
-	// if (getCookie('authToken')) {
-	// $location.url("/snapshot");
-	// }
-	// else{
-	// $location.url("/login");
-	// }
-	// }
-
 });
 
 module.controller('Login', function($rootScope, $scope, $http, $location) {
@@ -1781,11 +1771,14 @@ module.controller('acceptInvitationCtrl', function($rootScope, $scope, $routePar
 		}
 	}
 });
-module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routeParams, $http, $location) {
+module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routeParams, $http, $location, $timeout) {
 	if (getCookie('authToken')) {
+		$scope.button = true;
 		$rootScope.header = "Accept Invitation | Kanari";
 		if (getCookie('userRole') == "customer_admin") {
 			$('.welcome').show();
+			$scope.acceptStep2Submit = true;
+			$scope.button = true;
 		}
 		$scope.auth_token = getCookie('authToken');
 		$scope.acceptInvitation2 = function(acceptInv2) {
@@ -1804,7 +1797,7 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 						"mailing_address_line_2" : $scope.mailing_address_line_2,
 						"mailing_address_city" : "Dubai",
 						"mailing_address_country" : "UAE",
-						"email" : $scope.email
+						"email" : $scope.email1
 					},
 					"auth_token" : $scope.auth_token
 
@@ -1820,7 +1813,21 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 					if (acceptInvitationStep2 == true) {
 						$location.url("/outlets");
 					} else {
+						// $scope.name = undefined;
+						// $("#buisNm").val(" ");
+						// $(".phoneno_1").val("");
+						// $scope.registered_address_line_1 = "";
+						// $scope.registered_address_line_2 = "";
+						// $scope.mailing_address_line_1 = "";
+						// $scope.mailing_address_line_2 = "";
+						// $scope.email1 = "";
+						$('#acceptInvStep2')[0].reset();
+						console.log("hi " + $('.ng-invalid'));
+						$scope.button = false;
 						$scope.success = true;
+						$scope.delay = $timeout(function() {
+							$location.url("/login");
+						}, 3000);
 					}
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);
@@ -3043,9 +3050,9 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				},
 
 				// plotOptions : {
-					// column : {
-						// stacking : 'normal'
-					// }
+				// column : {
+				// stacking : 'normal'
+				// }
 				// },
 				plotOptions : {
 					area : {
@@ -3177,11 +3184,11 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					}
 				},
 				// plotOptions : {
-					// area : {
-						// marker : {
-							// enabled : false,
-						// }
-					// }
+				// area : {
+				// marker : {
+				// enabled : false,
+				// }
+				// }
 				// },
 				credits : {
 					enabled : false
