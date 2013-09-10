@@ -586,7 +586,7 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 			//window.history.back();
 			//flagP = 1;
 			$scope.processedRedemptions();
-			setTimeout(setupScrollbars, 1000);
+			//setTimeout(setupScrollbars, 1000);
 			$("#overlaySuccess").show();
 			$(".redeemptions").show();
 			//$scope.popup = true;
@@ -678,7 +678,16 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 		$scope.listRedemptions();
 		
 		$('#scrollbar3').oneFingerScroll();
-
+		
+		// $('#hi').click(function (event) {
+            // // event.preventDefault();
+            // // initX = endX = event.touches[0].clientX;
+            // // initY = endY = event.touches[0].clientY;
+            // // elem.bind('touchend', onTouchEnd);
+            // // elem.bind('touchmove', onTouchMove);
+            // alert("hi clicked");
+        // });
+		
 		$scope.confirm = function(id) {
 			console.log("confirmed" + id);
 			//alert("hi i am in "+id);
@@ -688,7 +697,6 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 				},
 				"auth_token" : getCookie('authToken')
 			}
-
 			$http({
 				method : 'put',
 				url : '/api/redemptions/' + id,
@@ -924,12 +932,12 @@ jQuery.fn.oneFingerScroll = function() {
 		// jQuery clones events, but only with a limited number of properties for perf reasons. Need the original event to get 'touches'
 		var e = event.originalEvent;
 		scrollStartPos = $(this).scrollTop() + e.touches[0].pageY;
-		e.preventDefault();
+		//e.preventDefault();
 	});
 	$(this).bind('touchmove', function(event) {
 		var e = event.originalEvent;
 		$(this).scrollTop(scrollStartPos - e.touches[0].pageY);
-		e.preventDefault();
+		//e.preventDefault();
 	});
 	return this;
 };

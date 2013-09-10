@@ -1069,7 +1069,7 @@ img, object {
 	float: right;
 	padding-top: 2.7%;
 	width: 51%;
-	/*text-align: right;*/
+	text-align: right;
 }
 
 .userClick {
@@ -1833,7 +1833,8 @@ img, object {
 .rememberMe {
 	border: none;
 	/*padding: 0.5em 0 0.1em;*/
-	padding: 1.5em 0;
+	/*padding: 1.5em 0;*/
+	padding: 1em 0 1.5em;
 }
 .rememberMe .ui-icon {
 	background-color: #6E4D6C;
@@ -1856,7 +1857,7 @@ img, object {
 	text-shadow: none;
 }
 .rememberMe .ui-checkbox {
-	left: -2px;
+	/*left: -2px;*/
 	margin: 0;
 }
 .rememberMe .ui-checkbox .ui-btn-icon-left .ui-icon {
