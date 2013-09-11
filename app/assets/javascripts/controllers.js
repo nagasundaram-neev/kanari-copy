@@ -744,6 +744,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.form_cuisine3 = false;
 		$('.welcome').show();
 		$('#dasboard').hide();
+		$('.add_manager').show();
 		$('#adminConsole').hide();
 		var managerId;
 		$scope.auth_token = getCookie('authToken');
@@ -1438,8 +1439,10 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$('.edit_manager').hide();
 			$scope.manager_deleted = "";
 		}
+		
 		$scope.close_manager = function() {
-			$('.add_manager').hide();
+			//$('.add_manager').hide();
+			$('#formid')[0].reset();
 		}
 		$scope.close_updatemanager = function() {
 			$('.edit_manager').hide();

@@ -606,7 +606,8 @@ div.create_rest {
 	margin-left: 20px;
 	padding-left: 20px;
 	margin-top: 0;
-	border-left: 2px solid #CCCCCC;
+	/*border-left: 2px solid #CCCCCC;*/
+	border-left: 1px solid #CCCCCC;
 }
 #outletManager .row {
 	margin-left: 0;
@@ -614,12 +615,16 @@ div.create_rest {
 
 .tabletId {
 	width: 38%;
-	display: none;
+	/*display: none;*/
 	margin-left: 20px;
 	padding-left: 15px;
 	margin-top: 20px;
-	border-left: 2px solid #CCCCCC;
+	border-left: 1px solid #CCCCCC;
 }
+.tabletId .addManagerTitle{
+	padding-top:0;
+}
+
 .changePass_tablet {
 	width: 38%;
 	display: none;
@@ -638,7 +643,8 @@ div.create_rest {
 	-ms-border-radius: 5px 5px 5px 5px;
 }
 #location .location_select {
-	display: block;
+	/*display: block;*/
+	display: inline-block;
 	padding: 12px 20px;
 }
 #location .location_map {
@@ -695,6 +701,14 @@ ul.taketour li a:hover {
 	font-size: 16px;
 	padding-bottom: 5px;
 }
+
+.addManagerTitle{
+	border-bottom: 1px solid #CCCCCC;
+    font-size: 16px;
+    padding: 10px 0 5px;
+    width: 364px;
+}
+
 .select_option {
 	padding: 15px 0;
 }
@@ -785,7 +799,7 @@ a.changePassword:hover {
 
 }
 #viewmap {
-	width: 750px;
+	/*width: 750px;*/
 	display: none;
 }
 #hidemap {
@@ -1846,6 +1860,18 @@ input {
     width: 79%;
 }
 
+.tipMsg{
+	color: #C64957;
+    display: inline-block;
+    float: right;
+    padding: 12px 20px;
+    text-transform: uppercase;
+    font-size:10px;
+    font-family: 'Rock Salt', cursive;	
+}
 
+.tipMsg span{
+	text-decoration:underline;
+}
 
 

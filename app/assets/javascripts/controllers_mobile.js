@@ -1529,7 +1529,7 @@ $(document).on("pageshow", ".ui-page", function() {
 	//alert("page " + $page.height() + "window " + $(window).height());
 	if (scrnHeight == 548) {
 		//$page.children('.ui-footer').css('position', 'absolute');
-		$("div[data-role='page']").style.setProperty("height", divHeightInDoc + "px");
+		//$("div[data-role='page']").style.setProperty("height", divHeightInDoc + "px");
 	}
 
 	function setFooterIphone() {
