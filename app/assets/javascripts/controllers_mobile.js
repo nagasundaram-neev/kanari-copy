@@ -1524,12 +1524,12 @@ $(document).on("pageshow", ".ui-page", function() {
 
 	var scrnHeight = screen.availHeight;
 	var pageHt = $page.height();
-	var divHeightInDoc = pageHt + 25;
+	var divHeightInDoc = scrnHeight;
 	//$("div[data-role='page']").css( "height",  divHeightInDoc);
 	//alert("page " + $page.height() + "window " + $(window).height());
 	if (scrnHeight == 548) {
 		//$page.children('.ui-footer').css('position', 'absolute');
-		//$("div[data-role='page']").style.setProperty("height", divHeightInDoc + "px", 'important');
+		$("div[data-role='page']").style.setProperty("height", divHeightInDoc + "px");
 	}
 
 	function setFooterIphone() {
