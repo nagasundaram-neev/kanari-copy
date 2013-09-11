@@ -1767,3 +1767,85 @@ input {
 	color: #005580;
 }
 
+
+/*Accept Invitation chnages CSS */
+.leftAlign{
+	float:left;
+}
+
+.rightAlign{
+	float:right;
+}
+
+.rightDiv{
+	float:left;
+	border:1px solid #CCCCCC;
+	border-left:0;
+    height: 117px;
+    margin-left: 10px;
+    margin-top: 0;
+    width: 15px;
+}
+
+.rightParentDiv{
+	left: 425px;
+    position: absolute;
+    width: 60%;
+}
+.rightParentDiv1{
+	left: 471px;
+    position: absolute;
+    width: 60%;
+    top:0;
+}
+
+.rightParentDiv1 .rightDiv{
+	height: 256px;	
+}
+
+.rightParentDiv2{
+	left: 471px;
+    position: absolute;
+    width: 60%;
+    top:0;
+}
+
+.rightParentDiv3{
+	left: 471px;
+    position: absolute;
+    width: 60%;
+    top:0;
+}
+
+.rightParentDiv3 .rightDiv{
+	height: 26px;
+}
+.rightParentDiv3 .rightDivMsg{
+	margin-top: 5px;
+}
+
+.rightParentDiv2 .rightDiv{
+	height: 164px;
+}
+
+.parentDiv{
+	position:relative;
+}
+
+.rightParentDiv1 .rightDivMsg{
+	margin-top: 55px;
+}
+
+.rightDivMsg{
+	color: #AAAAAA;	
+    float: right;
+    margin-left: 28px;
+    margin-top: 27px;
+    opacity: 1;
+    text-align: left;
+    width: 79%;
+}
+
+
+
+

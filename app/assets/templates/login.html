@@ -1,14 +1,19 @@
 <div data-role="page" data-theme="b" id="login" ng-controller="Login" class="main_content span12">
 	<style>
-		 .span12 a.kanarilogo img{margin: 5px 0;}
+		.span12 a.kanarilogo img {
+			margin: 5px 0;
+		}
 	</style>
 	<div class="loginDiv innerDiv" data-role="content" style="width: 33%;">
 		<div class="outerDiv">
 			<h1>Sign In</h1>
 			<div class="clr"></div>
 			<div class="innerLoginDiv">
-				<p class="alreadyUser">
+				<p class="alreadyUser" ng-show="alreadyUser">
 					Already a user? Log in to Kanari
+				</p>
+				<p class="alreadyUser" ng-show="congratsMsg">
+					Congratulations, you have successfully created your Kanari for Business account! Use your email address and the password you created to log in to it and start using Kanari.
 				</p>
 				<form ng-app="form-example" class="row form-horizontal" name="login" ng-submit="chkLogin(login)" novalidate>
 					<div class="control-group">

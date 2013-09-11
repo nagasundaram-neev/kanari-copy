@@ -127,6 +127,7 @@ var Base64 = {
 
 var baseUrl = "localhost:8080";
 var auth_token = "";
+var loginMsgFlag = 0;
 
 module.controller('commonCtrl', function($scope, $http, $location) {
 	$(".content").css("min-height", function() {
@@ -194,6 +195,16 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
 	$scope.erromsg = false;
 	var acceptInvitationStep2;
+	$scope.alreadyUser = true;
+	$scope.congratsMsg = false;
+	
+	if(getCookie('loginMsgFlag') == '1'){
+		$scope.alreadyUser = false;
+		$scope.congratsMsg = true;
+	}else{
+		$scope.alreadyUser = true;
+		$scope.congratsMsg = false;
+	}
 
 	$scope.login = function() {
 		$location.url("/login");
@@ -223,6 +234,8 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 				url : '/api/users/sign_in',
 			}).success(function(data, status) {
 				console.log("User Role " + data.user_role + " status " + status);
+				//delCookie('loginMsgFlag');
+				deleteCookie('loginMsgFlag');
 				if ($scope.remember) {
 					setCookie('userRole', data.user_role, 7);
 					setCookie('authToken', data.auth_token, 7);
@@ -1822,12 +1835,15 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 						// $scope.mailing_address_line_2 = "";
 						// $scope.email1 = "";
 						$('#acceptInvStep2')[0].reset();
-						console.log("hi " + $('.ng-invalid'));
-						$scope.button = false;
-						$scope.success = true;
-						$scope.delay = $timeout(function() {
-							$location.url("/login");
-						}, 3000);
+						// console.log("hi " + $('.ng-invalid'));
+						// $scope.button = false;
+						// $scope.success = true;
+						// $scope.delay = $timeout(function() {
+							// $location.url("/login");
+						// }, 3000);
+						//loginMsgFlag = 1;
+						setCookie('loginMsgFlag','1',0.29);
+						$location.url("/login");
 					}
 				}).error(function(data, status) {
 					console.log("data in error" + data + " status " + status);

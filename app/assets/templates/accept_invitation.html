@@ -1,13 +1,19 @@
 <div data-role="page" data-theme="b" id="acceptInvitation" ng-controller="acceptInvitationCtrl" class="main_content span12">
 	<style>
-		.input-help{ left: 440px;}
+		.input-help {
+			left: 440px;
+		}
 	</style>
 	<div class="loginDiv innerDiv" data-role="content" style="padding: 40px 30px;">
-		<h1>Accept Invitation</h1>
-		<span class="mandatoryFld"><div class="startMsg">*</div> Indicates mandatory fields</span>
+		<!-- <h1>Accept Invitation</h1> -->
+		<h1>Step 1 of 2:</br>Enter primary contact pesron's details</h1>
+		<span class="mandatoryFld">
+			<div class="startMsg">
+				*
+			</div> Indicates mandatory fields</span>
 		<div class="acceptInv outerDiv">
 			<form ng-app="form-example" name="acceptInv" class="row form-horizontal" ng-submit="acceptInvitation(acceptInv)" novalidate>
-				<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 42%;">
+				<div data-role="fieldcontain" class="innerLoginDiv" style="width: 42%;" >
 					<div class="control-group">
 						<div class="controls">
 							<lable>
@@ -16,39 +22,53 @@
 							<label style="margin-bottom: 10px;">{{emailId}}</label>
 						</div>
 					</div>
-					<div class="control-group">
-						<div class="controls">
-							<lable>
-								First Name<span class="star">*</span>
-							</lable>
-							<input data-theme="a" data-inline="true" type="text" name="txtfirstname" ng-model="first_name" value="" placeholder="First Name" required/>
-							<div class="input-help">
-								<h4>Please enter first name</h4>
+					<div class="parentDiv">
+					<div class="leftAlign">
+						<div class="control-group">
+							<div class="controls">
+								<lable>
+									First Name<span class="star">*</span>
+								</lable>
+								<input data-theme="a" data-inline="true" type="text" name="txtfirstname" ng-model="first_name" value="" placeholder="First Name" required/>
+								<div class="input-help">
+									<h4>Please enter first name</h4>
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<lable>
+									Last Name<span class="star">*</span>
+								</lable>
+								<input data-theme="a" data-inline="true" type="text" name="txtlastname" ng-model="last_name" value="" placeholder="Last Name" required/>
+								<div class="input-help">
+									<h4>Please enter last name</h4>
+								</div>
+								<div class="clr"></div>
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<lable>
+									Mobile Number<span class="star">*</span>
+								</lable>
+								<input data-theme="a" data-inline="true" type="text" class="phoneno_1 setTelephone" name="contactNo" placeholder="Mobile Number" />
+								<!-- <input data-theme="a" data-inline="true" type="text" min="0" number-mask="" maxlength="11" name="phone_no" ng-model="phone_no"  placeholder="Phone Number" required/> -->
+								<div class="clr"></div>
 							</div>
 						</div>
 					</div>
-					<div class="control-group">
-						<div class="controls">
-							<lable>
-								Last Name<span class="star">*</span>
-							</lable>
-							<input data-theme="a" data-inline="true" type="text" name="txtlastname" ng-model="last_name" value="" placeholder="Last Name" required/>
-							<div class="input-help">
-								<h4>Please enter last name</h4>
-							</div>
-							<div class="clr"></div>
+					<div class="rightParentDiv">
+						<div class="rightDiv">
+							&nbsp;
 						</div>
-					</div>
-					<div class="control-group">
-						<div class="controls">
-							<lable>
-								Phone Number<span class="star">*</span>
-							</lable>
-							<input data-theme="a" data-inline="true" type="text" class="phoneno_1 setTelephone" name="contactNo" placeholder="Contact Number" />
-							<!-- <input data-theme="a" data-inline="true" type="text" min="0" number-mask="" maxlength="11" name="phone_no" ng-model="phone_no"  placeholder="Phone Number" required/> -->
-							<div class="clr"></div>
+						<div class="rightDivMsg">
+							These are the contact details of the person at your business that will be managing your Kanari account.
 						</div>
+						<div class="clr"></div>
 					</div>
+					<div class="clr"></div>
+					</div>					
 					<div class="control-group">
 						<div class="controls">
 							<lable>
@@ -98,13 +118,12 @@
 						<!-- <input type="button" class="loginBtn" ng-click="acceptInvitation()" data-inline="true" value="Save" /> -->
 						<div class="controls">
 							<button type="submit" class="btn"  >
-								Proceed
+								Next
 							</button>
 							<button class="btn" disabled >
-								Proceed
+								Next
 							</button>
 						</div>
-
 						<p class="errorMsg" ng-show="error">
 							{{errorMsg}}
 						</p>
@@ -113,7 +132,9 @@
 							Password Didn't match
 						</p>
 						<p ng-hide="passwordError"></p>
-						<p ng-show="valide_phone" class="errorMsg">Invalid Phone Number</p
+						<p ng-show="valide_phone" class="errorMsg">
+							Invalid Phone Number
+						</p
 					</div>
 				</div>
 			</form>
@@ -121,7 +142,7 @@
 	</div>
 </div>
 <script>
-$(document).ready(function() {
+	$(document).ready(function() {
 		$(".setTelephone").mask("(+999)-9?9-9999999");
 		$(".setTelephone").on("blur", function() {
 			var last = $(this).val().substr($(this).val().lastIndexOf("-") + 1);
