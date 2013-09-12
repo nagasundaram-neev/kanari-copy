@@ -186,7 +186,7 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 	}
 
 });
-
+var acceptInvitationStep2;
 module.controller('Login', function($rootScope, $scope, $http, $location) {
 	$rootScope.header = "Login | Kanari";
 	$('.welcome').hide();
@@ -194,7 +194,6 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 	$scope.remember = false;
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
 	$scope.erromsg = false;
-	var acceptInvitationStep2;
 	$scope.alreadyUser = true;
 	$scope.congratsMsg = false;
 	
@@ -418,7 +417,7 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 			url : '/api/outlets',
 			params : param,
 		}).success(function(data, status) {
-			console.log("data in success " + data.lenght + " status " + status);
+			console.log("data in success " + data.length + " status " + status);
 			$scope.outlets = data.outlets;
 			$scope.error = data.auth_token;
 			$scope.statement = true;
@@ -453,7 +452,6 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 			if (status == 401) {
 				$location.url("/login");
 			}
-
 		});
 
 		function showAddOutletBtn() {
@@ -1816,7 +1814,6 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 						"email" : $scope.email1
 					},
 					"auth_token" : $scope.auth_token
-
 				}
 
 				$http({
