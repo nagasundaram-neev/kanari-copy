@@ -208,13 +208,13 @@ class Outlet < ActiveRecord::Base
     end
 
     def get_cumulative_promoter_score(feedbacks)
-      promoters = 0; passives = 0; neutrals = 0
+      promoters = 0; detractors = 0; neutrals = 0
       if feedbacks.present?
         promoters = feedbacks.select{|f| AppConfig[:promoters].include?f.recommendation_rating }.length
-        passives  = feedbacks.select{|f| AppConfig[:detractors].include?f.recommendation_rating }.length
-        neutrals  = feedbacks.length - ( promoters + passives )
+        detractors  = feedbacks.select{|f| AppConfig[:detractors].include?f.recommendation_rating }.length
+        neutrals  = feedbacks.length - ( promoters + detractors )
       end
-      nps = {:like => promoters, :dislike => passives, :neutral => neutrals}
+      nps = {:like => promoters, :dislike => detractors, :neutral => neutrals}
     end
 
     def get_average_bill_amount_statistics(feedbacks)
