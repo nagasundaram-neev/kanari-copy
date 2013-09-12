@@ -59,10 +59,13 @@ class Outlet < ActiveRecord::Base
     redemptions = self.redemptions.approved.includes(:user)
     feedback_trends = {:statistics => {}, :detailed_statistics => {}}
     feedback_trends[:statistics] = get_feedback_trends(start_time, end_time, feedbacks, redemptions)
+
+    is_detailed_statistics = true
     ((start_time.to_date)..(end_time.to_date)).each do |day|
       day_start = day.beginning_of_day; day_end = day.end_of_day
-      feedback_trends[:detailed_statistics][day.strftime("%Y-%m-%d")] = get_feedback_trends(day_start, day_end, feedbacks, redemptions)
+      feedback_trends[:detailed_statistics][day.strftime("%Y-%m-%d")] = get_feedback_trends(day_start, day_end, feedbacks, redemptions, is_detailed_statistics)
     end
+
     return {:feedback_trends => feedback_trends}
   end
 
@@ -166,7 +169,7 @@ class Outlet < ActiveRecord::Base
     end
 
     # Feedback Statistics
-    def get_feedback_trends(start_time, end_time, all_feedbacks, all_redemptions)
+    def get_feedback_trends(start_time, end_time, all_feedbacks, all_redemptions, detailed_statistics=false)
       start_time,end_time = end_time,start_time if start_time > end_time
       all_feedbacks = all_feedbacks.order('feedbacks.updated_at desc') unless all_feedbacks.blank?
       feedbacks_nps  = all_feedbacks.select {|f| f if (f.updated_at < end_time)}.first(NPS_LIMIT)
@@ -174,6 +177,7 @@ class Outlet < ActiveRecord::Base
       redemptions    = all_redemptions.select {|f| f if (f.updated_at > start_time && f.updated_at < end_time)}
       statistics     = {}
       statistics[:net_promoter_score] = get_net_promoter_score_statistics(feedbacks_nps)
+      statistics[:cumulative_promoter_score] = get_cumulative_promoter_score(feedbacks) unless detailed_statistics
       ["food_quality", "speed_of_service", "friendliness_of_service", "ambience", "cleanliness", "value_for_money"].each do |category|
         statistics[category.to_sym] = get_field_statistics(feedbacks, category)
       end
@@ -201,6 +205,16 @@ class Outlet < ActiveRecord::Base
         neutrals  = 100 - ( promoters + passives )
       end
       nps = {:like => promoters, :dislike => passives, :neutral => neutrals}
+    end
+
+    def get_cumulative_promoter_score(feedbacks)
+      promoters = 0; detractors = 0; neutrals = 0
+      if feedbacks.present?
+        promoters = feedbacks.select{|f| AppConfig[:promoters].include?f.recommendation_rating }.length
+        detractors  = feedbacks.select{|f| AppConfig[:detractors].include?f.recommendation_rating }.length
+        neutrals  = feedbacks.length - ( promoters + detractors )
+      end
+      nps = {:like => promoters, :dislike => detractors, :neutral => neutrals}
     end
 
     def get_average_bill_amount_statistics(feedbacks)

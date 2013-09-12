@@ -108,6 +108,11 @@ Feature: Dashboard Trends
              "dislike" : 30.0,
              "neutral" : 30.0
            },
+           "cumulative_promoter_score": {
+             "like"    : 4,
+             "dislike" : 3,
+             "neutral" : 3
+           },
            "usage": {
              "feedbacks_count": 10,
              "redemptions_count": 8,
@@ -342,6 +347,11 @@ Feature: Dashboard Trends
              "dislike" : 36.36363636363637,
              "neutral" : 27.272727272727266
            },
+           "cumulative_promoter_score": {
+             "dislike": 4,
+             "like": 4,
+             "neutral": 3
+           },
            "usage": {
              "feedbacks_count": 11,
              "redemptions_count": 8,
@@ -521,6 +531,11 @@ Feature: Dashboard Trends
              "neutral" : 0
            },
            "net_promoter_score": {
+             "like"    : 0,
+             "dislike" : 0,
+             "neutral" : 0
+           },
+           "cumulative_promoter_score": {
              "like"    : 0,
              "dislike" : 0,
              "neutral" : 0
