@@ -51,7 +51,7 @@ module.directive('map', function($http) {
 			var myOptions = {
 			zoom :9,
 			minZoom: 6,
-			center : new google.maps.LatLng(25.18971, 55.17745),
+			center : new google.maps.LatLng(getCookie('latitude'), getCookie('logitude')),
 			mapTypeId : google.maps.MapTypeId.ROADMAP
 			};
 			if(getCookie('latitude') == "null")
