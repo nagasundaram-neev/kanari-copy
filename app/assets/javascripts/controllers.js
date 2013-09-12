@@ -197,11 +197,11 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 	var acceptInvitationStep2;
 	$scope.alreadyUser = true;
 	$scope.congratsMsg = false;
-	
-	if(getCookie('loginMsgFlag') == '1'){
+
+	if (getCookie('loginMsgFlag') == '1') {
 		$scope.alreadyUser = false;
 		$scope.congratsMsg = true;
-	}else{
+	} else {
 		$scope.alreadyUser = true;
 		$scope.congratsMsg = false;
 	}
@@ -962,7 +962,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					setCookie('latitude', data.outlet.latitude, 0.29);
 					setCookie('logitude', data.outlet.longitude, 0.29);
 					if (data.outlet.manager) {
-						$scope.manager = data.outlet.manager.first_name + ' ' + data.outlet.manager.last_name;
+						//$scope.manager = data.outlet.manager.first_name + ' ' + data.outlet.manager.last_name;
+						$scope.myOption = data.outlet.manager.id;
 						$scope.manager_show = true;
 					} else {
 						$scope.manager_show = false;
@@ -1280,13 +1281,13 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$scope.password_changed = "";
 			$scope.staff_deleted = "";
 			$scope.errorMsg = "";
-			$('.tabletId').show();
+			//$('.tabletId').show();
 			$('.changePass_tablet').hide();
 			$scope.successTabletId = false;
 			$scope.errorTabletId = false;
 		};
 		$scope.close_tabletId = function() {
-			$('.tabletId').hide();
+			//$('.tabletId').hide();
 			$('#tabletIdForm')[0].reset();
 			$scope.successTabletId = false;
 			$scope.errorTabletId = false;
@@ -1383,7 +1384,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$scope.successTabletId = false;
 			$scope.errorTabletId = false;
 			$scope.errorMsg = "";
-			$('.tabletId').hide();
+			//$('.tabletId').hide();
 			$('.changePass_tablet').show();
 			$scope.successTabletId = false;
 			$scope.errorTabletId = false;
@@ -1439,7 +1440,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$('.edit_manager').hide();
 			$scope.manager_deleted = "";
 		}
-		
+
 		$scope.close_manager = function() {
 			//$('.add_manager').hide();
 			$('#formid')[0].reset();
@@ -1631,7 +1632,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				} else if (currentTab == "TabletIdShow") {
 					$('#viewmap').hide();
 					$('#hidemap').show();
-					$('.tabletId').hide();
+					//$('.tabletId').hide();
 					$scope.listTabletIds();
 					$scope.profileShow = false;
 					$scope.locationShow = false;
@@ -1842,10 +1843,10 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 						// $scope.button = false;
 						// $scope.success = true;
 						// $scope.delay = $timeout(function() {
-							// $location.url("/login");
+						// $location.url("/login");
 						// }, 3000);
 						//loginMsgFlag = 1;
-						setCookie('loginMsgFlag','1',0.29);
+						setCookie('loginMsgFlag', '1', 0.29);
 						$location.url("/login");
 					}
 				}).error(function(data, status) {
@@ -2950,7 +2951,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					}
 					/**Customers End**/
 
-					resultsDate.push(i + 1);
+					resultsDate.push(dateV);
 					results1.push(foodLike);
 					results2.push(foodNeutral);
 					results3.push(foodDisLike);
@@ -3048,6 +3049,13 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						style : {
 							color : '#7C7A7D',
 						}
+					},
+					labels : {
+						rotation : -90,
+						style: {
+                        fontSize: '10px',
+                        fontColor: '#7C7A7D'
+                    }
 					}
 				},
 
@@ -3118,11 +3126,12 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				xAxis : {
 					categories : resultsDate,
 					labels : {
+						rotation : -90,
 						align : 'right',
-						style : {
-							fontSize : '13px',
-							fontFamily : 'Verdana, sans-serif'
-						}
+						style: {
+                        fontSize: '10px',
+                        fontColor: '#7C7A7D'
+                    }
 					},
 					title : {
 						text : xAxisVal,
@@ -3173,11 +3182,12 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				xAxis : {
 					categories : resultsDate,
 					labels : {
+						rotation : -90,
 						align : 'right',
-						style : {
-							fontSize : '13px',
-							fontFamily : 'Verdana, sans-serif'
-						}
+						style: {
+                        fontSize: '10px',
+                        fontColor: '#7C7A7D'
+                    }
 					},
 					title : {
 						text : xAxisVal,
@@ -3241,6 +3251,13 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 
 				xAxis : {
 					categories : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
+					 labels: {
+                    rotation: -90,
+                    style: {
+                        fontSize: '10px',
+                        fontColor: '#7C7A7D'
+                    }
+                  },
 					title : {
 						text : 'Hours of Day',
 						style : {

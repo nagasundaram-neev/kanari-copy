@@ -19,11 +19,9 @@
 		.createOutletDiv .input-help {
 			left: 392px;
 		}
-		/*#divexample1 {
-			height: 100px;
-			overflow: auto;
-		}*/
-		/*.nicescroll-rails{left: 625.05px !important;top: 233px !important;}*/
+		.select_option lable {
+			width: 150px;
+		}
 	</style>
 	<div class="header_title">
 		<span class="manager_outlet">Manage Outlet</span>
@@ -38,31 +36,41 @@
 			<ul class="">
 				<li data-ng-class="{active:profileShow,create_outlet:true }">
 					<a ng-click="changeTab('profileShow')" > <%= image_tag 'icon_profile.png' %>
-					<div class="menuTitle">Profile</div>
+					<div class="menuTitle">
+						Profile
+					</div>
 					<br/>
 					<span>Name, Description and contact info</span> </a>
 				</li>
 				<li data-ng-class="{active:locationShow,create_location:true}" >
 					<a  ng-click="changeTab('locationShow')"> <%= image_tag 'icon_location.png' %>
-					<div class="menuTitle">Location</div>
+					<div class="menuTitle">
+						Location
+					</div>
 					<br/>
 					<span>Specify the exact location of your outlet</span> </a>
 				</li>
 				<li ng-show="userAction" data-ng-class="{active:permissionShow,create_manager:true}">
 					<a ng-click="changeTab('permissionShow')"> <%= image_tag 'icon_permissions.png' %>
-					<div class="menuTitle">Manager</div>
+					<div class="menuTitle">
+						Manager
+					</div>
 					<br/>
 					<span>Assign a manager to your outlet</span> </a>
 				</li>
 				<li data-ng-class="{active:ReportShow,create_report:true}">
 					<a ng-click="changeTab('ReportShow')"> <%= image_tag 'icon_reports.png' %>
-					<div class="menuTitle">Reports</div>
+					<div class="menuTitle">
+						Reports
+					</div>
 					<br/>
 					<span>Who gets the reports and how often</span> </a>
 				</li>
 				<li data-ng-class="{active:TabletIdShow,create_tabletId:true}">
 					<a ng-click="changeTab('TabletIdShow')"> <%= image_tag 'icon_create_tablet_id.png' %>
-					<div class="menuTitle">Tablets</div>
+					<div class="menuTitle">
+						Tablets
+					</div>
 					<br/>
 					<span>Create a tablet login for your outlet</span> </a>
 				</li>
@@ -79,9 +87,9 @@
 						*
 					</div> Indicates mandatory fields</span>
 				<!-- <div class="disable_outlet" ng-hide="action">
-					<b>Disable Outlet?</b>
-					<input type="checkbox" ng-show="outlet_disabled" checked ng-click="disableOutlet($event)" />
-					<input type="checkbox" ng-hide="outlet_disabled" ng-click="disableOutlet($event)" />
+				<b>Disable Outlet?</b>
+				<input type="checkbox" ng-show="outlet_disabled" checked ng-click="disableOutlet($event)" />
+				<input type="checkbox" ng-hide="outlet_disabled" ng-click="disableOutlet($event)" />
 				</div> -->
 				<div class="clr"></div>
 				<form name="createOutlet" id="createOutlet" ng-app="form-example" ng-submit="create_outlet(createOutlet)" class="row form-horizontal" novalidate>
@@ -202,8 +210,7 @@
 								<option value="09.00pm">09.00pm</option>
 								<option value="10.00pm">10.00pm</option>
 								<option value="11.00pm">11.00pm</option>
-								
-								
+
 							</select>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<span class="timeSetting vertical_center left_margin"> to</span>
@@ -300,12 +307,9 @@
 		</div>
 		<div id ="permission" ng-show="permissionShow">
 			<div data-role="fieldcontain" class="manager_list rightPanel">
-				<h3 ng-show="manager_show">Selected manager is : <span class="full_name">{{manager}}</span></h3>
-				<div ng-show="manager_show" class="change_manager">
-					Change Manager?
-				</div>
-				<div ng-hide="manager_show" class="change_manager">
-					<!-- Select Manager --> Assign a manager to your outlet
+				<!-- <h3 ng-show="manager_show">Selected manager is : <span class="full_name">{{manager}}</span></h3> -->
+				<div class="change_manager">
+					Assign a manager to your outlet
 				</div>
 				<form ng-app="form-example" class="row form-horizontal" name="select_Action" ng-submit="selectAction(select_Action)" novalidate>
 					<div class="select_option">
@@ -315,7 +319,7 @@
 						<select ng-model="myOption" ng-options="value.id as value.first_name + ' ' + value.last_name for value in managerList" required>
 							<option value="">Select Manager</option>
 						</select>
-						<div class="control-group" style="margin: 10px 0 0 130px;"	>
+						<div class="control-group" style="margin: 10px 0 0 150px;"	>
 							<div class="controls">
 								<button  type="submit" class="btn">
 									Save
@@ -330,18 +334,33 @@
 								<br />
 								<input type="button" class="btn_cls" ng-click="add_new_manager()" data-inline="true" value="Add a new manager" />
 								<br/>
+								 -->
 								<p ng-show="successmgr" class="successMsgMnger">
-									Manager has been updated successfully.
-								</p> -->
+								Manager has been updated successfully.
+								</p>
 								<p ng-hide="successmgr" ></p>
 							</div>
 						</div>
-
+						<div class="infoSteps">
+							<div class="step1" style="width:220px">
+								Step 1:
+								<br/>
+								Create a manager profile 
+							</div>
+							<div class="clr"></div>
+							<div class="step2">
+								Step 2:
+								<br/>
+								Select the manager from the list and click save
+							</div>
+						</div>
 					</div>
 				</form>
 			</div>
 			<div data-role="fieldcontain" class="add_manager rightPanel" style=" margin-top: 10px;">
-				<div class="addManagerTitle">Add a new manager</div>
+				<div class="addManagerTitle">
+					Add a new manager
+				</div>
 				<span class="mandatoryFld">
 					<div class="startMsg">
 						*
@@ -441,9 +460,7 @@
 							<button class="btn" disabled>
 								Add Manager
 							</button>
-							<a  ng-click="close_manager()" class="cancelBtn submitBtn btn btn-primary btn-large"  >
-								Cancel
-							</a>
+							<a  ng-click="close_manager()" class="cancelBtn submitBtn btn btn-primary btn-large"  > Cancel </a>
 							<p ng-show="error" class="errorMsg">
 								{{errorMsg}}
 							</p>
@@ -504,11 +521,26 @@
 				<p class="successMsg">
 					{{staff_deleted}}
 				</p>
-				<input type="button" class="btn_cls" ng-click="create_tablet_id()" data-inline="true" value="Add new tablet" />
+				<!-- <input type="button" class="btn_cls" ng-click="create_tablet_id()" data-inline="true" value="Add new tablet" /> -->
+				<div class="infoSteps">
+					<div class="step1">
+						Step 1:
+						<br/>
+						Enter a password to crate tablet login
+					</div>
+					<div class="clr"></div>
+					<div class="step2">
+						Step 2:
+						<br/>
+						Use the tablet login and password to access the kanari tablet application
+					</div>
+				</div>
 			</div>
 
 			<div data-role="fieldcontain" class="tabletId rightPanel">
-				<div class="addManagerTitle">Add a new tablet</div>
+				<div class="addManagerTitle">
+					Add a new tablet
+				</div>
 				<span class="mandatoryFld">
 					<div class="startMsg">
 						*
@@ -586,96 +618,96 @@
 						*
 					</div> Indicates mandatory fields</span>
 				<form id="passwordChange" ng-app="form-example" class="row form-horizontal" name="changePass" ng-submit="Change_password(changePass)" novalidate>
-			<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 42%;">
-					<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
-						<!-- <div class="control-group">
-						<div class="controls">
+					<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 42%;">
+						<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
+							<!-- <div class="control-group">
+							<div class="controls">
 							<lable >
-								Current	Password<span class="star">*</span>
+							Current	Password<span class="star">*</span>
 							</lable>
 							<input id="txtP" ng-model="old_password" class="immediate-help" password-validate required type="password" id="old_password" placeholder="Password">
 							<div class="input-help">
-								<h4>Password must meet the following requirements:</h4>
-								<ul>
-									<li ng-class="pwdHasLetter">
-										At least <strong>one letter</strong>
-									</li>
-									<li ng-class="pwdHasNumber">
-										At least <strong>one number</strong>
-									</li>
-									<li ng-class="pwdValidLength">
-										At least <strong>8 characters long</strong>
-									</li>
-								</ul>
+							<h4>Password must meet the following requirements:</h4>
+							<ul>
+							<li ng-class="pwdHasLetter">
+							At least <strong>one letter</strong>
+							</li>
+							<li ng-class="pwdHasNumber">
+							At least <strong>one number</strong>
+							</li>
+							<li ng-class="pwdValidLength">
+							At least <strong>8 characters long</strong>
+							</li>
+							</ul>
 							</div>
-						</div>
-					</div> -->
-					<div class="control-group">
-						<div class="controls">
-							<lable >
-								New Password<span class="star">*</span>
-							</lable>
-							<input id="txtP" ng-model="password" class="immediate-help" password-validate required type="password" id="inputPassword" placeholder="New Password">
-							<div class="input-help">
-								<h4>Password must meet the following requirements:</h4>
-								<ul>
-									<li ng-class="pwdHasLetter">
-										At least <strong>one letter</strong>
-									</li>
-									<li ng-class="pwdHasNumber">
-										At least <strong>one number</strong>
-									</li>
-									<li ng-class="pwdValidLength">
-										At least <strong>8 characters long</strong>
-									</li>
-								</ul>
 							</div>
+							</div> -->
+							<div class="control-group">
+								<div class="controls">
+									<lable >
+										New Password<span class="star">*</span>
+									</lable>
+									<input id="txtP" ng-model="password" class="immediate-help" password-validate required type="password" id="inputPassword" placeholder="New Password">
+									<div class="input-help">
+										<h4>Password must meet the following requirements:</h4>
+										<ul>
+											<li ng-class="pwdHasLetter">
+												At least <strong>one letter</strong>
+											</li>
+											<li ng-class="pwdHasNumber">
+												At least <strong>one number</strong>
+											</li>
+											<li ng-class="pwdValidLength">
+												At least <strong>8 characters long</strong>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<lable >
+										Confirm Password<span class="star">*</span>
+									</lable>
+									<input ng-model="password_confirmation" class="immediate-help" password-validate required type="password"  id="inputConfPassword" placeholder="Confirm Password">
+									<div class="input-help">
+										<h4>Password must meet the following requirements:</h4>
+										<ul>
+											<li ng-class="pwdHasLetter">
+												At least <strong>one letter</strong>
+											</li>
+											<li ng-class="pwdHasNumber">
+												At least <strong>one number</strong>
+											</li>
+											<li ng-class="pwdValidLength">
+												At least <strong>8 characters long</strong>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div style="margin: 10px 0 0 145px;" >
+								<!-- <input type="button" class="loginBtn" ng-click="acceptInvitation()" data-inline="true" value="Save" /> -->
+								<div class="controls">
+									<button type="submit" class="btn">
+										Save
+									</button>
+									<button class="btn" disabled>
+										Save
+									</button>
+									<a href="" class=" cancelBtn submitBtn btn btn-primary btn-large"  ng-click="close_change_tablet_pass()"> cancel </a>
+								</div>
+								<p class="errorMsg" >
+									{{errorMsg}}
+								</p>
+								<p class="successMsg" >
+									{{password_changed}}
+								</p>
+							</div>
+
 						</div>
 					</div>
-					<div class="control-group">
-						<div class="controls">
-							<lable >
-								Confirm Password<span class="star">*</span>
-							</lable>
-							<input ng-model="password_confirmation" class="immediate-help" password-validate required type="password"  id="inputConfPassword" placeholder="Confirm Password">
-							<div class="input-help">
-								<h4>Password must meet the following requirements:</h4>
-								<ul>
-									<li ng-class="pwdHasLetter">
-										At least <strong>one letter</strong>
-									</li>
-									<li ng-class="pwdHasNumber">
-										At least <strong>one number</strong>
-									</li>
-									<li ng-class="pwdValidLength">
-										At least <strong>8 characters long</strong>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-						<div style="margin: 10px 0 0 145px;" >
-						<!-- <input type="button" class="loginBtn" ng-click="acceptInvitation()" data-inline="true" value="Save" /> -->
-						<div class="controls">
-						<button type="submit" class="btn">
-							Save
-						</button>
-						<button class="btn" disabled>
-							Save
-						</button>
-						<a href="" class=" cancelBtn submitBtn btn btn-primary btn-large"  ng-click="close_change_tablet_pass()"> cancel </a>
-						</div>
-						<p class="errorMsg" >
-							{{errorMsg}}
-						</p>
-						<p class="successMsg" >
-							{{password_changed}}
-						</p>
-						</div>
-						
-					</div>
-				</div>
-			</form>
+				</form>
 			</div>
 		</div>
 		<div id ="location" >

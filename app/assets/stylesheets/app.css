@@ -114,7 +114,7 @@ body {
 	font-size: 12px;
 }
 
-.menuTitle{
+.menuTitle {
 	font-weight: normal;
 	font-size: 16px;
 	display: inline;
@@ -621,8 +621,8 @@ div.create_rest {
 	margin-top: 20px;
 	border-left: 1px solid #CCCCCC;
 }
-.tabletId .addManagerTitle{
-	padding-top:0;
+.tabletId .addManagerTitle {
+	padding-top: 0;
 }
 
 .changePass_tablet {
@@ -702,11 +702,11 @@ ul.taketour li a:hover {
 	padding-bottom: 5px;
 }
 
-.addManagerTitle{
+.addManagerTitle {
 	border-bottom: 1px solid #CCCCCC;
-    font-size: 16px;
-    padding: 10px 0 5px;
-    width: 364px;
+	font-size: 16px;
+	padding: 10px 0 5px;
+	width: 364px;
 }
 
 .select_option {
@@ -717,6 +717,23 @@ ul.taketour li a:hover {
 }
 .select_option lable {
 	width: 130px;
+}
+.infoSteps {
+	color: #c64957;
+	line-height: 22px;
+	font-family: 'Rock Salt', cursive;
+}
+.step1 {
+	float: right;
+	width: 175px;
+	margin-top: 30px;
+}
+.step2 {
+	width: 210px;
+	margin-top: 30px;
+}
+#permission select {
+    width: 150px !important;
 }
 /**Create Invitation**/
 #login .input-help {
@@ -1064,7 +1081,7 @@ input {
 }
 
 /***Dashboard Comment***/
-.dashboardLi a img, .hideNav ul li a img{
+.dashboardLi a img, .hideNav ul li a img {
 	margin-right: 5px;
 }
 .home_page_view {
@@ -1094,9 +1111,9 @@ input {
 }
 .insight_graph2 h3, h3.redemptionMsg {
 	font-size: 16px;
-    font-weight: normal;
-    line-height: 41px;
-    text-align: center;
+	font-weight: normal;
+	line-height: 41px;
+	text-align: center;
 }
 .promo_txt {
 	color: #999999;
@@ -1167,7 +1184,7 @@ input {
 }
 .insight_graph2 {
 	/*height: 583px;
-	overflow-y: auto;*/
+	 overflow-y: auto;*/
 	width: 55%;
 }
 .daily_change_span {
@@ -1198,7 +1215,7 @@ input {
 	float: left;
 	height: 45px;
 	/*margin-bottom: -1000px;
-	padding-bottom: 1000px;*/
+	 padding-bottom: 1000px;*/
 	padding-top: 30px;
 	text-align: left;
 	width: 49%;
@@ -1240,13 +1257,17 @@ input {
 	float: left;
 	text-align: right;
 	width: 50%;
-	 height: 45px;
-    padding-top: 30px;
+	height: 45px;
+	padding-top: 30px;
 	/*padding: 1% 0;*/
 }
 
-.score_1 .daily_change{padding-top: 0.5%;}
-.score_final .daily_change{padding-top: 0;}
+.score_1 .daily_change {
+	padding-top: 0.5%;
+}
+.score_final .daily_change {
+	padding-top: 0;
+}
 .netScore {
 	color: #664766;
 	display: block;
@@ -1268,7 +1289,7 @@ input {
 	font-weight: 100;
 	margin-top: 10px;
 }
-.score_final .value1{
+.score_final .value1 {
 	display: block;
 }
 .score_div .value1 {
@@ -1781,97 +1802,95 @@ input {
 	color: #005580;
 }
 
-
 /*Accept Invitation chnages CSS */
-.leftAlign{
-	float:left;
+.leftAlign {
+	float: left;
 }
 
-.rightAlign{
-	float:right;
+.rightAlign {
+	float: right;
 }
 
-.rightDiv{
-	float:left;
-	border:1px solid #CCCCCC;
-	border-left:0;
-    height: 117px;
-    margin-left: 10px;
-    margin-top: 0;
-    width: 15px;
+.rightDiv {
+	float: left;
+	border: 1px solid #CCCCCC;
+	border-left: 0;
+	height: 117px;
+	margin-left: 10px;
+	margin-top: 0;
+	width: 15px;
 }
 
-.rightParentDiv{
+.rightParentDiv {
 	left: 425px;
-    position: absolute;
-    width: 60%;
+	position: absolute;
+	width: 60%;
 }
-.rightParentDiv1{
+.rightParentDiv1 {
 	left: 471px;
-    position: absolute;
-    width: 60%;
-    top:0;
+	position: absolute;
+	width: 60%;
+	top: 0;
 }
 
-.rightParentDiv1 .rightDiv{
-	height: 256px;	
+.rightParentDiv1 .rightDiv {
+	height: 256px;
 }
 
-.rightParentDiv2{
+.rightParentDiv2 {
 	left: 471px;
-    position: absolute;
-    width: 60%;
-    top:0;
+	position: absolute;
+	width: 60%;
+	top: 0;
 }
 
-.rightParentDiv3{
+.rightParentDiv3 {
 	left: 471px;
-    position: absolute;
-    width: 60%;
-    top:0;
+	position: absolute;
+	width: 60%;
+	top: 0;
 }
 
-.rightParentDiv3 .rightDiv{
+.rightParentDiv3 .rightDiv {
 	height: 26px;
 }
-.rightParentDiv3 .rightDivMsg{
+.rightParentDiv3 .rightDivMsg {
 	margin-top: 5px;
 }
 
-.rightParentDiv2 .rightDiv{
+.rightParentDiv2 .rightDiv {
 	height: 164px;
 }
 
-.parentDiv{
-	position:relative;
+.parentDiv {
+	position: relative;
 }
 
-.rightParentDiv1 .rightDivMsg{
+.rightParentDiv1 .rightDivMsg {
 	margin-top: 55px;
 }
 
-.rightDivMsg{
-	color: #AAAAAA;	
-    float: right;
-    margin-left: 28px;
-    margin-top: 27px;
-    opacity: 1;
-    text-align: left;
-    width: 79%;
+.rightDivMsg {
+	color: #AAAAAA;
+	float: right;
+	margin-left: 28px;
+	margin-top: 27px;
+	opacity: 1;
+	text-align: left;
+	width: 79%;
 }
 
-.tipMsg{
+.tipMsg {
 	color: #C64957;
-    display: inline-block;
-    float: right;
-    padding: 12px 20px;
-    text-transform: uppercase;
-    font-size:10px;
-    font-family: 'Rock Salt', cursive;	
+	display: inline-block;
+	float: right;
+	padding: 12px 20px;
+	text-transform: uppercase;
+	font-size: 10px;
+	font-family: 'Rock Salt', cursive;
 }
 
-.tipMsg span{
-	text-decoration:underline;
+.tipMsg span {
+	text-decoration: underline;
 }
-
 
