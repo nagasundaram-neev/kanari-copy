@@ -35,42 +35,50 @@
 		<div class="leftPanel" >
 			<ul class="">
 				<li data-ng-class="{active:profileShow,create_outlet:true }">
-					<a ng-click="changeTab('profileShow')" > <%= image_tag 'icon_profile.png' %>
-					<div class="menuTitle">
-						Profile
-					</div>
+
+					<a ng-click="changeTab('profileShow')" > 
+						<!--<%= image_tag 'icon_profile.png' %>-->
+					<div class="srNo">1</div>
+					<div class="menuTitle">Profile</div>
+
 					<br/>
 					<span>Name, Description and contact info</span> </a>
 				</li>
 				<li data-ng-class="{active:locationShow,create_location:true}" >
-					<a  ng-click="changeTab('locationShow')"> <%= image_tag 'icon_location.png' %>
-					<div class="menuTitle">
-						Location
-					</div>
+
+					<a  ng-click="changeTab('locationShow')"> 
+						<!--<%= image_tag 'icon_location.png' %>-->
+					<div class="srNo">2</div>
+					<div class="menuTitle">Location</div>
 					<br/>
 					<span>Specify the exact location of your outlet</span> </a>
 				</li>
 				<li ng-show="userAction" data-ng-class="{active:permissionShow,create_manager:true}">
-					<a ng-click="changeTab('permissionShow')"> <%= image_tag 'icon_permissions.png' %>
-					<div class="menuTitle">
-						Manager
-					</div>
+
+					<a ng-click="changeTab('permissionShow')"> 
+						<!--<%= image_tag 'icon_permissions.png' %>-->
+					<div class="srNo">3</div>
+					<div class="menuTitle">Manager</div>
 					<br/>
 					<span>Assign a manager to your outlet</span> </a>
 				</li>
 				<li data-ng-class="{active:ReportShow,create_report:true}">
-					<a ng-click="changeTab('ReportShow')"> <%= image_tag 'icon_reports.png' %>
-					<div class="menuTitle">
-						Reports
-					</div>
+
+					<a ng-click="changeTab('ReportShow')"> 
+						<!--<%= image_tag 'icon_reports.png' %>-->
+					<div class="srNo">4</div>
+					<div class="menuTitle">Reports</div>
+
 					<br/>
 					<span>Who gets the reports and how often</span> </a>
 				</li>
 				<li data-ng-class="{active:TabletIdShow,create_tabletId:true}">
-					<a ng-click="changeTab('TabletIdShow')"> <%= image_tag 'icon_create_tablet_id.png' %>
-					<div class="menuTitle">
-						Tablets
-					</div>
+
+					<a ng-click="changeTab('TabletIdShow')"> 
+						<!--<%= image_tag 'icon_create_tablet_id.png' %>-->
+					<div class="srNo">5</div>
+					<div class="menuTitle">Tablets</div>
+
 					<br/>
 					<span>Create a tablet login for your outlet</span> </a>
 				</li>
@@ -93,26 +101,35 @@
 				</div> -->
 				<div class="clr"></div>
 				<form name="createOutlet" id="createOutlet" ng-app="form-example" ng-submit="create_outlet(createOutlet)" class="row form-horizontal" novalidate>
-					<div class="control-group">
-						<div class="controls">
-							<lable>
-								Restaurant Name<span class="star">*</span>
-							</lable>
-							<input data-theme="a" data-inline="true" placeholder="Restaurant Name" type="text" name="restaurant_name" ng-model="restaurant_name" class="passwordTxt" required />
-							<div class="input-help">
-								<h4>Please enter a restaurant name</h4>
+					<div class="tipContainer">
+						<div class="control-group">
+							<div class="controls">
+								<lable>
+									Restaurant Name<span class="star">*</span>
+								</lable>
+								<input data-theme="a" data-inline="true" placeholder="Restaurant Name" type="text" name="restaurant_name" ng-model="restaurant_name" class="passwordTxt" required />
+								<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The name of your restaurant"><img src="/assets/ic_help.png"></span></a> 
+	                            
+								<div class="input-help">
+									<h4>Please enter a restaurant name</h4>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="control-group">
-						<div class="controls">
-							<lable>
-								Restaurant Location<span class="star">*</span>
-							</lable>
-							<input data-theme="a" data-inline="true" placeholder="Restaurant Location" type="text" name="restaurant_location"  ng-model="restaurant_location" class="passwordTxt" required />
-							<div class="input-help">
-								<h4>Please enter a restaurant location</h4>
+						<div class="control-group">
+							<div class="controls">
+								<lable>
+									Restaurant Location<span class="star">*</span>
+								</lable>
+								<input data-theme="a" data-inline="true" placeholder="Restaurant Location" type="text" name="restaurant_location"  ng-model="restaurant_location" class="passwordTxt" required />
+								<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Brief one-line description. Eg. Dubai Mall Food Court or The Address Hotel Dubai."><img src="/assets/ic_help.png"></span></a> 
+								<div class="input-help">
+									<h4>Please enter a restaurant location</h4>
+								</div>
 							</div>
+						</div>
+						<div class="tipContent"> 
+							<span> tip: </span>
+							<br/>This is the information your customerswill see when viewing your listing on the kanari mobile app! 						
 						</div>
 					</div>
 					<div class="control-group">
@@ -121,6 +138,7 @@
 								Contact Number<span class="star">*</span>
 							</lable>
 							<input data-theme="a" data-inline="true" type="text" class="phoneno_1 setTelephone" name="contactNo" placeholder="Contact Number" />
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The restaurant's direct contact number."><img src="/assets/ic_help.png"></span></a> 
 							<!-- <input data-theme="a" data-inline="true" placeholder="Contact Number" type="text" min="0" number-mask="" maxlength="11" name="txtPassword" ng-model="contact_number" class="passwordTxt" required /> -->
 						</div>
 					</div>
@@ -130,6 +148,7 @@
 								Email Address<span class="star">*</span>
 							</lable>
 							<input data-theme="a" data-inline="true" placeholder="Email Address" type="email" name="txtPassword" ng-model="email_address" class="passwordTxt" required />
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The restaurant's email address for reservations, questions etc."><img src="/assets/ic_help.png"></span></a> 
 							<div class="input-help">
 								<h4>Invalid Email</h4>
 							</div>
@@ -150,6 +169,7 @@
 							<select id="select3" ng-show="form_outlet3" ng-model='formoutlet3' ng-change="selectOutlet3()"  ng-options='outletType.id as outletType.name for outletType in outletTypes'>
 								<option value="">Select Outlet</option>
 							</select>
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="You can select up to three outlet types for your restaurant."><img src="/assets/ic_help.png"></span></a> 
 							<br>
 							<span class="customErr input-help" ng-show="outletError">Please select different outlet type.</span>
 							<span class="customErrCls customErr input-help" ng-show="outletError1">Please select primary outlet type.</span>
@@ -171,7 +191,9 @@
 							<select id="selectC3" ng-show="form_cuisine3" ng-model='formcuisine3' ng-change="selectCuisine3()"  ng-options='cuisineType.id as cuisineType.name for cuisineType in cuisineTypes'>
 								<option value="">Select Cuisine</option>
 							</select>
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="You can select up to three cuisine types for your restaurant."><img src="/assets/ic_help.png"></span></a> 
 							<br/>
+							
 							<span class="customErr input-help" ng-show="cuisineError">Please select different cuisine type.</span>
 							<span class="customErrCls1 customErr input-help" ng-show="cuisineError1">Please select primary cuisine type.</span>
 							<span class="customErr input-help" ng-show="cuisineError2">Please select primary & secondary cuisine type.</span>
@@ -241,8 +263,10 @@
 								<option value="10.00pm">10.00pm</option>
 								<option value="11.00pm">11.00pm</option>
 							</select>
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="What are the opening hours of your restaurant?"><img src="/assets/ic_help.png"></span></a> 
 						</div>
 					</div>
+					
 					<div class="control-group">
 						<div class="controls">
 							<lable style="margin: 0;">
@@ -253,6 +277,7 @@
 							Yes &nbsp;&nbsp;&nbsp;
 							<input type="radio" class="radioBtn"  name="delivery" ng-model="Delivery" value="false">
 							No
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Does your restaurant deliver?"><img src="/assets/ic_help.png"></span></a> 
 						</div>
 					</div>
 					<div class="control-group">
@@ -264,6 +289,7 @@
 							Yes &nbsp;&nbsp;&nbsp;
 							<input type="radio" class="radioBtn" ng-model="serves_alcohol" name="serves_alcohol" value="false">
 							No
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Does your restaurant serve alcohol?"><img src="/assets/ic_help.png"></span></a> 
 						</div>
 					</div>
 					<div class="control-group">
@@ -275,9 +301,10 @@
 							Yes &nbsp;&nbsp;&nbsp;
 							<input type="radio" class="radioBtn"  ng-model="outdoor_Seating" name="outdoor_Seating" value="false">
 							No
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Does your restaurant have outdoor seating?"><img src="/assets/ic_help.png"></span></a> 
 						</div>
 					</div>
-					<div style="margin: 10px 0 0 130px;" class="control-group">
+					<div style="margin: 10px 0 0 160px;" class="control-group">
 						<div class="controls">
 							<button ng-disabled="value.length==0" type="submit" class="btn">
 								Save
@@ -762,3 +789,4 @@
 
 	}); 
 </script>
+	

@@ -587,7 +587,7 @@ div.create_rest {
 .leftPanel ul li a span {
 	font-size: 12px;
 	font-weight: normal;
-	margin-left: 28px;
+	/*margin-left: 28px;*/
 	padding: 0;
 }
 .innerDiv h3 {
@@ -1734,7 +1734,8 @@ input {
 .inputBox input {
 	width: 100px;
 }
-.outletTble .colAuthoOutlet {
+
+.outletTble .colAuthoOutlet {
 	float: left;
 	text-align: center;
 	width: 263px;
@@ -1894,3 +1895,33 @@ input {
 	text-decoration: underline;
 }
 
+.tipContainer { 
+	position: relative;
+}
+
+.tipContent {
+    bottom: 0;
+    color: #C64957;
+    font-family: 'Rock Salt',cursive;
+    line-height: 22px;
+    padding: 5px;
+    position: absolute;
+    right: 0;
+    width: 45%;
+}
+
+.tipContent > span {
+    text-decoration: underline;
+}
+
+.srNo {
+    background: none repeat scroll 0 0 #664766;
+    border-radius: 10px 10px 10px 10px;
+    color: #FFFFFF;
+    float: left;
+    height: 20px;
+    line-height: 20px;
+    margin-left: 5px;
+    margin-right: 8px;
+    padding: 0 6px;
+}
