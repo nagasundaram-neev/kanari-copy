@@ -615,8 +615,8 @@ div.create_rest {
 }
 
 .tabletId {
-	 width: 430px;
-	 height: 237px;
+	width: 430px;
+	height: 237px;
 	margin-left: 20px;
 	padding-left: 15px;
 	margin-top: 20px;
@@ -735,7 +735,7 @@ ul.taketour li a:hover {
 	width: 210px;
 	margin-top: 90px;
 }
-#tabletIds .step2{
+#tabletIds .step2 {
 	margin-top: 105px;
 	padding-bottom: 25px;
 }
@@ -997,12 +997,12 @@ input {
 
 /* Tablet Id table css */
 .dateTimeList {
-    margin: 5% 0 3%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    width: 348px;
-    max-height: 195px;
-    min-height: 125px;
+	margin: 5% 0 3%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	width: 348px;
+	max-height: 195px;
+	min-height: 125px;
 }
 .dateTimeListhead {
 	color: #664766;
@@ -1519,12 +1519,13 @@ input {
 	border: 1px solid #CCCCCC;
 	overflow: hidden;
 	width: 583px;
+	margin: 10px 20px;
 }
-.custExpSummary div.colno1{
-	width:250px;
+.custExpSummary div.colno1 {
+	width: 250px;
 }
-.custExpSummary div.colno3{
-	width:201px;
+.custExpSummary div.colno3 {
+	width: 201px;
 }
 .custExpSummary div {
 	border-bottom: 1px solid #CCCCCC;
@@ -1926,7 +1927,6 @@ input {
 .tipMsg span {
 	text-decoration: underline;
 }
-
 
 .tipContainer {
 
