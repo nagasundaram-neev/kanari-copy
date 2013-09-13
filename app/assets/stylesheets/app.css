@@ -1509,14 +1509,20 @@ input {
 .custExpSummary {
 	border: 1px solid #CCCCCC;
 	overflow: hidden;
-	width: 588px;
+	width: 583px;
+}
+.custExpSummary div.colno1{
+	width:250px;
+}
+.custExpSummary div.colno3{
+	width:201px;
 }
 .custExpSummary div {
 	border-bottom: 1px solid #CCCCCC;
 	border-right: 1px solid #CCCCCC;
 	float: left;
 	padding: 10px 5px;
-	width: 185px;
+	width: 100px;
 }
 /**** Dashboard Trends End ****/
 
@@ -1573,7 +1579,7 @@ input {
 	font-size: 14px;
 	padding-bottom: 5px;
 }
-.border_bottom_none {
+.border_bottom_none, .custExpSummary div.border_bottom_none {
 	border-bottom: none;
 }
 .headCol {
