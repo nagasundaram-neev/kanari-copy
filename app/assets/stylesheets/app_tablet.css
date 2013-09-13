@@ -455,7 +455,9 @@ input.ui-input-text, textarea.ui-input-text {
 	position: absolute;
 }
 .logo img {
-	margin: 5% 0 0;
+	height: 143px;
+    margin: 5% 0 0;
+    width: 215px;
 }
 
 .loginTxt {
