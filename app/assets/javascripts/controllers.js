@@ -1382,7 +1382,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$scope.successTabletId = false;
 			$scope.errorTabletId = false;
 			$scope.errorMsg = "";
-			//$('.tabletId').hide();
+			$('.tabletId').hide();
 			$('.changePass_tablet').show();
 			$scope.successTabletId = false;
 			$scope.errorTabletId = false;
@@ -1390,6 +1390,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		$scope.close_change_tablet_pass = function() {
 			$('.changePass_tablet').hide();
 			$('#passwordChange')[0].reset();
+			$('.tabletId').show();
 			$scope.successTabletId = false;
 			$scope.errorTabletId = false;
 		};
