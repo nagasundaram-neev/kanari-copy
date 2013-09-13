@@ -614,8 +614,8 @@ div.create_rest {
 }
 
 .tabletId {
-	width: 38%;
-	/*display: none;*/
+	 width: 430px;
+	 height: 355px;
 	margin-left: 20px;
 	padding-left: 15px;
 	margin-top: 20px;
@@ -730,10 +730,10 @@ ul.taketour li a:hover {
 }
 .step2 {
 	width: 210px;
-	margin-top: 30px;
+	margin-top: 90px;
 }
 #permission select {
-    width: 150px !important;
+	width: 150px !important;
 }
 /**Create Invitation**/
 #login .input-help {
@@ -990,8 +990,10 @@ input {
 
 /* Tablet Id table css */
 .dateTimeList {
-	width: 510px;
-	margin: 5% 0 3%;
+	 height: 200px;
+    margin: 5% 0 3%;
+    overflow-y: auto;
+    width: 345px;
 }
 .dateTimeListhead {
 	color: #664766;
@@ -1003,20 +1005,23 @@ input {
 .nicescroll-rails {
 	display: none;
 }
-.dateTimeList .col1, .dateTimeList .col2 {
+.dateTimeList .col1, .dateTimeList .col2, .dateTimeList .col3 {
 	padding: 2% 0;
 	height: 18px;
 	float: left;
 	border: 1px solid #ccc;
 	border-right: 0;
 	border-top: 0;
-}
-.dateTimeList .col1 {
-	width: 20%;
 	text-align: center;
 }
+.dateTimeList .col1 {
+	width: 100px;
+}
 .dateTimeList .col2 {
-	width: 21%;
+	width: 100px;
+}
+.dateTimeList .col3 {
+	width: 125px;
 }
 .dateTimeList .colBorderTop {
 	border-top: 1px solid #ccc;
@@ -1501,6 +1506,18 @@ input {
 	/*font-weight: bold;*/
 	color: #C84A58;
 }
+.custExpSummary {
+	border: 1px solid #CCCCCC;
+	overflow: hidden;
+	width: 588px;
+}
+.custExpSummary div {
+	border-bottom: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC;
+	float: left;
+	padding: 10px 5px;
+	width: 185px;
+}
 /**** Dashboard Trends End ****/
 
 /****Calendar CSS***/
@@ -1886,8 +1903,8 @@ input {
 	display: inline-block;
 	float: right;
 	padding: 12px 20px;
-	text-transform: uppercase;
-	font-size: 10px;
+	/*text-transform: uppercase;
+	 font-size: 10px;*/
 	font-family: 'Rock Salt', cursive;
 }
 
@@ -1895,33 +1912,33 @@ input {
 	text-decoration: underline;
 }
 
-.tipContainer { 
+.tipContainer {
 	position: relative;
 }
 
 .tipContent {
-    bottom: 0;
-    color: #C64957;
-    font-family: 'Rock Salt',cursive;
-    line-height: 22px;
-    padding: 5px;
-    position: absolute;
-    right: 0;
-    width: 45%;
+	bottom: 0;
+	color: #C64957;
+	font-family: 'Rock Salt', cursive;
+	line-height: 22px;
+	padding: 5px;
+	position: absolute;
+	right: 0;
+	width: 45%;
 }
 
 .tipContent > span {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 .srNo {
-    background: none repeat scroll 0 0 #664766;
-    border-radius: 10px 10px 10px 10px;
-    color: #FFFFFF;
-    float: left;
-    height: 20px;
-    line-height: 20px;
-    margin-left: 5px;
-    margin-right: 8px;
-    padding: 0 6px;
+	background: none repeat scroll 0 0 #664766;
+	border-radius: 10px 10px 10px 10px;
+	color: #FFFFFF;
+	float: left;
+	height: 20px;
+	line-height: 20px;
+	margin-left: 5px;
+	margin-right: 8px;
+	padding: 0 6px;
 }

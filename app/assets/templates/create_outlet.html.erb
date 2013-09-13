@@ -509,7 +509,7 @@
 			This is reports based div only
 		</div>
 		<div id ="tabletIds" ng-show="TabletIdShow" style="height: 267px;">
-			<div data-role="fieldcontain" class="manager_list rightPanel" style="width: 29%;">
+			<div data-role="fieldcontain" class="manager_list rightPanel" style=" width: 340px;">
 				<div class="change_manager">
 					Tablet logins for your outlet
 				</div>
@@ -519,13 +519,13 @@
 							<!-- <div class="col1 colBorderTop">
 							Sr. No.
 							</div> -->
-							<div class="col1 colBorderTop" >
+							<div class="col1 colBorderTop">
 								Tablet Login
 							</div>
-							<div class="col1 colBorderTop" style="width:18%">
+							<div class="col2 colBorderTop">
 								Delete
 							</div>
-							<div class="col1 colBorderTop colBorderRight" style="width: 26%;">
+							<div class="col3 colBorderTop colBorderRight">
 								Reset Password
 							</div>
 						</div>
@@ -536,10 +536,10 @@
 							<div class="col1">
 								{{listTabs.tablet_id}}
 							</div>
-							<div class="col1" style="width:18%">
+							<div class="col2">
 								<a href="" ng-click="DeleteStaff(listTabs.id)">DELETE</a>
 							</div>
-							<div class="col1 colBorderRight" style="width: 26%;">
+							<div class="col3 colBorderRight">
 								<a href="" ng-click="change_tablet_pass(listTabs.id)">RESET PASSWORD</a>
 							</div>
 						</div>
@@ -551,9 +551,11 @@
 				<!-- <input type="button" class="btn_cls" ng-click="create_tablet_id()" data-inline="true" value="Add new tablet" /> -->
 				<div class="infoSteps">
 					<div class="step1">
+						<img src="/assets/arrow1a.png" style=" margin-left: -100px;position: absolute;"/>
 						Step 1:
 						<br/>
 						Enter a password to create tablet login
+						<img src="/assets/arrow1b.png" style=" margin-top: -52px;position: absolute;"/>
 					</div>
 					<div class="clr"></div>
 					<div class="step2">
@@ -579,7 +581,7 @@
 								Password<span class="star">*</span>
 							</lable>
 							<input type="password" class="immediate-help" id="txt" placeholder="Password" password-validate ng-model="tabletId_password" required>
-							<div class="input-help">
+							<div class="input-help" style=" width: 165px;">
 								<h4>Password must meet the following requirements:</h4>
 								<ul>
 									<li ng-class="pwdHasLetter">
@@ -601,7 +603,7 @@
 								Confirm Password<span class="star">*</span>
 							</lable>
 							<input type="password" class="immediate-help" placeholder="Confirm Password" password-validate ng-model="tabletId_confirm_password" required>
-							<div class="input-help">
+							<div class="input-help" style=" width: 165px;">
 								<h4>Password must meet the following requirements:</h4>
 								<ul>
 									<li ng-class="pwdHasLetter">
