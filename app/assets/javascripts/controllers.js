@@ -2734,8 +2734,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			endDate : moment()
 		}, function(start, end) {
 			$('#reportrange span').html(start.format('D MMMM, YYYY') + ' - ' + end.format('D MMMM, YYYY'));
-			startDt = start.format('DD-MM-YYYY');
-			endDt = end.format('DD-MM-YYYY');
+			startDt = start.format('DD-MM-YYYY 00:00');
+			endDt = end.format('DD-MM-YYYY 23:23');
 			$scope.listOfTrendsDate(idV);
 		});
 
