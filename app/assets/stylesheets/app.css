@@ -709,6 +709,7 @@ ul.taketour li a:hover {
 	padding: 10px 0 5px;
 	margin-bottom: 10px;
 	width: 364px;
+	margin-bottom: 10px; 
 }
 
 .select_option {
@@ -1929,7 +1930,7 @@ input {
 }
 
 .tipContainer {
-
+	margin-right: -20px;
 	position: relative;
 }
 
