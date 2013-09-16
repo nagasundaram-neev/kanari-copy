@@ -63,7 +63,7 @@
 	font-family: 'Roboto', sans-serif !important;
 }
 
-#splash, #login, #landPage, #forgotpass, #signUp {
+#splash, #login, #landPage, #forgotpass, #signUp, #signedUp {
 	background: #F9C040 !important;
 }
 
@@ -1174,20 +1174,64 @@ img, object {
 }
 
 #signedUp .ui-content {
+	color: #5C4155 !important;
 	padding: 0 !important;
+	text-shadow: none;
+}
+#signedUp .signUp {
+	font-size: 170%;
+	margin: 10% 0;
+	 font-weight: 400;
+	font-family: 'Roboto', sans-serif !important;
 }
 .mainDiv {
 	color: #664765;
 	margin: 5% 0 0 3%;
-	width: 93%;
+	width: 93% !important;
 	text-shadow: none;
 }
+#signedUp .mainDiv {
+	text-align: center;
+	margin: 0 auto;
+}
 .thanks {
-	color: #664765;
+	display: block;
+	padding: 0 0 5%;
 }
 
 .secondDiv {
-	color: #656565;
+	font-size: 121%;
+	font-family: 'Open Sans', sans-serif !important;
+	line-height: 30px;
+	padding: 0 0 5%;
+}
+.tooltipCls {
+	margin-bottom: -10px;
+    margin-left: 29%;
+	position: relative;
+}
+.birdTooltip {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-radius: 10px 10px 10px 10px;
+	color: #694765;
+	font-size: 0.8em;
+	font-family: 'Open Sans', sans-serif !important;
+	padding: 5%;
+    text-shadow: none;
+    width: 60%;
+}
+.birdTooltiparrow-down {
+	border-left: 0 solid transparent;
+	border-right: 3em solid transparent;
+	border-top: 3em solid #FFFFFF;
+	height: 0;
+	margin-left: 37px;
+	width: 0;
+}
+.proceedBtn .ui-btn-corner-all {
+	border-radius: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
 }
 .trustUs {
 	margin: 4%;
@@ -1463,9 +1507,6 @@ img, object {
 	width: 100%;
 	margin: 0;
 }
-.proceedBtn .ui-btn-corner-all {
-	border-radius: 0.4em 0.4em 0.4em 0.4em;
-}
 
 #transactionHistory span {
 	float: left;
@@ -1502,9 +1543,6 @@ img, object {
 	text-align: center;
 	margin: 3% 0;
 	font-size: 20px;
-}
-#signedUp .signUp {
-	margin: 2% 0;
 }
 #restaurantList .signUp, #showRestaurant .signUp {
 	margin: 2.6 0 0;
@@ -1646,7 +1684,7 @@ img, object {
 	border: 0 none;
 	color: #664765;
 	text-transform: uppercase;
-	width: 100%;
+	width: 96%;
 }
 .signUpDiv .ui-btn-up-b, .ui-btn-hover-b {
 	background-image: -webkit-gradient(linear,left top,left bottom,from( #FACC4A ),to( #F9C040 ));
@@ -2176,4 +2214,12 @@ img, object {
 .feedbackSocialIcons{
 	height: 40px;
 }
+
+/*.feedback img{
+ width: 50px;
+ }
+
+ .redeems img{
+ width: 65px;
+ }*/
 

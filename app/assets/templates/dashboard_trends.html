@@ -1,6 +1,6 @@
 <div data-role="page" class="main_content span12" style="width: auto;" data-theme="b" id="dashboardTrends" ng-controller="dashboardTrendsCtrl">
 	<style>
-	body {
+		body {
 			background: none repeat scroll 0 0 #FFFFFF !important;
 		}
 		.ngView {
@@ -16,20 +16,16 @@
 			margin: 15px 25px;
 			padding: 5px 0;
 		}
-		.showNav ul{margin-right: 35px !important}
-		.header .span12{  width: 1235px;}
+		.showNav ul {
+			margin-right: 35px !important
+		}
+		.header .span12 {
+			width: 1235px;
+		}
 	</style>
 	<div class="showNav navBarCls" >
 		<div class="dashboardHeader">
-			 <input type="text" style="width: 210px" name="reservation" id="reportrange" value="Date from - Date to"  class="span4 firstshow"/>
-			<!-- <div class="input-append date"  id="dp3" data-date="13-08-2013" data-date-format="dd-mm-yyyy">
-				<input id="sDate" class="span2" size="16" type="text" ng-model="endDate" placeholder="End Date" readonly>
-				<span class="add-on"><i class="icon-th"></i></span>
-			</div>
-			<div class="input-append date"  id="dp2" data-date="13-08-2013" data-date-format="dd-mm-yyyy">
-				<input id="startDt" class="span2" size="16" type="text" ng-model="startDate"  placeholder="Start Date" readonly>
-				<span class="add-on"><i class="icon-th"></i></span>
-			</div> -->
+			<input type="text" style="width: 210px" name="reservation" id="reportrange" value="Date from - Date to"  class="span4 firstshow"/>
 			<select ng-model="outletTrend" ng-change="selectOutlet()" class="outletDropDown" ng-options="value.id as value.name+', '+value.address for value in outletNameList">
 				<option value="">Select Outlet</option>
 			</select>
@@ -127,7 +123,7 @@
 					<a id="usersGraph" href="javascript:void(0)">New Vs Returning Users</a>
 				</li>
 				<!-- <li>
-					<a id="timeOfVisit" href="javascript:void(0)">Time of Visit</a>
+				<a id="timeOfVisit" href="javascript:void(0)">Time of Visit</a>
 				</li> -->
 				<li>
 					<a id="chequeSize" href="javascript:void(0)">Cheque Size</a>
@@ -138,6 +134,200 @@
 		<div class="chart_div">
 			<span class="chart_heading">{{chart_heading}} > {{chart_subheading}}</span>
 			<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+			<div ng-show="custExpSummary" class="custExpSummary">
+				<div class="colno1">
+					<b>People who voted:</b>
+				</div>
+				<div>
+					<b>Over Period</b>
+				</div>
+				<div class="border_right_none colno3">
+					<b>Change VS Precending Period</b>
+				</div>
+				<div class="colno1">
+					Positive
+				</div>
+				<div>
+					{{positive | number:1}}%
+				</div>
+				<div class="border_right_none colno3" ng-switch on="positiveChange">
+					<span ng-switch-default > {{positiveChange}} </span>
+					<span ng-switch-when="null"> - </span>
+				</div>
+				<div class="colno1">
+					Neutral
+				</div>
+				<div>
+					{{neutral | number:1}}%
+				</div>
+				<div class="border_right_none colno3" ng-switch on="neutralChange">
+					<span ng-switch-default> {{neutralChange}} </span>
+					<span ng-switch-when="null"> - </span>
+				</div>
+				<div class="border_bottom_none colno1">
+					Negative
+				</div>
+				<div class="border_bottom_none">
+					{{negative | number:1}}%
+				</div>
+				<!-- <div class="border_bottom_none">{{(negative/(positive+neutral+negative))*100 | number:1}}%</div> -->
+				<div class="border_right_none border_bottom_none colno3" ng-switch on="negativeChange">
+					<span ng-switch-default> {{negativeChange}} </span>
+					<span ng-switch-when="null"> - </span>
+				</div>
+			</div>
+			<div ng-show="NPSSummary" class="custExpSummary">
+				<div class="colno1">
+					&nbsp;
+				</div>
+				<div>
+					<b>Over Period</b>
+				</div>
+				<div class="border_right_none colno3">
+					<b>Change VS Precending Period</b>
+				</div>
+				<div class="colno1">
+					NPS
+				</div>
+				<div>
+					{{NPS | number:1}}%
+				</div>
+				<div class="border_right_none colno3" ng-switch on="NPSChange">
+					<span ng-switch-default> {{NPSChange}} </span>
+					<span ng-switch-when="null"> - </span>
+				</div>
+				<div class="border_bottom_none colno1">
+					No. of feedback submissions
+				</div>
+				<div class="border_bottom_none">
+					{{noOfFeedback}}
+				</div>
+				<div class="border_right_none border_bottom_none colno3" ng-switch on="noOfFeedbackChange">
+					<span ng-switch-default> {{noOfFeedbackChange}} </span>
+					<span ng-switch-when="null"> - </span>
+				</div>
+			</div>
+			<div ng-show="feedbackCount" class="custExpSummary" style=" width: 694px;">
+				<div class="colno1">
+					&nbsp;
+				</div>
+				<div>
+					<b>Over Period</b>
+				</div>
+				<div>
+					<b>Avg. Per Day</b>
+				</div>
+				<div class="border_right_none colno3">
+					<b>Change VS Precending Period</b>
+				</div>
+				<div class="border_bottom_none colno1">
+					{{text}}
+				</div>
+				<div class="border_bottom_none">
+					{{noOfFeedback}}
+				</div>
+				<div class="border_bottom_none">
+					{{noOfFeedbackPerDay | number:1}}
+				</div>
+				<div class="border_right_none border_bottom_none colno3" ng-switch on="noOfFeedbackChange">
+					<span ng-switch-default> {{noOfFeedbackChange}} </span>
+					<span ng-switch-when="null"> - </span>
+				</div>
+			</div>
+			<div ng-show="rewardPool" class="custExpSummary">
+				<div class="colno1">
+					&nbsp;
+				</div>
+				<div>
+					<b>Over Period</b>
+				</div>
+				<div class="border_right_none colno3">
+					<b>Change VS Precending Period</b>
+				</div>
+				<div class="border_bottom_none colno1">
+					{{text}}
+				</div>
+				<div class="border_bottom_none">
+					Dhs. {{rewardPoolCount | number:1}}
+				</div>
+				<div class="border_right_none border_bottom_none colno3" ng-switch on="rewardPoolCountChange">
+					<span ng-switch-default> {{rewardPoolCountChange}} </span>
+					<span ng-switch-when="null"> - </span>
+				</div>
+			</div>
+			<div ng-show="demographic" class="custExpSummary">
+				<div class="colno1">
+					<b>Gender Segmentation</b>
+				</div>
+				<div>
+					<b>Over Period</b>
+				</div>
+				<div class="border_right_none colno3">
+					<b>Change VS Precending Period</b>
+				</div>
+				<div class="colno1">
+					Male
+				</div>
+				<div ng-switch on="maleCount">
+					<span ng-switch-default> {{maleCount}}% </span>
+					<span ng-switch-when="null"> - </span>
+				</div>
+				<div class="border_right_none colno3" ng-switch on="maleCountChange">
+					<span ng-switch-default> {{maleCountChange}} </span>
+					<span ng-switch-when="null"> - </span>
+				</div>
+				<div class="border_bottom_none colno1">
+					Female
+				</div>
+				<div class="border_bottom_none" ng-switch on="femaleCount">
+					<span ng-switch-default> {{femaleCount}}% </span>
+					<span ng-switch-when="null"> - </span>
+				</div>
+				<div class="border_right_none border_bottom_none colno3" ng-switch on="femaleCountChange">
+					<span ng-switch-default> {{femaleCountChange}} </span>
+					<span ng-switch-when="null"> - </span>
+				</div>
+			</div>
+			<div ng-show="usergraph" class="custExpSummary" style=" width: 694px;">
+				<div class="colno1">
+					&nbsp;
+				</div>
+				<div>
+					<b>Over Period</b>
+				</div>
+				<div>
+					<b>Avg. Per Day</b>
+				</div>
+				<div class="border_right_none colno3">
+					<b>Change VS Precending Period</b>
+				</div>
+				<div class="colno1">
+					New User
+				</div>
+				<div>
+					{{newUser}}
+				</div>
+				<div>
+					{{newUserPerDay | number:1}}
+				</div>
+				<div class="border_right_none colno3" ng-switch on="newUserChange">
+					<span ng-switch-default> {{newUserChange}} </span>
+					<span ng-switch-when="null"> - </span>
+				</div>
+				<div class="border_bottom_none colno1">
+					Returning User
+				</div>
+				<div class="border_bottom_none">
+					{{retUser}}
+				</div>
+				<div class="border_bottom_none">
+					{{retUserPerDay | number:1}}
+				</div>
+				<div class="border_right_none border_bottom_none colno3" ng-switch on="retUserChange">
+					<span ng-switch-default> {{retUserChange}} </span>
+					<span ng-switch-when="null"> - </span>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

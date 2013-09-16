@@ -1,4 +1,5 @@
 require 'normalize_time'
+require 'dashboard_summary'
 class Outlet < ActiveRecord::Base
   include NormalizeTime
 
@@ -53,17 +54,20 @@ class Outlet < ActiveRecord::Base
     start_time = normalize_date(options[:start_time]) || self.created_at
     end_time   = normalize_date(options[:end_time]) || Time.zone.now
 
+    #TODO: Instead of trying to guess what the user inteded, we should raise an exception
     start_time,end_time = end_time,start_time if start_time > end_time
 
+    #TODO: Lazily evaluate the query. Do not fetch all completed feedbacks here.
+    # First construct the query with the time range and then fire the query.
     feedbacks   = self.feedbacks.completed.includes(:user)
     redemptions = self.redemptions.approved.includes(:user)
-    feedback_trends = {:statistics => {}, :detailed_statistics => {}}
+    feedback_trends = {:statistics => {}, :summary => {}, :detailed_statistics => {}}
     feedback_trends[:statistics] = get_feedback_trends(start_time, end_time, feedbacks, redemptions)
+    feedback_trends[:summary] = get_feedback_summary(start_time, end_time, feedbacks, redemptions)
 
-    is_detailed_statistics = true
     ((start_time.to_date)..(end_time.to_date)).each do |day|
       day_start = day.beginning_of_day; day_end = day.end_of_day
-      feedback_trends[:detailed_statistics][day.strftime("%Y-%m-%d")] = get_feedback_trends(day_start, day_end, feedbacks, redemptions, is_detailed_statistics)
+      feedback_trends[:detailed_statistics][day.strftime("%Y-%m-%d")] = get_feedback_trends(day_start, day_end, feedbacks, redemptions)
     end
 
     return {:feedback_trends => feedback_trends}
@@ -169,7 +173,7 @@ class Outlet < ActiveRecord::Base
     end
 
     # Feedback Statistics
-    def get_feedback_trends(start_time, end_time, all_feedbacks, all_redemptions, detailed_statistics=false)
+    def get_feedback_trends(start_time, end_time, all_feedbacks, all_redemptions)
       start_time,end_time = end_time,start_time if start_time > end_time
       all_feedbacks = all_feedbacks.order('feedbacks.updated_at desc') unless all_feedbacks.blank?
       feedbacks_nps  = all_feedbacks.select {|f| f if (f.updated_at < end_time)}.first(NPS_LIMIT)
@@ -177,7 +181,6 @@ class Outlet < ActiveRecord::Base
       redemptions    = all_redemptions.select {|f| f if (f.updated_at > start_time && f.updated_at < end_time)}
       statistics     = {}
       statistics[:net_promoter_score] = get_net_promoter_score_statistics(feedbacks_nps)
-      statistics[:cumulative_promoter_score] = get_cumulative_promoter_score(feedbacks) unless detailed_statistics
       ["food_quality", "speed_of_service", "friendliness_of_service", "ambience", "cleanliness", "value_for_money"].each do |category|
         statistics[category.to_sym] = get_field_statistics(feedbacks, category)
       end
@@ -207,17 +210,8 @@ class Outlet < ActiveRecord::Base
       nps = {:like => promoters, :dislike => passives, :neutral => neutrals}
     end
 
-    def get_cumulative_promoter_score(feedbacks)
-      promoters = 0; detractors = 0; neutrals = 0
-      if feedbacks.present?
-        promoters = feedbacks.select{|f| AppConfig[:promoters].include?f.recommendation_rating }.length
-        detractors  = feedbacks.select{|f| AppConfig[:detractors].include?f.recommendation_rating }.length
-        neutrals  = feedbacks.length - ( promoters + detractors )
-      end
-      nps = {:like => promoters, :dislike => detractors, :neutral => neutrals}
-    end
-
     def get_average_bill_amount_statistics(feedbacks)
+      #TODO: Why to_i ? This will steal decimals from the bill amount.
       feedbacks.present? ? ( feedbacks.inject(0){|sum, f| sum + f.bill_amount.to_i}.to_f / feedbacks.length ) : 0
     end
 
@@ -252,10 +246,26 @@ class Outlet < ActiveRecord::Base
         usage[:redemptions_count] = redemptions.length
         usage[:discounts_claimed] = redemptions.inject(0){|sum, r| sum + r.points.to_i} 
       end 
+
+      #TODO: Refactor ! This will be inefficient when the array is huge.
       latest = (feedbacks | redemptions).compact.uniq.sort! {|i,j| i.updated_at <=> j.updated_at}.last
       rewards_pool = latest ? latest.send("rewards_pool_after_#{latest.class.name.downcase}") : 0 
       usage[:rewards_pool] = rewards_pool
       usage
+    end
+
+    def get_feedback_summary(start_time, end_time, all_feedbacks, all_redemptions)
+      summary_calculator = DashboardSummary.new(start_time, end_time, all_feedbacks, all_redemptions)
+      summary     = {}
+      summary[:customer_experience] = summary_calculator.get_customer_experience_summary
+      summary[:net_promoter_score] = summary_calculator.get_net_promoter_score_summary
+      summary[:feedbacks_count] = summary_calculator.get_feedbacks_count_summary
+      summary[:redemptions_count] = summary_calculator.get_feedbacks_count_summary
+      summary[:rewards_pool] = summary_calculator.get_rewards_pool_summary
+      summary[:demographics] = summary_calculator.get_demographics_summary
+      summary[:users] = summary_calculator.get_users_summary
+      summary[:average_bill_size] = summary_calculator.get_average_bill_size_summary
+      return summary
     end
 
 end
