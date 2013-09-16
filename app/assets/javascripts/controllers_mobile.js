@@ -807,7 +807,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 	$scope.willRecommend = "";
 	$scope.feedBackArray = [0, 0, 0, 0, 0, 0];
 	$scope.feedBackSize = 6;
-	$scope.feedBackCategoryName = ["food", "friendlines", "speed", "ambiance", "cleanliness", "value"];
+	$scope.feedBackCategoryName = ["food", "friendliness", "speed", "ambiance", "cleanliness", "value"];
 	$(".nxt").css("width", "100%");
 	$(".nxt img").css("padding-top", "0");
 
@@ -849,12 +849,12 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 		if ($scope.like) {
 			if ($scope.feedBackArray[category] == 0) {
 				$scope.feedBackArray[category] = 1;
-				$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_4.png');
+				$("#feed_" + category + " img").attr('src', '/assets/icon_' + $scope.feedBackCategoryName[category] + '4.svg');
 				$("#feed_" + category).css("background-color", "#664765");
 				$("#feed_" + category + " span").css("color", "#E5E6E8");
 			} else if ($scope.feedBackArray[category] == 1) {
 				$scope.feedBackArray[category] = 0;
-				$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_3.png');
+				$("#feed_" + category + " img").attr('src', '/assets/icon_' + $scope.feedBackCategoryName[category] + '3.svg');
 				$("#feed_" + category).css("background-color", "#E5E6E8");
 				$("#feed_" + category + " span").css("color", "#664765");
 			}
@@ -862,12 +862,12 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 		} else {
 			if ($scope.feedBackArray[category] == 0) {
 				$scope.feedBackArray[category] = -1;
-				$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_2.png');
+				$("#feed_" + category + " img").attr('src', '/assets/icon_' + $scope.feedBackCategoryName[category] + '2.svg');
 				$("#feed_" + category).css("background-color", "#664765");
 				$("#feed_" + category + " span").css("color", "#E5E6E8");
 			} else if ($scope.feedBackArray[category] == -1) {
 				$scope.feedBackArray[category] = 0;
-				$("#feed_" + category + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[category] + '_1.png');
+				$("#feed_" + category + " img").attr('src', '/assets/icon_' + $scope.feedBackCategoryName[category] + '1.svg');
 				$("#feed_" + category).css("background-color", "#E5E6E8");
 				$("#feed_" + category + " span").css("color", "#664765");
 			}
@@ -881,17 +881,17 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			for (var i = 0; i < $scope.feedBackSize; i++) {
 				if ($scope.feedBackArray[i] == 0) {
 					$scope.feedBackArray[i] = 0;
-					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_1.png');
+					$("#feed_" + i + " img").attr('src', '/assets/icon_' + $scope.feedBackCategoryName[i] + '1.svg');
 					$("#feed_" + i).css("background-color", "#E5E6E8");
 					$("#feed_" + i + " span").css("color", "#664765");
 				} else if ($scope.feedBackArray[i] == 1) {
 					$scope.feedBackArray[i] = 1;
-					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_2.png');
+					$("#feed_" + i + " img").attr('src', '/assets/icon_' + $scope.feedBackCategoryName[i] + '2.svg');
 					$("#feed_" + i).css("background-color", "#CCCCCC");
 					$("#feed_" + i + " span").css("color", "#664765");
 				} else if ($scope.feedBackArray[i] == -1) {
 					$scope.feedBackArray[i] = -1;
-					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_2.png');
+					$("#feed_" + i + " img").attr('src', '/assets/icon_' + $scope.feedBackCategoryName[i] + '2.svg');
 					$("#feed_" + i).css("background-color", "#664765");
 					$("#feed_" + i + " span").css("color", "#E5E6E8 ");
 				}
@@ -1050,17 +1050,17 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			for (var i = 0; i < $scope.feedBackSize; i++) {
 				if ($scope.feedBackArray[i] == 0) {
 					$scope.feedBackArray[i] = 0;
-					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_3.png');
+					$("#feed_" + i + " img").attr('src', '/assets/icon_' + $scope.feedBackCategoryName[i] + '3.svg');
 					$("#feed_" + i).css("background-color", "#E5E6E8");
 					$("#feed_" + i + " span").css("color", "#664765");
 				} else if ($scope.feedBackArray[i] == -1) {
 					$scope.feedBackArray[i] = -1;
-					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_4.png');
+					$("#feed_" + i + " img").attr('src', '/assets/icon_' + $scope.feedBackCategoryName[i] + '4.svg');
 					$("#feed_" + i).css("background-color", "#CCCCCC");
 					$("#feed_" + i + " span").css("color", "#664765");
 				} else if ($scope.feedBackArray[i] == 1) {
 					$scope.feedBackArray[i] = 1;
-					$("#feed_" + i + " img").attr('src', '/assets/b_' + $scope.feedBackCategoryName[i] + '_4.png');
+					$("#feed_" + i + " img").attr('src', '/assets/icon_' + $scope.feedBackCategoryName[i] + '4.svg');
 					$("#feed_" + i).css("background-color", "#664765");
 					$("#feed_" + i + " span").css("color", "#E5E6E8");
 				}
@@ -1529,7 +1529,39 @@ $(document).on("pageshow", ".ui-page", function() {
 	//alert("page " + $page.height() + "window " + $(window).height());
 	if (scrnHeight == 548) {
 		//$page.children('.ui-footer').css('position', 'absolute');
-		$("div[data-role='page']").style.setProperty("height", divHeightInDoc + "px");
+		//$("div[data-role='page']").style.setProperty("height", divHeightInDoc + "px");
+	}
+	
+	var doc = window.document;
+	
+	// If there's a hash, or addEventListener is undefined, stop here
+	if( !location.hash && win.addEventListener ){
+		
+		//scroll to 1
+		window.scrollTo( 0, 1 );
+		var scrollTop = 1,
+			getScrollTop = function(){
+				return win.pageYOffset || doc.compatMode === "CSS1Compat" && doc.documentElement.scrollTop || doc.body.scrollTop || 0;
+			},
+		
+			//reset to 0 on bodyready, if needed
+			bodycheck = setInterval(function(){
+				if( doc.body ){
+					clearInterval( bodycheck );
+					scrollTop = getScrollTop();
+					win.scrollTo( 0, scrollTop === 1 ? 0 : 1 );
+				}	
+			}, 15 );
+		
+		win.addEventListener( "load", function(){
+			setTimeout(function(){
+				//at load, if user hasn't scrolled more than 20 or so...
+				if( getScrollTop() < 20 ){
+					//reset to hide addr bar at onload
+					win.scrollTo( 0, scrollTop === 1 ? 0 : 1 );
+				}
+			}, 0);
+		} );
 	}
 
 	function setFooterIphone() {

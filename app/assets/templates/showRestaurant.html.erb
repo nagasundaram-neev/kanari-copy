@@ -4,7 +4,7 @@
 	</style>
 	<div data-role="content">
 		<div class="username">
-			<div class="home" ng-click="home()"></div>
+			<img src="/assets/icon_home.svg" class="home" ng-click="home()" />
 			<div class="signUp">
 				RESTAURANT DETAILS
 			</div>
@@ -16,17 +16,17 @@
 				<span class="address">{{restaurant_address}}</span>
 			</div>
 			<div class="username rest_info">
-				<span class="img_outlet" style="padding: 1% 0 1% 0;"><%= image_tag 'ic_customer_care.png' %></span> {{contact_number}}
+				<span class="img_outlet" style="padding: 1% 0 1% 0;"><!-- <%= image_tag 'ic_customer_care.png' %> --><img class="showRestIcons" src="/assets/icon_call_no.svg" /></span> {{contact_number}}
 			</div>
 			<div class="username rest_info">
-				<span class="img_outlet" style=" padding: 1% 0 1% 0;"><%= image_tag 'ic_at_white.png' %></span> {{email_address}}
+				<span class="img_outlet" style=" padding: 1% 0 1% 0;"><!-- <%= image_tag 'ic_at_white.png' %> --><img class="showRestIcons" src="/assets/icon_email.svg" /></span> {{email_address}}
 			</div>
 			<div class="username rest_info" ng-click="locationMap()">
-				<span class="img_outlet" style=" padding: 1% 0 1% 0;"><%= image_tag 'ic_location_white.png' %></span> Location map
+				<span class="img_outlet" style=" padding: 1% 0 1% 0;"><!-- <%= image_tag 'ic_location_white.png' %> --><img class="showRestIcons" src="/assets/icon_location_map.svg" /></span> Location map
 			</div>
 			<div class="outlet_div rest_info">
 				<div class="outlet_title ">
-					<span class="img_outlet"><%= image_tag 'ic_outlet.png' %></span> <span class="title_outlet">Outlet Type</span>
+					<span class="img_outlet"><!-- <%= image_tag 'ic_outlet.png' %> --><img class="showRestIcons" src="/assets/icon_outlet_type.svg" /></span> <span class="title_outlet">Outlet Type</span>
 				</div>
 				<div class="outlet_info" style="padding: 1% 0;">
 					<span ng-repeat="outlet in outlets">{{outlet.name}}<span ng-show=" ! $last ">, &nbsp; </span></span>
@@ -35,7 +35,7 @@
 			</div>
 			<div class="outlet_div rest_info">
 				<div class="outlet_title ">
-					<span class="img_outlet"><%= image_tag 'ic_cuisine.png' %></span> <span class="title_outlet"> Cuisine Type</span>
+					<span class="img_outlet"><!-- <%= image_tag 'ic_cuisine.png' %> --><img style="height:28px;" src="/assets/icon_cusuine_type.svg" /></span> <span class="title_outlet"> Cuisine Type</span>
 				</div>
 				<div class="outlet_info" style="padding: 1% 0;">
 					<span ng-repeat="cuisine in cuisineTypes">{{cuisine.name}}<span ng-show=" ! $last ">, &nbsp; </span></span>
@@ -44,7 +44,7 @@
 			</div>
 			<div class="outlet_div rest_info">
 				<div class="outlet_title">
-					<span class="img_outlet"><%= image_tag 'ic_opening_hrs.png' %></span> <span class="title_outlet"> Opening hours</span>
+					<span class="img_outlet"><!-- <%= image_tag 'ic_opening_hrs.png' %> --><img style="height:32px;" src="/assets/icon_opening_hours.svg" /></span> <span class="title_outlet"> Opening hours</span>
 				</div>
 				<div class="outlet_info" style="padding: 1% 0;">
 					<span>{{fromTime}} to {{toTime}}</span>
@@ -54,11 +54,11 @@
 
 			<div class="outlet_div rest_info ">
 				<div class="outlet_work">
-					<span class="img_outlet"><%= image_tag 'ic_delivery.png' %></span> <span class="title_outlet"> Delivery</span>
+					<span class="img_outlet"><!-- <%= image_tag 'ic_delivery.png' %> --><img style="height:27px;" src="/assets/icon_delivery.svg" /></span> <span class="title_outlet"> Delivery</span>
 				</div>
 				<div class="outlet_info outlet_serves imgCenter">
-					<img src="/assets/ic_ticks.png" ng-show="delivery" />
-					<img src="/assets/ic_ticks_grey.png" ng-hide="delivery"/>
+					<img style="margin-top: 4%;" src="/assets/icon_tick_purple.svg" ng-show="delivery" />
+					<img style="margin-top: 4%;" src="/assets/icon_tick_light_purple.svg" ng-hide="delivery"/>
 					<!-- <%= image_tag 'ic_ticks.png' %>
 					<%= image_tag 'ic_ticks_grey.png' %> -->
 				</div>
@@ -66,11 +66,13 @@
 			</div>
 			<div class="outlet_div rest_info">
 				<div class="outlet_work">
-					<span class="img_outlet"><%= image_tag 'ic_alcohol.png' %></span> <span class="title_outlet">Serves Alcohol</span>
+					<span class="img_outlet"><!-- <%= image_tag 'ic_alcohol.png' %> --><img style="height:27px;" src="/assets/icon_serves_alcohol.svg" /></span> <span class="title_outlet">Serves Alcohol</span>
 				</div>
 				<div class="outlet_info outlet_serves imgCenter">
-					<img src="/assets/ic_ticks.png" ng-show="alcohol" />
-					<img src="/assets/ic_ticks_grey.png" ng-hide="alcohol"/>
+					<img style="margin-top: 4%;" src="/assets/icon_tick_purple.svg" ng-show="alcohol" />
+					<img style="margin-top: 4%;" src="/assets/icon_tick_light_purple.svg" ng-hide="alcohol"/>
+					<!-- <img src="/assets/ic_ticks.png" ng-show="alcohol" />
+					<img src="/assets/ic_ticks_grey.png" ng-hide="alcohol"/> -->
 					<!-- <%= image_tag 'ic_ticks.png' %>
 					<%= image_tag 'ic_ticks_grey.png' %> -->
 				</div>
@@ -78,11 +80,13 @@
 			</div>
 			<div class="outlet_div rest_info">
 				<div class="outlet_work ">
-					<span class="img_outlet"><%= image_tag 'ic_outdoor.png' %></span> <span class="title_outlet"> Outdoor seating</span>
+					<span class="img_outlet"><!-- <%= image_tag 'ic_outdoor.png' %> --><img style="height:27px;" src="/assets/icon_outdoor_seating.svg" /></span> <span class="title_outlet"> Outdoor seating</span>
 				</div>
 				<div class="outlet_info outlet_serves imgCenter">
-					<img src="/assets/ic_ticks.png" ng-show="outDoor_seating" />
-					<img src="/assets/ic_ticks_grey.png" ng-hide="outDoor_seating"/>
+					<img style="margin-top: 4%;" src="/assets/icon_tick_purple.svg" ng-show="outDoor_seating" />
+					<img style="margin-top: 4%;" src="/assets/icon_tick_light_purple.svg" ng-hide="outDoor_seating"/>
+					<!-- <img src="/assets/ic_ticks.png" ng-show="outDoor_seating" />
+					<img src="/assets/ic_ticks_grey.png" ng-hide="outDoor_seating"/> -->
 					<!-- <%= image_tag 'ic_ticks.png' %>
 					<%= image_tag 'ic_ticks_grey.png' %> -->
 				</div>

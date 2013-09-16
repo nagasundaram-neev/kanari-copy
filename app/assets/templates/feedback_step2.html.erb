@@ -36,10 +36,12 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 		</div>
 		<div class="outerDiv">
 			<div ng-show="dislike" class="enter_code">
-				What do you think the restaurant did not do particularly well?
+				Which of the following were you really disappointed with?
+				<span>Select none, one, or more.</span>
 			</div>
 			<div ng-show="like" class="enter_code">
-				What do you think the restaurant did particularly well?
+				Which of the following were you really impressed with?
+				<span>Select none, one, or more.</span>
 			</div>
 			<div ng-show="recomendation" class="enter_code">
 				How likely are you to recommend <b>today's</b> experience to a friend?
@@ -48,33 +50,39 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 		<div class="keypad" ng-show="optionKeypad">
 			<div class="menDiv">
 				<div class="backColr" id="feed_0" ng-click="select_feedback_category('0')">
-					<%= image_tag 'b_food_3.png' %>
+					<!-- <%= image_tag 'icon_food3.svg' %> -->
+					<img class="feedbackIcons" src="/assets/icon_food3.svg" />
 					<span class="feedbackStep2Txt">FOOD</span>
 				</div>
 				<div class="backColr" id="feed_1" ng-click="select_feedback_category('1')">
-					<%= image_tag 'b_friendlines_3.png' %>
+					<!-- <%= image_tag 'b_friendlines_3.png' %> -->
+					<img class="feedbackIcons" src="/assets/icon_friendliness3.svg" />
 					<span class="feedbackStep2Txt">FRIENDLINESS</span>
 				</div>
 				<div class="clr"></div>
 			</div>
 			<div class="menDiv">
 				<div class="backColr" id="feed_2" ng-click="select_feedback_category('2')">
-					<%= image_tag 'b_speed_3.png' %>
+					<!-- <%= image_tag 'b_speed_3.png' %> -->
+					<img class="feedbackIcons" src="/assets/icon_speed3.svg" />
 					<span class="feedbackStep2Txt">SPEED</span>
 				</div>
 				<div class="backColr" id="feed_3" ng-click="select_feedback_category('3')">
-					<%= image_tag 'b_ambiance_3.png' %>
+					<!-- <%= image_tag 'b_ambiance_3.png' %> -->
+					<img class="feedbackIcons" src="/assets/icon_ambiance3.svg" />
 					<span class="feedbackStep2Txt">AMBIANCE</span>
 				</div>
 				<div class="clr"></div>
 			</div>
 			<div class="menDiv">
 				<div class="backColr" id="feed_4" ng-click="select_feedback_category('4')">
-					<%= image_tag 'b_cleanliness_3.png' %>
+					<!-- <%= image_tag 'b_cleanliness_3.png' %> -->
+					<img class="feedbackIcons" src="/assets/icon_cleanliness3.svg" />
 					<span class="feedbackStep2Txt">CLEANLINESS</span>
 				</div>
 				<div class="backColr" id="feed_5" ng-click="select_feedback_category('5')" style="">
-					<%= image_tag 'b_value_3.png' %>
+					<!-- <%= image_tag 'b_value_3.png' %> -->
+					<img class="feedbackIcons" src="/assets/icon_value3.svg" />
 					<span class="feedbackStep2Txt">VALUE FOR<br/>MONEY</span>
 				</div>
 				<div class="clr"></div>

@@ -36,8 +36,8 @@
 	width: 100%;
 	font-weight: normal !important;
 	position: absolute;
-    width: 100%;
-    text-align:left;
+	width: 100%;
+	text-align: left;
 }
 .genderBtn input::-webkit-input-placeholder {
 	color: #F5C03F !important
@@ -103,8 +103,8 @@
 .dobDiv input::-moz-placeholder, .dobDiv textarea::-moz-placeholder {
 	background: #664765;
 }
-#divexample1{
-	height:448px;
+#divexample1 {
+	height: 448px;
 	overflow-y: auto;
 }
 .dot {
@@ -123,20 +123,20 @@
 }
 
 .roundBtn img {
-	width: 23%;
+	/*width: 23%;*/
+	height: 78px;
 }
 
 /*.roundBtn {
-	margin-right: 5%;
-}*/
+ margin-right: 5%;
+ }*/
 
-.margnRght{
+.margnRght {
 	margin-right: 2.5%;
 }
-.margnLeft{
+.margnLeft {
 	margin-left: 2.5%;
 }
-
 
 .menDiv {
 	width: 100%;
@@ -300,7 +300,7 @@
 	color: #664765;
 	float: left;
 	height: 55px;
-	 padding: 2% 0 2% 4%;
+	padding: 2% 0 2% 4%;
 	text-shadow: none;
 	width: 35.73%;
 }
@@ -379,7 +379,7 @@
 	color: #593F5A;
 	font-size: 1.8em;
 	float: right;
-	padding-right:10%;
+	padding-right: 10%;
 }
 
 .thanksMsg {
@@ -393,7 +393,7 @@
 .pointsEarnedDiv {
 	color: #664765;
 	position: relative;
-    text-align: center;
+	text-align: center;
 }
 .shareTxt {
 	color: #664765;
@@ -402,12 +402,12 @@
 .backColorYellow {
 	background-color: #F8BE40;
 	/*margin: 8% 1%;
-	padding: 4% 5%;
-	width: 21.3%;*/
+	 padding: 4% 5%;
+	 width: 21.3%;*/
 	margin-left: 2px;
 	margin-top: 15px;
-    padding: 6px;
-    width: 50px;
+	padding: 6px;
+	width: 50px;
 }
 .backColorYellow img {
 	vertical-align: middle;
@@ -420,7 +420,7 @@
 	background: none repeat scroll 0 0 #664765;
 	height: 1px;
 	margin: 5% auto;
-	 width: 190px;
+	width: 190px;
 }
 .thanksMsg div {
 	width: 75%;
@@ -794,7 +794,6 @@ img, object {
 	border-right: 0 !important;
 }
 
-
 #feedback .menDiv {
 	margin: 2% 0 0 0;
 	width: 100%;
@@ -983,13 +982,18 @@ img, object {
 	margin: 0 0 0 9%;
 }
 .home {
-	background-image: url("/assets/ic_home_yellow.png");
-	background-position: 0 0;
-	background-repeat: no-repeat;
+	/*background-image: url("/assets/icon_home.svg");*/
+	/*background-position: 0 0;*/
+	/*background-repeat: no-repeat;*/
+	/*cursor: pointer;
+	 float: left;
+	 height: 40px;
+	 margin: 2% 0 0 2%;
+	 width: 36px;*/
 	cursor: pointer;
 	float: left;
-	height: 40px;
-	margin: 2% 0 0 2%;
+	height: 37px;
+	margin-top: 1%;
 	width: 36px;
 }
 #feedbackSub .home {
@@ -997,19 +1001,34 @@ img, object {
 	margin: 6% 0 0 2%;
 }
 .logout {
-	background-image: url("/assets/ic_logoff_yellow.png");
-	background-position: 0 0;
-	background-repeat: no-repeat;
+	/*background-image: url("/assets/ic_logoff_yellow.png");*/
+	/*background-position: 0 0;*/
+	/*background-repeat: no-repeat;*/
 	cursor: pointer;
 	float: right;
 	height: 37px;
-	width: 37px;
+	width: 32px;
 	margin-top: 2%;
 }
 .homeImg img {
-	max-height: 90%;
-	max-width: 75%;
+	/*max-height: 90%;
+	max-width: 75%;*/
+	height: 35px;
 }
+#settings .calender {
+	/*background-image: url(
+	 );
+	 background-position: 0 0;
+	 background-repeat: no-repeat;*/
+	/*cursor: pointer;
+	 float: right;
+	 height: 39px;
+	 margin-top: 2%;
+	 width: 45px;*/
+	height: 31px;
+	margin-bottom: 15%;
+}
+
 .home img {
 	margin-top: 14%;
 }
@@ -1232,8 +1251,8 @@ img, object {
 	text-align: center;
 	font-weight: normal;
 }
-.saveDiv .ui-btn-up-a , .ui-btn-hover-a{
-	background:#F5C03F !important;
+.saveDiv .ui-btn-up-a, .ui-btn-hover-a {
+	background: #F5C03F !important;
 }
 
 #settings .dateDiv input:-ms-input-placeholder {
@@ -1261,7 +1280,7 @@ img, object {
 	font-size: 148%;
 	font-weight: normal;
 	letter-spacing: 2px;
-	font-family:'Roboto',sans-serif !important;
+	font-family: 'Roboto', sans-serif !important;
 }
 .profileTextBottom {
 	padding: 1.2% !important;
@@ -1514,19 +1533,19 @@ img, object {
 
 .searchIcon {
 	/*background-image: url("/assets/ic_search_purple.png");
+	 background-position: 0 0;
+	 cursor: pointer;
+	 float: right;
+	 height: 39px;
+	 margin: 0% 0 0;
+	 width: 39px;*/
+	background-image: url("/assets/ic_search_purple.png");
 	background-position: 0 0;
 	cursor: pointer;
 	float: right;
-	height: 39px;
-	margin: 0% 0 0;
-	width: 39px;*/
-	background-image: url("/assets/ic_search_purple.png");
-    background-position: 0 0;
-    cursor: pointer;
-    float: right;
-    height: 33px;
-    margin: 0.9% 0 0;
-    width: 29px;
+	height: 33px;
+	margin: 0.9% 0 0;
+	width: 29px;
 }
 #signUp .ui-field-contain .ui-input-search, .ui-field-contain div.ui-input-text {
 	background: none repeat scroll 0 0 #FFFFFF;
@@ -1607,8 +1626,8 @@ img, object {
 .saveDiv .ui-corner-all, .saveDiv .ui-btn-corner-all {
 	border-radius: 0;
 	border: medium none;
-	 font-size: 50%;
-	 margin: 1.8% 0;
+	font-size: 50%;
+	margin: 1.8% 0;
 }
 .settingDiv .ui-slider-switch .ui-btn.ui-slider-handle {
 	margin: 2px 0 0 -14px;
@@ -1698,9 +1717,21 @@ img, object {
 
 .enter_code {
 	/*margin: 7% 3%;*/
-	margin: 4% 3%;
+	margin: 3% 3%;
 	font-size: 114%;
 }
+
+.enter_code span {
+	font-size: 86%;
+}
+
+.feedbackIcons {
+	height: 69px;
+}
+.feedbackIconsAmb {
+	height: 48px;
+}
+
 .loginDiv {
 	/*border: 1px solid #D9A432 !important;*/
 	border-radius: 10px;
@@ -1738,11 +1769,11 @@ img, object {
 	overflow: hidden;
 }
 
-#restaurantList .footDummyDiv{
-	width:99.9%;
+#restaurantList .footDummyDiv {
+	width: 99.9%;
 }
-#restaurantList{
-	height:594px !important;
+#restaurantList {
+	height: 594px !important;
 }
 .forgotPass {
 }
@@ -1995,18 +2026,16 @@ img, object {
 .logo_btm {
 	/*bottom: 0;*/
 	/*position: relative;
-	clear: both;*/
+	 clear: both;*/
 	/* background: url("/assets/login_bird.png") no-repeat scroll left center / auto 100% transparent;*/
-    height: 67px;
-    text-align: left;
-}
-
-#feedbackSub .logo_btm{
-	height:70px;
+	height: 67px;
 	text-align: left;
 }
 
-
+#feedbackSub .logo_btm {
+	height: 70px;
+	text-align: left;
+}
 
 /**Restaurant Info**/
 .rest_name {
@@ -2016,6 +2045,15 @@ img, object {
 #showRestaurant .rest_info img {
 	vertical-align: middle;
 }
+
+.showRestIcons {
+	height: 33px;
+}
+/*.showRestIcons1{
+ height: 35px;
+ width: 35px;
+ }*/
+
 #showRestaurant .rest_info {
 	border-bottom: 1px solid #FFFFFF;
 	text-align: left;
@@ -2083,10 +2121,15 @@ img, object {
 
 .fblogin img {
 	/*width: 2.3em;*/
-	width: 40px;
+	/*width: 40px;
 	padding-top: 0.5%;
 	float: left;
-	vertical-align: top;
+	vertical-align: top;*/
+	float: left;
+    height: 31px;
+    padding-top: 1.2%;
+    vertical-align: top;
+    width: 28px;
 }
 
 .fblogin div {
@@ -2123,13 +2166,14 @@ img, object {
 	font-size: 120%;
 }
 
-
 /* Retina changes */
 
-/*.feedback img{
-	width: 50px;
+.backArrow {
+	height: 16px;
+	width:10px;
 }
 
-.redeems img{
-	width: 65px;
-}*/
+.feedbackSocialIcons{
+	height: 40px;
+}
+

@@ -11,15 +11,21 @@ background-image: url("/assets/icon_Setting.svg");
     width: 45px;
 }
 .calender{
-background-image: url(<%= asset_path 'ic_calender_yellow.png' %>
+/*background-image: url(
 	);
 	background-position: 0 0;
-	background-repeat: no-repeat;
-	cursor: pointer;
+	background-repeat: no-repeat;*/
+	/*cursor: pointer;
 	float: right;
 	height: 39px;
 	margin-top: 2%;
-	width: 45px;
+	width: 45px;*/
+	cursor: pointer;
+    float: right;
+    height: 39px;
+    margin-top: 1.2%;
+    margin-right: 1%;
+    width: 45px;
 	}
 	</style>
 	<div data-role="content">
@@ -77,7 +83,8 @@ background-image: url(<%= asset_path 'ic_calender_yellow.png' %>
 				</div>
 				<div class="yellowBack" ng-click="redeemPoints()" style="border-right: medium none;">
 					<div class="redeems">
-						<%= image_tag 'b_redeem_points.png' %>
+						<img src="/assets/icon_redeempoints.svg" style="height: 50px;" />
+						<!-- <%= image_tag 'b_redeem_points.png' %> -->
 						<!-- <img src="http://www.html5rocks.com/static/demos/svgmobile_fundamentals/images/HTML5-logo-granim.svg" height="64" alt="Nice green circle"/> -->
 					</div>
 					<span class="feedbackTxt">REDEEM POINTS</span>
@@ -98,7 +105,8 @@ background-image: url(<%= asset_path 'ic_calender_yellow.png' %>
 				</div>
 				<div class="clr"></div>
 			</div>
-			<div class="calender"></div>
+			<!-- <div class="calender"></div> -->
+			<img src="/assets/icon_redeem_calender.svg" class="calender" />
 			<div class="clr"></div>
 		</div>
 </div>
