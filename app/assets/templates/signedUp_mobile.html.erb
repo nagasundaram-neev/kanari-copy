@@ -1,27 +1,27 @@
 <div data-role="page" data-theme="b" id="signedUp" ng-controller="signedUpController">
 	<div data-role="content">
-		<div class="username">
+		<div class="signedUpCls">
 			<div class="signUp">
-				You're signed up!
+				You're almost there...
 			</div>
 		</div>
-		<div class="mainDiv">
-			<span class="thanks">Thanks for signing up to Kanari!</span>
-			<div class="signedUpBrdr"></div>
+		<div class="outerDiv mainDiv">
+			<span class="secondDiv thanks">Thanks for signing up!</span>
+			<!-- <div class="signedUpBrdr"></div>
 			<div class="secondDiv">
-				<div>
-					You are now ready to start earning points in return for leaving valuable feedback to restaurants.
-				</div>
-				<div class="trustUs">
-					Trust us, you will really appreciate it.
-				</div>
+			<div>
+			You are now ready to start earning points in return for leaving valuable feedback to restaurants.
+			</div>
+			<div class="trustUs">
+			Trust us, you will really appreciate it.
+			</div>
 			</div>
 			<div>
-				But First!
+			But First!
 			</div>
-			<div class="signedUpBrdr"></div>
+			<div class="signedUpBrdr"></div> -->
 			<div class="secondDiv">
-				A confirmation email has been sent to your email address, please click the link to confirm your account...
+				We've sent a confirmation email to address you provided, just click on the link to get started.
 			</div>
 			<div class="proceedBtn">
 				<input type="button" class="signBtn" ng-click="proceedAccount()" data-inline="true" value="Proceed to My Account"/>
@@ -30,3 +30,16 @@
 		<p class="errorMsg" ng-show="errorMsg"></p>
 		<p ng-hide="errorMsg"></p>
 	</div>
+	<div data-role="footer">
+		<div class="tooltipCls">
+			<!-- <div class="birdTooltip">
+				Don't forget to confirm your account!
+			</div>
+			<div class="birdTooltiparrow-down">
+				&nbsp;
+			</div> -->
+			<img src="/assets/blurb_forget.svg" class="logo_btm" />
+		</div>
+		<img src="/assets/login_bird.png" class="logo_btm" />
+	</div>
+</div>

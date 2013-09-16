@@ -2821,9 +2821,12 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						custLegend1 = "Positive";
 						custLegend2 = "Neutral";
 						custLegend3 = "Negative";
-						$scope.positive = data.feedback_trends.statistics.food_quality.like;
-						$scope.neutral = data.feedback_trends.statistics.food_quality.neutral;
-						$scope.negative = data.feedback_trends.statistics.food_quality.dislike;
+						$scope.positive = data.feedback_trends.summary.customer_experience.food_quality.like.over_period;
+						$scope.neutral = data.feedback_trends.summary.customer_experience.food_quality.neutral.over_period;
+						$scope.negative = data.feedback_trends.summary.customer_experience.food_quality.dislike.over_period;
+						$scope.positiveChange = data.feedback_trends.summary.customer_experience.food_quality.like.change_in_points;
+						$scope.neutralChange = data.feedback_trends.summary.customer_experience.food_quality.neutral.change_in_points;
+						$scope.negativeChange = data.feedback_trends.summary.customer_experience.food_quality.dislike.change_in_points;
 					} else if (idValue == "speed") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].speed_of_service.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].speed_of_service.neutral;
@@ -2833,9 +2836,12 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						custLegend1 = "Positive";
 						custLegend2 = "Neutral";
 						custLegend3 = "Negative";
-						$scope.positive = data.feedback_trends.statistics.speed_of_service.like;
-						$scope.neutral = data.feedback_trends.statistics.speed_of_service.neutral;
-						$scope.negative = data.feedback_trends.statistics.speed_of_service.dislike;
+						$scope.positive = data.feedback_trends.summary.customer_experience.speed_of_service.like.over_period;
+						$scope.neutral = data.feedback_trends.summary.customer_experience.speed_of_service.neutral.over_period;
+						$scope.negative = data.feedback_trends.summary.customer_experience.speed_of_service.dislike.over_period;
+						$scope.positiveChange = data.feedback_trends.summary.customer_experience.speed_of_service.like.change_in_points;
+						$scope.neutralChange = data.feedback_trends.summary.customer_experience.speed_of_service.neutral.change_in_points;
+						$scope.negativeChange = data.feedback_trends.summary.customer_experience.speed_of_service.dislike.change_in_points;
 					} else if (idValue == "friendly") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].friendliness_of_service.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].friendliness_of_service.neutral;
@@ -2845,9 +2851,12 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						custLegend1 = "Positive";
 						custLegend2 = "Neutral";
 						custLegend3 = "Negative";
-						$scope.positive = data.feedback_trends.statistics.friendliness_of_service.like;
-						$scope.neutral = data.feedback_trends.statistics.friendliness_of_service.neutral;
-						$scope.negative = data.feedback_trends.statistics.friendliness_of_service.dislike;
+						$scope.positive = data.feedback_trends.summary.customer_experience.friendliness_of_service.like.over_period;
+						$scope.neutral = data.feedback_trends.summary.customer_experience.friendliness_of_service.neutral.over_period;
+						$scope.negative = data.feedback_trends.summary.customer_experience.friendliness_of_service.dislike.over_period;
+						$scope.positiveChange = data.feedback_trends.summary.customer_experience.friendliness_of_service.like.change_in_points;
+						$scope.neutralChange = data.feedback_trends.summary.customer_experience.friendliness_of_service.neutral.change_in_points;
+						$scope.negativeChange = data.feedback_trends.summary.customer_experience.friendliness_of_service.dislike.change_in_points;
 					} else if (idValue == "ambiance") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].ambience.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].ambience.neutral;
@@ -2857,9 +2866,12 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						custLegend1 = "Positive";
 						custLegend2 = "Neutral";
 						custLegend3 = "Negative";
-						$scope.positive = data.feedback_trends.statistics.ambience.like;
-						$scope.neutral = data.feedback_trends.statistics.ambience.neutral;
-						$scope.negative = data.feedback_trends.statistics.ambience.dislike;
+						$scope.positive = data.feedback_trends.summary.customer_experience.ambience.like.over_period;
+						$scope.neutral = data.feedback_trends.summary.customer_experience.ambience.neutral.over_period;
+						$scope.negative = data.feedback_trends.summary.customer_experience.ambience.dislike.over_period;
+						$scope.positiveChange = data.feedback_trends.summary.customer_experience.ambience.like.change_in_points;
+						$scope.neutralChange = data.feedback_trends.summary.customer_experience.ambience.neutral.change_in_points;
+						$scope.negativeChange = data.feedback_trends.summary.customer_experience.ambience.dislike.change_in_points;
 					} else if (idValue == "cleanly") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].cleanliness.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].cleanliness.neutral;
@@ -2869,9 +2881,12 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						custLegend1 = "Positive";
 						custLegend2 = "Neutral";
 						custLegend3 = "Negative";
-						$scope.positive = data.feedback_trends.statistics.cleanliness.like;
-						$scope.neutral = data.feedback_trends.statistics.cleanliness.neutral;
-						$scope.negative = data.feedback_trends.statistics.cleanliness.dislike;
+						$scope.positive = data.feedback_trends.summary.customer_experience.cleanliness.like.over_period;
+						$scope.neutral = data.feedback_trends.summary.customer_experience.cleanliness.neutral.over_period;
+						$scope.negative = data.feedback_trends.summary.customer_experience.cleanliness.dislike.over_period;
+						$scope.positiveChange = data.feedback_trends.summary.customer_experience.cleanliness.like.change_in_points;
+						$scope.neutralChange = data.feedback_trends.summary.customer_experience.cleanliness.neutral.change_in_points;
+						$scope.negativeChange = data.feedback_trends.summary.customer_experience.cleanliness.dislike.change_in_points;
 					} else if (idValue == "moneyVal") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].value_for_money.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].value_for_money.neutral;
@@ -2881,9 +2896,12 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						custLegend1 = "Positive";
 						custLegend2 = "Neutral";
 						custLegend3 = "Negative";
-						$scope.positive = data.feedback_trends.statistics.value_for_money.like;
-						$scope.neutral = data.feedback_trends.statistics.value_for_money.neutral;
-						$scope.negative = data.feedback_trends.statistics.value_for_money.dislike;
+						$scope.positive = data.feedback_trends.summary.customer_experience.value_for_money.like.over_period;
+						$scope.neutral = data.feedback_trends.summary.customer_experience.value_for_money.neutral.over_period;
+						$scope.negative = data.feedback_trends.summary.customer_experience.value_for_money.dislike.over_period;
+						$scope.positiveChange = data.feedback_trends.summary.customer_experience.value_for_money.like.change_in_points;
+						$scope.neutralChange = data.feedback_trends.summary.customer_experience.value_for_money.neutral.change_in_points;
+						$scope.negativeChange = data.feedback_trends.summary.customer_experience.value_for_money.dislike.change_in_points;
 					}
 					/** Customer Experience End**/
 
@@ -2899,9 +2917,12 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						custLegend1 = "% Promoters";
 						custLegend2 = "passives";
 						custLegend3 = "detractors";
-						$scope.positive = data.feedback_trends.statistics.cumulative_promoter_score.like;
-						$scope.neutral = data.feedback_trends.statistics.cumulative_promoter_score.neutral;
-						$scope.negative = data.feedback_trends.statistics.cumulative_promoter_score.dislike;
+						$scope.positive = data.feedback_trends.summary.net_promoter_score.promoters.over_period;
+						$scope.neutral = data.feedback_trends.summary.net_promoter_score.passives.over_period;
+						$scope.negative = data.feedback_trends.summary.net_promoter_score.detractors.over_period;
+						$scope.positiveChange = data.feedback_trends.summary.net_promoter_score.promoters.change_in_points;
+						$scope.neutralChange = data.feedback_trends.summary.net_promoter_score.passives.change_in_points;
+						$scope.negativeChange = data.feedback_trends.summary.net_promoter_score.detractors.change_in_points;
 						$scope.custExpSummary = true;
 						$scope.NPSSummary = false;
 						$scope.feedbackCount = false;
@@ -2914,10 +2935,10 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						usageLegend = "Net Promoter Score";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
 						yAxisVal = "Net Promoter Score [limit axes to -100 & +100]";
-						$scope.positive = data.feedback_trends.statistics.cumulative_promoter_score.like;
-						$scope.neutral = data.feedback_trends.statistics.cumulative_promoter_score.neutral;
-						$scope.negative = data.feedback_trends.statistics.cumulative_promoter_score.dislike;
-						$scope.noOfFeedback = data.feedback_trends.statistics.usage.feedbacks_count;
+						$scope.NPS = data.feedback_trends.summary.net_promoter_score.score.over_period;
+						$scope.NPSChange = data.feedback_trends.summary.net_promoter_score.score.change_in_points;
+						$scope.noOfFeedback = data.feedback_trends.summary.net_promoter_score.feedbacks_count.over_period;
+						$scope.noOfFeedbackChange = data.feedback_trends.summary.net_promoter_score.feedbacks_count.change_in_percentage;
 						$scope.custExpSummary = false;
 						$scope.NPSSummary = true;
 						$scope.feedbackCount = false;
@@ -2930,7 +2951,9 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					/**Usage start**/
 					else if (idValue == "feedbackSubmit") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].usage.feedbacks_count;
-						$scope.noOfFeedback = data.feedback_trends.statistics.usage.feedbacks_count;
+						$scope.noOfFeedback = data.feedback_trends.summary.feedbacks_count.over_period;
+						$scope.noOfFeedbackPerDay = data.feedback_trends.summary.feedbacks_count.average_per_day;
+						$scope.noOfFeedbackChange = data.feedback_trends.summary.feedbacks_count.change_in_percentage;
 						$scope.custExpSummary = false;
 						$scope.NPSSummary = false;
 						$scope.feedbackCount = true;
@@ -2943,7 +2966,9 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						yAxisVal = "Number of submissions";
 					} else if (idValue == "redemProc") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].usage.redemptions_count;
-						$scope.noOfFeedback = data.feedback_trends.statistics.usage.redemptions_count;
+						$scope.noOfFeedback = data.feedback_trends.summary.redemptions_count.over_period;
+						$scope.noOfFeedbackPerDay = data.feedback_trends.summary.redemptions_count.average_per_day;
+						$scope.noOfFeedbackChange = data.feedback_trends.summary.redemptions_count.change_in_percentage;
 						$scope.custExpSummary = false;
 						$scope.NPSSummary = false;
 						$scope.feedbackCount = true;
@@ -2982,7 +3007,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						yAxisVal = "Points Issued";
 					} else if (idValue == "rewardsPool") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].usage.rewards_pool;
-						$scope.rewardPoolCount = data.feedback_trends.statistics.usage.rewards_pool;
+						$scope.rewardPoolCount = data.feedback_trends.summary.rewards_pool.over_period;
+						$scope.rewardPoolCountChange = data.feedback_trends.summary.rewards_pool.change_in_percentage;
 						$scope.custExpSummary = false;
 						$scope.NPSSummary = false;
 						$scope.feedbackCount = false;
@@ -3000,8 +3026,10 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					else if (idValue == "demographics") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].customers.male;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].customers.female;
-						$scope.maleCount = data.feedback_trends.statistics.customers.male;
-						$scope.femaleCount = data.feedback_trends.statistics.customers.female;
+						$scope.maleCount = data.feedback_trends.summary.demographics.male.over_period;
+						$scope.maleCountChange = data.feedback_trends.summary.demographics.male.change_in_points;
+						$scope.femaleCount = data.feedback_trends.summary.demographics.female.over_period;
+						$scope.femaleCountChange = data.feedback_trends.summary.demographics.female.change_in_points;
 						$scope.custExpSummary = false;
 						$scope.NPSSummary = false;
 						$scope.feedbackCount = false;
@@ -3016,8 +3044,12 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					} else if (idValue == "usersGraph") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].customers.new_users;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].customers.returning_users;
-						$scope.newUser = data.feedback_trends.statistics.customers.new_users;
-						$scope.retUser = data.feedback_trends.statistics.customers.returning_users;
+						$scope.newUser = data.feedback_trends.summary.users.new.over_period;
+						$scope.newUserPerDay = data.feedback_trends.summary.users.new.average_per_day;
+						$scope.newUserChange = data.feedback_trends.summary.users.new.change_in_percentage;
+						$scope.retUser = data.feedback_trends.summary.users.returning.over_period;
+						$scope.retUserPerDay = data.feedback_trends.summary.users.returning.average_per_day;
+						$scope.retUserChange = data.feedback_trends.summary.users.returning.change_in_percentage;
 						$scope.custExpSummary = false;
 						$scope.NPSSummary = false;
 						$scope.feedbackCount = false;
@@ -3040,7 +3072,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					// }
 					else if (idValue == "chequeSize") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].average_bill_amount;
-						$scope.rewardPoolCount = data.feedback_trends.statistics.average_bill_amount;
+						$scope.rewardPoolCount = data.feedback_trends.summary.average_bill_size.over_period;
+						$scope.rewardPoolCountChange = data.feedback_trends.summary.average_bill_size.change_in_percentage;
 						$scope.custExpSummary = false;
 						$scope.NPSSummary = false;
 						$scope.feedbackCount = false;
@@ -3160,7 +3193,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						rotation : -90,
 						style : {
 							fontSize : '10px',
-							fontColor : '#7C7A7D'
+							fontColor : '#7C7A7D',
+							fontFamily: 'Open Sans'
 						}
 					}
 				},
@@ -3230,7 +3264,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						align : 'right',
 						style : {
 							fontSize : '10px',
-							fontColor : '#7C7A7D'
+							fontColor : '#7C7A7D',
+							 fontFamily: 'Open Sans'
 						}
 					},
 					title : {
@@ -3286,7 +3321,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						align : 'right',
 						style : {
 							fontSize : '10px',
-							fontColor : '#7C7A7D'
+							fontColor : '#7C7A7D',
+							 fontFamily: 'Open Sans'
 						}
 					},
 					title : {
@@ -3355,7 +3391,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						rotation : -90,
 						style : {
 							fontSize : '10px',
-							fontColor : '#7C7A7D'
+							fontColor : '#7C7A7D',
+							 fontFamily: 'Open Sans'
 						}
 					},
 					title : {
