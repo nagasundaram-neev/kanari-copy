@@ -1178,6 +1178,9 @@ img, object {
 	padding: 0 !important;
 	text-shadow: none;
 }
+#signedUp .ui-footer{
+	 background: none repeat scroll 0 0 #F9C040 !important;
+}
 #signedUp .signUp {
 	font-size: 170%;
 	margin: 10% 0;
