@@ -1,14 +1,14 @@
 <div data-role="page" data-theme="b" id="home" ng-controller="homeController">
 	<style>
 .setting {
-background-image: url("/assets/icon_Setting.svg");
+/*background-image: url("/assets/icon_Setting.svg");
     background-position: 0 3px;
     background-repeat: no-repeat;
-    background-size: 43px 42px;
+    background-size: 43px 42px;*/
     cursor: pointer;
     float: right;
-    height: 47px;
-    width: 45px;
+    height: 35px;
+    margin-top: 1%;
 }
 .calender{
 /*background-image: url(
@@ -22,15 +22,15 @@ background-image: url("/assets/icon_Setting.svg");
 	width: 45px;*/
 	cursor: pointer;
     float: right;
-    height: 39px;
-    margin-top: 1.2%;
+    height: 35px;
     margin-right: 1%;
-    width: 45px;
+    margin-top: 2.4%;
 	}
 	</style>
 	<div data-role="content">
 		<div class="username">
-			<div class="setting" ng-click="setting()"></div>
+			<!-- <div class="setting" ng-click="setting()"></div> -->
+			<img class="setting" src="/assets/icon_Setting.svg" ng-click="setting()" />
 			<a ng-click="homeClk()">{{userName}}</a>
 			<span class="role">{{role}}</span>
 			<div class="clr"></div>

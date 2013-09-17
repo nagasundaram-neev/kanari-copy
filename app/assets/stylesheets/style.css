@@ -991,10 +991,9 @@ img, object {
 	 margin: 2% 0 0 2%;
 	 width: 36px;*/
 	cursor: pointer;
-	float: left;
-	height: 37px;
-	margin-top: 1%;
-	width: 36px;
+    float: left;
+    height: 35px;
+    margin-top: 1%;
 }
 #feedbackSub .home {
 	height: 38px;
@@ -1005,10 +1004,9 @@ img, object {
 	/*background-position: 0 0;*/
 	/*background-repeat: no-repeat;*/
 	cursor: pointer;
-	float: right;
-	height: 37px;
-	width: 32px;
-	margin-top: 2%;
+    float: right;
+    height: 35px;
+    margin-top: 1%;
 }
 .homeImg img {
 	/*max-height: 90%;
@@ -1025,8 +1023,8 @@ img, object {
 	 height: 39px;
 	 margin-top: 2%;
 	 width: 45px;*/
-	height: 31px;
-	margin-bottom: 15%;
+	height: 35px;
+    margin-bottom: 11%;
 }
 
 .home img {
@@ -1543,9 +1541,12 @@ img, object {
 }
 
 .signUp {
-	text-align: center;
+	/*text-align: center;
 	margin: 3% 0;
-	font-size: 20px;
+	font-size: 20px;*/
+	 font-size: 20px;
+    margin: 2.5% 0;
+    text-align: center;
 }
 #restaurantList .signUp, #showRestaurant .signUp {
 	margin: 2.6 0 0;
@@ -1738,9 +1739,13 @@ img, object {
 .outerDiv {
 	/*margin: 5% 0 0 3%;*/
 	width: 100%;
+	/*line-height: 19px;*/
 	text-align: center;
 	text-shadow: none;
 	color: #593F5A;
+}
+#feedback_step2 .outerDiv{
+	line-height:19px;
 }
 .keypad {
 	margin: 2% 0 3% 3%;
@@ -1751,7 +1756,7 @@ img, object {
 }
 
 #feedback_step2 .keypad {
-	height: 420px;
+	/*height: 420px;*/
 	width: 100%;
 	margin: 2% 0 3%;
 }
@@ -1767,7 +1772,7 @@ img, object {
 }
 
 .feedbackIcons {
-	height: 69px;
+	height: 60px;
 }
 .feedbackIconsAmb {
 	height: 48px;
@@ -2023,7 +2028,7 @@ img, object {
 	text-shadow: none;
 }
 #home .username {
-	padding: 0.2em
+	/*padding: 0.2em*/
 }
 .username a {
 	text-decoration: none;
@@ -2091,7 +2096,7 @@ img, object {
 }
 
 .showRestIcons {
-	height: 33px;
+	height: 32px;
 }
 /*.showRestIcons1{
  height: 35px;
