@@ -23,35 +23,47 @@
 		<div ng-show="userLogin" class="userloggedIn" id="header_menu" class="navbar" ng-controller="headerCtrl">
 			<div data-role="controlgroup" data-type="horizontal">
 				<div class="headerDiv">
-					<a id="feedback" href="#/feedback" class="ui_btn"  data-role="button" ><%= image_tag 'ic_feedback.png' %>
+					<a id="feedback" href="#/feedback" class="ui_btn"  data-role="button" >
+						<!--<%= image_tag 'ic_feedback.png' %>-->
+						<%= image_tag( '/assets/icon_feedback.svg', height: '59') %>
 					<br/>
 					Feedback
 					<br/>
 					<span class="arrow-down">&nbsp;</span> </a>
 				</div>
 				<div class="headerDiv">
-					<a id="insights" href="#/insights" class="ui_btn"  data-role="button"><%= image_tag 'ic_insights.png' %>
+					<a id="insights" href="#/insights" class="ui_btn"  data-role="button">
+						<!--<%= image_tag 'ic_insights.png' %>-->
+						<%= image_tag( '/assets/icon_insights.svg', height: '59') %>
 					<br/>
 					Insights
 					<br/>
 					<span class="arrow-down">&nbsp;</span> </a>
 				</div>
 				<div class="headerDiv">
-					<a id="redemption" href="#/redemption" class="ui_btn"   data-role="button"><%= image_tag 'ic_redemptions.png' %>
+					<a id="redemption" href="#/redemption" class="ui_btn"   data-role="button">
+						<!--<%= image_tag 'ic_redemptions.png' %>-->
+						<%= image_tag( '/assets/icon_redeemptions.svg', height: '59') %>
 					<br/>
 					Redemptions
 					<br/>
 					<span class="arrow-down">&nbsp;</span> </a>
 				</div>
 				<div class="headerDiv">
-					<a id="numeric_code" href="#/numeric_code" class="ui_btn" data-role="button"><%= image_tag 'ic_code.png' %>
+					<a id="numeric_code" href="#/numeric_code" class="ui_btn" data-role="button">
+						<!--<%= image_tag 'ic_code.png' %>-->
+						<%= image_tag( '/assets/icon_code.svg', height: '59') %>
 					<br/>
 					Code
 					<br/>
 					<span class="arrow-down">&nbsp;</span> </a>
 				</div>
 				<div class="logoutDiv">
-					<a href="javascript:void(0)" class="logOut ui_btn" ng-click="showPopup()" data-role="button"><%= image_tag 'ic_logout.png' %></a>
+					<a href="javascript:void(0)" class="logOut ui_btn" ng-click="showPopup()" data-role="button">
+						<!--<%= image_tag 'ic_logout.png' %>-->
+						<%= image_tag( '/assets/icon_logout_tab.svg', height: '29') %>
+					</a>
+						
 				</div>
 			</div>
 		</div>
@@ -73,7 +85,7 @@
 		</div>
 		<div class="clr"></div>
 		<div id="overlaySuccess">
-			<img src="/assets/ajax-loader.gif">
+			<img src="/assets/ajaxloader.gif">
 		</div>
 		<div id="wrapper" class="ngView scrollable" ng-view></div>
 	</body>
