@@ -61,7 +61,9 @@ body {
 	font-size: 12px;
 }
 .span12 a.kanarilogo img {
-	margin-top: 5px;
+	margin-top: 6px;
+	height: 35px;
+    width: 210px;
 }
 .welcome a {
 	text-decoration: none;
