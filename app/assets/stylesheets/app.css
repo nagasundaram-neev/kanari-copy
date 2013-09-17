@@ -1496,7 +1496,7 @@ input {
 .chart_div {
 	float: left;
 	width: 900px;
-	margin: 0 20px;
+	margin: 0 20px 20px;
 }
 .chart_heading {
 	display: block;
@@ -1519,22 +1519,29 @@ input {
 .custExpSummary {
 	border: 1px solid #CCCCCC;
 	overflow: hidden;
-	width: 583px;
+	width: 610px;
 	margin: 10px 20px;
+}
+
+.custExpSummary div.custExpDiv {
+	border-bottom: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC;
+	float: left;
+	height: 15px;
+	/*padding: 10px 5px;*/
+	padding:5px 5px 15px;
+	width: 110px;
+}
+.tooltip-inner {
+     white-space: pre-line;
+     max-width:230px !important;
+     padding:10px 5px !important;
 }
 .custExpSummary div.colno1 {
 	width: 250px;
 }
 .custExpSummary div.colno3 {
-	width: 201px;
-}
-.custExpSummary div {
-	border-bottom: 1px solid #CCCCCC;
-	border-right: 1px solid #CCCCCC;
-	float: left;
-	height: 15px;
-	padding: 10px 5px;
-	width: 100px;
+	width: 218px;
 }
 /**** Dashboard Trends End ****/
 

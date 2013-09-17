@@ -2813,6 +2813,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					dateV = Object.keys($scope.trendsList)[i];
 					/** Customer Experience Start**/
 					if (idValue == "food") {
+						$scope.selectedOption = "";
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].food_quality.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].food_quality.neutral;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].food_quality.dislike;
@@ -2828,6 +2829,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.neutralChange = data.feedback_trends.summary.customer_experience.food_quality.neutral.change_in_points;
 						$scope.negativeChange = data.feedback_trends.summary.customer_experience.food_quality.dislike.change_in_points;
 					} else if (idValue == "speed") {
+						$scope.selectedOption = "";
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].speed_of_service.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].speed_of_service.neutral;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].speed_of_service.dislike;
@@ -2843,6 +2845,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.neutralChange = data.feedback_trends.summary.customer_experience.speed_of_service.neutral.change_in_points;
 						$scope.negativeChange = data.feedback_trends.summary.customer_experience.speed_of_service.dislike.change_in_points;
 					} else if (idValue == "friendly") {
+						$scope.selectedOption = "";
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].friendliness_of_service.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].friendliness_of_service.neutral;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].friendliness_of_service.dislike;
@@ -2858,6 +2861,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.neutralChange = data.feedback_trends.summary.customer_experience.friendliness_of_service.neutral.change_in_points;
 						$scope.negativeChange = data.feedback_trends.summary.customer_experience.friendliness_of_service.dislike.change_in_points;
 					} else if (idValue == "ambiance") {
+						$scope.selectedOption = "";
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].ambience.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].ambience.neutral;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].ambience.dislike;
@@ -2873,6 +2877,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.neutralChange = data.feedback_trends.summary.customer_experience.ambience.neutral.change_in_points;
 						$scope.negativeChange = data.feedback_trends.summary.customer_experience.ambience.dislike.change_in_points;
 					} else if (idValue == "cleanly") {
+						$scope.selectedOption = "";
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].cleanliness.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].cleanliness.neutral;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].cleanliness.dislike;
@@ -2888,6 +2893,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.neutralChange = data.feedback_trends.summary.customer_experience.cleanliness.neutral.change_in_points;
 						$scope.negativeChange = data.feedback_trends.summary.customer_experience.cleanliness.dislike.change_in_points;
 					} else if (idValue == "moneyVal") {
+						$scope.selectedOption = "";
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].value_for_money.like;
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].value_for_money.neutral;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].value_for_money.dislike;
@@ -2911,6 +2917,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.neutral;
 						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.dislike;
 						npsBreakdownV = 1;
+						$scope.selectedOption = "npsBreakdown";
 						//graphType = "area";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
 						yAxisVal = "Number of submissions (100%)";

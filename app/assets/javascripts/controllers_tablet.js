@@ -210,6 +210,7 @@ module.controller('signInController', function($scope, $http, $location) {
 	$("#wrapper").removeClass("clsafterLogin");
 	$("#wrapper").addClass("clsforLogin");
 	$(".userloggedIn").hide();
+	$('#overlaySuccess img').hide();
 	$scope.chkLogin = function() {
 		if ($scope.email == "" && $scope.password == "" && !$scope.email && !$scope.password) {
 			console.log("email is blank");
