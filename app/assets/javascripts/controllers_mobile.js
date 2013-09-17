@@ -133,7 +133,7 @@ var facebookFlag = 0;
 //var logOut = 0;
 var flagPage = 0;
 var iphoneFlag = 0;
-
+var footerFlag = 0;
 module.controller('loginController', function($scope, $http, $location) {
 	console.log("under login controller")
 
@@ -146,6 +146,7 @@ module.controller('loginController', function($scope, $http, $location) {
 	$scope.email = "";
 	if (getCookie("authToken")) {
 		flagPage = 0;
+		footerFlag = 0;
 		$location.url("/home");
 	} else {
 		$scope.chkLogin = function() {
@@ -232,6 +233,7 @@ module.controller('forgotPasswordController', function($scope, $http, $location)
 		$location.url("/login");
 	};
 	flagPage = 0;
+	footerFlag = 0;
 	$scope.home = function() {
 		$location.url("/index");
 	};
@@ -270,6 +272,7 @@ module.controller('forgotPasswordController', function($scope, $http, $location)
 module.controller('resetPassController', function($scope, $http, $location, $routeParams) {
 
 	flagPage = 0;
+	footerFlag = 0;
 	$scope.erromsg = false;
 	$scope.resetPass = function() {
 		//alert($routeParams.reset_password_token);
@@ -307,6 +310,7 @@ module.controller('homeController', function($scope, $http, $location) {
 	console.log("sign in Count" + getCookie("signInCount"));
 	if (getCookie("authToken")) {
 		flagPage = 0;
+		footerFlag = 0;
 		console.log("in home ctrl " + getCookie("authToken"));
 		$scope.getUserData = function() {
 			var param = {
@@ -429,6 +433,7 @@ module.controller('homeController', function($scope, $http, $location) {
 module.controller('commonCtrl', function($scope, $http, $location) {
 	//$location.url('/home');
 	flagPage = 0;
+	footerFlag = 0;
 	$scope.emailCLick = function() {
 		$location.url("/login");
 	};
@@ -444,6 +449,7 @@ module.controller('signUpController', function($scope, $http, $location) {
 
 	$scope.confPassword = "";
 	flagPage = 0;
+	footerFlag = 0;
 	console.log("flag" + feedbackFlag);
 	if (feedbackFlag == 1) {
 		$scope.feedBackMsg = true;
@@ -508,6 +514,7 @@ module.controller('signedUpController', function($scope, $http, $location) {
 	$scope.email = getCookie('email');
 	$scope.password = getCookie('password');
 	flagPage = 0;
+	footerFlag = 0;
 	$scope.proceedAccount = function() {
 		$location.url("/home");
 		//$location.url("/login");
@@ -519,6 +526,7 @@ module.controller('changePasswordController', function($scope, $http, $location)
 		$location.url("/settings");
 	};
 	flagPage = 0;
+	footerFlag = 0;
 	$scope.changePassword = function() {
 		if (!$scope.newPassword || !$scope.confirmPassword) {
 			$scope.error = "Password fields can't be blank";
@@ -559,10 +567,12 @@ module.controller('changePasswordController', function($scope, $http, $location)
 
 });
 
+
 module.controller('settingsController', function($scope, $http, $location) {
 
 	if (getCookie('authToken')) {
 		flagPage = 0;
+		footerFlag = 1;
 		if (getCookie('facebookFlag')) {
 			$scope.changePass = false;
 		} else {
@@ -685,18 +695,6 @@ module.controller('settingsController', function($scope, $http, $location) {
 				method : 'delete',
 				url : '/api/users/sign_out',
 				data : param
-			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
-				deleteCookie('authToken');
-				deleteCookie('userRole');
-				deleteCookie('userName');
-				deleteCookie('feedbackId');
-				deleteCookie("signInCount");
-				//logOut = 1;
-				deleteAllCookies();
-				$location.url("/login");
-			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + "authToken" + getCookie('authToken'));
 			});
 			$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken'));
 			deleteCookie('authToken');
@@ -705,6 +703,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 			deleteCookie('feedbackId');
 			deleteCookie("signInCount");
 			deleteAllCookies();
+			footerFlag = 0;
 			$location.url("/login");
 		};
 	} else {
@@ -716,6 +715,7 @@ var pointsEarned = 0;
 
 module.controller('feedbackController', function($scope, $http, $location) {
 	flagPage = 0;
+	footerFlag = 0;
 	$scope.digit1 = "";
 	$scope.digit2 = "";
 	$scope.digit3 = "";
@@ -794,6 +794,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 
 	//if (getCookie("feedbackId")) {
 	flagPage = 1;
+	footerFlag = 0;
 	$scope.nextFlag = 0;
 	$scope.prevFlag = 0;
 	$scope.like = true;
@@ -1102,6 +1103,7 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 
 	if (getCookie('authToken')) {
 		flagPage = 0;
+		footerFlag = 0;
 		$("#fbShareSuccMsg").hide();
 		$("#tweetShareSuccMsg").hide();
 		$("#gPlusShareSuccMsg").hide();
@@ -1165,7 +1167,7 @@ module.controller('restaurantListController', function($scope, $http, $location)
 	if (getCookie('authToken')) {
 		$scope.outlets = [];
 		flagPage = 1;
-
+		footerFlag = 0;
 		$scope.home = function() {
 			$location.url("/home");
 		};
@@ -1226,6 +1228,7 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 	if (getCookie('authToken')) {
 		$.mobile.loading('show');
 		flagPage = 1;
+		footerFlag = 0;
 		$scope.lattitude = "";
 		$scope.longitude = "";
 		$scope.outlets = [];
@@ -1293,6 +1296,7 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 
 	if (getCookie('authToken')) {
 		flagPage = 0;
+		footerFlag = 0;
 		$scope.successMsg = false;
 		$scope.erromsg = false;
 
@@ -1382,6 +1386,7 @@ module.controller('transactionHistoryController', function($scope, $http, $locat
 
 	if (getCookie('authToken')) {
 		flagPage = 1;
+		footerFlag = 0;
 		$scope.home = function() {
 			$location.url("/home");
 		};
@@ -1493,7 +1498,28 @@ $(document).on("pageshow", ".ui-page", function() {
 	});
 
 	var $page = $(this), vSpace = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() + $page.children('.ui-content').height();
-	if ($(window).height() > 500 && $(window).height() < 570) {
+	$("#divexample1").css('height', '400px');
+	//alert($page.outerHeight());
+	//alert($page.innerHeight());
+	//alert(vSpace);
+	if (vSpace < $(window).height()) {
+		$page.height($(window).height());
+	}
+	if($page.outerHeight() > vSpace){
+		//alert("no scroll ");
+		//alert(flagPage);
+		$page.children('.ui-footer').css('position', 'absolute');
+	}
+	else{
+		$page.children('.ui-footer').css('position', 'relative');
+		if (flagPage == 0) {
+			$page.children('.ui-footer').css('margin-top', '14px');
+		} else {
+			$page.children('.ui-footer').css('margin-top', '0');
+		}
+		//alert("scroll");
+	}
+	/*if ($(window).height() > 500 && $(window).height() < 570) {
 		//alert("in ");
 		$("#divexample1").css('height', '420px');
 	}
@@ -1503,26 +1529,41 @@ $(document).on("pageshow", ".ui-page", function() {
 		$page.height($(window).height());
 	}
 
+	var scrnHeight = screen.availHeight;
+	
 	if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
 		//if (document.cookie.indexOf("iphone_redirect=false") == -1)
 		//alert("iphone ");
+		alert($page.height());
+		alert($(window).height());
 		$("#divexample1").css('height', '320px');
-		$page.children('.ui-footer').css('position', 'relative');
+		if(scrnHeight == 548){
+			$("#divexample1").css('height', '350px');
+			if(footerFlag == 1){
+				$page.children('.ui-footer').css('position', 'relative');
+			}else{
+			//	$page.children('.ui-footer').css('position', 'absolute');
+			//	alert("under flag 1 else")
+			}
+		}else{
+			//alert("under else")
+			$page.children('.ui-footer').css('position', 'relative');
+		}
 		if (flagPage == 0) {
 			$page.children('.ui-footer').css('margin-top', '14px');
 		} else {
 			$page.children('.ui-footer').css('margin-top', '0');
 		}
-		setFooterIphone();
-	} else {
-		setFooterIphone();
-	}
+		//setFooterIphone();
+	} //else {
+		//setFooterIphone();
+	//}
+
 
 	setTimeout(function() {
 	window.scrollTo(0, 1)
 	}, 1000);
 
-	var scrnHeight = screen.availHeight;
 	var pageHt = $page.height();
 	var divHeightInDoc = pageHt + 5;
 	//$("div[data-role='page']").css( "height",  divHeightInDoc);
@@ -1530,41 +1571,11 @@ $(document).on("pageshow", ".ui-page", function() {
 	if (scrnHeight == 548) {
 		//$page.children('.ui-footer').css('position', 'absolute');
 		//$("div[data-role='page']").style.setProperty("height", divHeightInDoc + "px");
-	}
+	}*/
 	
-	var doc = window.document;
-	
-	// If there's a hash, or addEventListener is undefined, stop here
-	if( !location.hash && win.addEventListener ){
-		
-		//scroll to 1
-		window.scrollTo( 0, 1 );
-		var scrollTop = 1,
-			getScrollTop = function(){
-				return win.pageYOffset || doc.compatMode === "CSS1Compat" && doc.documentElement.scrollTop || doc.body.scrollTop || 0;
-			},
-		
-			//reset to 0 on bodyready, if needed
-			bodycheck = setInterval(function(){
-				if( doc.body ){
-					clearInterval( bodycheck );
-					scrollTop = getScrollTop();
-					win.scrollTo( 0, scrollTop === 1 ? 0 : 1 );
-				}	
-			}, 15 );
-		
-		win.addEventListener( "load", function(){
-			setTimeout(function(){
-				//at load, if user hasn't scrolled more than 20 or so...
-				if( getScrollTop() < 20 ){
-					//reset to hide addr bar at onload
-					win.scrollTo( 0, scrollTop === 1 ? 0 : 1 );
-				}
-			}, 0);
-		} );
-	}
 
-	function setFooterIphone() {
+
+	function setFooterIphone(){	
 		if ($page.height() > $(window).height()) {
 			$("#divexample1").css('height', '320px');
 			$page.children('.ui-footer').css('position', 'relative');
