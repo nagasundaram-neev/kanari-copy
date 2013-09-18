@@ -136,12 +136,12 @@ class DashboardSummary
     previous_returning_users = @previous_users.select {|user| user if user.sign_in_count > 0 }.length
 
     return({
-      new:{
+      new_users:{
         over_period: current_new_users,
         average_per_day: current_new_users.to_f/((@end_time.to_date - @start_time.to_date).round),
         change_in_percentage: percentage_change(previous_new_users, current_new_users)
       },
-      returning:{
+      returning_users:{
         over_period: current_returning_users,
         average_per_day: current_returning_users.to_f/((@end_time.to_date - @start_time.to_date).round),
         change_in_percentage: percentage_change(previous_returning_users, current_returning_users)

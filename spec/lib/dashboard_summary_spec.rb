@@ -204,12 +204,12 @@ describe DashboardSummary do
   describe "#get_users_summary" do
     it "should return user related summary as a hash" do
       @dashboard_summary.get_users_summary.should == {
-        new:{
+        new_users:{
           over_period: 1,
           average_per_day: 0.3333333333333333,
           change_in_percentage: 0.0
         },
-        returning:{
+        returning_users:{
           over_period: 1,
           average_per_day: 0.3333333333333333,
           change_in_percentage: nil

@@ -263,12 +263,12 @@ Feature: Dashboard Trends
              "over_period": 3600
            },
            "users": {
-             "new": {
+             "new_users": {
                "average_per_day": 2.0,
                "change_in_percentage": null,
                "over_period": 2
              },
-             "returning": {
+             "returning_users": {
                "average_per_day": 4.0,
                "change_in_percentage": null,
                "over_period": 4
@@ -647,12 +647,12 @@ Feature: Dashboard Trends
              "over_period": 3600
            },
            "users": {
-             "new": {
+             "new_users": {
                "average_per_day": 2.0,
                "change_in_percentage": null,
                "over_period": 2
              },
-             "returning": {
+             "returning_users": {
                "average_per_day": 4.0,
                "change_in_percentage": null,
                "over_period": 4
@@ -980,12 +980,12 @@ Feature: Dashboard Trends
              "over_period": 0
            },
            "users": {
-             "new": {
+             "new_users": {
                "average_per_day": 0.0,
                "change_in_percentage": null,
                "over_period": 0
              },
-             "returning": {
+             "returning_users": {
                "average_per_day": 0.0,
                "change_in_percentage": null,
                "over_period": 0
