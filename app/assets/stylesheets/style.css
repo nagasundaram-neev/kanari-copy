@@ -554,9 +554,14 @@
 	/*width: 153px;*/
 }
 .yellowBack {
-	float: left;
+	/*float: left;
 	padding: 8.5% 0;
 	width: 49.1%;
+	background-color: #F8BE40;
+	border-right: 2px solid #FFFFFF;*/
+	float: left;
+	padding: 7% 0;
+	width: 49%;
 	background-color: #F8BE40;
 	border-right: 2px solid #FFFFFF;
 }
