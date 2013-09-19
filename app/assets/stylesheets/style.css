@@ -1327,7 +1327,7 @@ img, object {
 .profileText span, .profileTextBottom span {
 	margin: 0 !important;
 	text-shadow: none;
-	font-size: 148%;
+	font-size: 115%;
 	font-weight: normal;
 	letter-spacing: 2px;
 	font-family: 'Roboto', sans-serif !important;
@@ -2095,13 +2095,16 @@ img, object {
 .rest_name {
 	font-size: 1.4em;
 	margin: 0.8% 0;
+	/*overflow: hidden;*/
+	 /*word-wrap: break-word;*/
 }
 #showRestaurant .rest_info img {
 	vertical-align: middle;
 }
 
 .showRestIcons {
-	height: 32px;
+	height: 28px;
+    margin: 3px 0;
 }
 /*.showRestIcons1{
  height: 35px;
@@ -2155,7 +2158,7 @@ img, object {
 }
 .img_outlet {
 	display: inline-block;
-	padding: 2.5% 0 0;
+	padding: 4.5% 4% 0 0;
 	text-align: center;
 	width: 35px;
 }

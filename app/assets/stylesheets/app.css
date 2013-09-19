@@ -56,13 +56,14 @@ body {
 .welcome {
 	float: right;
 	display: none;
-	margin-top: 22px;
+	margin-top: 30px;
 	padding-bottom: 5px;
 	font-size: 12px;
 }
 .span12 a.kanarilogo img {
-	margin-top: 6px;
 	height: 35px;
+    margin-bottom: 10px;
+    margin-top: 13px;
     width: 210px;
 }
 .welcome a {
@@ -1115,7 +1116,7 @@ input {
 	-moz-border-radius: 10px 10px 10px 10px;
 	-webkit-border-radius: 10px 10px 10px 10px;
 	-ms-border-radius: 10px 10px 10px 10px;
-	margin: 0.4% 0.6%;
+	margin: 0.4% 0;
 	overflow: hidden;
 	padding: 1% 0;
 	position: relative;
@@ -1262,7 +1263,7 @@ input {
 }
 .dashboardHeader {
 	float: left;
-	margin-left: 27px;
+	margin-left: 15px;
 }
 #dashboardComments, #dashboardTrends, #dashboardSnapshot {
 	width: auto;
@@ -1536,7 +1537,7 @@ input {
 }
 .tooltip-inner {
      white-space: pre-line;
-     max-width:230px !important;
+     max-width:250px !important;
      padding:10px 5px !important;
 }
 .custExpSummary div.colno1 {
