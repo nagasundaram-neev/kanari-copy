@@ -12,7 +12,7 @@
 		</div>
 		<div align="center" class="titleDiv">
 			<div class="rest_name">
-				<b class="restTitle">{{restaurant_name | truncateName}}</b>
+				<b class="restTitle">{{restaurant_name}}</b>
 				<span class="address">{{restaurant_address}}</span>
 			</div>
 			<div class="username rest_info">
@@ -35,7 +35,7 @@
 			</div>
 			<div class="outlet_div rest_info">
 				<div class="outlet_title ">
-					<span class="img_outlet"><!-- <%= image_tag 'ic_cuisine.png' %> --><img style="height:29px;" src="/assets/icon_cusuine_type.svg" /></span> <span class="title_outlet"> Cuisine Type</span>
+					<span class="img_outlet"><!-- <%= image_tag 'ic_cuisine.png' %> --><img class="showRestIcons" src="/assets/icon_cusuine_type.svg" /></span> <span class="title_outlet"> Cuisine Type</span>
 				</div>
 				<div class="outlet_info" style="padding: 3% 0;">
 					<span ng-repeat="cuisine in cuisineTypes">{{cuisine.name}}<span ng-show=" ! $last ">, &nbsp; </span></span>
@@ -44,7 +44,7 @@
 			</div>
 			<div class="outlet_div rest_info">
 				<div class="outlet_title">
-					<span class="img_outlet"><!-- <%= image_tag 'ic_opening_hrs.png' %> --><img style="height:32px;" src="/assets/icon_opening_hours.svg" /></span> <span class="title_outlet"> Opening hours</span>
+					<span class="img_outlet"><!-- <%= image_tag 'ic_opening_hrs.png' %> --><img class="showRestIcons" src="/assets/icon_opening_hours.svg" /></span> <span class="title_outlet"> Opening hours</span>
 				</div>
 				<div class="outlet_info" style="padding: 3% 0;">
 					<span>{{fromTime}} to {{toTime}}</span>
