@@ -3,6 +3,8 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no"  />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="default">
 		<title>Kanari</title>
 		<meta name="description" content="Kanari">
 		<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
@@ -11,6 +13,7 @@
 		<%= javascript_include_tag "jquery.js" %>
 		<%= javascript_include_tag "angular.js" %>
 		<%= javascript_include_tag "moment.min.js" %>
+		<%= javascript_include_tag "add2home.js" %>
 		<!-- <script type='text/javascript' src="https://rawgithub.com/timrwood/moment/2.1.0/min/moment.min.js"></script> -->
 		<%= javascript_include_tag "iscroll.js" %>
 		<%= javascript_include_tag "app_tablet" %>
@@ -18,6 +21,7 @@
 		<!-- <link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'> -->
 		<%= stylesheet_link_tag "jquery.mobile-1.3.0.css", :media => "all" %>
 		<%= stylesheet_link_tag "app_tablet.css", :media => "all" %>
+		<%= stylesheet_link_tag "add2home.css", :media => "all" %>
 	</head>
 	<body>
 		<div ng-show="userLogin" class="userloggedIn" id="header_menu" class="navbar" ng-controller="headerCtrl">
