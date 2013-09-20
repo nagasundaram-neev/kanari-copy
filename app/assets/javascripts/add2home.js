@@ -3,6 +3,7 @@
  * Released under MIT license, http://cubiq.org/license
  */
 var addToHome = (function (w) {
+	//alert("in");
 	var nav = w.navigator,
 		isIDevice = 'platform' in nav && (/iphone|ipod|ipad/gi).test(nav.platform),
 		isIPad,

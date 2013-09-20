@@ -134,7 +134,7 @@
 		</div>
 		<div class="chart_div">
 			<span class="chart_heading">{{chart_heading}} > {{chart_subheading}}
-			<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="{{chart_subheading_tooltip}}"><img src="/assets/ic_help.png"></span></a>
+			<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="{{chart_subheading_tooltip}}"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 			</span>
 			<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 			<div ng-show="custExpSummary" class="custExpSummary">
@@ -143,7 +143,7 @@
 				</div>
 				<div class="custExpDiv ">
 					<b>Over Period</b>
-					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The period is the date range you selected and the range displayed on the graph."><img src="/assets/ic_help.png"></span></a>
+					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The period is the date range you selected and the range displayed on the graph."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
 				<div class="custExpDiv border_right_none colno3">
 					<b>Change VS Precending Period</b>
@@ -151,11 +151,11 @@
 
 					Eg.1: If your current period is the month of September the change is relative tothe last month, which was August.
 
-					Eg.2: If your period is days long, the precending period is the 6 days immediately before your selected period."><img src="/assets/ic_help.png"></span></a>
+					Eg.2: If your period is days long, the precending period is the 6 days immediately before your selected period."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
 				<div class="custExpDiv colno1" ng-switch on="selectedOption">
 					<span ng-switch-default > Positive </span>
-					<span ng-switch-when="npsBreakdown">Promoters <a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Promoters are customers who answered 9 or 10 to the question 'How likely are you to recommend today's experience to friends & family?'"><img src="/assets/ic_help.png"></span></a> </span>
+					<span ng-switch-when="npsBreakdown">Promoters <a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Promoters are customers who answered 9 or 10 to the question 'How likely are you to recommend today's experience to friends & family?'"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> </span>
 				</div>
 				<div class="custExpDiv">
 					{{positive | number:1}}%
@@ -166,7 +166,7 @@
 				</div>
 				<div class="custExpDiv colno1" ng-switch on="selectedOption">
 					<span ng-switch-default > Neutral </span>
-					<span ng-switch-when="npsBreakdown">Passives <a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Passives are customers who answered 7 or 8 to the question 'How likely are you to recommend today's experience to friends & family?"><img src="/assets/ic_help.png"></span></a> </span>
+					<span ng-switch-when="npsBreakdown">Passives <a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Passives are customers who answered 7 or 8 to the question 'How likely are you to recommend today's experience to friends & family?"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> </span>
 				</div>
 				<div class="custExpDiv">
 					{{neutral | number:1}}%
@@ -177,7 +177,7 @@
 				</div>
 				<div class="custExpDiv border_bottom_none colno1" ng-switch on="selectedOption">
 					<span ng-switch-default > Negative </span>
-					<span ng-switch-when="npsBreakdown">Detractors <a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Detractors are customers who answered 0 or 6 to the question 'How likely are you to recommend today's experience to friends & family?"><img src="/assets/ic_help.png"></span></a> </span>
+					<span ng-switch-when="npsBreakdown">Detractors <a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Detractors are customers who answered 0 or 6 to the question 'How likely are you to recommend today's experience to friends & family?"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> </span>
 				</div>
 				<div class="custExpDiv border_bottom_none">
 					{{negative | number:1}}%
@@ -194,7 +194,7 @@
 				</div>
 				<div class="custExpDiv">
 					<b>Over Period</b>
-					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The period is the date range you selected and the range displayed on the graph."><img src="/assets/ic_help.png"></span></a>
+					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The period is the date range you selected and the range displayed on the graph."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
 				<div class="custExpDiv border_right_none colno3">
 					<b>Change VS Precending Period</b>
@@ -202,7 +202,7 @@
 
 					Eg.1: If your current period is the month of September the change is relative tothe last month, which was August.
 
-					Eg.2: If your period is days long, the precending period is the 6 days immediately before your selected period."><img src="/assets/ic_help.png"></span></a>
+					Eg.2: If your period is days long, the precending period is the 6 days immediately before your selected period."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
 				<div class="custExpDiv colno1">
 					NPS
@@ -231,7 +231,7 @@
 				</div>
 				<div class="custExpDiv">
 					<b>Over Period</b>
-					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The period is the date range you selected and the range displayed on the graph."><img src="/assets/ic_help.png"></span></a>
+					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The period is the date range you selected and the range displayed on the graph."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
 				<div class="custExpDiv">
 					<b>Avg. Per Day</b>
@@ -242,7 +242,7 @@
 
 					Eg.1: If your current period is the month of September the change is relative tothe last month, which was August.
 
-					Eg.2: If your period is days long, the precending period is the 6 days immediately before your selected period."><img src="/assets/ic_help.png"></span></a>
+					Eg.2: If your period is days long, the precending period is the 6 days immediately before your selected period."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
 				<div class="custExpDiv border_bottom_none colno1">
 					{{text}}
@@ -264,7 +264,7 @@
 				</div>
 				<div class="custExpDiv">
 					<b>Over Period</b>
-					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The period is the date range you selected and the range displayed on the graph."><img src="/assets/ic_help.png"></span></a>
+					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The period is the date range you selected and the range displayed on the graph."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
 				<div class="custExpDiv border_right_none colno3">
 					<b>Change VS Precending Period</b>
@@ -272,7 +272,7 @@
 
 					Eg.1: If your current period is the month of September the change is relative tothe last month, which was August.
 
-					Eg.2: If your period is days long, the precending period is the 6 days immediately before your selected period."><img src="/assets/ic_help.png"></span></a>
+					Eg.2: If your period is days long, the precending period is the 6 days immediately before your selected period."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
 				<div class="custExpDiv border_bottom_none colno1">
 					{{text}}
@@ -291,7 +291,7 @@
 				</div>
 				<div class="custExpDiv custExpDiv">
 					<b>Over Period</b>
-					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The period is the date range you selected and the range displayed on the graph."><img src="/assets/ic_help.png"></span></a>
+					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The period is the date range you selected and the range displayed on the graph."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
 				<div class="custExpDiv border_right_none colno3">
 					<b>Change VS Precending Period</b>
@@ -299,7 +299,7 @@
 
 					Eg.1: If your current period is the month of September the change is relative tothe last month, which was August.
 
-					Eg.2: If your period is days long, the precending period is the 6 days immediately before your selected period."><img src="/assets/ic_help.png"></span></a>
+					Eg.2: If your period is days long, the precending period is the 6 days immediately before your selected period."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
 				<div class="custExpDiv colno1">
 					Male
@@ -330,7 +330,7 @@
 				</div>
 				<div class="custExpDiv">
 					<b>Over Period</b>
-					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The period is the date range you selected and the range displayed on the graph."><img src="/assets/ic_help.png"></span></a>
+					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The period is the date range you selected and the range displayed on the graph."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
 				<div class="custExpDiv">
 					<b>Avg. Per Day</b>
@@ -341,11 +341,11 @@
 
 					Eg.1: If your current period is the month of September the change is relative tothe last month, which was August.
 
-					Eg.2: If your period is days long, the precending period is the 6 days immediately before your selected period."><img src="/assets/ic_help.png"></span></a>
+					Eg.2: If your period is days long, the precending period is the 6 days immediately before your selected period."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
 				<div class="custExpDiv colno1">
 					New User
-					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The no. of interactions from people who are using kanari at your restaurant for the first time."><img src="/assets/ic_help.png"></span></a>
+					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The no. of interactions from people who are using kanari at your restaurant for the first time."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
 				<div class="custExpDiv">
 					{{newUser}}
@@ -359,7 +359,7 @@
 				</div>
 				<div class="custExpDiv border_bottom_none colno1">
 					Returning User
-					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The no. of interactions from people who have previously used Kanari at your restaurant."><img src="/assets/ic_help.png"></span></a>
+					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The no. of interactions from people who have previously used Kanari at your restaurant."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
 				<div class="custExpDiv border_bottom_none">
 					{{retUser}}
