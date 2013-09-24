@@ -244,8 +244,8 @@ class Outlet < ActiveRecord::Base
       end 
       unless redemptions.blank?
         usage[:redemptions_count] = redemptions.length
-        usage[:discounts_claimed] = redemptions.inject(0){|sum, r| sum + r.points.to_i} 
-      end 
+        usage[:discounts_claimed] = redemptions.inject(0){|sum, r| sum + r.points.to_i}
+      end
 
       #TODO: Refactor ! This will be inefficient when the array is huge.
       latest = (feedbacks | redemptions).compact.uniq.sort! {|i,j| i.updated_at <=> j.updated_at}.last
@@ -259,12 +259,13 @@ class Outlet < ActiveRecord::Base
       summary     = {}
       summary[:customer_experience] = summary_calculator.get_customer_experience_summary
       summary[:net_promoter_score] = summary_calculator.get_net_promoter_score_summary
-      summary[:feedbacks_count] = summary_calculator.get_feedbacks_count_summary
-      summary[:redemptions_count] = summary_calculator.get_feedbacks_count_summary
-      summary[:rewards_pool] = summary_calculator.get_rewards_pool_summary
+      summary[:feedback_submissions] = summary_calculator.get_feedback_submission_summary
+      summary[:redemptions_processed] = summary_calculator.get_redemptions_count_summary
       summary[:demographics] = summary_calculator.get_demographics_summary
       summary[:users] = summary_calculator.get_users_summary
       summary[:average_bill_size] = summary_calculator.get_average_bill_size_summary
+      summary[:average_rewards_pool_size] = summary_calculator.get_rewards_pool_summary
+      summary[:discounts_claimed] = summary_calculator.get_discounts_claimed_summary
       return summary
     end
 

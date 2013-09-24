@@ -64,15 +64,21 @@ class DashboardSummary
     }
   end
 
-  def get_feedbacks_count_summary
+  def get_feedback_submission_summary
     current_feedback_count = @feedbacks.size
     previous_feedback_count = @previous_feedbacks.size
     average_feedbacks_per_day = current_feedback_count.to_f/((@end_time.to_date - @start_time.to_date).round)
+    previous_average_feedbacks_per_day = previous_feedback_count.to_f/((@end_time.to_date - @start_time.to_date).round)
 
     return ({
-      over_period: current_feedback_count,
-      average_per_day: average_feedbacks_per_day,
-      change_in_percentage: percentage_change(previous_feedback_count, current_feedback_count)
+      average_per_day: {
+        over_period: average_feedbacks_per_day,
+        change_in_percentage: percentage_change(previous_average_feedbacks_per_day, average_feedbacks_per_day)
+      },
+      count: {
+        change_in_percentage: percentage_change(previous_feedback_count, current_feedback_count),
+        over_period: current_feedback_count
+      }
     })
   end
 
@@ -80,22 +86,23 @@ class DashboardSummary
     current_redemptions_count = @redemptions.size
     previous_redemptions_count = @previous_redemptions.size
     average_redemptions_per_day = current_redemptions_count.to_f/((@end_time.to_date - @start_time.to_date).round)
+    previous_average_redemptions_per_day = previous_redemptions_count.to_f/((@end_time.to_date - @start_time.to_date).round)
 
     return ({
-      over_period: current_redemptions_count,
-      average_per_day: average_redemptions_per_day,
-      change_in_percentage: percentage_change(previous_redemptions_count, current_redemptions_count)
+      average_per_day: {
+        over_period: average_redemptions_per_day,
+        change_in_percentage: percentage_change(previous_average_redemptions_per_day, average_redemptions_per_day)
+      },
+      count: {
+        change_in_percentage: percentage_change(previous_redemptions_count, current_redemptions_count),
+        over_period: current_redemptions_count
+      }
     })
   end
 
   def get_rewards_pool_summary
-
-    #TODO: Refactor ! This will be inefficient when the array is huge.
-    latest = (@feedbacks | @redemptions).compact.uniq.sort! {|i,j| i.updated_at <=> j.updated_at}.last
-    rewards_pool = latest ? latest.send("rewards_pool_after_#{latest.class.name.downcase}") : 0
-
-    latest = (@previous_feedbacks | @previous_redemptions).compact.uniq.sort! {|i,j| i.updated_at <=> j.updated_at}.last
-    previous_rewards_pool = latest ? latest.send("rewards_pool_after_#{latest.class.name.downcase}") : 0
+    rewards_pool = get_average_rewards_pool(@feedbacks)
+    previous_rewards_pool = get_average_rewards_pool(@previous_feedbacks)
     return ({
       over_period: rewards_pool,
       change_in_percentage: percentage_change(previous_rewards_pool, rewards_pool)
@@ -159,6 +166,24 @@ class DashboardSummary
     })
   end
 
+  def get_discounts_claimed_summary
+    current_discounts_claimed = @redemptions.inject(0){|sum, r| sum + r.points.to_i}
+    previous_discounts_claimed = @previous_redemptions.inject(0){|sum, r| sum + r.points.to_i}
+    average_discounts_claimed_per_day = current_discounts_claimed.to_f/((@end_time.to_date - @start_time.to_date).round)
+    previous_average_discounts_claimed_per_day = previous_discounts_claimed.to_f/((@end_time.to_date - @start_time.to_date).round)
+    return({
+      total: {
+        over_period: current_discounts_claimed,
+        change_in_percentage: percentage_change(previous_discounts_claimed, current_discounts_claimed)
+      },
+      average_per_day: {
+        over_period: average_discounts_claimed_per_day,
+        change_in_percentage: percentage_change(previous_average_discounts_claimed_per_day, average_discounts_claimed_per_day)
+      }
+    })
+
+  end
+
   private
 
     def get_category_summary(category)
@@ -214,5 +239,9 @@ class DashboardSummary
 
     def get_average_bill_size(feedbacks)
       feedbacks.present? ? ( feedbacks.inject(0){|sum, f| sum + f.bill_amount.to_f} / feedbacks.length ) : 0.0
+    end
+
+    def get_average_rewards_pool(feedbacks)
+      feedbacks.present? ? ( feedbacks.inject(0){|sum, f| sum + f.rewards_pool_after_feedback.to_f} / feedbacks.length ) : 0.0
     end
 end

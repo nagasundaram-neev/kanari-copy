@@ -24,7 +24,7 @@ Feature: Dashboard Trends
           |123456@subway.com   |
           |234567@subway.com   |
         And the following feedbacks exist for "2013-08-01 10:10:00"
-          |id  |outlet_id |user_id |points |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating | comment                                                                         | completed   |bill_amount  |
+          |id  |outlet_id |user_id |points |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating | comment                                                             | completed   |bill_amount  |
 		      |1   |10        |1001    |400    |1            |1                |1                       |1        |1           |1               |10                     | I really enjoyed the pizza's in the out area by the street         | true        |4000         |
 		      |2   |10        |1002    |100    |1            |1                |1                       |-1       |1           |1               |9                     | I am dissapointed with the service                                  | true        |1000         |
 		      |3   |10        |1003    |400    |1            |1                |1                       |-1       |-1          |0               |1                     | I really enjoyed the pizza's in the out area by the street          | true        |4000         |
@@ -37,7 +37,7 @@ Feature: Dashboard Trends
 		      |21   |10        |1001    |50     |1            |1                |1                       |1        |1           |1               |10                     | I really enjoyed the pizza's in the out area by the street   | true       |500   |
 		      |22   |10        |1002    |150    |1            |1                |1                       |-1       |1           |1               |1                     | I am dissapointed with the service                            | true       |1500  |
 		      |23   |10        |1003    |200    |1            |-1               |1                       |-1       |0           |1               |2                     | I really enjoyed the pizza's in the out area by the street    | true       |2000  |
-                      |24   |10        |1004    |100    |0            |-1               |0                       |-1       |0           |-1              |8                     | I am dissapointed with the service                            | true       |1000       |
+                      |24   |10        |1004    |100    |0            |-1               |0                       |-1       |0           |-1              |8                     | I am dissapointed with the service                | true       |1000       |
 		      |25   |10        |1005    |300    |-1           |0                |0                       |0        |0           |1               |7                     | I really enjoyed the pizza's in the out area by the street    | true       |3000  |
 		      |26   |20        |1006    |100    |0            |0                |-1                      |0        |-1          |1               |6                     | I am dissapointed with the service                            | true       |1000  |
 		      |27   |10        |nil     |300    |nil          |nil              |nil                     |nil      |nil         |nil             |nil                   | nil                                                           | false      |3000  |
@@ -226,10 +226,35 @@ Feature: Dashboard Trends
                "over_period": 66.66666666666666
              }
            },
-           "feedbacks_count": {
-             "average_per_day": 10.0,
-             "change_in_percentage": null,
-             "over_period": 10
+           "discounts_claimed": {
+             "total": {
+               "over_period": 1700,
+               "change_in_percentage": null
+             },
+             "average_per_day": {
+               "over_period": 1700.0,
+               "change_in_percentage": null
+             }
+           },
+           "feedback_submissions": {
+             "average_per_day": {
+               "over_period": 10.0,
+               "change_in_percentage": null
+             },
+             "count": {
+               "change_in_percentage": null,
+               "over_period": 10
+             }
+           },
+           "redemptions_processed": {
+             "average_per_day": {
+               "over_period": 8.0,
+               "change_in_percentage": null
+             },
+             "count": {
+               "change_in_percentage": null,
+               "over_period": 8
+             }
            },
            "net_promoter_score": {
              "detractors": {
@@ -253,14 +278,9 @@ Feature: Dashboard Trends
                "over_period": 10.0
              }
            },
-           "redemptions_count": {
-             "average_per_day": 10.0,
+           "average_rewards_pool_size": {
              "change_in_percentage": null,
-             "over_period": 10
-           },
-           "rewards_pool": {
-             "change_in_percentage": null,
-             "over_period": 3600
+             "over_period": 0.0
            },
            "users": {
              "new_users": {
@@ -610,10 +630,25 @@ Feature: Dashboard Trends
                "over_period": 66.66666666666666
              }
            },
-           "feedbacks_count": {
-             "average_per_day": 11.0,
-             "change_in_percentage": null,
-             "over_period": 11
+           "feedback_submissions": {
+             "average_per_day": {
+               "change_in_percentage": null,
+               "over_period": 11.0
+             },
+             "count": {
+               "change_in_percentage": null,
+               "over_period": 11
+             }
+           },
+           "discounts_claimed": {
+             "average_per_day": {
+               "change_in_percentage": null,
+               "over_period": 1700.0
+             },
+             "total": {
+               "change_in_percentage": null,
+               "over_period": 1700
+             }
            },
            "net_promoter_score": {
              "detractors": {
@@ -637,14 +672,19 @@ Feature: Dashboard Trends
                "over_period": 9.090909090909092
              }
            },
-           "redemptions_count": {
-             "average_per_day": 11.0,
-             "change_in_percentage": null,
-             "over_period": 11
+           "redemptions_processed": {
+             "average_per_day": {
+               "change_in_percentage": null,
+               "over_period": 8.0
+             },
+             "count": {
+               "change_in_percentage": null,
+               "over_period": 8
+             }
            },
-           "rewards_pool": {
+           "average_rewards_pool_size": {
              "change_in_percentage": null,
-             "over_period": 3600
+             "over_period": 0.0
            },
            "users": {
              "new_users": {
@@ -847,6 +887,16 @@ Feature: Dashboard Trends
              "change_in_percentage": null,
              "over_period": 0.0
            },
+           "discounts_claimed": {
+             "average_per_day": {
+               "change_in_percentage": null,
+               "over_period": 0.0
+             },
+             "total": {
+               "change_in_percentage": null,
+               "over_period": 0
+             }
+           },
            "customer_experience": {
              "ambience": {
                "dislike": {
@@ -943,10 +993,25 @@ Feature: Dashboard Trends
                "over_period": null
              }
            },
-           "feedbacks_count": {
-             "average_per_day": 0.0,
-             "change_in_percentage": null,
-             "over_period": 0
+           "redemptions_processed": {
+             "average_per_day": {
+               "change_in_percentage": null,
+               "over_period": 0.0
+             },
+             "count": {
+               "change_in_percentage": null,
+               "over_period": 0
+             }
+           },
+           "feedback_submissions": {
+             "average_per_day": {
+               "change_in_percentage": null,
+               "over_period": 0.0
+             },
+             "count": {
+               "change_in_percentage": null,
+               "over_period": 0
+             }
            },
            "net_promoter_score": {
              "detractors": {
@@ -970,14 +1035,9 @@ Feature: Dashboard Trends
                "over_period": null
              }
            },
-           "redemptions_count": {
-             "average_per_day": 0.0,
+           "average_rewards_pool_size": {
              "change_in_percentage": null,
-             "over_period": 0
-           },
-           "rewards_pool": {
-             "change_in_percentage": null,
-             "over_period": 0
+             "over_period": 0.0
            },
            "users": {
              "new_users": {

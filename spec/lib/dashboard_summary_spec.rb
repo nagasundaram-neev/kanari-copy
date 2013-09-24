@@ -26,11 +26,11 @@ describe DashboardSummary do
       Redemption.create(updated_at: Time.now-9.days),
       Redemption.create(updated_at: Time.now-9.days),
       Redemption.create(updated_at: Time.now-8.days),
-      Redemption.create(updated_at: Time.now-8.days),
+      Redemption.create(updated_at: Time.now-8.days, points: 5),
       Redemption.create(updated_at: Time.now-7.days),
       Redemption.create(updated_at: Time.now-7.days, rewards_pool_after_redemption: 1000),
 
-      Redemption.create(updated_at: Time.now-6.days),
+      Redemption.create(updated_at: Time.now-6.days, points: 10),
       Redemption.create(updated_at: Time.now-5.days),
       Redemption.create(updated_at: Time.now-4.days, rewards_pool_after_redemption: 1020)
     ]
@@ -157,12 +157,11 @@ describe DashboardSummary do
     end
   end
 
-  describe "#get_feedbacks_count_summary" do
-    it "should return feedback count related summary as a hash" do
-      @dashboard_summary.get_feedbacks_count_summary.should == {
-        over_period: 4,
-        average_per_day: 4.0/3,
-        change_in_percentage: 0.0
+  describe "#get_feedback_submission_summary" do
+    it "should return feedback submission related summary as a hash" do
+      @dashboard_summary.get_feedback_submission_summary.should == {
+        :average_per_day => {:over_period=>1.3333333333333333, :change_in_percentage=>0.0},
+        :count => {:change_in_percentage=>0.0, :over_period=>4}
       }
     end
   end
@@ -170,9 +169,8 @@ describe DashboardSummary do
   describe "#get_redemptions_count_summary" do
     it "should return redemptions count related summary as a hash" do
       @dashboard_summary.get_redemptions_count_summary.should == {
-        over_period: 3,
-        average_per_day: 1.0,
-        change_in_percentage: -50.0
+        :average_per_day => {:over_period=>1.0, :change_in_percentage=>-50.0},
+        :count => {:change_in_percentage=>-50.0, :over_period=>3}
       }
     end
   end
@@ -180,8 +178,8 @@ describe DashboardSummary do
   describe "#get_rewards_pool_summary" do
     it "should return rewards pool related summary as a hash" do
       @dashboard_summary.get_rewards_pool_summary.should == {
-        over_period: 1020,
-        change_in_percentage: ((1020-1000).to_f/1000)*100
+        :change_in_percentage => nil,
+        :over_period => 255.0
       }
     end
   end
@@ -223,6 +221,15 @@ describe DashboardSummary do
       @dashboard_summary.get_average_bill_size_summary.should == {
         over_period: 750.0,
         change_in_percentage: 100.0
+      }
+    end
+  end
+
+  describe "#get_discounts_claimed_summary" do
+    it "should return discounts claimed summary as a hash" do
+      @dashboard_summary.get_discounts_claimed_summary.should == {
+        :average_per_day => {:over_period=>3.3333333333333335, :change_in_percentage=>100.0},
+        :total => {:over_period=>10, :change_in_percentage=>100.0}
       }
     end
   end
