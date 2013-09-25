@@ -963,6 +963,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$scope.feedbackSubmit = data.feedback_trends.summary.feedback_submissions.count.change_in_percentage;
 			$scope.noOfRedem = data.feedback_trends.summary.redemptions_processed.count.change_in_percentage;
 			$scope.discountClaimed = data.feedback_trends.summary.discounts_claimed.total.change_in_percentage;
+			$scope.pointsIssued = data.feedback_trends.summary.points_issued.total.change_in_percentage;
 			$scope.food_monthlyChange = data.feedback_trends.summary.customer_experience.food_quality.like.over_period - data.feedback_trends.summary.customer_experience.food_quality.dislike.over_period;
 			//$scope.food_neutral = data.feedback_trends.summary.customer_experience.food_quality.neutral.over_period;
 			//$scope.food_negative = data.feedback_trends.summary.customer_experience.food_quality.dislike.over_period;
@@ -2891,23 +2892,28 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		var day = d.getDate();
 
 		var currentDate = d.getFullYear() + '-' + (('' + month).length < 2 ? '0' : '') + month + '-' + (('' + day).length < 2 ? '0' : '') + day;
-
+		
+		
+		$scope.chartType = "percent";
+		stackingValue = "percent";
+		$scope.showChartType = true;
 		$scope.chart_subheading = "Food Quality";
 		$("#dashboard_trends ul li a").click(function() {
 			$('#dashboard_trends ul li a').removeClass("active");
 			$(this).addClass("active");
 			$scope.chart_subheading = $(this).text();
 			idV = $(this).attr("id");
-			if (idV == "timeOfVisit") {
-				$("#dp3").hide();
-				$("#startDt").attr("placeholder", "Select Date");
-			} else {
-				$("#dp3").show();
-				$("#startDt").attr("placeholder", "Start Date");
-			}
+			// if (idV == "npsBreakdown") {
+				// $scope.showChartType = false;
+				// stackingValue = "";
+			// } else {
+// 			
+				// //stackingValue = "percent";
+			// }
 			$scope.listOfTrendsDate(idV);
 		});
-
+	
+		
 		$scope.chart_heading = "Customer Experience";
 		$scope.chart_subheading_tooltip = "Breakdown of user ratings of food quality at this restaurant over the specified period. You can toggle between absolute and percentage figures.";
 		$scope.custExpSummary = true;
@@ -2921,15 +2927,32 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				$scope.rewardPool = false;
 				$scope.demographic = false;
 				$scope.usergraph = false;
+				$scope.showChartType = true;
+				//stackingValue = "";
 			} else if (metricsId == "netPromo") {
+					$scope.showChartType = false;
 				$scope.chart_heading = "Net Promoter Score";
 			} else if (metricsId == "usage") {
+					$scope.showChartType = false;
 				$scope.chart_heading = "Usage";
 			} else if (metricsId == "customers") {
+					$scope.showChartType = false;
 				$scope.chart_heading = "Customers";
 			}
 		});
-
+		
+		
+		$scope.selectChartType=function(){			
+			if($scope.chartType == "nonpercent"){
+				stackingValue = "";				
+			}
+			else{
+				stackingValue = "percent";
+			}	
+			graphType = "area";	
+			//$scope.listOfTrendsDate(idV);	
+			getCustExpGraph();		
+		}
 		$('#reportrange').daterangepicker({
 			ranges : {
 				'Today' : [moment(), moment()],
@@ -3146,7 +3169,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.selectedOption = "npsBreakdown";
 						//graphType = "area";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
-						yAxisVal = "Number of submissions (100%)";
+						yAxisVal = "Feedback Submissions(100%)";
 						custLegend1 = "% Promoters";
 						custLegend2 = "passives";
 						custLegend3 = "detractors";
@@ -3169,7 +3192,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						npsOverview = 1;
 						usageLegend = "Net Promoter Score";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
-						yAxisVal = "Net Promoter Score [limit axes to -100 & +100]";
+						yAxisVal = "Net Promoter Score";
 						$scope.chart_subheading_tooltip = "The Net Promoter Score (NPS) of your restaurant over the specified period. The NPS on each day is calculated as the average of the last 100 feedback submissions.";
 						$scope.NPS = data.feedback_trends.summary.net_promoter_score.score.over_period;
 						$scope.NPSChange = data.feedback_trends.summary.net_promoter_score.score.change_in_points;
@@ -3201,7 +3224,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.text = "No. of feedback submissions"
 						usageLegend = "Number of submissions";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
-						yAxisVal = "Number of submissions";
+						yAxisVal = "Feedback Submissions";
 						$scope.chart_subheading_tooltip = "The number of feedback submissions received each day over the specified period.";
 					} else if (idValue == "redemProc") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].usage.redemptions_count;
@@ -3218,7 +3241,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.text = "No. of redemptions processed"
 						usageLegend = "Redemptions";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
-						yAxisVal = "Redemptions";
+						yAxisVal = "Redemptions Processed";
 						$scope.chart_subheading_tooltip = "The number of redemptions processed each day over the specified period.";
 					} else if (idValue == "discountClaim") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].usage.discounts_claimed;
@@ -3240,6 +3263,9 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					} else if (idValue == "pointsIssued") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].usage.points_issued;
 						$scope.noOfFeedback = data.feedback_trends.statistics.usage.points_issued;
+						$scope.noOfFeedback = data.feedback_trends.summary.points_issued.total.over_period;
+						$scope.noOfFeedbackPerDay = data.feedback_trends.summary.points_issued.average_per_day.over_period;
+						$scope.positiveChange = data.feedback_trends.summary.points_issued.total.change_in_percentage;
 						$scope.custExpSummary = false;
 						$scope.NPSSummary = false;
 						$scope.feedbackCount = true;
@@ -3285,11 +3311,12 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.rewardPool = false;
 						$scope.demographic = true;
 						$scope.usergraph = false;
+						metricsId = "customers";
 						custLegend1 = "Male";
 						custLegend2 = "Female";
-						graphType = "line";
+						graphType = "area";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
-						yAxisVal = "Customer Interactions (Feedback Submissions + Redemptions)";
+						yAxisVal = "Customer Interactions";
 						$scope.chart_subheading_tooltip = "The demographics of your Kanari customer base over the specified period.";
 					} else if (idValue == "usersGraph") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].customers.new_users;
@@ -3311,7 +3338,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						custLegend2 = "Returning Users";
 						graphType = "area";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
-						yAxisVal = "Customer Interactions (Feedback Submissions + Redemptions?)";
+						yAxisVal = "Customer Interactions";
 						$scope.chart_subheading_tooltip = "The breakdown of new vs. returning users at your restaurant.New users are those using Kanari at your restaurant for the first time. Returning users are those who have used Kanari at your restaurant previously.";
 					}
 					// else if (idValue == "timeOfVisit") {
@@ -3322,7 +3349,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					// }
 					// timeOfV = 1;
 					// }
-					else if (idValue == "chequeSize") {
+					else if (idValue == "BillSize") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].average_bill_amount;
 						$scope.rewardPoolCount = data.feedback_trends.summary.average_bill_size.over_period;
 						$scope.positiveChange = data.feedback_trends.summary.average_bill_size.change_in_percentage;
@@ -3336,7 +3363,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.text = "Average bill size per feedback submission"
 						npsOverview = 1;
 						graphType = "line";
-						usageLegend = "Avg. Cheque Size";
+						usageLegend = "Avg. Bill Size";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
 						yAxisVal = "AED";
 						$scope.chart_subheading_tooltip = "The average bill size associated with each feedback submission over the specified period.";
@@ -3352,12 +3379,9 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				if (metricsId == "custExp" || npsBreakdownV == "1") {
 					getCustExpGraph();
 				} else if (metricsId == "usage" || npsOverview == "1") {
-					graphType = "line";
+					//graphType = "line";
 					getUsageGraph();
 				}
-				// else if (metricsId == "customers" && timeOfV == "1") {
-				// getTimeVisitGraph();
-				// }
 				else if (metricsId == "customers") {
 					customerGraph();
 				}
@@ -3452,12 +3476,11 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		function getCustExpGraph() {
+			console.log(graphType+"---"+stackingValue);
 			$('#container').highcharts({
-
 				chart : {
 					type : 'area'
 				},
-
 				title : {
 					text : $scope.chart_heading + ' | Stacked column chart',
 					color : '#A08A75',
@@ -3465,17 +3488,14 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						display : 'none'
 					}
 				},
-
 				xAxis : {
 					categories : resultsDate,
 					title : {
-						//text : xAxisVal,
 						style : {
 							color : '#7C7A7D',
 						}
 					},
 					labels : {
-						//rotation : -90,
 						style : {
 							fontSize : '10px',
 							fontColor : '#7C7A7D',
@@ -3484,7 +3504,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						}
 					}
 				},
-
 				yAxis : {
 					allowDecimals : false,
 					min : 0,
@@ -3492,11 +3511,11 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						text : yAxisVal,
 						style : {
 							color : '#7C7A7D',
+							fontFamily : 'Open Sans',
 							fontWeight : 'normal'
 						}
 					}
 				},
-
 				tooltip : {
 					formatter : function() {
 						return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '<br/>' + 'Total: ' + this.point.stackTotal;
@@ -3504,15 +3523,17 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				},
 				plotOptions : {
 					area : {
+						stacking : stackingValue,
+						lineColor : '#ffffff',
+						lineWidth : 1,
 						marker : {
-							enabled : false,
+							lineWidth : 1,
+							lineColor : '#ffffff'
 						}
 					}
 				},
 				legend : {
-					//x : -300,
 					backgroundColor : '#fff',
-					//align : 'right',
 					verticalAlign : 'center',
 					x : 300,
 					y : -10,
@@ -3537,6 +3558,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		function getUsageGraph() {
+			
 			$('#container').highcharts({
 				chart : {
 					type : graphType
@@ -3551,7 +3573,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				xAxis : {
 					categories : resultsDate,
 					labels : {
-						rotation : -90,
 						align : 'right',
 						style : {
 							fontSize : '10px',
@@ -3560,7 +3581,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						}
 					},
 					title : {
-						text : xAxisVal,
 						style : {
 							color : '#7C7A7D',
 						}
@@ -3572,13 +3592,13 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						text : yAxisVal,
 						style : {
 							color : '#7C7A7D',
+							fontFamily : 'Open Sans',
+							fontWeight : 'normal'
 						}
 					}
 				},
 				legend : {
-					//x : -300,
 					backgroundColor : '#fff',
-					//align : 'right',
 					verticalAlign : 'center',
 					x : 300,
 					y : -10,
@@ -3586,6 +3606,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						fontColor : '#A08A75'
 					}
 				},
+				
 				tooltip : {
 					pointFormat : usageLegend + ' <b>{point.y:.1f}</b>',
 				},
@@ -3598,6 +3619,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		function customerGraph() {
+			
 			$('#container').highcharts({
 				chart : {
 					type : graphType
@@ -3612,7 +3634,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				xAxis : {
 					categories : resultsDate,
 					labels : {
-						rotation : -90,
 						align : 'right',
 						style : {
 							fontSize : '10px',
@@ -3621,25 +3642,23 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						}
 					},
 					title : {
-						text : xAxisVal,
 						style : {
 							color : '#7C7A7D',
 						}
 					}
 				},
 				yAxis : {
-
 					title : {
 						text : yAxisVal,
 						style : {
 							color : '#7C7A7D',
+							fontFamily : 'Open Sans',
+							fontWeight : 'normal'
 						}
 					}
 				},
 				legend : {
-					//x : -300,
 					backgroundColor : '#fff',
-					//align : 'right',
 					verticalAlign : 'center',
 					x : 300,
 					y : -10,
@@ -3647,15 +3666,19 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						fontColor : '#A08A75'
 					}
 				},
-				// plotOptions : {
-				// area : {
-				// marker : {
-				// enabled : false,
-				// }
-				// }
-				// },
 				credits : {
 					enabled : false
+				},
+				plotOptions : {
+					area : {
+						stacking : '',
+						lineColor : '#ffffff',
+						lineWidth : 1,
+						marker : {
+							lineWidth : 1,
+							lineColor : '#ffffff'
+						}
+					}
 				},
 				series : [{
 					name : custLegend1,
@@ -3665,80 +3688,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					name : custLegend2,
 					data : results3,
 					color : '#664766'
-				}]
-			});
-		}
-
-		function getTimeVisitGraph() {
-			$('#container').highcharts({
-
-				chart : {
-					type : 'line'
-				},
-
-				title : {
-					text : $scope.chart_heading + ' | Stacked column chart',
-					color : '#A08A75',
-					style : {
-						display : 'none'
-					}
-				},
-
-				xAxis : {
-					categories : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
-					labels : {
-						rotation : -90,
-						style : {
-							fontSize : '10px',
-							fontColor : '#7C7A7D',
-							fontFamily : 'Open Sans'
-						}
-					},
-					title : {
-						text : 'Hours of Day',
-						style : {
-							color : '#7C7A7D',
-						}
-					}
-				},
-				yAxis : {
-					allowDecimals : false,
-					min : 0,
-					title : {
-						text : 'No of Visits',
-						style : {
-							color : '#7C7A7D',
-						}
-					}
-				},
-
-				tooltip : {
-					formatter : function() {
-						//return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '<br/>' + 'Total: ' + this.point.stackTotal;
-						return '<b>' + this.x + 'th </b>Hour : <b>' + this.y + '</b> Visit';
-					},
-				},
-
-				plotOptions : {
-					column : {
-						stacking : 'normal'
-					}
-				},
-				legend : {
-					//x : -300,
-					backgroundColor : '#fff',
-					//align : 'right',
-					verticalAlign : 'center',
-					x : 300,
-					y : -10,
-					style : {
-						fontColor : '#A08A75'
-					}
-				},
-				series : [{
-					name : 'No of Visits',
-					data : finaltime,
-					color : '#D8882F',
 				}]
 			});
 		}

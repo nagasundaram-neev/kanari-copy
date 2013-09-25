@@ -127,13 +127,20 @@
 				<a id="timeOfVisit" href="javascript:void(0)">Time of Visit</a>
 				</li> -->
 				<li>
-					<a id="chequeSize" href="javascript:void(0)">Cheque Size</a>
+					<a id="BillSize" href="javascript:void(0)">Bill Size</a>
 				</li>
 			</ul>
 			<div class="clr"></div>
 		</div>
 		<div class="chart_div">
-			<span class="chart_heading"><!-- {{chart_heading}} > --> {{chart_subheading}} <a href="javascript:void(0);"><span tooltip-placement="right" tooltip="{{chart_subheading_tooltip}}"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> </span>
+			<span class="chart_heading" ><!-- {{chart_heading}} > --> {{chart_subheading}} <a href="javascript:void(0);"><span tooltip-placement="right" tooltip="{{chart_subheading_tooltip}}"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+			<select ng-show="showChartType" ng-model="chartType" style=" float: right;" ng-change="selectChartType()" >
+				<option value="nonpercent">Stacked area chart</option>
+				<option value="percent">Percentage area chart</option>
+			</select>
+			</span>
+			
+			<div class="clr"></div>
 			<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 			<span class="chart_heading">Summary</span>
 			<div class="clr"></div>
