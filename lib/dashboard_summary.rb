@@ -184,6 +184,24 @@ class DashboardSummary
 
   end
 
+  def get_points_issued_summary
+    current_points_issued = @feedbacks.inject(0){|sum, r| sum + r.points.to_i}
+    previous_points_issued = @previous_feedbacks.inject(0){|sum, r| sum + r.points.to_i}
+    average_points_issued_per_day = current_points_issued.to_f/((@end_time.to_date - @start_time.to_date).round)
+    previous_average_points_issued_per_day = previous_points_issued.to_f/((@end_time.to_date - @start_time.to_date).round)
+    return({
+      total: {
+        over_period: current_points_issued,
+        change_in_percentage: percentage_change(previous_points_issued, current_points_issued)
+      },
+      average_per_day: {
+        over_period: average_points_issued_per_day,
+        change_in_percentage: percentage_change(previous_average_points_issued_per_day, average_points_issued_per_day)
+      }
+    })
+
+  end
+
   private
 
     def get_category_summary(category)

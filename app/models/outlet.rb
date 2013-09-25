@@ -266,6 +266,7 @@ class Outlet < ActiveRecord::Base
       summary[:average_bill_size] = summary_calculator.get_average_bill_size_summary
       summary[:average_rewards_pool_size] = summary_calculator.get_rewards_pool_summary
       summary[:discounts_claimed] = summary_calculator.get_discounts_claimed_summary
+      summary[:points_issued] = summary_calculator.get_points_issued_summary
       return summary
     end
 

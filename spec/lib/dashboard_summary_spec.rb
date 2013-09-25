@@ -15,10 +15,10 @@ describe DashboardSummary do
       Feedback.create(food_quality: 1, speed_of_service: 1,  recommendation_rating: 9,updated_at: Time.now - 9.days, user: male_user, bill_amount: 1300.70),
       Feedback.create(food_quality: 0, speed_of_service: 1,  recommendation_rating: 8,updated_at: Time.now - 8.days, user: male_user, bill_amount: 199.30),
       Feedback.create(food_quality: 0, speed_of_service: 1,  recommendation_rating: 8,updated_at: Time.now - 8.days, user: male_user),
-      Feedback.create(food_quality: 1, speed_of_service: 1,  recommendation_rating: 3,updated_at: Time.now - 7.days, user: male_user),
+      Feedback.create(food_quality: 1, speed_of_service: 1,  recommendation_rating: 3,updated_at: Time.now - 7.days, user: male_user, points: 5),
 
       Feedback.create(food_quality: 1, speed_of_service: 1,  recommendation_rating: 5,updated_at: Time.now - 6.days, user: female_user, bill_amount: 100.10),
-      Feedback.create(food_quality: 1, speed_of_service: -1, recommendation_rating: 8,updated_at: Time.now - 5.days, user: female_user),
+      Feedback.create(food_quality: 1, speed_of_service: -1, recommendation_rating: 8,updated_at: Time.now - 5.days, user: female_user, points: 10),
       Feedback.create(food_quality: 1, speed_of_service: -1, recommendation_rating: 9,updated_at: Time.now - 5.days, user: female_user, bill_amount: 2899.90),
       Feedback.create(food_quality: 1, speed_of_service: 1,  recommendation_rating: 8,updated_at: Time.now - 4.days, rewards_pool_after_feedback: 1020, user: male_user)
     ]
@@ -228,6 +228,15 @@ describe DashboardSummary do
   describe "#get_discounts_claimed_summary" do
     it "should return discounts claimed summary as a hash" do
       @dashboard_summary.get_discounts_claimed_summary.should == {
+        :average_per_day => {:over_period=>3.3333333333333335, :change_in_percentage=>100.0},
+        :total => {:over_period=>10, :change_in_percentage=>100.0}
+      }
+    end
+  end
+
+  describe "#get_points_issued_summary" do
+    it "should return points issued summary as a hash" do
+      @dashboard_summary.get_points_issued_summary.should == {
         :average_per_day => {:over_period=>3.3333333333333335, :change_in_percentage=>100.0},
         :total => {:over_period=>10, :change_in_percentage=>100.0}
       }

@@ -130,6 +130,16 @@ Feature: Dashboard Trends
              "change_in_percentage": null,
              "over_period": 2200.0
            },
+           "points_issued": {
+             "average_per_day": {
+               "change_in_percentage": null,
+               "over_period": 2200.0
+             },
+             "total": {
+               "change_in_percentage": null,
+               "over_period": 2200
+             }
+           },
            "customer_experience": {
              "ambience": {
                "dislike": {
@@ -534,6 +544,16 @@ Feature: Dashboard Trends
              "change_in_percentage": null,
              "over_period": 2090.909090909091
            },
+           "points_issued": {
+             "average_per_day": {
+               "change_in_percentage": null,
+               "over_period": 2300.0
+             },
+             "total": {
+               "change_in_percentage": null,
+               "over_period": 2300
+             }
+           },
            "customer_experience": {
              "ambience": {
                "dislike": {
@@ -886,6 +906,16 @@ Feature: Dashboard Trends
            "average_bill_size": {
              "change_in_percentage": null,
              "over_period": 0.0
+           },
+           "points_issued": {
+             "average_per_day": {
+               "change_in_percentage": null,
+               "over_period": 0.0
+             },
+             "total": {
+               "change_in_percentage": null,
+               "over_period": 0
+             }
            },
            "discounts_claimed": {
              "average_per_day": {
