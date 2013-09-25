@@ -724,6 +724,14 @@ module.controller('listPaymentInvoiceCtrl', function($rootScope, $scope, $http, 
 	}
 });
 
+var date = new Date(), y = date.getFullYear(), m = date.getMonth();
+var firstDay = new Date(y, m, 1);
+var lastDay = new Date(y, m + 1, 0);
+
+var startDt = moment(firstDay).format('DD-MM-YYYY 00:00');
+
+var endDt = moment(lastDay).format('DD-MM-YYYY 23:23');
+
 module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams, $http, $location) {
 	if (getCookie('authToken')) {
 		$scope.action = true;
@@ -914,20 +922,12 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			Dt : Date.now(),
 		}
 
-		var date = new Date(), y = date.getFullYear(), m = date.getMonth();
-		var firstDay = new Date(y, m, 1);
-		var lastDay = new Date(y, m + 1, 0);
-
-		var startDate = moment(firstDay).format('DD-MM-YYYY 00:00');
-
-		var endDate = moment(lastDay).format('DD-MM-YYYY 23:23');
-
-		console.log($routeParams.outletId + "----" + startDate + "------" + endDate)
+		//console.log($routeParams.outletId + "----" + startDate + "------" + endDate)
 		var param = {
 			"auth_token" : getCookie('authToken'),
 			"outlet_id" : $routeParams.outletId,
-			"start_time" : startDate,
-			"end_time" : endDate
+			"start_time" : startDt,
+			"end_time" : endDt
 		}
 
 		$http({
@@ -3017,12 +3017,15 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				timeOfV = 0;
 				npsBreakdownV = 0;
 				npsOverview = 0;
+				var startDateV;
 				//var timeOfVisit = [];
 				$scope.trendsList = data.feedback_trends.detailed_statistics;
 				var arrayLength = Object.keys($scope.trendsList).length;
 				for (var i = 0; i < arrayLength; i++) {
 					dateV = Object.keys($scope.trendsList)[i];
 					/** Customer Experience Start**/
+					startDateV = moment(dateV).format('MMM DD');
+					//console.log(startDateV);
 					if (idValue == "food") {
 						$scope.selectedOption = "";
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].food_quality.like;
@@ -3341,7 +3344,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					}
 					/**Customers End**/
 
-					resultsDate.push(dateV);
+					resultsDate.push(startDateV);
 					results1.push(foodLike);
 					results2.push(foodNeutral);
 					results3.push(foodDisLike);
@@ -3466,17 +3469,18 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				xAxis : {
 					categories : resultsDate,
 					title : {
-						text : xAxisVal,
+						//text : xAxisVal,
 						style : {
 							color : '#7C7A7D',
 						}
 					},
 					labels : {
-						rotation : -90,
+						//rotation : -90,
 						style : {
 							fontSize : '10px',
 							fontColor : '#7C7A7D',
-							fontFamily : 'Open Sans'
+							fontFamily : 'Open Sans',
+							fontWeight : 'normal'
 						}
 					}
 				},
@@ -3488,6 +3492,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						text : yAxisVal,
 						style : {
 							color : '#7C7A7D',
+							fontWeight : 'normal'
 						}
 					}
 				},
