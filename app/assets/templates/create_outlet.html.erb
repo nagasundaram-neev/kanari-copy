@@ -507,8 +507,115 @@
 			</div>
 			<div class="clr"></div>
 		</div>
-		<div id ="reports" ng-show="ReportShow" style="height: 267px;">
-			This is reports based div only
+		<!-- height: 267px; -->
+		<div id ="reports" ng-show="ReportShow" >
+			<div class="rightPanel" style="margin-top:0">
+				<a href="javascript:getPdf();" style="float: right;"><!-- Download PDF --></a>
+				<!-- <div id="content">
+     <h3>Hello, this is a H3 tag</h3>
+
+    <p>{{restaurant_name}} - {{restaurant_location}}</p>
+</div>
+<div id="editor"></div>
+<button id="cmd">generate PDF</button> -->
+				
+				
+				<div class="clr"></div>
+			<div class="restName">{{restaurant_name}} - {{restaurant_location}}</div>
+			<div class="reportPerid">Report Period: {{todaysDt.Dt | date:'MMMM yyyy'}}</div>
+			<div class="reportHead">Net Promoter Score</div>
+			<div id="container" style="min-width: 600px; height: 400px; margin: 0 auto"></div>
+			<div class="clr"></div>
+			<div class="xyAxisValues">
+				<div class="xyAxisOptions">
+					<span>Period NPS</span></br/>
+					<span>{{NPS | number:1}}</span></br/>
+					<!-- <span>+/-XX</span> -->
+				</div>
+				<div class="xyAxisOptions">
+					<span>Premoters</span></br/>
+					<span>{{positiveChange | number:1}}%</span></br/>
+					<!-- <span>+/-XX</span> -->
+				</div>
+				<div class="xyAxisOptions">
+					<span>Passives</span></br/>
+					<span>{{neutralChange | number:1}}%</span></br/>
+					<!-- <span>+/-XX</span> -->
+				</div>
+				<div class="xyAxisOptions">
+					<span>Detractors</span></br/>
+					<span>{{negativeChange | number:1}}%</span></br/>
+					<!-- <span>+/-XX</span> -->
+				</div>
+			</div>
+			<div class="clr"></div>
+			<div class="reportHead">Kanari Usage</div>
+			<div class="clr"></div>
+			<div class="xyAxisValues">
+				<div class="xyAxisOptions">
+					<span>Feedback Submissions</span></br/>
+					<span>{{feedbackSubmit | number:1}}%</span></br/>
+					<!-- <span>+/-XX</span> -->
+				</div>
+				<div class="xyAxisOptions">
+					<span>Redemptions Processed</span></br/>
+					<span>{{noOfRedem | number:1}}%</span></br/>
+					<!-- <span>+/-XX</span> -->
+				</div>
+				<div class="xyAxisOptions">
+					<span>Points issued</span></br/>
+					<span>{{neutralChange | number:1}}%</span></br/>
+					<!-- <span>+/-XX</span> -->
+				</div>
+				<div class="xyAxisOptions">
+					<span>Discounts Claimed</span></br/>
+					<span>{{discountClaimed | number:1}}%</span></br/>
+					<!-- <span>+/-XX</span> -->
+				</div>
+			</div>
+			<div class="clr"></div>
+			<div class="reportHead">Experience Criteria</div>
+			<div class="exp_criteria">
+				<div class="expCriterias">
+					{{food_monthlyChange | number:1}}%<br/>
+					<!-- -{{food_negative | number:1}}%<br/> -->
+					<span>FOOD</span>
+				</div>
+				<div class="expCriterias">
+					{{speed_monthlyChange | number:1}}%<br/>
+					<!-- -{{speed_neutral | number:1}}%<br/> -->
+					<span>SPEED</span>
+				</div>
+				<div class="expCriterias">
+					{{friendly_monthlyChange | number:1}}%<br/>
+					<!-- -{{friendly_negative | number:1}}%<br/> -->
+					<span>FRIENDLINESS</span>
+				</div>
+				<div class="clr"></div>
+				<div class="expCriterias">
+					{{ambience_monthlyChange | number:1}}%<br/>
+					<!-- -{{ambience_negative | number:1}}%<br/> -->
+					<span>AMBIANCE</span>
+				</div>
+				<div class="expCriterias">
+					{{clean_monthlyChange | number:1}}%<br/>
+					<!-- -{{clean_negative | number:1}}%<br/> -->
+					<span>CLEANLINESS</span>
+				</div>
+				<div class="expCriterias">
+					{{moneyVal_monthlyChange | number:1}}%<br/>
+					<!-- -{{moneyVal_negative | number:1}}%<br/> -->
+					<span>VALUE FOR MONEY</span>
+				</div>
+			</div>
+			<div class="clr"></div>
+			<div class="reportHead">Customers</div>
+			<div>
+				<div id="pieChart1" style="float:left;min-width: 300px;"></div>
+				<div id="pieChart2" style="float:left;min-width: 300px;"></div>
+			</div>
+			<div class="clr"></div>
+			</div>
 		</div>
 		<div id ="tabletIds" ng-show="TabletIdShow" style="height: 267px;">
 			<div data-role="fieldcontain" class="manager_list rightPanel" style=" width: 340px;">
@@ -792,5 +899,23 @@
 		// $("#divexample1").niceScroll();
 
 	}); 
+	
+	// $(function () {
+    // var doc = new jsPDF();
+    // var specialElementHandlers = {
+        // '#editor': function (element, renderer) {
+            // return true;
+        // }
+    // };
+// 
+    // $('#cmd').click(function () {
+    	// console.log("in");
+        // doc.fromHTML($('#reports').html(), 15, 15, {
+            // 'width': 170,
+                // 'elementHandlers': specialElementHandlers
+        // });
+        // doc.save('sample-file.pdf');
+    // });
+// });
 </script>
 	

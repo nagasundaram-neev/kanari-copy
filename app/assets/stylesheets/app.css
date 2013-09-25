@@ -62,9 +62,9 @@ body {
 }
 .span12 a.kanarilogo img {
 	height: 35px;
-    margin-bottom: 10px;
-    margin-top: 13px;
-    width: 210px;
+	margin-bottom: 10px;
+	margin-top: 13px;
+	width: 210px;
 }
 .welcome a {
 	text-decoration: none;
@@ -712,7 +712,7 @@ ul.taketour li a:hover {
 	padding: 10px 0 5px;
 	margin-bottom: 10px;
 	width: 364px;
-	margin-bottom: 10px; 
+	margin-bottom: 10px;
 }
 
 .select_option {
@@ -745,6 +745,35 @@ ul.taketour li a:hover {
 }
 #permission select {
 	width: 150px !important;
+}
+#reports {
+	line-height: 24px;
+}
+#reports .restName {
+	font-size: 14px;
+}
+.xyAxisValues {
+    margin: 0 20px;
+}
+.xyAxisOptions {
+	float: left;
+    line-height: 20px;
+    margin: 0 25px;
+    text-align: center;
+    width: 78px;
+}
+.expCriterias {
+	float: left;
+	text-align: center;
+	width: 170px;
+	padding: 20px 0;
+}
+.reportHead {
+	border-bottom: 1px solid #ccc;
+	font-size:20px;
+	font-weight:bold;
+	 margin-bottom: 10px;
+    padding: 15px 0;
 }
 /**Create Invitation**/
 #login .input-help {
@@ -1467,7 +1496,7 @@ input {
 
 /**** Dashboard Trends ****/
 .menu_bar {
-	width: 240px;
+	width: 220px;
 	padding: 10px 0;
 	border-right: 1px solid #F0F0F0;
 	float: left;
@@ -1498,13 +1527,13 @@ input {
 }
 .chart_div {
 	float: left;
-	width: 900px;
-	margin: 0 20px 20px;
+	margin: 10px 40px;
+    width: 920px;
 }
 .chart_heading {
 	display: block;
-	font-size: 16px;
-	/*font-weight: bold;*/
+	font-size: 30px;
+    font-weight: 100;
 	margin: 20px 10px;
 }
 #dashboard_trends ul li a:active {
@@ -1520,33 +1549,59 @@ input {
 	color: #C84A58;
 }
 .custExpSummary {
-	border: 1px solid #CCCCCC;
+	/*border: 1px solid #CCCCCC;
 	overflow: hidden;
 	width: 610px;
-	margin: 10px 20px;
+	margin: 10px 20px;*/
+	margin: 10px 10px 10px 50px;
+    overflow: hidden;
 }
 
 .custExpSummary div.custExpDiv {
-	border-bottom: 1px solid #CCCCCC;
+	/*border-bottom: 1px solid #CCCCCC;
 	border-right: 1px solid #CCCCCC;
 	float: left;
 	height: 15px;
-	/*padding: 10px 5px;*/
-	padding:5px 5px 15px;
-	width: 110px;
+	/*padding: 10px 5px;
+	padding: 5px 5px 15px;
+	width: 110px;*/
+	 border-bottom: 1px solid #F0F0F0;
+   color: #999999;
+    float: left;
+    height: 15px;
+    padding: 10px 5px;
+    text-align: center;
+    width:28%;
+}
+.maxWidth div.custExpDiv {
+	width:16%;
 }
 .tooltip-inner {
-     white-space: pre-line;
-     max-width:250px !important;
-     padding:10px 5px !important;
+	white-space: pre-line;
+	max-width: 250px !important;
+	padding: 10px 5px !important;
 }
-.tooltipIcon{height:15px;padding-bottom:5px;}
+.tooltipIcon {
+	height: 15px;
+	padding-bottom: 5px;
+}
 .custExpSummary div.colno1 {
-	width: 250px;
+	/*width: 250px;*/
+	 text-align: left;
+    width: 37%;
 }
-.custExpSummary div.colno3 {
-	width: 218px;
+.custExpSummary div.colno1 span {
+	font-size:16px;
+	color:#4C4B4D;
 }
+.custExpSummary div.colno2, .custExpSummary div.colno3 {
+	font-size:20px;
+}
+.custExpSummary div.colnoW {
+	width: 25%;
+}
+.custExpSummary span.positiveVal{color:#46B157}
+.custExpSummary span.negativeVal{color:#c84a58}
 /**** Dashboard Trends End ****/
 
 /****Calendar CSS***/

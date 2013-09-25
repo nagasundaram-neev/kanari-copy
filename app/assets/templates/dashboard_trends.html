@@ -133,19 +133,19 @@
 			<div class="clr"></div>
 		</div>
 		<div class="chart_div">
-			<span class="chart_heading">{{chart_heading}} > {{chart_subheading}}
-			<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="{{chart_subheading_tooltip}}"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
-			</span>
+			<span class="chart_heading"><!-- {{chart_heading}} > --> {{chart_subheading}} <a href="javascript:void(0);"><span tooltip-placement="right" tooltip="{{chart_subheading_tooltip}}"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> </span>
 			<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+			<span class="chart_heading">Summary</span>
+			<div class="clr"></div>
 			<div ng-show="custExpSummary" class="custExpSummary">
 				<div class="custExpDiv colno1">
 					<b>People who voted:</b>
 				</div>
-				<div class="custExpDiv ">
+				<div class="custExpDiv">
 					<b>Over Period</b>
 					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The period is the date range you selected and the range displayed on the graph."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
-				<div class="custExpDiv border_right_none colno3">
+				<div class="custExpDiv border_right_none">
 					<b>Change VS Precending Period</b>
 					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Change compared to te last period.
 
@@ -157,35 +157,38 @@
 					<span ng-switch-default > Positive </span>
 					<span ng-switch-when="npsBreakdown">Promoters <a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Promoters are customers who answered 9 or 10 to the question 'How likely are you to recommend today's experience to friends & family?'"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> </span>
 				</div>
-				<div class="custExpDiv">
+				<div class="custExpDiv colno2">
 					{{positive | number:1}}%
 				</div>
-				<div class="custExpDiv border_right_none colno3" ng-switch on="positiveChange">
-					<span ng-switch-default > {{positiveChange}} </span>
-					<span ng-switch-when="null"> - </span>
+				<div class="custExpDiv border_right_none colno3" ng-switch on="foodpositiveChange">
+					<span class="positiveVal" ng-switch-when="1"> {{positiveChange}} </span>
+					<span class="negativeVal" ng-switch-when="-1"> {{positiveChange}} </span>
+					<span ng-switch-when="0"> - </span>
 				</div>
 				<div class="custExpDiv colno1" ng-switch on="selectedOption">
 					<span ng-switch-default > Neutral </span>
 					<span ng-switch-when="npsBreakdown">Passives <a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Passives are customers who answered 7 or 8 to the question 'How likely are you to recommend today's experience to friends & family?"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> </span>
 				</div>
-				<div class="custExpDiv">
+				<div class="custExpDiv colno2">
 					{{neutral | number:1}}%
 				</div>
-				<div class="custExpDiv border_right_none colno3" ng-switch on="neutralChange">
-					<span ng-switch-default> {{neutralChange}} </span>
-					<span ng-switch-when="null"> - </span>
+				<div class="custExpDiv border_right_none colno3" ng-switch on="foodneutralChange">
+					<span class="positiveVal" ng-switch-when="1"> {{neutralChange}} </span>
+					<span class="negativeVal" ng-switch-when="-1"> {{neutralChange}} </span>
+					<span ng-switch-when="0"> - </span>
 				</div>
-				<div class="custExpDiv border_bottom_none colno1" ng-switch on="selectedOption">
+				<div class="custExpDiv colno1" ng-switch on="selectedOption">
 					<span ng-switch-default > Negative </span>
 					<span ng-switch-when="npsBreakdown">Detractors <a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Detractors are customers who answered 0 or 6 to the question 'How likely are you to recommend today's experience to friends & family?"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> </span>
 				</div>
-				<div class="custExpDiv border_bottom_none">
+				<div class="custExpDiv colno2">
 					{{negative | number:1}}%
 				</div>
 				<!-- <div class="border_bottom_none">{{(negative/(positive+neutral+negative))*100 | number:1}}%</div> -->
-				<div class="custExpDiv border_right_none border_bottom_none colno3" ng-switch on="negativeChange">
-					<span ng-switch-default> {{negativeChange}} </span>
-					<span ng-switch-when="null"> - </span>
+				<div class="custExpDiv border_right_none colno3" ng-switch on="foodnegativeChange">
+					<span class="positiveVal" ng-switch-when="1"> {{negativeChange}} </span>
+					<span class="negativeVal" ng-switch-when="-1"> {{negativeChange}} </span>
+					<span ng-switch-when="0"> - </span>
 				</div>
 			</div>
 			<div ng-show="NPSSummary" class="custExpSummary">
@@ -196,7 +199,7 @@
 					<b>Over Period</b>
 					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The period is the date range you selected and the range displayed on the graph."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
-				<div class="custExpDiv border_right_none colno3">
+				<div class="custExpDiv border_right_none">
 					<b>Change VS Precending Period</b>
 					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Change compared to te last period.
 
@@ -205,27 +208,28 @@
 					Eg.2: If your period is days long, the precending period is the 6 days immediately before your selected period."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
 				<div class="custExpDiv colno1">
-					NPS
+					<span>NPS</span>
 				</div>
-				<div class="custExpDiv">
+				<div class="custExpDiv colno2">
 					{{NPS | number:1}}%
 				</div>
 				<div class="custExpDiv border_right_none colno3" ng-switch on="NPSChange">
 					<span ng-switch-default> {{NPSChange}} </span>
 					<span ng-switch-when="null"> - </span>
 				</div>
-				<div class="custExpDiv border_bottom_none colno1">
-					No. of feedback submissions
+				<div class="custExpDiv colno1">
+					<span>No. of feedback submissions</span>
 				</div>
-				<div class="custExpDiv border_bottom_none">
+				<div class="custExpDiv colno2">
 					{{noOfFeedback}}
 				</div>
-				<div class="custExpDiv border_right_none border_bottom_none colno3" ng-switch on="noOfFeedbackChange">
-					<span ng-switch-default> {{noOfFeedbackChange}} </span>
-					<span ng-switch-when="null"> - </span>
+				<div class="custExpDiv border_right_none colno3" ng-switch on="foodpositiveChange">
+					<span class="positiveVal" ng-switch-when="1"> {{positiveChange}} </span>
+					<span class="negativeVal" ng-switch-when="-1"> {{positiveChange}} </span>
+					<span ng-switch-when="0"> - </span>
 				</div>
 			</div>
-			<div ng-show="feedbackCount" class="custExpSummary" style=" width: 731px;">
+			<div ng-show="feedbackCount" class="maxWidth custExpSummary">
 				<div class="custExpDiv colno1">
 					&nbsp;
 				</div>
@@ -236,7 +240,7 @@
 				<div class="custExpDiv">
 					<b>Avg. Per Day</b>
 				</div>
-				<div class="custExpDiv border_right_none colno3">
+				<div class="custExpDiv border_right_none colnoW">
 					<b>Change VS Precending Period</b>
 					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Change compared to te last period.
 
@@ -244,18 +248,19 @@
 
 					Eg.2: If your period is days long, the precending period is the 6 days immediately before your selected period."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
-				<div class="custExpDiv border_bottom_none colno1">
-					{{text}}
+				<div class="custExpDiv colno1">
+					<span>{{text}}</span>
 				</div>
-				<div class="custExpDiv border_bottom_none">
+				<div class="custExpDiv colno2">
 					{{noOfFeedback}}
 				</div>
-				<div class="custExpDiv border_bottom_none">
+				<div class="custExpDiv colno2">
 					{{noOfFeedbackPerDay | number:1}}
 				</div>
-				<div class="custExpDiv border_right_none border_bottom_none colno3" ng-switch on="noOfFeedbackChange">
-					<span ng-switch-default> {{noOfFeedbackChange}} </span>
-					<span ng-switch-when="null"> - </span>
+				<div class="custExpDiv border_right_none colno3 colnoW" ng-switch on="foodpositiveChange">
+					<span class="positiveVal" ng-switch-when="1"> {{positiveChange}} </span>
+					<span class="negativeVal" ng-switch-when="-1"> {{positiveChange}} </span>
+					<span ng-switch-when="0"> - </span>
 				</div>
 			</div>
 			<div ng-show="rewardPool" class="custExpSummary">
@@ -266,7 +271,7 @@
 					<b>Over Period</b>
 					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The period is the date range you selected and the range displayed on the graph."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
-				<div class="custExpDiv border_right_none colno3">
+				<div class="custExpDiv border_right_none">
 					<b>Change VS Precending Period</b>
 					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Change compared to te last period.
 
@@ -274,15 +279,16 @@
 
 					Eg.2: If your period is days long, the precending period is the 6 days immediately before your selected period."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
-				<div class="custExpDiv border_bottom_none colno1">
-					{{text}}
+				<div class="custExpDiv colno1">
+					<span>{{text}}</span>
 				</div>
-				<div class="custExpDiv border_bottom_none">
+				<div class="custExpDiv colno2">
 					Dhs. {{rewardPoolCount | number:1}}
 				</div>
-				<div class="custExpDiv border_right_none border_bottom_none colno3" ng-switch on="rewardPoolCountChange">
-					<span ng-switch-default> {{rewardPoolCountChange}} </span>
-					<span ng-switch-when="null"> - </span>
+				<div class="custExpDiv border_right_none colno3" ng-switch on="foodpositiveChange">
+					<span class="positiveVal" ng-switch-when="1"> {{positiveChange}} </span>
+					<span class="negativeVal" ng-switch-when="-1"> {{positiveChange}} </span>
+					<span ng-switch-when="0"> - </span>
 				</div>
 			</div>
 			<div ng-show="demographic" class="custExpSummary">
@@ -293,7 +299,7 @@
 					<b>Over Period</b>
 					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The period is the date range you selected and the range displayed on the graph."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
-				<div class="custExpDiv border_right_none colno3">
+				<div class="custExpDiv border_right_none">
 					<b>Change VS Precending Period</b>
 					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Change compared to te last period.
 
@@ -302,29 +308,31 @@
 					Eg.2: If your period is days long, the precending period is the 6 days immediately before your selected period."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
 				<div class="custExpDiv colno1">
-					Male
+					<span>Male</span>
 				</div>
-				<div ng-switch on="maleCount" class="custExpDiv">
+				<div ng-switch on="maleCount" class="custExpDiv colno2">
 					<span ng-switch-default> {{maleCount}}% </span>
 					<span ng-switch-when="null"> - </span>
 				</div>
-				<div class="custExpDiv border_right_none colno3" ng-switch on="maleCountChange">
-					<span ng-switch-default> {{maleCountChange}} </span>
-					<span ng-switch-when="null"> - </span>
+				<div class="custExpDiv border_right_none colno3" ng-switch on="foodnegativeChange">
+					<span class="positiveVal" ng-switch-when="1"> {{negativeChange}} </span>
+					<span class="negativeVal" ng-switch-when="-1"> {{negativeChange}} </span>
+					<span ng-switch-when="0"> - </span>
 				</div>
-				<div class="custExpDiv border_bottom_none colno1">
-					Female
+				<div class="custExpDiv colno1">
+					<span>Female</span>
 				</div>
-				<div class="custExpDiv border_bottom_none" ng-switch on="femaleCount">
+				<div class="custExpDiv colno2" ng-switch on="femaleCount">
 					<span ng-switch-default> {{femaleCount}}% </span>
 					<span ng-switch-when="null"> - </span>
 				</div>
-				<div class="custExpDiv border_right_none border_bottom_none colno3" ng-switch on="femaleCountChange">
-					<span ng-switch-default> {{femaleCountChange}} </span>
-					<span ng-switch-when="null"> - </span>
+				<div class="custExpDiv border_right_none colno3" ng-switch on="foodpositiveChange">
+					<span class="positiveVal" ng-switch-when="1"> {{positiveChange}} </span>
+					<span class="negativeVal" ng-switch-when="-1"> {{positiveChange}} </span>
+					<span ng-switch-when="0"> - </span>
 				</div>
 			</div>
-			<div ng-show="usergraph" class="custExpSummary" style=" width: 731px;">
+			<div ng-show="usergraph" class="maxWidth custExpSummary" >
 				<div class="custExpDiv colno1">
 					&nbsp;
 				</div>
@@ -335,7 +343,7 @@
 				<div class="custExpDiv">
 					<b>Avg. Per Day</b>
 				</div>
-				<div class="custExpDiv border_right_none colno3">
+				<div class="custExpDiv border_right_none colnoW">
 					<b>Change VS Precending Period</b>
 					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Change compared to te last period.
 
@@ -344,32 +352,34 @@
 					Eg.2: If your period is days long, the precending period is the 6 days immediately before your selected period."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
 				<div class="custExpDiv colno1">
-					New User
+					<span>New User</span>
 					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The no. of interactions from people who are using kanari at your restaurant for the first time."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
-				<div class="custExpDiv">
+				<div class="custExpDiv colno2">
 					{{newUser}}
 				</div>
-				<div class="custExpDiv">
+				<div class="custExpDiv colno2">
 					{{newUserPerDay | number:1}}
 				</div>
-				<div class="custExpDiv border_right_none colno3" ng-switch on="newUserChange">
-					<span ng-switch-default> {{newUserChange}} </span>
-					<span ng-switch-when="null"> - </span>
+				<div class="custExpDiv border_right_none colno3 colnoW" ng-switch on="foodnegativeChange">
+					<span class="positiveVal" ng-switch-when="1"> {{negativeChange}} </span>
+					<span class="negativeVal" ng-switch-when="-1"> {{negativeChange}} </span>
+					<span ng-switch-when="0"> - </span>
 				</div>
-				<div class="custExpDiv border_bottom_none colno1">
-					Returning User
+				<div class="custExpDiv colno1">
+					<span>Returning User</span>
 					<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The no. of interactions from people who have previously used Kanari at your restaurant."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
 				</div>
-				<div class="custExpDiv border_bottom_none">
+				<div class="custExpDiv colno2">
 					{{retUser}}
 				</div>
-				<div class="custExpDiv border_bottom_none">
+				<div class="custExpDiv colno2">
 					{{retUserPerDay | number:1}}
 				</div>
-				<div class="custExpDiv border_right_none border_bottom_none colno3" ng-switch on="retUserChange">
-					<span ng-switch-default> {{retUserChange}} </span>
-					<span ng-switch-when="null"> - </span>
+				<div class="custExpDiv border_right_none colno3 colnoW" ng-switch on="foodpositiveChange">
+					<span class="positiveVal" ng-switch-when="1"> {{positiveChange}} </span>
+					<span class="negativeVal" ng-switch-when="-1"> {{positiveChange}} </span>
+					<span ng-switch-when="0"> - </span>
 				</div>
 			</div>
 		</div>
