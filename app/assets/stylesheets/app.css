@@ -1527,7 +1527,7 @@ input {
 }
 .chart_div {
 	float: left;
-	margin: 10px 40px;
+	 margin: 10px 40px 20px;
     width: 920px;
 }
 .chart_heading {
