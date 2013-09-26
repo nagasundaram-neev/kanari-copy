@@ -1024,7 +1024,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 						}
 					},
 					title : {
-					//	text : xAxisVal,
+						//	text : xAxisVal,
 						style : {
 							color : '#7C7A7D',
 						}
@@ -1056,10 +1056,10 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					data : results1,
 					color : '#664766'
 				}],
-				  exporting: {
-            enabled: true,
-            type: 'image/jpeg'
-        }
+				exporting : {
+					enabled : true,
+					type : 'image/jpeg'
+				}
 			});
 		}
 
@@ -2900,8 +2900,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		var day = d.getDate();
 
 		var currentDate = d.getFullYear() + '-' + (('' + month).length < 2 ? '0' : '') + month + '-' + (('' + day).length < 2 ? '0' : '') + day;
-		
-		
+
 		$scope.chartType = "percent";
 		stackingValue = "percent";
 		$scope.showChartType = true;
@@ -2912,22 +2911,20 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			$(this).addClass("active");
 			$scope.chart_subheading = $(this).text();
 			idV = $(this).attr("id");
-			 if (idV == "npsBreakdown") {
+			if (idV == "npsBreakdown") {
 				// $scope.showChartType = false;
 				// stackingValue = "";
 				custExpVal = false;
-			 }
-			 else{
-			 	custExpVal = true;
-			 } 
-			 //else {
-// 			
-				// //stackingValue = "percent";
+			} else {
+				custExpVal = true;
+			}
+			//else {
+			//
+			// //stackingValue = "percent";
 			// }
 			$scope.listOfTrendsDate(idV);
 		});
-	
-		
+
 		$scope.chart_heading = "Customer Experience";
 		$scope.chart_subheading_tooltip = "Breakdown of user ratings of food quality at this restaurant over the specified period. You can toggle between absolute and percentage figures.";
 		$scope.custExpSummary = true;
@@ -2944,31 +2941,38 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				$scope.showChartType = true;
 				//stackingValue = "";
 			} else if (metricsId == "netPromo") {
-					$scope.showChartType = false;
+				$scope.showChartType = false;
 				$scope.chart_heading = "Net Promoter Score";
 			} else if (metricsId == "usage") {
-					$scope.showChartType = false;
+				$scope.showChartType = false;
 				$scope.chart_heading = "Usage";
 			} else if (metricsId == "customers") {
-					$scope.showChartType = false;
+				$scope.showChartType = false;
 				$scope.chart_heading = "Customers";
 			}
 		});
-		
-		
-		$scope.selectChartType=function(){			
-			if($scope.chartType == "nonpercent"){
+
+		$scope.btns = [{
+			label : "100%",
+			state : false
+		}];
+
+
+		 $('#data-policy').change(function() {
+			if ($('#data-policy').is(':checked')) {
 				stackingValue = "";
-				yAxisVal = "Feedback Submissions";				
-			}
-			else{
+				yAxisVal = "Feedback Submissions";
+				$scope.chartType = "nonpercent"
+			} else {
 				stackingValue = "percent";
 				yAxisVal = "%Feedback Submissions";
-			}	
-			graphType = "area";	
-			//$scope.listOfTrendsDate(idV);	
-			getCustExpGraph();		
-		}
+				$scope.chartType = "percent"
+			}
+			
+			graphType = "area";
+			 getCustExpGraph();
+		});
+
 		$('#reportrange').daterangepicker({
 			ranges : {
 				'Today' : [moment(), moment()],
@@ -3397,8 +3401,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				} else if (metricsId == "usage" || npsOverview == "1") {
 					//graphType = "line";
 					getUsageGraph();
-				}
-				else if (metricsId == "customers") {
+				} else if (metricsId == "customers") {
 					customerGraph();
 				}
 
@@ -3492,19 +3495,17 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		function getCustExpGraph() {
-			if(custExpVal == true){
-			if($scope.chartType == "nonpercent"){
-				stackingValue = "";
-				yAxisVal = "Feedback Submissions";				
-			}
-			else{
+			if (custExpVal == true) {
+				if ($scope.chartType == "nonpercent") {
+					stackingValue = "";
+					yAxisVal = "Feedback Submissions";
+				} else {
+					stackingValue = "percent";
+					yAxisVal = "%Feedback Submissions";
+				}
+			} else {
 				stackingValue = "percent";
-				yAxisVal = "%Feedback Submissions";
-			}
-			}
-			else{
-				stackingValue = "percent";
-				yAxisVal = "Feedback Submissions(100%)";	
+				yAxisVal = "Feedback Submissions(100%)";
 			}
 			$('#container').highcharts({
 				chart : {
@@ -3587,7 +3588,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		function getUsageGraph() {
-			
+
 			$('#container').highcharts({
 				chart : {
 					type : graphType
@@ -3635,7 +3636,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						fontColor : '#A08A75'
 					}
 				},
-				
+
 				tooltip : {
 					pointFormat : usageLegend + ' <b>{point.y:.1f}</b>',
 				},
@@ -3648,7 +3649,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		function customerGraph() {
-			
+
 			$('#container').highcharts({
 				chart : {
 					type : graphType

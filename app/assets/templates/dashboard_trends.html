@@ -133,13 +133,15 @@
 			<div class="clr"></div>
 		</div>
 		<div class="chart_div">
-			<span class="chart_heading" ><!-- {{chart_heading}} > --> {{chart_subheading}} <a href="javascript:void(0);"><span tooltip-placement="right" tooltip="{{chart_subheading_tooltip}}"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
-			<select ng-show="showChartType" ng-model="chartType" style=" float: right;" ng-change="selectChartType()" >
-				<option value="nonpercent">Stacked area chart</option>
-				<option value="percent">Percentage area chart</option>
-			</select>
-			</span>
-			
+			<span class="chart_heading" ><!-- {{chart_heading}} > --> {{chart_subheading}} <a href="javascript:void(0);"><span tooltip-placement="right" tooltip="{{chart_subheading_tooltip}}"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a>
+				<fieldset class="toggle" ng-show="showChartType">
+					<input type="checkbox" id="data-policy" ng-chnage="selectChartType()" ng-model="checked" checked="checked">
+					<label for="data-policy"> <span class="stackLbl">Stack</span>
+						<div class="toggle-button">
+							<div class="toggle-tab"></div>
+						</div> <span>100%</span> </label>
+				</fieldset> </span>
+
 			<div class="clr"></div>
 			<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 			<span class="chart_heading">Summary</span>
