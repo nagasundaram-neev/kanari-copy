@@ -947,13 +947,14 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			var arrayLength = Object.keys($scope.trendsList).length;
 			for (var i = 0; i < arrayLength; i++) {
 				dateV = Object.keys($scope.trendsList)[i];
+				startDateV = moment(dateV).format('MMM DD');
 				var foodLike = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.like - data.feedback_trends.detailed_statistics[dateV].net_promoter_score.dislike;
 				npsOverview = 1;
 				usageLegend = "Net Promoter Score";
 				xAxisVal = "Time Interval (Months, Weeks, Days)";
-				yAxisVal = "Net Promoter Score [limit axes to -100 & +100]";
+				yAxisVal = "Net Promoter Score";
 				$scope.chart_subheading_tooltip = "The Net Promoter Score (NPS) of your restaurant over the specified period. The NPS on each day is calculated as the average of the last 100 feedback submissions.";
-				resultsDate.push(dateV);
+				resultsDate.push(startDateV);
 				results1.push(foodLike);
 			}
 			$scope.NPS = data.feedback_trends.summary.net_promoter_score.score.change_in_points;
@@ -999,6 +1000,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		});
 
 		function getUsageGraph() {
+			console.log("in");
 			$('#container').highcharts({
 				chart : {
 					type : graphType
@@ -1013,7 +1015,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				xAxis : {
 					categories : resultsDate,
 					labels : {
-						rotation : -90,
+						//rotation : -90,
 						align : 'right',
 						style : {
 							fontSize : '10px',
@@ -1022,7 +1024,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 						}
 					},
 					title : {
-						text : xAxisVal,
+					//	text : xAxisVal,
 						style : {
 							color : '#7C7A7D',
 						}
@@ -1038,8 +1040,10 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					}
 				},
 				legend : {
-					x : -180,
 					backgroundColor : '#fff',
+					verticalAlign : 'center',
+					x : 270,
+					y : -10,
 					style : {
 						fontColor : '#A08A75'
 					}
@@ -1051,7 +1055,11 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					name : usageLegend,
 					data : results1,
 					color : '#664766'
-				}]
+				}],
+				  exporting: {
+            enabled: true,
+            type: 'image/jpeg'
+        }
 			});
 		}
 
@@ -2898,15 +2906,21 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		stackingValue = "percent";
 		$scope.showChartType = true;
 		$scope.chart_subheading = "Food Quality";
+		custExpVal = true;
 		$("#dashboard_trends ul li a").click(function() {
 			$('#dashboard_trends ul li a').removeClass("active");
 			$(this).addClass("active");
 			$scope.chart_subheading = $(this).text();
 			idV = $(this).attr("id");
-			// if (idV == "npsBreakdown") {
+			 if (idV == "npsBreakdown") {
 				// $scope.showChartType = false;
 				// stackingValue = "";
-			// } else {
+				custExpVal = false;
+			 }
+			 else{
+			 	custExpVal = true;
+			 } 
+			 //else {
 // 			
 				// //stackingValue = "percent";
 			// }
@@ -2944,10 +2958,12 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		
 		$scope.selectChartType=function(){			
 			if($scope.chartType == "nonpercent"){
-				stackingValue = "";				
+				stackingValue = "";
+				yAxisVal = "Feedback Submissions";				
 			}
 			else{
 				stackingValue = "percent";
+				yAxisVal = "%Feedback Submissions";
 			}	
 			graphType = "area";	
 			//$scope.listOfTrendsDate(idV);	
@@ -3171,8 +3187,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
 						yAxisVal = "Feedback Submissions(100%)";
 						custLegend1 = "% Promoters";
-						custLegend2 = "passives";
-						custLegend3 = "detractors";
+						custLegend2 = "Passives";
+						custLegend3 = "Detractors";
 						$scope.chart_subheading_tooltip = "Breakdown of how customers answered the question ‘How likely are you to recommend today’s experience to friends & family?’ \n Promoters are those who answered 9 or 10.\n Passives are those who answered 7 or 8. \n Detractors are those who answered 0 to 6.";
 						$scope.positive = data.feedback_trends.summary.net_promoter_score.promoters.over_period;
 						$scope.neutral = data.feedback_trends.summary.net_promoter_score.passives.over_period;
@@ -3476,7 +3492,20 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		function getCustExpGraph() {
-			console.log(graphType+"---"+stackingValue);
+			if(custExpVal == true){
+			if($scope.chartType == "nonpercent"){
+				stackingValue = "";
+				yAxisVal = "Feedback Submissions";				
+			}
+			else{
+				stackingValue = "percent";
+				yAxisVal = "%Feedback Submissions";
+			}
+			}
+			else{
+				stackingValue = "";
+				yAxisVal = "Feedback Submissions";	
+			}
 			$('#container').highcharts({
 				chart : {
 					type : 'area'
@@ -3535,7 +3564,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				legend : {
 					backgroundColor : '#fff',
 					verticalAlign : 'center',
-					x : 300,
+					x : 290,
 					y : -10,
 					style : {
 						fontColor : '#A08A75'
