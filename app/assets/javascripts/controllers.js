@@ -3503,8 +3503,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			}
 			}
 			else{
-				stackingValue = "";
-				yAxisVal = "Feedback Submissions";	
+				stackingValue = "percent";
+				yAxisVal = "Feedback Submissions(100%)";	
 			}
 			$('#container').highcharts({
 				chart : {
