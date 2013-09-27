@@ -3189,8 +3189,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.selectedOption = "npsBreakdown";
 						//graphType = "area";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
-						yAxisVal = "Feedback Submissions(100%)";
-						custLegend1 = "% Promoters";
+						yAxisVal = "Feedback Submissions (100%)";
+						custLegend1 = "Promoters";
 						custLegend2 = "Passives";
 						custLegend3 = "Detractors";
 						$scope.chart_subheading_tooltip = "Breakdown of how customers answered the question ‘How likely are you to recommend today’s experience to friends & family?’ \n Promoters are those who answered 9 or 10.\n Passives are those who answered 7 or 8. \n Detractors are those who answered 0 to 6.";
@@ -3215,7 +3215,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						yAxisVal = "Net Promoter Score";
 						$scope.chart_subheading_tooltip = "The Net Promoter Score (NPS) of your restaurant over the specified period. The NPS on each day is calculated as the average of the last 100 feedback submissions.";
 						$scope.NPS = data.feedback_trends.summary.net_promoter_score.score.over_period;
-						$scope.NPSChange = data.feedback_trends.summary.net_promoter_score.score.change_in_points;
+						$scope.negativeChange = data.feedback_trends.summary.net_promoter_score.score.change_in_points;
 						$scope.noOfFeedback = data.feedback_trends.summary.net_promoter_score.feedbacks_count.over_period;
 						$scope.positiveChange = data.feedback_trends.summary.net_promoter_score.feedbacks_count.change_in_percentage;
 						checkPosNegVal();
@@ -3241,8 +3241,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.rewardPool = false;
 						$scope.demographic = false;
 						$scope.usergraph = false;
-						$scope.text = "No. of feedback submissions"
-						usageLegend = "Number of submissions";
+						$scope.text = "Feedback submissions"
+						usageLegend = "Feedback Submissions";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
 						yAxisVal = "Feedback Submissions";
 						$scope.chart_subheading_tooltip = "The number of feedback submissions received each day over the specified period.";
@@ -3258,8 +3258,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.rewardPool = false;
 						$scope.demographic = false;
 						$scope.usergraph = false;
-						$scope.text = "No. of redemptions processed"
-						usageLegend = "Redemptions";
+						$scope.text = "Redemptions processed"
+						usageLegend = "Redemptions Processed";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
 						yAxisVal = "Redemptions Processed";
 						$scope.chart_subheading_tooltip = "The number of redemptions processed each day over the specified period.";
@@ -3275,7 +3275,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.rewardPool = false;
 						$scope.demographic = false;
 						$scope.usergraph = false;
-						$scope.text = "Avg. amount of discount claimed per day";
+						$scope.text = "Discounts Claimed";
 						usageLegend = "Discounts Claimed";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
 						yAxisVal = "Discounts Claimed";
@@ -3292,7 +3292,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.rewardPool = false;
 						$scope.demographic = false;
 						$scope.usergraph = false;
-						$scope.text = "Avg. no. of Points Issued per day";
+						$scope.text = "Points Issued";
 						usageLegend = "Points Issued";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
 						yAxisVal = "Points Issued";
@@ -3308,7 +3308,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.rewardPool = true;
 						$scope.demographic = false;
 						$scope.usergraph = false;
-						$scope.text = "Average rewards pool size"
+						$scope.text = "Average Rewards Pool"
 						usageLegend = "Rewards Pool";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
 						yAxisVal = "Rewards Pool";
@@ -3547,8 +3547,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					}
 				},
 				tooltip : {
-					formatter : function() {
-						return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '<br/>' + 'Total: ' + this.point.stackTotal;
+					formatter : function() {//Math.round(this.y).toFixed(0)
+						return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + Math.round(this.y).toFixed(0) + '<br/>' + 'Total: ' + this.point.stackTotal;
 					},
 				},
 				plotOptions : {

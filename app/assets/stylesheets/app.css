@@ -1535,6 +1535,7 @@ input {
 	font-size: 30px;
 	font-weight: 100;
 	margin: 20px 10px;
+	font-family: 'Roboto', sans-serif !important;
 }
 #dashboard_trends ul li a:active {
 	/*font-weight: bold;*/
@@ -1596,6 +1597,7 @@ input {
 }
 .custExpSummary div.colno2, .custExpSummary div.colno3 {
 	font-size: 20px;
+	color: #4C4B4D;
 }
 .custExpSummary div.colnoW {
 	width: 25%;
@@ -2042,7 +2044,7 @@ fieldset.toggle {
 .toggle label {
 	color: #5A4166;
 	float: left;
-	line-height: 26px;
+	line-height: 20px;
 }
 .stackLbl {
 	float: left;
@@ -2051,40 +2053,34 @@ fieldset.toggle {
 .toggle .toggle-button {
 	margin: 0px 5px 0px 0px;
 	float: left;
-	width: 70px;
-	height: 26px;
-	background-color: #664766;
-	border: 1px solid #664766;
+	width: 40px;
+	height: 20px;
+	background-color: #F5F5F5;
+    border: 1px solid #F5F5F5;
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 }
 .toggle .toggle-button .toggle-tab {
-	width: 30px;
-	height: 26px;
-	background-color: #E4E3E1;
-	border: 1px solid #664766;
+	width: 20px;
+	height: 20px;
+	  background-color: #5A4166;
+    border: 1px solid #664766;
 	margin-left: -1px;
 	margin-top: -1px;
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
-	-webkit-box-shadow: 5px 0px 4px -5px #000000, 0px 0px 0px 0px #000000;
-	-moz-box-shadow: 5px 0px 4px -5px rgba(0, 0, 0, 0.3), 0px 0px 0px 0px #000000;
-	box-shadow: 5px 0px 4px -5px rgba(0, 0, 0, 0.3), 0px 0px 0px 0px #000000;
 }
 .toggle input[type=checkbox] {
 	display: none;
 }
 .toggle input[type=checkbox]:checked ~
 label .toggle-button {
-	background-color: #664766;
+	 background-color: #F5F5F5;
 }
 .toggle input[type=checkbox]:checked ~
 label .toggle-button .toggle-tab {
-	margin-left: 39px;
-	background-color: #E4E3E1;
-	-webkit-box-shadow: -5px 0px 4px -5px #000000, 0px 0px 0px 0px #000000;
-	-moz-box-shadow: -5px 0px 4px -5px rgba(0, 0, 0, 0.3), 0px 0px 0px 0px #000000;
-	box-shadow: -5px 0px 4px -5px rgba(0, 0, 0, 0.3), 0px 0px 0px 0px #000000;
+	margin-left:20px;
+	background-color: #5A4166;
 }
