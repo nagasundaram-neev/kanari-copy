@@ -31,6 +31,63 @@ Feature: Request Redemption
       And the user should have "100" points
       And the user's last activity should be today
 
+    Scenario: Successfully request redemption when rewards pool had expired redemptions
+      Given a customer named "Subway" exists with id "100"
+        And the customer with id "100" has an outlet named "Subway - Bangalore" with id "20"
+        And the outlet has "1000" points in its rewards pool
+        And "500" points are allotted to expired redemptions
+      Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"
+        And his role is "user"
+        And his authentication token is "auth_token_123"
+        And he has "900" points
+        And his last activity was on "2013-01-01 01:00:00"
+      When I authenticate as the user "auth_token_123" with the password "random string"
+      When I send a POST request to "/api/redemptions" with the following:
+      """
+      {
+        "redemption" : {
+          "outlet_id": 20,
+          "points" : 900
+        }
+      }
+      """
+      Then the response status should be "201"
+      And the JSON response should be:
+      """
+      null
+      """
+      And the outlet's rewards pool should have "1000" points
+      And the user should have "900" points
+      And the user's last activity should be today
+
+    Scenario: Outlet has all the points allotted to pending redemptions
+      Given a customer named "Subway" exists with id "100"
+        And the customer with id "100" has an outlet named "Subway - Bangalore" with id "20"
+        And the outlet has "1000" points in its rewards pool
+        And "500" points are allotted to pending redemptions
+      Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"
+        And his role is "user"
+        And his authentication token is "auth_token_123"
+        And he has "900" points
+        And his last activity was on "2013-01-01 01:00:00"
+      When I authenticate as the user "auth_token_123" with the password "random string"
+      When I send a POST request to "/api/redemptions" with the following:
+      """
+      {
+        "redemption" : {
+          "outlet_id": 20,
+          "points" : 900
+        }
+      }
+      """
+      Then the response status should be "422"
+      And the JSON response should be:
+      """
+      {"errors" : ["Points not available"]}
+      """
+      And the outlet's rewards pool should have "1000" points
+      And the user should have "900" points
+
     Scenario: User doesn't have enough points
       Given a customer named "Subway" exists with id "100"
         And the customer with id "100" has an outlet named "Subway - Bangalore" with id "20"

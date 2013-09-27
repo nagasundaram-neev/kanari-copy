@@ -71,3 +71,13 @@ Then (/^the redemption should have been approved in last "(.*?)" minutes$/) do |
   @redemption.approved_at.should_not be_nil
   @redemption.approved_at.should_not <= Time.zone.now - time.to_i.minutes 
 end
+
+Given /^"([^"]*)" points are allotted to expired redemptions$/ do |points|
+  @redemption = Redemption.create!(user_id: 1000, points: points.to_i, outlet_id: @outlet.id)
+  step "the time limit for approving redemption is \"30\" minutes"
+  step "the time for approving redemption has been expired"
+end
+
+Given /^"([^"]*)" points are allotted to pending redemptions$/ do |points|
+  @redemption = Redemption.create!(user_id: 1000, points: points.to_i, outlet_id: @outlet.id)
+end
