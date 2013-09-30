@@ -3498,7 +3498,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			console.log(results1);
 			if (custExpVal == true) {
 				if ($scope.chartType == "nonpercent") {
-					stackingValue = "";
+					stackingValue = "normal";
 					yAxisVal = "Feedback Submissions";
 				} else {
 					stackingValue = "percent";
