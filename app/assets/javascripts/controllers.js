@@ -3241,7 +3241,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.rewardPool = false;
 						$scope.demographic = false;
 						$scope.usergraph = false;
-						$scope.text = "Feedback submissions"
+						$scope.text = "Feedback Submissions"
 						usageLegend = "Feedback Submissions";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
 						yAxisVal = "Feedback Submissions";
@@ -3258,7 +3258,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.rewardPool = false;
 						$scope.demographic = false;
 						$scope.usergraph = false;
-						$scope.text = "Redemptions processed"
+						$scope.text = "Redemptions Processed"
 						usageLegend = "Redemptions Processed";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
 						yAxisVal = "Redemptions Processed";
@@ -3495,6 +3495,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		function getCustExpGraph() {
+			console.log(results1);
 			if (custExpVal == true) {
 				if ($scope.chartType == "nonpercent") {
 					stackingValue = "";
@@ -3547,9 +3548,9 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					}
 				},
 				tooltip : {
-					formatter : function() {//Math.round(this.y).toFixed(0)
-						return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + Math.round(this.y).toFixed(0) + '<br/>' + 'Total: ' + this.point.stackTotal;
-					},
+					pointFormat:'<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} people)<br/>',
+					shared: true
+					
 				},
 				plotOptions : {
 					area : {
