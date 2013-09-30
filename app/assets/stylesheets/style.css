@@ -598,11 +598,10 @@
 	margin: 5% 0;
 }
 .recentActDiv {
-	float: left;
-	margin-left: 2%;
-	padding: 4% 0 3%;
-	text-shadow: none;
-	width: 74%;
+	margin: 0 auto;
+	padding: 4.5% 0 3%;
+    text-shadow: none;
+    width: 74%;
 }
 .descriptFeed {
 	padding-bottom: 12%;
