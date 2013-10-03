@@ -3575,11 +3575,11 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				series : [{
 					name : custLegend1,
 					data : results1,
-					color : '#D8882F'
+					color : '#F5BA44'
 				}, {
 					name : custLegend2,
 					data : results2,
-					color : '#3A240D'
+					color : '#CCCCCC'
 				}, {
 					name : custLegend3,
 					data : results3,
@@ -3592,7 +3592,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 
 			$('#container').highcharts({
 				chart : {
-					type : graphType
+					type : 'line'
 				},
 				title : {
 					text : $scope.chart_heading + ' | Stacked column chart',
@@ -3714,7 +3714,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				series : [{
 					name : custLegend1,
 					data : results1,
-					color : '#D8882F'
+					color : '#F5BA44'
 				}, {
 					name : custLegend2,
 					data : results3,
