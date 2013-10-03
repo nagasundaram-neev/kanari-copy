@@ -206,6 +206,10 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 });
 
 module.controller('signInController', function($scope, $http, $location) {
+	if (getCookie("authToken")) {
+		$location.url("/feedback");
+	}
+	else{
 	clearInterval(refreshIntervalId);
 	$("#wrapper").removeClass("clsafterLogin");
 	$("#wrapper").addClass("clsforLogin");
@@ -256,20 +260,11 @@ module.controller('signInController', function($scope, $http, $location) {
 		});
 	};
 
-	// var selectField1 = document.getElementById('inputFields1');
-	// selectField1.addEventListener('touchstart'/*'mousedown'*/, function(e) {
-	// alert("in");
-	// e.stopPropagation();
-	// }, false);
-	// var selectField2 = document.getElementById('inputFields2');
-	// selectField2.addEventListener('touchstart'/*'mousedown'*/, function(e) {
-	// e.stopPropagation();
-	// }, false);
-
 	$scope.$watch('email + password', function() {
 		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + '@kanari.co:' + $scope.password);
 	});
-
+	
+}
 addToIphoneHomePage();
 
 
