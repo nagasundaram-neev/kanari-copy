@@ -135,12 +135,7 @@ var flagPage = 0;
 var iphoneFlag = 0;
 var footerFlag = 0;
 module.controller('loginController', function($scope, $http, $location) {
-	console.log("under login controller")
-
-	
-	
-
-	
+	console.log("under login controller")	
 	
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
 	$scope.remember = false;

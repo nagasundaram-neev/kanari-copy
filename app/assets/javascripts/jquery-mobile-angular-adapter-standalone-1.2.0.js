@@ -13066,7 +13066,7 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 						hideMsg();
 
 						// show error message
-						$.mobile.showPageLoadingMsg( $.mobile.pageLoadErrorMessageTheme, $.mobile.pageLoadErrorMessage, true );
+						//$.mobile.showPageLoadingMsg( $.mobile.pageLoadErrorMessageTheme, $.mobile.pageLoadErrorMessage, true );
 
 						// hide after delay
 						setTimeout( $.mobile.hidePageLoadingMsg, 1500 );
