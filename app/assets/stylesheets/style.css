@@ -577,7 +577,7 @@
 }
 .actDate {
 	color: #FFFFFF;
-	float: left;
+	/*float: left;*/
 	margin: 0 0 0 2%;
 }
 .bottomDiv {
@@ -591,7 +591,7 @@
  width: 100%;}*/
 .recentAct {
 	color: #ECBD3A;
-	float: left;
+	/*float: left;*/
 	margin: 0 0 0 2%;
 }
 .whatLike {
@@ -601,7 +601,7 @@
 	margin: 0 auto;
 	padding: 4.5% 0 3%;
     text-shadow: none;
-    width: 57%;
+     text-align: center;
 }
 .descriptFeed {
 	padding-bottom: 12%;
