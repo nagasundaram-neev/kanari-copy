@@ -3604,7 +3604,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				xAxis : {
 					categories : resultsDate,
 					labels : {
-						align : 'right',
+						//align : 'right',
 						style : {
 							fontSize : '10px',
 							fontColor : '#7C7A7D',
@@ -3618,7 +3618,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					}
 				},
 				yAxis : {
-
+					min : 0,
 					title : {
 						text : yAxisVal,
 						style : {
@@ -3665,7 +3665,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				xAxis : {
 					categories : resultsDate,
 					labels : {
-						align : 'right',
+						//align : 'right',
 						style : {
 							fontSize : '10px',
 							fontColor : '#7C7A7D',
@@ -3678,6 +3678,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						}
 					}
 				},
+				
 				yAxis : {
 					title : {
 						text : yAxisVal,
@@ -3697,12 +3698,14 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						fontColor : '#A08A75'
 					}
 				},
-				credits : {
-					enabled : false
+				tooltip : {
+					pointFormat:'<span style="color:{series.color}">{series.name}</span>: <b>{point.y:,.0f}</b><br/>',
+					shared: true
+					
 				},
 				plotOptions : {
 					area : {
-						stacking : '',
+						stacking : 'normal',
 						lineColor : '#ffffff',
 						lineWidth : 1,
 						marker : {
