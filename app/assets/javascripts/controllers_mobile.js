@@ -135,8 +135,8 @@ var flagPage = 0;
 var iphoneFlag = 0;
 var footerFlag = 0;
 module.controller('loginController', function($scope, $http, $location) {
-	console.log("under login controller")	
-	
+	console.log("under login controller")
+
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
 	$scope.remember = false;
 	$scope.erromsg = false;
@@ -215,359 +215,333 @@ module.controller('loginController', function($scope, $http, $location) {
 		});
 
 	}
-addToIphoneHomePage();
+	addToIphoneHomePage();
 	// $scope.$watch('email + password', function() {
 	// $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
 	// });
 
 });
 //Function to call addtohomepage on Iphone
-function addToIphoneHomePage(){
-	var addToHome = (function (w) {
-	var nav = w.navigator,
-		isIDevice = 'platform' in nav && (/iphone|ipod|ipad/gi).test(nav.platform),
-		isIPad,
-		isRetina,
-		isSafari,
-		isStandalone,
-		OSVersion,
-		startX = 0,
-		startY = 0,
-		lastVisit = 0,
-		isExpired,
-		isSessionActive,
-		isReturningVisitor,
-		balloon,
-		overrideChecks,
-
-		positionInterval,
-		closeTimeout,
-
-		options = {
-			autostart: true,			// Automatically open the balloon
-			returningVisitor: false,	// Show the balloon to returning visitors only (setting this to true is HIGHLY RECCOMENDED)
-			animationIn: 'drop',		// drop || bubble || fade
-			animationOut: 'fade',		// drop || bubble || fade
-			startDelay: 2000,			// 2 seconds from page load before the balloon appears
-			lifespan: 15000,			// 15 seconds before it is automatically destroyed
-			bottomOffset: 14,			// Distance of the balloon from bottom
-			expire: 0,					// Minutes to wait before showing the popup again (0 = always displayed)
-			message: '',				// Customize your message or force a language ('' = automatic)
-			touchIcon: false,			// Display the touch icon
-			arrow: true,				// Display the balloon arrow
-			hookOnLoad: true,			// Should we hook to onload event? (really advanced usage)
-			closeButton: true,			// Let the user close the balloon
-			iterations: 100				// Internal/debug use
-		},
-
-		intl = {
-			ar:    '<span dir="rtl">قم بتثبيت هذا التطبيق على <span dir="ltr">%device:</span>انقر<span dir="ltr">%icon</span> ،<strong>ثم اضفه الى الشاشة الرئيسية.</strong></span>',
-			ca_es: 'Per instal·lar aquesta aplicació al vostre %device premeu %icon i llavors <strong>Afegir a pantalla d\'inici</strong>.',
-			cs_cz: 'Pro instalaci aplikace na Váš %device, stiskněte %icon a v nabídce <strong>Přidat na plochu</strong>.',
-			da_dk: 'Tilføj denne side til din %device: tryk på %icon og derefter <strong>Føj til hjemmeskærm</strong>.',
-			de_de: 'Installieren Sie diese App auf Ihrem %device: %icon antippen und dann <strong>Zum Home-Bildschirm</strong>.',
-			el_gr: 'Εγκαταστήσετε αυτήν την Εφαρμογή στήν συσκευή σας %device: %icon μετά πατάτε <strong>Προσθήκη σε Αφετηρία</strong>.',
-			en_us: 'Install this web app on your %device: tap %icon and then <strong>Add to Home Screen</strong>.',
-			es_es: 'Para instalar esta app en su %device, pulse %icon y seleccione <strong>Añadir a pantalla de inicio</strong>.',
-			fi_fi: 'Asenna tämä web-sovellus laitteeseesi %device: paina %icon ja sen jälkeen valitse <strong>Lisää Koti-valikkoon</strong>.',
-			fr_fr: 'Ajoutez cette application sur votre %device en cliquant sur %icon, puis <strong>Ajouter à l\'écran d\'accueil</strong>.',
-			he_il: '<span dir="rtl">התקן אפליקציה זו על ה-%device שלך: הקש %icon ואז <strong>הוסף למסך הבית</strong>.</span>',
-			hr_hr: 'Instaliraj ovu aplikaciju na svoj %device: klikni na %icon i odaberi <strong>Dodaj u početni zaslon</strong>.',
-			hu_hu: 'Telepítse ezt a web-alkalmazást az Ön %device-jára: nyomjon a %icon-ra majd a <strong>Főképernyőhöz adás</strong> gombra.',
-			it_it: 'Installa questa applicazione sul tuo %device: premi su %icon e poi <strong>Aggiungi a Home</strong>.',
-			ja_jp: 'このウェブアプリをあなたの%deviceにインストールするには%iconをタップして<strong>ホーム画面に追加</strong>を選んでください。',
-			ko_kr: '%device에 웹앱을 설치하려면 %icon을 터치 후 "홈화면에 추가"를 선택하세요',
-			nb_no: 'Installer denne appen på din %device: trykk på %icon og deretter <strong>Legg til på Hjem-skjerm</strong>',
-			nl_nl: 'Installeer deze webapp op uw %device: tik %icon en dan <strong>Voeg toe aan beginscherm</strong>.',
-			pl_pl: 'Aby zainstalować tę aplikacje na %device: naciśnij %icon a następnie <strong>Dodaj jako ikonę</strong>.',
-			pt_br: 'Instale este aplicativo em seu %device: aperte %icon e selecione <strong>Adicionar à Tela Inicio</strong>.',
-			pt_pt: 'Para instalar esta aplicação no seu %device, prima o %icon e depois o <strong>Adicionar ao ecrã principal</strong>.',
-			ru_ru: 'Установите это веб-приложение на ваш %device: нажмите %icon, затем <strong>Добавить в «Домой»</strong>.',
-			sv_se: 'Lägg till denna webbapplikation på din %device: tryck på %icon och därefter <strong>Lägg till på hemskärmen</strong>.',
-			th_th: 'ติดตั้งเว็บแอพฯ นี้บน %device ของคุณ: แตะ %icon และ <strong>เพิ่มที่หน้าจอโฮม</strong>',
-			tr_tr: 'Bu uygulamayı %device\'a eklemek için %icon simgesine sonrasında <strong>Ana Ekrana Ekle</strong> düğmesine basın.',
-			zh_cn: '您可以将此应用程式安装到您的 %device 上。请按 %icon 然后点选<strong>添加至主屏幕</strong>。',
-			zh_tw: '您可以將此應用程式安裝到您的 %device 上。請按 %icon 然後點選<strong>加入主畫面螢幕</strong>。'
+function addToIphoneHomePage() {
+	var addToHome = (function(w) {
+		var nav = w.navigator, isIDevice = 'platform' in nav && (/iphone|ipod|ipad/gi).test(nav.platform), isIPad, isRetina, isSafari, isStandalone, OSVersion, startX = 0, startY = 0, lastVisit = 0, isExpired, isSessionActive, isReturningVisitor, balloon, overrideChecks, positionInterval, closeTimeout, options = {
+			autostart : true, // Automatically open the balloon
+			returningVisitor : false, // Show the balloon to returning visitors only (setting this to true is HIGHLY RECCOMENDED)
+			animationIn : 'drop', // drop || bubble || fade
+			animationOut : 'fade', // drop || bubble || fade
+			startDelay : 2000, // 2 seconds from page load before the balloon appears
+			lifespan : 15000, // 15 seconds before it is automatically destroyed
+			bottomOffset : 14, // Distance of the balloon from bottom
+			expire : 0, // Minutes to wait before showing the popup again (0 = always displayed)
+			message : '', // Customize your message or force a language ('' = automatic)
+			touchIcon : false, // Display the touch icon
+			arrow : true, // Display the balloon arrow
+			hookOnLoad : true, // Should we hook to onload event? (really advanced usage)
+			closeButton : true, // Let the user close the balloon
+			iterations : 100	// Internal/debug use
+		}, intl = {
+			ar : '<span dir="rtl">قم بتثبيت هذا التطبيق على <span dir="ltr">%device:</span>انقر<span dir="ltr">%icon</span> ،<strong>ثم اضفه الى الشاشة الرئيسية.</strong></span>',
+			ca_es : 'Per instal·lar aquesta aplicació al vostre %device premeu %icon i llavors <strong>Afegir a pantalla d\'inici</strong>.',
+			cs_cz : 'Pro instalaci aplikace na Váš %device, stiskněte %icon a v nabídce <strong>Přidat na plochu</strong>.',
+			da_dk : 'Tilføj denne side til din %device: tryk på %icon og derefter <strong>Føj til hjemmeskærm</strong>.',
+			de_de : 'Installieren Sie diese App auf Ihrem %device: %icon antippen und dann <strong>Zum Home-Bildschirm</strong>.',
+			el_gr : 'Εγκαταστήσετε αυτήν την Εφαρμογή στήν συσκευή σας %device: %icon μετά πατάτε <strong>Προσθήκη σε Αφετηρία</strong>.',
+			en_us : 'Install this web app on your %device: tap %icon and then <strong>Add to Home Screen</strong>.',
+			es_es : 'Para instalar esta app en su %device, pulse %icon y seleccione <strong>Añadir a pantalla de inicio</strong>.',
+			fi_fi : 'Asenna tämä web-sovellus laitteeseesi %device: paina %icon ja sen jälkeen valitse <strong>Lisää Koti-valikkoon</strong>.',
+			fr_fr : 'Ajoutez cette application sur votre %device en cliquant sur %icon, puis <strong>Ajouter à l\'écran d\'accueil</strong>.',
+			he_il : '<span dir="rtl">התקן אפליקציה זו על ה-%device שלך: הקש %icon ואז <strong>הוסף למסך הבית</strong>.</span>',
+			hr_hr : 'Instaliraj ovu aplikaciju na svoj %device: klikni na %icon i odaberi <strong>Dodaj u početni zaslon</strong>.',
+			hu_hu : 'Telepítse ezt a web-alkalmazást az Ön %device-jára: nyomjon a %icon-ra majd a <strong>Főképernyőhöz adás</strong> gombra.',
+			it_it : 'Installa questa applicazione sul tuo %device: premi su %icon e poi <strong>Aggiungi a Home</strong>.',
+			ja_jp : 'このウェブアプリをあなたの%deviceにインストールするには%iconをタップして<strong>ホーム画面に追加</strong>を選んでください。',
+			ko_kr : '%device에 웹앱을 설치하려면 %icon을 터치 후 "홈화면에 추가"를 선택하세요',
+			nb_no : 'Installer denne appen på din %device: trykk på %icon og deretter <strong>Legg til på Hjem-skjerm</strong>',
+			nl_nl : 'Installeer deze webapp op uw %device: tik %icon en dan <strong>Voeg toe aan beginscherm</strong>.',
+			pl_pl : 'Aby zainstalować tę aplikacje na %device: naciśnij %icon a następnie <strong>Dodaj jako ikonę</strong>.',
+			pt_br : 'Instale este aplicativo em seu %device: aperte %icon e selecione <strong>Adicionar à Tela Inicio</strong>.',
+			pt_pt : 'Para instalar esta aplicação no seu %device, prima o %icon e depois o <strong>Adicionar ao ecrã principal</strong>.',
+			ru_ru : 'Установите это веб-приложение на ваш %device: нажмите %icon, затем <strong>Добавить в «Домой»</strong>.',
+			sv_se : 'Lägg till denna webbapplikation på din %device: tryck på %icon och därefter <strong>Lägg till på hemskärmen</strong>.',
+			th_th : 'ติดตั้งเว็บแอพฯ นี้บน %device ของคุณ: แตะ %icon และ <strong>เพิ่มที่หน้าจอโฮม</strong>',
+			tr_tr : 'Bu uygulamayı %device\'a eklemek için %icon simgesine sonrasında <strong>Ana Ekrana Ekle</strong> düğmesine basın.',
+			zh_cn : '您可以将此应用程式安装到您的 %device 上。请按 %icon 然后点选<strong>添加至主屏幕</strong>。',
+			zh_tw : '您可以將此應用程式安裝到您的 %device 上。請按 %icon 然後點選<strong>加入主畫面螢幕</strong>。'
 		};
 
-	function init () {
-		// Preliminary check, all further checks are performed on iDevices only
-		//alert("inlogin");
-		if ( !isIDevice ) return;
+		function init() {
+			// Preliminary check, all further checks are performed on iDevices only
+			//alert("inlogin");
+			if (!isIDevice)
+				return;
 
-		var now = Date.now(),
-			title,
-			i;
+			var now = Date.now(), title, i;
 
-		// Merge local with global options
-		if ( w.addToHomeConfig ) {
-			for ( i in w.addToHomeConfig ) {
-				options[i] = w.addToHomeConfig[i];
+			// Merge local with global options
+			if (w.addToHomeConfig) {
+				for (i in w.addToHomeConfig ) {
+					options[i] = w.addToHomeConfig[i];
+				}
 			}
-		}
-		if ( !options.autostart ) options.hookOnLoad = false;
+			if (!options.autostart)
+				options.hookOnLoad = false;
 
-		isIPad = (/ipad/gi).test(nav.platform);
-		isRetina = w.devicePixelRatio && w.devicePixelRatio > 1;
-		isSafari = (/Safari/i).test(nav.appVersion) && !(/CriOS/i).test(nav.appVersion);
-		isStandalone = nav.standalone;
-		OSVersion = nav.appVersion.match(/OS (\d+_\d+)/i);
-		OSVersion = OSVersion[1] ? +OSVersion[1].replace('_', '.') : 0;
+			isIPad = (/ipad/gi).test(nav.platform);
+			isRetina = w.devicePixelRatio && w.devicePixelRatio > 1;
+			isSafari = (/Safari/i).test(nav.appVersion) && !(/CriOS/i).test(nav.appVersion);
+			isStandalone = nav.standalone;
+			OSVersion = nav.appVersion.match(/OS (\d+_\d+)/i);
+			OSVersion = OSVersion[1] ? +OSVersion[1].replace('_', '.') : 0;
 
-		lastVisit = +w.localStorage.getItem('addToHome');
+			lastVisit = +w.localStorage.getItem('addToHome');
 
-		isSessionActive = w.sessionStorage.getItem('addToHomeSession');
-		isReturningVisitor = options.returningVisitor ? lastVisit && lastVisit + 28*24*60*60*1000 > now : true;
+			isSessionActive = w.sessionStorage.getItem('addToHomeSession');
+			isReturningVisitor = options.returningVisitor ? lastVisit && lastVisit + 28 * 24 * 60 * 60 * 1000 > now : true;
 
-		if ( !lastVisit ) lastVisit = now;
+			if (!lastVisit)
+				lastVisit = now;
 
-		// If it is expired we need to reissue a new balloon
-		isExpired = isReturningVisitor && lastVisit <= now;
+			// If it is expired we need to reissue a new balloon
+			isExpired = isReturningVisitor && lastVisit <= now;
 
-		if ( options.hookOnLoad ) w.addEventListener('load', loaded, false);
-		else if ( !options.hookOnLoad && options.autostart ) loaded();
-	}
-
-	function loaded () {
-		w.removeEventListener('load', loaded, false);
-
-		if ( !isReturningVisitor ) w.localStorage.setItem('addToHome', Date.now());
-		else if ( options.expire && isExpired ) w.localStorage.setItem('addToHome', Date.now() + options.expire * 60000);
-
-		if ( !overrideChecks && ( !isSafari || !isExpired || isSessionActive || isStandalone || !isReturningVisitor ) ) return;
-
-		var touchIcon = '',
-			platform = nav.platform.split(' ')[0],
-			language = nav.language.replace('-', '_'),
-			i, l;
-
-		balloon = document.createElement('div');
-		balloon.id = 'addToHomeScreen';
-		balloon.style.cssText += 'left:-9999px;-webkit-transition-property:-webkit-transform,opacity;-webkit-transition-duration:0;-webkit-transform:translate3d(0,0,0);position:' + (OSVersion < 5 ? 'absolute' : 'fixed');
-
-		// Localize message
-		if ( options.message in intl ) {		// You may force a language despite the user's locale
-			language = options.message;
-			options.message = '';
-		}
-		if ( options.message === '' ) {			// We look for a suitable language (defaulted to en_us)
-			options.message = language in intl ? intl[language] : intl['en_us'];
+			if (options.hookOnLoad)
+				w.addEventListener('load', loaded, false);
+			else if (!options.hookOnLoad && options.autostart)
+				loaded();
 		}
 
-		if ( options.touchIcon ) {
-			touchIcon = isRetina ?
-				document.querySelector('head link[rel^=apple-touch-icon][sizes="114x114"],head link[rel^=apple-touch-icon][sizes="144x144"]') :
-				document.querySelector('head link[rel^=apple-touch-icon][sizes="57x57"],head link[rel^=apple-touch-icon]');
+		function loaded() {
+			w.removeEventListener('load', loaded, false);
 
-			if ( touchIcon ) {
-				touchIcon = '<span style="background-image:url(' + touchIcon.href + ')" class="addToHomeTouchIcon"></span>';
+			if (!isReturningVisitor)
+				w.localStorage.setItem('addToHome', Date.now());
+			else if (options.expire && isExpired)
+				w.localStorage.setItem('addToHome', Date.now() + options.expire * 60000);
+
+			if (!overrideChecks && (!isSafari || !isExpired || isSessionActive || isStandalone || !isReturningVisitor ))
+				return;
+
+			var touchIcon = '', platform = nav.platform.split(' ')[0], language = nav.language.replace('-', '_'), i, l;
+
+			balloon = document.createElement('div');
+			balloon.id = 'addToHomeScreen';
+			balloon.style.cssText += 'left:-9999px;-webkit-transition-property:-webkit-transform,opacity;-webkit-transition-duration:0;-webkit-transform:translate3d(0,0,0);position:' + (OSVersion < 5 ? 'absolute' : 'fixed');
+
+			// Localize message
+			if (options.message in intl) {// You may force a language despite the user's locale
+				language = options.message;
+				options.message = '';
 			}
+			if (options.message === '') {// We look for a suitable language (defaulted to en_us)
+				options.message = language in intl ? intl[language] : intl['en_us'];
+			}
+
+			if (options.touchIcon) {
+				touchIcon = isRetina ? document.querySelector('head link[rel^=apple-touch-icon][sizes="114x114"],head link[rel^=apple-touch-icon][sizes="144x144"]') : document.querySelector('head link[rel^=apple-touch-icon][sizes="57x57"],head link[rel^=apple-touch-icon]');
+
+				if (touchIcon) {
+					touchIcon = '<span style="background-image:url(' + touchIcon.href + ')" class="addToHomeTouchIcon"></span>';
+				}
+			}
+
+			balloon.className = ( isIPad ? 'addToHomeIpad' : 'addToHomeIphone') + ( touchIcon ? ' addToHomeWide' : '');
+			balloon.innerHTML = touchIcon + options.message.replace('%device', platform).replace('%icon', OSVersion >= 4.2 ? '<span class="addToHomeShare"></span>' : '<span class="addToHomePlus">+</span>') + (options.arrow ? '<span class="addToHomeArrow"></span>' : '') + (options.closeButton ? '<span class="addToHomeClose">\u00D7</span>' : '');
+
+			document.body.appendChild(balloon);
+
+			// Add the close action
+			if (options.closeButton)
+				balloon.addEventListener('click', clicked, false);
+
+			if (!isIPad && OSVersion >= 6)
+				window.addEventListener('orientationchange', orientationCheck, false);
+
+			setTimeout(show, options.startDelay);
 		}
 
-		balloon.className = (isIPad ? 'addToHomeIpad' : 'addToHomeIphone') + (touchIcon ? ' addToHomeWide' : '');
-		balloon.innerHTML = touchIcon +
-			options.message.replace('%device', platform).replace('%icon', OSVersion >= 4.2 ? '<span class="addToHomeShare"></span>' : '<span class="addToHomePlus">+</span>') +
-			(options.arrow ? '<span class="addToHomeArrow"></span>' : '') +
-			(options.closeButton ? '<span class="addToHomeClose">\u00D7</span>' : '');
+		function show() {
+			var duration, iPadXShift = 208;
 
-		document.body.appendChild(balloon);
+			// Set the initial position
+			if (isIPad) {
+				if (OSVersion < 5) {
+					startY = w.scrollY;
+					startX = w.scrollX;
+				} else if (OSVersion < 6) {
+					iPadXShift = 160;
+				}
 
-		// Add the close action
-		if ( options.closeButton ) balloon.addEventListener('click', clicked, false);
+				balloon.style.top = startY + options.bottomOffset + 'px';
+				balloon.style.left = startX + iPadXShift - Math.round(balloon.offsetWidth / 2) + 'px';
 
-		if ( !isIPad && OSVersion >= 6 ) window.addEventListener('orientationchange', orientationCheck, false);
-
-		setTimeout(show, options.startDelay);
-	}
-
-	function show () {
-		var duration,
-			iPadXShift = 208;
-
-		// Set the initial position
-		if ( isIPad ) {
-			if ( OSVersion < 5 ) {
-				startY = w.scrollY;
-				startX = w.scrollX;
-			} else if ( OSVersion < 6 ) {
-				iPadXShift = 160;
-			}
-
-			balloon.style.top = startY + options.bottomOffset + 'px';
-			balloon.style.left = startX + iPadXShift - Math.round(balloon.offsetWidth / 2) + 'px';
-
-			switch ( options.animationIn ) {
-				case 'drop':
-					duration = '0.6s';
-					balloon.style.webkitTransform = 'translate3d(0,' + -(w.scrollY + options.bottomOffset + balloon.offsetHeight) + 'px,0)';
-					break;
-				case 'bubble':
-					duration = '0.6s';
-					balloon.style.opacity = '0';
-					balloon.style.webkitTransform = 'translate3d(0,' + (startY + 50) + 'px,0)';
-					break;
-				default:
-					duration = '1s';
-					balloon.style.opacity = '0';
-			}
-		} else {
-			startY = w.innerHeight + w.scrollY;
-
-			if ( OSVersion < 5 ) {
-				startX = Math.round((w.innerWidth - balloon.offsetWidth) / 2) + w.scrollX;
-				balloon.style.left = startX + 'px';
-				balloon.style.top = startY - balloon.offsetHeight - options.bottomOffset + 'px';
+				switch ( options.animationIn ) {
+					case 'drop':
+						duration = '0.6s';
+						balloon.style.webkitTransform = 'translate3d(0,' + -(w.scrollY + options.bottomOffset + balloon.offsetHeight) + 'px,0)';
+						break;
+					case 'bubble':
+						duration = '0.6s';
+						balloon.style.opacity = '0';
+						balloon.style.webkitTransform = 'translate3d(0,' + (startY + 50) + 'px,0)';
+						break;
+					default:
+						duration = '1s';
+						balloon.style.opacity = '0';
+				}
 			} else {
-				balloon.style.left = '50%';
-				balloon.style.marginLeft = -Math.round(balloon.offsetWidth / 2) - ( w.orientation%180 && OSVersion >= 6 ? 40 : 0 ) + 'px';
-				balloon.style.bottom = options.bottomOffset + 'px';
+				startY = w.innerHeight + w.scrollY;
+
+				if (OSVersion < 5) {
+					startX = Math.round((w.innerWidth - balloon.offsetWidth) / 2) + w.scrollX;
+					balloon.style.left = startX + 'px';
+					balloon.style.top = startY - balloon.offsetHeight - options.bottomOffset + 'px';
+				} else {
+					balloon.style.left = '50%';
+					balloon.style.marginLeft = -Math.round(balloon.offsetWidth / 2) - (w.orientation % 180 && OSVersion >= 6 ? 40 : 0 ) + 'px';
+					balloon.style.bottom = options.bottomOffset + 'px';
+				}
+
+				switch (options.animationIn) {
+					case 'drop':
+						duration = '1s';
+						balloon.style.webkitTransform = 'translate3d(0,' + -(startY + options.bottomOffset) + 'px,0)';
+						break;
+					case 'bubble':
+						duration = '0.6s';
+						balloon.style.webkitTransform = 'translate3d(0,' + (balloon.offsetHeight + options.bottomOffset + 50) + 'px,0)';
+						break;
+					default:
+						duration = '1s';
+						balloon.style.opacity = '0';
+				}
 			}
 
-			switch (options.animationIn) {
+			balloon.offsetHeight// repaint trick
+			balloon.style.webkitTransitionDuration = duration;
+			balloon.style.opacity = '1';
+			balloon.style.webkitTransform = 'translate3d(0,0,0)';
+			balloon.addEventListener('webkitTransitionEnd', transitionEnd, false);
+
+			closeTimeout = setTimeout(close, options.lifespan);
+		}
+
+		function manualShow(override) {
+			if (!isIDevice || balloon)
+				return;
+
+			overrideChecks = override;
+			loaded();
+		}
+
+		function close() {
+			clearInterval(positionInterval);
+			clearTimeout(closeTimeout);
+			closeTimeout = null;
+
+			// check if the popup is displayed and prevent errors
+			if (!balloon)
+				return;
+
+			var posY = 0, posX = 0, opacity = '1', duration = '0';
+
+			if (options.closeButton)
+				balloon.removeEventListener('click', clicked, false);
+			if (!isIPad && OSVersion >= 6)
+				window.removeEventListener('orientationchange', orientationCheck, false);
+
+			if (OSVersion < 5) {
+				posY = isIPad ? w.scrollY - startY : w.scrollY + w.innerHeight - startY;
+				posX = isIPad ? w.scrollX - startX : w.scrollX + Math.round((w.innerWidth - balloon.offsetWidth) / 2) - startX;
+			}
+
+			balloon.style.webkitTransitionProperty = '-webkit-transform,opacity';
+
+			switch ( options.animationOut ) {
 				case 'drop':
-					duration = '1s';
-					balloon.style.webkitTransform = 'translate3d(0,' + -(startY + options.bottomOffset) + 'px,0)';
+					if (isIPad) {
+						duration = '0.4s';
+						opacity = '0';
+						posY = posY + 50;
+					} else {
+						duration = '0.6s';
+						posY = posY + balloon.offsetHeight + options.bottomOffset + 50;
+					}
 					break;
 				case 'bubble':
-					duration = '0.6s';
-					balloon.style.webkitTransform = 'translate3d(0,' + (balloon.offsetHeight + options.bottomOffset + 50) + 'px,0)';
+					if (isIPad) {
+						duration = '0.8s';
+						posY = posY - balloon.offsetHeight - options.bottomOffset - 50;
+					} else {
+						duration = '0.4s';
+						opacity = '0';
+						posY = posY - 50;
+					}
 					break;
 				default:
-					duration = '1s';
-					balloon.style.opacity = '0';
-			}
-		}
-
-		balloon.offsetHeight;	// repaint trick
-		balloon.style.webkitTransitionDuration = duration;
-		balloon.style.opacity = '1';
-		balloon.style.webkitTransform = 'translate3d(0,0,0)';
-		balloon.addEventListener('webkitTransitionEnd', transitionEnd, false);
-
-		closeTimeout = setTimeout(close, options.lifespan);
-	}
-
-	function manualShow (override) {
-		if ( !isIDevice || balloon ) return;
-
-		overrideChecks = override;
-		loaded();
-	}
-
-	function close () {
-		clearInterval( positionInterval );
-		clearTimeout( closeTimeout );
-		closeTimeout = null;
-
-		// check if the popup is displayed and prevent errors
-		if ( !balloon ) return;
-
-		var posY = 0,
-			posX = 0,
-			opacity = '1',
-			duration = '0';
-
-		if ( options.closeButton ) balloon.removeEventListener('click', clicked, false);
-		if ( !isIPad && OSVersion >= 6 ) window.removeEventListener('orientationchange', orientationCheck, false);
-
-		if ( OSVersion < 5 ) {
-			posY = isIPad ? w.scrollY - startY : w.scrollY + w.innerHeight - startY;
-			posX = isIPad ? w.scrollX - startX : w.scrollX + Math.round((w.innerWidth - balloon.offsetWidth)/2) - startX;
-		}
-
-		balloon.style.webkitTransitionProperty = '-webkit-transform,opacity';
-
-		switch ( options.animationOut ) {
-			case 'drop':
-				if ( isIPad ) {
-					duration = '0.4s';
-					opacity = '0';
-					posY = posY + 50;
-				} else {
-					duration = '0.6s';
-					posY = posY + balloon.offsetHeight + options.bottomOffset + 50;
-				}
-				break;
-			case 'bubble':
-				if ( isIPad ) {
 					duration = '0.8s';
-					posY = posY - balloon.offsetHeight - options.bottomOffset - 50;
-				} else {
-					duration = '0.4s';
 					opacity = '0';
-					posY = posY - 50;
-				}
-				break;
-			default:
-				duration = '0.8s';
-				opacity = '0';
+			}
+
+			balloon.addEventListener('webkitTransitionEnd', transitionEnd, false);
+			balloon.style.opacity = opacity;
+			balloon.style.webkitTransitionDuration = duration;
+			balloon.style.webkitTransform = 'translate3d(' + posX + 'px,' + posY + 'px,0)';
 		}
 
-		balloon.addEventListener('webkitTransitionEnd', transitionEnd, false);
-		balloon.style.opacity = opacity;
-		balloon.style.webkitTransitionDuration = duration;
-		balloon.style.webkitTransform = 'translate3d(' + posX + 'px,' + posY + 'px,0)';
-	}
-
-
-	function clicked () {
-		w.sessionStorage.setItem('addToHomeSession', '1');
-		isSessionActive = true;
-		close();
-	}
-
-	function transitionEnd () {
-		balloon.removeEventListener('webkitTransitionEnd', transitionEnd, false);
-
-		balloon.style.webkitTransitionProperty = '-webkit-transform';
-		balloon.style.webkitTransitionDuration = '0.2s';
-
-		// We reached the end!
-		if ( !closeTimeout ) {
-			balloon.parentNode.removeChild(balloon);
-			balloon = null;
-			return;
+		function clicked() {
+			w.sessionStorage.setItem('addToHomeSession', '1');
+			isSessionActive = true;
+			close();
 		}
 
-		// On iOS 4 we start checking the element position
-		if ( OSVersion < 5 && closeTimeout ) positionInterval = setInterval(setPosition, options.iterations);
-	}
+		function transitionEnd() {
+			balloon.removeEventListener('webkitTransitionEnd', transitionEnd, false);
 
-	function setPosition () {
-		var matrix = new WebKitCSSMatrix(w.getComputedStyle(balloon, null).webkitTransform),
-			posY = isIPad ? w.scrollY - startY : w.scrollY + w.innerHeight - startY,
-			posX = isIPad ? w.scrollX - startX : w.scrollX + Math.round((w.innerWidth - balloon.offsetWidth) / 2) - startX;
+			balloon.style.webkitTransitionProperty = '-webkit-transform';
+			balloon.style.webkitTransitionDuration = '0.2s';
 
-		// Screen didn't move
-		if ( posY == matrix.m42 && posX == matrix.m41 ) return;
+			// We reached the end!
+			if (!closeTimeout) {
+				balloon.parentNode.removeChild(balloon);
+				balloon = null;
+				return;
+			}
 
-		balloon.style.webkitTransform = 'translate3d(' + posX + 'px,' + posY + 'px,0)';
-	}
+			// On iOS 4 we start checking the element position
+			if (OSVersion < 5 && closeTimeout)
+				positionInterval = setInterval(setPosition, options.iterations);
+		}
 
-	// Clear local and session storages (this is useful primarily in development)
-	function reset () {
-		w.localStorage.removeItem('addToHome');
-		w.sessionStorage.removeItem('addToHomeSession');
-	}
+		function setPosition() {
+			var matrix = new WebKitCSSMatrix(w.getComputedStyle(balloon, null).webkitTransform), posY = isIPad ? w.scrollY - startY : w.scrollY + w.innerHeight - startY, posX = isIPad ? w.scrollX - startX : w.scrollX + Math.round((w.innerWidth - balloon.offsetWidth) / 2) - startX;
 
-	function orientationCheck () {
-		balloon.style.marginLeft = -Math.round(balloon.offsetWidth / 2) - ( w.orientation%180 && OSVersion >= 6 ? 40 : 0 ) + 'px';
-	}
+			// Screen didn't move
+			if (posY == matrix.m42 && posX == matrix.m41)
+				return;
 
-	// Bootstrap!
-	init();
+			balloon.style.webkitTransform = 'translate3d(' + posX + 'px,' + posY + 'px,0)';
+		}
 
-	return {
-		show: manualShow,
-		close: close,
-		reset: reset
-	};
-})(window);
+		// Clear local and session storages (this is useful primarily in development)
+		function reset() {
+			w.localStorage.removeItem('addToHome');
+			w.sessionStorage.removeItem('addToHomeSession');
+		}
+
+		function orientationCheck() {
+			balloon.style.marginLeft = -Math.round(balloon.offsetWidth / 2) - (w.orientation % 180 && OSVersion >= 6 ? 40 : 0 ) + 'px';
+		}
+
+		// Bootstrap!
+		init();
+
+		return {
+			show : manualShow,
+			close : close,
+			reset : reset
+		};
+	})(window);
 }
-
-
-
-
 
 module.controller('forgotPasswordController', function($scope, $http, $location) {
 
@@ -912,7 +886,6 @@ module.controller('changePasswordController', function($scope, $http, $location)
 	};
 
 });
-
 
 module.controller('settingsController', function($scope, $http, $location) {
 
@@ -1664,7 +1637,7 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 				url : '/api/outlets/' + $routeParams.outletId,
 				params : param
 			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
+				console.log("User Role terter" + data + " status " + status);
 				//var date = new Date();
 				$scope.points = data.outlet.redeemable_points;
 			}).error(function(data, status) {
@@ -1711,6 +1684,11 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 					console.log("User Role " + data + " status " + status);
 					//$scope.success = "You have successfully redeemed for " + $scope.amount + " points";
 					$scope.listPoints();
+					$("#overlaySuccess").show();
+					$("#overlaySuccess").css({
+						'z-index' : '10',
+						'background-color' : '#000'
+					});
 					$scope.successMsg = true;
 					$scope.erromsg = false;
 				}).error(function(data, status) {
@@ -1722,7 +1700,14 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 			}
 
 		};
-
+		$scope.closeRedeemSuccMsg = function() {
+			
+			$("#overlaySuccess").hide();
+			$scope.listPoints();
+			$scope.successMsg = false;
+			$location.url("/home");
+			
+		}
 	} else {
 		$location.url("/login");
 	}
@@ -1851,12 +1836,11 @@ $(document).on("pageshow", ".ui-page", function() {
 	if (vSpace < $(window).height()) {
 		$page.height($(window).height());
 	}
-	if($page.outerHeight() > vSpace){
+	if ($page.outerHeight() > vSpace) {
 		//alert("no scroll ");
 		//alert(flagPage);
 		$page.children('.ui-footer').css('position', 'absolute');
-	}
-	else{
+	} else {
 		$page.children('.ui-footer').css('position', 'relative');
 		if (flagPage == 0) {
 			$page.children('.ui-footer').css('margin-top', '14px');
@@ -1866,62 +1850,59 @@ $(document).on("pageshow", ".ui-page", function() {
 		//alert("scroll");
 	}
 	/*if ($(window).height() > 500 && $(window).height() < 570) {
-		//alert("in ");
-		$("#divexample1").css('height', '420px');
-	}
-	var url_buffer = 50;
-	if (vSpace < $(window).height()) {
+	 //alert("in ");
+	 $("#divexample1").css('height', '420px');
+	 }
+	 var url_buffer = 50;
+	 if (vSpace < $(window).height()) {
 
-		$page.height($(window).height());
-	}
+	 $page.height($(window).height());
+	 }
 
-	var scrnHeight = screen.availHeight;
-	
-	if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
-		//if (document.cookie.indexOf("iphone_redirect=false") == -1)
-		//alert("iphone ");
-		alert($page.height());
-		alert($(window).height());
-		$("#divexample1").css('height', '320px');
-		if(scrnHeight == 548){
-			$("#divexample1").css('height', '350px');
-			if(footerFlag == 1){
-				$page.children('.ui-footer').css('position', 'relative');
-			}else{
-			//	$page.children('.ui-footer').css('position', 'absolute');
-			//	alert("under flag 1 else")
-			}
-		}else{
-			//alert("under else")
-			$page.children('.ui-footer').css('position', 'relative');
-		}
-		if (flagPage == 0) {
-			$page.children('.ui-footer').css('margin-top', '14px');
-		} else {
-			$page.children('.ui-footer').css('margin-top', '0');
-		}
-		//setFooterIphone();
-	} //else {
-		//setFooterIphone();
-	//}
+	 var scrnHeight = screen.availHeight;
 
+	 if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
+	 //if (document.cookie.indexOf("iphone_redirect=false") == -1)
+	 //alert("iphone ");
+	 alert($page.height());
+	 alert($(window).height());
+	 $("#divexample1").css('height', '320px');
+	 if(scrnHeight == 548){
+	 $("#divexample1").css('height', '350px');
+	 if(footerFlag == 1){
+	 $page.children('.ui-footer').css('position', 'relative');
+	 }else{
+	 //	$page.children('.ui-footer').css('position', 'absolute');
+	 //	alert("under flag 1 else")
+	 }
+	 }else{
+	 //alert("under else")
+	 $page.children('.ui-footer').css('position', 'relative');
+	 }
+	 if (flagPage == 0) {
+	 $page.children('.ui-footer').css('margin-top', '14px');
+	 } else {
+	 $page.children('.ui-footer').css('margin-top', '0');
+	 }
+	 //setFooterIphone();
+	 } //else {
+	 //setFooterIphone();
+	 //}
 
-	setTimeout(function() {
-	window.scrollTo(0, 1)
-	}, 1000);
+	 setTimeout(function() {
+	 window.scrollTo(0, 1)
+	 }, 1000);
 
-	var pageHt = $page.height();
-	var divHeightInDoc = pageHt + 5;
-	//$("div[data-role='page']").css( "height",  divHeightInDoc);
-	//alert("page " + $page.height() + "window " + $(window).height());
-	if (scrnHeight == 548) {
-		//$page.children('.ui-footer').css('position', 'absolute');
-		//$("div[data-role='page']").style.setProperty("height", divHeightInDoc + "px");
-	}*/
-	
+	 var pageHt = $page.height();
+	 var divHeightInDoc = pageHt + 5;
+	 //$("div[data-role='page']").css( "height",  divHeightInDoc);
+	 //alert("page " + $page.height() + "window " + $(window).height());
+	 if (scrnHeight == 548) {
+	 //$page.children('.ui-footer').css('position', 'absolute');
+	 //$("div[data-role='page']").style.setProperty("height", divHeightInDoc + "px");
+	 }*/
 
-
-	function setFooterIphone(){	
+	function setFooterIphone() {
 		if ($page.height() > $(window).height()) {
 			$("#divexample1").css('height', '320px');
 			$page.children('.ui-footer').css('position', 'relative');
