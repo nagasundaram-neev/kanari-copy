@@ -2874,6 +2874,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		var xAxisVal = "";
 		var yAxisVal = "";
 		var graphType = "";
+		var tickInt;
 
 		if ($routeParams.outletId) {
 			//alert("in");
@@ -2957,8 +2958,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			state : false
 		}];
 
-
-		 $('#data-policy').change(function() {
+		$('#data-policy').change(function() {
 			if ($('#data-policy').is(':checked')) {
 				stackingValue = "";
 				yAxisVal = "Feedback Submissions";
@@ -2968,9 +2968,9 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				yAxisVal = "%Feedback Submissions";
 				$scope.chartType = "percent"
 			}
-			
+
 			graphType = "area";
-			 getCustExpGraph();
+			getCustExpGraph();
 		});
 
 		$('#reportrange').daterangepicker({
@@ -3392,18 +3392,28 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					/**Customers End**/
 
 					resultsDate.push(startDateV);
+					//resultsDate.push(i);
 					results1.push(foodLike);
 					results2.push(foodNeutral);
 					results3.push(foodDisLike);
 				}
+				
+				if (resultsDate.length > 15) {
+					tickInt = 15;
+				} else {
+					tickInt = 1;
+				}
+				
 				if (metricsId == "custExp" || npsBreakdownV == "1") {
 					getCustExpGraph();
 				} else if (metricsId == "usage" || npsOverview == "1") {
-					//graphType = "line";
 					getUsageGraph();
 				} else if (metricsId == "customers") {
 					customerGraph();
 				}
+
+				
+				
 
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
@@ -3495,7 +3505,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		function getCustExpGraph() {
-			console.log(results1);
+
 			if (custExpVal == true) {
 				if ($scope.chartType == "nonpercent") {
 					stackingValue = "normal";
@@ -3508,6 +3518,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				stackingValue = "percent";
 				yAxisVal = "Feedback Submissions (100%)";
 			}
+
 			$('#container').highcharts({
 				chart : {
 					type : 'area'
@@ -3533,7 +3544,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 							fontFamily : 'Open Sans',
 							fontWeight : 'normal'
 						}
-					}
+					},
+					tickInterval : tickInt
 				},
 				yAxis : {
 					allowDecimals : false,
@@ -3548,9 +3560,9 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					}
 				},
 				tooltip : {
-					pointFormat:'<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} people)<br/>',
-					shared: true
-					
+					pointFormat : '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} people)<br/>',
+					shared : true
+
 				},
 				plotOptions : {
 					area : {
@@ -3603,6 +3615,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				},
 				xAxis : {
 					categories : resultsDate,
+
 					labels : {
 						//align : 'right',
 						style : {
@@ -3615,7 +3628,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						style : {
 							color : '#7C7A7D',
 						}
-					}
+					},
+					tickInterval : tickInt
 				},
 				yAxis : {
 					min : 0,
@@ -3676,9 +3690,10 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						style : {
 							color : '#7C7A7D',
 						}
-					}
+					},
+					tickInterval : tickInt
 				},
-				
+
 				yAxis : {
 					title : {
 						text : yAxisVal,
@@ -3699,9 +3714,9 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					}
 				},
 				tooltip : {
-					pointFormat:'<span style="color:{series.color}">{series.name}</span>: <b>{point.y:,.0f}</b><br/>',
-					shared: true
-					
+					pointFormat : '<span style="color:{series.color}">{series.name}</span>: <b>{point.y:,.0f}</b><br/>',
+					shared : true
+
 				},
 				plotOptions : {
 					area : {
