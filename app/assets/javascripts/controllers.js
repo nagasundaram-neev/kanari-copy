@@ -3278,7 +3278,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.text = "Discounts Claimed";
 						usageLegend = "Discounts Claimed";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
-						yAxisVal = "Discounts Claimed";
+						yAxisVal = "Discounts Claimed [in Dhs.]";
 						$scope.chart_subheading_tooltip = "The number of discounts claimed each day over the specified period.";
 					} else if (idValue == "pointsIssued") {
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].usage.points_issued;
@@ -3311,7 +3311,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.text = "Average Rewards Pool"
 						usageLegend = "Rewards Pool";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
-						yAxisVal = "Rewards Pool";
+						yAxisVal = "Rewards Pool [in Dhs.]";
 						$scope.chart_subheading_tooltip = "The size of the rewards pool on each day over the specified period.";
 					}
 					/**Usage end**/
@@ -3632,7 +3632,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					tickInterval : tickInt
 				},
 				yAxis : {
-					min : 0,
+					min : '',
 					title : {
 						text : yAxisVal,
 						style : {

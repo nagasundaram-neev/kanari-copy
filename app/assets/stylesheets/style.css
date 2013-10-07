@@ -1896,7 +1896,7 @@ img, object {
 
 .redeemSuccMsg {
 	border: 2px solid #664765;
-	color: #0F9D58;
+	color: #000;
 	margin: 3% 9%;
 	padding: 0.6%;
 	text-shadow: none;
@@ -1926,7 +1926,7 @@ img, object {
 	top: 40%;
 	padding: 3%;
 	position: absolute;
-	width: 80%;
+	width: 77%;
 	z-index: 11;
 }
 .popup img{

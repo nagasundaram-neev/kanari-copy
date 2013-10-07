@@ -321,7 +321,7 @@
 					<span>Male</span>
 				</div>
 				<div ng-switch on="maleCount" class="custExpDiv colno2">
-					<span ng-switch-default> {{maleCount}}% </span>
+					<span ng-switch-default> {{maleCount | number:1}}% </span>
 					<span ng-switch-when="null"> - </span>
 				</div>
 				<div class="custExpDiv border_right_none colno3" ng-switch on="foodnegativeChange">
@@ -333,7 +333,7 @@
 					<span>Female</span>
 				</div>
 				<div class="custExpDiv colno2" ng-switch on="femaleCount">
-					<span ng-switch-default> {{femaleCount}}% </span>
+					<span ng-switch-default> {{femaleCount | number:1}}% </span>
 					<span ng-switch-when="null"> - </span>
 				</div>
 				<div class="custExpDiv border_right_none colno3" ng-switch on="foodpositiveChange">
