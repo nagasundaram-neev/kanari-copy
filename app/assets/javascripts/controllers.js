@@ -3560,7 +3560,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					}
 				},
 				tooltip : {
-					pointFormat : '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} people)<br/>',
+					pointFormat : '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.0f}%</b> ({point.y:,.0f} people)<br/>',
 					shared : true
 
 				},
@@ -3653,7 +3653,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				},
 
 				tooltip : {
-					pointFormat : usageLegend + ' <b>{point.y:.1f}</b>',
+					pointFormat : usageLegend + ' <b>{point.y:.0f}</b>',
 				},
 				series : [{
 					name : usageLegend,
