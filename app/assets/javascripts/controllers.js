@@ -2907,6 +2907,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		$scope.showChartType = true;
 		$scope.chart_subheading = "Food Quality";
 		custExpVal = true;
+		yAxisMinVal = true;
 		$("#dashboard_trends ul li a").click(function() {
 			$('#dashboard_trends ul li a').removeClass("active");
 			$(this).addClass("active");
@@ -2916,8 +2917,13 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				// $scope.showChartType = false;
 				// stackingValue = "";
 				custExpVal = false;
+				yAxisMinVal = true;
+			} else if (idV == "npsOverview") {
+				yAxisMinVal = false;
+				custExpVal = true;
 			} else {
 				custExpVal = true;
+				yAxisMinVal = true;
 			}
 			//else {
 			//
@@ -3397,13 +3403,13 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					results2.push(foodNeutral);
 					results3.push(foodDisLike);
 				}
-				
+
 				if (resultsDate.length > 15) {
 					tickInt = 15;
 				} else {
 					tickInt = 1;
 				}
-				
+
 				if (metricsId == "custExp" || npsBreakdownV == "1") {
 					getCustExpGraph();
 				} else if (metricsId == "usage" || npsOverview == "1") {
@@ -3411,9 +3417,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				} else if (metricsId == "customers") {
 					customerGraph();
 				}
-
-				
-				
 
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
@@ -3601,7 +3604,15 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		function getUsageGraph() {
-
+			console.log(yAxisMinVal);
+			if(yAxisMinVal == true)
+			{
+				minV = 0;
+			}
+			else{
+				minV = '';
+			}
+			console.log(minV);
 			$('#container').highcharts({
 				chart : {
 					type : 'line'
@@ -3632,7 +3643,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					tickInterval : tickInt
 				},
 				yAxis : {
-					min : '',
+					min : minV,
 					title : {
 						text : yAxisVal,
 						style : {
