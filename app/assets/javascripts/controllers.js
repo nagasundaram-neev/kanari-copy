@@ -3387,7 +3387,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.demographic = false;
 						$scope.usergraph = false;
 						$scope.text = "Average bill size per feedback submission"
-						npsOverview = 1;
+						metricsId = "usage";
 						graphType = "line";
 						usageLegend = "Avg. Bill Size";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
@@ -3412,8 +3412,10 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 
 				if (metricsId == "custExp" || npsBreakdownV == "1") {
 					getCustExpGraph();
-				} else if (metricsId == "usage" || npsOverview == "1") {
+				} else if (metricsId == "usage") {
 					getUsageGraph();
+				} else if (metricsId == "usage" || npsOverview == "1") {
+					getUsageGraphOverview();
 				} else if (metricsId == "customers") {
 					customerGraph();
 				}
@@ -3604,15 +3606,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		function getUsageGraph() {
-			console.log("yAxisMinVal"+yAxisMinVal);
-			if(yAxisMinVal == true)
-			{
-				minV = 0;
-			}
-			else{
-				minV = '';
-			}
-			console.log(minV);
+   				console.log("getUsageGraph");
 			$('#container').highcharts({
 				chart : {
 					type : 'line'
@@ -3643,7 +3637,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					tickInterval : tickInt
 				},
 				yAxis : {
-					min : minV,
+					min : 0,
 					title : {
 						text : yAxisVal,
 						style : {
@@ -3673,7 +3667,69 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				}]
 			});
 		}
+		
+		function getUsageGraphOverview() {
+			console.log("getUsageGraphOverview");
+			$('#container').highcharts({
+				chart : {
+					type : 'line'
+				},
+				title : {
+					text : $scope.chart_heading + ' | Stacked column chart',
+					color : '#A08A75',
+					style : {
+						display : 'none'
+					}
+				},
+				xAxis : {
+					categories : resultsDate,
 
+					labels : {
+						//align : 'right',
+						style : {
+							fontSize : '10px',
+							fontColor : '#7C7A7D',
+							fontFamily : 'Open Sans'
+						}
+					},
+					title : {
+						style : {
+							color : '#7C7A7D',
+						}
+					},
+					tickInterval : tickInt
+				},
+				yAxis : {
+					//min : '',
+					title : {
+						text : yAxisVal,
+						style : {
+							color : '#7C7A7D',
+							fontFamily : 'Open Sans',
+							fontWeight : 'normal'
+						}
+					}
+				},
+				legend : {
+					backgroundColor : '#fff',
+					verticalAlign : 'center',
+					x : 300,
+					y : -10,
+					style : {
+						fontColor : '#A08A75'
+					}
+				},
+
+				tooltip : {
+					pointFormat : usageLegend + ' <b>{point.y:.0f}</b>',
+				},
+				series : [{
+					name : usageLegend,
+					data : results1,
+					color : '#664766'
+				}]
+			});
+		}
 		function customerGraph() {
 
 			$('#container').highcharts({
