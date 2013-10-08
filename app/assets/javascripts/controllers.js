@@ -3604,7 +3604,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		function getUsageGraph() {
-			console.log(yAxisMinVal);
+			console.log("yAxisMinVal"+yAxisMinVal);
 			if(yAxisMinVal == true)
 			{
 				minV = 0;
