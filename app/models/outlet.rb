@@ -73,8 +73,8 @@ class Outlet < ActiveRecord::Base
     today     = normalize_date(params[:date]) || Time.zone.now.beginning_of_day
     tomorrow  = today + 1.day
     yesterday = today - 1.day
-    feedbacks_till_today     = self.feedbacks.completed.where("updated_at < ?", tomorrow).limit(NPS_LIMIT)
-    feedbacks_till_yesterday = self.feedbacks.completed.where("updated_at < ?", today).limit(NPS_LIMIT)
+    feedbacks_till_today     = self.feedbacks.completed.where("updated_at < ?", tomorrow).order('updated_at desc').limit(NPS_LIMIT)
+    feedbacks_till_yesterday = self.feedbacks.completed.where("updated_at < ?", today).order('updated_at desc').limit(NPS_LIMIT)
     feedbacks_today          = feedbacks_till_today.select{|f| (f.updated_at >= today && f.updated_at < tomorrow)}
     feedbacks_yesterday      = feedbacks_till_today.select{|f| (f.updated_at >= yesterday && f.updated_at < today)}
     feedback_metrics = {
