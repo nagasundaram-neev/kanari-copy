@@ -82,3 +82,9 @@ Talk to a duck.
 # Production
 
 Not yet.
+
+# Misc information
+
+## Taking a database seed dump
+
+     rake db:seed:dump FILE="kanari_seed_data.rb" WITH_ID=true
