@@ -57,6 +57,9 @@ class Api::V1::FeedbacksController < ApplicationController
         @feedback.user = current_user
         @feedback.code = nil
         @feedback.completed = true
+        unless current_user.interacted_before?(outlet)
+          @feedback.first_interaction = true
+        end
         if @feedback.update(feedback_params)
           FeedbackLog.create({customer_id: outlet.customer_id, outlet_id: outlet.id, outlet_name: outlet.name, feedback_id: @feedback.id,
            user_id: current_user.id, user_first_name: current_user.first_name, user_last_name: current_user.last_name, user_email: current_user.email,

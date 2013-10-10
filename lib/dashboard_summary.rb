@@ -110,12 +110,12 @@ class DashboardSummary
   end
 
   def get_demographics_summary
-    @users ||= get_users(@feedbacks)
+    @users ||= get_users(@feedbacks + @redemptions)
     current_male_users = @users.select {|user| user if user.gender && user.gender.to_s.downcase == 'male'}.length
     current_male_percentage = percentage(current_male_users,@users.size)
     current_female_percentage = (100.0 - current_male_percentage) rescue nil
 
-    @previous_users ||= get_users(@previous_feedbacks)
+    @previous_users ||= get_users(@previous_feedbacks + @previous_redemptions)
     previous_male_users = @previous_users.select {|user| user if user.gender && user.gender.to_s.downcase == 'male'}.length
     previous_male_percentage = percentage(previous_male_users,@previous_users.size)
     previous_female_percentage = (100.0 - previous_male_percentage) rescue nil
@@ -134,13 +134,15 @@ class DashboardSummary
   end
 
   def get_users_summary
-    @users ||= get_users(@feedbacks)
-    current_new_users       = @users.select {|user| user if user.sign_in_count == 0 }.length
-    current_returning_users = @users.select {|user| user if user.sign_in_count > 0 }.length
+    interactions = @feedbacks + @redemptions
+    @users ||= get_users(interactions)
+    current_new_users       = interactions.select{|f| f.first_interaction == true }.size
+    current_returning_users = @users.size - current_new_users
 
-    @previous_users ||= get_users(@previous_feedbacks)
-    previous_new_users       = @previous_users.select {|user| user if user.sign_in_count == 0 }.length
-    previous_returning_users = @previous_users.select {|user| user if user.sign_in_count > 0 }.length
+    previous_interactions = @previous_feedbacks + @previous_redemptions
+    @previous_users ||= get_users(previous_interactions)
+    previous_new_users       = previous_interactions.select{|f| f.first_interaction == true }.size
+    previous_returning_users = @previous_users.size - previous_new_users
 
     return({
       new_users:{

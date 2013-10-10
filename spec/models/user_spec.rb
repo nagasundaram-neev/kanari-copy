@@ -201,4 +201,30 @@ describe User do
       end
     end
   end
+
+  describe "#interacted_before?" do
+    let(:user) { FactoryGirl.create(:user, role: 'user')}
+    let(:outlet) { FactoryGirl.create(:outlet)  }
+    context "when the user has submitted a feedback at the outlet" do
+      it "should return true" do
+        Feedback.create(user: user, outlet: outlet, completed: true)
+        user.interacted_before?(outlet).should == true
+      end
+    end
+    context "when the user has an approved redemption at the outlet" do
+      it "should return true" do
+        staff = FactoryGirl.create(:user, employed_outlet: outlet, role: 'staff', email: 'staff@staff.com')
+        Redemption.create(user: user, outlet: outlet, approved_by: staff.id)
+        user.interacted_before?(outlet).should == true
+      end
+    end
+    context "when the user has no submitted feedbacks or approved redemptions at the outlet" do
+      it "should return false" do
+        Feedback.delete_all
+        Redemption.delete_all
+        user.interacted_before?(outlet).should == false
+      end
+    end
+  end
+
 end

@@ -55,7 +55,7 @@ class Outlet < ActiveRecord::Base
 
     #TODO: Lazily evaluate the query. Do not fetch all completed feedbacks here.
     # First construct the query with the time range and then fire the query.
-    feedbacks   = self.feedbacks.completed.includes(:user)
+    feedbacks   = self.feedbacks.completed.includes(:user).order('feedbacks.updated_at desc')
     redemptions = self.redemptions.approved.includes(:user)
     feedback_trends = {:statistics => {}, :summary => {}, :detailed_statistics => {}}
     feedback_trends[:statistics] = get_feedback_trends(start_time, end_time, feedbacks, redemptions)
@@ -171,7 +171,6 @@ class Outlet < ActiveRecord::Base
     # Feedback Statistics
     def get_feedback_trends(start_time, end_time, all_feedbacks, all_redemptions)
       start_time,end_time = end_time,start_time if start_time > end_time
-      all_feedbacks = all_feedbacks.order('feedbacks.updated_at desc') unless all_feedbacks.blank?
       feedbacks_nps  = all_feedbacks.select {|f| f if (f.updated_at < end_time)}.first(NPS_LIMIT)
       feedbacks      = all_feedbacks.select {|f| f if (f.updated_at > start_time && f.updated_at < end_time)}
       redemptions    = all_redemptions.select {|f| f if (f.updated_at > start_time && f.updated_at < end_time)}
@@ -181,7 +180,7 @@ class Outlet < ActiveRecord::Base
         statistics[category.to_sym] = get_field_statistics(feedbacks, category)
       end
       statistics[:usage]               = get_usage_statistics(feedbacks, redemptions)
-      statistics[:customers]           = get_cusomers_statistics(feedbacks)
+      statistics[:customers]           = get_cusomers_statistics(feedbacks, redemptions)
       statistics[:average_bill_amount] = get_average_bill_amount_statistics(feedbacks)
       statistics
     end
@@ -211,24 +210,25 @@ class Outlet < ActiveRecord::Base
       feedbacks.present? ? ( feedbacks.inject(0){|sum, f| sum + f.bill_amount.to_i}.to_f / feedbacks.length ) : 0
     end
 
-    def get_cusomers_statistics(feedbacks)
+    def get_cusomers_statistics(feedbacks, redemptions)
       male_users = 0; female_users = 0; new_users = 0; returning_users = 0
-      time_of_visit = { "0" => 0, "1" => 0, "2" => 0, "3" => 0,  "4" => 0,  "5" => 0,  "6" => 0,
-                        "7" => 0, "8" => 0, "9" => 0, "10" => 0, "11" => 0, "12" => 0, "13" => 0,
-                        "14" => 0, "15" => 0, "16" => 0, "17" => 0, "18" => 0, "19" => 0, "20" => 0,
-                        "21" => 0, "22" => 0, "23" => 0 }
-      unless feedbacks.blank?
-        users = []
-        feedbacks.each {|f| users << f.user }
-        users = users.compact
-        male_users      = users.select {|user| user if user.gender && user.gender.to_s.downcase == 'male'}.length
-        female_users    = users.select {|user| user if user.gender && user.gender.to_s.downcase == 'female'}.length
-        new_users       = users.select {|user| user if user.sign_in_count == 0 }.length
-        returning_users = users.select {|user| user if user.sign_in_count > 0 }.length
-        feedbacks_per_hour = feedbacks.group_by {|f| f.updated_at.strftime('%H')}
-        ("00".."23").each {|hr| time_of_visit["#{hr.to_i}"] = ( feedbacks_per_hour["#{hr}"] && feedbacks_per_hour["#{hr}"].length) || 0 }
+      interactions = feedbacks + redemptions
+      interactions.each do |interaction|
+        user = interaction.user
+        next if user.nil?
+        if user.gender.to_s.downcase == 'male'
+          male_users += 1
+        elsif user.gender.to_s.downcase == 'female'
+          female_users += 1
+        end
+
+        if interaction.first_interaction
+          new_users += 1
+        else
+          returning_users += 1
+        end
       end
-      customer = {:male => male_users, :female => female_users, :new_users => new_users, :returning_users => returning_users, :time_of_visit => time_of_visit} 
+      customer = {:male => male_users, :female => female_users, :new_users => new_users, :returning_users => returning_users}
    end
 
     def get_usage_statistics(feedbacks=[],redemptions=[])

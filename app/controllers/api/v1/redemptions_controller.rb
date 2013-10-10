@@ -60,6 +60,9 @@ class Api::V1::RedemptionsController < ApplicationController
         user.update_points_and_redeems_count(points)
         redemption_parameters = { approved_by: current_user.id, approved_at: Time.zone.now, rewards_pool_after_redemption: outlet.rewards_pool,
                                   user_points_after_redemption: user.points_available }
+        unless user.interacted_before?(outlet)
+          redemption.first_interaction = true
+        end
         if redemption.update(redemption_parameters)
           RedemptionLog.create({customer_id: outlet.customer_id, outlet_id: outlet.id, outlet_name: outlet.name,
             generated_by: current_user.email, user_id: user.id, user_first_name: user.first_name, user_last_name: user.last_name,

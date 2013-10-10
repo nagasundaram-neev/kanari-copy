@@ -116,12 +116,10 @@ Feature: Dashboard Trends
              "rewards_pool": 3600
            },
            "customers": {
-             "male": 7,
-             "female": 3,
-             "new_users": 3,
-             "returning_users": 7,
-             "time_of_visit": {"0": 0,  "1": 0,  "2": 0,  "3": 0,  "4": 0,  "5": 0,  "6": 0,  "7": 0,  "8": 5,  "9": 0,  "10": 5, "11": 0,
-                               "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0, "22": 0, "23": 0}
+             "male": 14,
+             "female": 4,
+             "new_users": 0,
+             "returning_users": 18
            },
            "average_bill_amount": 2200.0
          },
@@ -294,14 +292,14 @@ Feature: Dashboard Trends
            },
            "users": {
              "new_users": {
-               "average_per_day": 2.0,
+               "average_per_day": 0.0,
                "change_in_percentage": null,
-               "over_period": 2
+               "over_period": 0
              },
              "returning_users": {
-               "average_per_day": 4.0,
+               "average_per_day": 6.0,
                "change_in_percentage": null,
-               "over_period": 4
+               "over_period": 6
              }
            }
          },
@@ -350,12 +348,10 @@ Feature: Dashboard Trends
                "rewards_pool": 3600
              },
              "customers": {
-               "male": 4,
+               "male": 8,
                "female": 1,
-               "new_users": 1,
-               "returning_users": 4,
-               "time_of_visit": {"0": 0,  "1": 0,  "2": 0,  "3": 0,  "4": 0,  "5": 0,  "6": 0,  "7": 0,  "8": 5,  "9": 0,  "10": 0, "11": 0,
-                                 "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0, "22": 0, "23": 0}
+               "new_users": 0,
+               "returning_users": 9
              },
              "average_bill_amount": 1600.0
            },
@@ -403,12 +399,10 @@ Feature: Dashboard Trends
                "rewards_pool": 5600
              },
              "customers": {
-               "male": 3,
-               "female": 2,
-               "new_users": 2,
-               "returning_users": 3,
-               "time_of_visit": {"0": 0,  "1": 0,  "2": 0,  "3": 0,  "4": 0,  "5": 0,  "6": 0,  "7": 0,  "8": 0,  "9": 0,  "10": 5, "11": 0,
-                                 "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0, "22": 0, "23": 0}
+               "male": 6,
+               "female": 3,
+               "new_users": 0,
+               "returning_users": 9
              },
              "average_bill_amount": 2800.0
            }
@@ -530,12 +524,10 @@ Feature: Dashboard Trends
              "rewards_pool": 3600
            },
            "customers": {
-             "male": 7,
-             "female": 3,
-             "new_users": 3,
-             "returning_users": 7,
-             "time_of_visit": {"0": 0,  "1": 0,  "2": 0,  "3": 0,  "4": 0,  "5": 0,  "6": 0,  "7": 0,  "8": 5,  "9": 0,  "10": 6, "11": 0,
-                               "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0, "22": 0, "23": 0}
+             "male": 14,
+             "female": 4,
+             "new_users": 0,
+             "returning_users": 18
            },
            "average_bill_amount": 2090.909090909091
          },
@@ -708,14 +700,14 @@ Feature: Dashboard Trends
            },
            "users": {
              "new_users": {
-               "average_per_day": 2.0,
+               "average_per_day": 0.0,
                "change_in_percentage": null,
-               "over_period": 2
+               "over_period": 0
              },
              "returning_users": {
-               "average_per_day": 4.0,
+               "average_per_day": 6.0,
                "change_in_percentage": null,
-               "over_period": 4
+               "over_period": 6
              }
            }
          },
@@ -764,12 +756,10 @@ Feature: Dashboard Trends
                "rewards_pool": 3600
              },
              "customers": {
-               "male": 4,
+               "male": 8,
                "female": 1,
-               "new_users": 1,
-               "returning_users": 4,
-               "time_of_visit": {"0": 0,  "1": 0,  "2": 0,  "3": 0,  "4": 0,  "5": 0,  "6": 0,  "7": 0,  "8": 5,  "9": 0,  "10": 0, "11": 0,
-                                 "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0, "22": 0, "23": 0}
+               "new_users": 0,
+               "returning_users": 9
              },
              "average_bill_amount": 1600.0
            },
@@ -817,12 +807,10 @@ Feature: Dashboard Trends
                "rewards_pool": 5600
              },
              "customers": {
-               "male": 3,
-               "female": 2,
-               "new_users": 2,
-               "returning_users": 3,
-               "time_of_visit": {"0": 0,  "1": 0,  "2": 0,  "3": 0,  "4": 0,  "5": 0,  "6": 0,  "7": 0,  "8": 0,  "9": 0,  "10": 6, "11": 0,
-                                 "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0, "22": 0, "23": 0}
+               "male": 6,
+               "female": 3,
+               "new_users": 0,
+               "returning_users": 9
              },
              "average_bill_amount": 2500.0
            }
@@ -896,9 +884,7 @@ Feature: Dashboard Trends
              "male": 0,
              "female": 0,
              "new_users": 0,
-             "returning_users": 0,
-             "time_of_visit": {"0": 0,  "1": 0,  "2": 0,  "3": 0,  "4": 0,  "5": 0,  "6": 0,  "7": 0,  "8": 0,  "9": 0,  "10": 0, "11": 0,
-                               "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0, "22": 0, "23": 0}
+             "returning_users": 0
            },
            "average_bill_amount": 0 
          },
@@ -1130,9 +1116,7 @@ Feature: Dashboard Trends
                "male": 0,
                "female": 0,
                "new_users": 0,
-               "returning_users": 0,
-               "time_of_visit": {"0": 0,  "1": 0,  "2": 0,  "3": 0,  "4": 0,  "5": 0,  "6": 0,  "7": 0,  "8": 0,  "9": 0,  "10": 0, "11": 0,
-                                 "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0, "22": 0, "23": 0}
+               "returning_users": 0
              },
              "average_bill_amount": 0
            },
@@ -1183,9 +1167,7 @@ Feature: Dashboard Trends
                "male": 0,
                "female": 0,
                "new_users": 0,
-               "returning_users": 0,
-               "time_of_visit": {"0": 0,  "1": 0,  "2": 0,  "3": 0,  "4": 0,  "5": 0,  "6": 0,  "7": 0,  "8": 0,  "9": 0,  "10": 0, "11": 0,
-                                 "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0, "22": 0, "23": 0}
+               "returning_users": 0
              },
              "average_bill_amount": 0
            }

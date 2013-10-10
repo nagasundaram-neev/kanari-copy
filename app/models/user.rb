@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
     return [first_name, last_name].join(' ').strip
   end
 
+  def interacted_before?(outlet)
+    has_approved_redemption?(outlet) || has_submitted_feedback?(outlet)
+  end
+
   def customer
     case role
     when 'customer_admin'
@@ -125,4 +129,14 @@ class User < ActiveRecord::Base
   def tablet_id
     self.role == 'staff' ? self.email.split('@').first : nil
   end
+
+  private
+
+    def has_approved_redemption?(outlet)
+      Redemption.exists?(['outlet_id = ? and user_id = ? and approved_by is not null', outlet.id, self.id]).nil? == false
+    end
+
+    def has_submitted_feedback?(outlet)
+      Feedback.exists?(outlet: outlet, user: self, completed: true).nil? == false
+    end
 end

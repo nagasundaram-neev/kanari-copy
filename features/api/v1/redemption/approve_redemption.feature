@@ -84,6 +84,7 @@ Feature: Approve Redemption
       And the user should have "100" points
       And the user should have "1" redeem count
       And the staff "staff.bangalore.1@subway.com" should have approved the redemption with id "1"
+      And redemption with id "1" should be the user's first interaction with the outlet
 	  And the redemption should have been approved in last "5" minutes
 	  And the user's last activity should be on "2013-01-01"
 
@@ -114,6 +115,84 @@ Feature: Approve Redemption
       """
       { "errors" : ["Redemption request not found"] }
       """
+
+    Scenario: User has already interacted with the outlet by redeeming points
+      Given the following users exist
+         |id        |first_name |email                        |password    |authentication_token |role   |
+         |101       |Donald     |staff.bangalore.1@subway.com |password123 |donald_auth_token    |staff  |
+      Given a customer named "Subway" exists with id "100"
+        And the customer with id "100" has an outlet named "Subway - Bangalore" with id "10"
+        And the outlet has "1000" points in its rewards pool
+        And outlet "Subway - Bangalore" has staffs
+          |staff.bangalore.1@subway.com   |
+      Given "Kenny Bross" is a user with email id "simpleuser@gmail.com" and password "password123" and user id "1000"
+        And his role is "user"
+        And his authentication token is "auth_token_123"
+        And he has "200" points
+        And till now he has redeemed "1000" points in "5" different redemptions
+      Given the following redemptions exist
+          |id           |outlet_id    |   user_id       |   points   | approved |
+          |1            |10           |   1000          |   100      |   false  |
+          |2            |10           |   1000          |   100      |   false  |
+          |3            |10           |   2000          |   300      |   false  |
+        And the time limit for approving redemption is "30" minutes
+      When I authenticate as the user "donald_auth_token" with the password "random string"
+      And I send a PUT request to "/api/redemptions/1" with the following:
+      """
+      {
+        "redemption" : {
+          "approve" : true
+        }
+      }
+      """
+      And I send a PUT request to "/api/redemptions/2" with the following:
+      """
+      {
+        "redemption" : {
+          "approve" : true
+        }
+      }
+      """
+      And redemption with id "1" should be the user's first interaction with the outlet
+      And redemption with id "2" should not be the user's first interaction with the outlet
+
+    Scenario: User has already interacted with the outlet by submitting feedbacks
+      Given the following users exist
+         |id        |first_name |email                        |password    |authentication_token |role   |
+         |101       |Donald     |staff.bangalore.1@subway.com |password123 |donald_auth_token    |staff  |
+      Given a customer named "Subway" exists with id "100"
+        And the customer with id "100" has an outlet named "Subway - Bangalore" with id "10"
+        And the outlet has "1000" points in its rewards pool
+        And outlet "Subway - Bangalore" has staffs
+          |staff.bangalore.1@subway.com   |
+      Given "Kenny Bross" is a user with email id "simpleuser@gmail.com" and password "password123" and user id "1000"
+        And his role is "user"
+        And his authentication token is "auth_token_123"
+        And he has "200" points
+        And till now he has redeemed "1000" points in "5" different redemptions
+      Given the following redemptions exist
+          |id           |outlet_id    |   user_id       |   points   | approved |
+          |1            |10           |   1000          |   100      |   false  |
+          |2            |10           |   1000          |   100      |   false  |
+          |3            |10           |   2000          |   300      |   false  |
+        And the time limit for approving redemption is "30" minutes
+      Given A feedback exists with the following attributes:
+        |id       |10     |
+        |code     |12345  |
+        |points   |120    |
+        |user_id  |1000   |
+        |outlet_id|10     |
+        |completed|true   |
+      When I authenticate as the user "donald_auth_token" with the password "random string"
+      And I send a PUT request to "/api/redemptions/2" with the following:
+      """
+      {
+        "redemption" : {
+          "approve" : true
+        }
+      }
+      """
+      And redemption with id "2" should not be the user's first interaction with the outlet
 
     Scenario: Time for confirming redemption has been expired 
       Given the following users exist

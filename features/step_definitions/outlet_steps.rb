@@ -118,3 +118,18 @@ Then(/^the outlet's latitude and longitude should be "(.*?)" and "(.*?)"$/) do |
   @existing_outlet.longitude.should == longitude.to_f
 end
 
+Then /^redemption with id "([^"]*)" should be the user's first interaction with the outlet$/ do |redemption_id|
+  Redemption.find(redemption_id.to_i).first_interaction.should == true
+end
+
+Then /^redemption with id "([^"]*)" should not be the user's first interaction with the outlet$/ do |redemption_id|
+  Redemption.find(redemption_id.to_i).first_interaction.should == false
+end
+
+Then /^feedback with id "([^"]*)" should be the user's first interaction with the outlet$/ do |feedback_id|
+  Feedback.find(feedback_id.to_i).first_interaction.should == true
+end
+
+Then /^feedback with id "([^"]*)" should not be the user's first interaction with the outlet$/ do |feedback_id|
+  Feedback.find(feedback_id.to_i).first_interaction.should == false
+end

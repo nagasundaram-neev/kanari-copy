@@ -52,6 +52,7 @@ Feature: Create Feedback
       |recommendation_rating|4|
       |completed|true|
       |code|nil|
+      And feedback with id "10" should be the user's first interaction with the outlet
 
     Scenario: User tries to submit feedback twice
       Given a customer named "Subway" exists with id "100"
@@ -135,6 +136,87 @@ Feature: Create Feedback
       |recommendation_rating|4|
       |completed|true|
       |code|nil|
+
+    Scenario: User has already interacted with the outlet by redeeming points
+      Given a customer named "Subway" exists with id "100"
+        And the customer with id "100" has an outlet named "Subway - Bangalore" with id "20"
+        And the outlet has "1000" points in its rewards pool
+      Given A feedback exists with the following attributes:
+        |id       |10     |
+        |code     |12345  |
+        |points   |120    |
+        |outlet_id|20      |
+        |completed|false      |
+        And the time limit for giving feedback is "120" minutes
+      Given "Kenny Bross" is a user with email id "simpleuser@gmail.com" and password "password123" and user id "1000"
+        And his role is "user"
+        And his authentication token is "auth_token_123"
+        And he has "100" points
+      Given A redemption request exists with the following attributes:
+        |id       |1      |
+        |user_id  |1000   |
+        |points   |120    |
+        |outlet_id|20     |
+        |approved |true   |
+      When I authenticate as the user "auth_token_123" with the password "random string"
+      When I send a PUT request to "/api/feedbacks/10" with the following:
+      """
+      {
+        "feedback" : {
+          "food_quality": -1,
+          "speed_of_service": 1,
+          "friendliness_of_service": 0,
+          "ambience": -1,
+          "cleanliness": 0,
+          "value_for_money": 1,
+          "comment": "Affordable place for a casual dinner",
+          "recommendation_rating" : 4
+        }
+      }
+      """
+      Then the response status should be "200"
+      And feedback with id "10" should not be the user's first interaction with the outlet
+
+    Scenario: User has already interacted with the outlet by submitting feedback
+      Given a customer named "Subway" exists with id "100"
+        And the customer with id "100" has an outlet named "Subway - Bangalore" with id "20"
+        And the outlet has "1000" points in its rewards pool
+        And the time limit for giving feedback is "120" minutes
+      Given "Kenny Bross" is a user with email id "simpleuser@gmail.com" and password "password123" and user id "1000"
+        And his role is "user"
+        And his authentication token is "auth_token_123"
+        And he has "100" points
+      Given A feedback exists with the following attributes:
+        |id       |10     |
+        |code     |12345  |
+        |points   |120    |
+        |outlet_id|20     |
+        |completed|false  |
+      Given A feedback exists with the following attributes:
+        |id       |20     |
+        |code     |12345  |
+        |points   |120    |
+        |outlet_id|20     |
+        |user_id  |1000   |
+        |completed|true   |
+      When I authenticate as the user "auth_token_123" with the password "random string"
+      When I send a PUT request to "/api/feedbacks/10" with the following:
+      """
+      {
+        "feedback" : {
+          "food_quality": -1,
+          "speed_of_service": 1,
+          "friendliness_of_service": 0,
+          "ambience": -1,
+          "cleanliness": 0,
+          "value_for_money": 1,
+          "comment": "Affordable place for a casual dinner",
+          "recommendation_rating" : 4
+        }
+      }
+      """
+      Then the response status should be "200"
+      And feedback with id "10" should not be the user's first interaction with the outlet
 
     Scenario: User not authenticated
       Given a customer named "Subway" exists with id "100"

@@ -18,20 +18,20 @@ describe DashboardSummary do
       Feedback.create(food_quality: 1, speed_of_service: 1,  recommendation_rating: 3,updated_at: Time.now - 7.days, user: male_user, points: 5),
 
       Feedback.create(food_quality: 1, speed_of_service: 1,  recommendation_rating: 5,updated_at: Time.now - 6.days, user: female_user, bill_amount: 100.10),
-      Feedback.create(food_quality: 1, speed_of_service: -1, recommendation_rating: 8,updated_at: Time.now - 5.days, user: female_user, points: 10),
+      Feedback.create(food_quality: 1, speed_of_service: -1, recommendation_rating: 8,updated_at: Time.now - 5.days, user: female_user, points: 10, first_interaction: true),
       Feedback.create(food_quality: 1, speed_of_service: -1, recommendation_rating: 9,updated_at: Time.now - 5.days, user: female_user, bill_amount: 2899.90),
       Feedback.create(food_quality: 1, speed_of_service: 1,  recommendation_rating: 8,updated_at: Time.now - 4.days, rewards_pool_after_feedback: 1020, user: male_user)
     ]
     redemptions = [
       Redemption.create(updated_at: Time.now-9.days),
-      Redemption.create(updated_at: Time.now-9.days),
-      Redemption.create(updated_at: Time.now-8.days),
+      Redemption.create(updated_at: Time.now-9.days, user: female_user),
+      Redemption.create(updated_at: Time.now-8.days, user: male_user, first_interaction: true),
       Redemption.create(updated_at: Time.now-8.days, points: 5),
       Redemption.create(updated_at: Time.now-7.days),
       Redemption.create(updated_at: Time.now-7.days, rewards_pool_after_redemption: 1000),
 
       Redemption.create(updated_at: Time.now-6.days, points: 10),
-      Redemption.create(updated_at: Time.now-5.days),
+      Redemption.create(updated_at: Time.now-5.days, user: male_user, first_interaction: true),
       Redemption.create(updated_at: Time.now-4.days, rewards_pool_after_redemption: 1020)
     ]
     @start_time = Time.now - (7.days - 2.hours)
@@ -187,14 +187,8 @@ describe DashboardSummary do
   describe "#get_demographics_summary" do
     it "should return demographics related summary as a hash" do
       @dashboard_summary.get_demographics_summary.should == {
-        male:{
-          over_period: 50.0,
-          change_in_points: -50.0
-        },
-        female:{
-          over_period: 50.0,
-          change_in_points: 50.0
-        }
+       :female => {:over_period=>50.0, :change_in_points=>0.0},
+       :male => {:over_period=>50.0, :change_in_points=>0.0}
       }
     end
   end
@@ -202,16 +196,8 @@ describe DashboardSummary do
   describe "#get_users_summary" do
     it "should return user related summary as a hash" do
       @dashboard_summary.get_users_summary.should == {
-        new_users:{
-          over_period: 1,
-          average_per_day: 0.3333333333333333,
-          change_in_percentage: 0.0
-        },
-        returning_users:{
-          over_period: 1,
-          average_per_day: 0.3333333333333333,
-          change_in_percentage: nil
-        }
+       :new_users => {:over_period=>2, :average_per_day=>0.6666666666666666, :change_in_percentage=>100.0},
+       :returning_users => {:over_period=>0, :average_per_day=>0.0, :change_in_percentage=>-100.0}
       }
     end
   end
