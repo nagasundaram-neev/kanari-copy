@@ -129,6 +129,7 @@ var refreshIntervalId;
 var flag = 0;
 var feedbackTimeout;
 var insightTimeout;
+var redemTimeout;
 
 module.controller('headerCtrl', function($scope, $http, $location) {
 	var overlayDiv = $("#overlaySuccess");
@@ -624,6 +625,7 @@ module.controller('homePageController', function($scope, $http, $location, $time
 	$("#feedback span").show();
 	$(".popup").hide();
 	if (getCookie('authToken')) {
+		$timeout.cancel(redemTimeout);
 		var dt;
 		var overlayDiv = $("#overlaySuccess");
 		$scope.active1 = true;
@@ -742,6 +744,7 @@ module.controller('insightsController', function($scope, $http, $location, $time
 	$("#insights").addClass("ui_btn_active");
 	$("#insights span").show();
 	if (getCookie('authToken')) {
+		$timeout.cancel(redemTimeout);
 		var dt;
 		$scope.active2 = true;
 		flag = 1;
@@ -989,8 +992,11 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 				}
 
 			});
+			
+			redemTimeout = $timeout($scope.listRedemptions, 120000);
+			
 		};
-
+		
 		$scope.processedRedemptions = function() {
 			var param = {
 				"auth_token" : getCookie('authToken')
@@ -1016,20 +1022,12 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 				}
 
 			});
+			
 		};
 
 		$scope.listRedemptions();
 		
 		$('#scrollbar3').oneFingerScroll();
-		
-		// $('#hi').click(function (event) {
-            // // event.preventDefault();
-            // // initX = endX = event.touches[0].clientX;
-            // // initY = endY = event.touches[0].clientY;
-            // // elem.bind('touchend', onTouchEnd);
-            // // elem.bind('touchmove', onTouchMove);
-            // alert("hi clicked");
-        // });
 		
 		$scope.confirm = function(id) {
 			console.log("confirmed" + id);
@@ -1080,6 +1078,7 @@ module.controller('numericCodeController', function($scope, $http, $location, $t
 	$("#numeric_code span").show();
 	if (getCookie('authToken')) {
 		$timeout.cancel(insightTimeout);
+		$timeout.cancel(redemTimeout);
 		//$timeout.cancel(feedbackTimeout);
 		flag = 1;
 		$scope.loader = false;

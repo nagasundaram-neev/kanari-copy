@@ -3318,7 +3318,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						usageLegend = "Rewards Pool";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
 						yAxisVal = "Rewards Pool [in Dhs.]";
-						$scope.chart_subheading_tooltip = "The size of the rewards pool on each day over the specified period.";
+						$scope.chart_subheading_tooltip = "The size of the rewards pool at the end of each day over the specified period.";
 					}
 					/**Usage end**/
 
