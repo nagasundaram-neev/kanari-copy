@@ -6,31 +6,31 @@ var module = angular.module('kanari', ['ui.bootstrap']).
   config(['$routeProvider','$locationProvider', function($routeProvider,$locationProvider) {
   	
   $routeProvider.
-     when('/login', {title: "Product",templateUrl: "<%= asset_path 'login.html' %>"}).
-     when('/forgot_pass', {templateUrl: "<%= asset_path 'forgot_password.html' %>"}).
-     when('/api/users/password/edit', {templateUrl: "<%= asset_path 'reset_password.html' %>"}).
-     when('/outlets', {templateUrl: "<%= asset_path 'home.html' %>"}).
-     when('/createInvitation', {templateUrl: "<%= asset_path 'add_Restaurant.html' %>"}).
-     when('/accept_invitation', {templateUrl: "<%= asset_path 'accept_invitation.html' %>"}).
-     when('/acceptInvitationStep2', {templateUrl: "<%= asset_path 'accept_invitation_step2.html' %>"}).
-     when('/create_outlet', {templateUrl: "<%= asset_path 'create_outlet.html' %>"}).
-     when('/create_manager', {templateUrl: "<%= asset_path 'create_manager.html' %>"}).
-     when('/list_payment_invoice',{templateUrl:"<%= asset_path 'list_payment_invoice.html'%>"}).
-     when('/payment_invoice',{templateUrl:"<%= asset_path 'payment_invoice.html'%>"}).
-     when('/take_tour',{templateUrl:"<%= asset_path 'takeTour.html'%>"}).
-     when('/create_kanari_code',{templateUrl:"<%= asset_path 'createKanariCode.html'%>"}).
-     when('/view_account',{templateUrl:"<%= asset_path 'viewAccount.html.erb'%>"}).
-     when('/add_outlet_cuisine_type', {templateUrl: "<%= asset_path 'add_outlet_cuisine_type.html' %>"}).
-     when('/outlet_manager', {templateUrl: "<%= asset_path 'outlet_manager.html' %>"}).
-     when('/payment_history', {templateUrl: "<%= asset_path 'paymentHistory.html' %>"}).
-     when('/outlet_manager_account', {templateUrl: "<%= asset_path 'outlet_manager_account.html' %>"}).
-     when('/logout', {templateUrl: "<%= asset_path 'logOut.html' %>"}).
-     when('/comments', {templateUrl: "<%= asset_path 'dashboard_comments.html' %>"}).
-     when('/trends', {templateUrl: "<%= asset_path 'dashboard_trends.html' %>"}).
-     when('/snapshot', {templateUrl: "<%= asset_path 'dashboard_snapshot.html' %>"}).
-     when('/adminConsole_outlet', {templateUrl: "<%= asset_path 'adminConsole_outlet.html' %>"}).
-     when('/adminConsole_customer', {templateUrl: "<%= asset_path 'adminConsole_customer.html' %>"}).
-     when('/change_password', {templateUrl: "<%= asset_path 'changePassword.html' %>"}).
+     when('/login', {title: "Product",templateUrl: "<%= asset_path 'assets/angular/templates/login.html' %>"}).
+     when('/forgot_pass', {templateUrl: "<%= asset_path 'assets/angular/templates/forgot_password.html' %>"}).
+     when('/api/users/password/edit', {templateUrl: "<%= asset_path 'assets/angular/templates/reset_password.html' %>"}).
+     when('/outlets', {templateUrl: "<%= asset_path 'assets/angular/templates/home.html' %>"}).
+     when('/createInvitation', {templateUrl: "<%= asset_path 'assets/angular/templates/add_Restaurant.html' %>"}).
+     when('/accept_invitation', {templateUrl: "<%= asset_path 'assets/angular/templates/accept_invitation.html' %>"}).
+     when('/acceptInvitationStep2', {templateUrl: "<%= asset_path 'assets/angular/templates/accept_invitation_step2.html' %>"}).
+     when('/create_outlet', {templateUrl: "<%= asset_path 'assets/angular/templates/create_outlet.html' %>"}).
+     when('/create_manager', {templateUrl: "<%= asset_path 'assets/angular/templates/create_manager.html' %>"}).
+     when('/list_payment_invoice',{templateUrl:"<%= asset_path 'assets/angular/templates/list_payment_invoice.html'%>"}).
+     when('/payment_invoice',{templateUrl:"<%= asset_path 'assets/angular/templates/payment_invoice.html'%>"}).
+     when('/take_tour',{templateUrl:"<%= asset_path 'assets/angular/templates/takeTour.html'%>"}).
+     when('/create_kanari_code',{templateUrl:"<%= asset_path 'assets/angular/templates/createKanariCode.html'%>"}).
+     when('/view_account',{templateUrl:"<%= asset_path 'assets/angular/templates/viewAccount.html.erb'%>"}).
+     when('/add_outlet_cuisine_type', {templateUrl: "<%= asset_path 'assets/angular/templates/add_outlet_cuisine_type.html' %>"}).
+     when('/outlet_manager', {templateUrl: "<%= asset_path 'assets/angular/templates/outlet_manager.html' %>"}).
+     when('/payment_history', {templateUrl: "<%= asset_path 'assets/angular/templates/paymentHistory.html' %>"}).
+     when('/outlet_manager_account', {templateUrl: "<%= asset_path 'assets/angular/templates/outlet_manager_account.html' %>"}).
+     when('/logout', {templateUrl: "<%= asset_path 'assets/angular/templates/logOut.html' %>"}).
+     when('/comments', {templateUrl: "<%= asset_path 'assets/angular/templates/dashboard_comments.html' %>"}).
+     when('/trends', {templateUrl: "<%= asset_path 'assets/angular/templates/dashboard_trends.html' %>"}).
+     when('/snapshot', {templateUrl: "<%= asset_path 'assets/angular/templates/dashboard_snapshot.html' %>"}).
+     when('/adminConsole_outlet', {templateUrl: "<%= asset_path 'assets/angular/templates/adminConsole_outlet.html' %>"}).
+     when('/adminConsole_customer', {templateUrl: "<%= asset_path 'assets/angular/templates/adminConsole_customer.html' %>"}).
+     when('/change_password', {templateUrl: "<%= asset_path 'assets/angular/templates/changePassword.html' %>"}).
      otherwise({redirectTo: '/login'});
      $locationProvider.hashPrefix = "#";
 }]);
@@ -344,6 +344,7 @@ module.directive('passwordValidate', function() {
 		}
 	};
 }); 
+
 module.filter('fromNow', function() {
   return function(date) {
     return moment(date).fromNow();

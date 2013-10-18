@@ -1,0 +1,921 @@
+<div data-role="page" style="min-height: 585px;" class="main_content span12" data-theme="b" id="createOutlet" ng-controller="createOutletCtrl">
+
+	<style>
+		input[type="image"], input[type="checkbox"], input[type="radio"] {
+			margin: 0;
+		}
+		.main_content span.vertical_center {
+			display: inline !important;
+			vertical-align: middle !important;
+			margin-right: 0px;
+			padding: 0 0 4px 0;
+		}
+		#map_canvas {
+			height: 400px;
+			width: 750px;
+			border: 1px solid #333335;
+			margin: 0 20px;
+		}
+		.createOutletDiv .input-help {
+			left: 392px;
+		}
+		.select_option lable {
+			width: 150px;
+		}
+	</style>
+	<div class="header_title">
+		<span class="manager_outlet">Manage Outlet</span>
+		<span class="arrow-right blank_span">&nbsp;</span>
+		<span class="create_rest" ng-show="action">Create Restaurant Outlet</span>
+		<span class="create_rest" ng-hide="action">Update Restaurant Outlet</span>
+	</div>
+	<div class="create_outlet innerDiv" data-role="content">
+
+		<div class="clr"></div>
+		<div class="leftPanel" >
+			<ul class="">
+				<li data-ng-class="{active:profileShow,create_outlet:true }">
+
+					<a ng-click="changeTab('profileShow')" > 
+						<!--<img alt="Icon profile" src="/assets/icon_profile-b081658cd9edb8285d5d7eb973ea7c9a.png" />-->
+					<div class="srNo">1</div>
+					<div class="menuTitle">Profile</div>
+
+					<br/>
+					<span>Name, Description and contact info</span> </a>
+				</li>
+				<li data-ng-class="{active:locationShow,create_location:true}" >
+
+					<a  ng-click="changeTab('locationShow')"> 
+						<!--<img alt="Icon location" src="/assets/icon_location-96912d46f99a9031b13423a598b8d933.png" />-->
+					<div class="srNo">2</div>
+					<div class="menuTitle">Location</div>
+					<br/>
+					<span>Specify the exact location of your outlet</span> </a>
+				</li>
+				<li ng-show="userAction" data-ng-class="{active:permissionShow,create_manager:true}">
+
+					<a ng-click="changeTab('permissionShow')"> 
+						<!--<img alt="Icon permissions" src="/assets/icon_permissions-678df3f7d5095ddd28776cb2537f7af5.png" />-->
+					<div class="srNo">3</div>
+					<div class="menuTitle">Manager</div>
+					<br/>
+					<span>Assign a manager to your outlet</span> </a>
+				</li>
+				<li data-ng-class="{active:ReportShow,create_report:true}">
+
+					<a ng-click="changeTab('ReportShow')"> 
+						<!--<img alt="Icon reports" src="/assets/icon_reports-e423a847c321d46f14fe9ddba41ede6e.png" />-->
+					<div class="srNo">4</div>
+					<div class="menuTitle">Reports</div>
+
+					<br/>
+					<span>Who gets the reports and how often</span> </a>
+				</li>
+				<li data-ng-class="{active:TabletIdShow,create_tabletId:true}">
+
+					<a ng-click="changeTab('TabletIdShow')"> 
+						<!--<img alt="Icon create tablet id" src="/assets/icon_create_tablet_id-44013760d0b5cbf9f558889d85c306c8.png" />-->
+					<div class="srNo">5</div>
+					<div class="menuTitle">Tablets</div>
+
+					<br/>
+					<span>Create a tablet login for your outlet</span> </a>
+				</li>
+			</ul>
+		</div>
+
+		<div ng-show="profileShow">
+			<div data-role="fieldcontain" class="createOutletDiv rightPanel">
+				<!-- <h1 ng-show="action">Create Restaurant Outlet</h1>
+				<h1 ng-hide="action">Update Restaurant Outlet</h1> -->
+
+				<span class="mandatoryFld" 	style="float: left;">
+					<div class="startMsg">
+						*
+					</div> Indicates mandatory fields</span>
+				<!-- <div class="disable_outlet" ng-hide="action">
+				<b>Disable Outlet?</b>
+				<input type="checkbox" ng-show="outlet_disabled" checked ng-click="disableOutlet($event)" />
+				<input type="checkbox" ng-hide="outlet_disabled" ng-click="disableOutlet($event)" />
+				</div> -->
+				<div class="clr"></div>
+				<form name="createOutlet" id="createOutlet" ng-app="form-example" ng-submit="create_outlet(createOutlet)" class="row form-horizontal" novalidate>
+					<div class="tipContainer">
+						<div class="control-group">
+							<div class="controls">
+								<lable>
+									Restaurant Name<span class="star">*</span>
+								</lable>
+								<input data-theme="a" data-inline="true" placeholder="Restaurant Name" type="text" name="restaurant_name" ng-model="restaurant_name" class="passwordTxt" required />
+								<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The name of your restaurant"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+	                            
+								<div class="input-help">
+									<h4>Please enter a restaurant name</h4>
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<lable>
+									Restaurant Location<span class="star">*</span>
+								</lable>
+								<input data-theme="a" data-inline="true" placeholder="Restaurant Location" type="text" name="restaurant_location"  ng-model="restaurant_location" class="passwordTxt" required />
+								<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Brief one-line description. Eg. Dubai Mall Food Court or The Address Hotel Dubai."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+								<div class="input-help">
+									<h4>Please enter a restaurant location</h4>
+								</div>
+							</div>
+						</div>
+						<div class="tipContent"> 
+							<span> tip: </span>
+							<br/>This is the information your customers will see when viewing your listing on the kanari mobile app! 						
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Contact Number<span class="star">*</span>
+							</lable>
+							<input data-theme="a" data-inline="true" type="text" class="phoneno_1 setTelephone" name="contactNo" placeholder="Contact Number" />
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The restaurant's direct contact number."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+							<!-- <input data-theme="a" data-inline="true" placeholder="Contact Number" type="text" min="0" number-mask="" maxlength="11" name="txtPassword" ng-model="contact_number" class="passwordTxt" required /> -->
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Email Address<span class="star">*</span>
+							</lable>
+							<input data-theme="a" data-inline="true" placeholder="Email Address" type="email" name="txtPassword" ng-model="email_address" class="passwordTxt" required />
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The restaurant's email address for reservations, questions etc."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+							<div class="input-help">
+								<h4>Invalid Email</h4>
+							</div>
+						</div>
+					</div>
+
+					<div class="control-group">
+						<div class="controls">
+							<lable style="margin: 0;">
+								Outlet Type<span class="star">*</span>
+							</lable>
+							<select ng-hide="form_outlet1" ng-model='formoutlet1' ng-change="selectOutlet1()" required ng-options='outletType.id as outletType.name for outletType in outletTypes'>
+								<option value="">Select Outlet</option>
+							</select>
+							<select ng-show="form_outlet2" ng-model='formoutlet2' ng-change="selectOutlet2()"  ng-options='outletType.id as outletType.name for outletType in outletTypes'>
+								<option value="">Select Outlet</option>
+							</select>
+							<select id="select3" ng-show="form_outlet3" ng-model='formoutlet3' ng-change="selectOutlet3()"  ng-options='outletType.id as outletType.name for outletType in outletTypes'>
+								<option value="">Select Outlet</option>
+							</select>
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="You can select up to three outlet types for your restaurant."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+							<br>
+							<span class="customErr input-help" ng-show="outletError">Please select different outlet type.</span>
+							<span class="customErrCls customErr input-help" ng-show="outletError1">Please select primary outlet type.</span>
+							<span class="customErr input-help" ng-show="outletError2">Please select primary & secondary outlet type.</span>
+
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable style="margin: 0;">
+								Cuisine Type<span class="star">*</span>
+							</lable>
+							<select ng-model='formcuisine1' ng-change="selectCuisine1()" required ng-options='cuisineType.id as cuisineType.name for cuisineType in cuisineTypes'>
+								<option value="">Select Cuisine</option>
+							</select>
+							<select ng-show="form_cuisine2" ng-model='formcuisine2' ng-change="selectCuisine2()"  ng-options='cuisineType.id as cuisineType.name for cuisineType in cuisineTypes'>
+								<option value="">Select Cuisine</option>
+							</select>
+							<select id="selectC3" ng-show="form_cuisine3" ng-model='formcuisine3' ng-change="selectCuisine3()"  ng-options='cuisineType.id as cuisineType.name for cuisineType in cuisineTypes'>
+								<option value="">Select Cuisine</option>
+							</select>
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="You can select up to three cuisine types for your restaurant."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+							<br/>
+							
+							<span class="customErr input-help" ng-show="cuisineError">Please select different cuisine type.</span>
+							<span class="customErrCls1 customErr input-help" ng-show="cuisineError1">Please select primary cuisine type.</span>
+							<span class="customErr input-help" ng-show="cuisineError2">Please select primary & secondary cuisine type.</span>
+
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable >
+								Opening Hours<span class="star">*</span>
+							</lable>
+							<span class="timeSetting vertical_center">from</span>
+							<select ng-model="fromTime" required>
+								<option value="">Select from time</option>
+								<option value="12.00am">12.00am</option>
+								<option value="01.00am">01.00am</option>
+								<option value="02.00am">02.00am</option>
+								<option value="03.00am">03.00am</option>
+								<option value="04.00am">04.00am</option>
+								<option value="05.00am">05.00am</option>
+								<option value="06.00am">06.00am</option>
+								<option value="07.00am">07.00am</option>
+								<option value="08.00am">08.00am</option>
+								<option value="09.00am">09.00am</option>
+								<option value="10.00am">10.00am</option>
+								<option value="11.00am">11.00am</option>
+								<option value="12.00pm">12.00pm</option>
+								<option value="01.00pm">01.00pm</option>
+								<option value="02.00pm">02.00pm</option>
+								<option value="03.00pm">03.00pm</option>
+								<option value="04.00pm">04.00pm</option>
+								<option value="05.00pm">05.00pm</option>
+								<option value="06.00pm">06.00pm</option>
+								<option value="07.00pm">07.00pm</option>
+								<option value="08.00pm">08.00pm</option>
+								<option value="09.00pm">09.00pm</option>
+								<option value="10.00pm">10.00pm</option>
+								<option value="11.00pm">11.00pm</option>
+
+							</select>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<span class="timeSetting vertical_center left_margin"> to</span>
+							<select ng-model="toTime" required>
+								<option value="">Select to time</option>
+								<option value="12.00am">12.00am</option>
+								<option value="01.00am">01.00am</option>
+								<option value="02.00am">02.00am</option>
+								<option value="03.00am">03.00am</option>
+								<option value="04.00am">04.00am</option>
+								<option value="05.00am">05.00am</option>
+								<option value="06.00am">06.00am</option>
+								<option value="07.00am">07.00am</option>
+								<option value="08.00am">08.00am</option>
+								<option value="09.00am">09.00am</option>
+								<option value="10.00am">10.00am</option>
+								<option value="11.00am">11.00am</option>
+								<option value="12.00pm">12.00pm</option>
+								<option value="01.00pm">01.00pm</option>
+								<option value="02.00pm">02.00pm</option>
+								<option value="03.00pm">03.00pm</option>
+								<option value="04.00pm">04.00pm</option>
+								<option value="05.00pm">05.00pm</option>
+								<option value="06.00pm">06.00pm</option>
+								<option value="07.00pm">07.00pm</option>
+								<option value="08.00pm">08.00pm</option>
+								<option value="09.00pm">09.00pm</option>
+								<option value="10.00pm">10.00pm</option>
+								<option value="11.00pm">11.00pm</option>
+							</select>
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="What are the opening hours of your restaurant?"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<div class="controls">
+							<lable style="margin: 0;">
+								Delivery<span class="star">*</span>
+
+							</lable>
+							<input type="radio" class="radioBtn" name="delivery" ng-model="Delivery" value="true" required>
+							Yes &nbsp;&nbsp;&nbsp;
+							<input type="radio" class="radioBtn"  name="delivery" ng-model="Delivery" value="false">
+							No
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Does your restaurant deliver?"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable style="margin: 0;">
+								Serves Alcohol<span class="star">*</span>
+							</lable>
+							<input type="radio"  class="radioBtn" name="serves_alcohol"  ng-model="serves_alcohol" value="true" required>
+							Yes &nbsp;&nbsp;&nbsp;
+							<input type="radio" class="radioBtn" ng-model="serves_alcohol" name="serves_alcohol" value="false">
+							No
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Does your restaurant serve alcohol?"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable style="margin: 0;">
+								Outdoor Seating<span class="star">*</span>
+							</lable>
+							<input type="radio"  class="radioBtn" ng-model="outdoor_Seating" name="outdoor_Seating" value="true" required>
+							Yes &nbsp;&nbsp;&nbsp;
+							<input type="radio" class="radioBtn"  ng-model="outdoor_Seating" name="outdoor_Seating" value="false">
+							No
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Does your restaurant have outdoor seating?"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+						</div>
+					</div>
+					<div style="margin: 10px 0 0 160px;" class="control-group">
+						<div class="controls">
+							<button ng-disabled="value.length==0" type="submit" class="btn">
+								Save
+							</button>
+							<button disabled class="btn">
+								Save
+							</button>
+						</div>
+						<div ng-show="successoutlet" class="successMsg">
+							<div class="create_rest" ng-show="action">
+								Your outlet has been created successfully.
+							</div>
+							<div class="create_rest" ng-hide="action">
+								Your outlet has been updated successfully.
+							</div>
+						</div>
+						<p ng-show="valide_phone" class="errorMsg">
+							Invalid Contact Number
+						</p>
+						<p ng-show="error" class="errorMsg">
+							{{errormsg}}
+						</p>
+					</div>
+				</form>
+			</div>
+			<div class="clr"></div>
+		</div>
+		<div id ="permission" ng-show="permissionShow">
+			<div data-role="fieldcontain" class="manager_list rightPanel">
+				<!-- <h3 ng-show="manager_show">Selected manager is : <span class="full_name">{{manager}}</span></h3> -->
+				<div class="change_manager">
+					Assign a manager to your outlet
+				</div>
+				<form ng-app="form-example" class="row form-horizontal" name="select_Action" ng-submit="selectAction(select_Action)" novalidate>
+					<div class="select_option">
+						<lable>
+							Assigned Manager<span class="star">*</span>
+						</lable>
+						<select ng-model="myOption" ng-options="value.id as value.first_name + ' ' + value.last_name for value in managerList" required>
+							<option value="">Select Manager</option>
+						</select>
+						<div class="control-group" style="margin: 10px 0 0 150px;"	>
+							<div class="controls">
+								<button  type="submit" class="btn">
+									Save
+								</button>
+								<button  class="btn" disabled>
+									Save
+								</button>
+								<!-- <br />
+								<br />
+								<span class="or">OR</span>
+								<br />
+								<br />
+								<input type="button" class="btn_cls" ng-click="add_new_manager()" data-inline="true" value="Add a new manager" />
+								<br/>
+								 -->
+								<p ng-show="successmgr" class="successMsgMnger" style=" margin-left: 0;">
+								Manager has been updated successfully.
+								</p>
+								<p ng-hide="successmgr" ></p>
+							</div>
+						</div>
+						<div class="infoSteps">
+							<div class="step1" style="width:220px">
+								<img style="position: absolute; margin-top: -75px; margin-left: -95px;" src="/assets/arrow1a.png">
+								<img style="position: absolute; margin-left: 60px; margin-top: -3px;" src="/assets/arrow1c.png">
+								Step 1:
+								<br/>
+								Create a manager profile 
+							</div>
+							<div class="clr"></div>
+							<div class="step2">
+								Step 2:
+								<br/>
+								Select the manager from the list and click save
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div data-role="fieldcontain" class="add_manager rightPanel" style=" margin-top: 10px;">
+				<div class="addManagerTitle">
+					Add a new manager
+				</div>
+				<span class="mandatoryFld">
+					<div class="startMsg">
+						*
+					</div> Indicates mandatory fields</span>
+				<form id="formid" ng-app="form-example" class="row form-horizontal" name="createManager" ng-submit="create_manager(createManager)" novalidate>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								First Name<span class="star">*</span>
+							</lable>
+							<input type="text"  placeholder="First Name" ng-model="first_name1" required>
+							<div class="input-help">
+								<h4>Please enter first name</h4>
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Last Name<span class="star">*</span>
+							</lable>
+							<input type="text" placeholder="Last Name" ng-model="last_name1" required>
+							<div class="input-help">
+								<h4>Please enter last name</h4>
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Email Address<span class="star">*</span>
+							</lable>
+							<input type="email" placeholder="Email Address" ng-model="email_address_manager1" required>
+							<div  class="input-help">
+								<h4>Invalid Email</h4>
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Password<span class="star">*</span>
+							</lable>
+							<input ng-model="password" class="immediate-help" password-validate required type="password" placeholder="Password">
+							<div class="input-help">
+								<h4>Password must meet the following requirements:</h4>
+								<ul>
+									<li ng-class="pwdHasLetter">
+										At least <strong>one letter</strong>
+									</li>
+									<li ng-class="pwdHasNumber">
+										At least <strong>one number</strong>
+									</li>
+									<li ng-class="pwdValidLength">
+										At least <strong>8 characters long</strong>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Confirm Password<span class="star">*</span>
+							</lable>
+							<input ng-model="confirmpassword" class="immediate-help" password-validate required type="password"  placeholder="Password">
+							<div class="input-help">
+								<h4>Password must meet the following requirements:</h4>
+								<ul>
+									<li ng-class="pwdHasLetter">
+										At least <strong>one letter</strong>
+									</li>
+									<li ng-class="pwdHasNumber">
+										At least <strong>one number</strong>
+									</li>
+									<li ng-class="pwdValidLength">
+										At least <strong>8 characters long</strong>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Phone Number<span class="star">*</span>
+							</lable>
+							<input data-theme="a" data-inline="true" type="text" class="phoneno_3 setTelephone" name="contactNo" placeholder="Phone Number" />
+							<!-- <input type="text" placeholder="Phone Number" min="0" number-mask="" maxlength="11" ng-model="add_contact_number" required> -->
+						</div>
+					</div>
+					<div class="control-group" style="margin: 10px 0 0 145px;">
+						<div class="controls">
+							<button type="submit" class="btn">
+								Add Manager
+							</button>
+							<button class="btn" disabled>
+								Add Manager
+							</button>
+							<a  ng-click="close_manager()" class="cancelBtn submitBtn btn btn-primary btn-large"  > Cancel </a>
+							<p ng-show="error" class="errorMsg">
+								{{errorMsg}}
+							</p>
+							<p ng-hide="error" ></p>
+							<p ng-show="success1" class="successMsg">
+								Manager has been added successfully.
+							</p>
+							<p ng-hide="success" ></p>
+							<p ng-show="valide_phone" class="errorMsg">
+								Invalid Phone Number
+							</p>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="clr"></div>
+		</div>
+		<!-- height: 267px; -->
+		<div id ="reports" ng-show="ReportShow" >
+			<div class="rightPanel" style="margin-top:0">
+				<a href="javascript:getPdf();" style="float: right;"><!-- Download PDF --></a>
+				<!-- <div id="content">
+     <h3>Hello, this is a H3 tag</h3>
+
+    <p>{{restaurant_name}} - {{restaurant_location}}</p>
+</div>
+<div id="editor"></div>
+<button id="cmd">generate PDF</button> -->
+				
+				
+				<div class="clr"></div>
+			<div class="restName">{{restaurant_name}} - {{restaurant_location}}</div>
+			<div class="reportPerid">Report Period: {{todaysDt.Dt | date:'MMMM yyyy'}}</div>
+			<div class="reportHead">Net Promoter Score</div>
+			<div id="container" style="min-width: 780px; height: 400px; margin: 0 auto"></div>
+			<div class="clr"></div>
+			<div class="xyAxisValues">
+				<div class="xyAxisOptions">
+					<span>Period NPS</span></br/>
+					<span>{{NPS | number:1}}</span></br/>
+					<!-- <span>+/-XX</span> -->
+				</div>
+				<div class="xyAxisOptions">
+					<span>Premoters</span></br/>
+					<span>{{positiveChange | number:1}}%</span></br/>
+					<!-- <span>+/-XX</span> -->
+				</div>
+				<div class="xyAxisOptions">
+					<span>Passives</span></br/>
+					<span>{{neutralChange | number:1}}%</span></br/>
+					<!-- <span>+/-XX</span> -->
+				</div>
+				<div class="xyAxisOptions">
+					<span>Detractors</span></br/>
+					<span>{{negativeChange | number:1}}%</span></br/>
+					<!-- <span>+/-XX</span> -->
+				</div>
+			</div>
+			<div class="clr"></div>
+			<div class="reportHead">Kanari Usage</div>
+			<div class="clr"></div>
+			<div class="xyAxisValues">
+				<div class="xyAxisOptions">
+					<span>Feedback Submissions</span></br/>
+					<span>{{feedbackSubmit | number:1}}%</span></br/>
+					<!-- <span>+/-XX</span> -->
+				</div>
+				<div class="xyAxisOptions">
+					<span>Redemptions Processed</span></br/>
+					<span>{{noOfRedem | number:1}}%</span></br/>
+					<!-- <span>+/-XX</span> -->
+				</div>
+				<div class="xyAxisOptions">
+					<span>Points issued</span></br/>
+					<span>{{pointsIssued | number:1}}%</span></br/>
+					<!-- <span>+/-XX</span> -->
+				</div>
+				<div class="xyAxisOptions">
+					<span>Discounts Claimed</span></br/>
+					<span>{{discountClaimed | number:1}}%</span></br/>
+					<!-- <span>+/-XX</span> -->
+				</div>
+			</div>
+			<div class="clr"></div>
+			<div class="reportHead">Experience Criteria</div>
+			<div class="exp_criteria">
+				<div class="expCriterias">
+					{{food_monthlyChange | number:1}}%<br/>
+					<!-- -{{food_negative | number:1}}%<br/> -->
+					<span>FOOD</span>
+				</div>
+				<div class="expCriterias">
+					{{speed_monthlyChange | number:1}}%<br/>
+					<!-- -{{speed_neutral | number:1}}%<br/> -->
+					<span>SPEED</span>
+				</div>
+				<div class="expCriterias">
+					{{friendly_monthlyChange | number:1}}%<br/>
+					<!-- -{{friendly_negative | number:1}}%<br/> -->
+					<span>FRIENDLINESS</span>
+				</div>
+				<div class="clr"></div>
+				<div class="expCriterias">
+					{{ambience_monthlyChange | number:1}}%<br/>
+					<!-- -{{ambience_negative | number:1}}%<br/> -->
+					<span>AMBIANCE</span>
+				</div>
+				<div class="expCriterias">
+					{{clean_monthlyChange | number:1}}%<br/>
+					<!-- -{{clean_negative | number:1}}%<br/> -->
+					<span>CLEANLINESS</span>
+				</div>
+				<div class="expCriterias">
+					{{moneyVal_monthlyChange | number:1}}%<br/>
+					<!-- -{{moneyVal_negative | number:1}}%<br/> -->
+					<span>VALUE FOR MONEY</span>
+				</div>
+			</div>
+			<div class="clr"></div>
+			<div class="reportHead">Customers</div>
+			<div>
+				<div id="pieChart1" style="float:left;min-width: 300px;"></div>
+				<div id="pieChart2" style="float:left;min-width: 300px;"></div>
+			</div>
+			<div class="clr"></div>
+			</div>
+		</div>
+		<div id ="tabletIds" ng-show="TabletIdShow" style="height: 267px;">
+			<div data-role="fieldcontain" class="manager_list rightPanel" style=" width: 340px;">
+				<div class="change_manager">
+					Tablet logins for your outlet
+				</div>
+				<div class="listIds" >
+					<div class="dateTimeList" id="divexample1">
+						<div class="dateTimeListhead clearfix">
+							<!-- <div class="col1 colBorderTop">
+							Sr. No.
+							</div> -->
+							<div class="col1 colBorderTop">
+								Tablet Login
+							</div>
+							<div class="col2 colBorderTop">
+								Delete
+							</div>
+							<div class="col3 colBorderTop colBorderRight">
+								Reset Password
+							</div>
+						</div>
+						<div ng-repeat="listTabs in listTabIds" class="dateTimeListRow clearfix">
+							<!-- <div class="col1">
+							{{$index+1}}
+							</div> -->
+							<div class="col1">
+								{{listTabs.tablet_id}}
+							</div>
+							<div class="col2">
+								<a href="" ng-click="DeleteStaff(listTabs.id)">DELETE</a>
+							</div>
+							<div class="col3 colBorderRight">
+								<a href="" ng-click="change_tablet_pass(listTabs.id)">RESET PASSWORD</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<p class="successMsg">
+					{{staff_deleted}}
+				</p>
+				<!-- <input type="button" class="btn_cls" ng-click="create_tablet_id()" data-inline="true" value="Add new tablet" /> -->
+				<div class="infoSteps">
+					<div class="step1">
+						<img style="position: absolute; margin-left: -150px; margin-top: -30px;" src="/assets/arrow1a.png">
+						Step 1:
+						<br/>
+						Enter a password to create tablet login
+						<img src="/assets/arrow1b.png" style=" margin-top: -52px;position: absolute;"/>
+					</div>
+					<div class="clr"></div>
+					<div class="step2">
+						Step 2:
+						<br/>
+						Use the tablet login and password to access the kanari tablet application
+					</div>
+				</div>
+			</div>
+
+			<div data-role="fieldcontain" class="tabletId rightPanel">
+				<div class="addManagerTitle">
+					Add a new tablet
+				</div>
+				<span class="mandatoryFld">
+					<div class="startMsg">
+						*
+					</div> Indicates mandatory fields</span>
+				<form id="tabletIdForm" ng-app="form-example" class="row form-horizontal" name="createTabletId" ng-submit="create_tabletId(createTabletId)" novalidate>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Password<span class="star">*</span>
+							</lable>
+							<input type="password" class="immediate-help" id="txt" placeholder="Password" password-validate ng-model="tabletId_password" required>
+							<div class="input-help" style=" width: 165px;">
+								<h4>Password must meet the following requirements:</h4>
+								<ul>
+									<li ng-class="pwdHasLetter">
+										At least <strong>one letter</strong>
+									</li>
+									<li ng-class="pwdHasNumber">
+										At least <strong>one number</strong>
+									</li>
+									<li ng-class="pwdValidLength">
+										At least <strong>8 characters long</strong>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<lable>
+								Confirm Password<span class="star">*</span>
+							</lable>
+							<input type="password" class="immediate-help" placeholder="Confirm Password" password-validate ng-model="tabletId_confirm_password" required>
+							<div class="input-help" style=" width: 165px;">
+								<h4>Password must meet the following requirements:</h4>
+								<ul>
+									<li ng-class="pwdHasLetter">
+										At least <strong>one letter</strong>
+									</li>
+									<li ng-class="pwdHasNumber">
+										At least <strong>one number</strong>
+									</li>
+									<li ng-class="pwdValidLength">
+										At least <strong>8 characters long</strong>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="control-group" style="margin: 10px 0 0 145px;">
+						<div class="controls">
+							<button type="submit"  class="btn">
+								Create Tablet Login
+							</button>
+							<button class="btn" disabled>
+								Create Tablet Login
+							</button>
+							<a ng-click="close_tabletId()" class="cancelBtn submitBtn btn btn-primary btn-large"> Cancel </a>
+							<p ng-show="errorTabletId" class="errorMsg">
+								{{errorMsg}}
+							</p>
+							<p ng-hide="error" ></p>
+							<p ng-show="successTabletId" class="successMsg">
+								Tablet has been created successfully.
+							</p>
+							<p ng-hide="success" ></p>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div data-role="fieldcontain" class="changePass_tablet rightPanel">
+				<h1>Reset Password</h1>
+				<span class="mandatoryFld">
+					<div class="startMsg">
+						*
+					</div> Indicates mandatory fields</span>
+				<form id="passwordChange" ng-app="form-example" class="row form-horizontal" name="changePass" ng-submit="Change_password(changePass)" novalidate>
+					<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 42%;">
+						<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
+							<!-- <div class="control-group">
+							<div class="controls">
+							<lable >
+							Current	Password<span class="star">*</span>
+							</lable>
+							<input id="txtP" ng-model="old_password" class="immediate-help" password-validate required type="password" id="old_password" placeholder="Password">
+							<div class="input-help">
+							<h4>Password must meet the following requirements:</h4>
+							<ul>
+							<li ng-class="pwdHasLetter">
+							At least <strong>one letter</strong>
+							</li>
+							<li ng-class="pwdHasNumber">
+							At least <strong>one number</strong>
+							</li>
+							<li ng-class="pwdValidLength">
+							At least <strong>8 characters long</strong>
+							</li>
+							</ul>
+							</div>
+							</div>
+							</div> -->
+							<div class="control-group">
+								<div class="controls">
+									<lable >
+										New Password<span class="star">*</span>
+									</lable>
+									<input id="txtP" ng-model="password" class="immediate-help" password-validate required type="password" id="inputPassword" placeholder="New Password">
+									<div class="input-help">
+										<h4>Password must meet the following requirements:</h4>
+										<ul>
+											<li ng-class="pwdHasLetter">
+												At least <strong>one letter</strong>
+											</li>
+											<li ng-class="pwdHasNumber">
+												At least <strong>one number</strong>
+											</li>
+											<li ng-class="pwdValidLength">
+												At least <strong>8 characters long</strong>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<lable >
+										Confirm Password<span class="star">*</span>
+									</lable>
+									<input ng-model="password_confirmation" class="immediate-help" password-validate required type="password"  id="inputConfPassword" placeholder="Confirm Password">
+									<div class="input-help">
+										<h4>Password must meet the following requirements:</h4>
+										<ul>
+											<li ng-class="pwdHasLetter">
+												At least <strong>one letter</strong>
+											</li>
+											<li ng-class="pwdHasNumber">
+												At least <strong>one number</strong>
+											</li>
+											<li ng-class="pwdValidLength">
+												At least <strong>8 characters long</strong>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div style="margin: 10px 0 0 145px;" >
+								<!-- <input type="button" class="loginBtn" ng-click="acceptInvitation()" data-inline="true" value="Save" /> -->
+								<div class="controls">
+									<button type="submit" class="btn">
+										Save
+									</button>
+									<button class="btn" disabled>
+										Save
+									</button>
+									<a href="" class=" cancelBtn submitBtn btn btn-primary btn-large"  ng-click="close_change_tablet_pass()"> cancel </a>
+								</div>
+								<p class="errorMsg" >
+									{{errorMsg}}
+								</p>
+								<p class="successMsg" >
+									{{password_changed}}
+								</p>
+							</div>
+
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div id ="location" >
+			<div ng-app="kanari" class="location_map">
+				<div id="viewmap">
+					<span class="location_select"> Please select your location </span>
+					<span class="tipMsg"><span>Tip:</span> be as accurate as possible when selecting your location!</span>
+					<div ng-controller="MapCtrl" ng-controller="MapCtrl">
+						<map id="map_canvas"></map>
+						<div style="margin: 10px 20px;">
+							<div class="addMarker">
+								<button ng-click="addMark()" type="submit" class="enabel_Btn btn">
+									Save
+								</button>
+								<button disabled class="disable_Btn btn">
+									Save
+								</button>
+							</div>
+							<div class="updateMarker">
+								<button ng-click="addMark()" type="submit" class="btn">
+									Save
+								</button>
+							</div>
+							<p ng-show="successLocation" class="successMsg">
+								Your location has been updated successfully.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div id="hidemap"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$(document).ready(function() {
+		$(".setTelephone").mask("(+999)-9?9-9999999");
+		$(".setTelephone").on("blur", function() {
+			var last = $(this).val().substr($(this).val().lastIndexOf("-") + 1);
+			// alert(last.length);
+			if (last.length == 6) {
+				var move = $(this).val().substr($(this).val().lastIndexOf("-") - 1, 1);
+
+				var lastfour = move + last;
+
+				var first = $(this).val().substr(0, 8);
+
+				$(this).val(first + '-' + lastfour);
+			}
+		});
+		// $("#divexample1").niceScroll();
+
+	}); 
+	
+	// $(function () {
+    // var doc = new jsPDF();
+    // var specialElementHandlers = {
+        // '#editor': function (element, renderer) {
+            // return true;
+        // }
+    // };
+// 
+    // $('#cmd').click(function () {
+    	// console.log("in");
+        // doc.fromHTML($('#reports').html(), 15, 15, {
+            // 'width': 170,
+                // 'elementHandlers': specialElementHandlers
+        // });
+        // doc.save('sample-file.pdf');
+    // });
+// });
+</script>
+	

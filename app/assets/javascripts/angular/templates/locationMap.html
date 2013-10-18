@@ -1,0 +1,22 @@
+<div data-role="page" data-theme="b" id="locationMap" ng-controller="locationMapController">
+	<div class="username">
+		<div class="backBtn" ng-click="back()"><img style="height: 31px;" src="/assets/icon_back.svg"/><div class="clr"></div></div>
+		<div class="signUp" style="margin: 1% 0px;">
+			MAP DETAILS
+		</div>
+		<div class="clr"></div>
+	</div>
+	<div class="map">
+		<div class="google-map"
+		center="position.coords"
+		zoom="zoomProperty"
+		markers="markersProperty"
+		latitude="clickedLatitudeProperty"
+		longitude="clickedLongitudeProperty"
+		mark-click="false"
+		draggable="true"
+		fit="true"
+		events="eventsProperty"
+		style="height: 500px; width: 100%"></div>
+	</div>
+</div>

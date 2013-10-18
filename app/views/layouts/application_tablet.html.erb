@@ -7,42 +7,26 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="default">
 		<title>Kanari</title>
 		<link rel="apple-touch-icon" href="/assets/logo_tabletso.png" />
-		<!-- <link rel="apple-touch-icon-precomposed" href="/assets/logo_tabletso72.png" /> -->
 		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/logo_tablet114.png" />
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/logo_tabletso72.png" />
 		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/logo_tablet57.png" />
-
-		<!-- <link rel="apple-touch-startup-image" href="/assets/logo_tablet320x460.png"/> -->
-		<!-- iPad (landscape) SPLASHSCREEN-->
 		<link href="/assets/logo_tablet748x1024.png" media="(device-width: 768px) and (orientation: landscape)" rel="apple-touch-startup-image"/>
+		
 		<!-- iPad (portrait) SPLASHSCREEN-->
 		<link href="/assets/logo_tablet768x1004.png" media="(device-width:: 768px) and (orientation: portrait)" rel="apple-touch-startup-image"/>
 		<link rel="apple-touch-startup-image" href="/assets/logo_tablet2048x1496.png" media="(device-width: 768px) and (orientation:landscape) and (-webkit-min-device-pixel-ratio: 2)" /> 
 		<link rel="apple-touch-startup-image" href="/assets/logo_tablet1536x2008.png" media="(device-width: 768px) and (orientation:portrait) and (-webkit-min-device-pixel-ratio: 2)" /> 
 		<meta name="description" content="Kanari">
-		<!-- <meta property="og:image" content="http://kanari.co/launch/wp-content/uploads/2013/07/Kanari_Logo_WhiteBird_cropped.png"/> -->
 		<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-		<%= stylesheet_link_tag "bootstrap.css", :media => "all" %>
-		<%= javascript_include_tag "jquery.js" %>
-		<%= javascript_include_tag "angular.js" %>
-		<%= javascript_include_tag "moment.min.js" %>
-		<!-- <%= javascript_include_tag "add2home.js" %> -->
-		<!-- <script type='text/javascript' src="https://rawgithub.com/timrwood/moment/2.1.0/min/moment.min.js"></script> -->
-		<%= javascript_include_tag "iscroll.js" %>
-		<%= javascript_include_tag "app_tablet" %>
-		<%= javascript_include_tag "controllers_tablet.js" %>
-		<!-- <link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'> -->
-		<%= stylesheet_link_tag "jquery.mobile-1.3.0.css", :media => "all" %>
-		<%= stylesheet_link_tag "app_tablet.css", :media => "all" %>
-		<%= stylesheet_link_tag "add2home.css", :media => "all" %>
+		<%= javascript_include_tag "applicationtab" %>
+		<%= stylesheet_link_tag "applicationtab", :media => "all" %>
 	</head>
 	<body>
 		<div ng-show="userLogin" class="userloggedIn" id="header_menu" class="navbar" ng-controller="headerCtrl">
 			<div data-role="controlgroup" data-type="horizontal">
 				<div class="headerDiv">
 					<a id="feedback" href="#/feedback" class="ui_btn"  data-role="button" >
-						<!--<%= image_tag 'ic_feedback.png' %>-->
 						<%= image_tag( '/assets/icon_feedback.svg', height: '59') %>
 					<br/>
 					Feedback
@@ -51,7 +35,6 @@
 				</div>
 				<div class="headerDiv">
 					<a id="insights" href="#/insights" class="ui_btn"  data-role="button">
-						<!--<%= image_tag 'ic_insights.png' %>-->
 						<%= image_tag( '/assets/icon_insights.svg', height: '59') %>
 					<br/>
 					Insights
@@ -60,7 +43,6 @@
 				</div>
 				<div class="headerDiv">
 					<a id="redemption" href="#/redemption" class="ui_btn"   data-role="button">
-						<!--<%= image_tag 'ic_redemptions.png' %>-->
 						<%= image_tag( '/assets/icon_redeemptions.svg', height: '59') %>
 					<br/>
 					Redemptions
@@ -69,7 +51,6 @@
 				</div>
 				<div class="headerDiv">
 					<a id="numeric_code" href="#/numeric_code" class="ui_btn" data-role="button">
-						<!--<%= image_tag 'ic_code.png' %>-->
 						<%= image_tag( '/assets/icon_code.svg', height: '59') %>
 					<br/>
 					Code
@@ -78,7 +59,6 @@
 				</div>
 				<div class="logoutDiv">
 					<a href="javascript:void(0)" class="logOut ui_btn" ng-click="showPopup()" data-role="button">
-						<!--<%= image_tag 'ic_logout.png' %>-->
 						<%= image_tag( '/assets/icon_logout_tab.svg', height: '29') %>
 					</a>
 						
