@@ -2618,8 +2618,8 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 			endDate : moment()
 		}, function(start, end) {
 			$('#reportrange span').html(start.format('D MMMM, YYYY') + ' - ' + end.format('D MMMM, YYYY'));
-			startDt = start.format('DD-MM-YYYY');
-			endDt = end.format('DD-MM-YYYY');
+			startDt = start.format('DD-MM-YYYY 00:00');
+			endDt = end.format('DD-MM-YYYY 23:23');
 			$scope.listPaymentHistory();
 		});
 
@@ -2747,8 +2747,8 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 			endDate : moment()
 		}, function(start, end) {
 			$('#reportrange span').html(start.format('D MMMM, YYYY') + ' - ' + end.format('D MMMM, YYYY'));
-			startDt = start.format('DD-MM-YYYY');
-			endDt = end.format('DD-MM-YYYY');
+			startDt = start.format('DD-MM-YYYY 00:00');
+			endDt = end.format('DD-MM-YYYY 23:23');
 			$scope.listFeedbacksDate();
 		});
 
@@ -3509,6 +3509,58 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			return next_date_str;
 		}
 
+
+		Highcharts.drawTable = function() {
+			console.log("in");
+			var myArray1 = ["Over Period", "Change VS Preceding Period"];
+			var myArray2 = [[10, 10, 12], [11, 11, 12]];
+			var count1 = myArray1.length;
+			var count2 = myArray2.length;
+			// user options
+			var tableTop = 100, colWidth = 100, tableLeft = 20, rowHeight = 20, cellPadding = 2.5, valueDecimals = 1, valueSuffix = ' °C';
+
+			// internal variables
+			var chart = this, series = chart.series, renderer = chart.renderer, cellLeft = tableLeft;
+
+			$.each(series, function(i, serie) {
+				renderer.text(serie.name, cellLeft + cellPadding, tableTop + (i + 2) * rowHeight - cellPadding).css({
+					fontWeight : 'bold'
+				}).add();
+			});
+
+			$.each(myArray1, function(count1, myArray1) {
+				cellLeft += colWidth;
+
+				// Apply the cell text
+				renderer.text(myArray1, cellLeft - cellPadding + colWidth, tableTop + rowHeight - cellPadding).attr({
+					align : 'right'
+				}).css({
+					fontWeight : 'bold'
+				}).add();
+
+				$.each(myArray2[count1], function(count2, myArray2) {
+					console.log(count2);
+					// Apply the cell text
+					renderer.text(myArray2, cellLeft + colWidth - cellPadding, tableTop + (count2 + 2) * rowHeight - cellPadding).attr({
+						align : 'right'
+					}).add();
+
+				});
+
+			});
+		};
+		/**
+		 * Draw a single line in the table
+		 */
+		Highcharts.tableLine = function(renderer, x1, y1, x2, y2) {
+			renderer.path(['M', x1, y1, 'L', x2, y2]).attr({
+				'stroke' : 'silver',
+				'stroke-width' : 1
+			}).add();
+		}
+		/**
+		 * Create the chart
+		 */
 		function getCustExpGraph() {
 
 			if (custExpVal == true) {
@@ -3526,7 +3578,12 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 
 			$('#container').highcharts({
 				chart : {
-					type : 'area'
+					type : 'area',
+					//renderTo : 'container',
+					// events : {
+						// load : Highcharts.drawTable
+					// },
+					
 				},
 				title : {
 					text : $scope.chart_heading + ' | Stacked column chart',
@@ -3606,7 +3663,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		function getUsageGraph() {
-   				console.log("getUsageGraph");
+			console.log("getUsageGraph");
 			$('#container').highcharts({
 				chart : {
 					type : 'line'
@@ -3667,7 +3724,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				}]
 			});
 		}
-		
+
 		function getUsageGraphOverview() {
 			console.log("getUsageGraphOverview");
 			$('#container').highcharts({
@@ -3730,6 +3787,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				}]
 			});
 		}
+
 		function customerGraph() {
 
 			$('#container').highcharts({
