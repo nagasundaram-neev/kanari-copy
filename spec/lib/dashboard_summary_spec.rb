@@ -133,8 +133,8 @@ describe DashboardSummary do
     it "should return the nps summary as a hash" do
       @dashboard_summary.get_net_promoter_score_summary.should == {
           score: {
-          over_period: -25.0,
-          change_in_points: -25.0
+          over_period: 0.0,
+          change_in_points: -20.0
         },
         feedbacks_count: {
           over_period: 4,

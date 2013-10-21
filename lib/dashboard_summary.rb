@@ -30,8 +30,8 @@ class DashboardSummary
     previous_detractors = @previous_feedbacks.select{|f| AppConfig[:detractors].include?f.recommendation_rating }.length
     previous_passives = @previous_feedbacks.size - (previous_promoters + previous_detractors)
 
-    current_score = percentage(current_promoters - current_passives,@feedbacks.size)
-    previous_score = percentage(previous_promoters - previous_passives,@previous_feedbacks.size)
+    current_score = percentage(current_promoters - current_detractors,@feedbacks.size)
+    previous_score = percentage(previous_promoters - previous_detractors,@previous_feedbacks.size)
 
     current_promoters_percent = percentage(current_promoters,@feedbacks.size)
     previous_promoters_percent = percentage(previous_promoters,@previous_feedbacks.size)
