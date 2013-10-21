@@ -730,7 +730,7 @@ var lastDay = new Date(y, m + 1, 0);
 
 var startDt = moment(firstDay).format('DD-MM-YYYY 00:00');
 
-var endDt = moment(lastDay).format('DD-MM-YYYY 23:23');
+var endDt = moment(lastDay).format('DD-MM-YYYY 23:59');
 
 module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams, $http, $location) {
 	if (getCookie('authToken')) {
@@ -2619,7 +2619,7 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 		}, function(start, end) {
 			$('#reportrange span').html(start.format('D MMMM, YYYY') + ' - ' + end.format('D MMMM, YYYY'));
 			startDt = start.format('DD-MM-YYYY 00:00');
-			endDt = end.format('DD-MM-YYYY 23:23');
+			endDt = end.format('DD-MM-YYYY 23:59');
 			$scope.listPaymentHistory();
 		});
 
@@ -2748,7 +2748,7 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 		}, function(start, end) {
 			$('#reportrange span').html(start.format('D MMMM, YYYY') + ' - ' + end.format('D MMMM, YYYY'));
 			startDt = start.format('DD-MM-YYYY 00:00');
-			endDt = end.format('DD-MM-YYYY 23:23');
+			endDt = end.format('DD-MM-YYYY 23:59');
 			$scope.listFeedbacksDate();
 		});
 
@@ -2995,7 +2995,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}, function(start, end) {
 			$('#reportrange span').html(start.format('D MMMM, YYYY') + ' - ' + end.format('D MMMM, YYYY'));
 			startDt = start.format('DD-MM-YYYY 00:00');
-			endDt = end.format('DD-MM-YYYY 23:23');
+			endDt = end.format('DD-MM-YYYY 23:59');
 			$scope.listOfTrendsDate(idV);
 		});
 
