@@ -67,8 +67,8 @@ class DashboardSummary
   def get_feedback_submission_summary
     current_feedback_count = @feedbacks.size
     previous_feedback_count = @previous_feedbacks.size
-    average_feedbacks_per_day = current_feedback_count.to_f/((@end_time.to_date - @start_time.to_date).round)
-    previous_average_feedbacks_per_day = previous_feedback_count.to_f/((@end_time.to_date - @start_time.to_date).round)
+    average_feedbacks_per_day = current_feedback_count.to_f/((@end_time.to_date - @start_time.to_date + 1).round)
+    previous_average_feedbacks_per_day = previous_feedback_count.to_f/((@end_time.to_date - @start_time.to_date + 1).round)
 
     return ({
       average_per_day: {
@@ -85,8 +85,8 @@ class DashboardSummary
   def get_redemptions_count_summary
     current_redemptions_count = @redemptions.size
     previous_redemptions_count = @previous_redemptions.size
-    average_redemptions_per_day = current_redemptions_count.to_f/((@end_time.to_date - @start_time.to_date).round)
-    previous_average_redemptions_per_day = previous_redemptions_count.to_f/((@end_time.to_date - @start_time.to_date).round)
+    average_redemptions_per_day = current_redemptions_count.to_f/((@end_time.to_date - @start_time.to_date + 1).round)
+    previous_average_redemptions_per_day = previous_redemptions_count.to_f/((@end_time.to_date - @start_time.to_date + 1).round)
 
     return ({
       average_per_day: {
@@ -147,12 +147,12 @@ class DashboardSummary
     return({
       new_users:{
         over_period: current_new_users,
-        average_per_day: current_new_users.to_f/((@end_time.to_date - @start_time.to_date).round),
+        average_per_day: current_new_users.to_f/((@end_time.to_date - @start_time.to_date + 1).round),
         change_in_percentage: percentage_change(previous_new_users, current_new_users)
       },
       returning_users:{
         over_period: current_returning_users,
-        average_per_day: current_returning_users.to_f/((@end_time.to_date - @start_time.to_date).round),
+        average_per_day: current_returning_users.to_f/((@end_time.to_date - @start_time.to_date + 1).round),
         change_in_percentage: percentage_change(previous_returning_users, current_returning_users)
       }
     })
@@ -171,8 +171,8 @@ class DashboardSummary
   def get_discounts_claimed_summary
     current_discounts_claimed = @redemptions.inject(0){|sum, r| sum + r.points.to_i}
     previous_discounts_claimed = @previous_redemptions.inject(0){|sum, r| sum + r.points.to_i}
-    average_discounts_claimed_per_day = current_discounts_claimed.to_f/((@end_time.to_date - @start_time.to_date).round)
-    previous_average_discounts_claimed_per_day = previous_discounts_claimed.to_f/((@end_time.to_date - @start_time.to_date).round)
+    average_discounts_claimed_per_day = current_discounts_claimed.to_f/((@end_time.to_date - @start_time.to_date + 1).round)
+    previous_average_discounts_claimed_per_day = previous_discounts_claimed.to_f/((@end_time.to_date - @start_time.to_date + 1).round)
     return({
       total: {
         over_period: current_discounts_claimed,
@@ -189,8 +189,8 @@ class DashboardSummary
   def get_points_issued_summary
     current_points_issued = @feedbacks.inject(0){|sum, r| sum + r.points.to_i}
     previous_points_issued = @previous_feedbacks.inject(0){|sum, r| sum + r.points.to_i}
-    average_points_issued_per_day = current_points_issued.to_f/((@end_time.to_date - @start_time.to_date).round)
-    previous_average_points_issued_per_day = previous_points_issued.to_f/((@end_time.to_date - @start_time.to_date).round)
+    average_points_issued_per_day = current_points_issued.to_f/((@end_time.to_date - @start_time.to_date + 1).round)
+    previous_average_points_issued_per_day = previous_points_issued.to_f/((@end_time.to_date - @start_time.to_date + 1).round)
     return({
       total: {
         over_period: current_points_issued,
