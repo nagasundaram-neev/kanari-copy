@@ -2,10 +2,10 @@ class DashboardSummary
 
   def initialize(start_time, end_time, all_feedbacks, all_redemptions)
     start_time,end_time = end_time,start_time if start_time > end_time
-    @start_time = start_time
-    @end_time = end_time
-    @feedbacks      = all_feedbacks.select {|f| f if (f.updated_at > start_time && f.updated_at < end_time)}
-    @redemptions    = all_redemptions.select {|f| f if (f.updated_at > start_time && f.updated_at < end_time)}
+    @start_time = start_time.to_date.beginning_of_day
+    @end_time = end_time.to_date.end_of_day
+    @feedbacks      = all_feedbacks.select {|f| f if (f.updated_at > @start_time && f.updated_at < @end_time)}
+    @redemptions    = all_redemptions.select {|f| f if (f.updated_at > @start_time && f.updated_at < @end_time)}
 
     @previous_end_time = @start_time
     @previous_start_time = @previous_end_time - (@end_time - @start_time)
