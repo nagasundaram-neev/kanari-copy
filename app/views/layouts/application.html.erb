@@ -16,12 +16,10 @@
 		<%= javascript_include_tag "jquery.nicescroll.plus.js" %>
 		<%= javascript_include_tag "jquery.maskedinput.js" %>
 		<%= javascript_include_tag "jquery.validate.js" %>
-
 		<%= javascript_include_tag "angular.js" %>
+		<%= javascript_include_tag "highcharts.js" %>		
 		
-		<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
 		<script src="http://code.highcharts.com/modules/exporting.js"></script>
-		<!-- <script src="http://code.highcharts.com/highcharts-more.js"></script> -->
 		<%= javascript_include_tag "moment.min.js" %>
 		<%= javascript_include_tag "daterangepicker.js" %>
 		<%= stylesheet_link_tag "daterangepicker-bs3.css", :media => "all" %>
@@ -62,30 +60,6 @@
 					<li id="dasboardCustomer" class="diffLinks">
 						<a href="#/snapshot" target="_blank" class="active"><%= image_tag 'icon_dasboard_in.png' %>Dashboard</a>
 					</li>
-					<!-- <li id="comments" class="dashboardLi diffLinks">
-						<a href="#/comments" style="border-bottom:none"><%= image_tag 'ic_comments.png' %>COMMENTS</a>
-					</li>
-					<li id="trends" class="dashboardLi diffLinks">
-						<a href="#/trends"><%= image_tag 'ic_trends.png' %>TRENDS</a>
-					</li>
-					<li id="snapshot" class="dashboardLi diffLinks">
-						<a href="#/snapshot" class="active"><%= image_tag 'ic_snapshots.png' %>SNAPSHOT </a>
-					</li> -->
-					
-					<!-- <li id="dasboardCustomer" class="diffLinks dropdown" ng-class="{open: open}">
-					<a class="dropdown-toggle" href="javascript:void(0)" ng-click="open=!open"><%= image_tag 'icon_dasboard_in.png' %>Dashboard </a>
-					<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-					<li>
-					<a tabindex="-1" href="#/snapshot"><%= image_tag 'ic_snapshots.png' %>SNAPSHOT </a>
-					</li>
-					<li>
-					<a tabindex="-1" href="#/trends"><%= image_tag 'ic_trends.png' %>TRENDS</a>
-					</li>
-					<li>
-					<a tabindex="-1" href="#/comments" style="border-bottom:none"><%= image_tag 'ic_comments.png' %>COMMENTS</a>
-					</li>
-					</ul>
-					</li> -->
 					<li class="active diffLinks" id="outlet" >
 						<a href="#/outlets"><%= image_tag 'icon_outlet_in.png' %> Outlets</a>
 					</li>
