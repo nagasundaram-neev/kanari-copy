@@ -20,9 +20,3 @@
 //= require bootstrap
 //= require angular-resource
 //= require ui-bootstrap-tpls-0.6.0
-
-
-
-   // As the name suggests, on click of a fake
-  // input field, trigger the real file field
-  // for upload of a file.
