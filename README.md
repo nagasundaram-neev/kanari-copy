@@ -81,7 +81,21 @@ Talk to a duck.
 
 # Production
 
-Not yet.
+    bundle install
+    rake db:create RAILS_ENV=production
+    rake db:migrate RAILS_ENV=production
+    mv db/test_seeds.rb db/seeds.rb && rake db:seed RAILS_ENV=production # If you need the seed data
+    #Configure SSL - TODO
+    rake assets:precompile RAILS_ENV=production
+
+Uncomment the following line from `config/environments/production.rb` after setting up a webserver to serve static assets
+from the `public` directory of the application.
+
+    config.serve_static_assets = false
+
+Keep the above line commented to run the application without a webserver.
+
+    unicorn -E production #Starts unicorn on port 8080
 
 # Misc information
 
