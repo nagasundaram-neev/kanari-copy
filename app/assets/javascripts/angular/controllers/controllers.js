@@ -128,7 +128,16 @@ var Base64 = {
 var baseUrl = "localhost:8080";
 var auth_token = "";
 var loginMsgFlag = 0;
-
+var resultsDate = [];
+var tickInt;
+var yAxisVal = "";
+var stackingValue = "";
+var custLegend1 = "";
+var custLegend2 = "";
+var custLegend3 = "";
+var results1 = [];
+var results2 = [];
+var results3 = [];
 module.controller('commonCtrl', function($scope, $http, $location) {
 	$(".content").css("min-height", function() {
 		return ($('.content')[0].scrollHeight) - 38;
@@ -147,10 +156,8 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 			method : 'delete',
 			url : '/api/users/sign_out'
 		}).success(function(data, status) {
-			console.log("Data in success " + data + " status " + status);
 			$location.url("/login");
 		}).error(function(data, status) {
-			console.log("data in error " + data + " status " + status);
 			if (status == 401) {
 				$location.url("/login");
 			}
@@ -232,7 +239,6 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 				method : 'post',
 				url : '/api/users/sign_in',
 			}).success(function(data, status) {
-				console.log("User Role " + data.user_role + " status " + status);
 				//delCookie('loginMsgFlag');
 				deleteCookie('loginMsgFlag');
 				if ($scope.remember) {
@@ -273,7 +279,6 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 				}
 
 			}).error(function(data, status) {
-				console.log("data error" + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -315,13 +320,11 @@ module.controller('forgotPassCtrl', function($rootScope, $scope, $http, $locatio
 					"email" : userEmail
 				}
 			};
-			//alert(param);
 			$http({
 				method : 'post',
 				url : '/api/users/password',
 				data : param,
 			}).success(function(data, status) {
-				console.log("data in success " + userEmail + " status " + status);
 				$scope.error = data.error;
 				if (!userEmail) {
 					$scope.erromsg = true;
@@ -331,7 +334,6 @@ module.controller('forgotPassCtrl', function($rootScope, $scope, $http, $locatio
 					$scope.erromsg = false;
 				}
 			}).error(function(data, status) {
-				console.log("data in error" + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -366,11 +368,9 @@ module.controller('resetPassCtrl', function($rootScope, $scope, $routeParams, $h
 				url : '/api/users/password',
 				data : param,
 			}).success(function(data, status) {
-				console.log("data in success " + data + " status " + status);
 				$scope.success = true;
 				$scope.erromsg = false;
 			}).error(function(data, status) {
-				console.log("data in error" + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -417,14 +417,12 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 			url : '/api/outlets',
 			params : param,
 		}).success(function(data, status) {
-			console.log("data in success " + data.length + " status " + status);
 			$scope.outlets = data.outlets;
 			$scope.error = data.auth_token;
 			$scope.statement = true;
 			$scope.erromsg = false;
 			outletCount = data.outlets.length;
 		}).error(function(data, status) {
-			console.log("data in error" + data + " status " + status);
 			if (status == 401) {
 				$location.url("/login");
 			}
@@ -442,13 +440,11 @@ module.controller('homeCtrl', function($rootScope, $scope, $http, $location) {
 			url : '/api/customers/' + customer_id,
 			params : param,
 		}).success(function(data, status) {
-			console.log("data in success " + data + " status " + status);
 			authOutlet = data.customer.authorized_outlets;
 			setCookie('auth_outlet', data.customer.customer_admin.can_create_outlet, 7);
 			showAddOutletBtn();
 
 		}).error(function(data, status) {
-			console.log("data in error" + data + " status " + status);
 			if (status == 401) {
 				$location.url("/login");
 			}
@@ -490,7 +486,6 @@ module.controller('createInvitation', function($rootScope, $scope, $http, $locat
 		$scope.erromsg = false;
 		$scope.errortext = ""
 		$scope.create_invitation = function() {
-			console.log("In Create Invitation" + auth_token);
 			var userEmail = $scope.userEmail;
 			var param = {
 				"user" : {
@@ -504,7 +499,6 @@ module.controller('createInvitation', function($rootScope, $scope, $http, $locat
 				url : '/api/users/invitation',
 				data : param,
 			}).success(function(data, status) {
-				console.log("data in success " + data + " status " + status);
 				//$location.url("/accept_invitation"+data.invitation_token);
 				baseurl = ""
 				if (!window.location.origin) {
@@ -516,7 +510,6 @@ module.controller('createInvitation', function($rootScope, $scope, $http, $locat
 				$scope.statement = true;
 				$scope.erromsg = false;
 			}).error(function(data, status) {
-				console.log("data in error" + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -558,7 +551,6 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 			var month = dt.getMonth() + 1;
 			recipt_date = dt.getFullYear() + "-" + month + "-" + dt.getDate();
 			if ( typeof startDt != 'undefined' && endDt != 'undefined') {
-				console.log("hi in end date");
 				$(".outletDropDown").change(function() {
 				});
 			}
@@ -573,7 +565,6 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 			url : 'api/customers',
 			params : param,
 		}).success(function(data, status) {
-			console.log("data in success " + data.lenght + " status " + status);
 			var arrayLengthOutlet = data.customers.length;
 			for (var i = 0, len = arrayLengthOutlet; i < len; i++) {
 				currencies.push({
@@ -589,7 +580,6 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 				}
 			});
 		}).error(function(data, status) {
-			console.log("data in error" + data + " status " + status);
 			if (status == 401) {
 				$location.url("/login");
 			}
@@ -597,7 +587,6 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 		$scope.isOutlet = true;
 		//Get Outlet List according to the customer
 		$scope.getOutletList = function(custId) {
-			console.log(custId);
 			var param = {
 				"customer_id" : custId,
 				"auth_token" : getCookie('authToken')
@@ -607,9 +596,7 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 				url : 'api/outlets',
 				params : param,
 			}).success(function(data, status) {
-				console.log("data in success " + data.lenght + " status " + status);
 				$scope.outletsList = data.outlets;
-				console.log(data.outlets.length);
 				if (data.outlets.length > 0) {
 					$scope.isOutlet = true;
 					$scope.formoutlet1 = data.outlets[0].id;
@@ -617,7 +604,6 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 					$scope.isOutlet = false;
 				}
 			}).error(function(data, status) {
-				console.log("data in error" + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -644,10 +630,8 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 					url : '/api/customers/' + custId + '/payment_invoices',
 					data : param,
 				}).success(function(data, status) {
-					console.log("data in success " + data + " status " + status);
 					$scope.paymentInvoiceSuccess = true;
 				}).error(function(data, status) {
-					console.log("data in error" + data + " status " + status);
 					if (status == 401) {
 						$location.url("/login");
 					}
@@ -701,7 +685,6 @@ module.controller('listPaymentInvoiceCtrl', function($rootScope, $scope, $http, 
 				url : '/api/payment_invoices',
 				params : param,
 			}).success(function(data, status) {
-				console.log("data in success " + data + " status " + status);
 				$scope.InvoiceList = data.payment_invoices;
 				var value = $scope.InvoiceList.val;
 				if (!value) {
@@ -710,7 +693,6 @@ module.controller('listPaymentInvoiceCtrl', function($rootScope, $scope, $http, 
 					$scope.paymentInvoiceSuccess = false;
 				}
 			}).error(function(data, status) {
-				console.log("data in error" + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -792,7 +774,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				$scope.success = true;
 
 			}).error(function(data, status) {
-				console.log("data in error" + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -816,7 +797,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				$scope.success = true;
 
 			}).error(function(data, status) {
-				console.log("data in error" + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -851,7 +831,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				$scope.success = true;
 
 			}).error(function(data, status) {
-				console.log("data  in error" + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -888,8 +867,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				});
 
 				managerId = $scope.myOption;
-				//$scope.manager = managerId;
-				console.log("Test" + getCookie('currentCuisineList'));
+
 				var param = {
 					"outlet" : {
 						"manager_id" : managerId,
@@ -904,12 +882,10 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					url : "/api/outlets/" + $scope.outletID,
 					data : param,
 				}).success(function(data, status) {
-					console.log("data in success hi " + data + " status " + status);
 					$scope.successmgr = true;
 					//$scope.manager_show = true;
 					$scope.getOutlet();
 				}).error(function(data, status) {
-					console.log("data in error" + data + " status " + status);
 					if (status == 401) {
 						$location.url("/login");
 					}
@@ -922,7 +898,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			Dt : Date.now(),
 		}
 
-		//console.log($routeParams.outletId + "----" + startDate + "------" + endDate)
 		var param = {
 			"auth_token" : getCookie('authToken'),
 			"outlet_id" : $routeParams.outletId,
@@ -938,7 +913,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			results1 = [];
 			results2 = [];
 			results3 = [];
-			resultsDate = [];
+
 			var time = [];
 			finaltime = [];
 			npsOverview = 0;
@@ -993,14 +968,12 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			pieChart2();
 
 		}).error(function(data, status) {
-			console.log("data in error" + data + " status " + status);
 			if (status == 401) {
 				$location.url("/login");
 			}
 		});
 
 		function getUsageGraph() {
-			console.log("in");
 			$('#container').highcharts({
 				chart : {
 					type : graphType
@@ -1143,7 +1116,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					params : param,
 				}).success(function(data, status) {
 
-					console.log("data in success " + data + " status " + status);
 					$scope.error = false;
 					$scope.outletID = data.outlet.id;
 					$scope.success = true;
@@ -1218,7 +1190,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					})
 
 				}).error(function(data, status) {
-					console.log("data in error" + data + " status " + status);
 					if (status == 401) {
 						$location.url("/login");
 					}
@@ -1239,7 +1210,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 
 		$scope.selectOutlet1 = function() {
 			$scope.form_outlet2 = true;
-			console.log($scope.formoutlet3);
 			if ($scope.formoutlet1) {
 				if ($scope.formoutlet1 == $scope.formoutlet2 || $scope.formoutlet1 == $scope.formoutlet3) {
 					$scope.outletError1 = false;
@@ -1398,13 +1368,10 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				url : '/api/outlets/' + $scope.outletID,
 				data : params,
 			}).success(function(data, status) {
-				console.log("data in success " + data + " status " + status);
-
 				$scope.error = data.auth_token;
 				$scope.statement = true;
 				$scope.erromsg = false;
 			}).error(function(data, status) {
-				console.log("data in error" + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -1452,9 +1419,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					url : url,
 					data : param,
 				}).success(function(data, status) {
-					console.log("data in success hi " + data + " status " + status);
 					$scope.error = false;
-					console.log($scope.checkedOutletTypes);
 					setCookie('currentOutletList', JSON.stringify($scope.checkedOutletTypes), 1);
 					setCookie('currentCuisineList', JSON.stringify($scope.checkedCuisineTypes), 1);
 					setCookie('radiobtn1', $scope.Delivery, 1);
@@ -1479,7 +1444,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 						'opacity' : '1'
 					});
 				}).error(function(data, status) {
-					console.log("data in error" + data + " status " + status);
 					if (status == 401) {
 						$location.url("/login");
 					}
@@ -1520,10 +1484,8 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				url : '/api/staffs',
 				params : param,
 			}).success(function(data, status) {
-				console.log("data in success " + data + " status " + status);
 				$scope.listTabIds = data.staffs;
 			}).error(function(data, status) {
-				console.log("data in error" + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -1547,14 +1509,11 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					"auth_token" : getCookie('authToken')
 				}
 
-				console.log("outlet id " + $routeParams.outletId);
-
 				$http({
 					method : 'post',
 					url : '/api/staffs',
 					data : param,
 				}).success(function(data, status) {
-					console.log("data in success " + data + " status " + status);
 					$scope.listTabletIds();
 					$scope.errorTabletId = false;
 					$scope.successTabletId = true;
@@ -1562,7 +1521,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					$("#txt").val("");
 
 				}).error(function(data, status) {
-					console.log("data in error" + data + " status " + status);
 					if (status == 401) {
 						$location.url("/login");
 					}
@@ -1585,11 +1543,9 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				url : '/api/staffs/' + staffId,
 				params : param,
 			}).success(function(data, status) {
-				console.log("Data in success " + data + " status " + status);
 				$scope.staff_deleted = "Tablet has been deleted successfully"
 				$scope.listTabletIds();
 			}).error(function(data, status) {
-				console.log("data in error " + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -1628,7 +1584,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					url : '/api/staffs/' + $scope.tabletId,
 					data : param,
 				}).success(function(data, status) {
-					console.log("Data in success " + data + " status " + status);
 					$('#passwordChange')[0].reset();
 					$scope.errorMsg = "";
 					$("#txtP").val("");
@@ -1641,7 +1596,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					}
 					$scope.password_changed = "";
 					$scope.errorMsg = data.errors[0];
-					console.log("data in error " + data + " status " + status);
 				});
 			}
 		};
@@ -1687,14 +1641,12 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					url : '/api/managers',
 					data : param,
 				}).success(function(data, status) {
-					console.log("data in success " + data + " status " + status);
 					$scope.error = false;
 					$scope.manager_id = data.manager.id;
 					$scope.success1 = true;
 					$scope.getManagerList();
 					$('#formid')[0].reset();
 				}).error(function(data, status) {
-					console.log("data in error" + data + " status " + status);
 					if (status == 401) {
 						$location.url("/login");
 					}
@@ -1720,14 +1672,12 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				url : '/api/managers/' + managerId,
 				params : param,
 			}).success(function(data, status) {
-				console.log("Data in success " + data + " status " + status);
 				$scope.manager_deleted = "Manager has been deleted successfully";
 				$scope.getManagerList();
 				$('#editManager')[0].reset();
 				$('.edit_manager').hide();
 
 			}).error(function(data, status) {
-				console.log("data in error " + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -1751,7 +1701,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				url : '/api/managers/' + managerId,
 				params : param,
 			}).success(function(data, status) {
-				console.log("data in success " + data + " status " + status);
 				$('.edit_manager').show();
 				$scope.manager_ID = data.manager.id;
 				$scope.first_name = data.manager.first_name;
@@ -1759,7 +1708,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				$scope.email_address_manager = data.manager.email;
 				$(".phoneno_2").val(data.manager.phone_number);
 			}).error(function(data, status) {
-				console.log("data in error" + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -1782,17 +1730,14 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					url : '/api/managers/' + $scope.manager_ID,
 					data : param,
 				}).success(function(data, status) {
-					console.log("data in success " + data + " status " + status);
 					$scope.manager_updated = "Manager has been updated successfully";
 					$scope.getManagerList();
 				}).error(function(data, status) {
-					console.log("data in error" + data + " status " + status);
 					if (status == 401) {
 						$location.url("/login");
 					}
 				});
 			} else {
-				console.log("here");
 				$scope.manager_updated = "";
 				$scope.valide_phone = true;
 			}
@@ -1889,7 +1834,6 @@ module.controller('outletManagerCtrl', function($rootScope, $scope, $routeParams
 			url : 'api/users',
 			params : param,
 		}).success(function(data, status) {
-			console.log("data in success " + data + " status " + status);
 			$('.edit_manager').show();
 			$scope.manager_ID = data.user.id;
 			$scope.first_name = data.user.first_name;
@@ -1897,7 +1841,6 @@ module.controller('outletManagerCtrl', function($rootScope, $scope, $routeParams
 			$scope.email_address_manager = data.user.email;
 			$(".phoneno_2").val(data.user.phone_number);
 		}).error(function(data, status) {
-			console.log("data in error" + data + " status " + status);
 			if (status == 401) {
 				$location.url("/login");
 			}
@@ -1920,17 +1863,14 @@ module.controller('outletManagerCtrl', function($rootScope, $scope, $routeParams
 					url : '/api/users/',
 					data : param,
 				}).success(function(data, status) {
-					console.log("data in success " + data + " status " + status);
 					setCookie('authToken', data.auth_token, 1);
 					$scope.manager_updated = "Manager has been updated successfully";
 				}).error(function(data, status) {
-					console.log("data in error" + data + " status " + status);
 					if (status == 401) {
 						$location.url("/login");
 					}
 				});
 			} else {
-				console.log("here");
 				$scope.manager_updated = "";
 				$scope.valide_phone = true;
 			}
@@ -1955,11 +1895,9 @@ module.controller('acceptInvitationCtrl', function($rootScope, $scope, $routePar
 		method : 'get',
 		url : '/api/users/invitation/' + $routeParams.invi_token,
 	}).success(function(data, status) {
-		console.log("data in success " + data + " status " + status);
 		$scope.emailId = data.email;
 
 	}).error(function(data, status) {
-		console.log("data in error" + data + " status " + status);
 		if (status == 401) {
 			$location.url("/login");
 		}
@@ -1984,14 +1922,12 @@ module.controller('acceptInvitationCtrl', function($rootScope, $scope, $routePar
 				url : '/api/users/invitation',
 				data : param,
 			}).success(function(data, status) {
-				console.log("data in success " + data + " status " + status);
 				$scope.error = false;
 				$scope.auth_token = data.auth_token;
 				$scope.success = true;
 				setCookie('authToken', data.auth_token, 1);
 				$location.url("/acceptInvitationStep2");
 			}).error(function(data, status) {
-				console.log("data in error" + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -2019,7 +1955,6 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 		$scope.acceptInvitation2 = function(acceptInv2) {
 			if ($scope.acceptInv2.$valid && $(".phoneno_1").val()) {
 				$scope.valide_phone = false;
-				console.log("city" + $scope.registered_address_city + "country " + $scope.registered_address_country);
 				var param = {
 					"customer" : {
 						"name" : $scope.name,
@@ -2042,32 +1977,15 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 					url : '/api/customers',
 					data : param,
 				}).success(function(data, status) {
-					console.log("data in success " + data + " status " + status);
 					$scope.error = false;
 					if (acceptInvitationStep2 == true) {
 						$location.url("/outlets");
 					} else {
-						// $scope.name = undefined;
-						// $("#buisNm").val(" ");
-						// $(".phoneno_1").val("");
-						// $scope.registered_address_line_1 = "";
-						// $scope.registered_address_line_2 = "";
-						// $scope.mailing_address_line_1 = "";
-						// $scope.mailing_address_line_2 = "";
-						// $scope.email1 = "";
 						$('#acceptInvStep2')[0].reset();
-						// console.log("hi " + $('.ng-invalid'));
-						// $scope.button = false;
-						// $scope.success = true;
-						// $scope.delay = $timeout(function() {
-						// $location.url("/login");
-						// }, 3000);
-						//loginMsgFlag = 1;
 						setCookie('loginMsgFlag', '1', 0.29);
 						$location.url("/login");
 					}
 				}).error(function(data, status) {
-					console.log("data in error" + data + " status " + status);
 					if (status == 401) {
 						$location.url("/login");
 					}
@@ -2108,7 +2026,6 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 			url : '/api/customers/' + customer_id,
 			params : param,
 		}).success(function(data, status) {
-			console.log("data in success " + data + " status " + status);
 			$scope.first_name = data.customer.customer_admin.first_name;
 			$scope.last_name = data.customer.customer_admin.last_name;
 			$scope.email = data.customer.customer_admin.email;
@@ -2125,7 +2042,6 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 			$scope.mailcountry = "UAE";
 			$scope.emailAdd = data.customer.email;
 		}).error(function(data, status) {
-			console.log("data in error" + data + " status " + status);
 			if (status == 401) {
 				$location.url("/login");
 			}
@@ -2158,11 +2074,9 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 					url : '/api/customers/' + customer_id,
 					data : param,
 				}).success(function(data, status) {
-					console.log("data in success " + data + " status " + status);
 					//	$scope.success = true;
 
 				}).error(function(data, status) {
-					console.log("data in error" + data + " status " + status);
 					if (status == 401) {
 						$location.url("/login");
 					}
@@ -2177,19 +2091,16 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 					},
 					"auth_token" : getCookie('authToken')
 				}
-				console.log($scope.phoneno_1);
 				$http({
 					method : 'put',
 					url : '/api/users/',
 					data : param2,
 				}).success(function(data, status) {
-					console.log("data in success " + data + " status " + status);
 					setCookie('authToken', data.auth_token, 7);
 					$scope.success = true;
 					$scope.error = false;
 
 				}).error(function(data, status) {
-					console.log("data in errorrr" + data + " status " + status);
 					if (status == 401) {
 						$location.url("/login");
 					}
@@ -2199,7 +2110,6 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 				});
 
 			} else {
-				console.log("here");
 				$scope.success = false;
 				$scope.valide_phone = true;
 			}
@@ -2245,13 +2155,11 @@ module.controller('changePassCtrl', function($rootScope, $scope, $routeParams, $
 					url : '/api/users/',
 					data : param2,
 				}).success(function(data, status) {
-					console.log("data in success " + data + " status " + status);
 					setCookie('authToken', data.auth_token, 7);
 					$scope.success = true;
 					$scope.error = false;
 
 				}).error(function(data, status) {
-					console.log("data in errorrr" + data + " status " + status);
 					if (status == 401) {
 						$location.url("/login");
 					}
@@ -2303,10 +2211,8 @@ module.controller('createKanariCodeCtrl', function($scope, $routeParams, $route,
 				url : '/api/kanari_codes',
 				data : param,
 			}).success(function(data, status) {
-				console.log("data in success " + data + " status " + status);
 
 			}).error(function(data, status) {
-				console.log("data in errorr" + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -2349,7 +2255,6 @@ module.controller('outletCuisineTypeCtrl', function($scope, $rootScope, $routePa
 				$scope.success = true;
 
 			}).error(function(data, status) {
-				console.log("data in error" + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -2372,7 +2277,6 @@ module.controller('outletCuisineTypeCtrl', function($scope, $rootScope, $routePa
 				$scope.success = true;
 
 			}).error(function(data, status) {
-				console.log("data in error" + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -2425,7 +2329,6 @@ module.controller('outletCuisineTypeCtrl', function($scope, $rootScope, $routePa
 					url : url,
 					data : param,
 				}).success(function(data, status) {
-					console.log("data in success " + data + " status " + status);
 					$scope.outletSuccess = true;
 					$scope.getOutletTypes();
 					$('.saveBtn').show();
@@ -2435,7 +2338,6 @@ module.controller('outletCuisineTypeCtrl', function($scope, $rootScope, $routePa
 					$scope.outlet_types = "";
 
 				}).error(function(data, status) {
-					console.log("data in errorrr" + data + " status " + status);
 					if (status == 401) {
 						$location.url("/login");
 					}
@@ -2453,14 +2355,12 @@ module.controller('outletCuisineTypeCtrl', function($scope, $rootScope, $routePa
 				url : '/api/outlet_types/' + $scope.formoutlet1,
 				params : param,
 			}).success(function(data, status) {
-				console.log("Data in success " + data + " status " + status);
 				$scope.outlet_deleted = "Outlet type has been deleted successfully"
 				$scope.getOutletTypes();
 				$('.saveBtn').show();
 				$('.updateBtn').hide();
 				$scope.outlet_types = "";
 			}).error(function(data, status) {
-				console.log("data in error " + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -2515,7 +2415,6 @@ module.controller('outletCuisineTypeCtrl', function($scope, $rootScope, $routePa
 					url : url,
 					data : param,
 				}).success(function(data, status) {
-					console.log("data in success " + data + " status " + status);
 					$scope.cuisineSuccess = true;
 					$scope.getCuisineTypes();
 					$('.saveCBtn').show();
@@ -2525,7 +2424,6 @@ module.controller('outletCuisineTypeCtrl', function($scope, $rootScope, $routePa
 					$scope.cuisine_types = "";
 
 				}).error(function(data, status) {
-					console.log("data in errorrr" + data + " status " + status);
 					if (status == 401) {
 						$location.url("/login");
 					}
@@ -2543,14 +2441,12 @@ module.controller('outletCuisineTypeCtrl', function($scope, $rootScope, $routePa
 				url : '/api/cuisine_types/' + $scope.formcuisine1,
 				params : param,
 			}).success(function(data, status) {
-				console.log("Data in success " + data + " status " + status);
 				$scope.cuisine_deleted = "Cuisine type has been deleted successfully"
 				$scope.getCuisineTypes();
 				$('.saveCBtn').show();
 				$('.updateCBtn').hide();
 				$scope.cuisine_types = "";
 			}).error(function(data, status) {
-				console.log("data in error " + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -2575,33 +2471,6 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 
 		$rootScope.header = "Payment History | Kanari";
 		$scope.paymentHistoryList = [];
-
-		// $(function() {
-		// $('#payDate1').datepicker().on('changeDate', function(ev) {
-		// var dt = new Date(ev.date.valueOf());
-		// var month = dt.getMonth() + 1;
-		// startDt = dt.getFullYear() + "-" + month + "-" + dt.getDate();
-		// if (startDt != 'undefined' && typeof endDt != 'undefined') {
-		// console.log("hi in start date");
-		// $scope.listPaymentHistory();
-		// $(".outletDropDown").change(function() {
-		// $scope.listPaymentHistory();
-		// });
-		// }
-		// });
-		// $('#payDate2').datepicker().on('changeDate', function(ev) {
-		// var dt = new Date(ev.date.valueOf());
-		// var month = dt.getMonth() + 1;
-		// endDt = dt.getFullYear() + "-" + month + "-" + dt.getDate();
-		// if ( typeof startDt != 'undefined' && endDt != 'undefined') {
-		// console.log("hi in end date");
-		// $scope.listPaymentHistory();
-		// $(".outletDropDown").change(function() {
-		// $scope.listPaymentHistory();
-		// });
-		// }
-		// });
-		// });
 
 		$('#reportrange').daterangepicker({
 			ranges : {
@@ -2644,7 +2513,6 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 				url : '/api/payment_invoices',
 				params : param,
 			}).success(function(data, status) {
-				console.log("Data in success " + data + " status " + status);
 				$scope.paymentHistoryList = [];
 				$scope.paymentHistoryList = data.payment_invoices;
 				var arrayLength = data.payment_invoices.length;
@@ -2658,9 +2526,7 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 				} else {
 					$scope.payHistoryListCount = true;
 				}
-				//console.log($scope.outletList);
 			}).error(function(data, status) {
-				console.log("data in error " + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -2679,12 +2545,8 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 				url : '/api/outlets/' + outletId,
 				params : param,
 			}).success(function(data, status) {
-				console.log("Data in success " + data + " status " + status);
-				console.log(payInNo);
 				$scope.paymentHistoryList[payInNo].outlet_id = data.outlet.name;
-				console.log($scope.paymentHistoryList);
 			}).error(function(data, status) {
-				console.log("data in error " + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -2762,13 +2624,11 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 				url : '/api/outlets',
 				params : param,
 			}).success(function(data, status) {
-				console.log("Data in success " + data + " status " + status);
 				$scope.outletNameList = data.outlets;
 				if ($routeParams.outletId) {
 					$scope.outletOption = parseInt($routeParams.outletId);
 				}
 			}).error(function(data, status) {
-				console.log("data in error " + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -2778,7 +2638,6 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 
 		var outletId = $scope.outletOption;
 		$scope.listFeedbacksDate = function() {
-			console.log("outetId " + $scope.outletOption);
 			var param = {
 				"auth_token" : getCookie('authToken'),
 				"password" : "X",
@@ -2792,16 +2651,13 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 				url : '/api/feedbacks',
 				params : param
 			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
 				$scope.feedbackList = data.feedbacks;
-				console.log(data.feedbacks.length);
 				if (data.feedbacks.length == 0) {
 					$scope.feedBackListCount = true;
 				} else {
 					$scope.feedBackListCount = false;
 				}
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -2823,9 +2679,7 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 				url : '/api/feedbacks',
 				params : param
 			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
 				$scope.feedbackList = data.feedbacks;
-				//console.log(data.feedbacks.length);
 				if (data.feedbacks.length == 0) {
 					$scope.feedBackListCount = true;
 				} else {
@@ -2833,7 +2687,6 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 				}
 
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -2874,7 +2727,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		var xAxisVal = "";
 		var yAxisVal = "";
 		var graphType = "";
-		var tickInt;
 
 		if ($routeParams.outletId) {
 			//alert("in");
@@ -3016,7 +2868,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		$scope.listOfTrendsDate = function(idValue) {
-			console.log("inFun" + $scope.outletTrend);
 			if (!idValue) {
 				idValue = "food";
 				metricsId = "custExp";
@@ -3056,7 +2907,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				url : '/api/feedbacks/trends',
 				params : param
 			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
 				results1 = [];
 				results2 = [];
 				results3 = [];
@@ -3074,7 +2924,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					dateV = Object.keys($scope.trendsList)[i];
 					/** Customer Experience Start**/
 					startDateV = moment(dateV).format('MMM DD');
-					//console.log(startDateV);
 					if (idValue == "food") {
 						$scope.selectedOption = "";
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].food_quality.like;
@@ -3421,7 +3270,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				}
 
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -3470,13 +3318,11 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				url : '/api/outlets',
 				params : param,
 			}).success(function(data, status) {
-				console.log("Data in success " + data + " status " + status);
 				$scope.outletNameList = data.outlets;
 				if ($routeParams.outletId) {
 					$scope.outletTrend = parseInt($routeParams.outletId);
 				}
 			}).error(function(data, status) {
-				console.log("data in error " + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -3511,7 +3357,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 
 
 		Highcharts.drawTable = function() {
-			console.log("in");
 			var myArray1 = ["Over Period", "Change VS Preceding Period"];
 			var myArray2 = [[10, 10, 12], [11, 11, 12]];
 			var count1 = myArray1.length;
@@ -3539,7 +3384,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				}).add();
 
 				$.each(myArray2[count1], function(count2, myArray2) {
-					console.log(count2);
 					// Apply the cell text
 					renderer.text(myArray2, cellLeft + colWidth - cellPadding, tableTop + (count2 + 2) * rowHeight - cellPadding).attr({
 						align : 'right'
@@ -3579,11 +3423,11 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			$('#container').highcharts({
 				chart : {
 					type : 'area',
-					//renderTo : 'container',
+					// renderTo : 'container',
 					// events : {
-						// load : Highcharts.drawTable
+					// load : Highcharts.drawTable
 					// },
-					
+
 				},
 				title : {
 					text : $scope.chart_heading + ' | Stacked column chart',
@@ -3663,7 +3507,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		function getUsageGraph() {
-			console.log("getUsageGraph");
 			$('#container').highcharts({
 				chart : {
 					type : 'line'
@@ -3726,7 +3569,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		function getUsageGraphOverview() {
-			console.log("getUsageGraphOverview");
 			$('#container').highcharts({
 				chart : {
 					type : 'line'
@@ -3906,7 +3748,6 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 				url : '/api/feedbacks/metrics',
 				params : param
 			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
 				$scope.foodLike = data.feedback_insights.food_quality.like;
 				$scope.foodDisLike = data.feedback_insights.food_quality.dislike;
 				$scope.foodDailyChange = data.feedback_insights.food_quality.change;
@@ -4010,7 +3851,6 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 				$scope.points = data.feedback_insights.rewards_pool;
 
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -4034,15 +3874,12 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		$scope.listFeedbacks = function() {
 			dt = new Date();
 			var time = dt.getHours();
-			//console.log("time " + time);
 
 			if (time >= 0 && time < 5) {
-				console.log("hi i an in");
 				dt.setDate(dt.getDate() - 1);
 			}
 			var startdt = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), 5, 0, 0)
 			var timeZone = String(String(dt).split("(")[1]).split(")")[0];
-			//console.log("start date " + startdt);
 			if (!$scope.$$phase) {
 				//$digest or $apply
 			}
@@ -4059,9 +3896,7 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 				url : '/api/feedbacks',
 				params : param
 			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
 				$scope.feedbackListSnapShot = data.feedbacks;
-				//console.log(data.feedbacks.length);
 				if (data.feedbacks.length == 0) {
 					$scope.feedBackListCount = true;
 				} else {
@@ -4069,7 +3904,6 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 				}
 
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -4080,7 +3914,6 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		$scope.listFeedbacks();
 
 		$scope.selectOutletSnap = function() {
-			//console.log("hi "+$scope.outletOption);
 			setCookie('outletDropDwn', $scope.outletOption, 0.29);
 			$scope.listFeedbacks();
 			$scope.feedbackMetrics();
@@ -4096,13 +3929,11 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 				url : '/api/outlets',
 				params : param,
 			}).success(function(data, status) {
-				console.log("Data in success " + data + " status " + status);
 				$scope.outletNameList = data.outlets;
 				if ($routeParams.outletId) {
 					$scope.outletOption = parseInt($routeParams.outletId);
 				}
 			}).error(function(data, status) {
-				console.log("data in error " + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -4148,10 +3979,8 @@ module.controller('adminConsoleOutletCtrl', function($scope, $rootScope, $routeP
 				url : '/api/outlets',
 				params : param,
 			}).success(function(data, status) {
-				console.log("Data in success " + data + " status " + status);
 				$scope.outletDetails = data.outlets;
 			}).error(function(data, status) {
-				console.log("data in error " + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -4162,7 +3991,6 @@ module.controller('adminConsoleOutletCtrl', function($scope, $rootScope, $routeP
 
 		$scope.disableOutlet = function(chk, id, outletName) {
 			//$scope.auth_token = getCookie('authToken');
-			console.log("hi " + chk);
 
 			var params = {
 				"outlet" : {
@@ -4175,7 +4003,6 @@ module.controller('adminConsoleOutletCtrl', function($scope, $rootScope, $routeP
 				url : '/api/outlets/' + id + "/disable",
 				data : params,
 			}).success(function(data, status) {
-				console.log("data in success " + data + " status " + status);
 				$scope.error = data.auth_token;
 				//$scope.outNO = id;
 				$scope.outletName = outletName;
@@ -4190,7 +4017,6 @@ module.controller('adminConsoleOutletCtrl', function($scope, $rootScope, $routeP
 				$scope.statement = true;
 				$scope.erromsg = false;
 			}).error(function(data, status) {
-				console.log("data in error" + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -4234,7 +4060,6 @@ module.controller('adminConsoleCustomerCtrl', function($scope, $rootScope, $rout
 				url : '/api/customers',
 				params : param,
 			}).success(function(data, status) {
-				console.log("Data in success " + data + " status " + status);
 				$scope.customerDetails = data.customers;
 				$scope.customerDetails.sort(function(a, b) {
 					var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase()
@@ -4246,7 +4071,6 @@ module.controller('adminConsoleCustomerCtrl', function($scope, $rootScope, $rout
 				});
 				$scope.outletNo = data.customers.authorized_outlets;
 			}).error(function(data, status) {
-				console.log("data in error " + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -4265,10 +4089,7 @@ module.controller('adminConsoleCustomerCtrl', function($scope, $rootScope, $rout
 		};
 
 		$scope.updateCustomerOutlets = function(id) {
-			console.log("id " + id);
-			cus = $scope.customerDetails[id]
-			console.log(cus.authorized_outlets)
-			console.log($scope.customerDetails[id])
+			cus = $scope.customerDetails[id];
 			var params = {
 				"customer" : {
 					"authorized_outlets" : cus.authorized_outlets,//outletNo,
@@ -4280,14 +4101,12 @@ module.controller('adminConsoleCustomerCtrl', function($scope, $rootScope, $rout
 				url : '/api/customers/' + cus.id,
 				data : params,
 			}).success(function(data, status) {
-				console.log("data in success " + data + " status " + status);
 				$scope.error = data.auth_token;
 				$scope.customerName = cus.name;
 				$scope.custUpdate = true;
 				$scope.statement = true;
 				$scope.erromsg = false;
 			}).error(function(data, status) {
-				console.log("data in error" + data + " status " + status);
 				if (status == 401) {
 					$location.url("/login");
 				}
@@ -4337,7 +4156,6 @@ function validateNumber() {
 	var filter = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
 	//if it's valid number
 	if (filter.test(a)) {
-		console.log("valid phone number");
 		return true;
 	}
 	//if it's NOT valid

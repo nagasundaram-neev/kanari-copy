@@ -11,8 +11,6 @@
 // about supported directives.
 //
 //
-//= require jquery
-//= require angular
 //= require moment.min
 //= require iscroll
 //= require app_tablet

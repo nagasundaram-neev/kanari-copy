@@ -102,6 +102,7 @@ module.directive('highchart', function () {
     
  module.filter('fromNow', function() {
   return function(date) {
+  	console.log("date "+ date);
     return moment(date).fromNow();
   }
 });

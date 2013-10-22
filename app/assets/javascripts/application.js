@@ -14,13 +14,8 @@
 //= require jquery.nicescroll.min.js
 //= require jquery.nicescroll.plus.js
 //= require jquery.maskedinput.js
-//= require jquery.validate.js
-//= require angular.js
-//= require highcharts.js
 //= require moment.min.js
 //= require daterangepicker.js
 //= require app
 //= require angular-resource.js
-//= require bootstrap.js
-//= require ui-bootstrap-tpls-0.6.0.js
 //= require angular/controllers/controllers.js

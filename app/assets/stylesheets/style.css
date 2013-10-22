@@ -555,10 +555,10 @@
 }
 .yellowBack {
 	/*float: left;
-	padding: 8.5% 0;
-	width: 49.1%;
-	background-color: #F8BE40;
-	border-right: 2px solid #FFFFFF;*/
+	 padding: 8.5% 0;
+	 width: 49.1%;
+	 background-color: #F8BE40;
+	 border-right: 2px solid #FFFFFF;*/
 	float: left;
 	padding: 7% 0;
 	width: 49%;
@@ -600,8 +600,8 @@
 .recentActDiv {
 	margin: 0 auto;
 	padding: 4.5% 0 3%;
-    text-shadow: none;
-     text-align: center;
+	text-shadow: none;
+	text-align: center;
 }
 .descriptFeed {
 	padding-bottom: 12%;
@@ -995,9 +995,9 @@ img, object {
 	 margin: 2% 0 0 2%;
 	 width: 36px;*/
 	cursor: pointer;
-    float: left;
-    height: 35px;
-    margin-top: 1%;
+	float: left;
+	height: 35px;
+	margin-top: 1%;
 }
 #feedbackSub .home {
 	height: 38px;
@@ -1008,13 +1008,13 @@ img, object {
 	/*background-position: 0 0;*/
 	/*background-repeat: no-repeat;*/
 	cursor: pointer;
-    float: right;
-    height: 35px;
-    margin-top: 1%;
+	float: right;
+	height: 35px;
+	margin-top: 1%;
 }
 .homeImg img {
 	/*max-height: 90%;
-	max-width: 75%;*/
+	 max-width: 75%;*/
 	height: 35px;
 }
 #settings .calender {
@@ -1028,7 +1028,7 @@ img, object {
 	 margin-top: 2%;
 	 width: 45px;*/
 	height: 35px;
-    margin-bottom: 11%;
+	margin-bottom: 11%;
 }
 
 .home img {
@@ -1180,13 +1180,13 @@ img, object {
 	padding: 0 !important;
 	text-shadow: none;
 }
-#signedUp .ui-footer, #login .ui-footer{
-	 background: none repeat scroll 0 0 #F9C040 !important;
+#signedUp .ui-footer, #login .ui-footer {
+	background: none repeat scroll 0 0 #F9C040 !important;
 }
 #signedUp .signUp {
 	font-size: 170%;
 	margin: 10% 0;
-	 font-weight: 400;
+	font-weight: 400;
 	font-family: 'Roboto', sans-serif !important;
 }
 .mainDiv {
@@ -1212,7 +1212,7 @@ img, object {
 }
 .tooltipCls {
 	margin-bottom: -10px;
-    margin-left: 29%;
+	margin-left: 29%;
 	position: relative;
 }
 .birdTooltip {
@@ -1222,8 +1222,8 @@ img, object {
 	font-size: 0.8em;
 	font-family: 'Open Sans', sans-serif !important;
 	padding: 5%;
-    text-shadow: none;
-    width: 60%;
+	text-shadow: none;
+	width: 60%;
 }
 .birdTooltiparrow-down {
 	border-left: 0 solid transparent;
@@ -1546,11 +1546,11 @@ img, object {
 
 .signUp {
 	/*text-align: center;
-	margin: 3% 0;
-	font-size: 20px;*/
-	 font-size: 20px;
-    margin: 2.5% 0;
-    text-align: center;
+	 margin: 3% 0;
+	 font-size: 20px;*/
+	font-size: 20px;
+	margin: 2.5% 0;
+	text-align: center;
 }
 #restaurantList .signUp, #showRestaurant .signUp {
 	margin: 2.6 0 0;
@@ -1748,8 +1748,8 @@ img, object {
 	text-shadow: none;
 	color: #593F5A;
 }
-#feedback_step2 .outerDiv{
-	line-height:19px;
+#feedback_step2 .outerDiv {
+	line-height: 19px;
 }
 .keypad {
 	margin: 2% 0 3% 3%;
@@ -1815,8 +1815,8 @@ img, object {
 	background: none repeat scroll 0 0 #F9C040 !important;
 	overflow: visible;
 }
-.spacer{
-	height:10px;
+.spacer {
+	height: 10px;
 }
 #forgotpass .ui-content {
 	overflow: hidden;
@@ -1908,7 +1908,7 @@ img, object {
 	width: 100%;
 	height: 100%;
 	display: none;
-	text-align:center;
+	text-align: center;
 	position: absolute;
 	top: 0;
 	/*background-color: #000;*/
@@ -1929,12 +1929,12 @@ img, object {
 	width: 77%;
 	z-index: 11;
 }
-.popup img{
+.popup img {
 	float: right;
-    height: 30px;
-    position: absolute;
-    right: -15px;
-    top: -15px;
+	height: 30px;
+	position: absolute;
+	right: -15px;
+	top: -15px;
 }
 .sucsessMsg {
 	color: #0F9D58;
@@ -1991,7 +1991,7 @@ img, object {
 	width: 100%;
 }
 #login .ui-btn-inline, input, #signUp .ui-btn-inline {
-	margin: 8% 0 3%;
+	margin: 5% 0 3%;
 	width: 100%;
 }
 #login .ui-btn-inline {
@@ -2130,7 +2130,7 @@ img, object {
 	font-size: 1.4em;
 	margin: 0.8% 0;
 	/*overflow: hidden;*/
-	 /*word-wrap: break-word;*/
+	/*word-wrap: break-word;*/
 }
 #showRestaurant .rest_info img {
 	vertical-align: middle;
@@ -2138,7 +2138,7 @@ img, object {
 
 .showRestIcons {
 	height: 28px;
-    margin: 3px 0;
+	margin: 3px 0;
 }
 /*.showRestIcons1{
  height: 35px;
@@ -2213,15 +2213,15 @@ img, object {
 .fblogin img {
 	/*width: 2.3em;*/
 	/*width: 40px;
-	padding-top: 0.5%;
+	 padding-top: 0.5%;
+	 float: left;
+	 vertical-align: top;*/
 	float: left;
-	vertical-align: top;*/
-	float: left;
-    height: 31px;
-    padding-top: 1.2%;
-    vertical-align: top;
-    /*width: 20px;*/
-   margin-left: 1%;
+	height: 31px;
+	padding-top: 1.2%;
+	vertical-align: top;
+	/*width: 20px;*/
+	margin-left: 1%;
 }
 
 .fblogin div {
@@ -2262,13 +2262,19 @@ img, object {
 
 .backArrow {
 	height: 16px;
-	width:10px;
+	width: 10px;
 }
 
-.feedbackSocialIcons{
+.feedbackSocialIcons {
 	height: 40px;
 }
-
+.acceptTerms {
+	overflow: hidden;
+	padding: 0;
+}
+.acceptTerms .ui-field-contain .ui-controlgroup, .ui-field-contain fieldset.ui-controlgroup {
+	width: 100% !important;
+}
 /*.feedback img{
  width: 50px;
  }
