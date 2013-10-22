@@ -10,5 +10,17 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require_directory .
-//= require_self
+//= require jquery.autocomplete.min.js
+//= require jquery.nicescroll.min.js
+//= require jquery.nicescroll.plus.js
+//= require jquery.maskedinput.js
+//= require jquery.validate.js
+//= require angular.js
+//= require highcharts.js
+//= require moment.min.js
+//= require daterangepicker.js
+//= require app
+//= require controllers.js
+//= require angular-resource.js
+//= require bootstrap.js
+//= require ui-bootstrap-tpls-0.6.0.js
