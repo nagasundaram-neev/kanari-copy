@@ -155,7 +155,6 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 		$("#overlaySuccess").hide();
 		$(".popup").hide();
 		//$scope.popup = false;
-		console.log("IN");
 		overlayDiv.css({
 			'z-index' : '0',
 			'background-color' : 'transparent'
@@ -163,7 +162,6 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 	};
 
 	$scope.logout = function() {
-		console.log("in Logout" + getCookie('authToken'));
 		var param = {
 			"auth_token" : getCookie('authToken')
 		}
@@ -174,7 +172,6 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 		}).success(function(data, status) {
 			$(".userloggedIn").hide();
 
-			console.log("User Role " + data + " status " + status);
 			deleteCookie('authToken');
 			deleteCookie('userRole');
 			deleteCookie('userName');
@@ -189,7 +186,6 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 			});
 
 		}).error(function(data, status) {
-			console.log("data " + data + " status " + status + "authToken" + getCookie('authToken'));
 		});
 		//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken'));
 		deleteCookie('authToken');
@@ -218,7 +214,6 @@ module.controller('signInController', function($scope, $http, $location) {
 	$('#overlaySuccess img').hide();
 	$scope.chkLogin = function() {
 		if ($scope.email == "" && $scope.password == "" && !$scope.email && !$scope.password) {
-			console.log("email is blank");
 			$scope.error = " Please enter Email and Password";
 			$scope.erromsg = true;
 			return false;
@@ -228,7 +223,6 @@ module.controller('signInController', function($scope, $http, $location) {
 			method : 'post',
 			url : '/api/users/sign_in',
 		}).success(function(data, status) {
-			console.log("User Role " + data.user_role + " status " + status);
 			if ($scope.rememberMe) {
 				setCookie('userRole', data.user_role, 7);
 				setCookie('authToken', data.auth_token, 7);
@@ -249,8 +243,6 @@ module.controller('signInController', function($scope, $http, $location) {
 			}
 
 		}).error(function(data, status) {
-			//console.log($scope.password)
-			console.log("data " + $scope.email + " status " + $scope.password);
 			if (data.errors == "Inactive User") {
 				$scope.error = "Outlet assigned to you is disabled";
 				$scope.erromsg = true;
@@ -342,7 +334,6 @@ function addToIphoneHomePage(){
 
 	function init () {
 		// Preliminary check, all further checks are performed on iDevices only
-		//alert("inlogin");
 		if ( !isIDevice ) return;
 
 		var now = Date.now(),
@@ -648,10 +639,8 @@ module.controller('homePageController', function($scope, $http, $location, $time
 			//$.mobile.loading('show');
 			dt = new Date();
 			var time = dt.getHours();
-			console.log("time " + time);
 
 			if (time >= 0 && time < 5) {
-				console.log("hi i an in");
 				dt.setDate(dt.getDate() - 1);
 			}
 
@@ -662,7 +651,6 @@ module.controller('homePageController', function($scope, $http, $location, $time
 			//var now = new Date();
 			//var nowUtc = new Date( now.getTime() + (now.getTimezoneOffset() * 60000));
 			//var strtDt = new Date();
-			console.log("start date " + startdt);
 			if (!$scope.$$phase) {
 				//$digest or $apply
 			}
@@ -678,7 +666,6 @@ module.controller('homePageController', function($scope, $http, $location, $time
 				url : '/api/feedbacks',
 				params : param
 			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
 				$scope.feedbackList = data.feedbacks;
 				$("#overlaySuccess").hide();
 				$('#overlaySuccess img').hide();
@@ -691,10 +678,8 @@ module.controller('homePageController', function($scope, $http, $location, $time
 				} else {
 					$scope.feedbkMsg = true;
 				}
-				console.log("in list feedbacks " + $scope.feedbackList.length);
 				setTimeout(loaded, 2000);
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 				//$.mobile.loading('hide');
 				overlayDiv.css({
 					'z-index' : '0',
@@ -763,16 +748,13 @@ module.controller('insightsController', function($scope, $http, $location, $time
 			dt = new Date();
 
 			var time = dt.getHours();
-			console.log("time " + time);
 
 			if (time >= 0 && time < 5) {
-				console.log("hi i an in");
 				dt.setDate(dt.getDate() - 1);
 			}
 
 			var startdt = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), 5, 0, 0)
 
-			console.log("date " + startdt);
 
 			var param = {
 				"auth_token" : getCookie('authToken'),
@@ -784,7 +766,6 @@ module.controller('insightsController', function($scope, $http, $location, $time
 				url : '/api/feedbacks/metrics',
 				params : param
 			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
 				$scope.foodLike = data.feedback_insights.food_quality.like;
 				$scope.foodDisLike = data.feedback_insights.food_quality.dislike;
 				$scope.foodDailyChange = data.feedback_insights.food_quality.change;
@@ -887,7 +868,6 @@ module.controller('insightsController', function($scope, $http, $location, $time
 				$scope.points = data.feedback_insights.rewards_pool;
 
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 				if (status == 401) {
 					//alert("hi");
 					deleteCookie('authToken');
@@ -945,7 +925,6 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 		};
 
 		$scope.close = function() {
-			//console.log("IN");
 			flagP = 0;
 			$("#overlaySuccess").hide();
 			$(".redeemptions").hide();
@@ -972,16 +951,13 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 				url : '/api/redemptions',
 				params : param
 			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
 				$scope.redemptionList = data.redemptions;
 				if ($scope.redemptionList.length > 0) {
 					$scope.redemptionMsg = false;
 				} else {
 					$scope.redemptionMsg = true;
 				}
-				console.log("list" + $scope.redemptionList)
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 				if (status == 401) {
 					deleteCookie('authToken');
 					deleteCookie('userRole');
@@ -1007,11 +983,8 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 				url : '/api/redemptions',
 				params : param
 			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
 				$scope.processedRedemptionList = data.redemptions;
-				console.log("list" + $scope.redemptionList)
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 				if (status == 401) {
 					deleteCookie('authToken');
 					deleteCookie('userRole');
@@ -1030,8 +1003,6 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 		$('#scrollbar3').oneFingerScroll();
 		
 		$scope.confirm = function(id) {
-			console.log("confirmed" + id);
-			//alert("hi i am in "+id);
 			var param = {
 				"redemption" : {
 					"approve" : true
@@ -1043,10 +1014,8 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 				url : '/api/redemptions/' + id,
 				data : param
 			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
 				$scope.listRedemptions();
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 				if (status == 401) {
 					deleteCookie('authToken');
 					deleteCookie('userRole');
@@ -1102,12 +1071,10 @@ module.controller('numericCodeController', function($scope, $http, $location, $t
 					$scope.succmsg = false;
 					$scope.erromsg = true;
 				} else if ($scope.billAmount < 0) {
-					console.log("in else if");
 					$scope.error = "Please enter valid bill amount";
 					$scope.succmsg = false;
 					$scope.erromsg = true;
 				} else {
-					console.log("amount " + $scope.billAmount)
 					$scope.loader = true;
 					var param = {
 						"bill_amount" : $scope.billAmount,
@@ -1119,7 +1086,6 @@ module.controller('numericCodeController', function($scope, $http, $location, $t
 						url : '/api/kanari_codes',
 						data : param,
 					}).success(function(data, status) {
-						console.log("data in success " + data + " status " + status);
 						$scope.erromsg = false;
 						$scope.codeGenerate = false;
 						$scope.codeGenerated = true;
@@ -1131,7 +1097,6 @@ module.controller('numericCodeController', function($scope, $http, $location, $t
 
 						$scope.loader = false;
 					}).error(function(data, status) {
-						console.log("data in errorrr" + data + " status " + status);
 						$scope.error = data.error[0];
 						$scope.succmsg = false;
 						$scope.erromsg = true;
@@ -1166,13 +1131,10 @@ module.controller('numericCodeController', function($scope, $http, $location, $t
 				url : '/api/feedbacks',
 				params : param
 			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
 
 				$scope.listCodes = data.feedbacks;
-				//console.log("codes"+$scope.listCodes);
 
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 				if (status == 401) {
 					deleteCookie('authToken');
 					deleteCookie('userRole');
@@ -1190,14 +1152,12 @@ module.controller('numericCodeController', function($scope, $http, $location, $t
 		$('#scrollbar2').oneFingerScroll();
 
 		$scope.parseDate = function(jsonDate) {
-			console.log("date " + jsonDate + " parsed date " + new Date(Date.parse(jsonDate)));
 			$scope.v = {
 				DDt : Date.parse(jsonDate)
 			}
 		};
 
 		$scope.done = function() {
-			//console.log("in done btn pressed");
 			$scope.codeGenerate = true;
 			$scope.loader = false;
 			$scope.codeGenerated = false;
@@ -1259,7 +1219,6 @@ var myScroll, pullDownEl, pullDownOffset, pullUpEl, pullUpOffset, generatedCount
 
 function pullDownAction() {
 	setTimeout(function() {// <-- Simulate network congestion, remove setTimeout from production!
-		console.log("hi in hello refresh");
 		angular.element($('#homepage')).scope().listFeedbacks();
 		myScroll.refresh();
 		// Remember to refresh when contents are loaded (ie: on ajax completion)
@@ -1286,7 +1245,6 @@ jQuery.fn.oneFingerScroll = function() {
 
 function pullUpAction() {
 	setTimeout(function() {// <-- Simulate network congestion, remove setTimeout from production!
-		//console.log("hi in hello refresh");
 		myScroll.refresh();
 		// Remember to refresh when contents are loaded (ie: on ajax completion)
 	}, 2000);

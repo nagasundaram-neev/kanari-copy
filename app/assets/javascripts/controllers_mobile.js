@@ -135,7 +135,6 @@ var flagPage = 0;
 var iphoneFlag = 0;
 var footerFlag = 0;
 module.controller('loginController', function($scope, $http, $location) {
-	console.log("under login controller")
 
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
 	$scope.remember = false;
@@ -148,7 +147,6 @@ module.controller('loginController', function($scope, $http, $location) {
 	} else {
 		$scope.chkLogin = function() {
 			if ($scope.email == "" && $scope.password == "" && !$scope.email && !$scope.password) {
-				console.log("email is blank");
 				$scope.error = " Please enter Email and Password";
 				$scope.erromsg = true;
 				return false;
@@ -160,9 +158,7 @@ module.controller('loginController', function($scope, $http, $location) {
 				url : '/api/users/sign_in',
 			}).success(function(data, status) {
 				auth_token = data.user_role;
-				console.log("User Role " + data.user_role + " status " + status);
 				if ($scope.remember) {
-					//alert("in");
 					setCookie('userRole', data.user_role, 7);
 					setCookie('authToken', data.auth_token, 7);
 					setCookie('userName', data.first_name + ' ' + data.last_name, 7);
@@ -174,7 +170,6 @@ module.controller('loginController', function($scope, $http, $location) {
 					setCookie('signInCount', data.sign_in_count, 0.29);
 				}
 				if (getCookie('userRole') == "user") {
-					console.log("hi in login success ");
 					$location.url("/home");
 				} else if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff" || getCookie('userRole') == "manager") {
 					deleteCookie('authToken');
@@ -186,8 +181,6 @@ module.controller('loginController', function($scope, $http, $location) {
 					$scope.erromsg = true;
 				}
 			}).error(function(data, status) {
-				console.log($scope.password)
-				console.log("data " + $scope.email + " status " + status);
 				if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff") {
 					deleteCookie('authToken');
 					deleteCookie('userRole');
@@ -569,7 +562,6 @@ module.controller('forgotPasswordController', function($scope, $http, $location)
 			url : '/api/users/password',
 			data : param
 		}).success(function(data, status) {
-			console.log("data in success " + data + " status " + status);
 			$scope.error = data.error;
 			if (!userEmail) {
 				$scope.erromsg = true;
@@ -579,7 +571,6 @@ module.controller('forgotPasswordController', function($scope, $http, $location)
 				$scope.erromsg = false;
 			}
 		}).error(function(data, status) {
-			console.log("data in error" + data + " status " + status);
 			$scope.erromsg = true;
 			$scope.success = false;
 		});
@@ -604,18 +595,15 @@ module.controller('resetPassController', function($scope, $http, $location, $rou
 				"reset_password_token" : resetPassToken
 			}
 		};
-		//alert(param);
 		$http({
 			method : 'put',
 			url : '/api/users/password',
 			data : param,
 		}).success(function(data, status) {
-			console.log("data in success " + data + " status " + status);
 			$scope.error = data.auth_token;
 			$scope.statement = true;
 			$scope.erromsg = false;
 		}).error(function(data, status) {
-			console.log("data in error" + data + " status " + status);
 			$scope.erromsg = true;
 		});
 	};
@@ -625,11 +613,9 @@ module.controller('resetPassController', function($scope, $http, $location, $rou
 module.controller('homeController', function($scope, $http, $location) {
 
 	$scope.points = "";
-	console.log("sign in Count" + getCookie("signInCount"));
 	if (getCookie("authToken")) {
 		flagPage = 0;
 		footerFlag = 0;
-		console.log("in home ctrl " + getCookie("authToken"));
 		$scope.getUserData = function() {
 			var param = {
 				"auth_token" : getCookie('authToken'),
@@ -641,7 +627,6 @@ module.controller('homeController', function($scope, $http, $location) {
 				url : '/api/users',
 				params : param
 			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
 				//var date = new Date();
 				$scope.points = data.user.points_available;
 				$scope.userName = data.user.first_name + " " + data.user.last_name;
@@ -662,9 +647,7 @@ module.controller('homeController', function($scope, $http, $location) {
 					$scope.feedbackSubmissions = data.user.feedbacks_count;
 				}
 				$scope.recentActivity = data.user.last_activity_at;
-				//alert("points"+$scope.points);
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 				if (status == 401) {
 					deleteCookie('authToken');
 					deleteCookie('userRole');
@@ -678,13 +661,10 @@ module.controller('homeController', function($scope, $http, $location) {
 		};
 
 		if (getCookie("signInCount") == 1) {
-			console.log("in sign in count");
 			$scope.getUserData();
 		}
 
-		//alert("token "+getCookie("authToken"));
 		if (getCookie("signInCount") == 0 && getCookie('feedbackId')) {
-			console.log("sign in Count if " + signInCount);
 			var param = {
 				"feedback_id" : getCookie('feedbackId'),
 				"auth_token" : getCookie('authToken'),
@@ -695,16 +675,13 @@ module.controller('homeController', function($scope, $http, $location) {
 				url : '/api/new_registration_points',
 				data : param
 			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
 				//var date = new Date();
 				$scope.points = data.points;
 				$scope.feedbackSubmissions = 1;
 				$scope.getUserData();
-				//alert("points"+$scope.points);
 				//signInCount = 0;
 				deleteCookie('feedbackId');
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 				if (status == 401) {
 					deleteCookie('authToken');
 					deleteCookie('userRole');
@@ -717,10 +694,8 @@ module.controller('homeController', function($scope, $http, $location) {
 			});
 
 		} else {
-			console.log("sign in Count else " + getCookie("signInCount"));
 			$scope.getUserData();
 		}
-		//alert("points"+$scope.points);
 		//$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(getCookie('authToken') + ':X');
 		// $scope.userName = getCookie('userName');
 		$scope.role = getCookie('userRole');
@@ -770,7 +745,6 @@ module.controller('signUpController', function($scope, $http, $location) {
 	$scope.confPassword = "";
 	flagPage = 0;
 	footerFlag = 0;
-	console.log("flag" + feedbackFlag);
 	if (feedbackFlag == 1) {
 		$scope.feedBackMsg = true;
 		$scope.message = false;
@@ -803,7 +777,6 @@ module.controller('signUpController', function($scope, $http, $location) {
 				url : '/api/users',
 				data : param
 			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
 				//setCookie('email', $scope.email, 0.29);
 				//setCookie('password', $scope.password, 0.29);
 				setCookie('userRole', data.user_role, 0.29);
@@ -812,9 +785,7 @@ module.controller('signUpController', function($scope, $http, $location) {
 				setCookie('signInCount', data.sign_in_count, 0.29);
 				$location.url("/signedUp");
 			}).error(function(data, status) {
-				console.log("data in error " + $scope.email + " status " + status);
 				if (data.errors[0] == "Email can't be blank") {
-					console.log("data.errors[0] " + data.errors[0]);
 					$scope.error = "Please enter a valid email";
 					$scope.errorMsg = true;
 				} else if (data.errors[0] == "Email has already been taken") {
@@ -871,7 +842,6 @@ module.controller('changePasswordController', function($scope, $http, $location)
 				url : '/api/users',
 				data : param
 			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
 				deleteCookie('authToken');
 				setCookie('authToken', data.auth_token, 0.29);
 				$scope.errorMsg = false;
@@ -880,7 +850,6 @@ module.controller('changePasswordController', function($scope, $http, $location)
 				$scope.confirmPassword = "";
 				$scope.newPassword = "";
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status);
 				$scope.error = data.errors[0];
 				$scope.errorMsg = true;
 				$scope.succMsg = false;
@@ -929,12 +898,8 @@ module.controller('settingsController', function($scope, $http, $location) {
 				url : '/api/users',
 				params : param
 			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
-				//var date = new Date();
 				if (data.user.date_of_birth) {
 					date = data.user.date_of_birth.split("-");
-					console.log("date " + date);
-					console.log(date[0] + " " + date[1] + " " + date[2]);
 					$scope.firstName = data.user.first_name;
 					$scope.lastName = data.user.last_name;
 					$scope.email = data.user.email;
@@ -953,7 +918,6 @@ module.controller('settingsController', function($scope, $http, $location) {
 				}
 
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 				if (status == 401) {
 					deleteCookie('authToken');
 					deleteCookie('userRole');
@@ -972,7 +936,6 @@ module.controller('settingsController', function($scope, $http, $location) {
 
 		$scope.saveProfile = function() {
 			if ($scope.gender) {
-				console.log("in gendr " + $scope.gender);
 			}
 			if (!$scope.firstName || !$scope.lastName) {
 				$scope.error = "Please provide first name and last name";
@@ -994,13 +957,11 @@ module.controller('settingsController', function($scope, $http, $location) {
 					url : '/api/users',
 					data : param
 				}).success(function(data, status) {
-					console.log("User Role " + data + " status " + status);
 					deleteCookie('authToken');
 					setCookie('authToken', data.auth_token, 0.29);
 					$scope.errorMsg = false;
 					$scope.succMsg = true;
 				}).error(function(data, status) {
-					console.log("data " + data + " status " + status);
 					$scope.error = data.errors[0];
 					$scope.errorMsg = true;
 					$scope.succMsg = false;
@@ -1009,7 +970,6 @@ module.controller('settingsController', function($scope, $http, $location) {
 		};
 
 		$scope.logout = function() {
-			console.log("in Logout" + getCookie('authToken'));
 
 			var param = {
 				"auth_token" : getCookie('authToken')
@@ -1064,7 +1024,6 @@ module.controller('feedbackController', function($scope, $http, $location) {
 	};
 
 	$scope.enterValues = function(val) {
-		//console.log("digit1 " + $scope.digit1);
 		if (!$scope.digit1 || $scope.digit1 == "") {
 			$scope.digit1 = val;
 		} else if (!$scope.digit2 || $scope.digit2 == "") {
@@ -1091,12 +1050,10 @@ module.controller('feedbackController', function($scope, $http, $location) {
 			url : '/api/kanari_codes/' + kanariCode,
 			//params : param
 		}).success(function(data, status) {
-			console.log("User Role " + data + " status " + status);
 			setCookie("feedbackId", data.feedback_id, 0.29);
 			setCookie("restName", data.outlet_name, 0.29);
 			$location.url("/feedback_step2");
 		}).error(function(data, status) {
-			console.log("data " + data + " status " + status);
 			if (status == 401) {
 				deleteCookie('authToken');
 				deleteCookie('userRole');
@@ -1115,7 +1072,6 @@ module.controller('feedbackController', function($scope, $http, $location) {
 
 module.controller('feedback_step2Controller', function($scope, $http, $location) {
 
-	//if (getCookie("feedbackId")) {
 	flagPage = 1;
 	footerFlag = 0;
 	$scope.nextFlag = 0;
@@ -1201,7 +1157,6 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 
 	$scope.next = function() {
 		if ($scope.nextFlag == 0) {
-			console.log("hi ")
 			for (var i = 0; i < $scope.feedBackSize; i++) {
 				if ($scope.feedBackArray[i] == 0) {
 					$scope.feedBackArray[i] = 0;
@@ -1237,19 +1192,15 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			$scope.recomendationBar = true;
 			$scope.optionKeypad = false;
 			$scope.prev = true;
-			//$scope.nextFlag = 0;
 			$scope.prevFlag = 1;
 			$scope.nextFlag = -1;
 			$(".nxt").css("width", "50.22%");
 			$(".nxtTxt").html("SUBMIT");
 			$scope.erromsg = false;
 			$(".nxt img").hide();
-			console.log("feedback " + $scope.feedBackArray);
 		} else if ($scope.nextFlag == -1) {
-			console.log("submitting feedback");
 			if (!$scope.willRecommend) {
 				if ($scope.willRecommend == '0') {
-					console.log("in hio ");
 					var param = {
 						"feedback" : {
 							"food_quality" : parseInt($scope.feedBackArray[0]),
@@ -1269,10 +1220,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 						url : '/api/feedbacks/' + getCookie('feedbackId'),
 						data : param
 					}).success(function(data, status) {
-						console.log("User Role " + data + " status " + status);
-						//pointsEarned = data.points;
 						setCookie("pointsEarned", data.points, 0.29);
-						// alert(getCookie('pointsEarned'));
 						$scope.erromsg = false;
 						if (getCookie('authToken')) {
 							$location.url("/feedbackSubmitSuccess");
@@ -1283,7 +1231,6 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 							//deleteCookie('feedbackId');
 						}
 					}).error(function(data, status) {
-						console.log("data in error" + data + " status " + status);
 						if (status == 401) {
 							deleteCookie('authToken');
 							deleteCookie('userRole');
@@ -1303,7 +1250,6 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 					});
 
 				} else {
-					console.log("recommend" + $scope.willRecommend);
 					$scope.error = "Your feedback is valuable! We'd really appreciate you answering the above questions.";
 					$scope.erromsg = true;
 				}
@@ -1327,10 +1273,8 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 					url : '/api/feedbacks/' + getCookie('feedbackId'),
 					data : param
 				}).success(function(data, status) {
-					console.log("User Role " + data + " status " + status);
 					pointsEarned = data.points;
 					setCookie("pointsEarned", data.points, 0.29);
-					//alert(getCookie('pointsEarned'));
 					$scope.erromsg = false;
 					if (getCookie('authToken')) {
 						$location.url("/feedbackSubmitSuccess");
@@ -1341,7 +1285,6 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 						//deleteCookie('feedbackId');
 					}
 				}).error(function(data, status) {
-					console.log("data in error" + data + " status " + status);
 					if (status == 401) {
 						deleteCookie('authToken');
 						deleteCookie('userRole');
@@ -1369,7 +1312,6 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 	};
 
 	$scope.previous = function() {
-		console.log("in previous ");
 		if ($scope.prevFlag == 0) {
 			for (var i = 0; i < $scope.feedBackSize; i++) {
 				if ($scope.feedBackArray[i] == 0) {
@@ -1399,7 +1341,6 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			$(".nxt").css("width", "100%");
 			$(".nxt img").css("padding-top", "0%");
 			$scope.nextFlag = 0;
-			//$scope.prevFlag = -1;
 		} else if ($scope.prevFlag == 1) {
 			$scope.like = false;
 			$scope.dislike = true;
@@ -1415,9 +1356,6 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			$(".nxt img").css("padding-top", "1%");
 		}
 	};
-	//} else {
-	//		$location.url("/home");
-	//}
 });
 
 var socialMessage;
@@ -1440,15 +1378,6 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 		socialMessage = 'I just saved AED ' + getCookie('pointsEarned') + ' by leaving feedback at ' + getCookie('restName') + '. Thanks Kanari! Check it out: http://kanari.co';
 		tweetMessage = 'I just saved AED ' + getCookie('pointsEarned') + ' by leaving feedback at ' + getCookie('restName') + '. Thanks @GetKanari! Check it out: http://kanari.co';
 
-		//$("#twitter").attr("href", "https://twitter.com/share?text="+socialMessage);
-
-		// var cb = new Codebird();
-		// cb.setConsumerKey("YeFlpVP16H9uRc2J0COEng", "ZEYmzEKWQvY3eSmzJikeOum1ELofSBjP5K1MVYQec");
-
-		//console.log("points " + pointsEarned);
-		//$scope.points = pointsEarned;
-
-		//console.log("scope variable " + $scope.points);
 		$scope.home = function() {
 			deleteCookie('pointsEarned');
 			deleteCookie('restName');
@@ -1456,10 +1385,7 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 		};
 
 		$scope.twitter = function() {
-			//window.open();
 			var popup = window.open("https://twitter.com/share?text=" + tweetMessage, 'popUpWindow', 'height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
-			//$scope.success = "Post to Twitter successfull!"
-			//$("#fbShareSuccMsg").show();
 
 			var timer = setInterval(function() {
 				if (popup.closed) {
@@ -1469,10 +1395,6 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 					$("#tweetShareSuccMsg").show();
 				}
 			}, 1000);
-			// $('.selected').click
-			// $("#fbShareSuccMsg").hide();
-			// $scope.tweetShareSuccMsg = true;it
-			//$("#tweetShareSuccMsg").show();
 		};
 
 		$scope.google = function() {
@@ -1500,7 +1422,6 @@ module.controller('restaurantListController', function($scope, $http, $location)
 		};
 
 		$scope.authToken = getCookie('authToken');
-		console.log($scope.authToken);
 
 		$scope.getRestaurantList = function() {
 
@@ -1514,10 +1435,8 @@ module.controller('restaurantListController', function($scope, $http, $location)
 				url : '/api/outlets',
 				params : param
 			}).success(function(data, status) {
-				console.log("User Role " + data + " status " + status);
 				$scope.outlets = data.outlets;
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status);
 				if (status == 401) {
 					deleteCookie('authToken');
 					deleteCookie('userRole');
@@ -1565,7 +1484,6 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 			url : '/api/outlets/' + $routeParams.outletId,
 			params : param,
 		}).success(function(data, status) {
-			console.log("data in success " + data + " status " + status);
 			$scope.outletID = data.outlet.id;
 			$scope.restaurant_name = data.outlet.name;
 			$scope.restaurant_address = data.outlet.address;
@@ -1581,7 +1499,6 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 			$scope.lattitude = data.outlet.latitude;
 			$scope.longitude = data.outlet.longitude;
 		}).error(function(data, status) {
-			console.log("data in error" + data + " status " + status);
 			if (status == 401) {
 				deleteCookie('authToken');
 				deleteCookie('userRole');
@@ -1641,11 +1558,8 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 				url : '/api/outlets/' + $routeParams.outletId,
 				params : param
 			}).success(function(data, status) {
-				console.log("User Role terter" + data + " status " + status);
-				//var date = new Date();
 				$scope.points = data.outlet.redeemable_points;
 			}).error(function(data, status) {
-				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 				if (status == 401) {
 					deleteCookie('authToken');
 					deleteCookie('userRole');
@@ -1662,12 +1576,10 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 
 		$scope.confirmRedeem = function() {
 			if (!$scope.amount) {
-				console.log("in if");
 				$scope.error = "Please enter valid amount for redemption";
 				$scope.successMsg = false;
 				$scope.erromsg = true;
 			} else if ($scope.amount < 0 || $scope.amount == 0) {
-				console.log("in else if");
 				$scope.error = "Please enter valid amount for redemption";
 				$scope.successMsg = false;
 				$scope.erromsg = true;
@@ -1685,8 +1597,6 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 					url : '/api/redemptions',
 					data : param
 				}).success(function(data, status) {
-					console.log("User Role " + data + " status " + status);
-					//$scope.success = "You have successfully redeemed for " + $scope.amount + " points";
 					$scope.listPoints();
 					$("#overlaySuccess").show();
 					$("#overlaySuccess").css({
@@ -1696,7 +1606,6 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 					$scope.successMsg = true;
 					$scope.erromsg = false;
 				}).error(function(data, status) {
-					console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 					$scope.error = data.errors[0];
 					$scope.successMsg = false;
 					$scope.erromsg = true;
@@ -1740,11 +1649,8 @@ module.controller('transactionHistoryController', function($scope, $http, $locat
 			url : '/api/activities',
 			params : param
 		}).success(function(data, status) {
-			console.log("User Role " + data + " status " + status);
 			$scope.transactionHList = data.activities;
-			//$scope.points = data.user.points_available;
 		}).error(function(data, status) {
-			console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
 			if (status == 401) {
 				deleteCookie('authToken');
 				deleteCookie('userRole');
@@ -1765,13 +1671,6 @@ module.controller('locationMapController', function($scope, $http, $location, $r
 
 	$.mobile.loading('show');
 
-	// $scope.MapCtrl = function() {
-	// console.log("lattitude " + $routeParams.lat + " longitude " + $routeParams.long);
-	// }
-	console.log("lattitude " + $routeParams.lat + " longitude " + $routeParams.long);
-	// $scope.$broadcast('clickMessageFromParent', {
-	// data : "SOME msg to the child"
-	// })
 	google.maps.visualRefresh = true;
 
 	angular.extend($scope, {
@@ -1819,12 +1718,10 @@ module.controller('locationMapController', function($scope, $http, $location, $r
 });
 
 function setFooter(valueH) {
-	console.log("set footer caller with value " + valueH)
 }
 
 
 $(document).on("pageshow", ".ui-page", function() {
-	console.log("under page show");
 	$('#date').scroller({
 		theme : "ios",
 		mode : "scroller",
@@ -1834,15 +1731,10 @@ $(document).on("pageshow", ".ui-page", function() {
 
 	var $page = $(this), vSpace = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() + $page.children('.ui-content').height();
 	$("#divexample1").css('height', '400px');
-	//alert($page.outerHeight());
-	//alert($page.innerHeight());
-	//alert(vSpace);
 	if (vSpace < $(window).height()) {
 		$page.height($(window).height());
 	}
 	if ($page.outerHeight() > vSpace) {
-		//alert("no scroll ");
-		//alert(flagPage);
 		$page.children('.ui-footer').css('position', 'absolute');
 	} else {
 		$page.children('.ui-footer').css('position', 'relative');
@@ -1853,58 +1745,6 @@ $(document).on("pageshow", ".ui-page", function() {
 		}
 		//alert("scroll");
 	}
-	/*if ($(window).height() > 500 && $(window).height() < 570) {
-	 //alert("in ");
-	 $("#divexample1").css('height', '420px');
-	 }
-	 var url_buffer = 50;
-	 if (vSpace < $(window).height()) {
-
-	 $page.height($(window).height());
-	 }
-
-	 var scrnHeight = screen.availHeight;
-
-	 if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
-	 //if (document.cookie.indexOf("iphone_redirect=false") == -1)
-	 //alert("iphone ");
-	 alert($page.height());
-	 alert($(window).height());
-	 $("#divexample1").css('height', '320px');
-	 if(scrnHeight == 548){
-	 $("#divexample1").css('height', '350px');
-	 if(footerFlag == 1){
-	 $page.children('.ui-footer').css('position', 'relative');
-	 }else{
-	 //	$page.children('.ui-footer').css('position', 'absolute');
-	 //	alert("under flag 1 else")
-	 }
-	 }else{
-	 //alert("under else")
-	 $page.children('.ui-footer').css('position', 'relative');
-	 }
-	 if (flagPage == 0) {
-	 $page.children('.ui-footer').css('margin-top', '14px');
-	 } else {
-	 $page.children('.ui-footer').css('margin-top', '0');
-	 }
-	 //setFooterIphone();
-	 } //else {
-	 //setFooterIphone();
-	 //}
-
-	 setTimeout(function() {
-	 window.scrollTo(0, 1)
-	 }, 1000);
-
-	 var pageHt = $page.height();
-	 var divHeightInDoc = pageHt + 5;
-	 //$("div[data-role='page']").css( "height",  divHeightInDoc);
-	 //alert("page " + $page.height() + "window " + $(window).height());
-	 if (scrnHeight == 548) {
-	 //$page.children('.ui-footer').css('position', 'absolute');
-	 //$("div[data-role='page']").style.setProperty("height", divHeightInDoc + "px");
-	 }*/
 
 	function setFooterIphone() {
 		if ($page.height() > $(window).height()) {
@@ -1926,8 +1766,6 @@ $(document).on("pageshow", ".ui-page", function() {
 //}
 
 document.ontouchmove = function(e) {
-	//alert("hi in touch");
-	//e.preventDefault();
 }
 function iOSversion() {
 	if (/iP(hone|od|ad)/.test(navigator.platform)) {
@@ -1938,7 +1776,6 @@ function iOSversion() {
 }
 
 function setCookie(name, value, days) {
-	//alert(value);
 	if (days) {
 		var date = new Date();
 		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -2017,7 +1854,6 @@ function isDate(txtDate, separator) {
 
 function moveToNext(field, nextFieldID) {
 	if (field.value.length >= field.maxLength) {
-		console.log("id " + nextFieldID);
 		document.getElementById(nextFieldID).focus();
 	}
 }
@@ -2025,26 +1861,20 @@ function moveToNext(field, nextFieldID) {
 
 $(document).ready(function() {
 	$('.backColr').live('touchstart', function(e) {
-		//$(this).removeClass('backColr');
 		$(this).addClass('backColr1');
-		//alert('alert');
 	});
 
 	$('.backColr').live('touchend', function(e) {
 		$(this).removeClass('backColr1');
 		$(this).addClass('backColr');
-		//alert('alert');
 	});
 	$('.clearBackColr').live('touchstart', function(e) {
-		//$(this).removeClass('backColr');
 		$(this).addClass('clearBackColr1');
-		//alert('alert');
 	});
 
 	$('.clearBackColr').live('touchend', function(e) {
 		$(this).removeClass('clearBackColr1');
 		$(this).addClass('clearBackColr');
-		//alert('alert');
 	});
 
 });
@@ -2069,14 +1899,11 @@ module.factory('Facebook', function($http, $location) {
 		login : function() {
 			FB.login(function(response) {
 				if (response.authResponse) {
-					console.log('Welcome!  Fetching your information.... ');
 					self.auth = response.authResponse;
-					//var date_of_birth = new Date(response.birthday);
 					FB.api('/me', function(response) {
 						var dt = new Date(response.birthday);
 						var month = dt.getMonth() + 1;
 						var startDt = dt.getFullYear() + "-" + month + "-" + dt.getDate();
-						console.log("access token " + startDt);
 						var param = {
 							"user" : {
 								"first_name" : response.first_name,
@@ -2095,13 +1922,10 @@ module.factory('Facebook', function($http, $location) {
 							data : param,
 						}).success(function(data) {
 							if (data.registration_complete == true) {
-								console.log("in success" + data.first_name);
 								setCookie('userRole', data.user_role, 0.29);
 								setCookie('authToken', data.auth_token, 0.29);
-								console.log("authToken" + getCookie('authToken'));
 								setCookie('signInCount', data.sign_in_count, 0.29);
 								setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
-								//facebookFlag = 1;
 								setCookie('facebookFlag', '1', 0.29);
 								$location.url('/home');
 							}
@@ -2109,7 +1933,6 @@ module.factory('Facebook', function($http, $location) {
 
 					});
 				} else {
-					console.log('Facebook login failed', response);
 				}
 			}, {
 				scope : 'email,user_birthday'
@@ -2124,29 +1947,16 @@ module.factory('Facebook', function($http, $location) {
 		share : function() {
 			FB.login(function(response) {
 				if (response.authResponse) {
-					//var fbMessage = 'I just saved AED ' + getCookie('pointsEarned') + ' by leaving feedback at ' + getCookie('restName') + '. Thanks Kanari! Check it out: http://kanari.co';
-					//alert("message for fb "+fbMessage)
 					FB.api('/me/feed', 'post', {
 						message : socialMessage
 					}, function(response) {
 						if (!response || response.error) {
-							//alert(response[0]);
-							//alert('Error occured');
-							//deleteCookie('pointsEsrned');
-							//deleteCookie('restName');
 						} else {
-							//alert('Post ID: ' + response.id);
-							//deleteCookie('pointsEsrned');
-							//deleteCookie('restName');
-							//$scope.fbShareSuccMsg = true;
 							$("#fbShareSuccMsg").show();
 						}
 					});
 
 				} else {
-					//deleteCookie('pointsEsrned');
-					//deleteCookie('restName');
-					//alert('User is logged out');
 				}
 			}, {
 				scope : 'publish_stream'
