@@ -20,7 +20,7 @@
 //= require moment.min.js
 //= require daterangepicker.js
 //= require app
-//= require controllers.js
 //= require angular-resource.js
 //= require bootstrap.js
 //= require ui-bootstrap-tpls-0.6.0.js
+//= require angular/controllers/controllers.js

@@ -8,25 +8,25 @@ var module = angular.module("kanariMobile", ["google-maps"]).config(function($ro
     // routes
    //console.log("in router");
     $routeProvider
-        .when('/home',{templateUrl:"<%= asset_path 'assets/angular/templates/home_mobile.html' %>"}) // this is the default JQueryMobile view in index.html
-        .when('/index',{templateUrl: "<%= asset_path 'assets/angular/templates/landing_page.html' %>" })
+        .when('/home',{templateUrl:"<%= asset_path 'home_mobile.html' %>"}) // this is the default JQueryMobile view in index.html
+        .when('/index',{templateUrl: "<%= asset_path 'landing_page.html' %>" })
         .when('/register',{templateUrl:'register.html'}) // this is a familiar AngularJS route using a partial ...
-        .when('/login',{templateUrl:"<%= asset_path 'assets/angular/templates/login_mobile.html' %>"}) // ... and so is this
-        .when('/regsuccess',{templateUrl: "<%= asset_path 'assets/angular/templates/regsuccess.html' %>" })
-        .when('/signUp',{templateUrl: "<%= asset_path 'assets/angular/templates/signUp_mobile.html' %>" })
-        .when('/signedUp',{templateUrl: "<%= asset_path 'assets/angular/templates/signedUp_mobile.html' %>" })
-        .when('/settings',{templateUrl: "<%= asset_path 'assets/angular/templates/settings_mobile.html' %>" })
-        .when('/forgotPassword',{templateUrl: "<%= asset_path 'assets/angular/templates/forgotPassword_mobile.html' %>" })
-        .when('/feedback',{templateUrl: "<%= asset_path 'assets/angular/templates/feedback.html' %>" })
-        .when('/feedback_step2',{templateUrl: "<%= asset_path 'assets/angular/templates/feedback_step2.html' %>" })
-        .when('/changePassword',{templateUrl: "<%= asset_path 'assets/angular/templates/changePassword_mobile.html' %>" })
-        .when('/redeemPoints',{templateUrl: "<%= asset_path 'assets/angular/templates/restaurantList.html' %>" })
-        .when('/confirmRedeem',{templateUrl: "<%= asset_path 'assets/angular/templates/redeemPoints.html' %>" })
-        .when('/feedbackSubmitSuccess',{templateUrl: "<%= asset_path 'assets/angular/templates/feedback_submit.html' %>" })
-        .when('/showRestaurant',{templateUrl: "<%= asset_path 'assets/angular/templates/showRestaurant.html' %>" })
-        .when('/transactionHistory',{templateUrl: "<%= asset_path 'assets/angular/templates/transactionHistory.html' %>" })
-        .when('/locationMap',{templateUrl: "<%= asset_path 'assets/angular/templates/locationMap.html' %>" })
-        .when('/api/users/password/edit', {templateUrl: "<%= asset_path 'assets/angular/templates/reset_password_mobile.html' %>"})
+        .when('/login',{templateUrl:"<%= asset_path 'login_mobile.html' %>"}) // ... and so is this
+        .when('/regsuccess',{templateUrl: "<%= asset_path 'regsuccess.html' %>" })
+        .when('/signUp',{templateUrl: "<%= asset_path 'signUp_mobile.html' %>" })
+        .when('/signedUp',{templateUrl: "<%= asset_path 'signedUp_mobile.html' %>" })
+        .when('/settings',{templateUrl: "<%= asset_path 'settings_mobile.html' %>" })
+        .when('/forgotPassword',{templateUrl: "<%= asset_path 'forgotPassword_mobile.html' %>" })
+        .when('/feedback',{templateUrl: "<%= asset_path 'feedback.html' %>" })
+        .when('/feedback_step2',{templateUrl: "<%= asset_path 'feedback_step2.html' %>" })
+        .when('/changePassword',{templateUrl: "<%= asset_path 'changePassword_mobile.html' %>" })
+        .when('/redeemPoints',{templateUrl: "<%= asset_path 'restaurantList.html' %>" })
+        .when('/confirmRedeem',{templateUrl: "<%= asset_path 'redeemPoints.html' %>" })
+        .when('/feedbackSubmitSuccess',{templateUrl: "<%= asset_path 'feedback_submit.html' %>" })
+        .when('/showRestaurant',{templateUrl: "<%= asset_path 'showRestaurant.html' %>" })
+        .when('/transactionHistory',{templateUrl: "<%= asset_path 'transactionHistory.html' %>" })
+        .when('/locationMap',{templateUrl: "<%= asset_path 'locationMap.html' %>" })
+        .when('/api/users/password/edit', {templateUrl: "<%= asset_path 'reset_password_mobile.html' %>"})
         .otherwise({redirectTo: '/index'});
 });
 

@@ -18,10 +18,3 @@
 //= require angular-google-maps
 //= require app_mobile
 //= require angular/controllers/controllers_mobile
-
-
-
-
-   // As the name suggests, on click of a fake
-  // input field, trigger the real file field
-  // for upload of a file.
