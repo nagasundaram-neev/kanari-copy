@@ -128,7 +128,16 @@ var Base64 = {
 var baseUrl = "localhost:8080";
 var auth_token = "";
 var loginMsgFlag = 0;
-
+var resultsDate = [];
+var tickInt;
+var yAxisVal = "";
+var stackingValue = "";
+var custLegend1 ="";
+var custLegend2 ="";
+var custLegend3 ="";
+var results1 = [];
+var results2 = [];
+var results3 = [];
 module.controller('commonCtrl', function($scope, $http, $location) {
 	$(".content").css("min-height", function() {
 		return ($('.content')[0].scrollHeight) - 38;
@@ -490,7 +499,6 @@ module.controller('createInvitation', function($rootScope, $scope, $http, $locat
 		$scope.erromsg = false;
 		$scope.errortext = ""
 		$scope.create_invitation = function() {
-			console.log("In Create Invitation" + auth_token);
 			var userEmail = $scope.userEmail;
 			var param = {
 				"user" : {
@@ -558,7 +566,6 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 			var month = dt.getMonth() + 1;
 			recipt_date = dt.getFullYear() + "-" + month + "-" + dt.getDate();
 			if ( typeof startDt != 'undefined' && endDt != 'undefined') {
-				console.log("hi in end date");
 				$(".outletDropDown").change(function() {
 				});
 			}
@@ -597,7 +604,6 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 		$scope.isOutlet = true;
 		//Get Outlet List according to the customer
 		$scope.getOutletList = function(custId) {
-			console.log(custId);
 			var param = {
 				"customer_id" : custId,
 				"auth_token" : getCookie('authToken')
@@ -609,7 +615,6 @@ module.controller('paymentInvoiceCtrl', function($rootScope, $scope, $http, $loc
 			}).success(function(data, status) {
 				console.log("data in success " + data.lenght + " status " + status);
 				$scope.outletsList = data.outlets;
-				console.log(data.outlets.length);
 				if (data.outlets.length > 0) {
 					$scope.isOutlet = true;
 					$scope.formoutlet1 = data.outlets[0].id;
@@ -888,8 +893,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				});
 
 				managerId = $scope.myOption;
-				//$scope.manager = managerId;
-				console.log("Test" + getCookie('currentCuisineList'));
+				
 				var param = {
 					"outlet" : {
 						"manager_id" : managerId,
@@ -938,7 +942,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			results1 = [];
 			results2 = [];
 			results3 = [];
-			resultsDate = [];
+			
 			var time = [];
 			finaltime = [];
 			npsOverview = 0;
@@ -1000,7 +1004,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		});
 
 		function getUsageGraph() {
-			console.log("in");
 			$('#container').highcharts({
 				chart : {
 					type : graphType
@@ -1239,7 +1242,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 
 		$scope.selectOutlet1 = function() {
 			$scope.form_outlet2 = true;
-			console.log($scope.formoutlet3);
 			if ($scope.formoutlet1) {
 				if ($scope.formoutlet1 == $scope.formoutlet2 || $scope.formoutlet1 == $scope.formoutlet3) {
 					$scope.outletError1 = false;
@@ -1547,7 +1549,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					"auth_token" : getCookie('authToken')
 				}
 
-				console.log("outlet id " + $routeParams.outletId);
 
 				$http({
 					method : 'post',
@@ -1792,7 +1793,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					}
 				});
 			} else {
-				console.log("here");
 				$scope.manager_updated = "";
 				$scope.valide_phone = true;
 			}
@@ -1930,7 +1930,6 @@ module.controller('outletManagerCtrl', function($rootScope, $scope, $routeParams
 					}
 				});
 			} else {
-				console.log("here");
 				$scope.manager_updated = "";
 				$scope.valide_phone = true;
 			}
@@ -2019,7 +2018,6 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 		$scope.acceptInvitation2 = function(acceptInv2) {
 			if ($scope.acceptInv2.$valid && $(".phoneno_1").val()) {
 				$scope.valide_phone = false;
-				console.log("city" + $scope.registered_address_city + "country " + $scope.registered_address_country);
 				var param = {
 					"customer" : {
 						"name" : $scope.name,
@@ -2047,22 +2045,7 @@ module.controller('acceptInvitation2Ctrl', function($rootScope, $scope, $routePa
 					if (acceptInvitationStep2 == true) {
 						$location.url("/outlets");
 					} else {
-						// $scope.name = undefined;
-						// $("#buisNm").val(" ");
-						// $(".phoneno_1").val("");
-						// $scope.registered_address_line_1 = "";
-						// $scope.registered_address_line_2 = "";
-						// $scope.mailing_address_line_1 = "";
-						// $scope.mailing_address_line_2 = "";
-						// $scope.email1 = "";
 						$('#acceptInvStep2')[0].reset();
-						// console.log("hi " + $('.ng-invalid'));
-						// $scope.button = false;
-						// $scope.success = true;
-						// $scope.delay = $timeout(function() {
-						// $location.url("/login");
-						// }, 3000);
-						//loginMsgFlag = 1;
 						setCookie('loginMsgFlag', '1', 0.29);
 						$location.url("/login");
 					}
@@ -2177,7 +2160,6 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 					},
 					"auth_token" : getCookie('authToken')
 				}
-				console.log($scope.phoneno_1);
 				$http({
 					method : 'put',
 					url : '/api/users/',
@@ -2199,7 +2181,6 @@ module.controller('viewaccountCtrl', function($rootScope, $scope, $http, $locati
 				});
 
 			} else {
-				console.log("here");
 				$scope.success = false;
 				$scope.valide_phone = true;
 			}
@@ -2576,32 +2557,7 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 		$rootScope.header = "Payment History | Kanari";
 		$scope.paymentHistoryList = [];
 
-		// $(function() {
-		// $('#payDate1').datepicker().on('changeDate', function(ev) {
-		// var dt = new Date(ev.date.valueOf());
-		// var month = dt.getMonth() + 1;
-		// startDt = dt.getFullYear() + "-" + month + "-" + dt.getDate();
-		// if (startDt != 'undefined' && typeof endDt != 'undefined') {
-		// console.log("hi in start date");
-		// $scope.listPaymentHistory();
-		// $(".outletDropDown").change(function() {
-		// $scope.listPaymentHistory();
-		// });
-		// }
-		// });
-		// $('#payDate2').datepicker().on('changeDate', function(ev) {
-		// var dt = new Date(ev.date.valueOf());
-		// var month = dt.getMonth() + 1;
-		// endDt = dt.getFullYear() + "-" + month + "-" + dt.getDate();
-		// if ( typeof startDt != 'undefined' && endDt != 'undefined') {
-		// console.log("hi in end date");
-		// $scope.listPaymentHistory();
-		// $(".outletDropDown").change(function() {
-		// $scope.listPaymentHistory();
-		// });
-		// }
-		// });
-		// });
+		
 
 		$('#reportrange').daterangepicker({
 			ranges : {
@@ -2680,9 +2636,7 @@ module.controller('paymentHistoryCtrl', function($scope, $rootScope, $routeParam
 				params : param,
 			}).success(function(data, status) {
 				console.log("Data in success " + data + " status " + status);
-				console.log(payInNo);
 				$scope.paymentHistoryList[payInNo].outlet_id = data.outlet.name;
-				console.log($scope.paymentHistoryList);
 			}).error(function(data, status) {
 				console.log("data in error " + data + " status " + status);
 				if (status == 401) {
@@ -2778,7 +2732,6 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 
 		var outletId = $scope.outletOption;
 		$scope.listFeedbacksDate = function() {
-			console.log("outetId " + $scope.outletOption);
 			var param = {
 				"auth_token" : getCookie('authToken'),
 				"password" : "X",
@@ -2852,6 +2805,7 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 });
 
 module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location, limitToFilter) {
+	console.log("in trends");
 	if (getCookie('authToken')) {
 		$('.welcome').show();
 		$('.hideNav').hide();
@@ -2874,7 +2828,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		var xAxisVal = "";
 		var yAxisVal = "";
 		var graphType = "";
-		var tickInt;
+		
 
 		if ($routeParams.outletId) {
 			//alert("in");
@@ -3016,7 +2970,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		$scope.listOfTrendsDate = function(idValue) {
-			console.log("inFun" + $scope.outletTrend);
 			if (!idValue) {
 				idValue = "food";
 				metricsId = "custExp";
@@ -3074,7 +3027,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					dateV = Object.keys($scope.trendsList)[i];
 					/** Customer Experience Start**/
 					startDateV = moment(dateV).format('MMM DD');
-					//console.log(startDateV);
 					if (idValue == "food") {
 						$scope.selectedOption = "";
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].food_quality.like;
@@ -3419,6 +3371,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				} else if (metricsId == "customers") {
 					customerGraph();
 				}
+				
+				
 
 			}).error(function(data, status) {
 				console.log("data " + data + " status " + status + " authToken" + getCookie('authToken'));
@@ -3511,7 +3465,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 
 
 		Highcharts.drawTable = function() {
-			console.log("in");
 			var myArray1 = ["Over Period", "Change VS Preceding Period"];
 			var myArray2 = [[10, 10, 12], [11, 11, 12]];
 			var count1 = myArray1.length;
@@ -3539,7 +3492,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 				}).add();
 
 				$.each(myArray2[count1], function(count2, myArray2) {
-					console.log(count2);
 					// Apply the cell text
 					renderer.text(myArray2, cellLeft + colWidth - cellPadding, tableTop + (count2 + 2) * rowHeight - cellPadding).attr({
 						align : 'right'
@@ -3579,7 +3531,7 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 			$('#container').highcharts({
 				chart : {
 					type : 'area',
-					//renderTo : 'container',
+					// renderTo : 'container',
 					// events : {
 						// load : Highcharts.drawTable
 					// },
@@ -3663,7 +3615,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		function getUsageGraph() {
-			console.log("getUsageGraph");
 			$('#container').highcharts({
 				chart : {
 					type : 'line'
@@ -3726,7 +3677,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 		}
 
 		function getUsageGraphOverview() {
-			console.log("getUsageGraphOverview");
 			$('#container').highcharts({
 				chart : {
 					type : 'line'
@@ -4034,15 +3984,12 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		$scope.listFeedbacks = function() {
 			dt = new Date();
 			var time = dt.getHours();
-			//console.log("time " + time);
 
 			if (time >= 0 && time < 5) {
-				console.log("hi i an in");
 				dt.setDate(dt.getDate() - 1);
 			}
 			var startdt = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), 5, 0, 0)
 			var timeZone = String(String(dt).split("(")[1]).split(")")[0];
-			//console.log("start date " + startdt);
 			if (!$scope.$$phase) {
 				//$digest or $apply
 			}
@@ -4080,7 +4027,6 @@ module.controller('dashboardSnapshotCtrl', function($scope, $rootScope, $routePa
 		$scope.listFeedbacks();
 
 		$scope.selectOutletSnap = function() {
-			//console.log("hi "+$scope.outletOption);
 			setCookie('outletDropDwn', $scope.outletOption, 0.29);
 			$scope.listFeedbacks();
 			$scope.feedbackMetrics();
@@ -4265,10 +4211,7 @@ module.controller('adminConsoleCustomerCtrl', function($scope, $rootScope, $rout
 		};
 
 		$scope.updateCustomerOutlets = function(id) {
-			console.log("id " + id);
-			cus = $scope.customerDetails[id]
-			console.log(cus.authorized_outlets)
-			console.log($scope.customerDetails[id])
+			cus = $scope.customerDetails[id];
 			var params = {
 				"customer" : {
 					"authorized_outlets" : cus.authorized_outlets,//outletNo,
@@ -4337,7 +4280,6 @@ function validateNumber() {
 	var filter = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
 	//if it's valid number
 	if (filter.test(a)) {
-		console.log("valid phone number");
 		return true;
 	}
 	//if it's NOT valid

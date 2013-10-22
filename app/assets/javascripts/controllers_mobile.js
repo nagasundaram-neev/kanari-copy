@@ -783,7 +783,11 @@ module.controller('signUpController', function($scope, $http, $location) {
 		if (!$scope.firstName || !$scope.lastName) {
 			$scope.error = "First Name and Last Name is required. Please enter it to continue";
 			$scope.errorMsg = true;
-		} else {
+		}else if (!$scope.acceptTerms){
+			$scope.error = "Please accept Kanari's User Terms";
+			$scope.errorMsg = true;
+		}
+		 else {
 			var param = {
 				"user" : {
 					"first_name" : $scope.firstName,

@@ -41,7 +41,13 @@
 				<div class="ui-input-text ui-body-a ui-block-a">
 					<input data-theme="a" data-inline="true" type="password" name="txtPassword" ng-model="confPassword" class="passwordTxt" placeholder="Confirm Password"/>
 				</div>
-
+				<div class="clr"></div>
+				<div class="rememberMe acceptTerms">
+					<fieldset data-role="controlgroup" class="chkbox">
+						<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" ng-model="acceptTerms" data-icon="check" />
+						<label for="checkbox-1">I have read and accepted Kanari's User Terms.</label>
+					</fieldset>
+				</div>
 				<input type="button" class="signBtn" ng-click="signUp()" data-inline="true" value="SIGN UP" />
 				<p class="errorMsg" ng-show="errorMsg">
 					{{error}}
