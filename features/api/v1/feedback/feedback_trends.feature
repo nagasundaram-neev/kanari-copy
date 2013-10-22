@@ -131,7 +131,7 @@ Feature: Dashboard Trends
            "points_issued": {
              "average_per_day": {
                "change_in_percentage": null,
-               "over_period": 2200.0
+               "over_period": 1100.0
              },
              "total": {
                "change_in_percentage": null,
@@ -240,13 +240,13 @@ Feature: Dashboard Trends
                "change_in_percentage": null
              },
              "average_per_day": {
-               "over_period": 1700.0,
+               "over_period": 850.0,
                "change_in_percentage": null
              }
            },
            "feedback_submissions": {
              "average_per_day": {
-               "over_period": 10.0,
+               "over_period": 5.0,
                "change_in_percentage": null
              },
              "count": {
@@ -256,7 +256,7 @@ Feature: Dashboard Trends
            },
            "redemptions_processed": {
              "average_per_day": {
-               "over_period": 8.0,
+               "over_period": 4.0,
                "change_in_percentage": null
              },
              "count": {
@@ -297,7 +297,7 @@ Feature: Dashboard Trends
                "over_period": 0
              },
              "returning_users": {
-               "average_per_day": 6.0,
+               "average_per_day": 3.0,
                "change_in_percentage": null,
                "over_period": 6
              }
@@ -539,7 +539,7 @@ Feature: Dashboard Trends
            "points_issued": {
              "average_per_day": {
                "change_in_percentage": null,
-               "over_period": 2300.0
+               "over_period": 1150.0
              },
              "total": {
                "change_in_percentage": null,
@@ -645,7 +645,7 @@ Feature: Dashboard Trends
            "feedback_submissions": {
              "average_per_day": {
                "change_in_percentage": null,
-               "over_period": 11.0
+               "over_period": 5.5
              },
              "count": {
                "change_in_percentage": null,
@@ -655,7 +655,7 @@ Feature: Dashboard Trends
            "discounts_claimed": {
              "average_per_day": {
                "change_in_percentage": null,
-               "over_period": 1700.0
+               "over_period": 850.0
              },
              "total": {
                "change_in_percentage": null,
@@ -681,13 +681,13 @@ Feature: Dashboard Trends
              },
              "score": {
                "change_in_points": null,
-               "over_period": 9.090909090909092
+               "over_period": 0.0
              }
            },
            "redemptions_processed": {
              "average_per_day": {
                "change_in_percentage": null,
-               "over_period": 8.0
+               "over_period": 4.0
              },
              "count": {
                "change_in_percentage": null,
@@ -705,7 +705,7 @@ Feature: Dashboard Trends
                "over_period": 0
              },
              "returning_users": {
-               "average_per_day": 6.0,
+               "average_per_day": 3.0,
                "change_in_percentage": null,
                "over_period": 6
              }

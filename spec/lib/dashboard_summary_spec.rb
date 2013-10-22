@@ -45,7 +45,7 @@ describe DashboardSummary do
         :food_quality =>{
           :like=>{
             :over_period=>100.0,
-            :change_in_points=>50.0
+            :change_in_points=>40.0
           },
           :dislike=>{
             :over_period=>0.0,
@@ -53,12 +53,12 @@ describe DashboardSummary do
           },
           :neutral=>{
             :over_period=>0.0,
-            :change_in_points=>-50.0}
+            :change_in_points=>-40.0}
         },
         :speed_of_service =>{
           :like=>{
             :over_period=> 50.0,
-            :change_in_points=> -50.0
+            :change_in_points=> -30.0
           },
           :dislike=>{
             :over_period=> 50.0,
@@ -66,7 +66,7 @@ describe DashboardSummary do
           },
           :neutral=>{
             :over_period=> 0.0,
-            :change_in_points=> 0.0
+            :change_in_points=> -20.0
           }
         },
         :friendliness_of_service =>{
@@ -133,24 +133,24 @@ describe DashboardSummary do
     it "should return the nps summary as a hash" do
       @dashboard_summary.get_net_promoter_score_summary.should == {
           score: {
-          over_period: -25.0,
-          change_in_points: 0.0
+          over_period: 0.0,
+          change_in_points: -20.0
         },
         feedbacks_count: {
           over_period: 4,
-          change_in_percentage: 0.0
+          change_in_percentage: -20.0
         },
         promoters: {
           over_period: 25.0,
-          change_in_points: 0.0
+          change_in_points: -15.0
         },
         passives: {
           over_period: 50.0,
-          change_in_points: 0.0
+          change_in_points: 10.0
         },
         detractors: {
           over_period: 25.0,
-          change_in_points: 0.0
+          change_in_points: 5.0
         }
 
       }
@@ -160,8 +160,8 @@ describe DashboardSummary do
   describe "#get_feedback_submission_summary" do
     it "should return feedback submission related summary as a hash" do
       @dashboard_summary.get_feedback_submission_summary.should == {
-        :average_per_day => {:over_period=>1.3333333333333333, :change_in_percentage=>0.0},
-        :count => {:change_in_percentage=>0.0, :over_period=>4}
+        :average_per_day => {:over_period=>1.0, :change_in_percentage=>-20.0},
+        :count => {:change_in_percentage=>-20.0, :over_period=>4}
       }
     end
   end
@@ -169,7 +169,7 @@ describe DashboardSummary do
   describe "#get_redemptions_count_summary" do
     it "should return redemptions count related summary as a hash" do
       @dashboard_summary.get_redemptions_count_summary.should == {
-        :average_per_day => {:over_period=>1.0, :change_in_percentage=>-50.0},
+        :average_per_day => {:over_period=>0.75, :change_in_percentage=>-50.0},
         :count => {:change_in_percentage=>-50.0, :over_period=>3}
       }
     end
@@ -196,7 +196,7 @@ describe DashboardSummary do
   describe "#get_users_summary" do
     it "should return user related summary as a hash" do
       @dashboard_summary.get_users_summary.should == {
-       :new_users => {:over_period=>2, :average_per_day=>0.6666666666666666, :change_in_percentage=>100.0},
+       :new_users => {:over_period=>2, :average_per_day=>0.5, :change_in_percentage=>100.0},
        :returning_users => {:over_period=>0, :average_per_day=>0.0, :change_in_percentage=>-100.0}
       }
     end
@@ -206,7 +206,7 @@ describe DashboardSummary do
     it "should return avergage bill size summary as a hash" do
       @dashboard_summary.get_average_bill_size_summary.should == {
         over_period: 750.0,
-        change_in_percentage: 100.0
+        change_in_percentage: 150.0,
       }
     end
   end
@@ -214,7 +214,7 @@ describe DashboardSummary do
   describe "#get_discounts_claimed_summary" do
     it "should return discounts claimed summary as a hash" do
       @dashboard_summary.get_discounts_claimed_summary.should == {
-        :average_per_day => {:over_period=>3.3333333333333335, :change_in_percentage=>100.0},
+        :average_per_day => {:over_period=>2.5, :change_in_percentage=>100.0},
         :total => {:over_period=>10, :change_in_percentage=>100.0}
       }
     end
@@ -223,7 +223,7 @@ describe DashboardSummary do
   describe "#get_points_issued_summary" do
     it "should return points issued summary as a hash" do
       @dashboard_summary.get_points_issued_summary.should == {
-        :average_per_day => {:over_period=>3.3333333333333335, :change_in_percentage=>100.0},
+        :average_per_day => {:over_period=>2.5, :change_in_percentage=>100.0},
         :total => {:over_period=>10, :change_in_percentage=>100.0}
       }
     end
