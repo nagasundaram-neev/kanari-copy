@@ -1,0 +1,62 @@
+<div data-role="page" class="main_content span12" data-theme="b" id="adminConsoleCustomer" ng-controller="adminConsoleCustomerCtrl">
+	<style>
+		.input-help {
+			left: 295px;
+		}
+	</style>
+	<div class="header_title">
+		<span class="manager_outlet">Admin Console</span>
+		<span class="arrow-right blank_span">&nbsp;</span>
+		<span style="padding: 10px 20px;"><span class="outletM"><a href="#/adminConsole_customer">Customer</a></span></span>
+		<span class="blank_span"><img alt="Div line yellow" src="/assets/div_line_yellow-d8148563a00860ed13b0711eaec1ae2e.jpg" /></span>
+		<span style="padding: 10px 20px;"><a href="#/adminConsole_outlet">Outlet</a></span>
+		<span class="blank_span"><img alt="Div line yellow" src="/assets/div_line_yellow-d8148563a00860ed13b0711eaec1ae2e.jpg" /></span>
+	</div>
+	<p class="successMsg" ng-show="custUpdate">{{customerName}} has been successfully updated</p>
+	<div class="viewAccPage outletTble">
+		<div class="adminConsoleHdr">
+			<div class="colHdr1 colCustomer1">
+				Customer Name
+			</div>
+			<div class="colHdr colCustomer">
+				Customer No.
+			</div>
+			<div class="colHdr2 colAuthoOutlet">
+				No. of Authorised Outlets
+			</div>
+			<div class="colHdr">
+				Date Created
+			</div>
+			<div class="colSave">
+				&nbsp;
+			</div>
+			<div class="clr"></div>
+		</div>
+		<div ng-repeat="customers in customerDetails"  class="adminConsoleColumns">
+			<div class="colHdr1 colCustomer1">
+				{{customers.name}}
+			</div>
+			<div class="colHdr colCustomer">
+				{{customers.id}}
+			</div>
+			<div class="colHdr2 colAuthoOutlet">
+				<div class="inputBox">
+					<input type="text" ng-model="customers.authorized_outlets" value="0"/>
+					<span class="arrows">
+					<img class="upArrow" ng-click="increase_decreaseVal($index,1)" src="/assets/up_arrow.png"/></br>
+					<img class="downArrow" ng-click="increase_decreaseVal($index,0)" src="/assets/down_arrow.png"/> 
+					</span>
+				</div>
+			</div>
+			<div class="colHdr">
+				{{customers.created_at | date:'dd/MM/yyyy'}}
+			</div>
+			<div class="colSave">
+				<!-- <span ng-click="updateCustomerOutlets(1,1)">Save</span> -->
+				<span ng-click="updateCustomerOutlets($index)">Save</span> 
+			</div>
+			
+			<div class="clr"></div>
+		</div>
+	</div>
+</div>

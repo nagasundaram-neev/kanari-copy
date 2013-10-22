@@ -1,0 +1,59 @@
+<div data-role="page" data-theme="b" id="redeemPoints" ng-controller="redeemPointsController">
+	<div data-role="content">
+		<div class="username">
+			<img src="/assets/icon_home.svg" class="home" ng-click="home()"/>
+			<div class="signUp">
+				REDEEM POINTS
+			</div>
+			<div class="clr"></div>
+		</div>
+		<div class="outerDiv" align="center">
+			<div class="innrDiv">
+				<div>
+					You can redeem up to a maximum of
+				</div>
+				<div>
+					<span class="aed">AED</span><span class="number">{{points}}</span>
+				</div>
+				<!-- <span class="points">POINTS</span> -->
+				<div class="clr"></div>
+			</div>
+			<div class="line"></div>
+		</div>
+		<div class="instructionDiv" align="center">
+			<div class="instruction">
+				How much would you like to redeem?
+			</div>
+			<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
+				<input data-theme="a" data-inline="true" type="text" onfocus="this.type='number';" maxlength="5" name="txtPassword" ng-model="amount" class="passwordTxt" placeholder="Amount to redeem in AED"/>
+			</div>
+			<div ng-show="successMsg" class="popup redeemSuccMsg">
+				<img src="/assets/b_closes.png" ng-click="closeRedeemSuccMsg()" />
+				<!-- Your redemption request is being processed. Don't forget to inform your waiter that you are redeeming your Kanari points. -->
+				<span>Your redemption request is being processed. Don't forget to inform your waiter that you are redeeming your Kanari points. As soon as your request is confirmed the points will be deducted from your account.</span>
+			</div>
+			<p class="errorMsg" ng-show="erromsg" style="display: block">
+				{{error}}
+			</p>
+		</div>
+		<div class="clr"></div>
+	</div>
+	<div data-role="footer" class="footerDiv">
+		<div class="prev" ng-click="previous()" style="padding: 0.95em 0;">
+			<!-- <img style="margin-top: 1.2%;" src="/assets/y_arrow_left.png"  /> -->
+				<img style="margin-top: 1.4%;" src="/assets/icon_arrow_left_yellow_feedback.svg"  />
+			<div class="prevTxt">
+				BACK
+			</div>
+		</div>
+		<div class="nxt" ng-click="confirmRedeem()" style="padding: 0.95em 0;">
+			<div class="nxtTxt" >
+				REDEEM POINTS
+			</div>
+			<div class="clr"></div>
+		</div>
+	</div>
+	<div id="overlaySuccess">
+			&nbsp;
+		</div>
+</div>

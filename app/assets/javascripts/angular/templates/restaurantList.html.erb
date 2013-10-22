@@ -1,0 +1,53 @@
+<div data-role="page"  id="restaurantListfgfghg" ng-controller="restaurantListController">
+	<div data-role="content">
+		<div class="username">
+			<img src="/assets/icon_home.svg" class="home" ng-click="home()" />
+			<div class="signUp">
+				RESTAURANT LISTING
+			</div>
+			<div class="clr"></div>
+		</div>
+		<div class="searchDiv">
+			<div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
+				<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="search" class="passwordTxt" placeholder="Search Restaurant"/>
+				<div class="searchIcon"></div>
+				<div class="clr"></div>
+			</div>
+		</div>
+		<div class="restListOuterDiv">
+			<div class="restListTitleDivLeft">
+				RESTAURANT NAME
+			</div>
+			<div class="restListTitleDivRight">
+				REDEEM UP TO
+			</div>
+			<div class="clr"></div>
+		</div>
+			</div>
+		<div id="divexample1" >
+			<div ng-repeat="outlet in outlets | filter:search | orderBy:'name'" class="nameDiv">
+				<div class="parentDivName" ng-click="showRestaurant(outlet.id)">
+					<div class="restName" style="line-height: 20px;text-transform:uppercase; font-size: 150%;">
+						{{outlet.name | truncate }}
+					</div>
+					<div class="" style="text-transform:capitalize;">
+						{{outlet.address | truncate}}
+					</div>
+				</div>
+				<div class="pointsDiv" ng-click="redeemPoint(outlet.id)">
+					<div class="aedTxt">
+						<div>
+							AED
+						</div>
+					</div>
+					<div class="pointsTxt">
+						<div>
+							{{outlet.redeemable_points}}
+						</div>
+					</div>
+					<!-- <div class="clr"></div>
+					<div style=" position: absolute;bottom:0;border-bottom: 1px solid rgb(255, 255, 255);margin-right: -21px; display: block; margin-left: -14px;">&nbsp;</div> -->
+				</div>
+			</div>
+		</div>
+</div>

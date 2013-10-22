@@ -1,0 +1,222 @@
+<div data-role="page" data-theme="b" id="acceptInvitationStep2" ng-controller="acceptInvitation2Ctrl" class="main_content span12">
+	<style>
+		.input-help {
+			left: 483px;
+		}
+	</style>
+	<div class="loginDiv innerDiv" data-role="content" style=" width: 45%;">
+		<!-- <h1>Create Customer Profile</h1> -->
+		<h1>Step 2 of 2:</br>Create a customer profile</h1>
+		<span class="mandatoryFld">
+			<div class="startMsg">
+				*
+			</div> Indicates mandatory fields</span>
+		<div class="acceptInv outerDiv">
+			<form ng-app="form-example" name="acceptInv2" id="acceptInvStep2" class="row form-horizontal" ng-submit="acceptInvitation2(acceptInv2)" novalidate>
+				<div data-role="fieldcontain" class="innerLoginDiv" style=" width: 42%;">
+					<div class="parentDiv">
+						<div>
+							<div class="control-group">
+								<lable>
+									Business Name<span class="star">*</span>
+								</lable>
+								<div class="controls">
+									<input data-theme="a" data-inline="true" id="buisNm" type="text" name="name" ng-model="name" placeholder="Registered Business Name" required/>
+									<div class="input-help">
+										<h4>Please provide business name</h4>
+									</div>
+									<div class="clr"></div>
+								</div>
+							</div>
+							<div class="control-group">
+								<lable>
+									Phone Number<span class="star">*</span>
+								</lable>
+								<div class="controls">
+									<input data-theme="a" data-inline="true" type="text" class="phoneno_1 setTelephone" name="contactNo" placeholder="Phone Number" />
+									<!-- <input data-theme="a" data-inline="true" type="text" min="0" number-mask="" name="phone_number" ng-model="phone_number" maxlength="11" placeholder="Phone Number" required/> -->
+									<div class="clr"></div>
+								</div>
+							</div>
+							<div class="control-group">
+								<lable>
+									Address 1<span class="star">*</span>
+								</lable>
+								<div class="controls">
+									<input data-theme="a" data-inline="true" type="text" name="registered_address_line_1" ng-model="registered_address_line_1" value="" placeholder="Registered Address Line 1" required/>
+									<div class="input-help">
+										<h4>Please provide address1</h4>
+									</div>
+									<div class="clr"></div>
+								</div>
+							</div>
+							<div class="control-group">
+								<lable>
+									Address 2
+								</lable>
+								<div class="controls">
+									<input data-theme="a" data-inline="true" type="text" name="registered_address_line_2" ng-model="registered_address_line_2" value="" placeholder="Registered Address Line 2" />
+									<div class="input-help">
+										<h4>Please provide address2</h4>
+									</div>
+									<div class="clr"></div>
+								</div>
+							</div>
+							<div class="control-group">
+								<lable>
+									City<span class="star">*</span>
+								</lable>
+								<div class="controls">
+									<input data-theme="a" data-inline="true" type="text" name="registered_address_city" ng-model="registered_address_city" value="Dubai" readonly="readonly" placeholder="Dubai" />
+									<div class="clr"></div>
+								</div>
+							</div>
+							<div class="control-group">
+								<lable>
+									Country<span class="star">*</span>
+								</lable>
+								<div class="controls">
+									<input data-theme="a" data-inline="true" type="text" name="registered_address_country" ng-model="registered_address_country" value="UAE" placeholder="UAE" readonly="readonly" />
+									<div class="clr"></div>
+								</div>
+							</div>
+						</div>
+						<div class="rightParentDiv1">
+							<div class="rightDiv">
+								&nbsp;
+							</div>
+							<div class="rightDivMsg">
+								These are the details of the holding company or hospitality group that manages your restaurant(s). This is also the business that will be billed for Kanari.</br></br>
+								Users of the Kanari app will never see these details.
+							</div>
+							<div class="clr"></div>
+						</div>
+						<div class="clr"></div>
+					</div>
+					<div class="parentDiv">
+						<div class="control-group">
+							<lable>
+								Mailing Address 1<span class="star">*</span>
+							</lable>
+							<div class="controls">
+								<input data-theme="a" data-inline="true" type="text" name="mailing_address_line_1" ng-model="mailing_address_line_1" value="" placeholder="Mailing Address Line 1" required/>
+								<div class="input-help">
+									<h4>Please provide maling address1</h4>
+								</div>
+								<div class="clr"></div>
+							</div>
+						</div>
+						<div class="control-group">
+							<lable>
+								Mailing Address 2
+							</lable>
+							<div class="controls">
+								<input data-theme="a" data-inline="true" type="text" name="mailing_address_line_2" ng-model="mailing_address_line_2" value="" placeholder="Mailing Address Line 2" />
+								<div class="input-help">
+									<h4>Please provide maling address2</h4>
+								</div>
+								<div class="clr"></div>
+							</div>
+						</div>
+						<div class="control-group">
+							<lable>
+								Mailing Address City<span class="star">*</span>
+							</lable>
+							<div class="controls">
+								<input data-theme="a" data-inline="true" type="text" name="mailing_address_city" ng-model="mailing_address_city" value="Dubai" readonly="readonly" placeholder="Dubai" />
+								<div class="clr"></div>
+							</div>
+						</div>
+						<div class="control-group">
+							<lable>
+								Mailing Address Country<span class="star">*</span>
+							</lable>
+							<div class="controls">
+								<input data-theme="a" data-inline="true" type="text" name="mailing_address_country" ng-model="mailing_address_country" value="UAE" readonly="readonly" placeholder="UAE" />
+								<div class="clr"></div>
+							</div>
+						</div>
+						<div class="rightParentDiv2">
+							<div class="rightDiv">
+								&nbsp;
+							</div>
+							<div class="rightDivMsg">
+								Your tablet and in-store marketing materials will be sent to this address. </br> </br>
+								If this address is the same as the above address then please enter the same details.
+							</div>
+							<div class="clr"></div>
+						</div>
+						<div class="clr"></div>
+					</div>
+					<div class="parentDiv">
+						<div class="control-group">
+							<lable>
+								Email<span class="star">*</span>
+							</lable>
+							<div class="controls">
+								<input data-theme="a" data-inline="true" type="email" name="email" ng-model="email1" value="" placeholder="Business Email Address" required/>
+								<div class="input-help">
+									<h4>Invalid Email</h4>
+								</div>
+							</div>
+							<div class="clr"></div>
+						</div>
+						<div class="rightParentDiv3">
+							<div class="rightDiv">
+								&nbsp;
+							</div>
+							<div class="rightDivMsg">
+								The business's email address.
+							</div>
+							<div class="clr"></div>
+						</div>
+						<div class="clr"></div>
+					</div>
+					<div class="clr"></div>
+					<div style="margin: 10px 0 0 190px;" class="control-group">
+						<!-- <input type="button" class="loginBtn" ng-click="acceptInvitation2()" data-inline="true" value="Save" /> -->
+						<div class="controls">
+							<button type="submit" class="btn">
+								Save & Finish
+							</button>
+							<button class="btn" disabled>
+								Save & Finish
+							</button>
+						</div>
+						<p class="errorMsg" ng-show="error">
+							{{errorMsg}}
+						</p>
+						<p ng-hide="error"></p>
+						<p class="successMsg" ng-show="success">
+							Your account has been created successfully.
+							<br/>
+							Click here for <a href="#/login">login.</a>
+						</p>
+						<p ng-hide="success"></p>
+						<p ng-show="valide_phone" class="errorMsg">
+							Invalid Phone Number
+						</p
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	$(document).ready(function() {
+		$(".setTelephone").mask("(+999)-9?9-9999999");
+		$(".setTelephone").on("blur", function() {
+			var last = $(this).val().substr($(this).val().lastIndexOf("-") + 1);
+			// alert(last.length);
+			if (last.length == 6) {
+				var move = $(this).val().substr($(this).val().lastIndexOf("-") - 1, 1);
+
+				var lastfour = move + last;
+
+				var first = $(this).val().substr(0, 8);
+
+				$(this).val(first + '-' + lastfour);
+			}
+		});
+	}); 
+</script>

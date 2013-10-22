@@ -7,11 +7,11 @@ config(['$routeProvider','$locationProvider', function($routeProvider,$locationP
 $locationProvider.html5Mode(false);
 $locationProvider.hashPrefix("");
 $routeProvider.
-when('/signin', {templateUrl: "<%= asset_path 'tablet_signin.html' %>"}).
-when('/feedback', {templateUrl: "<%= asset_path 'homepage.html' %>"}).
-when('/insights', {templateUrl: "<%= asset_path 'insights.html' %>"}).
-when('/redemption', {templateUrl: "<%= asset_path 'redemptions.html' %>"}).
-when('/numeric_code', {templateUrl: "<%= asset_path 'numeric_code.html' %>"}).
+when('/signin', {templateUrl: "<%= asset_path 'assets/angular/templates/tablet_signin.html' %>"}).
+when('/feedback', {templateUrl: "<%= asset_path 'assets/angular/templates/homepage.html' %>"}).
+when('/insights', {templateUrl: "<%= asset_path 'assets/angular/templates/insights.html' %>"}).
+when('/redemption', {templateUrl: "<%= asset_path 'assets/angular/templates/redemptions.html' %>"}).
+when('/numeric_code', {templateUrl: "<%= asset_path 'assets/angular/templates/numeric_code.html' %>"}).
 otherwise({redirectTo: '/signin'});
 }]);
 

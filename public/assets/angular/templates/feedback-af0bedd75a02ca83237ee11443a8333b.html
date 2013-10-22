@@ -1,0 +1,108 @@
+<div data-role="page" data-theme="b" id="feedback" ng-controller="feedbackController">
+	<style>
+.nextArrow{
+background-image: url(/assets/sprite_mobile-6bfba079324854e85769319b79997717.png
+	);
+	background-position: -464px -608px;
+	cursor: pointer;
+	float: right;
+	height: 23px;
+	width: 21px;
+	}
+	</style>
+	<div data-role="content">
+		<div class="username">
+			<img src="/assets/icon_home.svg" class="home" ng-click="home()" />
+			<div class="signUp" >
+				LEAVE FEEDBACK
+			</div>
+			<div class="clr"></div>
+		</div>
+		<div class="outerDiv">
+			<div class="enter_code">
+				Enter your code to proceed
+			</div>
+			<div class="menDiv">
+				<div class="backColr">
+					{{digit1}}
+
+				</div>
+				<div class="backColr">
+					{{digit2}}
+				</div>
+				<div class="backColr">
+					{{digit3}}
+				</div>
+				<div class="backColr">
+					{{digit4}}
+				</div>
+				<div class="backColr" style="border-right:0">
+					{{digit5}}
+				</div>
+				<div class="clr"></div>
+			</div>
+		</div>
+		<p ng-show="error" class="errorMsg">
+			{{errorMsg}}
+		</p>
+		<div class="keypad">
+			<div class="secondRow">
+				<div class="backColr" id="1" ng-click="enterValues('1')">
+					1
+				</div>
+				<div class="backColr" id="2" ng-click="enterValues('2')">
+					2
+				</div>
+				<div class="backColr" id="3" ng-click="enterValues('3')">
+					3
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="secondRow">
+				<div class="backColr" id="4" ng-click="enterValues('4')">
+					4
+				</div>
+				<div class="backColr" id="5" ng-click="enterValues('5')">
+					5
+				</div>
+				<div class="backColr" id="6" ng-click="enterValues('6')">
+					6
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="secondRow">
+				<div class="backColr" id="7" ng-click="enterValues('7')">
+					7
+				</div>
+				<div class="backColr" id="8" ng-click="enterValues('8')">
+					8
+				</div>
+				<div class="backColr" id="9" ng-click="enterValues('9')">
+					9
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="secondRow">
+				<div class="clearBackColr" id="clr" ng-click="clear()">
+
+					C
+
+				</div>
+				<div class="backColr" style=" padding:  0;" ng-click="enterValues('0')">
+					0
+				</div>
+				<div class="nextBackColr" ng-click="next()">
+					<div style="margin: 35% 0 31% 22%;">
+						<div class="nxtTxt">
+							NEXT
+						</div>
+						<!-- <img alt="P arrow right" src="/assets/p_arrow_right-018b48c20d627b24393e98c8cbe2d269.png" /> -->
+						<img style="vertical-align: middle;margin-left: 3.2%;margin-top:7%" src="/assets/icon_arrow_right_purple_feedback.svg"  />
+						<div class="clr"></div>
+					</div>
+					<!-- <div class="nextArrow"></div> -->
+				</div>
+				<div class="clr"></div>
+			</div>
+		</div>
+	</div>

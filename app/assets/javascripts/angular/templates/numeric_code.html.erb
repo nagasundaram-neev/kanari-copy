@@ -1,0 +1,62 @@
+<div id="redemeDiv" class="numericCode" align="center" ng-controller="numericCodeController" >
+	<div ng-show="codeGenerate" class="numericCodeContainer">
+		<h1 align="center" class="numericTxt"> Please enter bill amount </h1>
+		<div class="loaderDiv clearfix">
+			<input id="Field10" type="number" id="billAmnt" class="ui-input-text billAmountTxtBox" maxlength="5" placeholder="Enter bill amount.." ng-model="billAmount">
+			<div ng-show="loader" class="loader"><img src="/assets/ajax_loader.gif">
+			</div>
+		</div>
+		<div ng-click="generateCode()" >
+			<button type="submit" id="generateCode" class="signInBtn btn" >
+				Generate Code
+			</button>
+		</div>
+		<p ng-show="erromsg" class="errorMsg">
+			{{error}}
+		</p>
+	</div>
+	<div ng-show="codeGenerated" class="numericCodeContainer">
+		<h1 align="center" class="numericTxt"> The Numeric Code is </h1>
+		<div class="codeGenerated">
+			{{code}}
+		</div>
+		<div class="doneOterDiv">
+			<div>
+				Please give this code to your Customer
+			</div>
+			<div ng-click="done()" >
+				<button type="button" class="signInBtn btn" >
+					Done
+				</button>
+			</div>
+			<div class="clr"></div>
+		</div>
+	</div>
+	<div class="dateTimeList" ng-show="listCodes.length" >
+		<div class="dateTimeListhead clearfix">
+			<div class="col1 colBorderTop">
+				Date & Time
+			</div>
+			<div class="col1 colBorderTop" style="text-align: right;">
+				Bill Size
+			</div>
+			<div class="col2 colBorderTop colBorderRight">
+				Code
+			</div>
+		</div>
+		<div id="scrollbar2" style="overflow-y: scroll;">
+			<div ng-repeat="feedbacks in listCodes" class="dateTimeListRow clearfix">
+				<div class="col1">
+					{{feedbacks.updated_at | date:'dd/MM/yyyy @ h:mma'}}
+					<!-- {{feedbacks.updated_at | truncate}} -->
+				</div>
+				<div class="col1" style="text-align: right;">
+					{{feedbacks.bill_amount |number:2}}
+				</div>
+				<div class="col2 colBorderRight">
+					{{feedbacks.code}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

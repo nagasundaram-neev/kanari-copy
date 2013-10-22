@@ -1,0 +1,98 @@
+<div id="redemeDiv" align="center" ng-controller="redemeController" >
+	<div id="refresh" ng-click="showRedemptions()">
+		<span>Processed Redemptions</span>
+	</div>
+	<h3 class="redemptionMsg" ng-show="redemptionMsg">You don't have any active redemptions at the moment</h3>
+	<div class="clr"></div>
+	<div class="redemptionsList" ng-show="redemptionList.length">
+		<div class="clr"></div>
+		<div class="redemptionsListRow redemptHdr clearfix">
+			<div class="col">
+				<span>User Name</span>
+			</div>
+			<div class="col5">
+				Requested At
+			</div>
+			<div class="col6">
+				Amount
+			</div>
+			<div class="col3">
+				Confirm
+			</div>
+		</div>
+		<div id="scrollbar3" style="overflow-y: scroll;">
+		<div ng-repeat="redemptions in redemptionList" class="redemptionsListRow clearfix">
+			<div class="col1">
+				{{redemptions.user.first_name}} {{redemptions.user.last_name}}
+			</div>
+			<div class="textAlign col2">
+				{{redemptions.created_at | date:'h:mma'}}
+			</div>
+			<div class="textAlign col7">
+				Dhs {{redemptions.points}}
+			</div>
+			<div class="col4">
+				<span  ng-click="confirm(redemptions.id)">Confirm</span>
+			</div>
+		</div>
+		</div>
+	</div>
+	<span class="redeemptions"> <img class="closeBtn" src="/assets/b_closes.png" ng-click="close()" /> <h3 class="redemptionMsg" ng-show="!processedRedemptionList.length">You don't have any process redemptions at the moment</h3> <div class="clr"></div>
+		<div  ng-show="processedRedemptionList.length" >
+			<div class="redemptionsListRow redemptHdr clearfix">
+				<div class="col5">
+					Requested At
+				</div>
+				<div class="col">
+					<span>User Name</span>
+				</div>
+				<div class="col6">
+					Amount
+				</div>
+				<div class="col6">
+					Status
+				</div>
+				<div class="col5">
+					Confirmed At
+				</div>
+			</div>
+			<div id="scrollbar1" style="overflow-y: scroll;">
+			<div ng-repeat="redemptions in processedRedemptionList" class="redemptionsListRow redemptRow clearfix">
+				<div class="col1">
+					{{redemptions.created_at | date:'dd/MM/yyyy @h:mma'}}
+				</div>
+				<div class="col2">
+					{{redemptions.user.first_name}} {{redemptions.user.last_name}}
+				</div>
+				<div class="col7">
+					Dhs {{redemptions.points}}
+				</div>
+				<div ng-switch on="redemptions.approved_by">
+					<div ng-switch-default class="col7">
+						Processed
+					</div>
+					<div ng-switch-when="null" class="col7">
+						Expired
+					</div>
+				</div>
+				<div ng-switch on="redemptions.approved_by">
+					<div ng-switch-default class="col1">
+						{{redemptions.updated_at | date:'dd/MM/yyyy @h:mma' }}
+					</div>
+					<div ng-switch-when="null" class="col1" >
+						-
+					</div>
+				</div>
+				<!-- <div class="col1">
+
+				</div> -->
+			</div>
+			</div>
+		</div> </span>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+	}); 
+</script>

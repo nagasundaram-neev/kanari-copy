@@ -1,0 +1,146 @@
+<div data-role="page" data-theme="b" id="feedback_step2" ng-controller="feedback_step2Controller">
+	<style>
+.nextArrow{
+background-image: url(/assets/sprite_mobile-6bfba079324854e85769319b79997717.png
+);
+background-position: -464px -608px;
+cursor: pointer;
+float: right;
+height: 23px;
+width: 21px;
+}
+.food {
+background-image: url(/assets/sprite_mobile-6bfba079324854e85769319b79997717.png
+);
+background-position: -489px -654px;
+cursor: pointer;
+height: 86px;
+width: 106px;
+}
+.friendliness{
+background-image: url(/assets/sprite_mobile-6bfba079324854e85769319b79997717.png
+	);
+	background-position: -489px -654px;
+	cursor: pointer;
+	height: 86px;
+	width: 106px;
+	}
+	</style>
+	<div data-role="content">
+		<div class="username">
+			<!-- <div class="home" ng-click="home()"></div> -->
+			<div class="signUp">
+				LEAVE FEEDBACK
+			</div>
+			<div class="clr"></div>
+		</div>
+		<div class="outerDiv">
+			<div ng-show="dislike" class="enter_code">
+				<div>Which of the following were you really disappointed with?</div>
+				<span>Select none, one, or more.</span>
+			</div>
+			<div ng-show="like" class="enter_code">
+				<div>Which of the following were you really impressed with?</div>
+				<span>Select none, one, or more.</span>
+			</div>
+			<div ng-show="recomendation" class="enter_code">
+				How likely are you to recommend <b>today's</b> experience to a friend?
+			</div>
+		</div>
+		<div class="keypad" ng-show="optionKeypad">
+			<div class="menDiv">
+				<div class="backColr" id="feed_0" ng-click="select_feedback_category('0')">
+					<!-- <img alt="Icon food3" src="/assets/icon_food3-a60073df3437b0f0b34d12cb8c60f342.svg" /> -->
+					<img class="feedbackIcons" src="/assets/icon_food3.svg" />
+					<span class="feedbackStep2Txt">FOOD</span>
+				</div>
+				<div class="backColr" id="feed_1" ng-click="select_feedback_category('1')">
+					<!-- <img alt="B friendlines 3" src="/images/b_friendlines_3.png" /> -->
+					<img class="feedbackIcons" src="/assets/icon_friendliness3.svg" />
+					<span class="feedbackStep2Txt">FRIENDLINESS</span>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="menDiv">
+				<div class="backColr" id="feed_2" ng-click="select_feedback_category('2')">
+					<!-- <img alt="B speed 3" src="/images/b_speed_3.png" /> -->
+					<img class="feedbackIcons" src="/assets/icon_speed3.svg" />
+					<span class="feedbackStep2Txt">SPEED</span>
+				</div>
+				<div class="backColr" id="feed_3" ng-click="select_feedback_category('3')">
+					<!-- <img alt="B ambiance 3" src="/images/b_ambiance_3.png" /> -->
+					<img class="feedbackIcons" src="/assets/icon_ambiance3.svg" />
+					<span class="feedbackStep2Txt">AMBIANCE</span>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="menDiv">
+				<div class="backColr" id="feed_4" ng-click="select_feedback_category('4')">
+					<!-- <img alt="B cleanliness 3" src="/images/b_cleanliness_3.png" /> -->
+					<img class="feedbackIcons" src="/assets/icon_cleanliness3.svg" />
+					<span class="feedbackStep2Txt">CLEANLINESS</span>
+				</div>
+				<div class="backColr" id="feed_5" ng-click="select_feedback_category('5')" style="">
+					<!-- <img alt="B value 3" src="/images/b_value_3.png" /> -->
+					<img class="feedbackIcons" src="/assets/icon_value3.svg" />
+					<span class="feedbackStep2Txt">VALUE FOR<br/>MONEY</span>
+				</div>
+				<div class="clr"></div>
+			</div>
+		</div>
+		<div class="recommendationDiv" ng-show="recomendationBar">
+			<div>
+				<div ng-repeat="count in counts" id="feedback_{{count}}" class="Ybar" ng-click="recommendation(count)">
+					{{count}}
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="yesNoDiv">
+				<div class="no">
+					NO
+				</div>
+				<div class="yes">
+					YES
+				</div>
+			</div>
+			<div class="clr"></div>
+			<div class="yellowBorder"></div>
+			<div class="adviceDiv" align="center">
+				<div class="msg">
+					What are the reasons for your answer to the previous question?
+				</div>
+				<textarea name="advice" ng-model="comment" placeholder="....."></textarea>
+				<!-- <div class="ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow ui-body-a">
+				<input data-theme="a" data-inline="true" type="text" ng-model="comment" placeholder="...."/>
+				</div> -->
+				<p class="errorMsg" ng-show="erromsg">
+					{{error}} <br />
+				</p>
+				<p class="errorMsg" ng-show="erromsg1">
+					{{error}} <br />
+					Have another code <a ng-click="goBack()">Click here</a>
+				</p>
+				<div class="clr"></div>
+			</div>
+		</div>
+		</div>
+		<div data-role="footer" class="footerDiv">
+			<div class="prev" ng-click="previous()" ng-show="prev">
+				<!-- <img alt="Y arrow left" src="/assets/y_arrow_left-c1722f936cd6530c786ce1698a2712d4.png" /> -->
+				<img style="margin-top: 1.4%;" src="/assets/icon_arrow_left_yellow_feedback.svg"  />
+				<div class="prevTxt" >
+					PREVIOUS
+				</div>
+			</div>
+			<div class="nxt" ng-click="next()">
+				<div class="nxtTxt" >
+					NEXT
+				</div>
+				<!-- <img alt="P arrow right" src="/assets/p_arrow_right-018b48c20d627b24393e98c8cbe2d269.png" /> -->
+				<img style="margin-top: 1.2%;" src="/assets/icon_arrow_right_purple_feedback.svg"  />
+				<div class="clr"></div>
+			</div>
+		</div>
+
+	</div>
+

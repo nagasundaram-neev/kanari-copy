@@ -1,0 +1,218 @@
+<div data-role="page" class="main_content span12" data-theme="b" id="viewaccount" ng-controller="viewaccountCtrl">
+	<style>
+		.input-help{left: 295px;}
+	</style>
+	<div class="header_title">
+		<span class="manager_outlet">Manage Account</span>
+		<span class="arrow-right blank_span">&nbsp;</span>
+		<span style="padding: 10px 20px;"><a href="#/outlet_manager">Outlet Managers</a> </span>
+		<span class="blank_span"><img alt="Div line yellow" src="/assets/div_line_yellow-d8148563a00860ed13b0711eaec1ae2e.jpg" /></span>
+		<span style="padding: 10px 20px;"><span class="outletM"><a href="#/view_account">Account Details</a></span></span>
+		<span class="blank_span"><img alt="Div line yellow" src="/assets/div_line_yellow-d8148563a00860ed13b0711eaec1ae2e.jpg" /></span>
+		<span style="padding: 10px 20px;"><a href="#/payment_history">Payment History</a> </span>
+		<span class="blank_span"><img alt="Div line yellow" src="/assets/div_line_yellow-d8148563a00860ed13b0711eaec1ae2e.jpg" /></span>
+	</div>
+	<div class="viewAccPage">
+	
+		<form name="viewAcc" ng-app="form-example" class="row form-horizontal" ng-submit="view_account(viewAcc)" novalidate>
+			<div class="section">
+				Main Contact Person
+				<span class="mandatoryFld" style=" float: right;"><div class="startMsg">*</div> Indicates mandatory fields</span>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						First Name<span class="star">*</span>
+					</lable>
+					<input data-theme="a" data-inline="true" placeholder="First Name" type="text" name="first_name" ng-model="first_name" class="passwordTxt" required />
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Last Name<span class="star">*</span>
+					</lable>
+					<input data-theme="a" data-inline="true" placeholder="Last Name" type="text" name="last_name" ng-model="last_name" class="passwordTxt" required />
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Email
+					</lable>
+					<label style="margin-bottom: 10px;">{{email}}</label>
+					<!-- <input data-theme="a" data-inline="true" type="email" name="email" ng-model="email" class="passwordTxt" required /> -->
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Password<span class="star">*</span>
+					</lable>
+					<input style="width: 130px;" data-theme="a" placeholder="Password" data-inline="true" type="password" name="password" ng-model="password" class="passwordTxt" password-validate required/>
+					<div class="input-help">
+						<h4>Password must meet the following requirements:</h4>
+						<ul>
+							<li ng-class="pwdHasLetter">
+								At least <strong>one letter</strong>
+							</li>
+							<li ng-class="pwdHasNumber">
+								At least <strong>one number</strong>
+							</li>
+							<li ng-class="pwdValidLength">
+								At least <strong>8 characters long</strong>
+							</li>
+						</ul>
+					</div>
+					<a href="" class="changePassword"  ng-click="gotoChangePassword()"> Change Password </a>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="phoneno_valid controls">
+					<lable>
+						Phone<span class="star">*</span>
+					</lable>
+					<input style="width: 130px;" data-theme="a" data-inline="true" placeholder="Phone Number" type="text" class="phoneno_1 setTelephone" name="phoneno_1" />					
+				</div>
+			</div>
+			<div class="section">
+				Business Details
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Business Name<span class="star">*</span>
+					</lable>
+					<input data-theme="a" data-inline="true" type="text" placeholder="Company Name" name="compnyNm" ng-model="compnyNm" class="passwordTxt" required/>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Contact Number<span class="star">*</span>
+					</lable>
+					
+					<input data-theme="a" style="width: 130px;" data-inline="true" type="text" class="phoneno_2 setTelephone" name="contactNo" placeholder="Contact Number" />
+					
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Address 1<span class="star">*</span>
+					</lable>
+					<input data-theme="a" data-inline="true" type="text" name="add1" ng-model="add1" placeholder="Address1" class="passwordTxt" required />
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Address 2
+					</lable>
+					<input data-theme="a" data-inline="true" type="text" name="add2" placeholder="Address2" ng-model="add2" class="passwordTxt"  />
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						City<span class="star">*</span>
+					</lable>
+					<input data-theme="a" data-inline="true" type="text" name="city" placeholder="Dubai" readonly="readonly" value="Dubai" ng-model="city" class="passwordTxt" />
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Country<span class="star">*</span>
+					</lable>
+					<input data-theme="a" data-inline="true" type="text" name="country" placeholder="UAE" value="UAE" readonly="readonly" ng-model="country" class="passwordTxt" />
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Mailing Address 1<span class="star">*</span>
+					</lable>
+					<input data-theme="a" data-inline="true" type="text" name="add1" ng-model="mailadd1" placeholder="Mailing Address1" class="passwordTxt" required />
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Mailing Address 2
+					</lable>
+					<input data-theme="a" data-inline="true" type="text" name="add2" placeholder="Mailing Address2" ng-model="mailadd2" class="passwordTxt"  />
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Mailing Address City<span class="star">*</span>
+					</lable>
+					<input data-theme="a" data-inline="true" type="text" name="city" placeholder="Dubai" readonly="readonly" value="Dubai" ng-model="mailcity" class="passwordTxt" />
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Mailing Address Country<span class="star">*</span>
+					</lable>
+					<input data-theme="a" data-inline="true" type="text" name="country" placeholder="UAE" value="UAE" readonly="readonly" ng-model="mailcountry" class="passwordTxt" />
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<lable>
+						Email<span class="star">*</span>
+					</lable>
+					<input data-theme="a" data-inline="true" type="email" name="emailAdd" placeholder="Email" ng-model="emailAdd" class="passwordTxt" required />
+				</div>
+			</div>
+			<div class="ui-input-data">
+				<div style="margin: 10px 0 0 187px;" class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn">
+							Save
+						</button>
+						<button class="btn" disabled>
+							Save
+						</button>
+						<button  ng-click="goback()" class="cancelBtn submitBtn btn btn-primary btn-large"  >
+						Cancel
+					</button>
+						<div class="clr"></div>
+					</div>
+					
+					<p ng-show="success" class="successMsg">
+						Account updated successfully.
+					</p>
+					<p ng-show="error" class="errorMsg">
+						{{errormsg}}
+					</p>
+					<p ng-show="valide_phone" class="errorMsg">Invalid Phone/Contact Number</p>
+				</div>
+			</div>
+
+		</form>
+
+	</div>
+
+</div>
+<script>
+$(document).ready(function() {
+		$(".setTelephone").mask("(+999)-9?9-9999999");
+		$(".setTelephone").on("blur", function() {
+			var last = $(this).val().substr($(this).val().lastIndexOf("-") + 1);
+			// alert(last.length);
+			if (last.length == 6) {
+				var move = $(this).val().substr($(this).val().lastIndexOf("-") - 1, 1);
+
+				var lastfour = move + last;
+
+				var first = $(this).val().substr(0, 8);
+
+				$(this).val(first + '-' + lastfour);
+			}
+		});
+	}); 
+</script>

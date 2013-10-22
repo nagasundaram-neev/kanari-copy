@@ -1,0 +1,288 @@
+<div data-role="page" class="main_content span12" data-theme="b" id="outletManager" ng-controller="createOutletCtrl">
+	<style>
+		.input-help {
+			left: 225px;
+		}
+		.controls .successMsg {
+			margin-bottom: 0;
+		}
+		.viewAccPage lable {
+			width: 144px;
+		}
+		/*#divexample1 {
+		 height: 100px;
+		 overflow: auto;
+		 }*/
+		/*.nicescroll-rails{left: 726px !important;}*/
+	</style>
+	<div class="header_title">
+		<span class="manager_outlet">Manage Account</span>
+		<span class="arrow-right blank_span">&nbsp;</span>
+		<span style="padding: 10px 20px;"><span class="outletM"><a href="#/outlet_manager">Outlet Managers</a></span></span>
+		<span class="blank_span"><img src="assets/div_line_yellow.jpg" /></span>
+		<span style="padding: 10px 20px;"><a href="#/view_account">Account Details</a></span>
+		<span class="blank_span"><img src="assets/div_line_yellow.jpg" /></span>
+		<span style="padding: 10px 20px;"><a href="#/payment_history">Payment History</a></span>
+		<span class="blank_span"><img src="assets/div_line_yellow.jpg" /></span>
+	</div>
+	<div id="outletManager" class="viewAccPage" style="margin:20px 0 20px 40px">
+		<div class="manager_listing" id="divexample1" style="width: 600px;">
+			<div class="outlet_text" ng-show="!managerList.length">
+				<span ng-show="outletMgrListCount">Your outlets do not having any manager.</span>
+			</div>
+			<div class="manager_list_table" ng-show="managerList.length">
+				<div class="manager_list_header">
+					<div class="heading" style="width:90px">
+						First Name
+					</div>
+					<div class="heading" style="width:85px">
+						Last Name
+					</div>
+					<div class="heading">
+						Phone Number
+					</div>
+					<div class="heading" style="width:140px;">
+						Email Address
+					</div>
+					<div class="border_right_none heading" style="width:56px">
+						Delete
+					</div>
+				</div>
+				<div class="clr"></div>
+				<div ng-repeat="manager in managerList" class="manager_list_Data">
+					<div class="data" ng-minlength="8" style="width:90px">
+						<span class="data_name"> <a href="" ng-click="getManager(manager.id)">{{manager.first_name}} </span></a>
+					</div>
+					<div class="data" style="width:85px">
+						{{manager.last_name}}
+					</div>
+					<div class="data">
+						{{manager.phone_number}}
+					</div>
+					<div class="data" style="width:140px;">
+						{{manager.email}}
+					</div>
+					<div class="border_right_none data" style="width:56px">
+						<a href="" ng-click="DeleteManager(manager.id)">Delete</a>
+					</div>
+				</div>
+			</div>
+			<p class="successMsg">
+				{{manager_deleted}}
+			</p>
+			<br />
+			<input type="button" class="btn_cls" ng-click="add_new_manager()" data-inline="true" value="Add a new manager" />
+
+		</div>
+		<div class="edit_manager">
+			<h1>Update Manager</h1>
+			<span class="mandatoryFld">
+				<div class="startMsg">
+					*
+				</div> Indicates mandatory fields</span>
+			<form id="editManager" ng-app="form-example" class="row form-horizontal" name="editManager" ng-submit="updateManager(editManager)" novalidate>
+				<div class="control-group">
+					<div class="controls">
+						<lable>
+							First Name<span class="star">*</span>
+						</lable>
+						<input type="text" placeholder="First Name" ng-model="first_name" required>
+						<div class="input-help">
+							<h4>Please enter first name</h4>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<lable>
+							Last Name<span class="star">*</span>
+						</lable>
+						<input type="text"  placeholder="Last Name" ng-model="last_name" required>
+						<div class="input-help">
+							<h4>Please enter last name</h4>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<lable>
+							Email Address<span class="star">*</span>
+						</lable>
+						<input type="email" readonly="readonly" placeholder="Email Address" ng-model="email_address_manager" required>
+						<div  class="input-help">
+							<h4>Invalid Email</h4>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<lable>
+							Phone Number<span class="star">*</span>
+						</lable>
+						<input data-theme="a" data-inline="true" type="text" class="phoneno_2 setTelephone" name="contactNo" placeholder="Phone Number" />
+						<!-- <input type="text" placeholder="Phone Number" min="0" number-mask="" maxlength="11" ng-model="add_contact_number" required> -->
+					</div>
+				</div>
+				<div class="control-group" style="margin: 10px 0 0 145px;">
+					<div class="controls">
+						<button type="submit" class="btn">
+							Update
+						</button>
+						<button class="btn" disabled>
+							Update
+						</button>
+						<a  ng-click="close_updatemanager()" class="cancelBtn submitBtn btn btn-primary btn-large"  > Cancel </a>
+						<p ng-show="error" class="errorMsg">
+							{{errorMsg}}
+						</p>
+						<p ng-hide="error" ></p>
+						<p class="successMsg">
+							{{manager_updated}}
+						</p>
+						<p ng-hide="success" ></p>
+						<p ng-show="valide_phone" class="errorMsg">
+							Invalid Phone Number
+						</p>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div data-role="fieldcontain" class="add_manager rightPanel">
+			<h1>Add a new manager</h1>
+			<span class="mandatoryFld">
+				<div class="startMsg">
+					*
+				</div> Indicates mandatory fields</span>
+			<form id="formid" ng-app="form-example" class="row form-horizontal" name="createManager" ng-submit="create_manager(createManager)" novalidate>
+				<div class="control-group">
+					<div class="controls">
+						<lable>
+							First Name<span class="star">*</span>
+						</lable>
+						<input type="text"  placeholder="First Name" ng-model="first_name1" required>
+						<div class="input-help">
+							<h4>Please enter first name</h4>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<lable>
+							Last Name<span class="star">*</span>
+						</lable>
+						<input type="text" placeholder="Last Name" ng-model="last_name1" required>
+						<div class="input-help">
+							<h4>Please enter last name</h4>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<lable>
+							Email Address<span class="star">*</span>
+						</lable>
+						<input type="email" placeholder="Email Address" ng-model="email_address_manager1" required>
+						<div  class="input-help">
+							<h4>Invalid Email</h4>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<lable>
+							Password<span class="star">*</span>
+						</lable>
+						<input ng-model="password" class="immediate-help" password-validate required type="password" placeholder="Password">
+						<div class="input-help">
+							<h4>Password must meet the following requirements:</h4>
+							<ul>
+								<li ng-class="pwdHasLetter">
+									At least <strong>one letter</strong>
+								</li>
+								<li ng-class="pwdHasNumber">
+									At least <strong>one number</strong>
+								</li>
+								<li ng-class="pwdValidLength">
+									At least <strong>8 characters long</strong>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<lable>
+							Confirm Password<span class="star">*</span>
+						</lable>
+						<input ng-model="confirmpassword" class="immediate-help" password-validate required type="password"  placeholder="Password">
+						<div class="input-help">
+							<h4>Password must meet the following requirements:</h4>
+							<ul>
+								<li ng-class="pwdHasLetter">
+									At least <strong>one letter</strong>
+								</li>
+								<li ng-class="pwdHasNumber">
+									At least <strong>one number</strong>
+								</li>
+								<li ng-class="pwdValidLength">
+									At least <strong>8 characters long</strong>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<lable>
+							Phone Number<span class="star">*</span>
+						</lable>
+						<input data-theme="a" data-inline="true" type="text" class="phoneno_3 setTelephone" name="contactNo" placeholder="Phone Number" />
+						<!-- <input type="text" placeholder="Phone Number" min="0" number-mask="" maxlength="11" ng-model="add_contact_number" required> -->
+					</div>
+				</div>
+				<div class="control-group" style="margin: 10px 0 0 145px;">
+					<div class="controls">
+						<button type="submit" class="btn">
+							Add Manager
+						</button>
+						<button class="btn" disabled>
+							Add Manager
+						</button>
+						<a  ng-click="close_manager()" class="cancelBtn submitBtn btn btn-primary btn-large"  > Cancel </a>
+						<p ng-show="error" class="errorMsg">
+							{{errorMsg}}
+						</p>
+						<p ng-hide="error" ></p>
+						<p ng-show="success1" class="successMsg">
+							Manager has been added successfully.
+						</p>
+						<p ng-hide="success" ></p>
+						<p ng-show="valide_phone" class="errorMsg">
+							Invalid Phone Number
+						</p>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="clr"></div>
+	</div>
+</div>
+<script>
+	$(document).ready(function() {
+		$(".setTelephone").mask("(+999)-9?9-9999999");
+		$(".setTelephone").on("blur", function() {
+			var last = $(this).val().substr($(this).val().lastIndexOf("-") + 1);
+			// alert(last.length);
+			if (last.length == 6) {
+				var move = $(this).val().substr($(this).val().lastIndexOf("-") - 1, 1);
+
+				var lastfour = move + last;
+
+				var first = $(this).val().substr(0, 8);
+
+				$(this).val(first + '-' + lastfour);
+			}
+		});
+		// $("#divexample1").niceScroll();
+	}); 
+</script>

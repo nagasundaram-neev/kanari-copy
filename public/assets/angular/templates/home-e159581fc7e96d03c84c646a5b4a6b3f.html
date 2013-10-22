@@ -1,0 +1,66 @@
+<div data-role="page" class="main_content span12" data-theme="b" id="outlet" ng-controller="homeCtrl">
+	<div class="innerDiv" data-role="content">
+		<div class="span4 divLeft">
+			<h1 ng-show="!outlets.length">Welcome!</h1>
+			<h1 ng-show="outlets.length">Outlets </h1>
+			<span class="outlet_text" ng-show="!outlets.length">You currently do not have any outlets in your account. Please create a new restaurant outlet profile using the button below to get started with Kanari.</span>
+			<span class="outlet_text" ng-show="outlets.length">Below are the outlets you are managing through Kanari. You can update their details, view and download the latest reports and access  the advanced analytics to learn more about
+				what your customers are saying about your business.</span>
+			<!-- <a ng-show="outlets.length" href="#/list_payment_invoice" title="Payment Invoice Link" class="addRestaurant"><img alt="Icon new restaurant outlet" src="/assets/icon_new_restaurant_outlet-72049759e2b50233b499c176e6b3ad94.png" />List Payment Invoices</a> -->
+			<a ng-show="userAction" href="#/create_outlet" title="addRestaurant" class="addRestaurant"><img alt="Icon new restaurant outlet" src="/assets/icon_new_restaurant_outlet-72049759e2b50233b499c176e6b3ad94.png" />New Restaurant Outlet</a>
+			<div ng-hide="userAction">
+				&nbsp;
+			</div>
+			<div class="clr"></div>
+
+			<fb:activity
+			site="http://kanari.neevtech.com"
+			app_id="369424903187034"></fb:activity>
+
+			<div ng-show="outlets.length">
+				<span class="outlet_lenght"> Viewing {{outlets.length}} outlets</span>
+				<div class="outlets_list">
+					<div class="sr_outlet" ng-repeat="outlet in outlets">
+						<div class="outlet_name border_right">
+							<span class="outlet_id">{{$index+1}}</span>
+							<a href="#/create_outlet?outletId={{outlet.id}}" ng-hide="outlet.disabled">{{outlet.name}}</a>
+							<a href="javascript:void(0);" ng-show="outlet.disabled">{{outlet.name}}</a>
+							<span class="disable_outlet_cls" ng-show="outlet.disabled">(Disabled)</span>
+							<br/>
+							<span class="address">{{outlet.address}}</span>
+						</div>
+						<div class="manager_name border_right">
+							<b>Managed by</b>
+							<br/>
+							<span class="full_name">{{outlet.manager.first_name}} {{outlet.manager.last_name}}</span>
+						</div>
+						<div class="action">
+							<a href="#/snapshot?outletId={{outlet.id}}" target="_blank" class="outlet_action actions" ng-hide="outlet.disabled"> <img alt="Icon view dashboard" src="/assets/icon_view_dashboard-dc1af083f3c18038eca6666bbd9c5b16.png" />
+							<br/>
+							View Dashboard </a>
+							<a href="javascript:void(0);" class="outlet_action actions" ng-show="outlet.disabled"> <img alt="Icon view dashboard" src="/assets/icon_view_dashboard-dc1af083f3c18038eca6666bbd9c5b16.png" />
+							<br/>
+							View Dashboard </a>
+							<a href="#/create_outlet?outletId={{outlet.id}}" class="outlet_action actions" ng-hide="outlet.disabled"> <img alt="Icon modify profile" src="/assets/icon_modify_profile-e263be0b217ce75c1bf5e0a497b8862b.png" />
+							<br/>
+							Modify Profile </a>
+							<a href="javascript:void(0);" class="outlet_action actions" ng-show="outlet.disabled"> <img alt="Icon modify profile" src="/assets/icon_modify_profile-e263be0b217ce75c1bf5e0a497b8862b.png" />
+							<br/>
+							Modify Profile </a>
+							<a href="#/create_outlet?outletId={{outlet.id}}" class="outlet_action actions" ng-hide="outlet.disabled"> <img alt="Icon download report" src="/assets/icon_download_report-6eec7f95a6eda6cac66e76bc145dbc9a.png" />
+							<br/>
+							Download Report </a>
+							<a href="javascript:void(0);" class="outlet_action actions" ng-show="outlet.disabled"> <img alt="Icon download report" src="/assets/icon_download_report-6eec7f95a6eda6cac66e76bc145dbc9a.png" />
+							<br/>
+							Download Report </a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- <div class="divRight" ng-include src ="'/rightSidePanel.html'" ></div> -->
+		<div class="clr"></div>
+	</div>
+</div>

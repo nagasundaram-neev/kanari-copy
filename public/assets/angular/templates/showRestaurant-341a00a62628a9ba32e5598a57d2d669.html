@@ -1,0 +1,126 @@
+<div data-role="page" data-theme="b" id="showRestaurant" ng-controller="showRestaurantController">
+	<style>
+		
+	</style>
+	<div data-role="content">
+		<div class="username">
+			<img src="/assets/icon_home.svg" class="home" ng-click="home()" />
+			<div class="signUp">
+				RESTAURANT DETAILS
+			</div>
+			<div class="clr"></div>
+		</div>
+		<div align="center" class="titleDiv">
+			<div class="rest_name">
+				<b class="restTitle">{{restaurant_name | truncateName}}</b>
+				<span class="address">{{restaurant_address}}</span>
+			</div>
+			<div class="username rest_info">
+				<span class="img_outlet" style="padding: 1% 3% 1% 0"><!-- <img alt="Ic customer care" src="/images/ic_customer_care.png" /> --><img class="showRestIcons" src="/assets/icon_call_no.svg" /></span> {{contact_number}}
+			</div>
+			<div class="username rest_info">
+				<span class="img_outlet" style=" padding: 1% 3% 1% 0"><!-- <img alt="Ic at white" src="/images/ic_at_white.png" /> --><img class="showRestIcons" src="/assets/icon_email.svg" /></span> {{email_address}}
+			</div>
+			<div class="username rest_info" ng-click="locationMap()">
+				<span class="img_outlet" style=" padding: 1% 3% 1% 0"><!-- <img alt="Ic location white" src="/assets/ic_location_white-b55ebc9a981539cf50745a243b085acf.png" /> --><img class="showRestIcons" src="/assets/icon_location_map.svg" /></span> Location map
+			</div>
+			<div class="outlet_div rest_info">
+				<div class="outlet_title ">
+					<span class="img_outlet"><!-- <img alt="Ic outlet" src="/assets/ic_outlet-bfecd7f386d2ca3dd2b3c40b36ba53f5.png" /> --><img class="showRestIcons" src="/assets/icon_outlet_type.svg" /></span> <span class="title_outlet">Outlet Type</span>
+				</div>
+				<div class="outlet_info" style="padding: 3% 0;">
+					<span ng-repeat="outlet in outlets">{{outlet.name}}<span ng-show=" ! $last ">, &nbsp; </span></span>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="outlet_div rest_info">
+				<div class="outlet_title ">
+					<span class="img_outlet"><!-- <img alt="Ic cuisine" src="/images/ic_cuisine.png" /> --><img class="showRestIcons" src="/assets/icon_cusuine_type.svg" /></span> <span class="title_outlet"> Cuisine Type</span>
+				</div>
+				<div class="outlet_info" style="padding: 3% 0;">
+					<span ng-repeat="cuisine in cuisineTypes">{{cuisine.name}}<span ng-show=" ! $last ">, &nbsp; </span></span>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="outlet_div rest_info">
+				<div class="outlet_title">
+					<span class="img_outlet"><!-- <img alt="Ic opening hrs" src="/assets/ic_opening_hrs-068b0b3fb821c861a72b2cad2dd72e1d.png" /> --><img class="showRestIcons" src="/assets/icon_opening_hours.svg" /></span> <span class="title_outlet"> Opening hours</span>
+				</div>
+				<div class="outlet_info" style="padding: 3% 0;">
+					<span>{{fromTime}} to {{toTime}}</span>
+				</div>
+				<div class="clr"></div>
+			</div>
+
+			<div class="outlet_div rest_info ">
+				<div class="outlet_work">
+					<span class="img_outlet"><!-- <img alt="Ic delivery" src="/images/ic_delivery.png" /> --><img style="height:25px;" src="/assets/icon_delivery.svg" /></span> <span class="title_outlet"> Delivery</span>
+				</div>
+				<div class="outlet_info outlet_serves imgCenter">
+					<img style="margin-top: 4%;" src="/assets/icon_tick_purple.svg" ng-show="delivery" />
+					<img style="margin-top: 4%;" src="/assets/icon_tick_light_purple.svg" ng-hide="delivery"/>
+					<!-- <img alt="Ic ticks" src="/assets/ic_ticks-c074a78971a4004c531ae8696d1ddf78.png" />
+					<img alt="Ic ticks grey" src="/assets/ic_ticks_grey-437a45dd2f761eb558d767149a1f34e1.png" /> -->
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="outlet_div rest_info">
+				<div class="outlet_work">
+					<span class="img_outlet"><!-- <img alt="Ic alcohol" src="/images/ic_alcohol.png" /> --><img style="height:25px;" src="/assets/icon_serves_alcohol.svg" /></span> <span class="title_outlet">Serves Alcohol</span>
+				</div>
+				<div class="outlet_info outlet_serves imgCenter">
+					<img style="margin-top: 4%;" src="/assets/icon_tick_purple.svg" ng-show="alcohol" />
+					<img style="margin-top: 4%;" src="/assets/icon_tick_light_purple.svg" ng-hide="alcohol"/>
+					<!-- <img src="/assets/ic_ticks.png" ng-show="alcohol" />
+					<img src="/assets/ic_ticks_grey.png" ng-hide="alcohol"/> -->
+					<!-- <img alt="Ic ticks" src="/assets/ic_ticks-c074a78971a4004c531ae8696d1ddf78.png" />
+					<img alt="Ic ticks grey" src="/assets/ic_ticks_grey-437a45dd2f761eb558d767149a1f34e1.png" /> -->
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="outlet_div rest_info">
+				<div class="outlet_work ">
+					<span class="img_outlet"><!-- <img alt="Ic outdoor" src="/assets/ic_outdoor-2fc4854468917f2b1f1ee66fb1b2736e.png" /> --><img style="height:25px;" src="/assets/icon_outdoor_seating.svg" /></span> <span class="title_outlet"> Outdoor seating</span>
+				</div>
+				<div class="outlet_info outlet_serves imgCenter">
+					<img style="margin-top: 4%;" src="/assets/icon_tick_purple.svg" ng-show="outDoor_seating" />
+					<img style="margin-top: 4%;" src="/assets/icon_tick_light_purple.svg" ng-hide="outDoor_seating"/>
+					<!-- <img src="/assets/ic_ticks.png" ng-show="outDoor_seating" />
+					<img src="/assets/ic_ticks_grey.png" ng-hide="outDoor_seating"/> -->
+					<!-- <img alt="Ic ticks" src="/assets/ic_ticks-c074a78971a4004c531ae8696d1ddf78.png" />
+					<img alt="Ic ticks grey" src="/assets/ic_ticks_grey-437a45dd2f761eb558d767149a1f34e1.png" /> -->
+				</div>
+				<!-- <div class="clr"></div> -->
+			</div>
+		</div>
+		<div class="clr"></div>
+		<!-- <div class="footerDiv" style="position: absolute; ">
+			<div class="prev" ng-click="previous()" style="height: 29px;padding: 5px 0 3.8%;">
+				<img style="margin-top: 5.8%;" src="/assets/y_arrow_left.png"  />
+				<div style="margin-top: 5%; display: inline-block;" class="prevTxt" >
+					BACK
+				</div>
+			</div>
+			<div class="nxtRest" ng-click="redeemUpto()" style="height: 24px;padding: 0.79em 0;">
+				<div class="nxtTxt" >
+					REDEEM POINTS
+				</div>
+				<div class="clr"></div>
+			</div>
+		</div> -->
+		<div data-role="footer" class="footerDiv">
+		<div class="prev" ng-click="previous()">
+			<img style="margin-top: 1.5%;" src="/assets/icon_arrow_left_yellow_feedback.svg"  />
+			<div class="prevTxt">
+				BACK
+			</div>
+		</div>
+		<div class="nxt" ng-click="redeemUpto()" style="padding: 0.95em 0;">
+			<div class="nxtTxt" >
+				REDEEM POINTS
+			</div>
+			<div class="clr"></div>
+		</div>
+	</div>
+	</div>
+</div>
