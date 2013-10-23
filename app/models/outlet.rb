@@ -175,7 +175,8 @@ class Outlet < ActiveRecord::Base
       feedbacks      = all_feedbacks.select {|f| f if (f.updated_at > start_time && f.updated_at < end_time)}
       redemptions    = all_redemptions.select {|f| f if (f.updated_at > start_time && f.updated_at < end_time)}
       statistics     = {}
-      statistics[:net_promoter_score] = get_net_promoter_score_statistics(feedbacks_nps)
+      statistics[:nps_overview] = get_net_promoter_score_statistics(feedbacks_nps) # Consider last 100 feedbacks
+      statistics[:nps_breakdown] = get_net_promoter_score_statistics(feedbacks)  # Consider only the feedbacks of the period
       ["food_quality", "speed_of_service", "friendliness_of_service", "ambience", "cleanliness", "value_for_money"].each do |category|
         statistics[category.to_sym] = get_field_statistics(feedbacks, category)
       end
