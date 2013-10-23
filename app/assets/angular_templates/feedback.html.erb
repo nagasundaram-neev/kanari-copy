@@ -12,7 +12,7 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 	</style>
 	<div data-role="content">
 		<div class="username">
-			<img src="/assets/icon_home.svg" class="home" ng-click="home()" />
+			<img src="<%= asset_path 'icon_home.svg' %>" class="home" ng-click="home()" />
 			<div class="signUp" >
 				LEAVE FEEDBACK
 			</div>
@@ -96,11 +96,9 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 						<div class="nxtTxt">
 							NEXT
 						</div>
-						<!-- <%= image_tag 'p_arrow_right.png' %> -->
-						<img style="vertical-align: middle;margin-left: 3.2%;margin-top:7%" src="/assets/icon_arrow_right_purple_feedback.svg"  />
+						<img style="vertical-align: middle;margin-left: 3.2%;margin-top:7%" src="<%= asset_path 'icon_arrow_right_purple_feedback.svg' %>"/>
 						<div class="clr"></div>
 					</div>
-					<!-- <div class="nextArrow"></div> -->
 				</div>
 				<div class="clr"></div>
 			</div>

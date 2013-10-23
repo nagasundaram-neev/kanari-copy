@@ -1,25 +1,12 @@
 <div data-role="page" data-theme="b" id="home" ng-controller="homeController">
 	<style>
 .setting {
-/*background-image: url("/assets/icon_Setting.svg");
-    background-position: 0 3px;
-    background-repeat: no-repeat;
-    background-size: 43px 42px;*/
     cursor: pointer;
     float: right;
     height: 35px;
     margin: 1% 0;
 }
 .calender{
-/*background-image: url(
-	);
-	background-position: 0 0;
-	background-repeat: no-repeat;*/
-	/*cursor: pointer;
-	float: right;
-	height: 39px;
-	margin-top: 2%;
-	width: 45px;*/
 	cursor: pointer;
     float: right;
     height: 35px;
@@ -30,7 +17,7 @@
 	<div data-role="content">
 		<div class="username">
 			<!-- <div class="setting" ng-click="setting()"></div> -->
-			<img class="setting" src="/assets/icon_Setting.svg" ng-click="setting()" />
+			<img class="setting" src="<%= asset_path "icon_Setting.svg" %>" ng-click="setting()" />
 			<a ng-click="homeClk()">{{userName}}</a>
 			<!-- <span class="role">{{role}}</span> -->
 			<div class="clr"></div>
@@ -76,16 +63,13 @@
 			<div class="imgDiv">
 				<div class="yellowBack" ng-click="feedback()">
 					<div class="feedback">
-						<!-- <%= image_tag 'icon_LeaveFeedback.svg' %>. -->
-						<img src="/assets/icon_LeaveFeedback.svg" style="height: 60px;" />
+						<img src="<%= asset_path "icon_LeaveFeedback.svg" %>" style="height: 60px;" />
 					</div>
 					<span class="feedbackTxt">LEAVE FEEDBACK</span>
 				</div>
 				<div class="yellowBack" ng-click="redeemPoints()" style="border-right: medium none;">
 					<div class="redeems">
-						<img src="/assets/icon_redeempoints.svg" style="height: 60px;" />
-						<!-- <%= image_tag 'b_redeem_points.png' %> -->
-						<!-- <img src="http://www.html5rocks.com/static/demos/svgmobile_fundamentals/images/HTML5-logo-granim.svg" height="64" alt="Nice green circle"/> -->
+						<img src="<%= asset_path "icon_redeempoints.svg" %>" style="height: 60px;" />
 					</div>
 					<span class="feedbackTxt">REDEEM POINTS</span>
 				</div>
@@ -105,8 +89,6 @@
 				</span>
 				<div class="clr"></div>
 			</div>
-			<!-- <div class="calender"></div> -->
-			<!-- <img src="/assets/icon_redeem_calender.svg" class="calender" /> -->
 			<div class="clr"></div>
 		</div>
 </div>

@@ -52,12 +52,12 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				Share your experience
 			</div>
 			<div id="parent" style="overflow: hidden;width: 195px;margin: 0 auto;">
-				<div ng-click="Facebook.share()" class="backColorYellow" style="float: left"><img src="/assets/icon_social_fb.svg" class="feedbackSocialIcons" />
+				<div ng-click="Facebook.share()" class="backColorYellow" style="float: left"><img src="<%= asset_path "icon_social_fb.svg" %>" class="feedbackSocialIcons" />
 					</div>
 					<a id="twitter" data-url="false" href="javascript:void(0);" ng-click="twitter()">
-					<div class="backColorYellow" style="float: left"><img src="/assets/icon_share_twitter.svg" class="feedbackSocialIcons" />
+					<div class="backColorYellow" style="float: left"><img src="<%= asset_path "icon_share_twitter.svg" %>" class="feedbackSocialIcons" />
 					</div></a>
-					<a id="gogglePlus" href="javascript:void(0);" ng-click="google()"><div class="backColorYellow" style="float: left"><img src="/assets/icon_share_googleplus.svg" class="feedbackSocialIcons" />
+					<a id="gogglePlus" href="javascript:void(0);" ng-click="google()"><div class="backColorYellow" style="float: left"><img src="<%= asset_path "icon_share_googleplus.svg" %>" class="feedbackSocialIcons" />
 					</div></a>
 					<script type="text/javascript">
 						(function() {
@@ -80,18 +80,6 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				Post to Google+ successfull!
 			</p>
 			<div class="shareIconsDiv">
-				<!-- <div class="backColorYellow">
-				<div ng-click="facebook()" class="fb_image1"><img src="/assets/ic_fb_purple.png" />
-				</div>
-				</div>
-				<div class="backColorYellow">
-				<div ng-click="twitter()" class="twit_image1"><img src="/assets/ic_twitter_purple.png" />
-				</div>
-				</div>
-				<div class="backColorYellow">
-				<div ng-click="google()" class="google_image1"><img src="/assets/ic_gplus_purple.png" />
-				</div>
-				</div> -->
 				<div class="clr"></div>
 			</div>
 		</div>
@@ -101,12 +89,12 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 	<div data-role="footer" class="footerDiv" >
 		<div class="logo_btm">
 			<!-- <%= image_tag 'bird_yellow_k.png' %> -->
-			<img src="/assets/icon_bird_thankyou.svg" style="height: 71px;" />
+			<img src="<%= asset_path "icon_bird_thankyou.svg" %>" style="height: 71px;" />
 		</div>
 		<div class="clr"></div>
 		<div class="username">
 			<div style="padding: 0 45%;">
-				<img src="/assets/icon_home.svg" class="home" ng-click="home()"/>
+				<img src="<%= asset_path "icon_home.svg" %>" class="home" ng-click="home()"/>
 			</div>
 			<div class="clr"></div>
 		</div>

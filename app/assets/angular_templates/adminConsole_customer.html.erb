@@ -43,8 +43,8 @@
 				<div class="inputBox">
 					<input type="text" ng-model="customers.authorized_outlets" value="0"/>
 					<span class="arrows">
-					<img class="upArrow" ng-click="increase_decreaseVal($index,1)" src="/assets/up_arrow.png"/></br>
-					<img class="downArrow" ng-click="increase_decreaseVal($index,0)" src="/assets/down_arrow.png"/> 
+					<img class="upArrow" ng-click="increase_decreaseVal($index,1)" src= "<%= asset_path "up_arrow.png" %>" /></br>
+					<img class="downArrow" ng-click="increase_decreaseVal($index,0)" src="<%= asset_path "down_arrow.png" %>"/> 
 					</span>
 				</div>
 			</div>
