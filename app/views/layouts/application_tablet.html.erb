@@ -29,7 +29,7 @@
 			<div data-role="controlgroup" data-type="horizontal">
 				<div class="headerDiv">
 					<a id="feedback" href="#/feedback" class="ui_btn"  data-role="button" >
-						<%= image_tag( '/assets/icon_feedback.svg', height: '59') %>
+						<%= image_tag 'icon_feedback.svg' , height: '59'%>
 					<br/>
 					Feedback
 					<br/>
@@ -37,7 +37,7 @@
 				</div>
 				<div class="headerDiv">
 					<a id="insights" href="#/insights" class="ui_btn"  data-role="button">
-						<%= image_tag( '/assets/icon_insights.svg', height: '59') %>
+						<%= image_tag 'icon_insights.svg' , height: '59' %>
 					<br/>
 					Insights
 					<br/>
@@ -45,7 +45,7 @@
 				</div>
 				<div class="headerDiv">
 					<a id="redemption" href="#/redemption" class="ui_btn"   data-role="button">
-						<%= image_tag( '/assets/icon_redeemptions.svg', height: '59') %>
+						<%= image_tag 'icon_redeemptions.svg' , height: '59' %>
 					<br/>
 					Redemptions
 					<br/>
@@ -53,7 +53,7 @@
 				</div>
 				<div class="headerDiv">
 					<a id="numeric_code" href="#/numeric_code" class="ui_btn" data-role="button">
-						<%= image_tag( '/assets/icon_code.svg', height: '59') %>
+						<%= image_tag 'icon_code.svg' , height: '59' %>
 					<br/>
 					Code
 					<br/>
@@ -61,7 +61,7 @@
 				</div>
 				<div class="logoutDiv">
 					<a href="javascript:void(0)" class="logOut ui_btn" ng-click="showPopup()" data-role="button">
-						<%= image_tag( '/assets/icon_logout_tab.svg', height: '29') %>
+						<%= image_tag 'icon_logout_tab.svg' , height: '29' %>
 					</a>
 						
 				</div>
@@ -85,7 +85,7 @@
 		</div>
 		<div class="clr"></div>
 		<div id="overlaySuccess">
-			<img src="/assets/ajaxloader.gif">
+			<%= image_tag 'ajaxloader.gif' %>
 		</div>
 		<div id="wrapper" class="ngView scrollable" ng-view></div>
 	</body>

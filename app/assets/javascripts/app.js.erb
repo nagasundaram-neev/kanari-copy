@@ -48,12 +48,21 @@ module.directive('map', function($http) {
 			scope.$on('clickMessageFromParent',  function (scopeDetails, msgFromParent) {
 			var queryStringId = getUrlVars()["outletId"];
 			geocoder = new google.maps.Geocoder();
-			var myOptions = {
-			zoom :9,
-			minZoom: 6,
-			center : new google.maps.LatLng(getCookie('latitude'), getCookie('logitude')),
-			mapTypeId : google.maps.MapTypeId.ROADMAP
-			};
+			if(getCookie('latitude') == 'null'){
+				var myOptions = {
+				zoom :9,
+				minZoom: 6,
+				center : new google.maps.LatLng('23.7833','54.0000'),
+				mapTypeId : google.maps.MapTypeId.ROADMAP
+				};
+			}else{
+				var myOptions = {
+					zoom :9,
+					minZoom: 6,
+					center : new google.maps.LatLng(getCookie('latitude'), getCookie('logitude')),
+					mapTypeId : google.maps.MapTypeId.ROADMAP
+				};				
+			}
 			if(getCookie('latitude') == "null")
 			{
 				$('.addMarker').show();

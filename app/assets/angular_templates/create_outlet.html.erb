@@ -108,7 +108,7 @@
 									Restaurant Name<span class="star">*</span>
 								</lable>
 								<input data-theme="a" data-inline="true" placeholder="Restaurant Name" type="text" name="restaurant_name" ng-model="restaurant_name" class="passwordTxt" required />
-								<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The name of your restaurant"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+								<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The name of your restaurant"><%= image_tag 'ic_help.png' ,:class=>"tooltipIcon"%></span></a> 
 	                            
 								<div class="input-help">
 									<h4>Please enter a restaurant name</h4>
@@ -121,7 +121,7 @@
 									Restaurant Location<span class="star">*</span>
 								</lable>
 								<input data-theme="a" data-inline="true" placeholder="Restaurant Location" type="text" name="restaurant_location"  ng-model="restaurant_location" class="passwordTxt" required />
-								<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Brief one-line description. Eg. Dubai Mall Food Court or The Address Hotel Dubai."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+								<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Brief one-line description. Eg. Dubai Mall Food Court or The Address Hotel Dubai."><%= image_tag 'ic_help.png' ,:class=>"tooltipIcon"%></span></a> 
 								<div class="input-help">
 									<h4>Please enter a restaurant location</h4>
 								</div>
@@ -138,7 +138,7 @@
 								Contact Number<span class="star">*</span>
 							</lable>
 							<input data-theme="a" data-inline="true" type="text" class="phoneno_1 setTelephone" name="contactNo" placeholder="Contact Number" />
-							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The restaurant's direct contact number."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The restaurant's direct contact number."><%= image_tag 'ic_help.png' ,:class=>"tooltipIcon"%></span></a> 
 							<!-- <input data-theme="a" data-inline="true" placeholder="Contact Number" type="text" min="0" number-mask="" maxlength="11" name="txtPassword" ng-model="contact_number" class="passwordTxt" required /> -->
 						</div>
 					</div>
@@ -148,7 +148,7 @@
 								Email Address<span class="star">*</span>
 							</lable>
 							<input data-theme="a" data-inline="true" placeholder="Email Address" type="email" name="txtPassword" ng-model="email_address" class="passwordTxt" required />
-							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The restaurant's email address for reservations, questions etc."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="The restaurant's email address for reservations, questions etc."><%= image_tag 'ic_help.png' ,:class=>"tooltipIcon"%></span></a> 
 							<div class="input-help">
 								<h4>Invalid Email</h4>
 							</div>
@@ -169,7 +169,7 @@
 							<select id="select3" ng-show="form_outlet3" ng-model='formoutlet3' ng-change="selectOutlet3()"  ng-options='outletType.id as outletType.name for outletType in outletTypes'>
 								<option value="">Select Outlet</option>
 							</select>
-							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="You can select up to three outlet types for your restaurant."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="You can select up to three outlet types for your restaurant."><%= image_tag 'ic_help.png' ,:class=>"tooltipIcon"%></span></a> 
 							<br>
 							<span class="customErr input-help" ng-show="outletError">Please select different outlet type.</span>
 							<span class="customErrCls customErr input-help" ng-show="outletError1">Please select primary outlet type.</span>
@@ -191,7 +191,7 @@
 							<select id="selectC3" ng-show="form_cuisine3" ng-model='formcuisine3' ng-change="selectCuisine3()"  ng-options='cuisineType.id as cuisineType.name for cuisineType in cuisineTypes'>
 								<option value="">Select Cuisine</option>
 							</select>
-							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="You can select up to three cuisine types for your restaurant."><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="You can select up to three cuisine types for your restaurant."><%= image_tag 'ic_help.png' ,:class=>"tooltipIcon"%></span></a> 
 							<br/>
 							
 							<span class="customErr input-help" ng-show="cuisineError">Please select different cuisine type.</span>
@@ -263,7 +263,7 @@
 								<option value="10.00pm">10.00pm</option>
 								<option value="11.00pm">11.00pm</option>
 							</select>
-							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="What are the opening hours of your restaurant?"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="What are the opening hours of your restaurant?"><%= image_tag 'ic_help.png' ,:class=>"tooltipIcon"%></span></a> 
 						</div>
 					</div>
 					
@@ -277,7 +277,7 @@
 							Yes &nbsp;&nbsp;&nbsp;
 							<input type="radio" class="radioBtn"  name="delivery" ng-model="Delivery" value="false">
 							No
-							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Does your restaurant deliver?"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Does your restaurant deliver?"><%= image_tag 'ic_help.png' ,:class=>"tooltipIcon"%></span></a> 
 						</div>
 					</div>
 					<div class="control-group">
@@ -289,7 +289,7 @@
 							Yes &nbsp;&nbsp;&nbsp;
 							<input type="radio" class="radioBtn" ng-model="serves_alcohol" name="serves_alcohol" value="false">
 							No
-							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Does your restaurant serve alcohol?"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Does your restaurant serve alcohol?"><%= image_tag 'ic_help.png' ,:class=>"tooltipIcon"%></span></a> 
 						</div>
 					</div>
 					<div class="control-group">
@@ -301,7 +301,7 @@
 							Yes &nbsp;&nbsp;&nbsp;
 							<input type="radio" class="radioBtn"  ng-model="outdoor_Seating" name="outdoor_Seating" value="false">
 							No
-							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Does your restaurant have outdoor seating?"><img class="tooltipIcon" src="/assets/ic_help.png"></span></a> 
+							<a href="javascript:void(0);"><span tooltip-placement="right" tooltip="Does your restaurant have outdoor seating?"><%= image_tag 'ic_help.png' ,:class=>"tooltipIcon"%></span></a> 
 						</div>
 					</div>
 					<div style="margin: 10px 0 0 160px;" class="control-group">
@@ -370,8 +370,8 @@
 						</div>
 						<div class="infoSteps">
 							<div class="step1" style="width:220px">
-								<img style="position: absolute; margin-top: -75px; margin-left: -95px;" src="/assets/arrow1a.png">
-								<img style="position: absolute; margin-left: 60px; margin-top: -3px;" src="/assets/arrow1c.png">
+								<%= image_tag 'arrow1a.png' ,:style=>"position: absolute; margin-top: -75px; margin-left: -95px;" %>
+								<%= image_tag 'arrow1c.png' ,:style=>"position: absolute; margin-left: 60px; margin-top: -3px;" %>
 								Step 1:
 								<br/>
 								Create a manager profile 
@@ -660,11 +660,11 @@
 				<!-- <input type="button" class="btn_cls" ng-click="create_tablet_id()" data-inline="true" value="Add new tablet" /> -->
 				<div class="infoSteps">
 					<div class="step1">
-						<img style="position: absolute; margin-left: -150px; margin-top: -30px;" src="/assets/arrow1a.png">
+						<%= image_tag 'arrow1a.png' ,:style=>"position: absolute; margin-left: -150px; margin-top: -30px;" %>
 						Step 1:
 						<br/>
 						Enter a password to create tablet login
-						<img src="/assets/arrow1b.png" style=" margin-top: -52px;position: absolute;"/>
+						<%= image_tag 'arrow1b.png' ,:style=>"margin-top: -52px;position: absolute;" %>
 					</div>
 					<div class="clr"></div>
 					<div class="step2">

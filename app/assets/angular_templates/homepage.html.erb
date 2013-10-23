@@ -2,7 +2,7 @@
 	<h3 class="redemptionMsg" ng-show="feedbkMsg">Your customers have not submitted any feedback today</h3>
 	<div ng-show="feedbackList.length" class="home_page_view">
 		<!-- <div id="refresh" ng-click="refresh()">
-			<strong>Refresh feedbacks</strong>
+		<strong>Refresh feedbacks</strong>
 		</div> -->
 		<div id="pullDown">
 			<span class="pullDownIcon"></span><span class="pullDownLabel">Pull down to refresh...</span>
@@ -20,131 +20,57 @@
 				<div style=" ">
 					<div class="def_icon">
 						<div ng-switch on="feedbacks.food_quality">
-							<img height="21" ng-switch-when="1" src="/assets/ic_yellow_tick.svg">
-							<img height="21" ng-switch-when="-1" src="/assets/ic_red_cross.svg" />
-							<img height="21" ng-switch-when="0" src="/assets/ic_grey_round.svg" />
+							<span ng-switch-when="1"> <%= image_tag 'ic_yellow_tick.svg' ,height: '21'%> </span>
+							<span ng-switch-when="-1"> <%= image_tag 'ic_red_cross.svg' , height: '21'%> </span>
+							<span ng-switch-when="0"> <%= image_tag 'ic_grey_round.svg' , height: '21'%> </span>
 						</div>
 
 						Food
 					</div>
 					<div class="def_icon">
 						<div ng-switch on="feedbacks.speed_of_service">
-							<img height="21" ng-switch-when="1" src="/assets/ic_yellow_tick.svg">
-							<img height="21" ng-switch-when="-1" src="/assets/ic_red_cross.svg" />
-							<img height="21" ng-switch-when="0" src="/assets/ic_grey_round.svg" />
+							<span ng-switch-when="1"> <%= image_tag 'ic_yellow_tick.svg' , height: '21'%> </span>
+							<span ng-switch-when="-1"> <%= image_tag 'ic_red_cross.svg' , height: '21'%> </span>
+							<span ng-switch-when="0"> <%= image_tag 'ic_grey_round.svg' , height: '21'%> </span>
 						</div>
 						Speed
 					</div>
 					<div class="def_icon">
 						<div ng-switch on="feedbacks.ambience">
-							<img height="21" ng-switch-when="1" src="/assets/ic_yellow_tick.svg">
-							<img height="21" ng-switch-when="-1" src="/assets/ic_red_cross.svg" />
-							<img height="21" ng-switch-when="0"	 src="/assets/ic_grey_round.svg" />
+							<span ng-switch-when="1"> <%= image_tag 'ic_yellow_tick.svg' , height: '21'%> </span>
+							<span ng-switch-when="-1"> <%= image_tag 'ic_red_cross.svg' , height: '21'%> </span>
+							<span ng-switch-when="0"> <%= image_tag 'ic_grey_round.svg' , height: '21'%> </span>
 						</div>
 						Ambiance
 					</div>
 					<div class="def_icon">
 						<div ng-switch on="feedbacks.value_for_money">
-							<img height="21" ng-switch-when="1" src="/assets/ic_yellow_tick.svg">
-							<img height="21" ng-switch-when="-1" src="/assets/ic_red_cross.svg" />
-							<img height="21" ng-switch-when="0" src="/assets/ic_grey_round.svg" />
+							<span ng-switch-when="1"> <%= image_tag 'ic_yellow_tick.svg' , height: '21'%> </span>
+							<span ng-switch-when="-1"> <%= image_tag 'ic_red_cross.svg' , height: '21'%> </span>
+							<span ng-switch-when="0"> <%= image_tag 'ic_grey_round.svg' , height: '21'%> </span>
 						</div>
 						Value
 					</div>
 					<div class="def_icon">
 						<div ng-switch on="feedbacks.friendliness_of_service">
-							<img height="21" ng-switch-when="1" src="/assets/ic_yellow_tick.svg">
-							<img height="21" ng-switch-when="-1" src="/assets/ic_red_cross.svg" />
-							<img height="21" ng-switch-when="0" src="/assets/ic_grey_round.svg" />
+							<span ng-switch-when="1"> <%= image_tag 'ic_yellow_tick.svg' , height: '21'%> </span>
+							<span ng-switch-when="-1"> <%= image_tag 'ic_red_cross.svg' , height: '21'%> </span>
+							<span ng-switch-when="0"> <%= image_tag 'ic_grey_round.svg' , height: '21'%> </span>
 						</div>
 						Friendliness
 					</div>
 					<div class="def_icon">
 						<div ng-switch on="feedbacks.cleanliness">
-							<img height="21" ng-switch-when="1" src="/assets/ic_yellow_tick.svg">
-							<img height="21" ng-switch-when="-1" src="/assets/ic_red_cross.svg" />
-							<img height="21" ng-switch-when="0" src="/assets/ic_grey_round.svg" />
+							<span ng-switch-when="1"> <%= image_tag 'ic_yellow_tick.svg' , height: '21'%> </span>
+							<span ng-switch-when="-1"> <%= image_tag 'ic_red_cross.svg' , height: '21'%> </span>
+							<span ng-switch-when="0"> <%= image_tag 'ic_grey_round.svg' , height: '21'%> </span>
 						</div>
 						Clean
 					</div>
 				</div>
 			</div>
 			<div class="divPadding promo_code_desc">
-				<span>{{feedbacks.comment}} <!-- The smokehouse BBQ chicken is the best sandwich that has ever been added to the
-					stole of satwiches. It has all the flavour of fattning sandwiches but
-					with the healthy side... --><!-- </span>
-					</div>
-					<div class="clr"></div>
-					<div class="update_time">
-					<span timeago-autoupdate="feedbacks.updated_at"></span>
-
-					</div>
-					</div>
-					</div>
-					<!-- <div ng-show="feedbackList.length" id="divexample1" class="home_page_view">
-					<div ng-repeat="feedbacks in feedbackList" class="feedback_step">
-					<div class="divPadding promo_code">
-					<span class="promo_txt">Promoter Score</span>
-					<br/>
-					<span class="promo_value">{{feedbacks.promoter_score}}</span>
-					</div>
-					<div class="divPadding promo_code_def">
-					<div style=" margin: 0 auto;width: 100%">
-					<div class="def_icon">
-					<div ng-switch on="feedbacks.food_quality">
-					<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
-					<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
-					<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
-					</div>
-
-					Food
-					</div>
-					<div class="def_icon">
-					<div ng-switch on="feedbacks.speed_of_service">
-					<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
-					<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
-					<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
-					</div>
-					Speed
-					</div>
-					<div class="def_icon">
-					<div ng-switch on="feedbacks.ambience">
-					<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
-					<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
-					<img ng-switch-when="0"	 src="/assets/ic_grey_round.png" />
-					</div>
-					Ambiance
-					</div>
-					<div class="def_icon">
-					<div ng-switch on="feedbacks.value_for_money">
-					<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
-					<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
-					<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
-					</div>
-					Value
-					</div>
-					<div class="def_icon">
-					<div ng-switch on="feedbacks.friendliness_of_service">
-					<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
-					<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
-					<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
-					</div>
-					Friendliness
-					</div>
-					<div class="def_icon">
-					<div ng-switch on="feedbacks.cleanliness">
-					<img ng-switch-when="1" src="/assets/ic_yellow_tick.png" />
-					<img ng-switch-when="-1" src="/assets/ic_red_cross.png" />
-					<img ng-switch-when="0" src="/assets/ic_grey_round.png" />
-					</div>
-					Clean
-					</div>
-					</div>
-					</div>
-					<div class="divPadding promo_code_desc">
-					<span>{{feedbacks.comment}} <!-- The smokehouse BBQ chicken is the best sandwich that has ever been added to the
-					stole of satwiches. It has all the flavour of fattning sandwiches but
-					with the healthy side... --> </span>
+				<span>{{feedbacks.comment}}</span>
 			</div>
 			<div class="clr"></div>
 			<div class="update_time">
@@ -153,7 +79,7 @@
 		</div>
 	</div>
 	<div id="pullUp">
-			<span class="pullUpIcon"></span><span class="pullUpLabel"></span>
-		</div>
+		<span class="pullUpIcon"></span><span class="pullUpLabel"></span>
+	</div>
 </div>
 

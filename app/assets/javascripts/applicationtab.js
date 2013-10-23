@@ -17,4 +17,3 @@
 //= require angular/controllers/controllers_tablet
 //= require bootstrap
 //= require angular-resource
-//= require ui-bootstrap-tpls-0.6.0
