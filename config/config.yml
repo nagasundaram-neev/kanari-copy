@@ -9,6 +9,7 @@ default: &defaults
   neutral            : 0
   facebook_app_id: '369424903187034'
   facebook_app_secret: '30f0e007f1c49a328824647e6ecdd5a2'
+  default_from_email: 'admin@kanari.co'
 
 development:
   <<: *defaults

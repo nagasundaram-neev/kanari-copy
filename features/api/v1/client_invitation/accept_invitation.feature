@@ -24,6 +24,7 @@ Feature: Accept invitation
         |first_name|John|
         |last_name|Doe|
         |phone_number|+9123455|
+      And "user@gmail.com" should receive the kanari welcome mail
 
     Scenario: Invalid invitation_token
       Given I send a PUT request to "/api/users/invitation" with the following:
