@@ -35,9 +35,11 @@ Feature: Update Manager
       And the manager with id "100" should be updated with the following
         |first_name|Kobe|
         |last_name|Bryant|
-        |email|kobe@gmail.com|
+        |email|manager@subway.com|
+        |unconfirmed_email|kobe@gmail.com|
         |phone_number|+91234|
-    
+      And unconfirmed email id "kobe@gmail.com" should receive an email with confirmation link
+
   Scenario: Manager not found
       Given the following users exist
          |id        |first_name |email                          | password    | authentication_token  | role            | created_at             |

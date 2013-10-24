@@ -7,7 +7,8 @@ Kanari::Application.routes.draw do
       sessions: 'api/v1/custom_devise/sessions',
       invitations: 'api/v1/custom_devise/invitations',
       passwords: 'api/v1/custom_devise/passwords',
-      registrations: 'api/v1/custom_devise/registrations'
+      registrations: 'api/v1/custom_devise/registrations',
+      confirmations: 'api/v1/custom_devise/confirmations'
     }
   end
 
@@ -36,6 +37,9 @@ Kanari::Application.routes.draw do
       resources :audit_logs, :only => [:index]
       resources :new_registration_points, :only => [:create]
       get "/users/invitation/:invitation_token" => "invitations#show"
+      devise_scope :user do
+        get "/users/confirmation/:confirmation_token" => "custom_devise/confirmations#redirect", as: 'confirmation_mail'
+      end
       get "/feedbacks/metrics" => "feedbacks#metrics"
       get "/feedbacks/trends"  => "feedbacks#trends"
     end
