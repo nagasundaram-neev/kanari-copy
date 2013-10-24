@@ -757,11 +757,10 @@ module.controller('signUpController', function($scope, $http, $location) {
 		if (!$scope.firstName || !$scope.lastName) {
 			$scope.error = "First Name and Last Name is required. Please enter it to continue";
 			$scope.errorMsg = true;
-		}else if (!$scope.acceptTerms){
+		} else if (!$scope.acceptTerms) {
 			$scope.error = "Please accept Kanari's User Terms";
 			$scope.errorMsg = true;
-		}
-		 else {
+		} else {
 			var param = {
 				"user" : {
 					"first_name" : $scope.firstName,
@@ -805,14 +804,32 @@ module.controller('signUpController', function($scope, $http, $location) {
 
 });
 
-module.controller('signedUpController', function($scope, $http, $location) {
-	$scope.email = getCookie('email');
-	$scope.password = getCookie('password');
+module.controller('signedUpController', function($scope, $http, $location, $routeParams) {
+	//console.log("hi ai madjl");
+	// $scope.email = getCookie('email');
+	// $scope.password = getCookie('password');
 	flagPage = 0;
 	footerFlag = 0;
+	
+	$scope.errorMsg = false;
+
+	var param = {
+		"confirmation_token" : $routeParams.confirmation_token
+	}
+
+	$http({
+		method : 'get',
+		url : '/api/users/confirmation',
+		params : param
+	}).success(function(data, status) {
+		
+	}).error(function(data, status) {
+		$scope.errorMsg = true;
+		$scope.errorMsg = data.error;
+	});
+
 	$scope.proceedAccount = function() {
-		$location.url("/home");
-		//$location.url("/login");
+		$location.url("/login");
 	};
 });
 module.controller('changePasswordController', function($scope, $http, $location) {
@@ -1614,12 +1631,12 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 
 		};
 		$scope.closeRedeemSuccMsg = function() {
-			
+
 			$("#overlaySuccess").hide();
 			$scope.listPoints();
 			$scope.successMsg = false;
 			$location.url("/home");
-			
+
 		}
 	} else {
 		$location.url("/login");

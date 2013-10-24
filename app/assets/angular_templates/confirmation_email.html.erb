@@ -1,18 +1,15 @@
-<div data-role="page" data-theme="b" id="signedUp">
+<div data-role="page" data-theme="b" id="signedUp" ng-controller="signedUpController">
 	<div data-role="content">
 		<div class="signedUpCls">
 			<div class="signUp">
-				You're almost there...
+				Welcome to Kanari...
 			</div>
 		</div>
 		<div class="outerDiv mainDiv">
-			<span class="secondDiv thanks">Thanks for signing up!</span>
-			<div class="secondDiv">
-				We've sent a confirmation email to address you provided, just click on the link to get started.
-			</div>
-			<!-- <div class="proceedBtn">
+			<span class="secondDiv thanks">Thanks for confirming your account email!</span>
+			<div class="proceedBtn">
 				<input type="button" class="signBtn" ng-click="proceedAccount()" data-inline="true" value="Proceed to My Account"/>
-			</div> -->
+			</div>
 		</div>
 		<p class="errorMsg" ng-show="errorMsg"></p>
 		<p ng-hide="errorMsg"></p>

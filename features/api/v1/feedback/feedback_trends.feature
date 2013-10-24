@@ -103,7 +103,12 @@ Feature: Dashboard Trends
              "dislike" : 2,
              "neutral" : 1
            },
-           "net_promoter_score": {
+           "nps_overview": {
+             "like"    : 40.0,
+             "dislike" : 30.0,
+             "neutral" : 30.0
+           },
+           "nps_breakdown": {
              "like"    : 40.0,
              "dislike" : 30.0,
              "neutral" : 30.0
@@ -335,10 +340,15 @@ Feature: Dashboard Trends
                "dislike" : 1,
                "neutral" : 0
              },
-             "net_promoter_score": {
+             "nps_overview": {
                "like"    : 40.0,
                "dislike" : 30.0,
                "neutral" : 30.0
+             },
+             "nps_breakdown": {
+               "like"    : 20.0,
+               "dislike" : 40.0,
+               "neutral" : 40.0
              },
              "usage": {
                "feedbacks_count": 5,
@@ -386,7 +396,12 @@ Feature: Dashboard Trends
                "dislike" : 1,
                "neutral" : 1
              },
-             "net_promoter_score": {
+             "nps_overview": {
+               "like"    : 60.0,
+               "dislike" : 20.0,
+               "neutral" : 20.0
+             },
+             "nps_breakdown": {
                "like"    : 60.0,
                "dislike" : 20.0,
                "neutral" : 20.0
@@ -511,7 +526,12 @@ Feature: Dashboard Trends
              "dislike" : 2,
              "neutral" : 1
            },
-           "net_promoter_score": {
+           "nps_overview": {
+             "like"    : 36.36363636363637,
+             "dislike" : 36.36363636363637,
+             "neutral" : 27.272727272727266
+           },
+           "nps_breakdown": {
              "like"    : 36.36363636363637,
              "dislike" : 36.36363636363637,
              "neutral" : 27.272727272727266
@@ -743,10 +763,15 @@ Feature: Dashboard Trends
                "dislike" : 1,
                "neutral" : 0
              },
-             "net_promoter_score": {
+             "nps_overview": {
                "like"    : 36.36363636363637,
                "dislike" : 36.36363636363637,
                "neutral" : 27.272727272727266
+             },
+             "nps_breakdown": {
+               "like"    : 20.0,
+               "dislike" : 40.0,
+               "neutral" : 40.0
              },
              "usage": {
                "feedbacks_count": 5,
@@ -794,7 +819,12 @@ Feature: Dashboard Trends
                "dislike" : 1,
                "neutral" : 1
              },
-             "net_promoter_score": {
+             "nps_overview": {
+               "like"    : 50.0,
+               "dislike" : 33.33333333333333,
+               "neutral" : 16.66666666666667
+             },
+             "nps_breakdown": {
                "like"    : 50.0,
                "dislike" : 33.33333333333333,
                "neutral" : 16.66666666666667
@@ -868,7 +898,12 @@ Feature: Dashboard Trends
              "dislike" : 0,
              "neutral" : 0
            },
-           "net_promoter_score": {
+           "nps_overview": {
+             "like"    : 0,
+             "dislike" : 0,
+             "neutral" : 0
+           },
+           "nps_breakdown": {
              "like"    : 0,
              "dislike" : 0,
              "neutral" : 0
@@ -1100,7 +1135,12 @@ Feature: Dashboard Trends
                "dislike" : 0,
                "neutral" : 0
              },
-             "net_promoter_score": {
+             "nps_overview": {
+               "like"    : 0,
+               "dislike" : 0,
+               "neutral" : 0
+             },
+             "nps_breakdown": {
                "like"    : 0,
                "dislike" : 0,
                "neutral" : 0
@@ -1151,7 +1191,12 @@ Feature: Dashboard Trends
                "dislike" : 0,
                "neutral" : 0
              },
-             "net_promoter_score": {
+             "nps_overview": {
+               "like"    : 0,
+               "dislike" : 0,
+               "neutral" : 0
+             },
+             "nps_breakdown": {
                "like"    : 0,
                "dislike" : 0,
                "neutral" : 0
