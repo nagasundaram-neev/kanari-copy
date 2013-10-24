@@ -279,3 +279,83 @@ Feature: Sign In
         "errors" : ["Invalid login credentials"]
       }
       """
+
+    Scenario: User should be able to login after confirmation only
+      When I send a POST request to "/api/users" with the following:
+      """
+      {
+        "user" : {
+          "first_name": "Kobe",
+          "last_name": "Bryant",
+          "email": "kobe@gmail.com",
+          "password": "kobe1234",
+          "password_confirmation": "kobe1234"
+        }
+      }
+      """
+      Then the response status should be "201"
+      When I authenticate as the user "kobe@gmail.com" with the password "kobe1234"
+      And I send a POST request to "/api/users/sign_in"
+      Then the response status should be "401"
+      And the JSON response should be:
+      """
+      {
+        "errors" : ["Invalid login credentials"]
+      }
+      """
+      When "kobe@gmail.com" confirms the sign up
+      When I authenticate as the user "kobe@gmail.com" with the password "kobe1234"
+      And I send a POST request to "/api/users/sign_in"
+      Then the response status should be "200"
+      And the JSON response should have "auth_token"
+      And the JSON response at "user_role" should be "user"
+      And the JSON response at "registration_complete" should be true
+      And the JSON response at "first_name" should be "Kobe"
+      And the JSON response at "last_name" should be "Bryant"
+      And the JSON response at "sign_in_count" should be 1
+      And the JSON response at "customer_id" should be null
+
+    Scenario: Manager should be able to login after confirmation only
+      Given "Adam" is a user with email id "user@gmail.com" and password "password123"
+        And his role is "customer_admin"
+        And his authentication token is "auth_token_123"
+        And a customer named "Subway" exists with id "100" with admin "user@gmail.com"
+      When I authenticate as the user "auth_token_123" with the password "random string"
+      And I send a POST request to "/api/managers" with the following:
+      """
+      {
+        "user" : {
+          "email" : "manager@gmail.com",
+          "first_name" : "John",
+          "last_name" : "Doe",
+          "phone_number" : "+9132222",
+          "password" : "password123",
+          "password_confirmation" : "password123"
+        }
+      }
+      """
+      Then the response status should be "201"
+      Given the customer with id "100" has an outlet named "Subway - Bangalore" with manager "manager@gmail.com"
+      And outlet "Subway - Bangalore" has staffs
+        |staff.bangalore.1@subway.com   |
+        |staff.bangalore.2@subway.com   |
+      When I authenticate as the user "manager@gmail.com" with the password "password123"
+      And I send a POST request to "/api/users/sign_in"
+      Then the response status should be "401"
+      And the JSON response should be:
+      """
+      {
+        "errors" : ["Invalid login credentials"]
+      }
+      """
+      When "manager@gmail.com" confirms the sign up
+      When I authenticate as the user "manager@gmail.com" with the password "password123"
+      And I send a POST request to "/api/users/sign_in"
+      Then the response status should be "200"
+      And the JSON response should have "auth_token"
+      And the JSON response at "user_role" should be "manager"
+      And the JSON response at "registration_complete" should be true
+      And the JSON response at "first_name" should be "John"
+      And the JSON response at "last_name" should be "Doe"
+      And the JSON response at "sign_in_count" should be 1
+      And the JSON response at "customer_id" should be 100

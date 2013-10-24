@@ -25,6 +25,7 @@ class Api::V1::StaffsController < ApplicationController
     email = "#{username}@kanari.co"
     user = User.new(email: email, password: params[:user][:password], password_confirmation: params[:user][:password_confirmation])
     user.role = "staff"
+    user.skip_confirmation!
     if user.save
       user.employed_outlet = @outlet
       user.employed_customer = current_user.customer

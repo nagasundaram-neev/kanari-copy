@@ -15,20 +15,11 @@ module Api
           resource.reset_authentication_token
 
           if successful_signup?(resource)
-            if resource.active_for_authentication?
-              sign_up(resource_name, resource)
-              render json: {
-                auth_token: resource.authentication_token,
-                first_name: resource.first_name,
-                last_name: resource.last_name,
-                user_role: resource.role,
-                sign_in_count: resource.sign_in_count,
-                registration_complete: resource.registration_complete?,
-                customer_id: (resource.customer.nil? ? nil : resource.customer.id)
-              }, status: :created
-            else
-              render json: {errors: [resource.inactive_message]}, status: :created
-            end
+            render json: {
+              first_name: resource.first_name,
+              last_name: resource.last_name,
+              user_role: resource.role
+            }, status: :created
           else
             clean_up_passwords resource
             render json: {errors: resource.errors.full_messages}, status: :unprocessable_entity

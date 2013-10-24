@@ -7,6 +7,7 @@ Given "the following users exist" do |user_data|
   user_hashes = user_data.hashes
   user_hashes.each do |user_hash|
     user_hash["password_confirmation"] = user_hash["password"]
+    user_hash["confirmed_at"] = Time.now
     User.create!(user_hash)
   end
   User.count.should == user_hashes.size
@@ -19,6 +20,7 @@ end
 
 And /^his authentication token is "([^"]*)"$/ do |auth_token|
   @user.authentication_token = auth_token
+  @user.confirmed_at = Time.now
   @user.save!
 end
 
@@ -104,6 +106,31 @@ And /^"([^"]*)" should receive an email with password reset link$/ do |email|
   step "I should see \"reset_password_token=#{reset_password_token}\" in the email body"
 end
 
+And /^"([^"]*)" should receive an email with sign up confirmation link$/ do |email|
+  step "\"#{email}\" should have 1 emails"
+  step "\"#{email}\" should receive an email with subject /Confirmation instructions/"
+  open_last_email
+  @user = User.where(email: email).first
+  @confirmation_token = @user.confirmation_token
+  step "I should see \"confirmation/#{@confirmation_token}\" in the email body"
+end
+
+And /^unconfirmed email id "([^"]*)" should receive an email with confirmation link$/ do |email|
+  step "\"#{email}\" should have 1 emails"
+  step "\"#{email}\" should receive an email with subject /Confirmation instructions/"
+  open_last_email
+  @user = User.where(unconfirmed_email: email).first
+  @confirmation_token = @user.confirmation_token
+  step "I should see \"confirmation/#{@confirmation_token}\" in the email body"
+end
+
+And /^"([^"]*)" should receive another confirmation email with the same token$/ do |email|
+  step "\"#{email}\" should have 2 emails"
+  step "\"#{email}\" should receive an email with subject /Confirmation instructions/"
+  open_last_email
+  step "I should see \"confirmation/#{@confirmation_token}\" in the email body"
+end
+
 And /his reset_password_token is "([^"]*)"/ do |reset_password_token|
   @user.reset_password_token = reset_password_token
   @user.reset_password_sent_at = Time.now.utc
@@ -133,6 +160,12 @@ end
 Given /^"([^"]*)" received an invitation with token "([^"]*)"$/ do |email, invitation_token|
   @user = User.new(email: email, invitation_token: invitation_token, invitation_sent_at: Time.now.utc)
   @user.save!(validate: false)
+end
+
+Given /^"([^"]*)" received a confirmation mail with token "([^"]*)"$/ do |email, confirmation_token|
+  @user = User.new(email: email, password: 'Password123', password_confirmation: 'Password123')
+  @user.save
+  @user.update_attribute('confirmation_token', confirmation_token)
 end
 
 And /^a new user with email "([^"]*)" should be created$/ do |email|
@@ -179,7 +212,7 @@ And /^the user with email "([^"]*)" should have the following social network acc
 end
 
 Given "the following user exists" do |table|
-  User.create!(table.rows_hash)
+  a = User.create!(table.rows_hash.merge(confirmed_at: Time.now))
 end
 
 And /^the user should have "([^"]*)" points$/ do |points|
@@ -192,4 +225,10 @@ end
 
 Then(/^there should not be any user with email "(.*?)"$/) do |email|
   User.where(email: email).first.should be_nil
+end
+
+When /^"([^"]*)" confirms the sign up$/ do |email|
+  user = User.where(email: email).first
+  user.confirmed_at = Time.now
+  user.save!
 end

@@ -85,14 +85,13 @@ Feature: Update account
       }
       """
       Then the response status should be "200"
-      And the JSON response should have "auth_token"
-      And the JSON response at "auth_token" should be a string
       And the JSON response at "user_role" should be "user"
-      And the JSON response at "registration_complete" should be true
       And a user should be created with the following
         |first_name|Adam|
         |last_name|Smith|
-        |email|modifiedemail@gmail.com|
+        |email|user@gmail.com|
+        |unconfirmed_email|modifiedemail@gmail.com|
+      And unconfirmed email id "modifiedemail@gmail.com" should receive an email with confirmation link
 
    Scenario: Change Password : Updation of password should require password_confirmation and current password.
       Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"

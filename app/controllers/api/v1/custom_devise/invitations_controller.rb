@@ -10,7 +10,8 @@ module Api
         # POST /resource/invitation
         def create
           self.resource = resource_class.invite!(invite_params, current_inviter) do |u|
-            u.skip_invitation = true
+            u.skip_invitation = true #Because a personal mail is sent by the admin
+            u.skip_confirmation! #No need to confirm invited users
           end
           if resource.errors.empty?
             resource.invitation_sent_at = Time.now.utc

@@ -17,18 +17,14 @@ Feature: Sign Up
       }
       """
       Then the response status should be "201"
-      And the JSON response should have "auth_token"
-      And the JSON response at "auth_token" should be a string
       And the JSON response at "user_role" should be "user"
       And the JSON response at "first_name" should be "Kobe"
       And the JSON response at "last_name" should be "Bryant"
-      And the JSON response at "registration_complete" should be true
-      Given I keep the JSON response at "auth_token" as "AUTH_TOKEN"
-      Then the user with email "kobe@gmail.com" should have "%{AUTH_TOKEN}" as his authentication_token
       And a user should be created with the following
         |first_name|Kobe|
         |last_name|Bryant|
         |email|kobe@gmail.com|
+      And "kobe@gmail.com" should receive an email with sign up confirmation link
 
     Scenario: Successful sign up with oauth provider when user doesn't exist
       Given A facebook user exists who has registered with Kanari facebook app
@@ -47,14 +43,9 @@ Feature: Sign Up
       }
       """
       Then the response status should be "201"
-      And the JSON response should have "auth_token"
-      And the JSON response at "auth_token" should be a string
       And the JSON response at "user_role" should be "user"
       And the JSON response at "first_name" should be "Kobe"
       And the JSON response at "last_name" should be "Bryant"
-      And the JSON response at "registration_complete" should be true
-      Given I keep the JSON response at "auth_token" as "AUTH_TOKEN"
-      Then the user with email "kobe@gmail.com" should have "%{AUTH_TOKEN}" as his authentication_token
       And a user should be created with the following
         |first_name|Kobe|
         |last_name|Bryant|
@@ -64,6 +55,7 @@ Feature: Sign Up
       And the user with email "kobe@gmail.com" should have the following social network accounts
         |provider|
         |facebook|
+      And "kobe@gmail.com" should receive an email with sign up confirmation link
 
     Scenario: Successful sign up with oauth provider when user exists
       Given "Kobe Bryant" is a user with email id "kobe@gmail.com" and password "password123"
@@ -82,14 +74,9 @@ Feature: Sign Up
       }
       """
       Then the response status should be "201"
-      And the JSON response should have "auth_token"
-      And the JSON response at "auth_token" should be a string
       And the JSON response at "user_role" should be "user"
       And the JSON response at "first_name" should be "Kobe"
       And the JSON response at "last_name" should be "Bryant"
-      And the JSON response at "registration_complete" should be true
-      Given I keep the JSON response at "auth_token" as "AUTH_TOKEN"
-      Then the user with email "kobe@gmail.com" should have "%{AUTH_TOKEN}" as his authentication_token
       And a user should be created with the following
         |first_name|Kobe|
         |last_name|Bryant|
@@ -97,6 +84,7 @@ Feature: Sign Up
       And the user with email "kobe@gmail.com" should have the following social network accounts
         |provider|
         |facebook|
+      And "kobe@gmail.com" should receive an email with sign up confirmation link
 
     Scenario: Oauth provider exists for the user
       Given "Kobe Bryant" is a user with email id "kobe@gmail.com" and password "password123"
@@ -129,14 +117,10 @@ Feature: Sign Up
       }
       """
       Then the response status should be "201"
-      And the JSON response should have "auth_token"
-        And the auth_token should be different from "auth_token_123"
       And the JSON response at "user_role" should be "user"
       And the JSON response at "first_name" should be "Kobe"
       And the JSON response at "last_name" should be "Bryant"
-      And the JSON response at "registration_complete" should be true
-      Given I keep the JSON response at "auth_token" as "AUTH_TOKEN"
-      Then the user with email "kobe@gmail.com" should have "%{AUTH_TOKEN}" as his authentication_token
+      And "kobe@gmail.com" should receive an email with sign up confirmation link
 
     Scenario: Oauth provider exists for the user ( edge case when another user exists )
       Given "Axl Rose" is a user with email id "axl@gmail.com" and password "password123"
@@ -186,15 +170,11 @@ Feature: Sign Up
       }
       """
       Then the response status should be "201"
-      And the JSON response should have "auth_token"
-        And the auth_token should be different from "auth_token_123"
       And the JSON response at "user_role" should be "user"
       And the JSON response at "first_name" should be "Kobe"
       And the JSON response at "last_name" should be "Bryant"
-      And the JSON response at "registration_complete" should be true
-      Given I keep the JSON response at "auth_token" as "AUTH_TOKEN"
-      Then the user with email "kobe@gmail.com" should have "%{AUTH_TOKEN}" as his authentication_token
       Then access_token of "axl@gmail.com" for "facebook" provider should not have changed
+      And "kobe@gmail.com" should receive an email with sign up confirmation link
 
     Scenario: Oauth token is invalid
       When I send a POST request to /api/users to use oauth with the following:
