@@ -27,6 +27,7 @@ var module = angular.module("kanariMobile", ["google-maps"]).config(function($ro
         .when('/transactionHistory',{templateUrl: "<%= asset_path 'transactionHistory.html' %>" })
         .when('/locationMap',{templateUrl: "<%= asset_path 'locationMap.html' %>" })
         .when('/api/users/password/edit', {templateUrl: "<%= asset_path 'reset_password_mobile.html' %>"})
+        .when('/api/users/confirmations', {templateUrl: "<%= asset_path 'confirmation_email.html' %>"})
         .otherwise({redirectTo: '/index'});
 });
 
