@@ -14,6 +14,7 @@ You need to install these :
 2. RubyGems 2.0
 3. bundler ruby gem
 4. MySql server
+5. Postfix ( for sending emails ) - `sudo apt-get install postfix`
 
 Using RVM for Ruby version management is recommended.
 
@@ -87,6 +88,15 @@ Talk to a duck.
     mv db/test_seeds.rb db/seeds.rb && rake db:seed RAILS_ENV=production # If you need the seed data
     #Configure SSL - TODO
     rake assets:precompile RAILS_ENV=production
+
+## Configure Email server
+
+1. Edit config/environments/production.rb, change the following line :
+
+    config.action_mailer.default_url_options = { :host => '<host_name(example: app.kanari.com)>' }
+
+2. Change SMTP settings to use the Email service (for example AWS SES)
+
 
 Uncomment the following line from `config/environments/production.rb` after setting up a webserver to serve static assets
 from the `public` directory of the application.
