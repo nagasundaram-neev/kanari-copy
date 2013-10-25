@@ -3036,9 +3036,9 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 
 					/**Net Promoter Score start**/
 					else if (idValue == "npsBreakdown") {
-						var foodLike = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.like;
-						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.neutral;
-						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.dislike;
+						var foodLike = data.feedback_trends.detailed_statistics[dateV].nps_breakdown.like;
+						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].nps_breakdown.neutral;
+						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].nps_breakdown.dislike;
 						npsBreakdownV = 1;
 						$scope.selectedOption = "npsBreakdown";
 						//graphType = "area";
@@ -3062,7 +3062,8 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.demographic = false;
 						$scope.usergraph = false;
 					} else if (idValue == "npsOverview") {
-						var foodLike = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.like - data.feedback_trends.detailed_statistics[dateV].net_promoter_score.dislike;
+						console.log("in");	
+						var foodLike = data.feedback_trends.detailed_statistics[dateV].nps_overview.like - data.feedback_trends.detailed_statistics[dateV].nps_overview.dislike;
 						npsOverview = 1;
 						usageLegend = "Net Promoter Score";
 						xAxisVal = "Time Interval (Months, Weeks, Days)";
