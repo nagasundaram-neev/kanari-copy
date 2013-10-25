@@ -2,22 +2,22 @@
 	<div data-role="content">
 		<div class="signedUpCls">
 			<div class="signUp">
-				Welcome to Kanari...
+				OK, you're done!
 			</div>
 		</div>
 		<div class="outerDiv mainDiv">
-			<span class="secondDiv thanks">Thanks for confirming your account email!</span>
+			<span class="secondDiv thanks">Thanks for confirming your email address. Go ahead and log in to your Kanari account.</span>
 			<div class="proceedBtn">
-				<input type="button" class="signBtn" ng-click="proceedAccount()" data-inline="true" value="Proceed to My Account"/>
+				<input type="button" class="signBtn" ng-click="proceedAccount()" data-inline="true" value="LOG IN TO MY ACCOUNT"/>
 			</div>
 		</div>
 		<p class="errorMsg" ng-show="errorMsg"></p>
 		<p ng-hide="errorMsg"></p>
 	</div>
 	<div data-role="footer">
-		<div class="tooltipCls">
+		<!-- <div class="tooltipCls">
 			<img src="<%= asset_path "blurb_forget.svg" %>" class="logo_btm" />
-		</div>
+		</div> -->
 		<img src="<%= asset_path "login_bird.png" %>" class="logo_btm" />
 	</div>
 </div>
