@@ -2272,7 +2272,7 @@ img, object {
 	overflow: hidden;
 	padding: 0;
 }
-.acceptTerms .ui-field-contain .ui-controlgroup, .ui-field-contain fieldset.ui-controlgroup {
+#signUp .acceptTerms .ui-field-contain .ui-controlgroup, #signUp  .ui-field-contain fieldset.ui-controlgroup {
 	width: 100% !important;
 }
 /*.feedback img{
