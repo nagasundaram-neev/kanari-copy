@@ -57,16 +57,16 @@ describe DashboardSummary do
         },
         :speed_of_service =>{
           :like=>{
-            :over_period=> 50.0,
-            :change_in_points=> -30.0
+            :over_period=> 60.0,
+            :change_in_points=> 0.0
           },
           :dislike=>{
-            :over_period=> 50.0,
-            :change_in_points=> 50.0
+            :over_period=> 40.0,
+            :change_in_points=> 40.0
           },
           :neutral=>{
             :over_period=> 0.0,
-            :change_in_points=> -20.0
+            :change_in_points=> -40.0
           }
         },
         :friendliness_of_service =>{
@@ -132,27 +132,26 @@ describe DashboardSummary do
   describe "#get_net_promoter_score_summary" do
     it "should return the nps summary as a hash" do
       @dashboard_summary.get_net_promoter_score_summary.should == {
-          score: {
-          over_period: 0.0,
-          change_in_points: -20.0
+        :detractors => {
+          :over_period=>40.0,
+          :change_in_points=>40.0
         },
-        feedbacks_count: {
-          over_period: 4,
-          change_in_percentage: -20.0
+        :feedbacks_count => {
+          :over_period=>5,
+          :change_in_percentage=>0.0
         },
-        promoters: {
-          over_period: 25.0,
-          change_in_points: -15.0
+        :passives => {
+          :over_period=>40.0,
+          :change_in_points=>0.0
         },
-        passives: {
-          over_period: 50.0,
-          change_in_points: 10.0
+        :promoters => {
+          :over_period=>20.0,
+          :change_in_points=>-40.0
         },
-        detractors: {
-          over_period: 25.0,
-          change_in_points: 5.0
+        :score => {
+          :over_period=>-20.0,
+          :change_in_points=>-80.0
         }
-
       }
     end
   end
@@ -160,8 +159,8 @@ describe DashboardSummary do
   describe "#get_feedback_submission_summary" do
     it "should return feedback submission related summary as a hash" do
       @dashboard_summary.get_feedback_submission_summary.should == {
-        :average_per_day => {:over_period=>1.0, :change_in_percentage=>-20.0},
-        :count => {:change_in_percentage=>-20.0, :over_period=>4}
+        :average_per_day => {:over_period=>1.25, :change_in_percentage=>0.0},
+        :count => {:change_in_percentage=>0.0, :over_period=>5}
       }
     end
   end
@@ -169,8 +168,8 @@ describe DashboardSummary do
   describe "#get_redemptions_count_summary" do
     it "should return redemptions count related summary as a hash" do
       @dashboard_summary.get_redemptions_count_summary.should == {
-        :average_per_day => {:over_period=>0.75, :change_in_percentage=>-50.0},
-        :count => {:change_in_percentage=>-50.0, :over_period=>3}
+        :average_per_day => {:over_period=>1.25, :change_in_percentage=>25.0},
+        :count => {:change_in_percentage=>25.0, :over_period=>5}
       }
     end
   end
@@ -179,7 +178,7 @@ describe DashboardSummary do
     it "should return rewards pool related summary as a hash" do
       @dashboard_summary.get_rewards_pool_summary.should == {
         :change_in_percentage => nil,
-        :over_period => 255.0
+        :over_period => 204.0
       }
     end
   end
@@ -205,8 +204,8 @@ describe DashboardSummary do
   describe "#get_average_bill_size_summary" do
     it "should return avergage bill size summary as a hash" do
       @dashboard_summary.get_average_bill_size_summary.should == {
-        over_period: 750.0,
-        change_in_percentage: 150.0,
+        :change_in_percentage => 100.0,
+        :over_period => 600.0
       }
     end
   end
@@ -223,8 +222,8 @@ describe DashboardSummary do
   describe "#get_points_issued_summary" do
     it "should return points issued summary as a hash" do
       @dashboard_summary.get_points_issued_summary.should == {
-        :average_per_day => {:over_period=>2.5, :change_in_percentage=>100.0},
-        :total => {:over_period=>10, :change_in_percentage=>100.0}
+        :average_per_day => {:over_period=>3.75, :change_in_percentage=>nil},
+        :total => {:over_period=> 15, :change_in_percentage=>nil}
       }
     end
   end
