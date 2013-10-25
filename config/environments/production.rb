@@ -10,7 +10,7 @@ Kanari::Application.configure do
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
 
-  config.action_mailer.default_url_options = { :host => ' kanari-377987740.ap-southeast-1.elb.amazonaws.com' }
+  config.action_mailer.default_url_options = { :host => 'kanari-377987740.ap-southeast-1.elb.amazonaws.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address:                 "127.0.0.1",
