@@ -108,7 +108,7 @@ end
 
 And /^"([^"]*)" should receive an email with sign up confirmation link$/ do |email|
   step "\"#{email}\" should have 1 emails"
-  step "\"#{email}\" should receive an email with subject /Confirmation instructions/"
+  step "\"#{email}\" should receive an email with subject /Confirm your email to start using Kanari/"
   open_last_email
   @user = User.where(email: email).first
   @confirmation_token = @user.confirmation_token
@@ -117,7 +117,7 @@ end
 
 And /^unconfirmed email id "([^"]*)" should receive an email with confirmation link$/ do |email|
   step "\"#{email}\" should have 1 emails"
-  step "\"#{email}\" should receive an email with subject /Confirmation instructions/"
+  step "\"#{email}\" should receive an email with subject /Confirm your email to start using Kanari/"
   open_last_email
   @user = User.where(unconfirmed_email: email).first
   @confirmation_token = @user.confirmation_token
@@ -126,7 +126,7 @@ end
 
 And /^"([^"]*)" should receive another confirmation email with the same token$/ do |email|
   step "\"#{email}\" should have 2 emails"
-  step "\"#{email}\" should receive an email with subject /Confirmation instructions/"
+  step "\"#{email}\" should receive an email with subject /Confirm your email to start using Kanari/"
   open_last_email
   step "I should see \"confirmation/#{@confirmation_token}\" in the email body"
 end
