@@ -131,6 +131,13 @@ And /^"([^"]*)" should receive another confirmation email with the same token$/ 
   step "I should see \"confirmation/#{@confirmation_token}\" in the email body"
 end
 
+And /^"([^"]*)" should receive the kanari welcome mail$/ do |email|
+  step "\"#{email}\" should receive an email with subject /Welcome to Kanari/"
+  open_last_email
+  @user = User.where(email: email).first
+  step "I should see \"#{@user.first_name}\" in the email body"
+end
+
 And /his reset_password_token is "([^"]*)"/ do |reset_password_token|
   @user.reset_password_token = reset_password_token
   @user.reset_password_sent_at = Time.now.utc

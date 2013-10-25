@@ -53,4 +53,3 @@ gem 'json_spec', group: :test # JSON matchers for tests
 gem 'debugger', '1.6.1', group: [:development, :test]
 gem 'foreman', :group => :development
 gem 'rails-erd', :group => :development
-gem 'seed_dump', :group => :development, git: 'git@github.com:emilsoman/seed_dump.git'
