@@ -805,7 +805,6 @@ module.controller('signUpController', function($scope, $http, $location) {
 });
 
 module.controller('signedUpController', function($scope, $http, $location, $routeParams) {
-	//console.log("hi ai madjl");
 	// $scope.email = getCookie('email');
 	// $scope.password = getCookie('password');
 	flagPage = 0;

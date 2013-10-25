@@ -3062,7 +3062,6 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 						$scope.demographic = false;
 						$scope.usergraph = false;
 					} else if (idValue == "npsOverview") {
-						console.log("in");	
 						var foodLike = data.feedback_trends.detailed_statistics[dateV].nps_overview.like - data.feedback_trends.detailed_statistics[dateV].nps_overview.dislike;
 						npsOverview = 1;
 						usageLegend = "Net Promoter Score";
