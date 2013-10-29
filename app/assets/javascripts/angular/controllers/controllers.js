@@ -3252,10 +3252,16 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 					results3.push(foodDisLike);
 				}
 
-				if (resultsDate.length > 15) {
-					tickInt = 15;
-				} else {
+				if (resultsDate.length <= 15) {
 					tickInt = 1;
+				} else if(resultsDate.length >= 15 && resultsDate.length <= 30) {
+					tickInt = 2;
+				}else if(resultsDate.length >= 31 && resultsDate.length <= 60) {
+					tickInt = 4;
+				}else if(resultsDate.length >= 61 && resultsDate.length <= 90) {
+					tickInt = 7;
+				}else if(resultsDate.length >= 91) {
+					tickInt = 30;
 				}
 
 				if (metricsId == "custExp" || npsBreakdownV == "1") {
