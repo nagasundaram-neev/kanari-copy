@@ -105,13 +105,19 @@ Feature: Dashboard Trends
            },
            "nps_overview": {
              "like"    : 40.0,
+             "like_count"    : 4,
              "dislike" : 30.0,
-             "neutral" : 30.0
+             "dislike_count" : 3,
+             "neutral" : 30.0,
+             "neutral_count" : 3
            },
            "nps_breakdown": {
              "like"    : 40.0,
+             "like_count"    : 4,
              "dislike" : 30.0,
-             "neutral" : 30.0
+             "dislike_count" : 3,
+             "neutral" : 30.0,
+             "neutral_count" : 3
            },
            "usage": {
              "feedbacks_count": 10,
@@ -342,13 +348,19 @@ Feature: Dashboard Trends
              },
              "nps_overview": {
                "like"    : 40.0,
+               "like_count"    : 4,
                "dislike" : 30.0,
-               "neutral" : 30.0
+               "dislike_count" : 3,
+               "neutral" : 30.0,
+               "neutral_count" : 3
              },
              "nps_breakdown": {
                "like"    : 20.0,
+               "like_count"    : 1,
                "dislike" : 40.0,
-               "neutral" : 40.0
+               "dislike_count" : 2,
+               "neutral" : 40.0,
+               "neutral_count" : 2
              },
              "usage": {
                "feedbacks_count": 5,
@@ -398,13 +410,19 @@ Feature: Dashboard Trends
              },
              "nps_overview": {
                "like"    : 60.0,
+               "like_count"    : 3,
                "dislike" : 20.0,
-               "neutral" : 20.0
+               "dislike_count" : 1,
+               "neutral" : 20.0,
+               "neutral_count" : 1
              },
              "nps_breakdown": {
                "like"    : 60.0,
+               "like_count"    : 3,
                "dislike" : 20.0,
-               "neutral" : 20.0
+               "dislike_count" : 1,
+               "neutral" : 20.0,
+               "neutral_count" : 1
              },
              "usage": {
                "feedbacks_count": 5,
@@ -494,358 +512,376 @@ Feature: Dashboard Trends
       And the JSON response should be:
       """
       {
-       "feedback_trends": {
-         "statistics": {
-           "food_quality": {
-             "like"    : 6,
-             "dislike" : 2,
-             "neutral" : 3
-           },
-           "speed_of_service": {
-             "like"    : 6,
-             "dislike" : 2,
-             "neutral" : 3
-           },
-           "friendliness_of_service": {
-             "like"    : 8,
-             "dislike" : 0,
-             "neutral" : 3
-           },
-           "ambience": {
-             "like"    : 2,
-             "dislike" : 5,
-             "neutral" : 4
-           },
-           "cleanliness": {
-             "like"    : 4,
-             "dislike" : 4,
-             "neutral" : 3
-           },
-           "value_for_money": {
-             "like"    : 8,
-             "dislike" : 2,
-             "neutral" : 1
-           },
-           "nps_overview": {
-             "like"    : 36.36363636363637,
-             "dislike" : 36.36363636363637,
-             "neutral" : 27.272727272727266
-           },
-           "nps_breakdown": {
-             "like"    : 36.36363636363637,
-             "dislike" : 36.36363636363637,
-             "neutral" : 27.272727272727266
-           },
-           "usage": {
-             "feedbacks_count": 11,
-             "redemptions_count": 8,
-             "discounts_claimed": 1700,
-             "points_issued": 2200,
-             "rewards_pool": 3600
-           },
-           "customers": {
-             "male": 14,
-             "female": 4,
-             "new_users": 0,
-             "returning_users": 18
-           },
-           "average_bill_amount": 2090.909090909091
-         },
-         "summary": {
-           "average_bill_size": {
-             "change_in_percentage": null,
-             "over_period": 2090.909090909091
-           },
-           "points_issued": {
-             "average_per_day": {
-               "change_in_percentage": null,
-               "over_period": 1150.0
-             },
-             "total": {
-               "change_in_percentage": null,
-               "over_period": 2300
-             }
-           },
-           "customer_experience": {
-             "ambience": {
-               "dislike": {
-                 "change_in_points": null,
-                 "over_period": 45.45454545454545
-               },
-               "like": {
-                 "change_in_points": null,
-                 "over_period": 18.181818181818183
-               },
-               "neutral": {
-                 "change_in_points": null,
-                 "over_period": 36.36363636363637
-               }
-             },
-             "cleanliness": {
-               "dislike": {
-                 "change_in_points": null,
-                 "over_period": 36.36363636363637
-               },
-               "like": {
-                 "change_in_points": null,
-                 "over_period": 36.36363636363637
-               },
-               "neutral": {
-                 "change_in_points": null,
-                 "over_period": 27.27272727272727
-               }
-             },
-             "food_quality": {
-               "dislike": {
-                 "change_in_points": null,
-                 "over_period": 18.181818181818183
-               },
-               "like": {
-                 "change_in_points": null,
-                 "over_period": 54.54545454545454
-               },
-               "neutral": {
-                 "change_in_points": null,
-                 "over_period": 27.27272727272727
-               }
-             },
-             "friendliness_of_service": {
-               "dislike": {
-                 "change_in_points": null,
-                 "over_period": 0.0
-               },
-               "like": {
-                 "change_in_points": null,
-                 "over_period": 72.72727272727273
-               },
-               "neutral": {
-                 "change_in_points": null,
-                 "over_period": 27.27272727272727
-               }
-             },
-             "speed_of_service": {
-               "dislike": {
-                 "change_in_points": null,
-                 "over_period": 18.181818181818183
-               },
-               "like": {
-                 "change_in_points": null,
-                 "over_period": 54.54545454545454
-               },
-               "neutral": {
-                 "change_in_points": null,
-                 "over_period": 27.27272727272727
-               }
-             },
-             "value_for_money": {
-               "dislike": {
-                 "change_in_points": null,
-                 "over_period": 18.181818181818183
-               },
-               "like": {
-                 "change_in_points": null,
-                 "over_period": 72.72727272727273
-               },
-               "neutral": {
-                 "change_in_points": null,
-                 "over_period": 9.090909090909092
-               }
-             }
-           },
-           "demographics": {
-             "female": {
-               "change_in_points": null,
-               "over_period": 33.33333333333334
-             },
-             "male": {
-               "change_in_points": null,
-               "over_period": 66.66666666666666
-             }
-           },
-           "feedback_submissions": {
-             "average_per_day": {
-               "change_in_percentage": null,
-               "over_period": 5.5
-             },
-             "count": {
-               "change_in_percentage": null,
-               "over_period": 11
-             }
-           },
-           "discounts_claimed": {
-             "average_per_day": {
-               "change_in_percentage": null,
-               "over_period": 850.0
-             },
-             "total": {
-               "change_in_percentage": null,
-               "over_period": 1700
-             }
-           },
-           "net_promoter_score": {
-             "detractors": {
-               "change_in_points": null,
-               "over_period": 36.36363636363637
-             },
-             "feedbacks_count": {
-               "change_in_percentage": null,
-               "over_period": 11
-             },
-             "passives": {
-               "change_in_points": null,
-               "over_period": 27.27272727272727
-             },
-             "promoters": {
-               "change_in_points": null,
-               "over_period": 36.36363636363637
-             },
-             "score": {
-               "change_in_points": null,
-               "over_period": 0.0
-             }
-           },
-           "redemptions_processed": {
-             "average_per_day": {
-               "change_in_percentage": null,
-               "over_period": 4.0
-             },
-             "count": {
-               "change_in_percentage": null,
-               "over_period": 8
-             }
-           },
-           "average_rewards_pool_size": {
-             "change_in_percentage": null,
-             "over_period": 0.0
-           },
-           "users": {
-             "new_users": {
-               "average_per_day": 0.0,
-               "change_in_percentage": null,
-               "over_period": 0
-             },
-             "returning_users": {
-               "average_per_day": 3.0,
-               "change_in_percentage": null,
-               "over_period": 6
-             }
-           }
-         },
-         "detailed_statistics": {
-           "2013-08-02": {
-             "food_quality": {
-               "like"    : 3,
-               "dislike" : 1,
-               "neutral" : 1
-             },
-             "speed_of_service": {
-               "like"    : 2,
-               "dislike" : 2,
-               "neutral" : 1
-             },
-             "friendliness_of_service": {
-               "like"    : 3,
-               "dislike" : 0,
-               "neutral" : 2
-             },
-             "ambience": {
-               "like"    : 1,
-               "dislike" : 3,
-               "neutral" : 1
-             },
-             "cleanliness": {
-               "like"    : 2,
-               "dislike" : 0,
-               "neutral" : 3
-             },
-             "value_for_money": {
-               "like"    : 4,
-               "dislike" : 1,
-               "neutral" : 0
-             },
-             "nps_overview": {
-               "like"    : 36.36363636363637,
-               "dislike" : 36.36363636363637,
-               "neutral" : 27.272727272727266
-             },
-             "nps_breakdown": {
-               "like"    : 20.0,
-               "dislike" : 40.0,
-               "neutral" : 40.0
-             },
-             "usage": {
-               "feedbacks_count": 5,
-               "redemptions_count": 4,
-               "discounts_claimed": 600,
-               "points_issued": 800,
-               "rewards_pool": 3600
-             },
-             "customers": {
-               "male": 8,
-               "female": 1,
-               "new_users": 0,
-               "returning_users": 9
-             },
-             "average_bill_amount": 1600.0
-           },
-           "2013-08-01": {
-             "food_quality": {
-               "like"    : 3,
-               "dislike" : 1,
-               "neutral" : 2
-             },
-             "speed_of_service": {
-               "like"    : 4,
-               "dislike" : 0,
-               "neutral" : 2
-             },
-             "friendliness_of_service": {
-               "like"    : 5,
-               "dislike" : 0,
-               "neutral" : 1
-             },
-             "ambience": {
-               "like"    : 1,
-               "dislike" : 2,
-               "neutral" : 3
-             },
-             "cleanliness": {
-               "like"    : 2,
-               "dislike" : 4,
-               "neutral" : 0
-             },
-             "value_for_money": {
-               "like"    : 4,
-               "dislike" : 1,
-               "neutral" : 1
-             },
-             "nps_overview": {
-               "like"    : 50.0,
-               "dislike" : 33.33333333333333,
-               "neutral" : 16.66666666666667
-             },
-             "nps_breakdown": {
-               "like"    : 50.0,
-               "dislike" : 33.33333333333333,
-               "neutral" : 16.66666666666667
-             },
-             "usage": {
-               "feedbacks_count": 6,
-               "redemptions_count": 4,
-               "discounts_claimed": 1100,
-               "points_issued": 1400,
-               "rewards_pool": 5600
-             },
-             "customers": {
-               "male": 6,
-               "female": 3,
-               "new_users": 0,
-               "returning_users": 9
-             },
-             "average_bill_amount": 2500.0
-           }
-         }
-       }
+        "feedback_trends": {
+          "detailed_statistics": {
+            "2013-08-01": {
+              "ambience": {
+                "dislike": 2,
+                "like": 1,
+                "neutral": 3
+              },
+              "average_bill_amount": 2500.0,
+              "cleanliness": {
+                "dislike": 4,
+                "like": 2,
+                "neutral": 0
+              },
+              "customers": {
+                "female": 3,
+                "male": 6,
+                "new_users": 0,
+                "returning_users": 9
+              },
+              "food_quality": {
+                "dislike": 1,
+                "like": 3,
+                "neutral": 2
+              },
+              "friendliness_of_service": {
+                "dislike": 0,
+                "like": 5,
+                "neutral": 1
+              },
+              "nps_breakdown": {
+                "dislike": 33.33333333333333,
+                "dislike_count": 2,
+                "like": 50.0,
+                "like_count": 3,
+                "neutral": 16.66666666666667,
+                "neutral_count": 1
+              },
+              "nps_overview": {
+                "dislike": 33.33333333333333,
+                "dislike_count": 2,
+                "like": 50.0,
+                "like_count": 3,
+                "neutral": 16.66666666666667,
+                "neutral_count": 1
+              },
+              "speed_of_service": {
+                "dislike": 0,
+                "like": 4,
+                "neutral": 2
+              },
+              "usage": {
+                "discounts_claimed": 1100,
+                "feedbacks_count": 6,
+                "points_issued": 1400,
+                "redemptions_count": 4,
+                "rewards_pool": 5600
+              },
+              "value_for_money": {
+                "dislike": 1,
+                "like": 4,
+                "neutral": 1
+              }
+            },
+            "2013-08-02": {
+              "ambience": {
+                "dislike": 3,
+                "like": 1,
+                "neutral": 1
+              },
+              "average_bill_amount": 1600.0,
+              "cleanliness": {
+                "dislike": 0,
+                "like": 2,
+                "neutral": 3
+              },
+              "customers": {
+                "female": 1,
+                "male": 8,
+                "new_users": 0,
+                "returning_users": 9
+              },
+              "food_quality": {
+                "dislike": 1,
+                "like": 3,
+                "neutral": 1
+              },
+              "friendliness_of_service": {
+                "dislike": 0,
+                "like": 3,
+                "neutral": 2
+              },
+              "nps_breakdown": {
+                "dislike": 40.0,
+                "dislike_count": 2,
+                "like": 20.0,
+                "like_count": 1,
+                "neutral": 40.0,
+                "neutral_count": 2
+              },
+              "nps_overview": {
+                "dislike": 36.36363636363637,
+                "dislike_count": 4,
+                "like": 36.36363636363637,
+                "like_count": 4,
+                "neutral": 27.272727272727266,
+                "neutral_count": 3
+              },
+              "speed_of_service": {
+                "dislike": 2,
+                "like": 2,
+                "neutral": 1
+              },
+              "usage": {
+                "discounts_claimed": 600,
+                "feedbacks_count": 5,
+                "points_issued": 800,
+                "redemptions_count": 4,
+                "rewards_pool": 3600
+              },
+              "value_for_money": {
+                "dislike": 1,
+                "like": 4,
+                "neutral": 0
+              }
+            }
+          },
+          "statistics": {
+            "ambience": {
+              "dislike": 5,
+              "like": 2,
+              "neutral": 4
+            },
+            "average_bill_amount": 2090.909090909091,
+            "cleanliness": {
+              "dislike": 4,
+              "like": 4,
+              "neutral": 3
+            },
+            "customers": {
+              "female": 4,
+              "male": 14,
+              "new_users": 0,
+              "returning_users": 18
+            },
+            "food_quality": {
+              "dislike": 2,
+              "like": 6,
+              "neutral": 3
+            },
+            "friendliness_of_service": {
+              "dislike": 0,
+              "like": 8,
+              "neutral": 3
+            },
+            "nps_breakdown": {
+              "dislike": 36.36363636363637,
+              "dislike_count": 4,
+              "like": 36.36363636363637,
+              "like_count": 4,
+              "neutral": 27.272727272727266,
+              "neutral_count": 3
+            },
+            "nps_overview": {
+              "dislike": 36.36363636363637,
+              "dislike_count": 4,
+              "like": 36.36363636363637,
+              "like_count": 4,
+              "neutral": 27.272727272727266,
+              "neutral_count": 3
+            },
+            "speed_of_service": {
+              "dislike": 2,
+              "like": 6,
+              "neutral": 3
+            },
+            "usage": {
+              "discounts_claimed": 1700,
+              "feedbacks_count": 11,
+              "points_issued": 2200,
+              "redemptions_count": 8,
+              "rewards_pool": 3600
+            },
+            "value_for_money": {
+              "dislike": 2,
+              "like": 8,
+              "neutral": 1
+            }
+          },
+          "summary": {
+            "average_bill_size": {
+              "change_in_percentage": null,
+              "over_period": 2090.909090909091
+            },
+            "average_rewards_pool_size": {
+              "change_in_percentage": null,
+              "over_period": 0.0
+            },
+            "customer_experience": {
+              "ambience": {
+                "dislike": {
+                  "change_in_points": null,
+                  "over_period": 45.45454545454545
+                },
+                "like": {
+                  "change_in_points": null,
+                  "over_period": 18.181818181818183
+                },
+                "neutral": {
+                  "change_in_points": null,
+                  "over_period": 36.36363636363637
+                }
+              },
+              "cleanliness": {
+                "dislike": {
+                  "change_in_points": null,
+                  "over_period": 36.36363636363637
+                },
+                "like": {
+                  "change_in_points": null,
+                  "over_period": 36.36363636363637
+                },
+                "neutral": {
+                  "change_in_points": null,
+                  "over_period": 27.27272727272727
+                }
+              },
+              "food_quality": {
+                "dislike": {
+                  "change_in_points": null,
+                  "over_period": 18.181818181818183
+                },
+                "like": {
+                  "change_in_points": null,
+                  "over_period": 54.54545454545454
+                },
+                "neutral": {
+                  "change_in_points": null,
+                  "over_period": 27.27272727272727
+                }
+              },
+              "friendliness_of_service": {
+                "dislike": {
+                  "change_in_points": null,
+                  "over_period": 0.0
+                },
+                "like": {
+                  "change_in_points": null,
+                  "over_period": 72.72727272727273
+                },
+                "neutral": {
+                  "change_in_points": null,
+                  "over_period": 27.27272727272727
+                }
+              },
+              "speed_of_service": {
+                "dislike": {
+                  "change_in_points": null,
+                  "over_period": 18.181818181818183
+                },
+                "like": {
+                  "change_in_points": null,
+                  "over_period": 54.54545454545454
+                },
+                "neutral": {
+                  "change_in_points": null,
+                  "over_period": 27.27272727272727
+                }
+              },
+              "value_for_money": {
+                "dislike": {
+                  "change_in_points": null,
+                  "over_period": 18.181818181818183
+                },
+                "like": {
+                  "change_in_points": null,
+                  "over_period": 72.72727272727273
+                },
+                "neutral": {
+                  "change_in_points": null,
+                  "over_period": 9.090909090909092
+                }
+              }
+            },
+            "demographics": {
+              "female": {
+                "change_in_points": null,
+                "over_period": 33.33333333333334
+              },
+              "male": {
+                "change_in_points": null,
+                "over_period": 66.66666666666666
+              }
+            },
+            "discounts_claimed": {
+              "average_per_day": {
+                "change_in_percentage": null,
+                "over_period": 850.0
+              },
+              "total": {
+                "change_in_percentage": null,
+                "over_period": 1700
+              }
+            },
+            "feedback_submissions": {
+              "average_per_day": {
+                "change_in_percentage": null,
+                "over_period": 5.5
+              },
+              "count": {
+                "change_in_percentage": null,
+                "over_period": 11
+              }
+            },
+            "net_promoter_score": {
+              "detractors": {
+                "change_in_points": null,
+                "over_period": 36.36363636363637
+              },
+              "feedbacks_count": {
+                "change_in_percentage": null,
+                "over_period": 11
+              },
+              "passives": {
+                "change_in_points": null,
+                "over_period": 27.27272727272727
+              },
+              "promoters": {
+                "change_in_points": null,
+                "over_period": 36.36363636363637
+              },
+              "score": {
+                "change_in_points": null,
+                "over_period": 0.0
+              }
+            },
+            "points_issued": {
+              "average_per_day": {
+                "change_in_percentage": null,
+                "over_period": 1150.0
+              },
+              "total": {
+                "change_in_percentage": null,
+                "over_period": 2300
+              }
+            },
+            "redemptions_processed": {
+              "average_per_day": {
+                "change_in_percentage": null,
+                "over_period": 4.0
+              },
+              "count": {
+                "change_in_percentage": null,
+                "over_period": 8
+              }
+            },
+            "users": {
+              "new_users": {
+                "average_per_day": 0.0,
+                "change_in_percentage": null,
+                "over_period": 0
+              },
+              "returning_users": {
+                "average_per_day": 3.0,
+                "change_in_percentage": null,
+                "over_period": 6
+              }
+            }
+          }
+        }
       }
       """
 
@@ -866,358 +902,376 @@ Feature: Dashboard Trends
       And the JSON response should be:
       """
       {
-       "feedback_trends": {
-         "statistics": {
-           "food_quality": {
-             "like"    : 0,
-             "dislike" : 0,
-             "neutral" : 0
-           },
-           "speed_of_service": {
-             "like"    : 0,
-             "dislike" : 0,
-             "neutral" : 0
-           },
-           "friendliness_of_service": {
-             "like"    : 0,
-             "dislike" : 0,
-             "neutral" : 0
-           },
-           "ambience": {
-             "like"    : 0,
-             "dislike" : 0,
-             "neutral" : 0
-           },
-           "cleanliness": {
-             "like"    : 0,
-             "dislike" : 0,
-             "neutral" : 0
-           },
-           "value_for_money": {
-             "like"    : 0,
-             "dislike" : 0,
-             "neutral" : 0
-           },
-           "nps_overview": {
-             "like"    : 0,
-             "dislike" : 0,
-             "neutral" : 0
-           },
-           "nps_breakdown": {
-             "like"    : 0,
-             "dislike" : 0,
-             "neutral" : 0
-           },
-           "usage": {
-             "feedbacks_count": 0,
-             "redemptions_count": 0,
-             "discounts_claimed": 0,
-             "points_issued": 0,
-             "rewards_pool": 0
-           },
-           "customers": {
-             "male": 0,
-             "female": 0,
-             "new_users": 0,
-             "returning_users": 0
-           },
-           "average_bill_amount": 0 
-         },
-         "summary": {
-           "average_bill_size": {
-             "change_in_percentage": null,
-             "over_period": 0.0
-           },
-           "points_issued": {
-             "average_per_day": {
-               "change_in_percentage": null,
-               "over_period": 0.0
-             },
-             "total": {
-               "change_in_percentage": null,
-               "over_period": 0
-             }
-           },
-           "discounts_claimed": {
-             "average_per_day": {
-               "change_in_percentage": null,
-               "over_period": 0.0
-             },
-             "total": {
-               "change_in_percentage": null,
-               "over_period": 0
-             }
-           },
-           "customer_experience": {
-             "ambience": {
-               "dislike": {
-                 "change_in_points": null,
-                 "over_period": null
-               },
-               "like": {
-                 "change_in_points": null,
-                 "over_period": null
-               },
-               "neutral": {
-                 "change_in_points": null,
-                 "over_period": null
-               }
-             },
-             "cleanliness": {
-               "dislike": {
-                 "change_in_points": null,
-                 "over_period": null
-               },
-               "like": {
-                 "change_in_points": null,
-                 "over_period": null
-               },
-               "neutral": {
-                 "change_in_points": null,
-                 "over_period": null
-               }
-             },
-             "food_quality": {
-               "dislike": {
-                 "change_in_points": null,
-                 "over_period": null
-               },
-               "like": {
-                 "change_in_points": null,
-                 "over_period": null
-               },
-               "neutral": {
-                 "change_in_points": null,
-                 "over_period": null
-               }
-             },
-             "friendliness_of_service": {
-               "dislike": {
-                 "change_in_points": null,
-                 "over_period": null
-               },
-               "like": {
-                 "change_in_points": null,
-                 "over_period": null
-               },
-               "neutral": {
-                 "change_in_points": null,
-                 "over_period": null
-               }
-             },
-             "speed_of_service": {
-               "dislike": {
-                 "change_in_points": null,
-                 "over_period": null
-               },
-               "like": {
-                 "change_in_points": null,
-                 "over_period": null
-               },
-               "neutral": {
-                 "change_in_points": null,
-                 "over_period": null
-               }
-             },
-             "value_for_money": {
-               "dislike": {
-                 "change_in_points": null,
-                 "over_period": null
-               },
-               "like": {
-                 "change_in_points": null,
-                 "over_period": null
-               },
-               "neutral": {
-                 "change_in_points": null,
-                 "over_period": null
-               }
-             }
-           },
-           "demographics": {
-             "female": {
-               "change_in_points": null,
-               "over_period": null
-             },
-             "male": {
-               "change_in_points": null,
-               "over_period": null
-             }
-           },
-           "redemptions_processed": {
-             "average_per_day": {
-               "change_in_percentage": null,
-               "over_period": 0.0
-             },
-             "count": {
-               "change_in_percentage": null,
-               "over_period": 0
-             }
-           },
-           "feedback_submissions": {
-             "average_per_day": {
-               "change_in_percentage": null,
-               "over_period": 0.0
-             },
-             "count": {
-               "change_in_percentage": null,
-               "over_period": 0
-             }
-           },
-           "net_promoter_score": {
-             "detractors": {
-               "change_in_points": null,
-               "over_period": null
-             },
-             "feedbacks_count": {
-               "change_in_percentage": null,
-               "over_period": 0
-             },
-             "passives": {
-               "change_in_points": null,
-               "over_period": null
-             },
-             "promoters": {
-               "change_in_points": null,
-               "over_period": null
-             },
-             "score": {
-               "change_in_points": null,
-               "over_period": null
-             }
-           },
-           "average_rewards_pool_size": {
-             "change_in_percentage": null,
-             "over_period": 0.0
-           },
-           "users": {
-             "new_users": {
-               "average_per_day": 0.0,
-               "change_in_percentage": null,
-               "over_period": 0
-             },
-             "returning_users": {
-               "average_per_day": 0.0,
-               "change_in_percentage": null,
-               "over_period": 0
-             }
-           }
-         },
-         "detailed_statistics": {
-           "2013-08-02": {
-             "food_quality": {
-               "like"    : 0,
-               "dislike" : 0,
-               "neutral" : 0
-             },
-             "speed_of_service": {
-               "like"    : 0,
-               "dislike" : 0,
-               "neutral" : 0
-             },
-             "friendliness_of_service": {
-               "like"    : 0,
-               "dislike" : 0,
-               "neutral" : 0
-             },
-             "ambience": {
-               "like"    : 0,
-               "dislike" : 0,
-               "neutral" : 0
-             },
-             "cleanliness": {
-               "like"    : 0,
-               "dislike" : 0,
-               "neutral" : 0
-             },
-             "value_for_money": {
-               "like"    : 0,
-               "dislike" : 0,
-               "neutral" : 0
-             },
-             "nps_overview": {
-               "like"    : 0,
-               "dislike" : 0,
-               "neutral" : 0
-             },
-             "nps_breakdown": {
-               "like"    : 0,
-               "dislike" : 0,
-               "neutral" : 0
-             },
-             "usage": {
-               "feedbacks_count": 0,
-               "redemptions_count": 0,
-               "discounts_claimed": 0,
-               "points_issued": 0,
-               "rewards_pool": 0
-             },
-             "customers": {
-               "male": 0,
-               "female": 0,
-               "new_users": 0,
-               "returning_users": 0
-             },
-             "average_bill_amount": 0
-           },
-           "2013-08-01": {
-             "food_quality": {
-               "like"    : 0,
-               "dislike" : 0,
-               "neutral" : 0
-             },
-             "speed_of_service": {
-               "like"    : 0,
-               "dislike" : 0,
-               "neutral" : 0
-             },
-             "friendliness_of_service": {
-               "like"    : 0,
-               "dislike" : 0,
-               "neutral" : 0
-             },
-             "ambience": {
-               "like"    : 0,
-               "dislike" : 0,
-               "neutral" : 0
-             },
-             "cleanliness": {
-               "like"    : 0,
-               "dislike" : 0,
-               "neutral" : 0
-             },
-             "value_for_money": {
-               "like"    : 0,
-               "dislike" : 0,
-               "neutral" : 0
-             },
-             "nps_overview": {
-               "like"    : 0,
-               "dislike" : 0,
-               "neutral" : 0
-             },
-             "nps_breakdown": {
-               "like"    : 0,
-               "dislike" : 0,
-               "neutral" : 0
-             },
-             "usage": {
-               "feedbacks_count": 0,
-               "redemptions_count": 0,
-               "discounts_claimed": 0,
-               "points_issued": 0,
-               "rewards_pool": 0
-             },
-             "customers": {
-               "male": 0,
-               "female": 0,
-               "new_users": 0,
-               "returning_users": 0
-             },
-             "average_bill_amount": 0
-           }
-         }
-       }
+        "feedback_trends": {
+          "detailed_statistics": {
+            "2013-08-01": {
+              "ambience": {
+                "dislike": 0,
+                "like": 0,
+                "neutral": 0
+              },
+              "average_bill_amount": 0,
+              "cleanliness": {
+                "dislike": 0,
+                "like": 0,
+                "neutral": 0
+              },
+              "customers": {
+                "female": 0,
+                "male": 0,
+                "new_users": 0,
+                "returning_users": 0
+              },
+              "food_quality": {
+                "dislike": 0,
+                "like": 0,
+                "neutral": 0
+              },
+              "friendliness_of_service": {
+                "dislike": 0,
+                "like": 0,
+                "neutral": 0
+              },
+              "nps_breakdown": {
+                "dislike": 0,
+                "dislike_count": null,
+                "like": 0,
+                "like_count": null,
+                "neutral": 0,
+                "neutral_count": null
+              },
+              "nps_overview": {
+                "dislike": 0,
+                "dislike_count": null,
+                "like": 0,
+                "like_count": null,
+                "neutral": 0,
+                "neutral_count": null
+              },
+              "speed_of_service": {
+                "dislike": 0,
+                "like": 0,
+                "neutral": 0
+              },
+              "usage": {
+                "discounts_claimed": 0,
+                "feedbacks_count": 0,
+                "points_issued": 0,
+                "redemptions_count": 0,
+                "rewards_pool": 0
+              },
+              "value_for_money": {
+                "dislike": 0,
+                "like": 0,
+                "neutral": 0
+              }
+            },
+            "2013-08-02": {
+              "ambience": {
+                "dislike": 0,
+                "like": 0,
+                "neutral": 0
+              },
+              "average_bill_amount": 0,
+              "cleanliness": {
+                "dislike": 0,
+                "like": 0,
+                "neutral": 0
+              },
+              "customers": {
+                "female": 0,
+                "male": 0,
+                "new_users": 0,
+                "returning_users": 0
+              },
+              "food_quality": {
+                "dislike": 0,
+                "like": 0,
+                "neutral": 0
+              },
+              "friendliness_of_service": {
+                "dislike": 0,
+                "like": 0,
+                "neutral": 0
+              },
+              "nps_breakdown": {
+                "dislike": 0,
+                "dislike_count": null,
+                "like": 0,
+                "like_count": null,
+                "neutral": 0,
+                "neutral_count": null
+              },
+              "nps_overview": {
+                "dislike": 0,
+                "dislike_count": null,
+                "like": 0,
+                "like_count": null,
+                "neutral": 0,
+                "neutral_count": null
+              },
+              "speed_of_service": {
+                "dislike": 0,
+                "like": 0,
+                "neutral": 0
+              },
+              "usage": {
+                "discounts_claimed": 0,
+                "feedbacks_count": 0,
+                "points_issued": 0,
+                "redemptions_count": 0,
+                "rewards_pool": 0
+              },
+              "value_for_money": {
+                "dislike": 0,
+                "like": 0,
+                "neutral": 0
+              }
+            }
+          },
+          "statistics": {
+            "ambience": {
+              "dislike": 0,
+              "like": 0,
+              "neutral": 0
+            },
+            "average_bill_amount": 0,
+            "cleanliness": {
+              "dislike": 0,
+              "like": 0,
+              "neutral": 0
+            },
+            "customers": {
+              "female": 0,
+              "male": 0,
+              "new_users": 0,
+              "returning_users": 0
+            },
+            "food_quality": {
+              "dislike": 0,
+              "like": 0,
+              "neutral": 0
+            },
+            "friendliness_of_service": {
+              "dislike": 0,
+              "like": 0,
+              "neutral": 0
+            },
+            "nps_breakdown": {
+              "dislike": 0,
+              "dislike_count": null,
+              "like": 0,
+              "like_count": null,
+              "neutral": 0,
+              "neutral_count": null
+            },
+            "nps_overview": {
+              "dislike": 0,
+              "dislike_count": null,
+              "like": 0,
+              "like_count": null,
+              "neutral": 0,
+              "neutral_count": null
+            },
+            "speed_of_service": {
+              "dislike": 0,
+              "like": 0,
+              "neutral": 0
+            },
+            "usage": {
+              "discounts_claimed": 0,
+              "feedbacks_count": 0,
+              "points_issued": 0,
+              "redemptions_count": 0,
+              "rewards_pool": 0
+            },
+            "value_for_money": {
+              "dislike": 0,
+              "like": 0,
+              "neutral": 0
+            }
+          },
+          "summary": {
+            "average_bill_size": {
+              "change_in_percentage": null,
+              "over_period": 0.0
+            },
+            "average_rewards_pool_size": {
+              "change_in_percentage": null,
+              "over_period": 0.0
+            },
+            "customer_experience": {
+              "ambience": {
+                "dislike": {
+                  "change_in_points": null,
+                  "over_period": null
+                },
+                "like": {
+                  "change_in_points": null,
+                  "over_period": null
+                },
+                "neutral": {
+                  "change_in_points": null,
+                  "over_period": null
+                }
+              },
+              "cleanliness": {
+                "dislike": {
+                  "change_in_points": null,
+                  "over_period": null
+                },
+                "like": {
+                  "change_in_points": null,
+                  "over_period": null
+                },
+                "neutral": {
+                  "change_in_points": null,
+                  "over_period": null
+                }
+              },
+              "food_quality": {
+                "dislike": {
+                  "change_in_points": null,
+                  "over_period": null
+                },
+                "like": {
+                  "change_in_points": null,
+                  "over_period": null
+                },
+                "neutral": {
+                  "change_in_points": null,
+                  "over_period": null
+                }
+              },
+              "friendliness_of_service": {
+                "dislike": {
+                  "change_in_points": null,
+                  "over_period": null
+                },
+                "like": {
+                  "change_in_points": null,
+                  "over_period": null
+                },
+                "neutral": {
+                  "change_in_points": null,
+                  "over_period": null
+                }
+              },
+              "speed_of_service": {
+                "dislike": {
+                  "change_in_points": null,
+                  "over_period": null
+                },
+                "like": {
+                  "change_in_points": null,
+                  "over_period": null
+                },
+                "neutral": {
+                  "change_in_points": null,
+                  "over_period": null
+                }
+              },
+              "value_for_money": {
+                "dislike": {
+                  "change_in_points": null,
+                  "over_period": null
+                },
+                "like": {
+                  "change_in_points": null,
+                  "over_period": null
+                },
+                "neutral": {
+                  "change_in_points": null,
+                  "over_period": null
+                }
+              }
+            },
+            "demographics": {
+              "female": {
+                "change_in_points": null,
+                "over_period": null
+              },
+              "male": {
+                "change_in_points": null,
+                "over_period": null
+              }
+            },
+            "discounts_claimed": {
+              "average_per_day": {
+                "change_in_percentage": null,
+                "over_period": 0.0
+              },
+              "total": {
+                "change_in_percentage": null,
+                "over_period": 0
+              }
+            },
+            "feedback_submissions": {
+              "average_per_day": {
+                "change_in_percentage": null,
+                "over_period": 0.0
+              },
+              "count": {
+                "change_in_percentage": null,
+                "over_period": 0
+              }
+            },
+            "net_promoter_score": {
+              "detractors": {
+                "change_in_points": null,
+                "over_period": null
+              },
+              "feedbacks_count": {
+                "change_in_percentage": null,
+                "over_period": 0
+              },
+              "passives": {
+                "change_in_points": null,
+                "over_period": null
+              },
+              "promoters": {
+                "change_in_points": null,
+                "over_period": null
+              },
+              "score": {
+                "change_in_points": null,
+                "over_period": null
+              }
+            },
+            "points_issued": {
+              "average_per_day": {
+                "change_in_percentage": null,
+                "over_period": 0.0
+              },
+              "total": {
+                "change_in_percentage": null,
+                "over_period": 0
+              }
+            },
+            "redemptions_processed": {
+              "average_per_day": {
+                "change_in_percentage": null,
+                "over_period": 0.0
+              },
+              "count": {
+                "change_in_percentage": null,
+                "over_period": 0
+              }
+            },
+            "users": {
+              "new_users": {
+                "average_per_day": 0.0,
+                "change_in_percentage": null,
+                "over_period": 0
+              },
+              "returning_users": {
+                "average_per_day": 0.0,
+                "change_in_percentage": null,
+                "over_period": 0
+              }
+            }
+          }
+        }
       }
       """
 
