@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require highcharts.src.js
+//= require exporting.js
 //= require jquery.autocomplete.min.js
 //= require jquery.nicescroll.min.js
 //= require jquery.nicescroll.plus.js
