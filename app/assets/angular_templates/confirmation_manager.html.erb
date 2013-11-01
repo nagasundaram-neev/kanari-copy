@@ -1,0 +1,22 @@
+<div data-role="page" data-theme="b" id="forgotPass" ng-controller="confirmManagerCtrl" class="main_content span12">
+	<style>
+		.input-help {
+			left: 438px;
+		}
+	</style>
+	<div class="loginDiv innerDiv" data-role="content" style="text-align: center;">
+		<h2>OK, you're done!</h2>
+		<p>
+			Thanks for confirming your email address. Go ahead and log in to your Kanari account.<a ng-click="gotoLogin()" style="cursor:pointer">Click here</a>
+		</p>
+	</div>
+	<p class="errorMsg" ng-show="erromsg">
+		{{errorMsg}}
+	</p>
+	<p ng-hide="erromsg"></p>
+	<!-- <input type="button" class="loginBtn" ng-click="BackLink()" data-inline="true" value="Back" /> -->
+</div>
+</div>
+<div class="logo_btm"></div>
+</div>
+</div>

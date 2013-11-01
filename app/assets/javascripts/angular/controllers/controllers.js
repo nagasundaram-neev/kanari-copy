@@ -347,6 +347,36 @@ module.controller('forgotPassCtrl', function($rootScope, $scope, $http, $locatio
 	}
 });
 
+module.controller('confirmManagerCtrl', function($rootScope, $scope, $http, $location, $routeParams) {
+	$rootScope.header = "Confirmation Email | Kanari";
+	$scope.erromsg = false;
+	//$scope.succMsg = true;
+
+	$scope.confirmMail = function() {
+		var param = {
+			"confirmation_token" : $routeParams.confirmation_token
+		}
+
+		$http({
+			method : 'get',
+			url : '/api/users/confirmation',
+			params : param
+		}).success(function(data, status) {
+			$scope.succMsg = true;
+		}).error(function(data, status) {
+			console.log("hi iam in");
+			$scope.erromsg = true;
+			//$scope.succMsg = false;
+			$scope.errorMsg = data.error;
+		});
+	};
+	$scope.confirmMail();
+	
+	$scope.gotoLogin = function() {
+		$location.url("/login");
+	}
+});
+
 module.controller('resetPassCtrl', function($rootScope, $scope, $routeParams, $http, $location) {
 	$rootScope.header = "Reset Password | Kanari";
 	$scope.erromsg = false;
@@ -3254,13 +3284,13 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 
 				if (resultsDate.length <= 15) {
 					tickInt = 1;
-				} else if(resultsDate.length >= 15 && resultsDate.length <= 30) {
+				} else if (resultsDate.length >= 15 && resultsDate.length <= 30) {
 					tickInt = 2;
-				}else if(resultsDate.length >= 31 && resultsDate.length <= 60) {
+				} else if (resultsDate.length >= 31 && resultsDate.length <= 60) {
 					tickInt = 4;
-				}else if(resultsDate.length >= 61 && resultsDate.length <= 90) {
+				} else if (resultsDate.length >= 61 && resultsDate.length <= 90) {
 					tickInt = 7;
-				}else if(resultsDate.length >= 91) {
+				} else if (resultsDate.length >= 91) {
 					tickInt = 30;
 				}
 
