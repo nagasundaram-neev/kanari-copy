@@ -286,7 +286,11 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 					$scope.error = "You are not authenticated to use this app";
 					$scope.erromsg = true;
 				} else {
-					$scope.error = "Invalid Email or Password";
+					if (data.errors == "Inactive User") {
+						$scope.error = "Inactive User";
+					} else {
+						$scope.error = "Invalid Email or Password";
+					}
 					$scope.erromsg = true;
 				}
 			});
@@ -350,7 +354,7 @@ module.controller('forgotPassCtrl', function($rootScope, $scope, $http, $locatio
 module.controller('confirmManagerCtrl', function($rootScope, $scope, $http, $location, $routeParams) {
 	$rootScope.header = "Confirmation Email | Kanari";
 	$scope.erromsg = false;
-	//$scope.succMsg = true;
+	$scope.succMsg = true;
 
 	$scope.confirmMail = function() {
 		var param = {
@@ -364,14 +368,13 @@ module.controller('confirmManagerCtrl', function($rootScope, $scope, $http, $loc
 		}).success(function(data, status) {
 			$scope.succMsg = true;
 		}).error(function(data, status) {
-			console.log("hi iam in");
 			$scope.erromsg = true;
-			//$scope.succMsg = false;
+			$scope.succMsg = false;
 			$scope.errorMsg = data.error;
 		});
 	};
 	$scope.confirmMail();
-	
+
 	$scope.gotoLogin = function() {
 		$location.url("/login");
 	}
@@ -953,7 +956,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			for (var i = 0; i < arrayLength; i++) {
 				dateV = Object.keys($scope.trendsList)[i];
 				startDateV = moment(dateV).format('MMM DD');
-				var foodLike = data.feedback_trends.detailed_statistics[dateV].net_promoter_score.like - data.feedback_trends.detailed_statistics[dateV].net_promoter_score.dislike;
+				var foodLike = data.feedback_trends.detailed_statistics[dateV].nps_overview.like - data.feedback_trends.detailed_statistics[dateV].nps_overview.dislike;
 				npsOverview = 1;
 				usageLegend = "Net Promoter Score";
 				xAxisVal = "Time Interval (Months, Weeks, Days)";
