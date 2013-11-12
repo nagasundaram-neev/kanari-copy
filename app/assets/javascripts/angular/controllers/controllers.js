@@ -973,22 +973,64 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$scope.noOfRedem = data.feedback_trends.summary.redemptions_processed.count.change_in_percentage;
 			$scope.discountClaimed = data.feedback_trends.summary.discounts_claimed.total.change_in_percentage;
 			$scope.pointsIssued = data.feedback_trends.summary.points_issued.total.change_in_percentage;
-			$scope.food_monthlyChange = data.feedback_trends.summary.customer_experience.food_quality.like.over_period - data.feedback_trends.summary.customer_experience.food_quality.dislike.over_period;
+			$scope.food_monthlyChangeLike = data.feedback_trends.summary.customer_experience.food_quality.like.over_period;
+			$scope.food_monthlyChangeDislike = data.feedback_trends.summary.customer_experience.food_quality.dislike.over_period;
+			$scope.food_monthlyChangeNeutral = data.feedback_trends.summary.customer_experience.food_quality.neutral.over_period;
+			if($scope.food_monthlyChange < 0){
+				signFood = '-'
+			}else{
+				signFood = '';
+			}
 			//$scope.food_neutral = data.feedback_trends.summary.customer_experience.food_quality.neutral.over_period;
 			//$scope.food_negative = data.feedback_trends.summary.customer_experience.food_quality.dislike.over_period;
-			$scope.speed_monthlyChange = data.feedback_trends.summary.customer_experience.speed_of_service.like.over_period - data.feedback_trends.summary.customer_experience.speed_of_service.dislike.over_period;
+			$scope.speed_monthlyChangeLike = data.feedback_trends.summary.customer_experience.speed_of_service.like.over_period;
+			 $scope.speed_monthlyChangeDislike = data.feedback_trends.summary.customer_experience.speed_of_service.dislike.over_period;
+			 $scope.speed_monthlyChangeNeutral = data.feedback_trends.summary.customer_experience.speed_of_service.neutral.over_period;
+			if($scope.speed_monthlyChange < 0){
+				signSpeed = '-'
+			}else{
+				signSpeed = '';
+			}
 			//$scope.speed_neutral = data.feedback_trends.summary.customer_experience.speed_of_service.neutral.over_period;
 			//$scope.speed_negative = data.feedback_trends.summary.customer_experience.speed_of_service.dislike.over_period;
-			$scope.friendly_monthlyChange = data.feedback_trends.summary.customer_experience.friendliness_of_service.like.over_period - data.feedback_trends.summary.customer_experience.friendliness_of_service.dislike.over_period;
+			$scope.friendly_monthlyChangeLike = data.feedback_trends.summary.customer_experience.friendliness_of_service.like.over_period;
+			$scope.friendly_monthlyChangeDislike = data.feedback_trends.summary.customer_experience.friendliness_of_service.dislike.over_period;
+			$scope.friendly_monthlyChangeNeutral = data.feedback_trends.summary.customer_experience.friendliness_of_service.neutral.over_period;
+			if($scope.friendly_monthlyChange < 0){
+				signFriendly = '-'
+			}else{
+				signFriendly = '';
+			}
 			//$scope.friendly_neutral = data.feedback_trends.summary.customer_experience.friendliness_of_service.neutral.over_period;
 			//$scope.friendly_negative = data.feedback_trends.summary.customer_experience.friendliness_of_service.dislike.over_period;
-			$scope.ambience_monthlyChange = data.feedback_trends.summary.customer_experience.ambience.like.over_period - data.feedback_trends.summary.customer_experience.ambience.dislike.over_period;
+			$scope.ambience_monthlyChangeLike = data.feedback_trends.summary.customer_experience.ambience.like.over_period;
+			$scope.ambience_monthlyChangeDislike = data.feedback_trends.summary.customer_experience.ambience.dislike.over_period;
+			$scope.ambience_monthlyChangeNeutral = data.feedback_trends.summary.customer_experience.ambience.neutral.over_period;
+			if($scope.ambience_monthlyChange < 0){
+				signAmbience = '-'
+			}else{
+				signAmbience = '';
+			}
 			//$scope.ambience_neutral = data.feedback_trends.summary.customer_experience.ambience.neutral.over_period;
 			//$scope.ambience_negative = data.feedback_trends.summary.customer_experience.ambience.dislike.over_period;
-			$scope.clean_monthlyChange = data.feedback_trends.summary.customer_experience.cleanliness.like.over_period - data.feedback_trends.summary.customer_experience.cleanliness.dislike.over_period;
+			$scope.clean_monthlyChangeLike = data.feedback_trends.summary.customer_experience.cleanliness.like.over_period;
+			$scope.clean_monthlyChangeDislike = data.feedback_trends.summary.customer_experience.cleanliness.dislike.over_period;
+			$scope.clean_monthlyChangeNeutral = data.feedback_trends.summary.customer_experience.cleanliness.neutral.over_period;
+			if($scope.clean_monthlyChange < 0){
+				signClean = '-'
+			}else{
+				signClean = '';
+			}
 			//$scope.clean_neutral = data.feedback_trends.summary.customer_experience.cleanliness.neutral.over_period;
 			//$scope.clean_negative = data.feedback_trends.summary.customer_experience.cleanliness.dislike.over_period;
-			$scope.moneyVal_monthlyChange = data.feedback_trends.summary.customer_experience.value_for_money.like.over_period - data.feedback_trends.summary.customer_experience.value_for_money.dislike.over_period;
+			$scope.moneyVal_monthlyChangeLike = data.feedback_trends.summary.customer_experience.value_for_money.like.over_period;
+			$scope.moneyVal_monthlyChangeDislike = data.feedback_trends.summary.customer_experience.value_for_money.dislike.over_period;
+			$scope.moneyVal_monthlyChangeNeutral = data.feedback_trends.summary.customer_experience.value_for_money.neutral.over_period;
+			if($scope.moneyVal_monthlyChange < 0){
+				signMoney = '-'
+			}else{
+				signMoney = '';
+			}
 			//$scope.moneyVal_neutral = data.feedback_trends.summary.customer_experience.value_for_money.neutral.over_period;
 			//$scope.moneyVal_negative = data.feedback_trends.summary.customer_experience.value_for_money.dislike.over_period;
 			male = data.feedback_trends.summary.demographics.male.over_period;
@@ -999,17 +1041,26 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			getUsageGraph();
 			pieChart1();
 			pieChart2();
-
+			donutChartFood();
+			donutChartSpeed();
+			donutChartClean();
+			donutChartFriendly();
+			donutChartAmbience();
+			donutChartMoneyVal();
+	
 		}).error(function(data, status) {
 			if (status == 401) {
 				$location.url("/login");
 			}
 		});
-
+		
 		function getUsageGraph() {
-			$('#container').highcharts({
+			 //chart1 = new Highcharts.Chart({
+			 	
+			 	$('#container').highcharts({
 				chart : {
-					type : graphType
+					renderTo : 'container',
+					type : 'line'
 				},
 				title : {
 					text : $scope.chart_heading + ' | Stacked column chart',
@@ -1026,7 +1077,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 						style : {
 							fontSize : '10px',
 							fontColor : '#7C7A7D',
-							fontFamily : 'Open Sans'
+							fontFamily : 'Roboto'
 						}
 					},
 					title : {
@@ -1063,11 +1114,286 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					color : '#664766'
 				}],
 				exporting : {
-					enabled : true,
+					enabled : false,
 					type : 'image/jpeg'
 				}
 			});
+
 		}
+
+		function donutChartFood() {
+		//chart2 = new Highcharts.Chart({ 	
+			$('#food').highcharts({
+				chart : {
+					renderTo : 'food',
+					plotBackgroundColor : null,
+					plotBorderWidth : 0,
+					plotShadow : false
+				},
+				title : {
+					text : (Math.round( ($scope.food_monthlyChangeLike - $scope.food_monthlyChangeDislike) * 10) / 10) + '%',
+					align : 'center',
+					verticalAlign : 'middle',
+					y : 30
+				},
+				tooltip : {
+					pointFormat : '{series.name}: <b>{point.percentage:.1f}%</b>'
+				},
+				plotOptions : {
+					pie : {
+						dataLabels : {
+							enabled : false,
+							distance : -50,
+							style : {
+								fontWeight : 'bold',
+								color : 'white',
+								textShadow : '0px 1px 2px black'
+							}
+						},
+						startAngle : -135,
+						endAngle : 135,
+						center : ['50%', '75%']
+					}
+				},
+				series : [{
+					type : 'pie',
+					name : 'Food',
+					innerSize : '75%',
+					data : [['Like', $scope.food_monthlyChangeLike], ['Dislike', $scope.food_monthlyChangeDislike],['Neutral', $scope.food_monthlyChangeNeutral]]
+				}],
+				exporting : {
+					enabled : false,
+					type : 'image/jpeg'
+				}
+			});
+		};
+
+
+		function donutChartSpeed() {
+			$('#speed').highcharts({
+				chart : {
+					plotBackgroundColor : null,
+					plotBorderWidth : 0,
+					plotShadow : false
+				},
+				title : {
+					text :  (Math.round(($scope.speed_monthlyChangeLike - $scope.speed_monthlyChangeDislike) * 10) / 10 )  + '%',
+					align : 'center',
+					verticalAlign : 'middle',
+					y : 30
+				},
+				tooltip : {
+					pointFormat : '{series.name}: <b>{point.percentage:.1f}%</b>'
+				},
+				plotOptions : {
+					pie : {
+						dataLabels : {
+							enabled : false,
+							distance : -50,
+							style : {
+								fontWeight : 'bold',
+								color : 'white',
+								textShadow : '0px 1px 2px black'
+							}
+						},
+						startAngle : -135,
+						endAngle : 135,
+						center : ['50%', '75%']
+					}
+				},
+				series : [{
+					type : 'pie',
+					name : 'Speed',
+					innerSize : '75%',
+					data : [['Like', $scope.speed_monthlyChangeLike], ['Dislike', $scope.speed_monthlyChangeDislike],['Neutral', $scope.speed_monthlyChangeNeutral]]
+				}],
+				exporting : {
+					enabled : false,
+					type : 'image/jpeg'
+				}
+			});
+		};
+
+		function donutChartFriendly() {
+			$('#friendly').highcharts({
+				chart : {
+					plotBackgroundColor : null,
+					plotBorderWidth : 0,
+					fillColor: '#ff0000',
+					plotShadow : false
+				},
+				title : {
+					text : (Math.round(($scope.friendly_monthlyChangeLike - $scope.friendly_monthlyChangeDislike)*10)/10) + '%',
+					align : 'center',
+					verticalAlign : 'middle',
+					y : 30
+				},
+				tooltip : {
+					pointFormat : '{series.name}: <b>{point.percentage:.1f}%</b>'
+				},
+				plotOptions : {
+					pie : {
+						dataLabels : {
+							enabled : false,
+							distance : -50,
+							style : {
+								fontWeight : 'bold',
+								color : 'white',
+								textShadow : '0px 1px 2px black'
+							}
+						},
+						startAngle : -135,
+						endAngle : 135,
+						center : ['50%', '75%']
+					}
+				},
+				series : [{
+					type : 'pie',
+					name : 'Friendliness',
+					innerSize : '75%',
+					data : [['Like', $scope.friendly_monthlyChangeLike], ['Dislike', $scope.friendly_monthlyChangeDislike],['Neutral', $scope.friendly_monthlyChangeNeutral]]
+				}],
+				exporting : {
+					enabled : false,
+					type : 'image/jpeg'
+				}
+			});
+		};
+
+		function donutChartClean() {
+			$('#clean').highcharts({
+				chart : {
+					plotBackgroundColor : null,
+					plotBorderWidth : 0,
+					plotShadow : false
+				},
+				title : {
+					text : (Math.round(($scope.clean_monthlyChangeLike - $scope.clean_monthlyChangeDislike)*10)/10) + '%',
+					align : 'center',
+					verticalAlign : 'middle',
+					y : 30
+				},
+				tooltip : {
+					pointFormat : '{series.name}: <b>{point.percentage:.1f}%</b>'
+				},
+				plotOptions : {
+					pie : {
+						dataLabels : {
+							enabled : false,
+							distance : -50,
+							style : {
+								fontWeight : 'bold',
+								color : 'white',
+								textShadow : '0px 1px 2px black'
+							}
+						},
+						startAngle : -135,
+						endAngle : 135,
+						center : ['50%', '75%']
+					}
+				},
+				series : [{
+					type : 'pie',
+					name : 'Cleanliness',
+					innerSize : '75%',
+					data : [['Like', $scope.clean_monthlyChangeLike], ['Dislike', $scope.clean_monthlyChangeDislike],['Neutral', $scope.clean_monthlyChangeNeutral]]
+				}],
+				exporting : {
+					enabled : false,
+					type : 'image/jpeg'
+				}
+			});
+		};
+
+		function donutChartAmbience() {
+			$('#ambience').highcharts({
+				chart : {
+					plotBackgroundColor : null,
+					plotBorderWidth : 0,
+					plotShadow : false
+				},
+				title : {
+					text : (Math.round(($scope.ambience_monthlyChangeLike - $scope.ambience_monthlyChangeDislike)*10)/10)  + '%',
+					align : 'center',
+					verticalAlign : 'middle',
+					y : 30
+				},
+				tooltip : {
+					pointFormat : '{series.name}: <b>{point.percentage:.1f}%</b>'
+				},
+				plotOptions : {
+					pie : {
+						dataLabels : {
+							enabled : false,
+							distance : -50,
+							style : {
+								fontWeight : 'bold',
+								color : 'white',
+								textShadow : '0px 1px 2px black'
+							}
+						},
+						startAngle : -135,
+						endAngle : 135,
+						center : ['50%', '75%']
+					}
+				},
+				series : [{
+					type : 'pie',
+					name : 'Ambiance',
+					innerSize : '75%',
+					data : [['Like', $scope.ambience_monthlyChangeLike], ['Dislike', $scope.ambience_monthlyChangeDislike],['Neutral', $scope.ambience_monthlyChangeNeutral]]
+				}],
+				exporting : {
+					enabled : false,
+					type : 'image/jpeg'
+				}
+			});
+		};
+
+		function donutChartMoneyVal() {
+			$('#moneyVal').highcharts({
+				chart : {
+					plotBackgroundColor : null,
+					plotBorderWidth : 0,
+					plotShadow : false
+				},
+				title : {
+					text :(Math.round(($scope.moneyVal_monthlyChangeLike - $scope.moneyVal_monthlyChangeDislike)*10)/10)  + '%',
+					align : 'center',
+					verticalAlign : 'middle',
+					y : 30
+				},
+				tooltip : {
+					pointFormat : '{series.name}: <b>{point.percentage:.1f}%</b>'
+				},
+				plotOptions : {
+					pie : {
+						dataLabels : {
+							enabled : false,
+							distance : -50,
+							style : {
+								fontWeight : 'bold',
+								color : 'white',
+								textShadow : '0px 1px 2px black'
+							}
+						},
+						startAngle : -135,
+						endAngle : 135,
+						center : ['50%', '75%']
+					}
+				},
+				series : [{
+					type : 'pie',
+					name : 'Value For Money',
+					innerSize : '75%',
+					data : [['Like', $scope.moneyVal_monthlyChangeLike], ['Dislike',$scope.moneyVal_monthlyChangeDislike],['Neutral',$scope.moneyVal_monthlyChangeNeutral]]
+				}],
+				exporting : {
+					enabled : false,
+					type : 'image/jpeg'
+				}
+			});
+		};
 
 		function pieChart1() {
 			$('#pieChart1').highcharts({
@@ -1098,9 +1424,13 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					type : 'pie',
 					name : 'Browser share',
 					data : [['male', male], ['female', female]]
-				}]
+				}],
+				exporting : {
+					enabled : false,
+					type : 'image/jpeg'
+				}
 			});
-		}
+		};
 
 		function pieChart2() {
 			$('#pieChart2').highcharts({
@@ -1131,9 +1461,54 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					type : 'pie',
 					name : 'Browser share',
 					data : [['New User', newUser], ['Returning User', retUser]]
-				}]
+				}],
+				exporting : {
+					enabled : false,
+					type : 'image/jpeg'
+				}
 			});
-		}
+		};
+
+		function pieChart3() {
+			$('#pieChart3').highcharts({
+				chart : {
+					plotBackgroundColor : null,
+					plotBorderWidth : null,
+					plotShadow : false
+				},
+				title : {
+					text : 'NEW VS. RETURNING'
+				},
+				tooltip : {
+					pointFormat : '{series.name}: <b>{point.percentage:.1f}%</b>'
+				},
+				plotOptions : {
+					pie : {
+						allowPointSelect : true,
+						cursor : 'pointer',
+						dataLabels : {
+							enabled : true,
+							color : '#000000',
+							connectorColor : '#000000',
+							format : '<b>{point.name}</b>: {point.percentage:.1f} %'
+						}
+					}
+				},
+				series : [{
+					type : 'pie',
+					name : 'Browser share',
+					data : [['New User', newUser], ['Returning User', retUser]]
+				}],
+				exporting : {
+					enabled : false,
+					type : 'image/jpeg'
+				}
+			});
+		};
+		
+		$scope.printReport = function(){
+			window.print();
+		};
 
 
 		$scope.getOutlet = function() {
@@ -4202,6 +4577,3 @@ function validateNumber() {
 	}
 }
 
-// function formatPhone(obj) {
-// $(obj).addClass('ng-pristine');
-// }
