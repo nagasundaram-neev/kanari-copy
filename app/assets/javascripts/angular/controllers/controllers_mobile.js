@@ -212,6 +212,8 @@ module.controller('loginController', function($scope, $http, $location) {
 	// $scope.$watch('email + password', function() {
 	// $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
 	// });
+	
+	// comment for checking 
 
 });
 //Function to call addtohomepage on Iphone
