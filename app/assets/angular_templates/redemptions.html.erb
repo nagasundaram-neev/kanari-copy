@@ -37,7 +37,7 @@
 			</div>
 		</div>
 	</div>
-	<span class="redeemptions"> <span ng-click="close()"><%= image_tag 'b_closes.png' ,:class=> 'closeBtn' %></span> <h3 class="redemptionMsg" ng-show="!processedRedemptionList.length">You don't have any process redemptions at the moment</h3> <div class="clr"></div>
+	<span class="redeemptions"> <span ng-click="close()"><%= asset_path 'b_closes.png' ,:class=> 'closeBtn' %></span> <h3 class="redemptionMsg" ng-show="!processedRedemptionList.length">You don't have any process redemptions at the moment</h3> <div class="clr"></div>
 		<div  ng-show="processedRedemptionList.length" >
 			<div class="redemptionsListRow redemptHdr clearfix">
 				<div class="col5">
