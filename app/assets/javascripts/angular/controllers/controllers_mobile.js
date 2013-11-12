@@ -582,30 +582,49 @@ module.controller('resetPassController', function($scope, $http, $location, $rou
 
 	flagPage = 0;
 	footerFlag = 0;
+	$scope.success = false;
 	$scope.erromsg = false;
 	$scope.resetPass = function() {
 		//alert($routeParams.reset_password_token);
 		var userPass = $scope.password;
 		var userConfirmPass = $scope.confirmpassword;
 		var resetPassToken = $routeParams.reset_password_token;
-		var param = {
-			"user" : {
-				"password" : userPass,
-				"password_confirmation" : userConfirmPass,
-				"reset_password_token" : resetPassToken
-			}
-		};
-		$http({
-			method : 'put',
-			url : '/api/users/password',
-			data : param,
-		}).success(function(data, status) {
-			$scope.error = data.auth_token;
-			$scope.statement = true;
-			$scope.erromsg = false;
-		}).error(function(data, status) {
+		if(!$scope.confirmpassword || !$scope.password){
+			$scope.error = "Please enter the password";
+			$scope.success = false;
 			$scope.erromsg = true;
-		});
+			
+		}else{
+			var param = {
+				"user" : {
+					"password" : userPass,
+					"password_confirmation" : userConfirmPass,
+					"reset_password_token" : resetPassToken
+				}
+			};
+			$http({
+				method : 'put',
+				url : '/api/users/password',
+				data : param,
+			}).success(function(data, status) {
+				//$scope.error = data.auth_token;
+				//$scope.statement = true;
+				$scope.success = true;
+				$scope.erromsg = false;
+			}).error(function(data, status) {
+				$scope.error = "The passwords you entered don't match, please re-enter them.";
+				$scope.erromsg = true;
+				$scope.success = false;
+			});
+		 }//else{
+			// $scope.error = "Please enter the password";
+			// $scope.erromsg = true;
+		// }
+
+	};
+
+	$scope.home = function() {
+		$location.url("/login");
 	};
 
 });
@@ -809,7 +828,7 @@ module.controller('signedUpController', function($scope, $http, $location, $rout
 	// $scope.password = getCookie('password');
 	flagPage = 0;
 	footerFlag = 0;
-	
+
 	$scope.errorMsg = false;
 
 	var param = {
@@ -821,7 +840,7 @@ module.controller('signedUpController', function($scope, $http, $location, $rout
 		url : '/api/users/confirmation',
 		params : param
 	}).success(function(data, status) {
-		
+
 	}).error(function(data, status) {
 		$scope.errorMsg = true;
 		$scope.errorMsg = data.error;
