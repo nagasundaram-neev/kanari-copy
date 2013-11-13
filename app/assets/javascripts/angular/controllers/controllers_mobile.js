@@ -213,6 +213,8 @@ module.controller('loginController', function($scope, $http, $location) {
 	// $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.email + ':' + $scope.password);
 	// });
 
+	// comment for checking
+
 });
 //Function to call addtohomepage on Iphone
 function addToIphoneHomePage() {
@@ -589,12 +591,12 @@ module.controller('resetPassController', function($scope, $http, $location, $rou
 		var userPass = $scope.password;
 		var userConfirmPass = $scope.confirmpassword;
 		var resetPassToken = $routeParams.reset_password_token;
-		if(!$scope.confirmpassword || !$scope.password){
+		if (!$scope.confirmpassword || !$scope.password) {
 			$scope.error = "Please enter the password";
 			$scope.success = false;
 			$scope.erromsg = true;
-			
-		}else{
+
+		} else {
 			var param = {
 				"user" : {
 					"password" : userPass,
@@ -607,8 +609,6 @@ module.controller('resetPassController', function($scope, $http, $location, $rou
 				url : '/api/users/password',
 				data : param,
 			}).success(function(data, status) {
-				//$scope.error = data.auth_token;
-				//$scope.statement = true;
 				$scope.success = true;
 				$scope.erromsg = false;
 			}).error(function(data, status) {
@@ -616,10 +616,7 @@ module.controller('resetPassController', function($scope, $http, $location, $rou
 				$scope.erromsg = true;
 				$scope.success = false;
 			});
-		 }//else{
-			// $scope.error = "Please enter the password";
-			// $scope.erromsg = true;
-		// }
+		}
 
 	};
 
