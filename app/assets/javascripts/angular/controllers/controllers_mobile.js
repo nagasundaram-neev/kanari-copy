@@ -1161,12 +1161,12 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 		if ($scope.like) {
 			if ($scope.feedBackArray[category] == 0) {
 				$scope.feedBackArray[category] = 1;
-				$("#feed_" + category + " img").attr('src', '/assets/icon_' + $scope.feedBackCategoryName[category] + '4.svg');
+				$("#feed_" + category + " img").attr('src', '/icons/icon_' + $scope.feedBackCategoryName[category] + '4.svg');
 				$("#feed_" + category).css("background-color", "#664765");
 				$("#feed_" + category + " span").css("color", "#E5E6E8");
 			} else if ($scope.feedBackArray[category] == 1) {
 				$scope.feedBackArray[category] = 0;
-				$("#feed_" + category + " img").attr('src', '/assets/icon_' + $scope.feedBackCategoryName[category] + '3.svg');
+				$("#feed_" + category + " img").attr('src', '/icons/icon_' + $scope.feedBackCategoryName[category] + '3.svg');
 				$("#feed_" + category).css("background-color", "#E5E6E8");
 				$("#feed_" + category + " span").css("color", "#664765");
 			}
@@ -1174,12 +1174,12 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 		} else {
 			if ($scope.feedBackArray[category] == 0) {
 				$scope.feedBackArray[category] = -1;
-				$("#feed_" + category + " img").attr('src', '/assets/icon_' + $scope.feedBackCategoryName[category] + '2.svg');
+				$("#feed_" + category + " img").attr('src', '/icons/icon_' + $scope.feedBackCategoryName[category] + '2.svg');
 				$("#feed_" + category).css("background-color", "#664765");
 				$("#feed_" + category + " span").css("color", "#E5E6E8");
 			} else if ($scope.feedBackArray[category] == -1) {
 				$scope.feedBackArray[category] = 0;
-				$("#feed_" + category + " img").attr('src', '/assets/icon_' + $scope.feedBackCategoryName[category] + '1.svg');
+				$("#feed_" + category + " img").attr('src', '/icons/icon_' + $scope.feedBackCategoryName[category] + '1.svg');
 				$("#feed_" + category).css("background-color", "#E5E6E8");
 				$("#feed_" + category + " span").css("color", "#664765");
 			}
@@ -1192,17 +1192,17 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			for (var i = 0; i < $scope.feedBackSize; i++) {
 				if ($scope.feedBackArray[i] == 0) {
 					$scope.feedBackArray[i] = 0;
-					$("#feed_" + i + " img").attr('src', '/assets/icon_' + $scope.feedBackCategoryName[i] + '1.svg');
+					$("#feed_" + i + " img").attr('src', '/icons/icon_' + $scope.feedBackCategoryName[i] + '1.svg');
 					$("#feed_" + i).css("background-color", "#E5E6E8");
 					$("#feed_" + i + " span").css("color", "#664765");
 				} else if ($scope.feedBackArray[i] == 1) {
 					$scope.feedBackArray[i] = 1;
-					$("#feed_" + i + " img").attr('src', '/assets/icon_' + $scope.feedBackCategoryName[i] + '2.svg');
+					$("#feed_" + i + " img").attr('src', '/icons/icon_' + $scope.feedBackCategoryName[i] + '2.svg');
 					$("#feed_" + i).css("background-color", "#CCCCCC");
 					$("#feed_" + i + " span").css("color", "#664765");
 				} else if ($scope.feedBackArray[i] == -1) {
 					$scope.feedBackArray[i] = -1;
-					$("#feed_" + i + " img").attr('src', '/assets/icon_' + $scope.feedBackCategoryName[i] + '2.svg');
+					$("#feed_" + i + " img").attr('src', '/icons/icon_' + $scope.feedBackCategoryName[i] + '2.svg');
 					$("#feed_" + i).css("background-color", "#664765");
 					$("#feed_" + i + " span").css("color", "#E5E6E8 ");
 				}
@@ -1348,17 +1348,17 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			for (var i = 0; i < $scope.feedBackSize; i++) {
 				if ($scope.feedBackArray[i] == 0) {
 					$scope.feedBackArray[i] = 0;
-					$("#feed_" + i + " img").attr('src', '/assets/icon_' + $scope.feedBackCategoryName[i] + '3.svg');
+					$("#feed_" + i + " img").attr('src', '/icons/icon_' + $scope.feedBackCategoryName[i] + '3.svg');
 					$("#feed_" + i).css("background-color", "#E5E6E8");
 					$("#feed_" + i + " span").css("color", "#664765");
 				} else if ($scope.feedBackArray[i] == -1) {
 					$scope.feedBackArray[i] = -1;
-					$("#feed_" + i + " img").attr('src', '/assets/icon_' + $scope.feedBackCategoryName[i] + '4.svg');
+					$("#feed_" + i + " img").attr('src', '/icons/icon_' + $scope.feedBackCategoryName[i] + '4.svg');
 					$("#feed_" + i).css("background-color", "#CCCCCC");
 					$("#feed_" + i + " span").css("color", "#664765");
 				} else if ($scope.feedBackArray[i] == 1) {
 					$scope.feedBackArray[i] = 1;
-					$("#feed_" + i + " img").attr('src', '/assets/icon_' + $scope.feedBackCategoryName[i] + '4.svg');
+					$("#feed_" + i + " img").attr('src', '/icons/icon_' + $scope.feedBackCategoryName[i] + '4.svg');
 					$("#feed_" + i).css("background-color", "#664765");
 					$("#feed_" + i + " span").css("color", "#E5E6E8");
 				}
