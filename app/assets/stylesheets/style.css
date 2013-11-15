@@ -1585,7 +1585,7 @@ img, object {
 	 height: 39px;
 	 margin: 0% 0 0;
 	 width: 39px;*/
-	background-image: url("/assets/icons/ic_search_purple.png");
+	background-image: url("/icons/ic_search_purple.png");
 	background-position: 0 0;
 	cursor: pointer;
 	float: right;
