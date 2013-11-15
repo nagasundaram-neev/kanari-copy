@@ -143,13 +143,16 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 		return ($('.content')[0].scrollHeight) - 38;
 	});
 
-	if (getCookie('userRole') == "kanari_admin") {
-		$scope.userName = getCookie('userRole');
-	} else if (getCookie('userRole') == "customer_admin") {
-		$scope.userName = getCookie('userName');
-	} else if (getCookie('userRole') == "manager") {
-		$scope.userName = getCookie('userName');
-	}
+	$scope.setUsername = function() {
+		if (getCookie('userRole') == "kanari_admin") {
+			$scope.userName = getCookie('userRole');
+		} else if (getCookie('userRole') == "customer_admin") {
+			$scope.userName = getCookie('userName');
+		} else if (getCookie('userRole') == "manager") {
+			$scope.userName = getCookie('userName');
+		}
+	};
+	$scope.setUsername();
 
 	$scope.logout = function() {
 		$http({
@@ -183,7 +186,6 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 		$location.url("/" + section);
 	}
 	if (getCookie('userRole') == "manager") {
-
 		$('#account').hide();
 		$scope.accountm = true;
 		$('#accountm').show();
@@ -976,19 +978,19 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$scope.food_monthlyChangeLike = data.feedback_trends.summary.customer_experience.food_quality.like.over_period;
 			$scope.food_monthlyChangeDislike = data.feedback_trends.summary.customer_experience.food_quality.dislike.over_period;
 			$scope.food_monthlyChangeNeutral = data.feedback_trends.summary.customer_experience.food_quality.neutral.over_period;
-			if($scope.food_monthlyChange < 0){
+			if ($scope.food_monthlyChange < 0) {
 				signFood = '-'
-			}else{
+			} else {
 				signFood = '';
 			}
 			//$scope.food_neutral = data.feedback_trends.summary.customer_experience.food_quality.neutral.over_period;
 			//$scope.food_negative = data.feedback_trends.summary.customer_experience.food_quality.dislike.over_period;
 			$scope.speed_monthlyChangeLike = data.feedback_trends.summary.customer_experience.speed_of_service.like.over_period;
-			 $scope.speed_monthlyChangeDislike = data.feedback_trends.summary.customer_experience.speed_of_service.dislike.over_period;
-			 $scope.speed_monthlyChangeNeutral = data.feedback_trends.summary.customer_experience.speed_of_service.neutral.over_period;
-			if($scope.speed_monthlyChange < 0){
+			$scope.speed_monthlyChangeDislike = data.feedback_trends.summary.customer_experience.speed_of_service.dislike.over_period;
+			$scope.speed_monthlyChangeNeutral = data.feedback_trends.summary.customer_experience.speed_of_service.neutral.over_period;
+			if ($scope.speed_monthlyChange < 0) {
 				signSpeed = '-'
-			}else{
+			} else {
 				signSpeed = '';
 			}
 			//$scope.speed_neutral = data.feedback_trends.summary.customer_experience.speed_of_service.neutral.over_period;
@@ -996,9 +998,9 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$scope.friendly_monthlyChangeLike = data.feedback_trends.summary.customer_experience.friendliness_of_service.like.over_period;
 			$scope.friendly_monthlyChangeDislike = data.feedback_trends.summary.customer_experience.friendliness_of_service.dislike.over_period;
 			$scope.friendly_monthlyChangeNeutral = data.feedback_trends.summary.customer_experience.friendliness_of_service.neutral.over_period;
-			if($scope.friendly_monthlyChange < 0){
+			if ($scope.friendly_monthlyChange < 0) {
 				signFriendly = '-'
-			}else{
+			} else {
 				signFriendly = '';
 			}
 			//$scope.friendly_neutral = data.feedback_trends.summary.customer_experience.friendliness_of_service.neutral.over_period;
@@ -1006,9 +1008,9 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$scope.ambience_monthlyChangeLike = data.feedback_trends.summary.customer_experience.ambience.like.over_period;
 			$scope.ambience_monthlyChangeDislike = data.feedback_trends.summary.customer_experience.ambience.dislike.over_period;
 			$scope.ambience_monthlyChangeNeutral = data.feedback_trends.summary.customer_experience.ambience.neutral.over_period;
-			if($scope.ambience_monthlyChange < 0){
+			if ($scope.ambience_monthlyChange < 0) {
 				signAmbience = '-'
-			}else{
+			} else {
 				signAmbience = '';
 			}
 			//$scope.ambience_neutral = data.feedback_trends.summary.customer_experience.ambience.neutral.over_period;
@@ -1016,9 +1018,9 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$scope.clean_monthlyChangeLike = data.feedback_trends.summary.customer_experience.cleanliness.like.over_period;
 			$scope.clean_monthlyChangeDislike = data.feedback_trends.summary.customer_experience.cleanliness.dislike.over_period;
 			$scope.clean_monthlyChangeNeutral = data.feedback_trends.summary.customer_experience.cleanliness.neutral.over_period;
-			if($scope.clean_monthlyChange < 0){
+			if ($scope.clean_monthlyChange < 0) {
 				signClean = '-'
-			}else{
+			} else {
 				signClean = '';
 			}
 			//$scope.clean_neutral = data.feedback_trends.summary.customer_experience.cleanliness.neutral.over_period;
@@ -1026,9 +1028,9 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			$scope.moneyVal_monthlyChangeLike = data.feedback_trends.summary.customer_experience.value_for_money.like.over_period;
 			$scope.moneyVal_monthlyChangeDislike = data.feedback_trends.summary.customer_experience.value_for_money.dislike.over_period;
 			$scope.moneyVal_monthlyChangeNeutral = data.feedback_trends.summary.customer_experience.value_for_money.neutral.over_period;
-			if($scope.moneyVal_monthlyChange < 0){
+			if ($scope.moneyVal_monthlyChange < 0) {
 				signMoney = '-'
-			}else{
+			} else {
 				signMoney = '';
 			}
 			//$scope.moneyVal_neutral = data.feedback_trends.summary.customer_experience.value_for_money.neutral.over_period;
@@ -1047,17 +1049,17 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 			donutChartFriendly();
 			donutChartAmbience();
 			donutChartMoneyVal();
-	
+
 		}).error(function(data, status) {
 			if (status == 401) {
 				$location.url("/login");
 			}
 		});
-		
+
 		function getUsageGraph() {
-			 //chart1 = new Highcharts.Chart({
-			 	
-			 	$('#container').highcharts({
+			//chart1 = new Highcharts.Chart({
+
+			$('#container').highcharts({
 				chart : {
 					renderTo : 'container',
 					type : 'line'
@@ -1122,7 +1124,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 		}
 
 		function donutChartFood() {
-		//chart2 = new Highcharts.Chart({ 	
+			//chart2 = new Highcharts.Chart({
 			$('#food').highcharts({
 				chart : {
 					renderTo : 'food',
@@ -1131,7 +1133,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					plotShadow : false
 				},
 				title : {
-					text : (Math.round( ($scope.food_monthlyChangeLike - $scope.food_monthlyChangeDislike) * 10) / 10) + '%',
+					text : (Math.round(($scope.food_monthlyChangeLike - $scope.food_monthlyChangeDislike) * 10) / 10) + '%',
 					align : 'center',
 					verticalAlign : 'middle',
 					y : 30
@@ -1159,7 +1161,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					type : 'pie',
 					name : 'Food',
 					innerSize : '75%',
-					data : [['Like', $scope.food_monthlyChangeLike], ['Dislike', $scope.food_monthlyChangeDislike],['Neutral', $scope.food_monthlyChangeNeutral]]
+					data : [['Like', $scope.food_monthlyChangeLike], ['Dislike', $scope.food_monthlyChangeDislike], ['Neutral', $scope.food_monthlyChangeNeutral]]
 				}],
 				exporting : {
 					enabled : false,
@@ -1167,7 +1169,6 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				}
 			});
 		};
-
 
 		function donutChartSpeed() {
 			$('#speed').highcharts({
@@ -1177,7 +1178,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					plotShadow : false
 				},
 				title : {
-					text :  (Math.round(($scope.speed_monthlyChangeLike - $scope.speed_monthlyChangeDislike) * 10) / 10 )  + '%',
+					text : (Math.round(($scope.speed_monthlyChangeLike - $scope.speed_monthlyChangeDislike) * 10) / 10 ) + '%',
 					align : 'center',
 					verticalAlign : 'middle',
 					y : 30
@@ -1205,7 +1206,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					type : 'pie',
 					name : 'Speed',
 					innerSize : '75%',
-					data : [['Like', $scope.speed_monthlyChangeLike], ['Dislike', $scope.speed_monthlyChangeDislike],['Neutral', $scope.speed_monthlyChangeNeutral]]
+					data : [['Like', $scope.speed_monthlyChangeLike], ['Dislike', $scope.speed_monthlyChangeDislike], ['Neutral', $scope.speed_monthlyChangeNeutral]]
 				}],
 				exporting : {
 					enabled : false,
@@ -1219,11 +1220,11 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				chart : {
 					plotBackgroundColor : null,
 					plotBorderWidth : 0,
-					fillColor: '#ff0000',
+					fillColor : '#ff0000',
 					plotShadow : false
 				},
 				title : {
-					text : (Math.round(($scope.friendly_monthlyChangeLike - $scope.friendly_monthlyChangeDislike)*10)/10) + '%',
+					text : (Math.round(($scope.friendly_monthlyChangeLike - $scope.friendly_monthlyChangeDislike) * 10) / 10) + '%',
 					align : 'center',
 					verticalAlign : 'middle',
 					y : 30
@@ -1251,7 +1252,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					type : 'pie',
 					name : 'Friendliness',
 					innerSize : '75%',
-					data : [['Like', $scope.friendly_monthlyChangeLike], ['Dislike', $scope.friendly_monthlyChangeDislike],['Neutral', $scope.friendly_monthlyChangeNeutral]]
+					data : [['Like', $scope.friendly_monthlyChangeLike], ['Dislike', $scope.friendly_monthlyChangeDislike], ['Neutral', $scope.friendly_monthlyChangeNeutral]]
 				}],
 				exporting : {
 					enabled : false,
@@ -1268,7 +1269,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					plotShadow : false
 				},
 				title : {
-					text : (Math.round(($scope.clean_monthlyChangeLike - $scope.clean_monthlyChangeDislike)*10)/10) + '%',
+					text : (Math.round(($scope.clean_monthlyChangeLike - $scope.clean_monthlyChangeDislike) * 10) / 10) + '%',
 					align : 'center',
 					verticalAlign : 'middle',
 					y : 30
@@ -1296,7 +1297,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					type : 'pie',
 					name : 'Cleanliness',
 					innerSize : '75%',
-					data : [['Like', $scope.clean_monthlyChangeLike], ['Dislike', $scope.clean_monthlyChangeDislike],['Neutral', $scope.clean_monthlyChangeNeutral]]
+					data : [['Like', $scope.clean_monthlyChangeLike], ['Dislike', $scope.clean_monthlyChangeDislike], ['Neutral', $scope.clean_monthlyChangeNeutral]]
 				}],
 				exporting : {
 					enabled : false,
@@ -1313,7 +1314,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					plotShadow : false
 				},
 				title : {
-					text : (Math.round(($scope.ambience_monthlyChangeLike - $scope.ambience_monthlyChangeDislike)*10)/10)  + '%',
+					text : (Math.round(($scope.ambience_monthlyChangeLike - $scope.ambience_monthlyChangeDislike) * 10) / 10) + '%',
 					align : 'center',
 					verticalAlign : 'middle',
 					y : 30
@@ -1341,7 +1342,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					type : 'pie',
 					name : 'Ambiance',
 					innerSize : '75%',
-					data : [['Like', $scope.ambience_monthlyChangeLike], ['Dislike', $scope.ambience_monthlyChangeDislike],['Neutral', $scope.ambience_monthlyChangeNeutral]]
+					data : [['Like', $scope.ambience_monthlyChangeLike], ['Dislike', $scope.ambience_monthlyChangeDislike], ['Neutral', $scope.ambience_monthlyChangeNeutral]]
 				}],
 				exporting : {
 					enabled : false,
@@ -1358,7 +1359,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					plotShadow : false
 				},
 				title : {
-					text :(Math.round(($scope.moneyVal_monthlyChangeLike - $scope.moneyVal_monthlyChangeDislike)*10)/10)  + '%',
+					text : (Math.round(($scope.moneyVal_monthlyChangeLike - $scope.moneyVal_monthlyChangeDislike) * 10) / 10) + '%',
 					align : 'center',
 					verticalAlign : 'middle',
 					y : 30
@@ -1386,7 +1387,7 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 					type : 'pie',
 					name : 'Value For Money',
 					innerSize : '75%',
-					data : [['Like', $scope.moneyVal_monthlyChangeLike], ['Dislike',$scope.moneyVal_monthlyChangeDislike],['Neutral',$scope.moneyVal_monthlyChangeNeutral]]
+					data : [['Like', $scope.moneyVal_monthlyChangeLike], ['Dislike', $scope.moneyVal_monthlyChangeDislike], ['Neutral', $scope.moneyVal_monthlyChangeNeutral]]
 				}],
 				exporting : {
 					enabled : false,
@@ -1505,11 +1506,10 @@ module.controller('createOutletCtrl', function($rootScope, $scope, $routeParams,
 				}
 			});
 		};
-		
-		$scope.printReport = function(){
+
+		$scope.printReport = function() {
 			window.print();
 		};
-
 
 		$scope.getOutlet = function() {
 			if ($routeParams.outletId) {
@@ -2271,6 +2271,8 @@ module.controller('outletManagerCtrl', function($rootScope, $scope, $routeParams
 					data : param,
 				}).success(function(data, status) {
 					setCookie('authToken', data.auth_token, 1);
+					setCookie('userName', $scope.first_name + ' ' + $scope.last_name, 1);
+					angular.element(document.getElementById('common')).scope().setUsername();
 					$scope.manager_updated = "Manager has been updated successfully";
 				}).error(function(data, status) {
 					if (status == 401) {
