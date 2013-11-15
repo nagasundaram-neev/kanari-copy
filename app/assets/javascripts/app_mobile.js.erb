@@ -6,7 +6,6 @@ var module = angular.module("kanariMobile", ["google-maps"]).config(function($ro
     $locationProvider.html5Mode(false);
     $locationProvider.hashPrefix("");
     // routes
-   //console.log("in router");
     $routeProvider
         .when('/home',{templateUrl:"<%= asset_path 'home_mobile.html' %>"}) // this is the default JQueryMobile view in index.html
         .when('/index',{templateUrl: "<%= asset_path 'landing_page.html' %>" })
@@ -32,8 +31,9 @@ var module = angular.module("kanariMobile", ["google-maps"]).config(function($ro
 });
 
 
-  module.filter('truncate', function () {
+  module.filter('truncate',function () {
         return function (text, length, end) {
+        	
             if (isNaN(length))
                 length = 15;
  
@@ -50,28 +50,5 @@ var module = angular.module("kanariMobile", ["google-maps"]).config(function($ro
             }
  
         };
-    });
+     });
     
-     module.filter('truncateName', function () {
-        return function (text, length, end) {
-            if (isNaN(length))
-                length = 14;
- 
-            if (end === undefined)
-                end = "...";
- 
-            if (text.length <= length ) {
-                return text;
-            }
-            
-            else {
-                return String(text).substring(0, length-end.length) + end;
-                
-            }
- 
-        };
-    });
-    
-
-
-

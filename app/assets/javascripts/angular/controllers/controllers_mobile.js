@@ -1497,6 +1497,13 @@ module.controller('restaurantListController', function($scope, $http, $location)
 	}
 });
 
+function truncate(string){
+   if (string.length > 15)
+      return string.substring(0,13)+'...';
+   else
+      return string;
+};
+
 module.controller('showRestaurantController', function($scope, $http, $routeParams, $location) {
 
 	if (getCookie('authToken')) {
@@ -1517,7 +1524,7 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 			params : param,
 		}).success(function(data, status) {
 			$scope.outletID = data.outlet.id;
-			$scope.restaurant_name = data.outlet.name;
+			$scope.restaurant_name = truncate(data.outlet.name);
 			$scope.restaurant_address = data.outlet.address;
 			$scope.email_address = data.outlet.email;
 			$scope.contact_number = data.outlet.phone_number;
@@ -1563,6 +1570,9 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 	}
 
 });
+
+
+
 
 module.controller('redeemPointsController', function($scope, $http, $location, $routeParams) {
 
