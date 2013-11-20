@@ -1,22 +1,28 @@
-<div data-role="page" data-theme="b" id="forgotPass" ng-controller="confirmManagerCtrl" class="main_content span12">
+<div data-role="page" data-theme="b" id="confirmEmail" ng-controller="confirmManagerCtrl" class="main_content span12">
 	<style>
 		.input-help {
 			left: 438px;
 		}
+		.ngView {
+			background: none repeat scroll 0 0 #F5BA44;
+			color: #5A4166;
+			/*padding: 20px 0;*/
+		}
+		#common{
+			background: none repeat scroll 0 0 #F5BA44;
+		}
 	</style>
 	<div class="loginDiv innerDiv" data-role="content" style="text-align: center;">
-		<h2>OK, you're done!</h2>
-		<p>
-			Thanks for confirming your email address. Go ahead and log in to your Kanari account.<a ng-click="gotoLogin()" style="cursor:pointer">Click here</a>
-		</p>
+		<div class="headerLogo" align="center">
+			<a class="kanarilogo" href="javascript:void(0);"><%= image_tag 'business_logo.svg' %></a>
+		</div>
+		<h2 class="confirmH2">OK, you're done! Just visit</h2>
+		<a class="redbutton">app.kanari.co</a>
+		<h2 class="confirmH2" href="javascript:void(0);">from your mobile browser to get started!</h2>
 	</div>
-	<p class="errorMsg" ng-show="erromsg">
-		{{errorMsg}}
+	<!-- <p class="errorMsg" ng-show="erromsg">
+	{{errorMsg}}
 	</p>
 	<p ng-hide="erromsg"></p>
 	<!-- <input type="button" class="loginBtn" ng-click="BackLink()" data-inline="true" value="Back" /> -->
-</div>
-</div>
-<div class="logo_btm"></div>
-</div>
 </div>

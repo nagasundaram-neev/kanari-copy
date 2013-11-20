@@ -357,7 +357,7 @@ module.controller('confirmManagerCtrl', function($rootScope, $scope, $http, $loc
 	$rootScope.header = "Confirmation Email | Kanari";
 	$scope.erromsg = false;
 	$scope.succMsg = true;
-
+	$('.header').hide();
 	$scope.confirmMail = function() {
 		var param = {
 			"confirmation_token" : $routeParams.confirmation_token
