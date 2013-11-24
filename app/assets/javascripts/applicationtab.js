@@ -12,6 +12,7 @@
 //
 //
 //= require moment.min
+//= require localytics.js
 //= require iscroll
 //= require app_tablet
 //= require angular/controllers/controllers_tablet

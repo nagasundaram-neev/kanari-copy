@@ -13,6 +13,7 @@
 //
 //= require jquery-mobile-angular-adapter-standalone-1.2.0
 //= require jquery.nicescroll.min
+//= require localytics.js
 //= require mobiscroll-1.5.min
 //= require jquery.nicescroll.plus
 //= require angular-google-maps

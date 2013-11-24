@@ -130,6 +130,8 @@ var flag = 0;
 var feedbackTimeout;
 var insightTimeout;
 var redemTimeout;
+var localyticsSession = LocalyticsSession("a82f806f8ee66e07a62c716-e5454e1c-5375-11e3-926f-005cf8cbabd8");
+localyticsSession.open();
 
 module.controller('headerCtrl', function($scope, $http, $location) {
 	var overlayDiv = $("#overlaySuccess");
@@ -184,6 +186,9 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 				'z-index' : '0',
 				'background-color' : 'transparent'
 			});
+			localyticsSession.tagEvent("Exit");
+			localyticsSession.upload();
+			localyticsSession.close();
 
 		}).error(function(data, status) {
 		});
@@ -1015,6 +1020,8 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 				data : param
 			}).success(function(data, status) {
 				$scope.listRedemptions();
+				localyticsSession.tagEvent("Redemption Confirmed");
+				
 			}).error(function(data, status) {
 				if (status == 401) {
 					deleteCookie('authToken');
