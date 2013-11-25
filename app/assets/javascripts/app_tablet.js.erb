@@ -102,7 +102,6 @@ module.directive('highchart', function () {
     
  module.filter('fromNow', function() {
   return function(date) {
-  	console.log("date "+ date);
     return moment(date).fromNow();
   }
 });
@@ -113,8 +112,6 @@ module.directive('iScroll', ['$rootScope', '$parse', '$location', function($root
     link: function(scope, elem, attrs) {
       new iScroll('wrapper', { useTransition: false, bounce:true, vScroll:true,
         onScrollEnd: function () {
-          console.log("onScrollEnd");
-          console.log("url is " + $location.url());
         },
       });
     }

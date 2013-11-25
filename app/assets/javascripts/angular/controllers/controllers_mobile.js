@@ -125,7 +125,6 @@ var Base64 = {
 	}
 }
 
-var baseUrl = "localhost:8080";
 var auth_token = "";
 var feedbackFlag = 0;
 var signInCount = "";
@@ -807,7 +806,7 @@ module.controller('signUpController', function($scope, $http, $location) {
 				setCookie('authToken', data.auth_token, 0.29);
 				setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
 				setCookie('signInCount', data.sign_in_count, 0.29);
-				localyticsSession.tagEvent("Signed Up", {"Type": Email});
+				localyticsSession.tagEvent("Signed Up", {"Type": 'Email'});
 				$location.url("/signedUp");
 			}).error(function(data, status) {
 				if (data.errors[0] == "Email can't be blank") {
@@ -1018,7 +1017,6 @@ module.controller('settingsController', function($scope, $http, $location) {
 					else{
 						pt_data.City = "No"
 					}
-					console.log(JSON.stringify(pt_data))
 					localyticsSession.tagEvent("Settings Summary",JSON.stringify(pt_data));
 					
 					deleteCookie('authToken');
@@ -1294,7 +1292,6 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 						setCookie("pointsEarned", data.points, 0.29);
 						$scope.erromsg = false;
 						if(!$("#comment").val()){
-							console.log("hi in  no comment");
 							if(data.points > 0 && data.points < 5){
 								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'0-5'});								
 							}
@@ -1308,7 +1305,6 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'50+'});
 							}
 						}else if($("#comment").val()){
-							console.log("hi in comment");
 							if(data.points > 0 && data.points < 5){
 								localyticsSession.tagEvent("Submit Feedback",{"Comment":'Yes',"Points":'0-5'});								
 							}
@@ -1379,7 +1375,6 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 					$scope.erromsg = false;
 					if (getCookie('authToken')) {
 						if(!$("#comment").val()){
-							console.log("hi in  no comment");
 							if(data.points > 0 && data.points < 5){
 								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'0-5'});								
 							}
@@ -1393,7 +1388,6 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'50+'});
 							}
 						}else if($("#comment").val()){
-							console.log("hi in comment");
 							if(data.points > 0 && data.points < 5){
 								localyticsSession.tagEvent("Submit Feedback",{"Comment":'Yes',"Points":'0-5'});								
 							}
@@ -1411,7 +1405,6 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 						deleteCookie('feedbackId');
 					} else {
 						if(!$("#comment").val()){
-							console.log("hi in  no comment");
 							if(data.points > 0 && data.points < 5){
 								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'0-5'});								
 							}
@@ -1425,7 +1418,6 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'50+'});
 							}
 						}else if($("#comment").val()){
-							console.log("hi in comment");
 							if(data.points > 0 && data.points < 5){
 								localyticsSession.tagEvent("Submit Feedback",{"Comment":'Yes',"Points":'0-5'});								
 							}
@@ -2116,7 +2108,6 @@ module.factory('Facebook', function($http, $location) {
 							url : '/api/users',
 							data : param
 						}).success(function(data) {
-							console.log(data);
 							if (data.registration_complete == true) {
 								setCookie('userRole', data.user_role, 0.29);
 								setCookie('authToken', data.auth_token, 0.29);
@@ -2172,7 +2163,7 @@ module.factory('Facebook', function($http, $location) {
 window.fbAsyncInit = function() {
 	FB.init({
 		//appId : '507524349327671'
-		appId : '369424903187034'
+		appId : '169570039884537'
 	});
 };
 
