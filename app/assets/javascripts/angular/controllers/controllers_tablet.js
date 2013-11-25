@@ -187,7 +187,6 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 				'background-color' : 'transparent'
 			});
 			localyticsSession.tagEvent("Exit");
-			localyticsSession.upload();
 			localyticsSession.close();
 
 		}).error(function(data, status) {
@@ -1021,6 +1020,7 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 			}).success(function(data, status) {
 				$scope.listRedemptions();
 				localyticsSession.tagEvent("Redemption Confirmed");
+				localyticsSession.upload();
 				
 			}).error(function(data, status) {
 				if (status == 401) {
