@@ -1017,7 +1017,7 @@ var LocalyticsSession = function (appKey, options) {
         ref.setIdentifier("customer_email", customerEmail);
     };
 
-    ref.__url__ = "https://analytics.localytics.com/";
+    ref.__url__ = "//analytics.localytics.com/";
 
     var fallBackToSafe = function (fnName, e) {
       console.log("> Call to Localytics client library failed .");
