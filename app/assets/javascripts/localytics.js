@@ -240,7 +240,7 @@ var LocalyticsSession = function (appKey, options) {
     };
 
     var winJSXHRSend = function (jsonData) {
-      var url = "http:" + ref.__url__ + "api/v2/applications/" + encodeURIComponent(appKey) + "/uploads";
+      var url = "https:" + ref.__url__ + "api/v2/applications/" + encodeURIComponent(appKey) + "/uploads";
       WinJS.xhr({
         url: url,
         type: "POST",
@@ -255,7 +255,7 @@ var LocalyticsSession = function (appKey, options) {
     var jsonpSend = function (jsonData) {
       var script = document.createElement("script"),
         head = document.head || document.getElementsByTagName("head")[0] || document.documentElement,
-        src = "http:" + ref.__url__ + "api/v2/applications/" + encodeURIComponent(appKey) + "/uploads?callback=" + CALLBACK_METHOD + "&client_date=" + generateClientTime() + "&data=" + encodeURIComponent(jsonData);
+        src = "https:" + ref.__url__ + "api/v2/applications/" + encodeURIComponent(appKey) + "/uploads?callback=" + CALLBACK_METHOD + "&client_date=" + generateClientTime() + "&data=" + encodeURIComponent(jsonData);
 
       log("Uploading blob: \n" + jsonData);
       log("Request length: " + src.length);
