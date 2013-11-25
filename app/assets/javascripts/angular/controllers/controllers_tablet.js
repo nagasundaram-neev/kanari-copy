@@ -130,7 +130,7 @@ var flag = 0;
 var feedbackTimeout;
 var insightTimeout;
 var redemTimeout;
-var localyticsSession = LocalyticsSession("a82f806f8ee66e07a62c716-e5454e1c-5375-11e3-926f-005cf8cbabd8");
+var localyticsSession = LocalyticsSession("f5eca14e738338c606503c3-3bcc0202-5276-11e3-1668-004a77f8b47f");
 localyticsSession.open();
 
 module.controller('headerCtrl', function($scope, $http, $location) {
