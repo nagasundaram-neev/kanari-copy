@@ -1908,6 +1908,7 @@ function setFooter(valueH) {
 
 
 $(document).on("pageshow", ".ui-page", function() {
+	localyticsSession.upload();
 	$('#date').scroller({
 		theme : "ios",
 		mode : "scroller",
