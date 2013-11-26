@@ -120,8 +120,8 @@ module Api
               else
                 resource.social_network_accounts << SocialNetworkAccount.new(provider: params[:oauth_provider], access_token: params[:access_token])
                 set_random_password
-                u.skip_invitation = true
-		u.skip_confirmation! #No need to confirm invited users
+                resource.skip_invitation = true
+		resource.skip_confirmation! #No need to confirm invited users
                 return resource.save #User is created and oauth provider is added
               end
             else
