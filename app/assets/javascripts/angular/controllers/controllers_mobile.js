@@ -171,7 +171,9 @@ module.controller('loginController', function($scope, $http, $location) {
 					setCookie('signInCount', data.sign_in_count, 0.29);
 				}
 				if (getCookie('userRole') == "user") {
-					localyticsSession.tagEvent("Logged In", {"Type": 'Email'});
+					localyticsSession.tagEvent("Logged In", {
+						"Type" : 'Email'
+					});
 					$location.url("/home");
 				} else if (getCookie('userRole') == "kanari_admin" || getCookie('userRole') == "customer_admin" || getCookie('userRole') == "staff" || getCookie('userRole') == "manager") {
 					deleteCookie('authToken');
@@ -583,7 +585,7 @@ module.controller('forgotPasswordController', function($scope, $http, $location)
 });
 
 module.controller('resetPassController', function($scope, $http, $location, $routeParams) {
-localyticsSession.tagScreen('resetPass');
+	localyticsSession.tagScreen('resetPass');
 	flagPage = 0;
 	footerFlag = 0;
 	$scope.success = false;
@@ -598,6 +600,10 @@ localyticsSession.tagScreen('resetPass');
 			$scope.success = false;
 			$scope.erromsg = true;
 
+		} else if ($scope.confirmpassword != $scope.password) {
+			$scope.error = "The passwords you entered don't match, please re-enter them.";
+			$scope.erromsg = true;
+			$scope.success = false;
 		} else {
 			var param = {
 				"user" : {
@@ -614,7 +620,7 @@ localyticsSession.tagScreen('resetPass');
 				$scope.success = true;
 				$scope.erromsg = false;
 			}).error(function(data, status) {
-				$scope.error = "The passwords you entered don't match, please re-enter them.";
+				$scope.error = data.errors[0];
 				$scope.erromsg = true;
 				$scope.success = false;
 			});
@@ -629,7 +635,7 @@ localyticsSession.tagScreen('resetPass');
 });
 
 module.controller('homeController', function($scope, $http, $location) {
-localyticsSession.tagScreen('Home');
+	localyticsSession.tagScreen('Home');
 	$scope.points = "";
 	if (getCookie("authToken")) {
 		flagPage = 0;
@@ -746,7 +752,9 @@ localyticsSession.tagScreen('Home');
 module.controller('commonCtrl', function($scope, $http, $location) {
 	//$location.url('/home');
 	localyticsSession.tagScreen('Index');
-	localyticsSession.tagEvent("Start",{"Accessed Via":'Direct'});
+	localyticsSession.tagEvent("Start", {
+		"Accessed Via" : 'Direct'
+	});
 	flagPage = 0;
 	footerFlag = 0;
 	$scope.emailCLick = function() {
@@ -806,7 +814,9 @@ module.controller('signUpController', function($scope, $http, $location) {
 				setCookie('authToken', data.auth_token, 0.29);
 				setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
 				setCookie('signInCount', data.sign_in_count, 0.29);
-				localyticsSession.tagEvent("Signed Up", {"Type": 'Email'});
+				localyticsSession.tagEvent("Signed Up", {
+					"Type" : 'Email'
+				});
 				$location.url("/signedUp");
 			}).error(function(data, status) {
 				if (data.errors[0] == "Email can't be blank") {
@@ -833,7 +843,7 @@ module.controller('signedUpController', function($scope, $http, $location, $rout
 	// $scope.email = getCookie('email');
 	// $scope.password = getCookie('password');
 	localyticsSession.tagScreen('Signed Up');
-	
+
 	flagPage = 0;
 	footerFlag = 0;
 
@@ -998,27 +1008,32 @@ module.controller('settingsController', function($scope, $http, $location) {
 					url : '/api/users',
 					data : param
 				}).success(function(data, status) {
-					var pt_data = {}
-					if($scope.gender){
-						pt_data.Gender = "Yes"
+					//var pt_data = {}
+					var gender = '';
+					var date = '';
+					var city = '';
+
+					if ($scope.gender) {
+						gender = 'Yes';
+					} else {
+						gender = 'No';
 					}
-					else{
-						pt_data.Gender = "No"
+					if ($scope.date) {
+						date = 'Yes';
+					} else {
+						date = 'No';
 					}
-					if($scope.date){
-						pt_data.Date = "Yes"
+					if ($scope.location) {
+						city = 'Yes';
+					} else {
+						city = 'No';
 					}
-					else{
-						pt_data.Date = "No"
-					}
-					if($scope.location){
-						pt_data.City = "Yes"
-					}
-					else{
-						pt_data.City = "No"
-					}
-					localyticsSession.tagEvent("Settings Summary",JSON.stringify(pt_data));
-					
+					localyticsSession.tagEvent("Settings Summary", {
+						"Gender" : gender,
+						"Date" : date,
+						"City" : city
+					});
+
 					deleteCookie('authToken');
 					setCookie('authToken', data.auth_token, 0.29);
 					$scope.errorMsg = false;
@@ -1291,34 +1306,62 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 					}).success(function(data, status) {
 						setCookie("pointsEarned", data.points, 0.29);
 						$scope.erromsg = false;
-						if(!$("#comment").val()){
-							if(data.points > 0 && data.points < 5){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'0-5'});								
+						if (!$("#comment").val()) {
+							if (data.points > 0 && data.points < 5) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'No',
+									"Points" : '0-5'
+								});
+							} else if (data.points >= 5 && data.points < 10) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'No',
+									"Points" : '5-10'
+								});
+							} else if (data.points >= 10 && data.points < 30) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'No',
+									"Points" : '10-30'
+								});
+							} else if (data.points >= 30 && data.points < 50) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'No',
+									"Points" : '30-50'
+								});
+							} else if (data.points >= 50) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'No',
+									"Points" : '50+'
+								});
 							}
-							else if(data.points >= 5 && data.points < 10){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'5-10'});
-							}else if(data.points >= 10 && data.points < 30){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'10-30'});
-							}else if(data.points >= 30 && data.points < 50){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'30-50'});
-							}else if(data.points >= 50){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'50+'});
+						} else if ($("#comment").val()) {
+							if (data.points > 0 && data.points < 5) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'Yes',
+									"Points" : '0-5'
+								});
+							} else if (data.points >= 5 && data.points < 10) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'Yes',
+									"Points" : '5-10'
+								});
+							} else if (data.points >= 10 && data.points < 30) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'Yes',
+									"Points" : '10-30'
+								});
+							} else if (data.points >= 30 && data.points < 50) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'Yes',
+									"Points" : '30-50'
+								});
+							} else if (data.points >= 50) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'Yes',
+									"Points" : '50+'
+								});
 							}
-						}else if($("#comment").val()){
-							if(data.points > 0 && data.points < 5){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'Yes',"Points":'0-5'});								
-							}
-							else if(data.points >= 5 && data.points < 10){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'Yes',"Points":'5-10'});
-							}else if(data.points >= 10 && data.points < 30){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'Yes',"Points":'10-30'});
-							}else if(data.points >= 30 && data.points < 50){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'Yes',"Points":'30-50'});
-							}else if(data.points >= 50){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'Yes',"Points":'50+'});
-							}
-						}	
-						
+						}
+
 						if (getCookie('authToken')) {
 							$location.url("/feedbackSubmitSuccess");
 							deleteCookie('feedbackId');
@@ -1374,63 +1417,119 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 					setCookie("pointsEarned", data.points, 0.29);
 					$scope.erromsg = false;
 					if (getCookie('authToken')) {
-						if(!$("#comment").val()){
-							if(data.points > 0 && data.points < 5){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'0-5'});								
+						if (!$("#comment").val()) {
+							if (data.points > 0 && data.points < 5) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'No',
+									"Points" : '0-5'
+								});
+							} else if (data.points >= 5 && data.points < 10) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'No',
+									"Points" : '5-10'
+								});
+							} else if (data.points >= 10 && data.points < 30) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'No',
+									"Points" : '10-30'
+								});
+							} else if (data.points >= 30 && data.points < 50) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'No',
+									"Points" : '30-50'
+								});
+							} else if (data.points >= 50) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'No',
+									"Points" : '50+'
+								});
 							}
-							else if(data.points >= 5 && data.points < 10){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'5-10'});
-							}else if(data.points >= 10 && data.points < 30){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'10-30'});
-							}else if(data.points >= 30 && data.points < 50){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'30-50'});
-							}else if(data.points >= 50){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'50+'});
+						} else if ($("#comment").val()) {
+							if (data.points > 0 && data.points < 5) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'Yes',
+									"Points" : '0-5'
+								});
+							} else if (data.points >= 5 && data.points < 10) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'Yes',
+									"Points" : '5-10'
+								});
+							} else if (data.points >= 10 && data.points < 30) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'Yes',
+									"Points" : '10-30'
+								});
+							} else if (data.points >= 30 && data.points < 50) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'Yes',
+									"Points" : '30-50'
+								});
+							} else if (data.points >= 50) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'Yes',
+									"Points" : '50+'
+								});
 							}
-						}else if($("#comment").val()){
-							if(data.points > 0 && data.points < 5){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'Yes',"Points":'0-5'});								
-							}
-							else if(data.points >= 5 && data.points < 10){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'Yes',"Points":'5-10'});
-							}else if(data.points >= 10 && data.points < 30){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'Yes',"Points":'10-30'});
-							}else if(data.points >= 30 && data.points < 50){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'Yes',"Points":'30-50'});
-							}else if(data.points >= 50){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'Yes',"Points":'50+'});
-							}
-						}	
+						}
 						$location.url("/feedbackSubmitSuccess");
 						deleteCookie('feedbackId');
 					} else {
-						if(!$("#comment").val()){
-							if(data.points > 0 && data.points < 5){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'0-5'});								
+						if (!$("#comment").val()) {
+							if (data.points > 0 && data.points < 5) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'No',
+									"Points" : '0-5'
+								});
+							} else if (data.points >= 5 && data.points < 10) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'No',
+									"Points" : '5-10'
+								});
+							} else if (data.points >= 10 && data.points < 30) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'No',
+									"Points" : '10-30'
+								});
+							} else if (data.points >= 30 && data.points < 50) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'No',
+									"Points" : '30-50'
+								});
+							} else if (data.points >= 50) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'No',
+									"Points" : '50+'
+								});
 							}
-							else if(data.points >= 5 && data.points < 10){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'5-10'});
-							}else if(data.points >= 10 && data.points < 30){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'10-30'});
-							}else if(data.points >= 30 && data.points < 50){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'30-50'});
-							}else if(data.points >= 50){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'No',"Points":'50+'});
+						} else if ($("#comment").val()) {
+							if (data.points > 0 && data.points < 5) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'Yes',
+									"Points" : '0-5'
+								});
+							} else if (data.points >= 5 && data.points < 10) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'Yes',
+									"Points" : '5-10'
+								});
+							} else if (data.points >= 10 && data.points < 30) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'Yes',
+									"Points" : '10-30'
+								});
+							} else if (data.points >= 30 && data.points < 50) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'Yes',
+									"Points" : '30-50'
+								});
+							} else if (data.points >= 50) {
+								localyticsSession.tagEvent("Submit Feedback", {
+									"Comment" : 'Yes',
+									"Points" : '50+'
+								});
 							}
-						}else if($("#comment").val()){
-							if(data.points > 0 && data.points < 5){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'Yes',"Points":'0-5'});								
-							}
-							else if(data.points >= 5 && data.points < 10){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'Yes',"Points":'5-10'});
-							}else if(data.points >= 10 && data.points < 30){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'Yes',"Points":'10-30'});
-							}else if(data.points >= 30 && data.points < 50){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'Yes',"Points":'30-50'});
-							}else if(data.points >= 50){
-								localyticsSession.tagEvent("Submit Feedback",{"Comment":'Yes',"Points":'50+'});
-							}
-						}	
+						}
 						feedbackFlag = 1;
 						$location.url("/signUp");
 						//deleteCookie('feedbackId');
@@ -1545,7 +1644,9 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 					clearInterval(timer);
 					//alert('closed');
 					$("#fbShareSuccMsg").hide();
-					localyticsSession.tagEvent("Social Share",{"Platform":'Twitter'});
+					localyticsSession.tagEvent("Social Share", {
+						"Platform" : 'Twitter'
+					});
 					$("#tweetShareSuccMsg").show();
 				}
 			}, 1000);
@@ -1553,7 +1654,9 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 
 		$scope.google = function() {
 			var popup = window.open("https://plus.google.com/share?data-text=lkjnkln" + socialMessage, 'popUpWindow', 'height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
-			localyticsSession.tagEvent("Social Share",{"Platform":'Google+'});
+			localyticsSession.tagEvent("Social Share", {
+				"Platform" : 'Google+'
+			});
 		};
 
 	} else {
@@ -1607,15 +1710,17 @@ module.controller('restaurantListController', function($scope, $http, $location)
 		$scope.getRestaurantList();
 
 		$scope.redeemPoint = function(outletId) {
-			localyticsSession.tagEvent("Redeem Points",{"Clicked From":'Listing'});
+			localyticsSession.tagEvent("Redeem Points", {
+				"Clicked From" : 'Listing'
+			});
 			$location.url("/confirmRedeem?outletId=" + outletId);
 		};
 
 		$scope.showRestaurant = function(outletId) {
 			$location.url("/showRestaurant?outletId=" + outletId);
 		};
-		
-		$scope.setLocalytics = function(){
+
+		$scope.setLocalytics = function() {
 			localyticsSession.tagEvent("Search Restaurant");
 		};
 
@@ -1624,11 +1729,11 @@ module.controller('restaurantListController', function($scope, $http, $location)
 	}
 });
 
-function truncate(string){
-   if (string.length > 15)
-      return string.substring(0,13)+'...';
-   else
-      return string;
+function truncate(string) {
+	if (string.length > 15)
+		return string.substring(0, 13) + '...';
+	else
+		return string;
 };
 
 module.controller('showRestaurantController', function($scope, $http, $routeParams, $location) {
@@ -1664,7 +1769,9 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 			$scope.outDoor_seating = data.outlet.has_outdoor_seating.toString();
 			$scope.lattitude = data.outlet.latitude;
 			$scope.longitude = data.outlet.longitude;
-			localyticsSession.tagEvent("View Restaurant",{"Name":data.outlet.name});
+			localyticsSession.tagEvent("View Restaurant", {
+				"Name" : data.outlet.name
+			});
 		}).error(function(data, status) {
 			if (status == 401) {
 				deleteCookie('authToken');
@@ -1686,15 +1793,17 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 		};
 
 		$scope.redeemUpto = function() {
-			localyticsSession.tagEvent("Redeem Points",{"Clicked From":'Details'});
+			localyticsSession.tagEvent("Redeem Points", {
+				"Clicked From" : 'Details'
+			});
 			$location.url("/confirmRedeem?outletId=" + $routeParams.outletId);
 		};
-		
-		$scope.email = function(){
+
+		$scope.email = function() {
 			localyticsSession.tagEvent("Email");
 		};
-		
-		$scope.phone = function(){
+
+		$scope.phone = function() {
 			localyticsSession.tagEvent("Phone");
 		};
 
@@ -1774,17 +1883,27 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 					url : '/api/redemptions',
 					data : param
 				}).success(function(data, status) {
-					if($scope.amount > 0 && $scope.amount < 50){
-						localyticsSession.tagEvent("Request Redemption",{"Discount":'0-50'});						
-					}else if($scope.amount >= 50 && $scope.amount < 100){
-						localyticsSession.tagEvent("Request Redemption",{"Discount":'50-100'});
-					}else if($scope.amount >= 100 && $scope.amount < 300){
-						localyticsSession.tagEvent("Request Redemption",{"Discount":'100-300'});
-					}else if($scope.amount >= 300 && $scope.amount < 500){
-						localyticsSession.tagEvent("Request Redemption",{"Discount":'300-500'});
-					}else if($scope.amount >= 500){
-						localyticsSession.tagEvent("Request Redemption",{"Discount":'500+'});
-					}	
+					if ($scope.amount > 0 && $scope.amount < 50) {
+						localyticsSession.tagEvent("Request Redemption", {
+							"Discount" : '0-50'
+						});
+					} else if ($scope.amount >= 50 && $scope.amount < 100) {
+						localyticsSession.tagEvent("Request Redemption", {
+							"Discount" : '50-100'
+						});
+					} else if ($scope.amount >= 100 && $scope.amount < 300) {
+						localyticsSession.tagEvent("Request Redemption", {
+							"Discount" : '100-300'
+						});
+					} else if ($scope.amount >= 300 && $scope.amount < 500) {
+						localyticsSession.tagEvent("Request Redemption", {
+							"Discount" : '300-500'
+						});
+					} else if ($scope.amount >= 500) {
+						localyticsSession.tagEvent("Request Redemption", {
+							"Discount" : '500+'
+						});
+					}
 					$scope.listPoints();
 					$("#overlaySuccess").show();
 					$("#overlaySuccess").css({
@@ -2086,7 +2205,9 @@ module.factory('Facebook', function($http, $location) {
 		login : function() {
 			FB.login(function(response) {
 				if (response.authResponse) {
-					localyticsSession.tagEvent("Signed Up", {"Type": Facebook});
+					localyticsSession.tagEvent("Signed Up", {
+						"Type" : 'Facebook'
+					});
 					self.auth = response.authResponse;
 					FB.api('/me', function(response) {
 						var dt = new Date(response.birthday);
@@ -2115,13 +2236,15 @@ module.factory('Facebook', function($http, $location) {
 								setCookie('signInCount', data.sign_in_count, 0.29);
 								setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
 								setCookie('facebookFlag', '1', 0.29);
-								localyticsSession.tagEvent("Logged In", {"Type": Facebook});
+								localyticsSession.tagEvent("Logged In", {
+									"Type" : 'Facebook'
+								});
 								$location.url('/home');
-							}else{
+							} else {
 								$location.url("/signedUp");
 							}
-						}).error(function(data){
-							
+						}).error(function(data) {
+
 						});
 
 					});
@@ -2145,7 +2268,9 @@ module.factory('Facebook', function($http, $location) {
 					}, function(response) {
 						if (!response || response.error) {
 						} else {
-							localyticsSession.tagEvent("Social Share",{"Platform":'Facebook'});
+							localyticsSession.tagEvent("Social Share", {
+								"Platform" : 'Facebook'
+							});
 							$("#fbShareSuccMsg").show();
 						}
 					});
