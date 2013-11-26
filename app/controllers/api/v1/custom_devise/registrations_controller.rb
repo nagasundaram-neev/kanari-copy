@@ -23,7 +23,7 @@ module Api
 	       last_name: resource.last_name,
 	       user_role: resource.role,
 	       sign_in_count: resource.sign_in_count,
-	       registration_complete: resource.registration_complete?,
+	       registration_complete: resource.registration_complete?
               }, status: :created
 	    else
 	     render json: {
