@@ -1997,12 +1997,11 @@ img, object {
 #login .ui-btn-inline {
 	margin: 1% 0 3%;
 	min-height: 20px !important;
-} 
+}
 #login .resetPass .ui-btn-inline {
 	margin: 2% 0 3%;
 	min-height: 20px !important;
 }
-
 
 #forgotpass .ui-btn-left, #forgotpass .ui-btn-right, #forgotpass .ui-btn-inline, input {
 	width: 49%;
@@ -2281,6 +2280,37 @@ img, object {
 #signUp .acceptTerms .ui-field-contain .ui-controlgroup, #signUp  .ui-field-contain fieldset.ui-controlgroup {
 	width: 100% !important;
 }
+
+#signUp .rememberMe .ui-checkbox {
+	float: left;
+}
+
+.userTerms {
+	color: #664765 !important;
+	float: left;
+	font-size: 0.8em;
+	font-weight: normal !important;
+	line-height: 35px;
+	margin-left: 2px;
+	text-decoration: none;
+	text-shadow: none;
+}
+
+.userTermsdot {
+	color: #664765;
+	display: block;
+	float: left;
+	font-weight: normal;
+	line-height: 33px;
+	margin-left: 1px;
+}
+
+#signUp .rememberMe .ui-checkbox .ui-btn-icon-left .ui-btn-inner, .ui-radio .ui-btn-icon-left .ui-btn-inner {
+	padding-top: 0;
+	padding-right: 0;
+	padding-left: 22px;
+}
+
 /*.feedback img{
  width: 50px;
  }

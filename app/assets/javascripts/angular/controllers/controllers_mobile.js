@@ -133,7 +133,7 @@ var facebookFlag = 0;
 var flagPage = 0;
 var iphoneFlag = 0;
 var footerFlag = 0;
-var localyticsSession = LocalyticsSession("f5eca14e738338c606503c3-3bcc0202-5276-11e3-1668-004a77f8b47f");
+var localyticsSession = LocalyticsSession("4541b43eb3c33ab174c297e-429beda6-52ab-11e3-925c-005cf8cbabd8");
 localyticsSession.open();
 module.controller('loginController', function($scope, $http, $location) {
 	localyticsSession.tagScreen('Login');
