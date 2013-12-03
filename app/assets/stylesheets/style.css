@@ -2292,23 +2292,22 @@ img, object {
 	font-weight: normal !important;
 	line-height: 35px;
 	margin-left: 2px;
-	text-decoration: none;
+	/*text-decoration: none;*/
 	text-shadow: none;
 }
 
 .userTermsdot {
 	color: #664765;
-	display: block;
 	float: left;
-	font-weight: normal;
-	line-height: 33px;
-	margin-left: 1px;
+    line-height: 32px;
+    /*margin-left: 1px;*/
+    text-shadow: none;
 }
 
 #signUp .rememberMe .ui-checkbox .ui-btn-icon-left .ui-btn-inner, .ui-radio .ui-btn-icon-left .ui-btn-inner {
 	padding-top: 0;
 	padding-right: 0;
-	padding-left: 22px;
+	padding-left: 21px;
 }
 
 /*.feedback img{
