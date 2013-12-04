@@ -14,7 +14,6 @@ module Api
           resource.role = 'user'
           resource.reset_authentication_token
 
-
           if successful_signup?(resource)
             render json: {
               auth_token: resource.authentication_token,
@@ -113,13 +112,23 @@ module Api
                 resource.social_network_accounts << SocialNetworkAccount.new(provider: params[:oauth_provider], access_token: params[:access_token])
                 set_random_password
                 resource.skip_invitation = true
-                resource.skip_confirmation! #No need to confirm invited users
-                return resource.save #User is created and oauth provider is added
+                resource.skip_confirmation! #No need to confirm users coming through social login
+                if resource.save #User is created and oauth provider is added
+                  UserMailer.welcome_email(resource).deliver
+                  return true
+                else
+                  return false
+                end
               end
             else
               resource.skip_invitation = true
-              resource.skip_confirmation! #No need to confirm invited users
-              return resource.save #Has nothing to do with oauth
+              resource.skip_confirmation! #No need to confirm users
+              if resource.save #User is created
+                UserMailer.welcome_email(resource).deliver
+                return true
+              else
+                return false
+              end
             end
           end
       end
