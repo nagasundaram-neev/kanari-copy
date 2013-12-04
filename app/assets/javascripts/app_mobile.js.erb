@@ -13,7 +13,7 @@ var module = angular.module("kanariMobile", ["google-maps"]).config(function($ro
         .when('/login',{templateUrl:"<%= asset_path 'login_mobile.html' %>"}) // ... and so is this
         .when('/regsuccess',{templateUrl: "<%= asset_path 'regsuccess.html' %>" })
         .when('/signUp',{templateUrl: "<%= asset_path 'signUp_mobile.html' %>" })
-        .when('/signedUp',{templateUrl: "<%= asset_path 'signedUp_mobile.html' %>" })
+        //.when('/signedUp',{templateUrl: "<%= asset_path 'signedUp_mobile.html' %>" })
         .when('/settings',{templateUrl: "<%= asset_path 'settings_mobile.html' %>" })
         .when('/forgotPassword',{templateUrl: "<%= asset_path 'forgotPassword_mobile.html' %>" })
         .when('/feedback',{templateUrl: "<%= asset_path 'feedback.html' %>" })
@@ -26,7 +26,7 @@ var module = angular.module("kanariMobile", ["google-maps"]).config(function($ro
         .when('/transactionHistory',{templateUrl: "<%= asset_path 'transactionHistory.html' %>" })
         .when('/locationMap',{templateUrl: "<%= asset_path 'locationMap.html' %>" })
         .when('/api/users/password/edit', {templateUrl: "<%= asset_path 'reset_password_mobile.html' %>"})
-        .when('/api/users/confirmations', {templateUrl: "<%= asset_path 'confirmation_email.html' %>"})
+        //.when('/api/users/confirmations', {templateUrl: "<%= asset_path 'confirmation_email.html' %>"})
         .otherwise({redirectTo: '/index'});
 });
 

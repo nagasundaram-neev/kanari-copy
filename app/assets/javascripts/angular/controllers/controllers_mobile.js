@@ -133,7 +133,7 @@ var facebookFlag = 0;
 var flagPage = 0;
 var iphoneFlag = 0;
 var footerFlag = 0;
-var localyticsSession = LocalyticsSession("4541b43eb3c33ab174c297e-429beda6-52ab-11e3-925c-005cf8cbabd8");
+var localyticsSession = LocalyticsSession("f5eca14e738338c606503c3-3bcc0202-5276-11e3-1668-004a77f8b47f");
 localyticsSession.open();
 module.controller('loginController', function($scope, $http, $location) {
 	localyticsSession.tagScreen('Login');
@@ -817,7 +817,7 @@ module.controller('signUpController', function($scope, $http, $location) {
 				localyticsSession.tagEvent("Signed Up", {
 					"Type" : 'Email'
 				});
-				$location.url("/signedUp");
+				$location.url("/login");
 			}).error(function(data, status) {
 				if (data.errors[0] == "Email can't be blank") {
 					$scope.error = "Please enter a valid email";
@@ -2241,7 +2241,7 @@ module.factory('Facebook', function($http, $location) {
 								});
 								$location.url('/home');
 							} else {
-								$location.url("/signedUp");
+								//$location.url("/signedUp");
 							}
 						}).error(function(data) {
 
