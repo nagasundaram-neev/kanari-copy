@@ -817,7 +817,7 @@ module.controller('signUpController', function($scope, $http, $location) {
 				localyticsSession.tagEvent("Signed Up", {
 					"Type" : 'Email'
 				});
-				$location.url("/login");
+				$location.url("/home");
 			}).error(function(data, status) {
 				if (data.errors[0] == "Email can't be blank") {
 					$scope.error = "Please enter a valid email";
