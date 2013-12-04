@@ -16,22 +16,14 @@ module Api
 
 
           if successful_signup?(resource)
-            if oauth_signup? 
-	      render json: {
-               auth_token: resource.authentication_token,
-	       first_name: resource.first_name,
-	       last_name: resource.last_name,
-	       user_role: resource.role,
-	       sign_in_count: resource.sign_in_count,
-	       registration_complete: resource.registration_complete?
-              }, status: :created
-	    else
-	     render json: {
+            render json: {
+              auth_token: resource.authentication_token,
               first_name: resource.first_name,
               last_name: resource.last_name,
-              user_role: resource.role
-             }, status: :created
-	    end
+              user_role: resource.role,
+              sign_in_count: resource.sign_in_count,
+              registration_complete: resource.registration_complete?
+            }, status: :created
           else
             clean_up_passwords resource
             render json: {errors: resource.errors.full_messages}, status: :unprocessable_entity
@@ -121,10 +113,12 @@ module Api
                 resource.social_network_accounts << SocialNetworkAccount.new(provider: params[:oauth_provider], access_token: params[:access_token])
                 set_random_password
                 resource.skip_invitation = true
-		resource.skip_confirmation! #No need to confirm invited users
+                resource.skip_confirmation! #No need to confirm invited users
                 return resource.save #User is created and oauth provider is added
               end
             else
+              resource.skip_invitation = true
+              resource.skip_confirmation! #No need to confirm invited users
               return resource.save #Has nothing to do with oauth
             end
           end
