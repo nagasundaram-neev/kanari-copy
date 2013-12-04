@@ -32,7 +32,7 @@ module Api
             resource.save
           end
           if resource.errors.empty?
-            UserMailer.welcome_email(resource).deliver
+            UserMailer.welcome_email_business(resource).deliver
             sign_in(resource_name, resource)
             render json: {auth_token: auth_token}, status: 200 #Invitation accepted
           else

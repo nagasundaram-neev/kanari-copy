@@ -5,4 +5,10 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail(to: @user.email, subject: 'Welcome to Kanari')
   end
+
+  def welcome_email_business(user)
+    @user = user
+    mail(to: @user.email, subject: 'Welcome to Kanari')
+  end
+
 end
