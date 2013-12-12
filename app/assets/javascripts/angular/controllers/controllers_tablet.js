@@ -1071,7 +1071,7 @@ module.controller('numericCodeController', function($scope, $http, $location, $t
 		// });
 		$scope.generateCode = function() {
 
-			if (testID != $scope.billAmount) {
+			//if (testID != $scope.billAmount) {
 				testID = $scope.billAmount;
 				if (!$scope.billAmount) {
 					$scope.error = "Please enter valid bill amount";
@@ -1118,7 +1118,7 @@ module.controller('numericCodeController', function($scope, $http, $location, $t
 						}
 					});
 				}
-			}
+			//}
 		};
 
 		var selectField = document.getElementById('Field10');
