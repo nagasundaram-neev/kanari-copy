@@ -17,7 +17,7 @@
 				<p class="alreadyUser" ng-show="congratsMsg">
 					Congratulations, you have successfully created your Kanari for Business account! Use your email address and the password you created to log in to it and start using Kanari.
 				</p>
-				<form ng-app="form-example" class="row form-horizontal" name="login" ng-submit="chkLogin(login)" novalidate>
+				<form ng-app="form-example" class="row form-horizontal" autocomplete="off" name="login" ng-submit="chkLogin(login)" novalidate>
 					<div class="control-group">
 						<div class="controls">
 							<input type="email" id="inputEmail" placeholder="Email" ng-model="email" required>
@@ -57,10 +57,10 @@
 					</div>
 					<div class="control-group"  style="margin-bottom: 0px;">
 						<div class="controls">
-							<button type="submit" class="signInBtn btn">
+							<button id="enableBtn" type="submit" class="signInBtn btn">
 								Sign in
 							</button>
-							<button class="signInBtn btn" disabled>
+							<button id="disableBtn"  class="signInBtn btn" disabled>
 								Sign in
 							</button>
 						</div>
