@@ -133,6 +133,20 @@ var facebookFlag = 0;
 var flagPage = 0;
 var iphoneFlag = 0;
 var footerFlag = 0;
+var hostName =location.hostname; 
+//var localyticsSession;
+// switch(hostName){
+	// case "localhost": localyticsSession = LocalyticsSession("3377ca92c983287af395e16-ce41cd54-55c4-11e3-96f0-009c5fda0a25");
+							// //console.log("hi in localhost");
+							// break;
+	// case "app.kanari.co": localyticsSession = LocalyticsSession("4541b43eb3c33ab174c297e-429beda6-52ab-11e3-925c-005cf8cbabd8");
+							// //console.log("hi in production");
+							// break;
+	// case "staging.kanari.co": localyticsSession = LocalyticsSession("f5eca14e738338c606503c3-3bcc0202-5276-11e3-1668-004a77f8b47f"); 
+							 // //console.log("hi in stagin");
+							 // break;
+// }
+
 var localyticsSession = LocalyticsSession("f5eca14e738338c606503c3-3bcc0202-5276-11e3-1668-004a77f8b47f");
 localyticsSession.open();
 module.controller('loginController', function($scope, $http, $location) {
@@ -1150,6 +1164,39 @@ module.controller('feedbackController', function($scope, $http, $location) {
 		});
 
 	};
+	
+	// $scope.ValidatePassKey = function(first,second) {
+ 	 // if($("#digit"+first).val().length == 1)
+ 	  // // inputs.eq( inputs.index(this)+ 1 ).focus();
+ 	   // $("#digit"+second).click();
+//  	   
+ 	   // alert("digit"+second);
+ 	// };
+ 	
+ 	$('.txtPin').keypress(function() {
+    var value = $(this).val();
+    if(value.length >= 1) {
+        var inputs = $(this).closest('form').find(':input');
+        inputs.eq( inputs.index(this)+ 1 ).focus();
+    }
+});
+
+var max_chars = 1;
+
+$('#digit4').keydown( function(e){
+	//alert("here");
+    if ($(this).val().length >= 1) { 
+        $(this).val($(this).val().substr(0, max_chars));
+    }
+});
+
+$('#digit4').keyup( function(e){
+	$(this).type='text';
+    if ($(this).val().length >= 1) { 
+        $(this).val($(this).val().substr(0, max_chars));
+    }
+});
+	
 });
 
 module.controller('feedback_step2Controller', function($scope, $http, $location) {
@@ -2034,6 +2081,14 @@ $(document).on("pageshow", ".ui-page", function() {
 		display : "bottom",
 		dateFormat : 'dd/mm/yy'
 	});
+	
+	
+	// $('.fblogin').click(function(event) {
+		// console.log(event);
+		// event.preventDefault();
+		// //Facebook.login()
+        // window.location = "http://localhost:8080/#/home";
+	// });
 
 	var $page = $(this), vSpace = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() + $page.children('.ui-content').height();
 	$("#divexample1").css('height', '400px');
@@ -2251,7 +2306,8 @@ module.factory('Facebook', function($http, $location) {
 				} else {
 				}
 			}, {
-				scope : 'email,user_birthday'
+				scope : 'email,user_birthday',
+				redirect_uri : 'http://www.google.com'
 			});
 		},
 
@@ -2288,7 +2344,7 @@ module.factory('Facebook', function($http, $location) {
 
 window.fbAsyncInit = function() {
 	FB.init({
-		//appId : '507524349327671'
+		//appId : '369424903187034'
 		appId : '169570039884537'
 	});
 };

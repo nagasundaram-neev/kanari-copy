@@ -20,33 +20,40 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 		</div>
 		<div class="outerDiv">
 			<div class="enter_code">
-				Enter your code to proceed
+				<!-- Enter your code to proceed -->
+				Ask for your Kanari Code and enter it here
 			</div>
+			<form>
 			<div class="menDiv">
 				<div class="backColr">
-					{{digit1}}
-
+					<!-- {{digit1}} -->
+					<input data-theme="a" class="txtPin" id="digit0" data-inline="true" type="text" onfocus="this.type='number';" maxlength="1" ng-model="digit1"/>
 				</div>
 				<div class="backColr">
-					{{digit2}}
+					<!-- {{digit2}} -->
+					<input data-theme="a" class="txtPin" id="digit1" data-inline="true" type="text" onfocus="this.type='number';"  maxlength="1" ng-model="digit2"/>
 				</div>
 				<div class="backColr">
-					{{digit3}}
+					<!-- {{digit3}} -->
+					<input data-theme="a" class="txtPin" id="digit2" data-inline="true" type="text" onfocus="this.type='number';" maxlength="1"  ng-model="digit3"/>
 				</div>
 				<div class="backColr">
-					{{digit4}}
+					<!-- {{digit4}} -->
+					<input data-theme="a" class="txtPin" id="digit3" data-inline="true" type="text" onfocus="this.type='number';" maxlength="1"  ng-model="digit4"/>
 				</div>
 				<div class="backColr" style="border-right:0">
-					{{digit5}}
+					<!-- {{digit5}} -->
+					<input data-theme="a"  id="digit4" data-inline="true" type="text" onfocus="this.type='number';" maxlength="1" ng-model="digit5" />
 				</div>
 				<div class="clr"></div>
 			</div>
 		</div>
-		<p ng-show="error" class="errorMsg">
-			{{errorMsg}}
-		</p>
-		<div class="keypad">
-			<div class="secondRow">
+	
+				<!-- <button id="enableBtn" class="btnFeedbackCode">
+								Submit
+				</button> -->
+			
+			<!-- <div class="secondRow">
 				<div class="backColr" id="1" ng-click="enterValues('1')">
 					1
 				</div>
@@ -101,6 +108,21 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 					</div>
 				</div>
 				<div class="clr"></div>
+			</div> -->
+		
+		<p ng-show="error" class="errorMsg">
+			{{errorMsg}}
+		</p>
+		</form>
+		<div data-role="footer" class="footerDiv">
+			<div id="keypadBtn" class="nxt" ng-click="next()">
+				
+					SUBMIT
+				
+			<div class="clr"></div>
 			</div>
+				<!-- <div id="keypadBtn" class="keypad">
+			<input type="button" class="logBtn loginBtn" ng-click="next()" value="Submit"/>
+			</div> -->
 		</div>
 	</div>

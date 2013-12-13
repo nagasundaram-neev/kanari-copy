@@ -789,8 +789,9 @@ img, object {
 	border-right: 3px solid #FFFFFF;
 	float: left;
 	height: 75px;
-	font-size: 375%;
+	/*font-size: 375%;*/
 	padding: 0;
+	margin: 0;
 	width: 19.2%;
 }
 
@@ -1767,6 +1768,12 @@ img, object {
 
 .enter_code {
 	/*margin: 7% 3%;*/
+	margin: 4% 4%;
+	/*font-size: 114%;*/
+	font-size: 150%;
+}
+
+.recommend{
 	margin: 3% 3%;
 	font-size: 114%;
 }
@@ -2309,6 +2316,35 @@ img, object {
 	padding-right: 0;
 	padding-left: 21px;
 }
+
+.backColr input.ui-input-text{
+	background-color: #E5E6E8;
+    font-size: 320%;
+    height: 75px;
+	margin:0 0 0 0;
+    min-height: 0;
+    padding: 0;
+    text-align: center;
+    width: 99%;
+}
+
+.backColr .ui-input-text.ui-focus, .ui-input-search.ui-focus , .ui-shadow-inset{
+	box-shadow: none !important;
+}
+
+.backColr .ui-corner-all{
+	border-radius:0 !important;
+}
+
+
+#keypadBtn{
+	width:100%;
+	text-align: center;
+	color: #664765;
+}
+
+
+
 
 /*.feedback img{
  width: 50px;
