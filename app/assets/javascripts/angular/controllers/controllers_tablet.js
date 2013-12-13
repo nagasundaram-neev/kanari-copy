@@ -130,7 +130,15 @@ var flag = 0;
 var feedbackTimeout;
 var insightTimeout;
 var redemTimeout;
-var localyticsSession = LocalyticsSession("f5eca14e738338c606503c3-3bcc0202-5276-11e3-1668-004a77f8b47f");
+var hostName =location.hostname; 
+if(hostName == "app.kanari.co"){
+	var localyticsSession = LocalyticsSession("4541b43eb3c33ab174c297e-429beda6-52ab-11e3-925c-005cf8cbabd8");
+}
+else if(hostName == "staging.kanari.co"){
+	var localyticsSession = LocalyticsSession("f5eca14e738338c606503c3-3bcc0202-5276-11e3-1668-004a77f8b47f");
+}
+
+//var localyticsSession = LocalyticsSession("f5eca14e738338c606503c3-3bcc0202-5276-11e3-1668-004a77f8b47f");
 localyticsSession.open();
 
 module.controller('headerCtrl', function($scope, $http, $location) {
