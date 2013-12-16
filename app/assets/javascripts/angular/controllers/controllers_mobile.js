@@ -134,11 +134,11 @@ var flagPage = 0;
 var iphoneFlag = 0;
 var footerFlag = 0;
 var hostName =location.hostname; 
-// if(hostName == "localhost")
-// {
-	// var localyticsSession = LocalyticsSession("3377ca92c983287af395e16-ce41cd54-55c4-11e3-96f0-009c5fda0a25");
-// }
-if(hostName == "app.kanari.co"){
+if(hostName == "192.168.1.120")
+{
+	var localyticsSession = LocalyticsSession("3377ca92c983287af395e16-ce41cd54-55c4-11e3-96f0-009c5fda0a25");
+}
+else if(hostName == "app.kanari.co"){
 	var localyticsSession = LocalyticsSession("4541b43eb3c33ab174c297e-429beda6-52ab-11e3-925c-005cf8cbabd8");
 }
 else if(hostName == "staging.kanari.co"){
@@ -1162,35 +1162,44 @@ module.controller('feedbackController', function($scope, $http, $location) {
 
 	};
 	
-	// $scope.ValidatePassKey = function(first,second) {
- 	 // if($("#digit"+first).val().length == 1)
- 	  // // inputs.eq( inputs.index(this)+ 1 ).focus();
- 	   // $("#digit"+second).click();
-//  	   
- 	   // alert("digit"+second);
- 	// };
+	 // $scope.focusNext = function() {
+	 	// console.log("in");
+ 	  // var inputs = $(this).closest('form').find(':input');
+        // inputs.eq( inputs.index(this)+ 1 ).focus();
+ 	 // };
  	
- 	$('.txtPin').keypress(function() {
-    var value = $(this).val();
-    if(value.length >= 1) {
-        var inputs = $(this).closest('form').find(':input');
-        inputs.eq( inputs.index(this)+ 1 ).focus();
-    }
-});
+ 	/*
+	 $('.txtPin').keypress(function() {
+		 var value = $(this).val();
+		 if(value.length >= 1) {
+			 var inputs = $(this).closest('form').find(':input');
+			 inputs.eq( inputs.index(this)+ 1 ).focus();
+		 }*/
+	 // $(".inputs").keyup(function () {
+	 	// if ($(this).val().length >= 1) { 
+    // if (this.value.length == this.maxLength) {
+      // $(this).next('.inputs').focus();
+    // }
+   // }
+// });
+
 
 var max_chars = 1;
 
-$('#digit4').keydown( function(e){
+$('.txtPin').keydown( function(e){
 	//alert("here");
     if ($(this).val().length >= 1) { 
         $(this).val($(this).val().substr(0, max_chars));
+       
     }
 });
 
-$('#digit4').keyup( function(e){
+$('.txtPin').keyup( function(e){
 	$(this).type='text';
     if ($(this).val().length >= 1) { 
         $(this).val($(this).val().substr(0, max_chars));
+         var inputs = $(this).closest('form').find(':input');
+        inputs.eq( inputs.index(this)+ 1 ).focus();
     }
 });
 	

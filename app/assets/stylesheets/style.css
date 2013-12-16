@@ -786,13 +786,14 @@ img, object {
 
 #feedback .backColr {
 	background-color: #E5E6E8;
-	border-right: 3px solid #FFFFFF;
+	border-right: 2px solid #FFFFFF;
 	float: left;
 	height: 75px;
+	
 	/*font-size: 375%;*/
 	padding: 0;
-	margin: 0;
-	width: 19.2%;
+	/*margin: 0 0.4% 0 0;*/
+	width: 19.5%;
 }
 
 #feedback .backColr :nth-child(4) {
@@ -800,8 +801,8 @@ img, object {
 }
 
 #feedback .menDiv {
-	margin: 2% 0 0 0;
-	width: 100%;
+	margin: 2% 1%;
+    width: 98%;
 }
 
 #feedback .keypad .menDiv {
@@ -2338,9 +2339,10 @@ img, object {
 
 
 #keypadBtn{
-	width:100%;
+	width:80%;
 	text-align: center;
 	color: #664765;
+	margin: 4% 10% 0 10%;
 }
 
 
