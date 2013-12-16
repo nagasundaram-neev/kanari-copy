@@ -134,11 +134,11 @@ var flagPage = 0;
 var iphoneFlag = 0;
 var footerFlag = 0;
 var hostName =location.hostname; 
-if(hostName == "192.168.1.120")
-{
-	var localyticsSession = LocalyticsSession("3377ca92c983287af395e16-ce41cd54-55c4-11e3-96f0-009c5fda0a25");
-}
-else if(hostName == "app.kanari.co"){
+// if(hostName == "192.168.1.120")
+// {
+	// var localyticsSession = LocalyticsSession("3377ca92c983287af395e16-ce41cd54-55c4-11e3-96f0-009c5fda0a25");
+// }
+(hostName == "app.kanari.co"){
 	var localyticsSession = LocalyticsSession("4541b43eb3c33ab174c297e-429beda6-52ab-11e3-925c-005cf8cbabd8");
 }
 else if(hostName == "staging.kanari.co"){
