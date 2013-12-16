@@ -20,3 +20,4 @@
 //= require app_mobile
 //= require angular/controllers/controllers_mobile
 //= require add2home
+ 
