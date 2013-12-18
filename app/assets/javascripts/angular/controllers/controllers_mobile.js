@@ -134,10 +134,10 @@ var flagPage = 0;
 var iphoneFlag = 0;
 var footerFlag = 0;
 var hostName =location.hostname; 
-// if(hostName == "192.168.1.120")
-// {
-	// var localyticsSession = LocalyticsSession("3377ca92c983287af395e16-ce41cd54-55c4-11e3-96f0-009c5fda0a25");
-// }
+//if(hostName == "192.168.1.120")
+//{
+//	var localyticsSession = LocalyticsSession("3377ca92c983287af395e16-ce41cd54-55c4-11e3-96f0-009c5fda0a25");
+//}
 if(hostName == "app.kanari.co"){
 	localyticsSession = LocalyticsSession("4541b43eb3c33ab174c297e-429beda6-52ab-11e3-925c-005cf8cbabd8");
 }
@@ -1158,31 +1158,15 @@ module.controller('feedbackController', function($scope, $http, $location) {
 			}
 			$scope.errorMsg = data.errors[0];
 			$scope.error = true;
+			$scope.digit1 = "";
+			$scope.digit2 = "";
+			$scope.digit3 = "";
+			$scope.digit4 = "";
+			$scope.digit5 = "";
+			$("#digit0").focus();
 		});
 
 	};
-	
-	 // $scope.focusNext = function() {
-	 	// console.log("in");
- 	  // var inputs = $(this).closest('form').find(':input');
-        // inputs.eq( inputs.index(this)+ 1 ).focus();
- 	 // };
- 	
- 	/*
-	 $('.txtPin').keypress(function() {
-		 var value = $(this).val();
-		 if(value.length >= 1) {
-			 var inputs = $(this).closest('form').find(':input');
-			 inputs.eq( inputs.index(this)+ 1 ).focus();
-		 }*/
-	 // $(".inputs").keyup(function () {
-	 	// if ($(this).val().length >= 1) { 
-    // if (this.value.length == this.maxLength) {
-      // $(this).next('.inputs').focus();
-    // }
-   // }
-// });
-
 
 var max_chars = 1;
 
@@ -1195,14 +1179,14 @@ $('.txtPin').keydown( function(e){
 });
 
 $('.txtPin').keyup( function(e){
-	$(this).type='text';
+	//$(this).type='text';
     if ($(this).val().length >= 1) { 
         $(this).val($(this).val().substr(0, max_chars));
          var inputs = $(this).closest('form').find(':input');
         inputs.eq( inputs.index(this)+ 1 ).focus();
     }
 });
-	
+
 });
 
 module.controller('feedback_step2Controller', function($scope, $http, $location) {
@@ -2087,6 +2071,16 @@ $(document).on("pageshow", ".ui-page", function() {
 		display : "bottom",
 		dateFormat : 'dd/mm/yy'
 	});
+	
+	//console.log($.mobile.activePage.attr('id'));
+	
+	if($.mobile.activePage.attr('id') == 'feedback'){
+		//$("#digit0").focus();
+//		$("input:first:text").focus().select();
+		$("#digit0").focus().click();
+//		$('input:first:text').blur();
+		
+	}
 	
 	
 	// $('.fblogin').click(function(event) {

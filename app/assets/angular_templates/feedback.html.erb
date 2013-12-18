@@ -23,6 +23,9 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 				<!-- Enter your code to proceed -->
 				Ask for your Kanari Code and enter it here
 			</div>
+		<div ng-show="error" class="errorMsg" style="margin-top: -15px">
+			{{errorMsg}}
+		</div>
 			<form>
 			<div class="menDiv">
 				<div class="backColr">
@@ -126,6 +129,3 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 		</div> -->
 	</div>
 	<div class="clr"></div>
-<div ng-show="error" class="errorMsg" style="margin-top: 5px">
-			{{errorMsg}}
-		</div>
