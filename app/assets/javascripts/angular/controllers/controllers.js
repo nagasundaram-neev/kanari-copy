@@ -3446,9 +3446,9 @@ module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routePara
 
 					/**Net Promoter Score start**/
 					else if (idValue == "npsBreakdown") {
-						var foodLike = data.feedback_trends.detailed_statistics[dateV].nps_breakdown.like;
-						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].nps_breakdown.neutral;
-						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].nps_breakdown.dislike;
+						var foodLike = data.feedback_trends.detailed_statistics[dateV].nps_breakdown.like_count;
+						var foodNeutral = data.feedback_trends.detailed_statistics[dateV].nps_breakdown.neutral_count;
+						var foodDisLike = data.feedback_trends.detailed_statistics[dateV].nps_breakdown.dislike_count;
 						npsBreakdownV = 1;
 						$scope.selectedOption = "npsBreakdown";
 						//graphType = "area";
