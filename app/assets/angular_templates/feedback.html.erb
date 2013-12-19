@@ -9,6 +9,10 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 	height: 23px;
 	width: 21px;
 	}
+	::-webkit-input-placeholder { font-size: 80%; }
+::-moz-placeholder { font-size: 80%; } /* firefox 19+ */
+:-ms-input-placeholder { font-size: 80%; } /* ie */
+input:-moz-placeholder { font-size: 800%; }
 	</style>
 	<div data-role="content">
 		<div class="username">
@@ -30,24 +34,24 @@ background-image: url(<%= asset_path 'sprite_mobile.png' %>
 			<div class="menDiv">
 				<div class="backColr">
 					<!-- {{digit1}} -->
-					<input data-theme="a" class="txtPin" id="digit0" data-inline="true" type="text" ng-change="focusNext()" onfocus="this.type='number';" maxlength="1" ng-model="digit1"/>
+					<input data-theme="a" class="txtPin" id="digit0" data-inline="true" type="number" maxlength="5" ng-model="digit1" placeholder="Enter Code"/>
 				</div>
-				<div class="backColr">
-					<!-- {{digit2}} -->
+				<!-- <div class="backColr">
+					
 					<input data-theme="a" class="txtPin" id="digit1" data-inline="true" type="text" ng-change="focusNext()" onfocus="this.type='number';"  maxlength="1" ng-model="digit2"/>
 				</div>
 				<div class="backColr">
-					<!-- {{digit3}} -->
+					
 					<input data-theme="a" class="txtPin" id="digit2" data-inline="true" type="text" ng-change="focusNext()" onfocus="this.type='number';" maxlength="1"  ng-model="digit3"/>
 				</div>
 				<div class="backColr">
-					<!-- {{digit4}} -->
+					
 					<input data-theme="a" class="txtPin" id="digit3" data-inline="true" type="text" ng-change="focusNext()" onfocus="this.type='number';" maxlength="1"  ng-model="digit4"/>
 				</div>
 				<div class="backColr" style="border-right:0px solid #FFF">
-					<!-- {{digit5}} -->
+					
 					<input data-theme="a" class="txtPin"  id="digit4" data-inline="true" type="text" ng-change="focusNext()" onfocus="this.type='number';" maxlength="1" ng-model="digit5" />
-				</div>
+				</div> -->
 				<div class="clr"></div>
 			</div>
 		</div>

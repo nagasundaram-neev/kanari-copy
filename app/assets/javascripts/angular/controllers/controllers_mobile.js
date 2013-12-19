@@ -134,10 +134,10 @@ var flagPage = 0;
 var iphoneFlag = 0;
 var footerFlag = 0;
 var hostName =location.hostname; 
-//if(hostName == "192.168.1.120")
-//{
-//	var localyticsSession = LocalyticsSession("3377ca92c983287af395e16-ce41cd54-55c4-11e3-96f0-009c5fda0a25");
-//}
+// if(hostName == "192.168.1.5")
+// {
+	// var localyticsSession = LocalyticsSession("3377ca92c983287af395e16-ce41cd54-55c4-11e3-96f0-009c5fda0a");
+// }
 if(hostName == "app.kanari.co"){
 	localyticsSession = LocalyticsSession("4541b43eb3c33ab174c297e-429beda6-52ab-11e3-925c-005cf8cbabd8");
 }
@@ -281,7 +281,6 @@ function addToIphoneHomePage() {
 
 		function init() {
 			// Preliminary check, all further checks are performed on iDevices only
-			//alert("inlogin");
 			if (!isIDevice)
 				return;
 
@@ -602,7 +601,6 @@ module.controller('resetPassController', function($scope, $http, $location, $rou
 	$scope.success = false;
 	$scope.erromsg = false;
 	$scope.resetPass = function() {
-		//alert($routeParams.reset_password_token);
 		var userPass = $scope.password;
 		var userConfirmPass = $scope.confirmpassword;
 		var resetPassToken = $routeParams.reset_password_token;
@@ -1096,6 +1094,8 @@ module.controller('feedbackController', function($scope, $http, $location) {
 	$scope.digit3 = "";
 	$scope.digit4 = "";
 	$scope.digit5 = "";
+	setTimeout(function(){	$(".txtPin").focus();$(".txtPin").prompt();},3000); 
+	
 	$scope.error = false;
 
 	$scope.home = function() {
@@ -1105,7 +1105,7 @@ module.controller('feedbackController', function($scope, $http, $location) {
 			$location.url("/index");
 		}
 	};
-
+	
 	$scope.clear = function() {
 		$scope.digit1 = "";
 		$scope.digit2 = "";
@@ -1131,8 +1131,9 @@ module.controller('feedbackController', function($scope, $http, $location) {
 
 	$scope.next = function() {
 		var kanariCode;
-		if ($scope.digit1 && $scope.digit2 && $scope.digit3 && $scope.digit4 && $scope.digit5) {
-			kanariCode = $scope.digit1 + "" + $scope.digit2 + "" + $scope.digit3 + "" + $scope.digit4 + "" + $scope.digit5;
+		if ($scope.digit1) {
+			//kanariCode = $scope.digit1 + "" + $scope.digit2 + "" + $scope.digit3 + "" + $scope.digit4 + "" + $scope.digit5;
+			kanariCode = $scope.digit1;
 		} else {
 			kanaricode = "";
 		}
@@ -1159,20 +1160,15 @@ module.controller('feedbackController', function($scope, $http, $location) {
 			$scope.errorMsg = data.errors[0];
 			$scope.error = true;
 			$scope.digit1 = "";
-			$scope.digit2 = "";
-			$scope.digit3 = "";
-			$scope.digit4 = "";
-			$scope.digit5 = "";
 			$("#digit0").focus();
 		});
 
 	};
 
-var max_chars = 1;
+var max_chars = 5;
 
 $('.txtPin').keydown( function(e){
-	//alert("here");
-    if ($(this).val().length >= 1) { 
+    if ($(this).val().length == 5) { 
         $(this).val($(this).val().substr(0, max_chars));
        
     }
@@ -1180,10 +1176,10 @@ $('.txtPin').keydown( function(e){
 
 $('.txtPin').keyup( function(e){
 	//$(this).type='text';
-    if ($(this).val().length >= 1) { 
+    if ($(this).val().length >= 5) { 
         $(this).val($(this).val().substr(0, max_chars));
-         var inputs = $(this).closest('form').find(':input');
-        inputs.eq( inputs.index(this)+ 1 ).focus();
+         //var inputs = $(this).closest('form').find(':input');
+        //inputs.eq( inputs.index(this)+ 1 ).focus();
     }
 });
 
@@ -1679,7 +1675,6 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 			var timer = setInterval(function() {
 				if (popup.closed) {
 					clearInterval(timer);
-					//alert('closed');
 					$("#fbShareSuccMsg").hide();
 					localyticsSession.tagEvent("Social Share", {
 						"Platform" : 'Twitter'
@@ -2072,14 +2067,12 @@ $(document).on("pageshow", ".ui-page", function() {
 		dateFormat : 'dd/mm/yy'
 	});
 	
-	//console.log($.mobile.activePage.attr('id'));
+	
 	
 	if($.mobile.activePage.attr('id') == 'feedback'){
-		//$("#digit0").focus();
-//		$("input:first:text").focus().select();
-		$("#digit0").focus().click();
-//		$('input:first:text').blur();
-		
+		//$("#digit0").val("test");
+
+
 	}
 	
 	
@@ -2104,7 +2097,6 @@ $(document).on("pageshow", ".ui-page", function() {
 		} else {
 			$page.children('.ui-footer').css('margin-top', '0');
 		}
-		//alert("scroll");
 	}
 
 	function setFooterIphone() {
@@ -2118,7 +2110,6 @@ $(document).on("pageshow", ".ui-page", function() {
 			}
 
 		} else {
-			//alert("height sufficient no need to scroll")
 		}
 	}
 
