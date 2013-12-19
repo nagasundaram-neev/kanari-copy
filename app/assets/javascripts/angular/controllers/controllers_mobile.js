@@ -136,7 +136,7 @@ var footerFlag = 0;
 var hostName =location.hostname; 
 // if(hostName == "192.168.1.5")
 // {
-	// var localyticsSession = LocalyticsSession("3377ca92c983287af395e16-ce41cd54-55c4-11e3-96f0-009c5fda0a");
+	// var localyticsSession = LocalyticsSession("47dfd007f9c83fc37e7aff2-b19dd06c-6874-11e3-1807-004a77f8b47f");
 // }
 if(hostName == "app.kanari.co"){
 	localyticsSession = LocalyticsSession("4541b43eb3c33ab174c297e-429beda6-52ab-11e3-925c-005cf8cbabd8");
@@ -1094,8 +1094,6 @@ module.controller('feedbackController', function($scope, $http, $location) {
 	$scope.digit3 = "";
 	$scope.digit4 = "";
 	$scope.digit5 = "";
-	setTimeout(function(){	$(".txtPin").focus();$(".txtPin").prompt();},3000); 
-	
 	$scope.error = false;
 
 	$scope.home = function() {
@@ -1133,7 +1131,7 @@ module.controller('feedbackController', function($scope, $http, $location) {
 		var kanariCode;
 		if ($scope.digit1) {
 			//kanariCode = $scope.digit1 + "" + $scope.digit2 + "" + $scope.digit3 + "" + $scope.digit4 + "" + $scope.digit5;
-			kanariCode = $scope.digit1;
+			kanariCode = $("#digit0").val();
 		} else {
 			kanaricode = "";
 		}
