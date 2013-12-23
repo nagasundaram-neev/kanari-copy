@@ -1082,6 +1082,10 @@ img, object {
 	letter-spacing: 0.4em;
 }
 
+.pointsEarnedDiv .points {
+	letter-spacing: 0.1em;	
+}
+
 .headTitleLast span {
 
 }
@@ -1632,6 +1636,18 @@ img, object {
 .adviceDiv input::-moz-placeholder, textarea::-moz-placeholder {
 	color: #664765 !important;
 	text-align: center;
+}
+ textarea#comment::-webkit-input-placeholder{
+	color: #AAAAAA !important;
+	text-align: left;
+	font-weight: normal;
+	text-shadow: none !important;
+}
+textarea#comment::-moz-placeholder{
+	color: #AAAAAA !important;
+	text-align: left;
+	font-weight: normal;
+	text-shadow: none !important;
 }
 
 .adviceDiv textarea.ui-input-text {
@@ -2269,6 +2285,10 @@ img, object {
 }
 .aed {
 	font-size: 120%;
+}
+
+.pointsEarned .aed {
+	font-size: 19%;	
 }
 
 /* Retina changes */
