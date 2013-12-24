@@ -138,3 +138,19 @@ Given(/^the following feedbacks exist before "(.*?)" days$/) do |day, hashes|
   end
   Feedback.where(updated_at: (thisday + 1.hours)).count.should == feedback_hashes.size
 end
+
+Then(/^feedback with id "(.*?)" user_status should be "(.*?)"$/) do |feedback_id, status|
+  feedback = Feedback.where(:id => feedback_id).first  
+  feedback.user_status.should == status
+end
+
+When(/^feedback with id "(.*?)" completed should be "(.*?)"$/) do |feedback_id, completed|
+  feedback = Feedback.where(:id => feedback_id).first  
+  feedback.completed.to_s.should == completed
+end
+
+When(/^feedback with id "(.*?)" user_id should be "(.*?)"$/) do |feedback_id, user_id|
+  feedback = Feedback.where("id = ? and user_id =? ",feedback_id,user_id).first  
+  feedback.should_not nil
+end
+

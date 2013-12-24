@@ -1,6 +1,6 @@
 class Api::V1::FeedbacksController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :metrics, :trends]
-  before_action :set_feedback, only: [:show, :edit, :destroy]
+  before_action :authenticate_user!, only: [:index, :metrics, :trends ,:user_reachout]
+  before_action :set_feedback, only: [:show, :edit, :destroy , :user_reachout]
   before_action :set_outlet, only: [:index, :metrics, :trends]
 
   respond_to :json
@@ -62,9 +62,9 @@ class Api::V1::FeedbacksController < ApplicationController
         end
         if @feedback.update(feedback_params)
           FeedbackLog.create({customer_id: outlet.customer_id, outlet_id: outlet.id, outlet_name: outlet.name, feedback_id: @feedback.id,
-           user_id: current_user.id, user_first_name: current_user.first_name, user_last_name: current_user.last_name, user_email: current_user.email,
-           code: code_before, points: @feedback.points, outlet_points_before: outlet_points_before, outlet_points_after: outlet.rewards_pool,
-           user_points_before: user_points_before, user_points_after: current_user.points_available })
+              user_id: current_user.id, user_first_name: current_user.first_name, user_last_name: current_user.last_name, user_email: current_user.email,
+              code: code_before, points: @feedback.points, outlet_points_before: outlet_points_before, outlet_points_after: outlet.rewards_pool,
+              user_points_before: user_points_before, user_points_after: current_user.points_available })
           render json: {points: @feedback.points}, status: :ok
         else
           render json: {errors: @feedback.errors.full_messages}, status: :unprocessable_entity
@@ -83,42 +83,91 @@ class Api::V1::FeedbacksController < ApplicationController
     end
   end
 
+  # Customer Admin / Manager can send email asking whether they can reach out to them or not
+  def user_reachout
+    # Authorize resource
+    authorize! :get_feedback, @feedback.outlet
+    # Update the feedback status only when feedback permission
+    begin
+      if @feedback.completed && @feedback.user_status == "reach_out" && @feedback.user.present?
+        #sending mail with parameters user feedback and the admin user(manager or customer_admin)
+        UserMailer.request_email_to_share_details(@feedback.user, @feedback, current_user).deliver
+        if(@feedback.update_column("user_status","pending"))
+          render json: nil, status: :ok
+        else
+          render json: {errors: @feedback.errors.full_messages}, status: :unprocessable_entity
+        end
+      else
+        render json: {errors: ["Insufficient privileges"]}, status: :unprocessable_entity
+      end
+    rescue => e
+      render json: {errors: e}, status: :unprocessable_entity
+    end
+  end
+
+  # Customer Admin / Manager can communicate by sending email once the user gives the response ok
+  def user_response
+    @feedback = Feedback.where("id = ? and user_id = ? and user_status = ? and completed = ?",params[:id],params[:send_id], "pending", true).first
+    render json: {errors: ["Feedback not found."]}, status: :not_found and return if @feedback.nil?
+    @contacted_user = User.where("id = ?", params["contacted_user_id"]).first
+    render json: {errors: ["User not found."]}, status: :not_found and return if @contacted_user.nil?
+    
+    begin
+      if params["response"] == "1"
+        #sending mail with parameters user feedback and the admin user(manager or customer_admin)        
+        UserMailer.customer_accepted_email_to_share_details(@feedback,@contacted_user).deliver
+        status = "accepted"      
+      elsif params["response"] == "0"
+         status = "rejected"  
+      else
+        render json: {errors: ["Invalid response"]}, status: :unprocessable_entity and return
+      end
+      if(@feedback.update_column("user_status", status))
+        render json: nil, status: :ok
+      else
+        render json: {errors: @feedback.errors.full_messages}, status: :unprocessable_entity
+      end
+    rescue => e
+      render json: {errors: e}, status: :unprocessable_entity
+    end
+  end
+
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_feedback
-      @feedback = Feedback.where(id: params[:id]).first
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_feedback
+    @feedback = Feedback.where(id: params[:id]).first
+  end
 
-    def set_feedback_for_update
-      if params[:feedback][:user_id].nil?
-        set_incomplete_feedback
-      else
-        set_completed_feedback
-      end
+  def set_feedback_for_update
+    if params[:feedback][:user_id].nil?
+      set_incomplete_feedback
+    else
+      set_completed_feedback
     end
+  end
 
-    def set_completed_feedback
-      @feedback = Feedback.where(id: params[:id], completed: true).first
-    end
+  def set_completed_feedback
+    @feedback = Feedback.where(id: params[:id], completed: true).first
+  end
 
-    def set_incomplete_feedback
-      @feedback = Feedback.where(id: params[:id], completed: false).first
-    end
+  def set_incomplete_feedback
+    @feedback = Feedback.where(id: params[:id], completed: false).first
+  end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_outlet
-      if params[:outlet_id].present?
-        @outlet = Outlet.where(id: params[:outlet_id].strip).first
-      else
-        @outlet = current_user.outlets.first
-      end
-      if @outlet.nil?
-        render json: {errors: ["Outlet not found"]}, status: :unprocessable_entity and return
-      end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_outlet
+    if params[:outlet_id].present?
+      @outlet = Outlet.where(id: params[:outlet_id].strip).first
+    else
+      @outlet = current_user.outlets.first
     end
+    if @outlet.nil?
+      render json: {errors: ["Outlet not found"]}, status: :unprocessable_entity and return
+    end
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def feedback_params
-      params.require(:feedback).permit(:food_quality, :speed_of_service, :friendliness_of_service, :ambience, :cleanliness, :value_for_money, :comment, :recommendation_rating)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def feedback_params
+    params.require(:feedback).permit(:food_quality, :speed_of_service, :friendliness_of_service, :ambience, :cleanliness, :value_for_money, :comment, :recommendation_rating)
+  end
 end

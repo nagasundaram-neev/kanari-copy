@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131009132205) do
+ActiveRecord::Schema.define(version: 20131223113154) do
 
   create_table "code_generation_logs", force: true do |t|
     t.integer  "outlet_id"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20131009132205) do
     t.integer  "recommendation_rating"
     t.float    "bill_amount"
     t.boolean  "first_interaction",           default: false
+    t.string   "user_status",                 default: "reach_out"
   end
 
   add_index "feedbacks", ["code"], name: "index_feedbacks_on_code", using: :btree
