@@ -131,6 +131,10 @@ var feedbackTimeout;
 var insightTimeout;
 var redemTimeout;
 var hostName =location.hostname; 
+// if(hostName == "192.168.1.68")
+// {
+	// var localyticsSession = LocalyticsSession("47dfd007f9c83fc37e7aff2-b19dd06c-6874-11e3-1807-004a77f8b47f");
+// }
 if(hostName == "app.kanari.co"){
 	var localyticsSession = LocalyticsSession("4541b43eb3c33ab174c297e-429beda6-52ab-11e3-925c-005cf8cbabd8");
 }
@@ -1184,6 +1188,39 @@ module.controller('numericCodeController', function($scope, $http, $location, $t
 	} else {
 		$location.url("/signin");
 	}
+});
+
+module.controller('signedUpController', function($scope,$rootScope, $http, $location, $routeParams) {
+	
+	$rootScope.header = "Kanari";
+	$scope.erromsg = false;
+	$scope.succMsg = true;
+	$('.header').hide();	
+	$scope.confirmMail = function() {
+		var param = {
+			"feed_id" : $routeParams.feed_id,
+			"contacted_user_id" : $routeParams.contacted_user_id,
+			"response" : $routeParams.response,
+			"send_id" : $routeParams.send_id
+		}
+
+		$http({
+			method : 'get',
+			url : '/api/feedbacks/user_response',
+			params : param
+		}).success(function(data, status) {
+			if ($routeParams.response == 1) {
+				$routeParams.response = true;
+			} else {
+				$routeParams.response = false;
+			}
+			$scope.response = $routeParams.response;
+		}).error(function(data, status) {
+		});
+	};
+	$scope.confirmMail();
+	
+
 });
 
 function callScroller() {

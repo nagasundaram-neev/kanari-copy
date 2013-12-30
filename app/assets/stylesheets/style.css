@@ -2365,7 +2365,9 @@ textarea#comment::-moz-placeholder{
 	margin: 2% 10% 0 10%;
 }
 
-
+.desktopStyle{
+	display:none;
+}
 
 
 /*.feedback img{

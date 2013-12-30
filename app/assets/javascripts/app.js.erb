@@ -32,6 +32,7 @@ var module = angular.module('kanari', ['ui.bootstrap']).
      when('/adminConsole_customer', {templateUrl: "<%= asset_path 'adminConsole_customer.html' %>"}).
      when('/change_password', {templateUrl: "<%= asset_path 'changePassword.html' %>"}).
      when('/api/users/confirmations', {templateUrl: "<%= asset_path 'confirmation_manager.html' %>"}).
+     when('/api/customer_response', {templateUrl: "<%= asset_path 'confirmation_email.html' %>"}).
      otherwise({redirectTo: '/login'});
      $locationProvider.hashPrefix = "#";
 }]);
