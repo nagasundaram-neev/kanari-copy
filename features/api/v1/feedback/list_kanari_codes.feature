@@ -14,12 +14,12 @@ Feature: List Kanari Codes for pending feedbacks
           |staff.bangalore.1@subway.com   |
           |staff.bangalore.2@subway.com   |
         And the following feedbacks are created before "20" minutes
-          |id  |outlet_id |user_id |points |bill_amount |code   | completed |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating |
-          |1   |10        |1000    |400    |4000        |12345  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-          |2   |10        |3000    |100    |1000        |nil    | true      |1            |-1               |0                       |-1       |-1          |4               | 9                    |
-          |3   |10        |4000    |200    |2000        |34567  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-          |4   |20        |1000    |200    |2000        |45678  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-          |5   |30        |2000    |200    |2000        |56789  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
+          |id  |outlet_id |user_id |points |bill_amount |code   | completed |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating |user_status|
+          |1   |10        |1000    |400    |4000        |12345  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |reach_out|
+          |2   |10        |3000    |100    |1000        |nil    | true      |1            |-1               |0                       |-1       |-1          |4               | 9                    |reach_out|
+          |3   |10        |4000    |200    |2000        |34567  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |reach_out|
+          |4   |20        |1000    |200    |2000        |45678  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |reach_out|
+          |5   |30        |2000    |200    |2000        |56789  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |reach_out|
         And the time limit for giving feedback is "120" minutes
       When I authenticate as the user "donald_auth_token" with the password "random string"
       And I send a GET request to "/api/feedbacks" with the following:
@@ -44,7 +44,8 @@ Feature: List Kanari Codes for pending feedbacks
             "bill_amount": 4000.0,
             "code": "12345",
             "updated_at": "2013-07-08 00:00:00",
-            "promoter_score": 0
+            "promoter_score": 0,
+            "user_status": "reach_out"
           },
           {
             "id": 3,
@@ -59,7 +60,8 @@ Feature: List Kanari Codes for pending feedbacks
             "bill_amount": 2000.0,
             "code": "34567",
             "updated_at": "2013-07-06 00:00:00",
-            "promoter_score": 0
+            "promoter_score": 0,
+            "user_status": "reach_out"
           }
         ]
       }
@@ -76,12 +78,12 @@ Feature: List Kanari Codes for pending feedbacks
           |staff.bangalore.1@subway.com   |
           |staff.bangalore.2@subway.com   |
         And the following feedbacks are created before "130" minutes
-          |id  |outlet_id |user_id |points |bill_amount |code   | completed |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating |
-          |1   |10        |1000    |400    |4000        |12345  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-          |2   |10        |3000    |100    |1000        |nil    | true      |1            |-1               |0                       |-1       |-1          |4               | 9                    |
-          |3   |10        |4000    |200    |2000        |34567  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-          |4   |20        |1000    |200    |2000        |45678  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-          |5   |30        |2000    |200    |2000        |56789  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
+          |id  |outlet_id |user_id |points |bill_amount |code   | completed |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating |user_status|
+          |1   |10        |1000    |400    |4000        |12345  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |reach_out|
+          |2   |10        |3000    |100    |1000        |nil    | true      |1            |-1               |0                       |-1       |-1          |4               | 9                    |reach_out|
+          |3   |10        |4000    |200    |2000        |34567  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |reach_out|
+          |4   |20        |1000    |200    |2000        |45678  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |reach_out|
+          |5   |30        |2000    |200    |2000        |56789  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |reach_out|
         And the time limit for giving feedback is "120" minutes
       When I authenticate as the user "donald_auth_token" with the password "random string"
       And I send a GET request to "/api/feedbacks" with the following:
@@ -109,12 +111,12 @@ Feature: List Kanari Codes for pending feedbacks
           |staff.bangalore.1@subway.com   |
           |staff.bangalore.2@subway.com   |
         And the following feedbacks are created before "100" minutes
-          |id  |outlet_id |user_id |points |bill_amount |code   | completed |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating |
-          |1   |10        |1000    |400    |4000        |12345  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-          |2   |10        |3000    |100    |1000        |nil    | true      |1            |-1               |0                       |-1       |-1          |4               | 9                    |
-          |3   |10        |4000    |200    |2000        |34567  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-          |4   |20        |1000    |200    |2000        |45678  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-          |5   |30        |2000    |200    |2000        |56789  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
+          |id  |outlet_id |user_id |points |bill_amount |code   | completed |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating |user_status|
+          |1   |10        |1000    |400    |4000        |12345  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |reach_out|
+          |2   |10        |3000    |100    |1000        |nil    | true      |1            |-1               |0                       |-1       |-1          |4               | 9                    |reach_out|
+          |3   |10        |4000    |200    |2000        |34567  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |reach_out|
+          |4   |20        |1000    |200    |2000        |45678  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |reach_out|
+          |5   |30        |2000    |200    |2000        |56789  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |reach_out|
         And the time limit for giving feedback is "30" minutes
       When I authenticate as the user "donald_auth_token" with the password "random string"
       And I send a GET request to "/api/feedbacks" with the following:
@@ -138,12 +140,12 @@ Feature: List Kanari Codes for pending feedbacks
           |staff.bangalore.1@subway.com   |
           |staff.bangalore.2@subway.com   |
         And the following feedbacks are created before "10" minutes
-          |id  |outlet_id |user_id |points |bill_amount |code   | completed |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating |
-          |1   |10        |1000    |400    |4000        |12345  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-          |2   |10        |3000    |100    |1000        |nil    | true      |1            |-1               |0                       |-1       |-1          |4               | 9                    |
-          |3   |10        |4000    |200    |2000        |34567  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-          |4   |20        |1000    |200    |2000        |45678  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
-          |5   |30        |2000    |200    |2000        |56789  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |
+          |id  |outlet_id |user_id |points |bill_amount |code   | completed |food_quality |speed_of_service |friendliness_of_service |ambience |cleanliness |value_for_money |recommendation_rating |user_status|
+          |1   |10        |1000    |400    |4000        |12345  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |reach_out|
+          |2   |10        |3000    |100    |1000        |nil    | true      |1            |-1               |0                       |-1       |-1          |4               | 9                    |reach_out|
+          |3   |10        |4000    |200    |2000        |34567  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |reach_out|
+          |4   |20        |1000    |200    |2000        |45678  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |reach_out|
+          |5   |30        |2000    |200    |2000        |56789  | nil       |nil          |nil              |nil                     |nil      |nil         |nil             | nil                  |reach_out|
       When I authenticate as the user "mike_auth_token" with the password "random string"
       And I send a GET request to "/api/feedbacks" with the following:
       """

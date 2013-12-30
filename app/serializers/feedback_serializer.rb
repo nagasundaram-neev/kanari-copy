@@ -1,5 +1,5 @@
 class FeedbackSerializer < ActiveModel::Serializer
-  attributes :id, :food_quality, :speed_of_service, :friendliness_of_service, :ambience, :cleanliness, :value_for_money, :comment, :updated_at, :promoter_score, :points, :code, :bill_amount
+  attributes :id, :food_quality, :speed_of_service, :friendliness_of_service, :ambience, :cleanliness, :value_for_money, :comment, :updated_at, :promoter_score, :points, :code, :bill_amount, :user_status
 
   def promoter_score
     object.recommendation_rating
