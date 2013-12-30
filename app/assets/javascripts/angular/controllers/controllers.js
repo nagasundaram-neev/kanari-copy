@@ -3102,6 +3102,27 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 
 			});
 		};
+		
+		
+		$scope.reachOutEmail = function(id){
+            var param = {
+                "auth_token" : getCookie('authToken'),
+                "password" : "X"
+            }
+
+            $http({
+                method : 'put',
+                url : '/api/feedbacks/user_reachout/'+id,
+                data : param
+            }).success(function(data, status) {
+                $scope.listFeedbacks();
+            }).error(function(data, status) {
+                if (status == 401) {
+                    $location.url("/login");
+                }
+
+            });
+        };
 
 		$scope.listFeedbacks();
 		$scope.selectOutlet = function() {
@@ -3112,6 +3133,38 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 		$location.url("/login");
 	}
 });
+
+
+module.controller('signedUpController', function($scope,$rootScope, $http, $location, $routeParams) {
+	// $scope.email = getCookie('email');
+	// $scope.password = getCookie('password');
+	$rootScope.header = "Confirmation Email | Kanari";
+	$scope.erromsg = false;
+	$scope.succMsg = true;
+	$('.header').hide();	
+	console.log($routeParams.response);
+	
+
+	// var param = {
+		// "confirmation_token" : $routeParams.confirmation_token
+	// }
+// 
+	// $http({
+		// method : 'get',
+		// url : '/api/users/confirmation',
+		// params : param
+	// }).success(function(data, status) {
+		// localyticsSession.tagEvent("Account Confirmed");
+	// }).error(function(data, status) {
+		// $scope.errorMsg = true;
+		// $scope.errorMsg = data.error;
+	// });
+// 
+	// $scope.proceedAccount = function() {
+		// $location.url("/login");
+	// };
+});
+
 
 module.controller('dashboardTrendsCtrl', function($scope, $rootScope, $routeParams, $route, $http, $location, limitToFilter) {
 	if (getCookie('authToken')) {
