@@ -16,14 +16,14 @@ class UserMailer < ActionMailer::Base
     @feedback = feedback
     @outlet = @feedback.outlet
     @contacted_user_id = contacted_user.id
-    @host = default_url_options[:host]    
+    @host = default_url_options[:host]
     mail(from: 'Kanari Team <notifications@kanari.co>', to: @user.email, subject: "The manager at #{@outlet.name} wants to contact you")
   end
-  
+
   def customer_accepted_email_to_share_details(feedback,user)
-    @manager_user = user    
-    @feedback = feedback    
-    @customer_user = @feedback.user    
+    @manager_user = user
+    @feedback = feedback
+    @customer_user = @feedback.user
     mail(from: 'Kanari Team <notifications@kanari.co>', to: @manager_user.email, subject: 'Kanari: Your Reach Out request has been accepted')
   end
 end

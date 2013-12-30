@@ -111,19 +111,19 @@ class Api::V1::FeedbacksController < ApplicationController
     render json: {errors: ["Feedback not found."]}, status: :not_found and return if @feedback.nil?
     @contacted_user = User.where("id = ?", params["contacted_user_id"]).first
     render json: {errors: ["User not found."]}, status: :not_found and return if @contacted_user.nil?
-    
+
     begin
       if params["response"] == "1"
-        #sending mail with parameters user feedback and the admin user(manager or customer_admin)        
+        #sending mail with parameters user feedback and the admin user(manager or customer_admin)
         UserMailer.customer_accepted_email_to_share_details(@feedback,@contacted_user).deliver
-        status = "accepted"      
+        status = "accepted"
       elsif params["response"] == "0"
-         status = "rejected"  
+         status = "rejected"
       else
         render json: {errors: ["Invalid response"]}, status: :unprocessable_entity and return
       end
       if(@feedback.update_column("user_status", status))
-        render json: nil, status: :ok
+        render json: {response: status }, status: :ok
       else
         render json: {errors: @feedback.errors.full_messages}, status: :unprocessable_entity
       end
