@@ -3136,33 +3136,36 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 
 
 module.controller('signedUpController', function($scope,$rootScope, $http, $location, $routeParams) {
-	// $scope.email = getCookie('email');
-	// $scope.password = getCookie('password');
-	$rootScope.header = "Confirmation Email | Kanari";
+	
+	$rootScope.header = "Kanari";
 	$scope.erromsg = false;
 	$scope.succMsg = true;
 	$('.header').hide();	
-	console.log($routeParams.response);
+	$scope.confirmMail = function() {
+		var param = {
+			"feed_id" : $routeParams.feed_id,
+			"contacted_user_id" : $routeParams.contacted_user_id,
+			"response" : $routeParams.response,
+			"send_id" : $routeParams.send_id
+		}
+
+		$http({
+			method : 'get',
+			url : '/api/feedbacks/user_response',
+			params : param
+		}).success(function(data, status) {
+			if ($routeParams.response == 1) {
+				$routeParams.response = true;
+			} else {
+				$routeParams.response = false;
+			}
+			$scope.response = $routeParams.response;
+		}).error(function(data, status) {
+		});
+	};
+	$scope.confirmMail();
 	
 
-	// var param = {
-		// "confirmation_token" : $routeParams.confirmation_token
-	// }
-// 
-	// $http({
-		// method : 'get',
-		// url : '/api/users/confirmation',
-		// params : param
-	// }).success(function(data, status) {
-		// localyticsSession.tagEvent("Account Confirmed");
-	// }).error(function(data, status) {
-		// $scope.errorMsg = true;
-		// $scope.errorMsg = data.error;
-	// });
-// 
-	// $scope.proceedAccount = function() {
-		// $location.url("/login");
-	// };
 });
 
 
