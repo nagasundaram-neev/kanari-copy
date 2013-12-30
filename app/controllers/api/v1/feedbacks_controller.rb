@@ -107,7 +107,7 @@ class Api::V1::FeedbacksController < ApplicationController
 
   # Customer Admin / Manager can communicate by sending email once the user gives the response ok
   def user_response
-    @feedback = Feedback.where("id = ? and user_id = ? and user_status = ? and completed = ?",params[:id],params[:send_id], "pending", true).first
+    @feedback = Feedback.where("id = ? and user_id = ? and user_status = ? and completed = ?",params[:feed_id],params[:send_id], "pending", true).first
     render json: {errors: ["Feedback not found."]}, status: :not_found and return if @feedback.nil?
     @contacted_user = User.where("id = ?", params["contacted_user_id"]).first
     render json: {errors: ["User not found."]}, status: :not_found and return if @contacted_user.nil?

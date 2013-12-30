@@ -43,7 +43,7 @@ Kanari::Application.routes.draw do
       get "/feedbacks/metrics" => "feedbacks#metrics"
       get "/feedbacks/trends"  => "feedbacks#trends"
       put "/feedbacks/user_reachout/:id" => "feedbacks#user_reachout"
-      get "/feedbacks/user_response/:id" => "feedbacks#user_response"      
+      get "/feedbacks/user_response" => "feedbacks#user_response"      
     end
   end
 
