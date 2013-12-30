@@ -93,7 +93,7 @@ class Api::V1::FeedbacksController < ApplicationController
         #sending mail with parameters user feedback and the admin user(manager or customer_admin)
         UserMailer.request_email_to_share_details(@feedback.user, @feedback, current_user).deliver
         if(@feedback.update_column("user_status","pending"))
-          render json: nil, status: :ok
+          render json: {response: "pending" }, status: :ok
         else
           render json: {errors: @feedback.errors.full_messages}, status: :unprocessable_entity
         end
