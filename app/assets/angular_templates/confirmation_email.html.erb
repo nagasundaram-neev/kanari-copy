@@ -6,10 +6,11 @@
 			</div>
 		</div>
 		<div class="outerDiv mainDiv">
-			<span class="secondDiv thanks">Thanks for confirming your email address. Go ahead and log in to your Kanari account.</span>
-			<div class="proceedBtn">
+			<span class="secondDiv thanks" ng-show="response">Thanks for confirming Email communication. Our manager will get back to you soon...</span>
+			<span class="secondDiv thanks" ng-hide="response">Thanks for your support you rejected Email communication</span>
+			<!-- <div class="proceedBtn">
 				<input type="button" class="signBtn" ng-click="proceedAccount()" data-inline="true" value="LOG IN TO MY ACCOUNT"/>
-			</div>
+			</div> -->
 		</div>
 		<p class="errorMsg" ng-show="errorMsg"></p>
 		<p ng-hide="errorMsg"></p>

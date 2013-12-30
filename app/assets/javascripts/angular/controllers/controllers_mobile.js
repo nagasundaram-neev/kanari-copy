@@ -133,15 +133,13 @@ var facebookFlag = 0;
 var flagPage = 0;
 var iphoneFlag = 0;
 var footerFlag = 0;
-var hostName =location.hostname; 
-// if(hostName == "192.168.1.5")
-// {
+var hostName = location.hostname;
+// if (hostName == "192.168.1.68") {
 	// var localyticsSession = LocalyticsSession("47dfd007f9c83fc37e7aff2-b19dd06c-6874-11e3-1807-004a77f8b47f");
 // }
-if(hostName == "app.kanari.co"){
+if (hostName == "app.kanari.co") {
 	localyticsSession = LocalyticsSession("4541b43eb3c33ab174c297e-429beda6-52ab-11e3-925c-005cf8cbabd8");
-}
-else if(hostName == "staging.kanari.co"){
+} else if (hostName == "staging.kanari.co") {
 	localyticsSession = LocalyticsSession("f5eca14e738338c606503c3-3bcc0202-5276-11e3-1668-004a77f8b47f");
 }
 localyticsSession.open();
@@ -849,8 +847,6 @@ module.controller('signUpController', function($scope, $http, $location) {
 });
 
 module.controller('signedUpController', function($scope, $http, $location, $routeParams) {
-	// $scope.email = getCookie('email');
-	// $scope.password = getCookie('password');
 	localyticsSession.tagScreen('Signed Up');
 
 	flagPage = 0;
@@ -858,25 +854,36 @@ module.controller('signedUpController', function($scope, $http, $location, $rout
 
 	$scope.errorMsg = false;
 
-	var param = {
-		"confirmation_token" : $routeParams.confirmation_token
-	}
+	$scope.confirmMail = function() {
+		var param = {
+			"feed_id" : $routeParams.feed_id,
+			"contacted_user_id" : $routeParams.contacted_user_id,
+			"response" : $routeParams.response,
+			"send_id" : $routeParams.send_id
+		}
 
-	$http({
-		method : 'get',
-		url : '/api/users/confirmation',
-		params : param
-	}).success(function(data, status) {
-		localyticsSession.tagEvent("Account Confirmed");
-	}).error(function(data, status) {
-		$scope.errorMsg = true;
-		$scope.errorMsg = data.error;
-	});
-
-	$scope.proceedAccount = function() {
-		$location.url("/login");
+		$http({
+			method : 'get',
+			url : '/api/feedbacks/user_response',
+			params : param
+		}).success(function(data, status) {
+			//$scope.succMsg = true;
+			if ($routeParams.response == 1) {
+				$routeParams.response = true;
+			} else {
+				$routeParams.response = false;
+			}
+			$scope.response = $routeParams.response;
+		}).error(function(data, status) {
+			// $scope.erromsg = true;
+			// $scope.succMsg = false;
+			// $scope.errorMsg = data.error;
+		});
 	};
+	$scope.confirmMail();
+
 });
+
 module.controller('changePasswordController', function($scope, $http, $location) {
 	localyticsSession.tagScreen('Change Password');
 	$scope.back = function() {
@@ -1103,7 +1110,7 @@ module.controller('feedbackController', function($scope, $http, $location) {
 			$location.url("/index");
 		}
 	};
-	
+
 	$scope.clear = function() {
 		$scope.digit1 = "";
 		$scope.digit2 = "";
@@ -1163,23 +1170,23 @@ module.controller('feedbackController', function($scope, $http, $location) {
 
 	};
 
-var max_chars = 5;
+	var max_chars = 5;
 
-$('.txtPin').keydown( function(e){
-    if ($(this).val().length == 5) { 
-        $(this).val($(this).val().substr(0, max_chars));
-       
-    }
-});
+	$('.txtPin').keydown(function(e) {
+		if ($(this).val().length == 5) {
+			$(this).val($(this).val().substr(0, max_chars));
 
-$('.txtPin').keyup( function(e){
-	//$(this).type='text';
-    if ($(this).val().length >= 5) { 
-        $(this).val($(this).val().substr(0, max_chars));
-         //var inputs = $(this).closest('form').find(':input');
-        //inputs.eq( inputs.index(this)+ 1 ).focus();
-    }
-});
+		}
+	});
+
+	$('.txtPin').keyup(function(e) {
+		//$(this).type='text';
+		if ($(this).val().length >= 5) {
+			$(this).val($(this).val().substr(0, max_chars));
+			//var inputs = $(this).closest('form').find(':input');
+			//inputs.eq( inputs.index(this)+ 1 ).focus();
+		}
+	});
 
 });
 
@@ -2064,21 +2071,17 @@ $(document).on("pageshow", ".ui-page", function() {
 		display : "bottom",
 		dateFormat : 'dd/mm/yy'
 	});
-	
-	
-	
-	if($.mobile.activePage.attr('id') == 'feedback'){
+
+	if ($.mobile.activePage.attr('id') == 'feedback') {
 		//$("#digit0").val("test");
 
-
 	}
-	
-	
+
 	// $('.fblogin').click(function(event) {
-		// console.log(event);
-		// event.preventDefault();
-		// //Facebook.login()
-        // window.location = "http://localhost:8080/#/home";
+	// console.log(event);
+	// event.preventDefault();
+	// //Facebook.login()
+	// window.location = "http://localhost:8080/#/home";
 	// });
 
 	var $page = $(this), vSpace = $page.children('.ui-header').outerHeight() + $page.children('.ui-footer').outerHeight() + $page.children('.ui-content').height();

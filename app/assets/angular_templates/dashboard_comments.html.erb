@@ -112,11 +112,20 @@
 				</div>
 				<div class="divPadding promo_code_desc">
 					<span>{{feedbacks.comment}}</span>
+					<div class="update_time">
+						<span class="timeago" >{{feedbacks.updated_at | date:'h:mm a, EEEE MMM. d, y'}}</span>
+					</div>
 				</div>
-				<div class="clr"></div>
-				<div class="update_time">
-					<span class="timeago" >{{feedbacks.updated_at | date:'h:mm a, EEEE MMM. d, y'}}</span>
+				<div class="reachOut">
+					<div ng-switch on="feedbacks.user_status">
+						<div ng-switch-when="reach_out"><div ng-click="reachOutEmail(feedbacks.id)"><%= image_tag 'reach.png'%> </br> <span>Reach Out</span></div></div>
+						<div ng-switch-when="pending"><div><%= image_tag 'pending.png'%> </br> <span>Pending</span></div></div>
+						<div ng-switch-when="accepted"><div><%= image_tag 'tick.png'%> </br> <span>Accepted</span></div></div>
+						<div ng-switch-when="rejected"><div><%= image_tag 'del.png'%> </br> <span>Declined</span></div></div>
+					</div>
 				</div>
+				<!-- <div class="clr"></div> -->
+
 			</div>
 		</div>
 	</div>
