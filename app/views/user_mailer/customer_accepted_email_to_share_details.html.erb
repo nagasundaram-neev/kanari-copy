@@ -31,7 +31,7 @@
                   </tr>
                   <tr>
                     <td width="90" style="font-family: Helvetica, Arial, FreeSans, sans-serif;line-height: 20px;font-size:13px;color: #333333;border-collapse: collapse">Date & Time</td>
-                    <td width="280" style="font-family: Helvetica, Arial, FreeSans, sans-serif;line-height: 20px;font-size:13px;color: #333333;border-collapse: collapse"><%= @feedback.created_at %></td>
+                    <td width="280" style="font-family: Helvetica, Arial, FreeSans, sans-serif;line-height: 20px;font-size:13px;color: #333333;border-collapse: collapse"><%= @feedback.created_at.strftime('%d-%m-%Y %H:%M') %></td>
                   </tr>
                   <tr>
                     <td width="90" style="font-family: Helvetica, Arial, FreeSans, sans-serif;line-height: 20px;font-size:13px;color: #333333;border-collapse: collapse">Location</td>

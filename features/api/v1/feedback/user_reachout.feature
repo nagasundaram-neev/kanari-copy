@@ -24,7 +24,11 @@ Feature: User Reachout
       And feedback with id "10" completed should be "true"
       Then the response status should be "200"
       And feedback with id "10" user_status should be "pending"
-      And "siva@gmail.com" should receive an email      
+      And "siva@gmail.com" should receive an email
+      And the JSON response should be:
+      """
+      {"response": "pending"}
+      """      
 
 
 Scenario: Manager can successfully reach out to the feedback provider or registered user      
@@ -49,6 +53,10 @@ Scenario: Manager can successfully reach out to the feedback provider or registe
       Then the response status should be "200"
       And feedback with id "10" user_status should be "pending"
       And "siva@gmail.com" should receive an email with subject "The manager at Subway - Bangalore wants to contact you"
+      And the JSON response should be:
+      """
+      {"response": "pending"}
+      """
 
 Scenario: Staff can not reach out to the feedback provider or registered user      
        Given "Adam" is a user with email id "user@gmail.com" and password "password123"
