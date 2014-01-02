@@ -1,0 +1,37 @@
+	
+Hello <%= @manager_user.first_name %>,
+
+The customer you have reached out to has accepted your Reach Out request. We've summarized all the details for you below so you can get in touch with them.
+
+Customer information
+
+Name	<%= @customer_user.full_name %>
+Email	<%= @customer_user.email %>
+Date & Time	<%= @feedback.created_at.strftime('%d-%m-%Y %H:%M') %>
+Location	<%= @feedback.outlet.address %>
+
+
+The feedback you received
+
+Promoter Scrore: <%= @feedback.recommendation_rating %>
+
+Food		<%= @feedback.food_quality %>	
+Speed		<%= @feedback.speed_of_service %>
+Friendliness	<%= @feedback.friendliness_of_service %>
+Cleanliness	<%= @feedback.cleanliness %>
+Ambiance	<%= @feedback.ambience %>	
+Value		<%= @feedback.value_for_money %>
+
+Comment:
+
+<%= @feedback.comment %>
+
+Dissatisfied customers whose complaints are taken care of end up being even more loyal than customers who were always satisfied.
+
+Good luck!
+
+The Kanari Team
+
+
+
+You're receiving this because you're a Kanari user.
