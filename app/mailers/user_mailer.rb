@@ -18,6 +18,9 @@ class UserMailer < ActionMailer::Base
     @contacted_user_id = contacted_user.id
     @host = default_url_options[:host]
     mail(from: 'Kanari Team <notifications@kanari.co>', to: @user.email, subject: "The manager at #{@outlet.name} wants to contact you")
+    headers['X-MC-Tags'] = "Reach Out, User Request"
+    headers['X-MC-Track'] = "opens, clicks"
+    headers['X-MC-TrackingDomain'] = "track.kanari.co"
   end
 
   def customer_accepted_email_to_share_details(feedback,user)
@@ -25,5 +28,8 @@ class UserMailer < ActionMailer::Base
     @feedback = feedback
     @customer_user = @feedback.user
     mail(from: 'Kanari Team <notifications@kanari.co>', to: @manager_user.email, subject: 'Kanari: Your Reach Out request has been accepted')
+    headers['X-MC-Tags'] = "Reach Out, Manager Response"
+    headers['X-MC-Track'] = "opens, clicks"
+    headers['X-MC-TrackingDomain'] = "track.kanari.co"
   end
 end
