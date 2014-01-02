@@ -16,8 +16,8 @@ Kanari::Application.configure do
     :address   => "smtp.mandrillapp.com",
     :port      => 25, # ports 587 and 2525 are also supported with STARTTLS
     :enable_starttls_auto => true, # detects and uses STARTTLS
-    :user_name => "gsp087016@gmail.com",
-    :password  => "NHHar-sd1O77oZAEXDdIiA", # SMTP password is any valid API key
+    :user_name => "subhi@kanari.co",
+    :password  => "HysdtL0bhPe7jSP24JR8mw", # SMTP password is any valid API key
     :authentication => 'login'
     #address:                 "127.0.0.1",
     #port:                    25,
