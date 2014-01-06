@@ -7,7 +7,7 @@ Customer information
 
 Name	<%= @customer_user.full_name %>
 Email	<%= @customer_user.email %>
-Date & Time	<%= @feedback.created_at.strftime('%d-%m-%Y %H:%M') %>
+Date & Time	<%= @feedback.created_at.strftime('%H:%M %p, %A %b. %d, %Y ') %>
 Location	<%= @feedback.outlet.address %>
 
 
