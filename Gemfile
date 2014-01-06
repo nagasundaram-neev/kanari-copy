@@ -11,6 +11,7 @@ gem 'devise', github: 'emilsoman/devise', branch: 'rails4'
 gem 'devise_invitable', github: 'emilsoman/devise_invitable', branch: 'rails4' #For sending registration invitations
 gem 'cancan' #For authorization
 gem 'active_model_serializers' #Serializing ActiveRecord -> JSON
+gem 'whenever', :require => false
 
 # Javascript server side engine for asset pipeline
 gem 'therubyracer'
