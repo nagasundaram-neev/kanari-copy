@@ -867,7 +867,7 @@ module.controller('signedUpController', function($scope, $http, $location, $rout
 			url : '/api/feedbacks/user_response',
 			params : param
 		}).success(function(data, status) {
-			//$scope.succMsg = true;
+			$scope.succMsg = true;
 			if ($routeParams.response == 1) {
 				$routeParams.response = true;
 			} else {

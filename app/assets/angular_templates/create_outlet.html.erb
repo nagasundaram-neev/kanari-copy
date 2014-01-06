@@ -73,7 +73,13 @@
 				<li data-ng-class="{active:ReportShow,create_report:true}">
 
 					<a ng-click="changeTab('ReportShow')"> <!--<%= image_tag 'icon_reports.png' %>-->
-					<div class="srNo">
+					<!-- <div class="srNo">
+						4
+					</div> -->
+					<div class="srNo" ng-hide="userAction" data-ng-class="{active:permissionShow,create_manager:true}">
+						3
+					</div>
+					<div ng-show="userAction" class="srNo">
 						4
 					</div>
 					<div class="menuTitle">
@@ -85,7 +91,13 @@
 				<li data-ng-class="{active:TabletIdShow,create_tabletId:true}">
 
 					<a ng-click="changeTab('TabletIdShow')"> <!--<%= image_tag 'icon_create_tablet_id.png' %>-->
-					<div class="srNo">
+					<!-- <div class="srNo">
+						5
+					</div> -->
+					<div class="srNo" ng-hide="userAction" data-ng-class="{active:permissionShow,create_manager:true}">
+						4
+					</div>
+					<div ng-show="userAction" class="srNo">
 						5
 					</div>
 					<div class="menuTitle">

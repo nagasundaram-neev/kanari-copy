@@ -24,9 +24,6 @@
 			margin: 0 22px;
 			width: auto;
 		}
-		.promo_code_desc{
-			height:108px;
-		}
 	</style>
 	<div class="showNav navBarCls" >
 		<div class="dashboardHeader">
@@ -54,7 +51,7 @@
 	<div id="outletManager" class="viewAccPage commentsDiv"  >
 		<h3 class="redemptionMsg" ng-show="!feedbackList.length"><span ng-show="feedBackListCount">Your customers have not submitted any feedback.</span></h3>
 		<div ng-show="feedbackList.length" class="home_page_view">
-			<div ng-repeat="feedbacks in feedbackList" class="commentFeedback feedback_step">
+			<div ng-repeat="feedbacks in feedbackList" class="feedback_step">
 				<div class="divPadding promo_code">
 					<span class="promo_txt">Promoter Score</span>
 					<br/>
@@ -115,26 +112,13 @@
 				</div>
 				<div class="divPadding promo_code_desc">
 					<span>{{feedbacks.comment}}</span>
-					<div class="update_time">
-						<span class="timeago" >{{feedbacks.updated_at | date:'h:mm a, EEEE MMM. d, y'}}</span>
-					</div>
 				</div>
-				<div class="reachOut">
-					<div ng-switch on="feedbacks.user_status">
-						<div ng-switch-when="reach_out" style="cursor: pointer;"><div ng-click="showPopUp(feedbacks.id)"><%= image_tag 'reach.png'%> </br> <span>Reach Out</span></div></div>
-						<div ng-switch-when="pending"><div><%= image_tag 'pending.png'%> </br> <span>Pending</span></div></div>
-						<div ng-switch-when="accepted"><div><%= image_tag 'tick.png'%> </br> <span>Accepted</span></div></div>
-						<div ng-switch-when="rejected"><div><%= image_tag 'del.png'%> </br> <span>Declined</span></div></div>
-					</div>
+				<div class="clr"></div>
+				<div class="update_time">
+					<span class="timeago" >{{feedbacks.updated_at | date:'h:mm a, EEEE MMM. d, y'}}</span>
 				</div>
-				<!-- <div class="clr"></div> -->
-<div ng-show="popup" id="popup{{feedbacks.id}}" class="popup clearfix">
-		<h5>If the user you are reaching out to accepts your Reach Out request you will receive an email with their contact details. If the user doesn't respond to you within 72 hours, you'll be able to re-send your Reach Out request.</h5>
-		<div class="btn" ng-click="reachOutEmail(feedbacks.id)">
-				Ok, got it!
-		</div>
-	</div>
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript"></script>
 </div>

@@ -1162,6 +1162,12 @@ input {
 	padding: 1% 0;
 	position: relative;
 }
+.commentFeedback{
+	position:inherit;
+}
+.commentFeedback .btn{
+	margin-top: 10px;
+}
 .promo_code {
 	color: #674665;
 	float: left;
@@ -2317,4 +2323,44 @@ label .toggle-button .toggle-tab {
 }
 .secondDiv{
 	font-size:18px;
+}
+.popup{
+	display:none;
+}
+
+.popup {
+	background-color: #FFFFFF;
+	border: 0 none;
+	box-shadow: 2px 2px 2px #FFFFFF;
+	left: 30%;
+	top:40%;
+	padding: 1%;
+	position: absolute;
+	width: 40%;
+	z-index: 11;
+	text-align:center;
+}
+
+.popup h5 {
+	font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+}
+.popup button {
+	width: 100%;
+}
+#overlaySuccess {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	text-align:center;
+	/*background-color: #000;*/
+	filter: alpha(opacity=50);
+	-moz-opacity: 0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.5;
+	/*z-index: 10;*/
 }

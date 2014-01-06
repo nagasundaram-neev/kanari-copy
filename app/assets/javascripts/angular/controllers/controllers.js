@@ -2981,6 +2981,7 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 		$rootScope.header = "Dashboard Comments | Kanari";
 		$scope.feedbackList = [];
 		$scope.outletNameList = [];
+		var overlayDiv = $("#overlaySuccess");
 
 		var outerDivHeight = $("body").height();
 		//alert(outerDivHeight);
@@ -3116,6 +3117,12 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
                 data : param
             }).success(function(data, status) {
                 $scope.listFeedbacks();
+                $("#overlaySuccess").hide();
+                $("#popup"+id).hide();
+				overlayDiv.css({
+					'z-index' : '0',
+					'background-color' : 'transparent'
+				});
             }).error(function(data, status) {
                 if (status == 401) {
                     $location.url("/login");
@@ -3123,6 +3130,26 @@ module.controller('dashboardCommentsCtrl', function($scope, $rootScope, $routePa
 
             });
         };
+        
+        $scope.showPopUp = function(id){
+        	$("#overlaySuccess").show();
+				$("#popup"+id).show();
+				//$scope.popup = true;
+				overlayDiv.css({
+					'z-index' : '10',
+					'background-color' : '#000'
+				});
+				$(".popup").focus();
+        };
+        
+        $("#overlaySuccess").click(function(){
+        	 $("#overlaySuccess").hide();
+                $(".popup").hide();
+				overlayDiv.css({
+					'z-index' : '0',
+					'background-color' : 'transparent'
+				});
+        });
 
 		$scope.listFeedbacks();
 		$scope.selectOutlet = function() {
