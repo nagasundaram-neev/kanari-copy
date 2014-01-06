@@ -131,7 +131,7 @@ var feedbackTimeout;
 var insightTimeout;
 var redemTimeout;
 var hostName =location.hostname; 
-// if(hostName == "192.168.1.68")
+// if(hostName == "192.168.1.5")
 // {
 	// var localyticsSession = LocalyticsSession("47dfd007f9c83fc37e7aff2-b19dd06c-6874-11e3-1807-004a77f8b47f");
 // }
@@ -1082,7 +1082,7 @@ module.controller('numericCodeController', function($scope, $http, $location, $t
 		// event.preventDefault();
 		// });
 		$scope.generateCode = function() {
-
+				if($scope.loader == false && testID != $scope.billAmount){
 				testID = $scope.billAmount;
 				if (!$scope.billAmount) {
 					$scope.error = "Please enter valid bill amount";
@@ -1114,6 +1114,7 @@ module.controller('numericCodeController', function($scope, $http, $location, $t
 						$('#billAmnt').val("");
 
 						$scope.loader = false;
+						testID = 000;
 					}).error(function(data, status) {
 						$scope.error = data.error[0];
 						$scope.succmsg = false;
@@ -1129,7 +1130,7 @@ module.controller('numericCodeController', function($scope, $http, $location, $t
 						}
 					});
 				}
-			
+			}
 		};
 
 		var selectField = document.getElementById('Field10');
