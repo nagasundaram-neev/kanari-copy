@@ -98,7 +98,7 @@ class Api::V1::FeedbacksController < ApplicationController
           render json: {errors: @feedback.errors.full_messages}, status: :unprocessable_entity
         end
       else
-        render json: {errors: ["Insufficient privileges"]}, status: :unprocessable_entity
+        render json: {errors: ["Data not sufficient."]}, status: :unprocessable_entity
       end
     rescue => e
       render json: {errors: e}, status: :unprocessable_entity
