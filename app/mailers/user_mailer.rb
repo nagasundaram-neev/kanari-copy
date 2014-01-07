@@ -16,7 +16,7 @@ class UserMailer < ActionMailer::Base
     @feedback = feedback
     @outlet = @feedback.outlet
     @contacted_user_id = contacted_user.id
-    @host = default_url_options[:host]
+    @host = "#{default_url_options[:protocol]}://#{default_url_options[:host]}"
     mail(from: 'Kanari Team <notifications@kanari.co>', to: @user.email, subject: "The manager at #{@outlet.name} wants to contact you")
     headers['X-MC-Tags'] = "Reach Out, User Request"
     headers['X-MC-Track'] = "opens, clicks"
