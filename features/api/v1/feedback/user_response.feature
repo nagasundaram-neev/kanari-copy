@@ -19,7 +19,7 @@ Feature: User Response
         |user_status  |pending     |
       Given no emails have been sent
       When feedback with id "10" user_status should be "pending"
-      And I send a GET request to "/api/feedbacks/user_response?feed_id=10&contacted_user_id=20&response=1&send_id=130"
+      And I send a GET request to "/api/feedbacks/user_response?feed_id=10&contacted_user_id=20&response=1&send_id=130&timezone=Asia/Kolkata"
       And feedback with id "10" user_id should be "130"
       And feedback with id "10" completed should be "true"
       Then the response status should be "200"

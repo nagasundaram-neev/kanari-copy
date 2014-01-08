@@ -115,7 +115,7 @@ class Api::V1::FeedbacksController < ApplicationController
     begin
       if params["response"] == "1"
         #sending mail with parameters user feedback and the admin user(manager or customer_admin)
-        UserMailer.customer_accepted_email_to_share_details(@feedback,@contacted_user,params[:timezone]).deliver
+        UserMailer.customer_accepted_email_to_share_details(@feedback,@contacted_user,params[:timezone] || "UTC").deliver
         status = "accepted"
       elsif params["response"] == "0"
          status = "rejected"
