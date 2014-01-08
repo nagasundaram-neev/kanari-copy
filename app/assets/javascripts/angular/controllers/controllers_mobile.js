@@ -853,12 +853,13 @@ module.controller('signedUpController', function($scope, $http, $location, $rout
 	footerFlag = 0;
 
 	$scope.errorMsg = false;
-
+	var timezone = jstz.determine();
 	$scope.confirmMail = function() {
 		var param = {
 			"feed_id" : $routeParams.feed_id,
 			"contacted_user_id" : $routeParams.contacted_user_id,
 			"response" : $routeParams.response,
+			"timezone" : timezone.name(),
 			"send_id" : $routeParams.send_id
 		}
 

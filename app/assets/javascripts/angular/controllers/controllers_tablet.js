@@ -131,7 +131,7 @@ var feedbackTimeout;
 var insightTimeout;
 var redemTimeout;
 var hostName =location.hostname; 
-// if(hostName == "192.168.1.5")
+// if(hostName == "192.168.1.68")
 // {
 	// var localyticsSession = LocalyticsSession("47dfd007f9c83fc37e7aff2-b19dd06c-6874-11e3-1807-004a77f8b47f");
 // }
@@ -1197,11 +1197,13 @@ module.controller('signedUpController', function($scope,$rootScope, $http, $loca
 	$scope.erromsg = false;
 	$scope.succMsg = true;
 	$('.header').hide();	
+	var timezone = jstz.determine();
 	$scope.confirmMail = function() {
 		var param = {
 			"feed_id" : $routeParams.feed_id,
 			"contacted_user_id" : $routeParams.contacted_user_id,
 			"response" : $routeParams.response,
+			"timezone" : timezone.name(),
 			"send_id" : $routeParams.send_id
 		}
 
