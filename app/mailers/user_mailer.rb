@@ -23,10 +23,11 @@ class UserMailer < ActionMailer::Base
     headers['X-MC-TrackingDomain'] = "track.kanari.co"
   end
 
-  def customer_accepted_email_to_share_details(feedback,user)
+  def customer_accepted_email_to_share_details(feedback,user,timezone)
     @manager_user = user
     @feedback = feedback
     @customer_user = @feedback.user
+    @timezone = timezone
     mail(from: 'Kanari Team <notifications@kanari.co>', to: @manager_user.email, subject: 'Kanari: Your Reach Out request has been accepted')
     headers['X-MC-Tags'] = "Reach Out, Manager Response"
     headers['X-MC-Track'] = "opens, clicks"
