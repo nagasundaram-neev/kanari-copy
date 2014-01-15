@@ -180,6 +180,7 @@ module.controller('loginController', function($scope, $http, $location) {
 					setCookie('signInCount', data.sign_in_count, 0.29);
 				}
 				if (getCookie('userRole') == "user") {
+					_gaq.push(['_trackEvent', 'Mobile App', 'Logged In', 'Email']);
 					localyticsSession.tagEvent("Logged In", {
 						"Type" : 'Email'
 					});
@@ -739,11 +740,13 @@ module.controller('homeController', function($scope, $http, $location) {
 
 		$scope.feedback = function() {
 			localyticsSession.tagEvent("Leave Feedback");
+			_gaq.push(['_trackEvent', 'Mobile App', 'Leave Feedback', '']);
 			$location.url("/feedback");
 		};
 
 		$scope.redeemPoints = function() {
 			localyticsSession.tagEvent("List Restaurants");
+			_gaq.push(['_trackEvent', 'Mobile App', 'List Restaurants', '']);
 			$location.url("/redeemPoints");
 		};
 
@@ -759,6 +762,9 @@ module.controller('homeController', function($scope, $http, $location) {
 module.controller('commonCtrl', function($scope, $http, $location) {
 	//$location.url('/home');
 	localyticsSession.tagScreen('Index');
+	//$analytics.pageTrack('Index');
+	//$analytics.eventTrack('Start',{});
+	_gaq.push(['_trackEvent', 'Mobile App', 'Start', 'Direct']);
 	localyticsSession.tagEvent("Start", {
 		"Accessed Via" : 'Direct'
 	});
@@ -768,10 +774,12 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 		//$location.url("/login");
 		window.location = "/#/login";
 		localyticsSession.tagEvent("Log In");
+		_gaq.push(['_trackEvent', 'Mobile App', 'Log In', '']);
 		window.location.reload();
 	};
 	$scope.signUpCLick = function() {
 		localyticsSession.tagEvent("Sign Up");
+		_gaq.push(['_trackEvent', 'Mobile App', 'Sign Up', '']);
 		$location.url("/signUp");
 	};
 	$scope.leaveFeedback = function() {
@@ -821,6 +829,7 @@ module.controller('signUpController', function($scope, $http, $location) {
 				setCookie('authToken', data.auth_token, 0.29);
 				setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
 				setCookie('signInCount', data.sign_in_count, 0.29);
+				_gaq.push(['_trackEvent', 'Mobile App', 'Signed Up', 'Email']);
 				localyticsSession.tagEvent("Signed Up", {
 					"Type" : 'Email'
 				});
@@ -1045,6 +1054,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 					} else {
 						city = 'No';
 					}
+					_gaq.push(['_trackEvent', 'Mobile App', 'Settings Summary', '']);
 					localyticsSession.tagEvent("Settings Summary", {
 						"Gender" : gender,
 						"Date" : date,
@@ -1065,6 +1075,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 
 		$scope.logout = function() {
 			localyticsSession.tagEvent("Log Out");
+			_gaq.push(['_trackEvent', 'Mobile App', 'Log Out', '']);
 			var param = {
 				"auth_token" : getCookie('authToken')
 			}
@@ -1082,7 +1093,8 @@ module.controller('settingsController', function($scope, $http, $location) {
 			deleteAllCookies();
 			footerFlag = 0;
 			$location.url("/login");
-			localyticsSession.tagEvent("Exit");
+			//localyticsSession.tagEvent("Exit");
+			_gaq.push(['_trackEvent', 'Mobile App', 'Exit', '']);
 			localyticsSession.upload();
 			localyticsSession.close();
 		};
@@ -1151,6 +1163,7 @@ module.controller('feedbackController', function($scope, $http, $location) {
 		}).success(function(data, status) {
 			setCookie("feedbackId", data.feedback_id, 0.29);
 			setCookie("restName", data.outlet_name, 0.29);
+			_gaq.push(['_trackEvent', 'Mobile App', 'Enter Code', '']);
 			localyticsSession.tagEvent("Enter Code");
 			$location.url("/feedback_step2");
 		}).error(function(data, status) {
@@ -1458,26 +1471,31 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 					if (getCookie('authToken')) {
 						if (!$("#comment").val()) {
 							if (data.points > 0 && data.points < 5) {
+								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '0-5']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
 									"Points" : '0-5'
 								});
 							} else if (data.points >= 5 && data.points < 10) {
+								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '5-10']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
 									"Points" : '5-10'
 								});
 							} else if (data.points >= 10 && data.points < 30) {
+								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '10-30']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
 									"Points" : '10-30'
 								});
 							} else if (data.points >= 30 && data.points < 50) {
+								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '30-50']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
 									"Points" : '30-50'
 								});
 							} else if (data.points >= 50) {
+								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '50+']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
 									"Points" : '50+'
@@ -1485,26 +1503,31 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 							}
 						} else if ($("#comment").val()) {
 							if (data.points > 0 && data.points < 5) {
+								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '0-5']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
 									"Points" : '0-5'
 								});
 							} else if (data.points >= 5 && data.points < 10) {
+								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '5-10']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
 									"Points" : '5-10'
 								});
 							} else if (data.points >= 10 && data.points < 30) {
+								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '10-30']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
 									"Points" : '10-30'
 								});
 							} else if (data.points >= 30 && data.points < 50) {
+								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '30-50']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
 									"Points" : '30-50'
 								});
 							} else if (data.points >= 50) {
+								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '50+']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
 									"Points" : '50+'
@@ -1516,26 +1539,31 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 					} else {
 						if (!$("#comment").val()) {
 							if (data.points > 0 && data.points < 5) {
+								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '0-5']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
 									"Points" : '0-5'
 								});
 							} else if (data.points >= 5 && data.points < 10) {
+								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '5-10']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
 									"Points" : '5-10'
 								});
 							} else if (data.points >= 10 && data.points < 30) {
+								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '10-30']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
 									"Points" : '10-30'
 								});
 							} else if (data.points >= 30 && data.points < 50) {
+								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '30-50']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
 									"Points" : '30-50'
 								});
 							} else if (data.points >= 50) {
+								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '50+']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
 									"Points" : '50+'
@@ -1543,26 +1571,31 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 							}
 						} else if ($("#comment").val()) {
 							if (data.points > 0 && data.points < 5) {
+								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '0-5']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
 									"Points" : '0-5'
 								});
 							} else if (data.points >= 5 && data.points < 10) {
+								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '5-10']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
 									"Points" : '5-10'
 								});
 							} else if (data.points >= 10 && data.points < 30) {
+								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '10-30']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
 									"Points" : '10-30'
 								});
 							} else if (data.points >= 30 && data.points < 50) {
+								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '30-50']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
 									"Points" : '30-50'
 								});
 							} else if (data.points >= 50) {
+								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '50+']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
 									"Points" : '50+'
@@ -1653,6 +1686,7 @@ var socialMessage;
 var tweetMessage;
 module.controller('feedbackSubmitController', function($scope, $http, $routeParams, $location) {
 	localyticsSession.tagScreen('Feedback Submitted');
+	_gaq.push(['_trackEvent', 'Mobile App', 'Feedback Submitted', '']);
 	if (getCookie('authToken')) {
 		flagPage = 0;
 		footerFlag = 0;
@@ -1682,6 +1716,7 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 				if (popup.closed) {
 					clearInterval(timer);
 					$("#fbShareSuccMsg").hide();
+					_gaq.push(['_trackEvent', 'Mobile App', 'Social Share', 'Twitter']);
 					localyticsSession.tagEvent("Social Share", {
 						"Platform" : 'Twitter'
 					});
@@ -1692,6 +1727,7 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 
 		$scope.google = function() {
 			var popup = window.open("https://plus.google.com/share?data-text=lkjnkln" + socialMessage, 'popUpWindow', 'height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
+			_gaq.push(['_trackEvent', 'Mobile App', 'Social Share', 'Google+']);
 			localyticsSession.tagEvent("Social Share", {
 				"Platform" : 'Google+'
 			});
@@ -1748,6 +1784,7 @@ module.controller('restaurantListController', function($scope, $http, $location)
 		$scope.getRestaurantList();
 
 		$scope.redeemPoint = function(outletId) {
+			_gaq.push(['_trackEvent', 'Mobile App', 'Redeem Points', 'Listing']);
 			localyticsSession.tagEvent("Redeem Points", {
 				"Clicked From" : 'Listing'
 			});
@@ -1759,6 +1796,7 @@ module.controller('restaurantListController', function($scope, $http, $location)
 		};
 
 		$scope.setLocalytics = function() {
+			_gaq.push(['_trackEvent', 'Mobile App', 'Search Restaurant', '']);
 			localyticsSession.tagEvent("Search Restaurant");
 		};
 
@@ -1807,6 +1845,7 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 			$scope.outDoor_seating = data.outlet.has_outdoor_seating.toString();
 			$scope.lattitude = data.outlet.latitude;
 			$scope.longitude = data.outlet.longitude;
+			_gaq.push(['_trackEvent', 'Mobile App', 'View Restaurant', data.outlet.name]);
 			localyticsSession.tagEvent("View Restaurant", {
 				"Name" : data.outlet.name
 			});
@@ -1831,6 +1870,7 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 		};
 
 		$scope.redeemUpto = function() {
+			_gaq.push(['_trackEvent', 'Mobile App', 'Redeem Points', 'Details']);
 			localyticsSession.tagEvent("Redeem Points", {
 				"Clicked From" : 'Details'
 			});
@@ -1838,14 +1878,17 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 		};
 
 		$scope.email = function() {
+			_gaq.push(['_trackEvent', 'Mobile App', 'Email', '']);
 			localyticsSession.tagEvent("Email");
 		};
 
 		$scope.phone = function() {
+			_gaq.push(['_trackEvent', 'Mobile App', 'Phone', '']);
 			localyticsSession.tagEvent("Phone");
 		};
 
 		$scope.locationMap = function() {
+			_gaq.push(['_trackEvent', 'Mobile App', 'View Map', '']);
 			localyticsSession.tagEvent("View Map");
 			$location.url("/locationMap?outletId=" + $routeParams.outletId + "&lat=" + $scope.lattitude + "&long=" + $scope.longitude);
 		};
@@ -1922,22 +1965,27 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 					data : param
 				}).success(function(data, status) {
 					if ($scope.amount > 0 && $scope.amount < 50) {
+						_gaq.push(['_trackEvent', 'Mobile App', 'Request Redemption', '0-50']);
 						localyticsSession.tagEvent("Request Redemption", {
 							"Discount" : '0-50'
 						});
 					} else if ($scope.amount >= 50 && $scope.amount < 100) {
+						_gaq.push(['_trackEvent', 'Mobile App', 'Request Redemption', '50-100']);
 						localyticsSession.tagEvent("Request Redemption", {
 							"Discount" : '50-100'
 						});
 					} else if ($scope.amount >= 100 && $scope.amount < 300) {
+						_gaq.push(['_trackEvent', 'Mobile App', 'Request Redemption', '100-300']);
 						localyticsSession.tagEvent("Request Redemption", {
 							"Discount" : '100-300'
 						});
 					} else if ($scope.amount >= 300 && $scope.amount < 500) {
+						_gaq.push(['_trackEvent', 'Mobile App', 'Request Redemption', '300-500']);
 						localyticsSession.tagEvent("Request Redemption", {
 							"Discount" : '300-500'
 						});
 					} else if ($scope.amount >= 500) {
+						_gaq.push(['_trackEvent', 'Mobile App', 'Request Redemption', '500+']);
 						localyticsSession.tagEvent("Request Redemption", {
 							"Discount" : '500+'
 						});
@@ -2253,6 +2301,7 @@ module.factory('Facebook', function($http, $location) {
 		login : function() {
 			FB.login(function(response) {
 				if (response.authResponse) {
+					_gaq.push(['_trackEvent', 'Mobile App', 'Signed Up', 'Facebook']);
 					localyticsSession.tagEvent("Signed Up", {
 						"Type" : 'Facebook'
 					});
@@ -2284,6 +2333,7 @@ module.factory('Facebook', function($http, $location) {
 								setCookie('signInCount', data.sign_in_count, 0.29);
 								setCookie('userName', data.first_name + ' ' + data.last_name, 0.29);
 								setCookie('facebookFlag', '1', 0.29);
+								_gaq.push(['_trackEvent', 'Mobile App', 'Logged In', 'Facebook']);
 								localyticsSession.tagEvent("Logged In", {
 									"Type" : 'Facebook'
 								});
@@ -2320,6 +2370,7 @@ module.factory('Facebook', function($http, $location) {
 							localyticsSession.tagEvent("Social Share", {
 								"Platform" : 'Facebook'
 							});
+							_gaq.push(['_trackEvent', 'Mobile App', 'Social Share', 'Facebook']);
 							$("#fbShareSuccMsg").show();
 						}
 					});

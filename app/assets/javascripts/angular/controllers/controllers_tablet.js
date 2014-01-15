@@ -199,6 +199,7 @@ module.controller('headerCtrl', function($scope, $http, $location) {
 				'background-color' : 'transparent'
 			});
 			localyticsSession.tagEvent("Exit");
+			_gaq.push(['_trackEvent', 'Tablet App', 'Exit', '']);
 			localyticsSession.close();
 
 		}).error(function(data, status) {
@@ -1031,6 +1032,7 @@ module.controller('redemeController', function($scope, $http, $location, $timeou
 				data : param
 			}).success(function(data, status) {
 				$scope.listRedemptions();
+				_gaq.push(['_trackEvent', 'Tablet App', 'Redemption Confirmed', '']);
 				localyticsSession.tagEvent("Redemption Confirmed");
 				localyticsSession.upload();
 				
