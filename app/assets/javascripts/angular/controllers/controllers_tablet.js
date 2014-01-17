@@ -131,10 +131,10 @@ var feedbackTimeout;
 var insightTimeout;
 var redemTimeout;
 var hostName =location.hostname; 
-// if(hostName == "192.168.1.68")
-// {
-	// var localyticsSession = LocalyticsSession("47dfd007f9c83fc37e7aff2-b19dd06c-6874-11e3-1807-004a77f8b47f");
-// }
+if(hostName == "192.168.1.68")
+{
+	var localyticsSession = LocalyticsSession("47dfd007f9c83fc37e7aff2-b19dd06c-6874-11e3-1807-004a77f8b47f");
+}
 if(hostName == "app.kanari.co"){
 	var localyticsSession = LocalyticsSession("4541b43eb3c33ab174c297e-429beda6-52ab-11e3-925c-005cf8cbabd8");
 }

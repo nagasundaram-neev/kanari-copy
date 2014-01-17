@@ -134,9 +134,9 @@ var flagPage = 0;
 var iphoneFlag = 0;
 var footerFlag = 0;
 var hostName = location.hostname;
-// if (hostName == "192.168.1.68") {
-	// var localyticsSession = LocalyticsSession("47dfd007f9c83fc37e7aff2-b19dd06c-6874-11e3-1807-004a77f8b47f");
-// }
+if (hostName == "192.168.1.68") {
+	var localyticsSession = LocalyticsSession("47dfd007f9c83fc37e7aff2-b19dd06c-6874-11e3-1807-004a77f8b47f");
+}
 if (hostName == "app.kanari.co") {
 	localyticsSession = LocalyticsSession("4541b43eb3c33ab174c297e-429beda6-52ab-11e3-925c-005cf8cbabd8");
 } else if (hostName == "staging.kanari.co") {
@@ -146,6 +146,8 @@ localyticsSession.open();
 //var localyticsSession = LocalyticsSession("f5eca14e738338c606503c3-3bcc0202-5276-11e3-1668-004a77f8b47f");
 module.controller('loginController', function($scope, $http, $location) {
 	localyticsSession.tagScreen('Login');
+	_gaq.push(["_set", "title", "Login"]);
+	_gaq.push(['_trackPageview', 'Login']);
 	$scope.storageKey = 'JQueryMobileAngularTodoapp';
 	$scope.remember = false;
 	$scope.erromsg = false;
@@ -554,7 +556,8 @@ function addToIphoneHomePage() {
 module.controller('forgotPasswordController', function($scope, $http, $location) {
 	$scope.success = false;
 	localyticsSession.tagScreen('forgotPass');
-
+	_gaq.push(["_set", "title", "Forgot Password"]);
+	_gaq.push(['_trackPageview', 'forgotPass']);
 	$scope.cancel = function() {
 		$location.url("/login");
 	};
@@ -595,6 +598,8 @@ module.controller('forgotPasswordController', function($scope, $http, $location)
 
 module.controller('resetPassController', function($scope, $http, $location, $routeParams) {
 	localyticsSession.tagScreen('resetPass');
+	_gaq.push(["_set", "title", "Reset Password"]);
+	_gaq.push(['_trackPageview', 'resetPass']);
 	flagPage = 0;
 	footerFlag = 0;
 	$scope.success = false;
@@ -644,6 +649,8 @@ module.controller('resetPassController', function($scope, $http, $location, $rou
 
 module.controller('homeController', function($scope, $http, $location) {
 	localyticsSession.tagScreen('Home');
+	_gaq.push(["_set", "title", "Home"]);
+	_gaq.push(['_trackPageview', 'Home']);
 	$scope.points = "";
 	if (getCookie("authToken")) {
 		flagPage = 0;
@@ -762,6 +769,8 @@ module.controller('homeController', function($scope, $http, $location) {
 module.controller('commonCtrl', function($scope, $http, $location) {
 	//$location.url('/home');
 	localyticsSession.tagScreen('Index');
+	_gaq.push(["_set", "title", "Landing Page"]);
+	_gaq.push(['_trackPageview', 'Index']);
 	//$analytics.pageTrack('Index');
 	//$analytics.eventTrack('Start',{});
 	_gaq.push(['_trackEvent', 'Mobile App', 'Start', 'Direct']);
@@ -789,6 +798,8 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 
 module.controller('signUpController', function($scope, $http, $location) {
 	localyticsSession.tagScreen('Sign Up');
+	_gaq.push(["_set", "title", "Sign Up"]);
+	_gaq.push(['_trackPageview', 'Sign Up']);
 	$scope.confPassword = "";
 	flagPage = 0;
 	footerFlag = 0;
@@ -857,7 +868,8 @@ module.controller('signUpController', function($scope, $http, $location) {
 
 module.controller('signedUpController', function($scope, $http, $location, $routeParams) {
 	localyticsSession.tagScreen('Signed Up');
-
+	_gaq.push(["_set", "title", "Signed Up"]);
+	_gaq.push(['_trackPageview', 'Signed Up']);
 	flagPage = 0;
 	footerFlag = 0;
 
@@ -896,6 +908,8 @@ module.controller('signedUpController', function($scope, $http, $location, $rout
 
 module.controller('changePasswordController', function($scope, $http, $location) {
 	localyticsSession.tagScreen('Change Password');
+	_gaq.push(["_set", "title", "Change Password"]);
+	_gaq.push(['_trackPageview', 'Change Password']);
 	$scope.back = function() {
 		$location.url("/settings");
 	};
@@ -941,6 +955,8 @@ module.controller('changePasswordController', function($scope, $http, $location)
 
 module.controller('settingsController', function($scope, $http, $location) {
 	localyticsSession.tagScreen('Settings');
+	_gaq.push(["_set", "title", "Settings"]);
+	_gaq.push(['_trackPageview', 'Settings']);
 	if (getCookie('authToken')) {
 		flagPage = 0;
 		footerFlag = 1;
@@ -1107,6 +1123,8 @@ var pointsEarned = 0;
 
 module.controller('feedbackController', function($scope, $http, $location) {
 	localyticsSession.tagScreen('Enter Code');
+	_gaq.push(["_set", "title", "Feedback Code"]);
+	_gaq.push(['_trackPageview', 'Enter Code']);
 	flagPage = 0;
 	footerFlag = 0;
 	$scope.digit1 = "";
@@ -1206,6 +1224,8 @@ module.controller('feedbackController', function($scope, $http, $location) {
 
 module.controller('feedback_step2Controller', function($scope, $http, $location) {
 	localyticsSession.tagScreen('Feedback 1/3');
+	_gaq.push(["_set", "title", "Feedback 1/3"]);
+	_gaq.push(['_trackPageview', 'Feedback 1/3']);
 	flagPage = 1;
 	footerFlag = 0;
 	$scope.nextFlag = 0;
@@ -1292,6 +1312,8 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 	$scope.next = function() {
 		if ($scope.nextFlag == 0) {
 			localyticsSession.tagScreen('Feedback 2/3');
+			_gaq.push(["_set", "title", "Feedback 2/3"]);
+			_gaq.push(['_trackPageview', 'Feedback 2/3']);
 			for (var i = 0; i < $scope.feedBackSize; i++) {
 				if ($scope.feedBackArray[i] == 0) {
 					$scope.feedBackArray[i] = 0;
@@ -1322,6 +1344,8 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			$(".nxt img").css("padding-top", "1%");
 		} else if ($scope.nextFlag == 1) {
 			localyticsSession.tagScreen('Feedback 3/3');
+			_gaq.push(["_set", "title", "Feedback 3/3"]);
+			_gaq.push(['_trackPageview', 'Feedback 3/3']);
 			$scope.like = false;
 			$scope.dislike = false;
 			$scope.recomendation = true;
@@ -1636,6 +1660,8 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 	$scope.previous = function() {
 		if ($scope.prevFlag == 0) {
 			localyticsSession.tagScreen('Feedback 1/3');
+			_gaq.push(["_set", "title", "Feedback 1/3"]);
+			_gaq.push(['_trackPageview', 'Feedback 1/3']);
 			for (var i = 0; i < $scope.feedBackSize; i++) {
 				if ($scope.feedBackArray[i] == 0) {
 					$scope.feedBackArray[i] = 0;
@@ -1666,6 +1692,8 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 			$scope.nextFlag = 0;
 		} else if ($scope.prevFlag == 1) {
 			localyticsSession.tagScreen('Feedback 2/3');
+			_gaq.push(["_set", "title", "Feedback 2/3"]);
+			_gaq.push(['_trackPageview', 'Feedback 2/3']);
 			$scope.like = false;
 			$scope.dislike = true;
 			$scope.prev = true;
@@ -1686,6 +1714,8 @@ var socialMessage;
 var tweetMessage;
 module.controller('feedbackSubmitController', function($scope, $http, $routeParams, $location) {
 	localyticsSession.tagScreen('Feedback Submitted');
+	_gaq.push(["_set", "title", "Submit Feedback"]);
+	_gaq.push(['_trackPageview', 'Feedback Submitted']);
 	_gaq.push(['_trackEvent', 'Mobile App', 'Feedback Submitted', '']);
 	if (getCookie('authToken')) {
 		flagPage = 0;
@@ -1740,6 +1770,8 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 
 module.controller('restaurantListController', function($scope, $http, $location) {
 	localyticsSession.tagScreen('Restaurant Listing');
+	_gaq.push(["_set", "title", "Restaurant Listing"]);
+	_gaq.push(['_trackPageview', 'Restaurant Listing']);
 	if (getCookie('authToken')) {
 		$scope.outlets = [];
 		flagPage = 1;
@@ -1783,8 +1815,11 @@ module.controller('restaurantListController', function($scope, $http, $location)
 		};
 		$scope.getRestaurantList();
 
-		$scope.redeemPoint = function(outletId) {
-			_gaq.push(['_trackEvent', 'Mobile App', 'Redeem Points', 'Listing']);
+		$scope.redeemPoint = function(outletId,name,location) {
+			var eventTrackStringNew = name+'-'+location;
+			console.log(eventTrackStringNew)
+			_gaq.push(['_trackEvent', 'Mobile App', 'Redeem Points', eventTrackStringNew]);
+			
 			localyticsSession.tagEvent("Redeem Points", {
 				"Clicked From" : 'Listing'
 			});
@@ -1814,6 +1849,11 @@ function truncate(string) {
 
 module.controller('showRestaurantController', function($scope, $http, $routeParams, $location) {
 	localyticsSession.tagScreen('Restaurant Details');
+	_gaq.push(["_set", "title", "Restaurant Details"]);
+	_gaq.push(['_trackPageview', 'Restaurant Details']);
+	
+	var eventTrackString = "";
+	
 	if (getCookie('authToken')) {
 		$.mobile.loading('show');
 		flagPage = 1;
@@ -1833,6 +1873,7 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 		}).success(function(data, status) {
 			$scope.outletID = data.outlet.id;
 			$scope.restaurant_name = truncate(data.outlet.name);
+			eventTrackString = data.outlet.name+'-'+data.outlet.address;
 			$scope.restaurant_address = data.outlet.address;
 			$scope.email_address = data.outlet.email;
 			$scope.contact_number = data.outlet.phone_number;
@@ -1870,7 +1911,7 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 		};
 
 		$scope.redeemUpto = function() {
-			_gaq.push(['_trackEvent', 'Mobile App', 'Redeem Points', 'Details']);
+			_gaq.push(['_trackEvent', 'Mobile App', 'Redeem Points', eventTrackString]);
 			localyticsSession.tagEvent("Redeem Points", {
 				"Clicked From" : 'Details'
 			});
@@ -1901,6 +1942,8 @@ module.controller('showRestaurantController', function($scope, $http, $routePara
 
 module.controller('redeemPointsController', function($scope, $http, $location, $routeParams) {
 	localyticsSession.tagScreen('Redeem Points');
+	_gaq.push(["_set", "title", "Redeem Points"]);
+	_gaq.push(['_trackPageview', 'Redeem Points']);
 	if (getCookie('authToken')) {
 		flagPage = 0;
 		footerFlag = 0;
@@ -2019,6 +2062,8 @@ module.controller('redeemPointsController', function($scope, $http, $location, $
 
 module.controller('transactionHistoryController', function($scope, $http, $location) {
 	localyticsSession.tagScreen('Transaction History');
+	_gaq.push(["_set", "title", "Transaction History"]);
+	_gaq.push(['_trackPageview', 'Transaction History']);
 	if (getCookie('authToken')) {
 		flagPage = 1;
 		footerFlag = 0;
@@ -2060,6 +2105,8 @@ module.controller('transactionHistoryController', function($scope, $http, $locat
 
 module.controller('locationMapController', function($scope, $http, $location, $routeParams) {
 	localyticsSession.tagScreen('Restaurant Map');
+	_gaq.push(["_set", "title", "Restaurant Map"]);
+	_gaq.push(['_trackPageview', 'Restaurant Map']);
 	$.mobile.loading('show');
 
 	google.maps.visualRefresh = true;
