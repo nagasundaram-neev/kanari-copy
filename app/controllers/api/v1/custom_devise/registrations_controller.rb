@@ -36,14 +36,30 @@ module Api
           self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
           prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
           resource.reset_authentication_token
-
+          
           updated = if needs_password?(resource, params)
-            frame_date_of_birth_to_date_format(params[:user][:date_of_birth])
-            resource.update_with_password(account_update_params)
+            if params[:user][:date_of_birth].present?
+              params[:user][:date_of_birth] = frame_date_of_birth_to_date_format(params[:user][:date_of_birth])
+              if params[:user][:date_of_birth] != nil
+                resource.update_with_password(account_update_params)
+              else
+                render json: {errors: ["Date format not correct."]}, status: :unprocessable_entity and return
+              end
+            else
+              resource.update_with_password(account_update_params)
+            end
           else
             params[:user].delete(:current_password)
-            frame_date_of_birth_to_date_format(params[:user][:date_of_birth])
-            resource.update_without_password(account_update_params)
+            if params[:user][:date_of_birth].present?
+              params[:user][:date_of_birth] = frame_date_of_birth_to_date_format(params[:user][:date_of_birth])
+              if params[:user][:date_of_birth] != nil
+                resource.update_without_password(account_update_params)
+              else
+                render json: {errors: ["Date format not correct."]}, status: :unprocessable_entity and return
+              end
+            else
+              resource.update_without_password(account_update_params)
+            end
           end
 
           if updated
@@ -68,14 +84,19 @@ module Api
         end
 
         private
-          
+
         # converts year input to date format
           def frame_date_of_birth_to_date_format(date)
             if date.to_s.size == 4 && !!(date =~ /^[0-9]+$/) && (date.to_i.is_a? Integer)
               params[:user][:date_of_birth] = Date.strptime("{ #{date.to_s}, 1, 1 }", "{ %Y, %m, %d }")
+              return params[:user][:date_of_birth]
+            elsif date.to_s.size == 10 && (date.match(/\d\d-\d\d-\d\d\d\d/) != nil || date.match(/\d\d\/\d\d\/\d\d\d\d/) != nil)
+              return date
+            else
+              return nil
             end
-          end          
-          
+          end
+
           def sign_up_params
             params.fetch(:user).permit([:password, :password_confirmation, :email, :first_name, :last_name, :phone_number, :gender, :date_of_birth])
           end

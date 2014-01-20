@@ -16,7 +16,7 @@ Feature: Update account
           "last_name": "Bryant",
           "password": "kobe1234",
           "password_confirmation": "kobe1234",
-          "date_of_birth": "06-05-1987",
+          "date_of_birth": "10-03-1987",
           "gender": "Male",
           "location": "SF",
           "phone_number": "+91234",
@@ -34,7 +34,7 @@ Feature: Update account
         |last_name|Bryant|
         |email|user@gmail.com|
         |gender|Male|
-        |date_of_birth|1987-05-06|
+        |date_of_birth|1987-03-10|
         |location|SF|
         |phone_number|+91234|
 
@@ -132,7 +132,7 @@ Feature: Update account
           "email": "kobe@gmail.com",
           "password": "kobe1234",
           "password_confirmation": "kobe1234",
-          "date_of_birth": "06-05-1987",
+          "date_of_birth": "1987",
           "gender": "Male",
           "location": "SF",
           "current_password": "password123"
@@ -196,6 +196,61 @@ Feature: Update account
       """
       {"errors" : ["Current password is invalid"]}
       """
+
+Scenario: Unsuccessfully update user account
+      Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"
+        And his role is "user"
+        And his authentication token is "auth_token_123"
+      When I authenticate as the user "auth_token_123" with the password "random string"
+      When I send a PUT request to "/api/users" with the following:
+      """
+      {
+        "user" : {
+          "first_name": "Kobe",
+          "last_name": "Bryant",
+          "password": "kobe1234",
+          "password_confirmation": "kobe1234",
+          "date_of_birth": "abcd",
+          "gender": "Male",
+          "location": "SF",
+          "phone_number": "+91234",
+          "current_password": "password123"
+        }
+      }
+      """
+      Then the response status should be "422"
+      And the JSON response should be:
+      """
+      {"errors" : ["Date format not correct."]}
+      """
+
+Scenario: Unsuccessfully update user account
+      Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"
+        And his role is "user"
+        And his authentication token is "auth_token_123"
+      When I authenticate as the user "auth_token_123" with the password "random string"
+      When I send a PUT request to "/api/users" with the following:
+      """
+      {
+        "user" : {
+          "first_name": "Kobe",
+          "last_name": "Bryant",
+          "password": "kobe1234",
+          "password_confirmation": "kobe1234",
+          "date_of_birth": "10-aa-1987",
+          "gender": "Male",
+          "location": "SF",
+          "phone_number": "+91234",
+          "current_password": "password123"
+        }
+      }
+      """
+      Then the response status should be "422"
+      And the JSON response should be:
+      """
+      {"errors" : ["Date format not correct."]}
+      """
+
 
     Scenario: Attempt to change role by sending it in the params
       Given "Adam Smith" is a user with email id "user@gmail.com" and password "password123"
