@@ -109,6 +109,11 @@ Given(/^the outlet's email is "(.*?)"$/) do |email|
   @outlet.save!
 end
 
+Given(/^the outlet is located at "(.*?)"$/) do |address|
+  @outlet.address = address
+  @outlet.save!
+end
+
 Then(/^the outlet's email should still be "(.*?)"$/) do |email|
   @existing_outlet.email.should == email
 end

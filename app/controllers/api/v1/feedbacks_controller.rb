@@ -38,7 +38,7 @@ class Api::V1::FeedbacksController < ApplicationController
       if @feedback.update(feedback_params)
         @feedback.completed = true
         @feedback.save
-        render json: {points: @feedback.points}, status: :ok
+        render json: {points: @feedback.points, outlet_name: @feedback.outlet.name, outlet_location: @feedback.outlet.address}, status: :ok
       else
         render json: {errors: @feedback.errors.full_messages}, status: :unprocessable_entity
       end
@@ -65,7 +65,7 @@ class Api::V1::FeedbacksController < ApplicationController
               user_id: current_user.id, user_first_name: current_user.first_name, user_last_name: current_user.last_name, user_email: current_user.email,
               code: code_before, points: @feedback.points, outlet_points_before: outlet_points_before, outlet_points_after: outlet.rewards_pool,
               user_points_before: user_points_before, user_points_after: current_user.points_available })
-          render json: {points: @feedback.points}, status: :ok
+          render json: {points: @feedback.points, outlet_name: outlet.name, outlet_location: outlet.address}, status: :ok
         else
           render json: {errors: @feedback.errors.full_messages}, status: :unprocessable_entity
         end
