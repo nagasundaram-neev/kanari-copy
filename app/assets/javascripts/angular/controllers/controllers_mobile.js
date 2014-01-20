@@ -134,9 +134,9 @@ var flagPage = 0;
 var iphoneFlag = 0;
 var footerFlag = 0;
 var hostName = location.hostname;
-if (hostName == "192.168.1.68") {
-	var localyticsSession = LocalyticsSession("47dfd007f9c83fc37e7aff2-b19dd06c-6874-11e3-1807-004a77f8b47f");
-}
+// if (hostName == "192.168.1.68") {
+	// var localyticsSession = LocalyticsSession("47dfd007f9c83fc37e7aff2-b19dd06c-6874-11e3-1807-004a77f8b47f");
+// }
 if (hostName == "app.kanari.co") {
 	localyticsSession = LocalyticsSession("4541b43eb3c33ab174c297e-429beda6-52ab-11e3-925c-005cf8cbabd8");
 } else if (hostName == "staging.kanari.co") {
@@ -1383,6 +1383,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 						setCookie("pointsEarned", data.points, 0.29);
 						$scope.erromsg = false;
 						if (!$("#comment").val()) {
+							_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', data.outlet_name+'-'+data.outlet_location]);
 							if (data.points > 0 && data.points < 5) {
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
@@ -1410,6 +1411,7 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 								});
 							}
 						} else if ($("#comment").val()) {
+							_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', data.outlet_name+'-'+data.outlet_location]);
 							if (data.points > 0 && data.points < 5) {
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
@@ -1494,64 +1496,66 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 					$scope.erromsg = false;
 					if (getCookie('authToken')) {
 						if (!$("#comment").val()) {
+							_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', data.outlet_name+'-'+data.outlet_location]);
 							if (data.points > 0 && data.points < 5) {
-								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '0-5']);
+								//_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '0-5']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
 									"Points" : '0-5'
 								});
 							} else if (data.points >= 5 && data.points < 10) {
-								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '5-10']);
+								//_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '5-10']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
 									"Points" : '5-10'
 								});
 							} else if (data.points >= 10 && data.points < 30) {
-								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '10-30']);
+								//_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '10-30']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
 									"Points" : '10-30'
 								});
 							} else if (data.points >= 30 && data.points < 50) {
-								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '30-50']);
+								//_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '30-50']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
 									"Points" : '30-50'
 								});
 							} else if (data.points >= 50) {
-								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '50+']);
+								//_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '50+']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
 									"Points" : '50+'
 								});
 							}
 						} else if ($("#comment").val()) {
+							_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', data.outlet_name+'-'+data.outlet_location]);
 							if (data.points > 0 && data.points < 5) {
-								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '0-5']);
+								//_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '0-5']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
 									"Points" : '0-5'
 								});
 							} else if (data.points >= 5 && data.points < 10) {
-								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '5-10']);
+								//_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '5-10']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
 									"Points" : '5-10'
 								});
 							} else if (data.points >= 10 && data.points < 30) {
-								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '10-30']);
+								//_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '10-30']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
 									"Points" : '10-30'
 								});
 							} else if (data.points >= 30 && data.points < 50) {
-								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '30-50']);
+								//_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '30-50']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
 									"Points" : '30-50'
 								});
 							} else if (data.points >= 50) {
-								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '50+']);
+								//_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '50+']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
 									"Points" : '50+'
@@ -1562,64 +1566,66 @@ module.controller('feedback_step2Controller', function($scope, $http, $location)
 						deleteCookie('feedbackId');
 					} else {
 						if (!$("#comment").val()) {
+							_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', data.outlet_name+'-'+data.outlet_location]);
 							if (data.points > 0 && data.points < 5) {
-								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '0-5']);
+								//_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '0-5']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
 									"Points" : '0-5'
 								});
 							} else if (data.points >= 5 && data.points < 10) {
-								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '5-10']);
+								//_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '5-10']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
 									"Points" : '5-10'
 								});
 							} else if (data.points >= 10 && data.points < 30) {
-								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '10-30']);
+								//_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '10-30']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
 									"Points" : '10-30'
 								});
 							} else if (data.points >= 30 && data.points < 50) {
-								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '30-50']);
+								//_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '30-50']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
 									"Points" : '30-50'
 								});
 							} else if (data.points >= 50) {
-								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '50+']);
+								//_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '50+']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'No',
 									"Points" : '50+'
 								});
 							}
 						} else if ($("#comment").val()) {
+							_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', data.outlet_name+'-'+data.outlet_location]);
 							if (data.points > 0 && data.points < 5) {
-								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '0-5']);
+								//_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '0-5']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
 									"Points" : '0-5'
 								});
 							} else if (data.points >= 5 && data.points < 10) {
-								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '5-10']);
+								//_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '5-10']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
 									"Points" : '5-10'
 								});
 							} else if (data.points >= 10 && data.points < 30) {
-								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '10-30']);
+								//_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '10-30']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
 									"Points" : '10-30'
 								});
 							} else if (data.points >= 30 && data.points < 50) {
-								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '30-50']);
+								//_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '30-50']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
 									"Points" : '30-50'
 								});
 							} else if (data.points >= 50) {
-								_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '50+']);
+								//_gaq.push(['_trackEvent', 'Mobile App', 'Submit Feedback', '50+']);
 								localyticsSession.tagEvent("Submit Feedback", {
 									"Comment" : 'Yes',
 									"Points" : '50+'
@@ -2165,7 +2171,7 @@ $(document).on("pageshow", ".ui-page", function() {
 		theme : "ios",
 		mode : "scroller",
 		display : "bottom",
-		dateFormat : 'dd/mm/yy'
+		dateFormat : 'Year'
 	});
 
 	if ($.mobile.activePage.attr('id') == 'feedback') {
