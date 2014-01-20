@@ -38,9 +38,11 @@ module Api
           resource.reset_authentication_token
 
           updated = if needs_password?(resource, params)
+            frame_date_of_birth_to_date_format(params[:user][:date_of_birth])
             resource.update_with_password(account_update_params)
           else
             params[:user].delete(:current_password)
+            frame_date_of_birth_to_date_format(params[:user][:date_of_birth])
             resource.update_without_password(account_update_params)
           end
 
@@ -66,7 +68,14 @@ module Api
         end
 
         private
-
+          
+        # converts year input to date format
+          def frame_date_of_birth_to_date_format(date)
+            if date.to_s.size == 4 && !!(date =~ /^[0-9]+$/) && (date.to_i.is_a? Integer)
+              params[:user][:date_of_birth] = Date.strptime("{ #{date.to_s}, 1, 1 }", "{ %Y, %m, %d }")
+            end
+          end          
+          
           def sign_up_params
             params.fetch(:user).permit([:password, :password_confirmation, :email, :first_name, :last_name, :phone_number, :gender, :date_of_birth])
           end
