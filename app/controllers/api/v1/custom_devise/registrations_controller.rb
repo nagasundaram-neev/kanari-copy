@@ -39,7 +39,7 @@ module Api
           
           updated = if needs_password?(resource, params)
             if params[:user][:date_of_birth].present?
-              params[:user][:date_of_birth] = frame_date_of_birth_to_date_format(params[:user][:date_of_birth])
+              params[:user][:date_of_birth] = frame_date_of_birth_to_date_format(params[:user][:date_of_birth].to_s)
               if params[:user][:date_of_birth] != nil
                 resource.update_with_password(account_update_params)
               else
@@ -51,7 +51,7 @@ module Api
           else
             params[:user].delete(:current_password)
             if params[:user][:date_of_birth].present?
-              params[:user][:date_of_birth] = frame_date_of_birth_to_date_format(params[:user][:date_of_birth])
+              params[:user][:date_of_birth] = frame_date_of_birth_to_date_format(params[:user][:date_of_birth].to_s)
               if params[:user][:date_of_birth] != nil
                 resource.update_without_password(account_update_params)
               else
