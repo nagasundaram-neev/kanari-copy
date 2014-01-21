@@ -238,10 +238,11 @@ setTimeout(function() {
     $scope.$apply(function () {
     	var sor = $('#inputEmail').val();
       var pa = $('#inputPassword').val();
- $( 'input[ng-model], select[ng-model]' ).each( function() {
-  angular.element( this ).controller( 'ngModel' ).$setViewValue( $( this ).val() );
-});
-      console.log(" huh"+sor+"     "+pa);
+      if($('#inputEmail').val()  && $('#inputPassword').val()){
+			$( 'input[ng-model], select[ng-model]' ).each( function() {
+  				angular.element( this ).controller( 'ngModel' ).$setViewValue( $( this ).val() );
+			});      	
+      }
     });
   }, 1000);
 		

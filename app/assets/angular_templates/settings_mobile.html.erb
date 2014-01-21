@@ -1,7 +1,7 @@
 <div data-role="page" data-theme="b" id="settings" ng-controller="settingsController">
 	<div data-role="content">
 		<div class="username">
-			<img src="<%= asset_path "icon_logout.svg" %>" class="logout" ng-click="logout()" />
+			<img src="<%= asset_path "icon_logout.svg" %>" analytics-on="click" analytics-event="Log Out" class="logout" ng-click="logout()" />
 			<img src="<%= asset_path "icon_home.svg" %>" class="home" ng-click="home()" />
 			<div class="signUp">
 				SETTINGS
@@ -32,21 +32,25 @@
 					<input data-theme="a" data-inline="true" type="text" name="txtPassword" ng-model="location" class="passwordTxt" placeholder="Location"/>
 				</div>
 				<div data-role="fieldcontain" class="genderBtn ui-input-text ui-body-a">
-					<label for="toggleswitch1"> Gender </label>
-					<select name="toggleswitch1" id="toggleswitch1" data-theme="a" ng-model="gender" data-role="slider" data-mini="true">
+					<label for="select-choice-1" style="color: #664765;float: left;margin: 1.5% 0 0;padding-left: 5px;text-align: left; text-shadow: none;width: 102px;"> Gender </label>
+					<select name="select-choice-1" id="toggleswitch1" data-theme="a" ng-model="gender" data-mini="true">
+						<option value="-"> - </option>
 						<option value="male"> Male </option>
 						<option value="female"> Female </option>
 					</select>
 					<div class="clr"></div>
 				</div>
-				<div class="ui-input-text ui-body-a dateDiv">
-					<label class="dateLabel"> Date of birth</label>
-					<div class="date">
-						<input data-theme="a" data-inline="true" type="text" name="date" ng-model="date" class="dateInner" id="date" placeholder="Date of Birth"/>
-						<!-- <input data-theme="a" data-inline="true" type="text" name="date" onfocus="this.type='number';" ng-model="month" maxlength="2" class="dateInner" id="month" placeholder="M" onkeyup="moveToNext(this,'year')"/>
-						<input data-theme="a" data-inline="true" type="text" name="date" onfocus="this.type='number';" ng-model="year" maxlength="4" class="dateInner" id="year" placeholder="Y"/> -->
-					</div>
+				<div data-role="fieldcontain" class="genderBtn ui-input-text ui-body-a">
+					<label for="select-choice-2" style="color: #664765;float: left;margin: 1.5% 0 0;padding-left: 5px;text-align: left; text-shadow: none;width: 102px;"> Born in </label>
+					<select name="select-choice-2" id="toggleswitch2" ng-model="date" ng-options="year.value as year.value for year in year" data-theme="a" >
+						<option value="">Year</option>
+					</select>
 					<div class="clr"></div>
+					<!-- <label class="dateLabel"> Date of birth</label>
+					<div class="date">
+						<input data-theme="a" data-inline="true" type="text" name="date" ng-model="date" class="dateInner" id="date" placeholder="Date of Birth"/> 
+					</div>
+					<div class="clr"></div> -->
 				</div>
 				<div data-role="fieldcontain" class="profileTextBottom" align="center">
 					<span>HISTORY</span>
@@ -66,6 +70,6 @@
 		</div>
 	</div>
 	<div data-role="footer" class="saveDiv footerDiv" >
-		<input type="button" class="signBtn" ng-click="saveProfile()" data-inline="true" value="Save"/>
+		<input type="button" class="signBtn" analytics-event="Settings Summary" analytics-category="Mobile app" ng-click="saveProfile()" data-inline="true" value="Save"/>
 	</div>
 </div>
