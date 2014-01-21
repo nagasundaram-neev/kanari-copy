@@ -195,8 +195,10 @@ module.controller('commonCtrl', function($scope, $http, $location) {
 	}
 
 });
+
 var acceptInvitationStep2;
-module.controller('Login', function($rootScope, $scope, $http, $location) {
+module.controller('Login', function($rootScope, $scope, $http, $location, $attrs) {
+	 
 	$rootScope.header = "Login | Kanari";
 	$('.welcome').hide();
 	$('.navBarCls').hide();
@@ -232,7 +234,19 @@ module.controller('Login', function($rootScope, $scope, $http, $location) {
 			setCookie('rememberme', 'no', 0.29);
 		}
 	};
+setTimeout(function() {
+    $scope.$apply(function () {
+    	var sor = $('#inputEmail').val();
+      var pa = $('#inputPassword').val();
+ $( 'input[ng-model], select[ng-model]' ).each( function() {
+  angular.element( this ).controller( 'ngModel' ).$setViewValue( $( this ).val() );
+});
+      console.log(" huh"+sor+"     "+pa);
+    });
+  }, 1000);
+		
 	$scope.chkLogin = function(login) {
+	
 		if ($scope.login.$valid) {
 			$('.welcome').hide();
 			$('.navBarCls').hide();
