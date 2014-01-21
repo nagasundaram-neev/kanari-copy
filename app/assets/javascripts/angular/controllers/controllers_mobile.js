@@ -134,9 +134,9 @@ var flagPage = 0;
 var iphoneFlag = 0;
 var footerFlag = 0;
 var hostName = location.hostname;
-// if (hostName == "192.168.1.68") {
-	// var localyticsSession = LocalyticsSession("47dfd007f9c83fc37e7aff2-b19dd06c-6874-11e3-1807-004a77f8b47f");
-// }
+if (hostName == "192.168.1.68") {
+	var localyticsSession = LocalyticsSession("47dfd007f9c83fc37e7aff2-b19dd06c-6874-11e3-1807-004a77f8b47f");
+}
 if (hostName == "app.kanari.co") {
 	localyticsSession = LocalyticsSession("4541b43eb3c33ab174c297e-429beda6-52ab-11e3-925c-005cf8cbabd8");
 } else if (hostName == "staging.kanari.co") {
@@ -824,7 +824,7 @@ module.controller('signUpController', function($scope, $http, $location) {
 					"first_name" : $scope.firstName,
 					"last_name" : $scope.lastName,
 					"email" : $scope.email,
-					"gender" : "male",
+					"gender" : "-",
 					"password" : $scope.password,
 					"password_confirmation" : $scope.confPassword
 				}
@@ -958,6 +958,18 @@ module.controller('settingsController', function($scope, $http, $location) {
 	_gaq.push(["_set", "title", "Settings"]);
 	_gaq.push(['_trackPageview', 'Settings']);
 	if (getCookie('authToken')) {
+		
+		$scope.year = [];
+		var startYear = 1964;
+		for (var i=0; i< 60; i++){
+			$scope.year.push({'name': startYear,'value': startYear});
+			if(startYear != new Date().getFullYear()){
+				startYear++;				
+			}else{
+				break;
+			}
+		};
+		
 		flagPage = 0;
 		footerFlag = 1;
 		if (getCookie('facebookFlag')) {
@@ -999,7 +1011,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 					$scope.lastName = data.user.last_name;
 					$scope.email = data.user.email;
 					$scope.password = data.user.password;
-					$scope.date = date[2] + "/" + date[1] + "/" + date[0];
+					$scope.date = parseInt(date[0]);
 					$scope.gender = data.user.gender;
 					$scope.location = data.user.location;
 				} else {
@@ -1044,7 +1056,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 						"location" : $scope.location,
 					},
 					"auth_token" : getCookie('authToken')
-				}
+				};
 				$http({
 					method : 'put',
 					url : '/api/users',
@@ -1070,7 +1082,7 @@ module.controller('settingsController', function($scope, $http, $location) {
 					} else {
 						city = 'No';
 					}
-					_gaq.push(['_trackEvent', 'Mobile App', 'Settings Summary', '']);
+					_gaq.push(['_trackEvent', 'Mobile App', 'Save Settings', '']);
 					localyticsSession.tagEvent("Settings Summary", {
 						"Gender" : gender,
 						"Date" : date,
@@ -1722,7 +1734,7 @@ module.controller('feedbackSubmitController', function($scope, $http, $routePara
 	localyticsSession.tagScreen('Feedback Submitted');
 	_gaq.push(["_set", "title", "Submit Feedback"]);
 	_gaq.push(['_trackPageview', 'Feedback Submitted']);
-	_gaq.push(['_trackEvent', 'Mobile App', 'Feedback Submitted', '']);
+	//_gaq.push(['_trackEvent', 'Mobile App', 'Feedback Submitted', '']);
 	if (getCookie('authToken')) {
 		flagPage = 0;
 		footerFlag = 0;
@@ -1823,7 +1835,6 @@ module.controller('restaurantListController', function($scope, $http, $location)
 
 		$scope.redeemPoint = function(outletId,name,location) {
 			var eventTrackStringNew = name+'-'+location;
-			console.log(eventTrackStringNew)
 			_gaq.push(['_trackEvent', 'Mobile App', 'Redeem Points', eventTrackStringNew]);
 			
 			localyticsSession.tagEvent("Redeem Points", {
@@ -2180,7 +2191,6 @@ $(document).on("pageshow", ".ui-page", function() {
 	}
 
 	// $('.fblogin').click(function(event) {
-	// console.log(event);
 	// event.preventDefault();
 	// //Facebook.login()
 	// window.location = "http://localhost:8080/#/home";
