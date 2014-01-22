@@ -960,16 +960,18 @@ module.controller('settingsController', function($scope, $http, $location) {
 	if (getCookie('authToken')) {
 		
 		$scope.year = [];
-		var startYear = 1964;
-		for (var i=0; i< 60; i++){
+		var startYear = 1940;
+		var currentYear = new Date().getFullYear();
+		var limitYear = currentYear - startYear;
+		for (var i=0; i<= limitYear; i++){
 			$scope.year.push({'name': startYear,'value': startYear});
-			if(startYear != new Date().getFullYear()){
+			if(startYear != currentYear){
 				startYear++;				
 			}else{
 				break;
 			}
 		};
-		
+
 		flagPage = 0;
 		footerFlag = 1;
 		if (getCookie('facebookFlag')) {
