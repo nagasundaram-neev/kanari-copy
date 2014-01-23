@@ -4,11 +4,13 @@ class UserMailer < ActionMailer::Base
   def welcome_email(user)
     @user = user
     mail(to: @user.email, subject: 'Welcome to Kanari')
+    headers['X-MC-Tags'] = "Welcome, Mobile App, system"    
   end
 
   def welcome_email_business(user)
     @user = user
     mail(to: @user.email, subject: 'Welcome to Kanari')
+    headers['X-MC-Tags'] = "Welcome, Business Account, system"    
   end
 
   def request_email_to_share_details(reachoutuser,feedback,contacted_user)
